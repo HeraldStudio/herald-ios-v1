@@ -1,0 +1,6 @@
+framework module PagingView {
+  umbrella header "PagingView-umbrella.h"
+
+  export *
+  module * { export * }
+}
