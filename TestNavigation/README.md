@@ -1,1 +1,0 @@
-#Herald_iOS
