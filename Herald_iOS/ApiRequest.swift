@@ -1,0 +1,159 @@
+//
+//  ApiRequest.swift
+//  Herald_iOS
+//
+//  Created by 于海通 on 16/4/11.
+//  Copyright © 2016年 于海通. All rights reserved.
+//
+
+import Foundation
+import Alamofire
+import SwiftyJSON
+
+class ApiRequest {
+    
+    static let CONN_TIMEOUT = 10000, READ_TIMEOUT = 10000
+    
+    /**
+     * 构造部分
+     * context  当前上下文
+     * exceptionPool   是否吞掉错误消息
+     * url      请求的目标url
+     **/
+    var errorPool : NSMutableArray?
+    
+    var url : String?
+
+    func errorPool (pool : NSMutableArray) -> ApiRequest {
+        errorPool = pool
+        return self
+    }
+    
+    func url (url : String) -> ApiRequest {
+        self.url = url
+        return self
+    }
+    
+    func api (api : String) -> ApiRequest {
+        return url(ApiHelper.getApiUrl(api))
+    }
+    
+    /**
+     * 联网设置部分
+     * builder  参数表
+     **/
+    var map : [String : AnyObject] = [:]
+    
+    func uuid () -> ApiRequest {
+        map.updateValue(ApiHelper.getUUID(), forKey: "uuid")
+        return self
+    }
+    
+    func post (map : String...) -> ApiRequest {
+        for i in 0 ..< (map.count / 2) {
+            let key = map[2 * i]
+            let value = map[2 * i + 1]
+            self.map.updateValue(value, forKey: key)
+        }
+        
+        return self
+    }
+    
+    /**
+     * 一级回调设置部分
+     * 一级回调只是跟Alamofire框架之间的交互，并在此交互过程中为二级回调提供接口
+     * 从此类外面看，不存在一级回调，只有二级回调和三级回调
+     *
+     * callback     默认的Callback（自动调用二级回调，若出错还会执行错误处理）
+     **/
+    
+    func callback (response : Response <String, NSError>) -> Void {
+        switch response.result {
+        case .Success:
+            let responseJson = JSON.parse(response.result.value!)
+            for k in onFinishListeners {
+                let onFinishListener = k as! OnFinishListener
+                guard let code = responseJson["code"].int else {
+                    fallthrough
+                }
+                onFinishListener(code == 200, code, responseJson.stringValue)
+            }
+        case .Failure:
+            for k in onFinishListeners {
+                let onFinishListener = k as! OnFinishListener
+                onFinishListener(false, 0, "")
+            }
+        }
+    }
+    
+    
+    /**
+     * 二级回调设置部分
+     * 二级回调是对返回状态和返回数据处理方式的定义，相当于重写Callback，
+     * 但这里允许多个二级回调策略进行叠加，因此比Callback更灵活
+     *
+     * onFinishListeners    二级回调接口，内含一个默认的回调操作，该操作仅在设置了三级回调策略时有效
+     **/
+    typealias OnFinishListener = (Bool, Int, String) -> Void
+    
+    let onFinishListeners : NSMutableArray = []
+    
+    func onFinish (listener : OnFinishListener) -> ApiRequest {
+        onFinishListeners.addObject(listener as! AnyObject)
+        return self
+    }
+    
+    /**
+     * 三级回调设置部分
+     * 三级回调是对一些比较典型的回调策略的包装，此处暂时只实现了将数据存入缓存这一种三级回调策略
+     *
+     * JSONParser   将原始数据转换为要存入缓存的目标数据的中转过程
+     * toCache      将目标数据存入缓存的回调策略
+     * toCache()    用于设置三级回调策略的函数
+     **/
+    typealias JSONParser = JSON throws -> String
+    
+    func toCache (key : String, withParser parser : JSONParser) -> ApiRequest {
+        onFinish {
+            success, _, response in
+            if(success) {
+                do {
+                    let cache = try parser(JSON.parse(response))
+                    CacheHelper.setCache(key, cacheValue: cache)
+                } catch {
+                    for k in self.onFinishListeners {
+                        let onFinishListener = k as! OnFinishListener
+                        onFinishListener(false, 0, "")
+                    }
+                }
+            }
+        }
+        return self
+    }
+    
+    func toServiceCache (key : String, withParser parser : JSONParser) -> ApiRequest {
+        onFinish {
+            success, _, response in
+            if(success) {
+                do {
+                    let cache = try parser(JSON.parse(response))
+                    CacheHelper.setServiceCache(key, cacheValue: cache)
+                } catch {
+                    for k in self.onFinishListeners {
+                        let onFinishListener = k as! OnFinishListener
+                        onFinishListener(false, 0, "")
+                    }
+                }
+            }
+        }
+        return self
+    }
+    
+    /**
+     * 执行部分
+     **/
+    func run () {
+        Alamofire.request(.POST, url!, parameters: map)
+            .responseString(completionHandler: callback)
+    }
+}
