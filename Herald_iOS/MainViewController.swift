@@ -18,7 +18,7 @@ class MainViewController: UITabBarController{
         // 去除界面切换时导航栏的黑影
         navigationController?.view.backgroundColor = UIColor.whiteColor()
         
-        tabBar.tintColor = UIColor.orangeColor()
+        tabBar.tintColor = UIColor(red: 0, green: 180/255, blue: 255/255, alpha: 1)
     }
     
     override func viewWillAppear(animated: Bool) {

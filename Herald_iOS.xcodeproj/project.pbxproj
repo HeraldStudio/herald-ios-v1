@@ -13,6 +13,9 @@
 		D31821B41CC3B4F700992355 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821B31CC3B4F700992355 /* Calendar.swift */; };
 		D31821B61CC48D5400992355 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821B51CC48D5400992355 /* ServiceHelper.swift */; };
 		D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821B81CC4D53300992355 /* CardsTableViewCell.swift */; };
+		D31821BF1CC522D900992355 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821BE1CC522D900992355 /* CardViewController.swift */; };
+		D31821C11CC5256F00992355 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821C01CC5256F00992355 /* CardTableViewCell.swift */; };
+		D31821C31CC5291000992355 /* CardHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821C21CC5291000992355 /* CardHistoryModel.swift */; };
 		D31DE50E1CC334EC00E4891D /* ModuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE50D1CC334EC00E4891D /* ModuleTableViewCell.swift */; };
 		D31DE5121CC3592F00E4891D /* ClassInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5111CC3592F00E4891D /* ClassInfo.swift */; };
 		D31DE5141CC3597800E4891D /* MyUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5131CC3597800E4891D /* MyUILabel.swift */; };
@@ -62,6 +65,9 @@
 		D31821B31CC3B4F700992355 /* Calendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		D31821B51CC48D5400992355 /* ServiceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
 		D31821B81CC4D53300992355 /* CardsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsTableViewCell.swift; sourceTree = "<group>"; };
+		D31821BE1CC522D900992355 /* CardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
+		D31821C01CC5256F00992355 /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
+		D31821C21CC5291000992355 /* CardHistoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHistoryModel.swift; sourceTree = "<group>"; };
 		D31DE50D1CC334EC00E4891D /* ModuleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleTableViewCell.swift; sourceTree = "<group>"; };
 		D31DE5111CC3592F00E4891D /* ClassInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassInfo.swift; sourceTree = "<group>"; };
 		D31DE5131CC3597800E4891D /* MyUILabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUILabel.swift; sourceTree = "<group>"; };
@@ -209,6 +215,9 @@
 		D3A0C17D1CBB7C5800744640 /* cardextra */ = {
 			isa = PBXGroup;
 			children = (
+				D31821BE1CC522D900992355 /* CardViewController.swift */,
+				D31821C01CC5256F00992355 /* CardTableViewCell.swift */,
+				D31821C21CC5291000992355 /* CardHistoryModel.swift */,
 			);
 			name = cardextra;
 			sourceTree = "<group>";
@@ -608,7 +617,10 @@
 				D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */,
 				D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */,
 				D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */,
+				D31821C31CC5291000992355 /* CardHistoryModel.swift in Sources */,
 				D3D35DDF1CBA2E8200B18092 /* LoginViewController.swift in Sources */,
+				D31821C11CC5256F00992355 /* CardTableViewCell.swift in Sources */,
+				D31821BF1CC522D900992355 /* CardViewController.swift in Sources */,
 				D3D35DDD1CBA2E8200B18092 /* AppDelegate.swift in Sources */,
 				D3A0C1701CBB7A3A00744640 /* MainViewController.swift in Sources */,
 				D30A9BA11CBBA9100087D583 /* ApiThreadManager.swift in Sources */,
