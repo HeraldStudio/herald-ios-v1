@@ -42,19 +42,32 @@ class CardsViewController: UIViewController, UITableViewDelegate {
         }
         
         slider.setBannerTapHandler { (index) in
-            print("tapped:\(index)")
+            if self.links[index] != "" {
+                if let link = NSURL(string: self.links[index]) {
+                    UIApplication.sharedApplication().openURL(link)
+                }
+            }
         }
     }
+    
+    var links : [String] = []
     
     func refreshSlider () {
         let cache = JSON.parse(CacheHelper.getServiceCache("versioncheck_cache"))
         let array = cache["content"]["sliderviews"]
         
+        links.removeAll()
         var pics : [AnyObject?] = []
         for i in 0 ..< array.count {
             let pic = array[i]
             if let url = pic["imageurl"].string {
                 pics.append(url)
+                
+                if let link = pic["url"].string {
+                    links.append(link)
+                } else {
+                    links.append("")
+                }
             }
         }
         

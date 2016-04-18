@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class MyInfoViewController: UIViewController {
+class MyInfoViewController: UITableViewController {
     
     var parent : MainViewController?
     
@@ -13,5 +13,22 @@ class MyInfoViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        print("r\(indexPath.section),\(indexPath.row)")
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                ApiHelper.doLogout(self)
+            default:
+                break
+            }
+        default:
+            break
+        }
     }
 }
