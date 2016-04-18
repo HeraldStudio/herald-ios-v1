@@ -7,8 +7,6 @@ class MyInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("MyInfoFragment loaded")
         // Do any additional setup after loading the view, typically from a nib.
     }
     

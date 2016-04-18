@@ -9,12 +9,27 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Kingfisher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Reindeer-Reindeer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Reindeer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,12 +42,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0FEF46F4121DF282551E22D33AC3978A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3B7F4820F0B75D0E21995C28A3C869C4</key>
+		<key>3749C15205853154FC3AB0BAC580DF7D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -42,7 +52,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>AE0CB486AAA4EB271891B6F89951FA7B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B23F4CB8F0EFE2AB6B067FB06DB99CC0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F59043B0198B7D307A91A8681F7B1123</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F91226101ECE8FCFD221A3EC54481F82</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -92,7 +92,7 @@ class SettingsHelper {
      */
     static func getModuleCardEnabled (moduleID : Int) -> Bool {
         //获得某项模块的卡片是否显示
-        return getCache("herald_settings_module_cardenabled_" + MODULES[moduleID].name) != "0"
+        return MODULES[moduleID].hasCard && getCache("herald_settings_module_cardenabled_" + MODULES[moduleID].name) != "0"
     }
     
     /**
