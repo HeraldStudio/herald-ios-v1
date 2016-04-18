@@ -14,7 +14,7 @@ class CardHistoryModel {
     var cost : String
     var left : String
     
-    func init (place : String, type : String, cost : String, left : String) {
+    init (place : String, type : String, cost : String, left : String) {
         self.place = place
         self.type = type
         self.cost = cost
