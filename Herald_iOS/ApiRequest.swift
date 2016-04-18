@@ -38,6 +38,13 @@ class ApiRequest {
         return url(ApiHelper.getApiUrl(api))
     }
     
+    var isPlain = false
+    
+    func plain () -> ApiRequest {
+        isPlain = true
+        return self
+    }
+    
     /**
      * 联网设置部分
      * builder  参数表
@@ -68,19 +75,27 @@ class ApiRequest {
      **/
     
     func callback (response : Response <String, NSError>) -> Void {
+        
         switch response.result {
         case .Success:
-            let responseJson = JSON.parse(response.result.value!)
-            for k in onFinishListeners {
-                let onFinishListener = k as! OnFinishListener
-                guard let code = responseJson["code"].int else {
-                    fallthrough
+            if isPlain {
+                for onFinishListener in onFinishListeners {
+                    onFinishListener(true, 200, response.result.value!)
                 }
-                onFinishListener(code == 200, code, responseJson.stringValue)
+            } else {
+                let responseJson = JSON.parse(response.result.value!)
+                for onFinishListener in onFinishListeners {
+                    guard let code = responseJson["code"].int else {
+                        fallthrough
+                    }
+                    guard let jsonStr = responseJson.rawString() else {
+                        fallthrough
+                    }
+                    onFinishListener(code == 200, code, jsonStr)
+                }
             }
         case .Failure:
-            for k in onFinishListeners {
-                let onFinishListener = k as! OnFinishListener
+            for onFinishListener in onFinishListeners {
                 onFinishListener(false, 0, "")
             }
         }
@@ -96,10 +111,10 @@ class ApiRequest {
      **/
     typealias OnFinishListener = (Bool, Int, String) -> Void
     
-    let onFinishListeners : NSMutableArray = []
+    var onFinishListeners : [(Bool, Int, String) -> Void] = []
     
     func onFinish (listener : OnFinishListener) -> ApiRequest {
-        onFinishListeners.addObject(listener as! AnyObject)
+        onFinishListeners.append(listener)
         return self
     }
     
@@ -122,7 +137,7 @@ class ApiRequest {
                     CacheHelper.setCache(key, cacheValue: cache)
                 } catch {
                     for k in self.onFinishListeners {
-                        let onFinishListener = k as! OnFinishListener
+                        let onFinishListener = k
                         onFinishListener(false, 0, "")
                     }
                 }
@@ -139,8 +154,7 @@ class ApiRequest {
                     let cache = try parser(JSON.parse(response))
                     CacheHelper.setServiceCache(key, cacheValue: cache)
                 } catch {
-                    for k in self.onFinishListeners {
-                        let onFinishListener = k as! OnFinishListener
+                    for onFinishListener in self.onFinishListeners {
                         onFinishListener(false, 0, "")
                     }
                 }

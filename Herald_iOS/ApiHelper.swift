@@ -29,7 +29,7 @@ class ApiHelper : NSObject {
     
     // TODO dealApiException
     
-    static func doLogout (navigation : UINavigationController?) {
+    static func doLogout (context : UIViewController?) {
         
         //清除授权信息
         authCache.put("authUser", withValue: "")
@@ -45,10 +45,10 @@ class ApiHelper : NSObject {
         CacheHelper.clearAllModuleCache()
         
         // 跳转到登录页
-        if let nc = navigation {
+        if let nc = context {
             let sb = UIStoryboard(name: "Main", bundle: nil)
-            let vc = sb.instantiateViewControllerWithIdentifier("LoginActivity")
-            nc.pushViewController(vc, animated: true)
+            let vc = sb.instantiateViewControllerWithIdentifier("login")
+            nc.presentViewController(vc, animated: true) {}
         }
     }
     
@@ -75,6 +75,39 @@ class ApiHelper : NSObject {
         return CacheHelper.getCache("authPwd")
     }
     
+    static func setWifiAuth (user user : String, pwd : String) {
+        // TODO 加密
+        CacheHelper.setCache("wifiAuthUser", cacheValue: user)
+        CacheHelper.setCache("wifiAuthPwd", cacheValue: pwd)
+    }
+    
+    static func getWifiUserName () -> String {
+        // 若无校园网独立用户缓存，则使用登陆应用的账户
+        let cacheUser = CacheHelper.getCache("wifiAuthUser")
+        return cacheUser == "" ? getUserName() : cacheUser
+    }
+    
+    static func getWifiPassword () -> String {
+        // 若无校园网独立用户缓存，则使用登陆应用的账户
+        let cachePwd = CacheHelper.getCache("authPwd")
+        return cachePwd == "" ? getPassword() : cachePwd
+    }
+    
+    static func clearWifiAuth () {
+        // TODO 若实现了加密，这里也应该对应修改
+        setWifiAuth(user: "", pwd: "")
+    }
+    
+    let authCache = NSUserDefaults.withPrefix("auth_")
+    
+    static func getAuthCache (key : String) -> String {
+        return authCache.get(key)
+    }
+    
+    static func setAuthCache (key : String, withValue value : String) {
+        authCache.put(key, withValue: value)
+    }
+
     static func getSchoolnum () -> String {
         return authCache.get("schoolnum")
     }

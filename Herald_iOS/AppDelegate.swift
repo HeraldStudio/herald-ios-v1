@@ -14,11 +14,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func applicationDidFinishLaunching(application: UIApplication) {
-        print("hello")
     }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        //判断是否是首次启动
+        let launchTimes = SettingsHelper.getLaunchTimes()
+        if launchTimes == 0 {
+            SettingsHelper.setDefaultConfig()
+        }
+        
+        //启动次数递增
+        SettingsHelper.updateLaunchTimes(launchTimes + 1)
+        
         return true
     }
 
