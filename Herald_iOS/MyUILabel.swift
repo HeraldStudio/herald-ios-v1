@@ -12,7 +12,7 @@ import UIKit;
 class MyUILabel : UILabel {
     var info : String = "";
     var root : UIViewController?;
-    func showInfo(){
+    @IBAction func showInfo(){
         // 初始化对话框
         var dialog :UIAlertController;
         dialog = UIAlertController(title: "课程信息", message: info,

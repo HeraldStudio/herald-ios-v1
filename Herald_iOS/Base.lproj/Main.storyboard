@@ -1108,7 +1108,7 @@
         <!--课表助手-->
         <scene sceneID="noy-hT-7qm">
             <objects>
-                <viewController storyboardIdentifier="MODULE_QUERY_CURRICULUM" title="课表助手" id="d6o-yY-zYP" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MODULE_QUERY_CURRICULUM" title="课表助手" id="d6o-yY-zYP" customClass="CurriculumViewController" customModule="小猴偷米" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s6P-BF-Zmw"/>
                         <viewControllerLayoutGuide type="bottom" id="iyI-E2-Owr"/>
@@ -1116,10 +1116,72 @@
                     <view key="view" contentMode="scaleToFill" id="fc7-b8-7MG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="curriculum_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Ukd-j1-x2e">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MF7-b5-nRQ">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <connections>
+                                    <outlet property="delegate" destination="d6o-yY-zYP" id="MI1-S9-UdX"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="MF7-b5-nRQ" firstAttribute="top" secondItem="s6P-BF-Zmw" secondAttribute="bottom" id="2Di-JT-HEx"/>
+                            <constraint firstAttribute="bottom" secondItem="Ukd-j1-x2e" secondAttribute="bottom" id="E5W-Iu-rcU"/>
+                            <constraint firstAttribute="trailing" secondItem="Ukd-j1-x2e" secondAttribute="trailing" id="EI4-Eu-wpB"/>
+                            <constraint firstItem="Ukd-j1-x2e" firstAttribute="top" secondItem="fc7-b8-7MG" secondAttribute="top" id="YSP-SW-lZf"/>
+                            <constraint firstAttribute="trailing" secondItem="MF7-b5-nRQ" secondAttribute="trailing" id="hKB-Bo-gkU"/>
+                            <constraint firstItem="Ukd-j1-x2e" firstAttribute="leading" secondItem="fc7-b8-7MG" secondAttribute="leading" id="odX-DK-NRp"/>
+                            <constraint firstAttribute="bottom" secondItem="MF7-b5-nRQ" secondAttribute="bottom" id="xJo-xY-ThS"/>
+                            <constraint firstItem="MF7-b5-nRQ" firstAttribute="leading" secondItem="fc7-b8-7MG" secondAttribute="leading" id="zbI-pT-FZ5"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Ukd-j1-x2e"/>
+                                <exclude reference="MF7-b5-nRQ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="E5W-Iu-rcU"/>
+                                <exclude reference="EI4-Eu-wpB"/>
+                                <exclude reference="YSP-SW-lZf"/>
+                                <exclude reference="odX-DK-NRp"/>
+                                <exclude reference="2Di-JT-HEx"/>
+                                <exclude reference="hKB-Bo-gkU"/>
+                                <exclude reference="xJo-xY-ThS"/>
+                                <exclude reference="zbI-pT-FZ5"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Ukd-j1-x2e"/>
+                                <include reference="MF7-b5-nRQ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="E5W-Iu-rcU"/>
+                                <include reference="EI4-Eu-wpB"/>
+                                <include reference="YSP-SW-lZf"/>
+                                <include reference="odX-DK-NRp"/>
+                                <include reference="2Di-JT-HEx"/>
+                                <include reference="hKB-Bo-gkU"/>
+                                <include reference="xJo-xY-ThS"/>
+                                <include reference="zbI-pT-FZ5"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="课表助手" id="itE-9d-fi4"/>
+                    <navigationItem key="navigationItem" title="课表助手" id="itE-9d-fi4">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="eEJ-wO-A2N">
+                            <connections>
+                                <action selector="refreshCache" destination="d6o-yY-zYP" id="H69-ji-Ox0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="scrollView" destination="MF7-b5-nRQ" id="mju-CD-1wC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hFz-Oa-Crj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1419,6 +1481,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="curriculum_bg" width="360" height="540"/>
         <image name="ic_card" width="48" height="48"/>
         <image name="ic_home" width="40" height="40"/>
         <image name="ic_person" width="40" height="40"/>

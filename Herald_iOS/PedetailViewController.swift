@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class CardViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class PedetailViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableView : UITableView?
     
@@ -31,7 +31,7 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
         let jsonArray = jsonCache["detial"]
         guard let extra = jsonCache["left"].string else { self.showError(); return }
         title = "余额：" + extra
-            
+        
         history.removeAll()
         if jsonArray.count > 0 {
             guard let lastLeftStr = jsonArray[0]["left"].string else { self.showError(); return }
@@ -116,7 +116,7 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
     @IBAction func goToChargePage () {
         showTipDialogIfUnknown("注意：由于一卡通中心配置问题，充值之后需要刷卡消费一次，一卡通余额才能正常显示哦", cachePostfix: "card_charge") {
             () -> Void in
-                UIApplication.sharedApplication().openURL(NSURL(string: "http://58.192.115.47:8088/wechat-web/login/initlogin.html")!)
+            UIApplication.sharedApplication().openURL(NSURL(string: "http://58.192.115.47:8088/wechat-web/login/initlogin.html")!)
         }
     }
     
