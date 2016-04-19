@@ -161,7 +161,7 @@ class CurriculumView : UIViewController {
         }
         
         // 绘制每列的竖直分割线
-        let v1 = UIView(frame: CGRect(x: x, y: topPadding, width: 1, height: height))
+        let v1 = UIView(frame: CGRect(x: x - 0.5, y: topPadding, width: 1, height: height))
         v1.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
         self.view.addSubview(v1)
         
@@ -169,7 +169,7 @@ class CurriculumView : UIViewController {
         for i in 0 ..< N {
             let info = list[i] as! ClassInfo
             let block = MyUILabel(frame: CGRect(
-                x: x + 0.5,
+                x: x,
                 y: topPadding + CGFloat(info.startTime) * height / CGFloat(CurriculumView.PERIOD_COUNT + 1) + 0.5,
                 width: w - 1,
                 height: CGFloat(info.getPeriodCount()) * height / CGFloat(CurriculumView.PERIOD_COUNT + 1) - 1

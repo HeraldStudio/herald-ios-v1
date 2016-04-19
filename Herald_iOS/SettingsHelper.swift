@@ -28,9 +28,9 @@ class SettingsHelper {
         AppModule(name: "srtp", nameTip: "课外研学", desc: "提供SRTP学分及得分详情查询服务", controller: "MODULE_QUERY_SRTP", icon: "ic_srtp", hasCard: false),
         AppModule(name: "schoolbus", nameTip: "校车助手", desc: "提供可实时更新的校车班车时间表", controller: "MODULE_QUERY_SCHOOLBUS", icon: "ic_bus", hasCard: false),
         AppModule(name: "schedule", nameTip: "校历查询", desc: "显示当前年度各学期的学校校历安排", controller: "MODULE_QUERY_SCHEDULE", icon: "ic_schedule", hasCard: false),
-        AppModule(name: "gymreserve", nameTip: "场馆预约", desc: "提供体育场馆在线预约和查询服务", controller: "WEBMODULE_GYMRESERVE", icon: "ic_gymreserve", hasCard: false),
-        AppModule(name: "quanyi", nameTip: "权益服务", desc: "向东大校会权益部反馈投诉信息", controller: "WEBMODULE_QUANYI", icon: "ic_quanyi", hasCard: false),
-        AppModule(name: "emptyroom", nameTip: "空教室", desc: "提供指定时间内的空教室信息查询服务", controller: "WEBMODULE_EMPTYROOM", icon: "ic_emptyroom", hasCard: false)
+        AppModule(name: "gymreserve", nameTip: "场馆预约", desc: "提供体育场馆在线预约和查询服务", controller: "http://115.28.27.150/heraldapp/#/yuyue/home", icon: "ic_gymreserve", hasCard: false),
+        AppModule(name: "quanyi", nameTip: "权益服务", desc: "向东大校会权益部反馈投诉信息", controller: "https://jinshuju.net/f/By3aTK", icon: "ic_quanyi", hasCard: false),
+        AppModule(name: "emptyroom", nameTip: "空教室", desc: "提供指定时间内的空教室信息查询服务", controller: "http://115.28.27.150/queryEmptyClassrooms/m", icon: "ic_emptyroom", hasCard: false)
     ]
     
     static func setDefaultConfig () {

@@ -110,7 +110,12 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
     //选中一个Cell后执行的方法
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if let vc = storyboard?.instantiateViewControllerWithIdentifier(SettingsHelper.MODULES[indexPath.row].controller) {
+        
+        let controller = SettingsHelper.MODULES[indexPath.row].controller
+        
+        if controller.containsString("http") {
+            UIApplication.sharedApplication().openURL(NSURL(string: controller)!)
+        } else if let vc = storyboard?.instantiateViewControllerWithIdentifier(controller) {
             navigationController?.pushViewController(vc, animated: true)
         }
     }

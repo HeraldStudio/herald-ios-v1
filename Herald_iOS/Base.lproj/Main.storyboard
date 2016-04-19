@@ -269,9 +269,6 @@
                     <connections>
                         <segue destination="vBz-7U-fcV" kind="relationship" relationship="viewControllers" id="P9f-e8-thO"/>
                         <segue destination="y5h-cL-odB" kind="relationship" relationship="viewControllers" id="yQ2-Pe-zFV"/>
-                        <segue destination="xb8-Aw-3BS" kind="show" id="Pig-c8-jpc"/>
-                        <segue destination="B31-Qi-exO" kind="show" id="qMR-iD-Kqc"/>
-                        <segue destination="Oj1-Pd-RuD" kind="show" id="b9k-sA-ISi"/>
                         <segue destination="csM-i5-Wk1" kind="show" id="suc-an-EX8"/>
                         <segue destination="d6o-yY-zYP" kind="show" id="b17-kL-da5"/>
                         <segue destination="eSB-zy-AYS" kind="show" id="S9T-GD-CH4"/>
@@ -1406,66 +1403,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Us0-76-Nkf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6843" y="-818"/>
-        </scene>
-        <!--场馆预约-->
-        <scene sceneID="aHM-QT-ft7">
-            <objects>
-                <viewController storyboardIdentifier="WEBMODULE_GYMRESERVE" title="场馆预约" id="xb8-Aw-3BS" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="MYL-Vb-fMm"/>
-                        <viewControllerLayoutGuide type="bottom" id="5XU-Nk-FnC"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="SEI-Ai-gJG">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="场馆预约" id="mJu-o4-huJ"/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x6J-8U-0fw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2478" y="-2322"/>
-        </scene>
-        <!--权益服务-->
-        <scene sceneID="XEZ-dc-Buv">
-            <objects>
-                <viewController storyboardIdentifier="WEBMODULE_QUANYI" title="权益服务" id="B31-Qi-exO" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="zKF-iU-g91"/>
-                        <viewControllerLayoutGuide type="bottom" id="lWy-cM-3a4"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="qWJ-VM-hOj">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="权益服务" id="wF8-AT-q1B"/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YuD-cR-u2Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3366" y="-2322"/>
-        </scene>
-        <!--空教室-->
-        <scene sceneID="HKn-TT-jGi">
-            <objects>
-                <viewController storyboardIdentifier="WEBMODULE_EMPTYROOM" title="空教室" id="Oj1-Pd-RuD" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="iAu-XK-yN9"/>
-                        <viewControllerLayoutGuide type="bottom" id="4lW-ZT-Ca9"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Uf3-wc-6cd">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="空教室" id="u6q-TB-NmF"/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="utE-Ay-stA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4236" y="-2322"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="nwa-vV-p8g">
