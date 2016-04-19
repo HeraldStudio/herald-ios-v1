@@ -64,6 +64,8 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
             lastSection.append(newElement)
             history.append(lastSection)
         }
+        
+        tableView?.reloadData()
     }
     
     @IBAction func refreshCache () {
