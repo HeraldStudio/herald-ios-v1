@@ -9,12 +9,16 @@
 import Foundation
 
 class CardHistoryModel {
+    var date : String
+    var time : String
     var place : String
     var type : String
     var cost : String
     var left : String
     
-    init (place : String, type : String, cost : String, left : String) {
+    init (date : String, time : String, place : String, type : String, cost : String, left : String) {
+        self.date = date
+        self.time = time
         self.place = place
         self.type = type
         self.cost = cost
