@@ -23,5 +23,12 @@ class CardHistoryModel {
         self.type = type
         self.cost = cost
         self.left = left
+        
+        if type == "扣款" && place == "" {
+            self.place = "水电费"
+        } else if place == "" && type != "" {
+            self.place = type
+            self.type = "无详情"
+        }
     }
 }

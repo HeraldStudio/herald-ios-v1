@@ -10,9 +10,12 @@ class CardsViewController: UIViewController, UITableViewDelegate {
     
     let slider = BannerPageViewController()
     
+    var themeColor : UIColor?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         cardsTableView.delegate = self
+        themeColor = navigationController?.navigationBar.backgroundColor
         
         let tw = (tabBarController?.tabBar.frame.width)!
         let th = (tabBarController?.tabBar.frame.height)!
@@ -37,6 +40,7 @@ class CardsViewController: UIViewController, UITableViewDelegate {
         slider.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.width * CGFloat(0.4))
         slider.interval = 5
         slider.placeholderImage = UIImage(named: "default_herald")
+        
         slider.setRemoteImageFetche { (imageView, url, placeHolderImage) in
             imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: placeHolderImage)
         }
@@ -73,6 +77,7 @@ class CardsViewController: UIViewController, UITableViewDelegate {
         
         if pics.count == 0 { return }
         slider.images = pics
+        slider.view.backgroundColor = themeColor
         slider.startRolling()
         
         let container = UIView()
@@ -101,6 +106,10 @@ class CardsViewController: UIViewController, UITableViewDelegate {
     //初始化每一个Cell
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let moduleCell = cardsTableView.dequeueReusableCellWithIdentifier("cardsCell", forIndexPath: indexPath) as! CardsTableViewCell
+        moduleCell.content?.text = "Hello, World"
+        for _ in 0 ..< indexPath.row {
+            moduleCell.content?.text = (moduleCell.content?.text)! + "Hello, World"
+        }
         return moduleCell
     }
     
@@ -109,5 +118,12 @@ class CardsViewController: UIViewController, UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let y = abs(scrollView.contentOffset.y)
+        guard let h = cardsTableView.tableHeaderView?.frame.height else {return}
+        let alpha : CGFloat = y < h ? (1 - y / h) * (1 - y / h) : 0;
+        
+        slider.view.subviews[0].alpha = alpha
+    }
 }
 

@@ -163,13 +163,6 @@
 			name = extension;
 			sourceTree = "<group>";
 		};
-		D3A0C1781CBB7BE500744640 /* mod_achievement */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = mod_achievement;
-			sourceTree = "<group>";
-		};
 		D3A0C1791CBB7C0000744640 /* mod_modulemanager */ = {
 			isa = PBXGroup;
 			children = (
@@ -351,7 +344,6 @@
 				D31DE50C1CC334D800E4891D /* custom */,
 				D348580F1CBB57DC00B55E76 /* extension */,
 				D348580A1CBB48EF00B55E76 /* helper */,
-				D3A0C1781CBB7BE500744640 /* mod_achievement */,
 				D3D35E0B1CBA2FFC00B18092 /* mod_auth */,
 				D3D35E0A1CBA2FEE00B18092 /* mod_communicate */,
 				D3A0C1791CBB7C0000744640 /* mod_modulemanager */,
