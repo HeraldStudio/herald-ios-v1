@@ -15,12 +15,8 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
     @IBOutlet var tableView : UITableView?
     
     override func viewDidLoad() {
-        let cache = CacheHelper.getCache("herald_card")
-        if cache != "" {
-            loadCache()
-        } else {
-            refreshCache()
-        }
+        loadCache()
+        refreshCache()
     }
     
     var history : [[CardHistoryModel]] = []
@@ -39,7 +35,7 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
             guard let left = Float(extra) else { self.showError(); return }
             var todayCost = String(format: "%.2f", left - lastLeft)
             if !todayCost.containsString("-") && !todayCost.containsString("+") {
-                todayCost = "+" + todayCost
+                todayCost = (todayCost == "0.00" ? "-" : "+") + todayCost
             }
             history.append([CardHistoryModel(date: "今天", time: "未出账", place: "今日总消费", type: "你可以到充值页面提前查看当天消费流水", cost: todayCost, left: extra)])
         }
@@ -52,11 +48,14 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
             let time = datetimeStr.componentsSeparatedByString(" ")[1]
             guard let place = obj["system"].string else { self.showError(); return }
             guard let type = obj["type"].string else { self.showError(); return }
-            guard let cost = obj["price"].string else { self.showError(); return }
+            guard var cost = obj["price"].string else { self.showError(); return }
             guard let left = obj["left"].string else { self.showError(); return }
             if date != lastDate {
                 history.append([])
                 lastDate = date
+            }
+            if !cost.containsString("-") && !cost.containsString("+") {
+                cost = (cost == "0.00" ? "-" : "+") + cost
             }
             let newElement = CardHistoryModel(date: date, time: time, place: place, type: type, cost: cost, left: left)
             guard var lastSection = history.last else { self.showError(); return }
