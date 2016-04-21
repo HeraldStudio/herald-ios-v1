@@ -168,7 +168,7 @@ class CurriculumView : UIViewController {
         // 绘制每节课的方块
         for i in 0 ..< N {
             let info = list[i] as! ClassInfo
-            let block = MyUILabel(frame: CGRect(
+            let block = CurriculumBlock(frame: CGRect(
                 x: x,
                 y: topPadding + CGFloat(info.startTime) * height / CGFloat(CurriculumView.PERIOD_COUNT + 1) + 0.5,
                 width: w - 1,
