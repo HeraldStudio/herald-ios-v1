@@ -4,25 +4,25 @@ import Reindeer
 import Kingfisher
 import SwiftyJSON
 
-class CardsViewController: UIViewController, UITableViewDelegate {
+class CardsViewController: BaseViewController, UITableViewDelegate {
     
     @IBOutlet weak var cardsTableView: UITableView!
     
     let slider = BannerPageViewController()
     
-    var themeColor : UIColor?
+    let swiper = SwipeRefreshHeader()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cardsTableView.delegate = self
-        themeColor = navigationController?.navigationBar.backgroundColor
         
         let tw = (tabBarController?.tabBar.frame.width)!
         let th = (tabBarController?.tabBar.frame.height)!
         let bottomPadding = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tw, height: th))
         cardsTableView.tableFooterView = bottomPadding
+        cardsTableView.estimatedRowHeight = 120;
+        cardsTableView.rowHeight = UITableViewAutomaticDimension;
         
-        setupSlider()
+        setupSliderAndSwiper()
         refreshSlider()
         
         ApiRequest().url("http://android.heraldstudio.com/checkversion").uuid()
@@ -36,7 +36,7 @@ class CardsViewController: UIViewController, UITableViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    func setupSlider () {
+    func setupSliderAndSwiper () {
         slider.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.width * CGFloat(0.4))
         slider.interval = 5
         slider.placeholderImage = UIImage(named: "default_herald")
@@ -52,6 +52,12 @@ class CardsViewController: UIViewController, UITableViewDelegate {
                 }
             }
         }
+        
+        // 刷新控件
+        swiper.themeColor = navigationController?.navigationBar.backgroundColor
+        swiper.contentView = slider.view
+        swiper.refresher = {() in self.showMessage("刷新测试")} // TODO
+        cardsTableView.tableHeaderView = swiper
     }
     
     var links : [String] = []
@@ -77,15 +83,7 @@ class CardsViewController: UIViewController, UITableViewDelegate {
         
         if pics.count == 0 { return }
         slider.images = pics
-        slider.view.backgroundColor = themeColor
         slider.startRolling()
-        
-        let container = UIView()
-        container.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: slider.view.frame.height + 8)
-        container.addSubview(slider.view)
-        
-        cardsTableView.tableHeaderView = container
-        slider.didMoveToParentViewController(self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -106,9 +104,9 @@ class CardsViewController: UIViewController, UITableViewDelegate {
     //初始化每一个Cell
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let moduleCell = cardsTableView.dequeueReusableCellWithIdentifier("cardsCell", forIndexPath: indexPath) as! CardsTableViewCell
-        moduleCell.content?.text = "Hello, World"
+        moduleCell.content?.text = "Hello, World! "
         for _ in 0 ..< indexPath.row {
-            moduleCell.content?.text = (moduleCell.content?.text)! + "Hello, World"
+            moduleCell.content?.text = (moduleCell.content?.text)! + "Hello, World! "
         }
         return moduleCell
     }
@@ -119,11 +117,11 @@ class CardsViewController: UIViewController, UITableViewDelegate {
     }
 
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        let y = abs(scrollView.contentOffset.y)
-        guard let h = cardsTableView.tableHeaderView?.frame.height else {return}
-        let alpha : CGFloat = y < h ? (1 - y / h) * (1 - y / h) : 0;
-        
-        slider.view.subviews[0].alpha = alpha
+        swiper.syncApperance(scrollView.contentOffset)
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        swiper.endDrag()
     }
 }
 

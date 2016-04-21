@@ -5,43 +5,17 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet weak var moduleTableView: UITableView!
     
+    let swiper = SwipeRefreshHeader()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
         moduleTableView.delegate = self
-        self.view.backgroundColor = UIColor.whiteColor()
-        //moduleTableView.bounces = false
         
-        setupModuleManager()
         setupModuleList()
         
-        self.moduleTableView.estimatedRowHeight=74;
-        
-        self.moduleTableView.rowHeight=UITableViewAutomaticDimension;
-    }
-    
-    var tapGestureRecogniser:UITapGestureRecognizer!
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func setupModuleManager() {
-        let topManager = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: 65))
-        topManager.backgroundColor = UIColor.whiteColor()
-        let img = UIImageView(image: UIImage(named: "ic_menu_manage"))
-        img.frame = CGRectMake(21, 21, 25, 25)
-        topManager.addSubview(img)
-        
-        let label = UILabel(frame: CGRect(x: 156, y: 21, width: 64, height: 22))
-        label.font = UIFont.systemFontOfSize(15)
-        label.textColor = UIColor.darkTextColor()
-        label.text = "模块管理"
-        topManager.addSubview(label)
-        
-        moduleTableView.tableHeaderView = topManager
+        self.moduleTableView.estimatedRowHeight = 74;
+        self.moduleTableView.rowHeight = UITableViewAutomaticDimension;
         
         let tw = (tabBarController?.tabBar.frame.width)!
         let th = (tabBarController?.tabBar.frame.height)!
@@ -49,34 +23,47 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
         moduleTableView.tableFooterView = bottomPadding
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     var enabledModules : [AppModule] = []
     var disabledModules : [AppModule] = []
     var sections : [[AppModule]] = []
-    var sectionEnabled : [Bool] = []
+    var sectionTitles : [String] = []
     
     func setupModuleList () {
         enabledModules.removeAll()
         disabledModules.removeAll()
+        sections.removeAll()
+        sectionTitles.removeAll()
+        
+        sectionTitles.append("模块管理")
+        let manager = AppModule(name: "", nameTip : "模块管理", desc : "管理各模块的显示/隐藏状态",
+                                controller : "MODULE_MANAGER", icon : "ic_add", hasCard : true)
+        manager.shortcutEnabled = true
+        sections.append([manager])
         
         for k in SettingsHelper.getSeuModuleList() {
             if k.cardEnabled || k.shortcutEnabled {
                 enabledModules.append(k)
                 if enabledModules.count == 1 {
-                    sectionEnabled.append(true)
+                    sectionTitles.append("显示在卡片或快捷栏的模块")
                 }
             } else {
                 disabledModules.append(k)
                 if disabledModules.count == 1 {
-                    sectionEnabled.append(false)
+                    sectionTitles.append("完全隐藏的模块")
                 }
             }
         }
-        for z in sectionEnabled {
-            if z {
-                sections.append(enabledModules)
-            } else {
-                sections.append(disabledModules)
-            }
+        
+        if enabledModules.count > 0 {
+            sections.append(enabledModules)
+        }
+        if disabledModules.count > 0 {
+            sections.append(disabledModules)
         }
         moduleTableView.reloadData()
     }
@@ -104,14 +91,14 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionEnabled[section] ? "显示在卡片或快捷栏的模块" : "完全隐藏的模块"
+        return sectionTitles[section]
     }
     
     //选中一个Cell后执行的方法
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        let controller = SettingsHelper.MODULES[indexPath.row].controller
+        let controller = sections[indexPath.section][indexPath.row].controller
         
         if controller.containsString("http") {
             UIApplication.sharedApplication().openURL(NSURL(string: controller)!)

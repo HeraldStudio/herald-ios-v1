@@ -14,15 +14,32 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet var tableView : UITableView?
     
+    let swiper = SwipeRefreshHeader()
+    
     override func viewDidLoad() {
+        swiper.refresher = {() in self.refreshCache()}
+        swiper.themeColor = navigationController?.navigationBar.backgroundColor
+        tableView?.tableHeaderView = swiper
         loadCache()
-        refreshCache()
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        swiper.syncApperance((tableView?.contentOffset)!)
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        swiper.endDrag()
     }
     
     var history : [[CardHistoryModel]] = []
     
     func loadCache() {
         let cache = CacheHelper.getCache("herald_card")
+        if cache == "" {
+            refreshCache()
+            return
+        }
+        
         let jsonCache = JSON.parse(cache)["content"]
         let jsonArray = jsonCache["detial"]
         guard let extra = jsonCache["left"].string else { self.showError(); return }
@@ -37,7 +54,7 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
             if !todayCost.containsString("-") && !todayCost.containsString("+") {
                 todayCost = (todayCost == "0.00" ? "-" : "+") + todayCost
             }
-            history.append([CardHistoryModel(date: "今天", time: "未出账", place: "今日总消费", type: "你可以到充值页面提前查看当天消费流水", cost: todayCost, left: extra)])
+            history.append([CardHistoryModel(date: "今天", time: "你可以到充值页面提前查看当天消费流水", place: "今日总消费", type: "未出账", cost: todayCost, left: extra)])
         }
         
         var lastDate = ""
