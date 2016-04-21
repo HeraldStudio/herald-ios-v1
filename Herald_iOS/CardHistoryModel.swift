@@ -24,9 +24,13 @@ class CardHistoryModel {
         self.cost = cost
         self.left = left
         
-        if type == "扣款" && place == "" {
-            self.place = "水电费"
-        } else if place == "" && type != "" {
+        // 银行转账项目的余额显示不正确，隐藏它
+        if type == "银行转帐" {
+            self.left = ""
+        }
+        
+        // 小字有内容、大字无内容时，把小字放到大字的位置上，小字显示“无详情”
+        if place == "" && type != "" {
             self.place = type
             self.type = "无详情"
         }

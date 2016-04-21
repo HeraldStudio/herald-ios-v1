@@ -15,7 +15,11 @@ class CurriculumViewController : BaseViewController, UIScrollViewDelegate {
     
     @IBOutlet var scrollView : UIScrollView?
     
+    let swiper = SwipeRefreshHeader()
+    
     override func viewDidLoad() {
+        swiper.refresher = {() in self.refreshCache()}
+        swiper.themeColor = navigationController?.navigationBar.backgroundColor
         let top = (navigationController?.navigationBar.bounds.height)! + UIApplication.sharedApplication().statusBarFrame.height
         scrollView?.frame = CGRect(x: 0, y: top, width: view.bounds.width, height: view.bounds.height - top)
         readLocal()
@@ -118,9 +122,11 @@ class CurriculumViewController : BaseViewController, UIScrollViewDelegate {
             page.loadData()
         }
         
-        scrollView?.scrollRectToVisible((scrollView?.subviews[thisWeek - 1].frame)!, animated: false)
+        scrollView?.scrollRectToVisible((scrollView?.subviews[thisWeek - 1].frame)!, animated: true)
         let page = abs(Int(scrollView!.contentOffset.x / scrollView!.frame.width))
         title = "第 \(page + 1) 周"
+        
+        scrollView?.addSubview(swiper)
     }
     
     func showError () {
@@ -141,5 +147,10 @@ class CurriculumViewController : BaseViewController, UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let page = abs(Int(scrollView.contentOffset.x / scrollView.frame.width + 0.5))
         title = "第 \(page + 1) 周"
+        swiper.syncApperance(scrollView.contentOffset)
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        swiper.endDrag()
     }
 }
