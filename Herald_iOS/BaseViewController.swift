@@ -16,6 +16,20 @@ class BaseViewController : UIViewController {
     
     var alertDialog : MBProgressHUD?
     
+    var themeColor = UIColor(red: 0/255, green: 180/255, blue: 255/255, alpha: 1)
+    
+    /// 还没有写成功的改变顶栏颜色
+    var oldThemeColor : UIColor?
+    
+    override func viewDidAppear(animated: Bool) {
+        oldThemeColor = navigationController?.navigationBar.backgroundColor
+        navigationController?.navigationBar.backgroundColor = themeColor
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        navigationController?.navigationBar.backgroundColor = oldThemeColor
+    }
+    
     func showProgressDialog () {
         hideProgressDialog()
         progressDialog = MBProgressHUD(view: view)

@@ -27,6 +27,10 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
         swiper.syncApperance((tableView?.contentOffset)!)
     }
     
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        swiper.beginDrag()
+    }
+    
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         swiper.endDrag()
     }

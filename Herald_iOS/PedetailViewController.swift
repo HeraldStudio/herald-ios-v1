@@ -9,13 +9,20 @@
 import Foundation
 import UIKit
 import SwiftyJSON
+import FSCalendar
 
-class PedetailViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class PedetailViewController : BaseViewController, FSCalendarDataSource, FSCalendarDelegate {
     
-    @IBOutlet var tableView : UITableView?
+    @IBOutlet weak var calendar : FSCalendar!
+    
+    @IBOutlet weak var countLabel : UILabel!
+    
+    @IBOutlet weak var remainLabel : UILabel!
     
     override func viewDidLoad() {
-        let cache = CacheHelper.getCache("herald_card")
+        themeColor = UIColor(red: 38/255, green: 166/255, blue: 154/255, alpha: 1)
+        
+        let cache = CacheHelper.getCache("herald_pedetail")
         if cache != "" {
             loadCache()
         } else {
@@ -23,104 +30,87 @@ class PedetailViewController : BaseViewController, UITableViewDelegate, UITableV
         }
     }
     
-    var history : [[CardHistoryModel]] = []
+    var history : [NSDate] = []
     
     func loadCache() {
-        let cache = CacheHelper.getCache("herald_card")
-        let jsonCache = JSON.parse(cache)["content"]
-        let jsonArray = jsonCache["detial"]
-        guard let extra = jsonCache["left"].string else { self.showError(); return }
-        title = "余额：" + extra
+        let cache = CacheHelper.getCache("herald_pedetail")
+        let count = CacheHelper.getCache("herald_pe_count")
+        let remain = CacheHelper.getCache("herald_pe_remain")
+        countLabel.text = count
+        remainLabel.text = remain
+        calendar?.reloadData()
+        
+        let jsonArray = JSON.parse(cache)["content"]
         
         history.removeAll()
-        if jsonArray.count > 0 {
-            guard let lastLeftStr = jsonArray[0]["left"].string else { self.showError(); return }
-            guard let lastLeft = Float(lastLeftStr) else { self.showError(); return }
-            guard let left = Float(extra) else { self.showError(); return }
-            var todayCost = String(format: "%.2f", left - lastLeft)
-            if !todayCost.containsString("-") && !todayCost.containsString("+") {
-                todayCost = "+" + todayCost
-            }
-            history.append([CardHistoryModel(date: "今天", time: "未出账", place: "今日总消费", type: "你可以到充值页面提前查看当天消费流水", cost: todayCost, left: extra)])
-        }
         
-        var lastDate = ""
-        for i in 0 ..< jsonArray.count {
-            let obj = jsonArray[i]
-            guard let datetimeStr = obj["date"].string else { self.showError(); return }
-            let date = datetimeStr.componentsSeparatedByString(" ")[0]
-            let time = datetimeStr.componentsSeparatedByString(" ")[1]
-            guard let place = obj["system"].string else { self.showError(); return }
-            guard let type = obj["type"].string else { self.showError(); return }
-            guard let cost = obj["price"].string else { self.showError(); return }
-            guard let left = obj["left"].string else { self.showError(); return }
-            if date != lastDate {
-                history.append([])
-                lastDate = date
-            }
-            let newElement = CardHistoryModel(date: date, time: time, place: place, type: type, cost: cost, left: left)
-            guard var lastSection = history.last else { self.showError(); return }
-            history.removeLast()
-            lastSection.append(newElement)
-            history.append(lastSection)
+        // 遍历所有跑操记录
+        for k in jsonArray.arrayValue {
+            guard let date = k["sign_date"].string else { showError(); return }
+            
+            let ymd = date.stringByReplacingOccurrencesOfString("-", withString: "/").componentsSeparatedByString("/")
+            let unit = NSCalendarUnit(arrayLiteral: .Year, .Month, .Day)
+            let comp = NSCalendar.currentCalendar().components(unit, fromDate: NSDate())
+            
+            guard let year = Int(ymd[0]) else { showError(); return }
+            guard let month = Int(ymd[1]) else { showError(); return }
+            guard let day = Int(ymd[2]) else { showError(); return }
+            comp.year = year; comp.month = month; comp.day = day
+            
+            guard let historyDate = NSCalendar.currentCalendar().dateFromComponents(comp) else { showError(); return }
+            calendar?.selectDate(historyDate)
+            history.append(historyDate)
         }
     }
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("card").uuid().post("timedelta", "31")
-            .toCache("herald_card") {json -> String in
-                guard let str = json.rawString() else {return ""}
-                return str
-            }
-            .onFinish { success, _, _ in
-                self.hideProgressDialog()
-                if success {
-                    self.loadCache()
-                    self.showMessage("刷新成功")
-                } else {
-                    self.showMessage("刷新失败，你也可以到充值页面查询")
+        ApiThreadManager().addAll(
+            ApiRequest().api("pedetail").uuid().toCache("herald_pedetail") {
+                json -> String in
+                    guard let str = json.rawString() else {return ""}
+                    return str
+                },
+            ApiRequest().api("pe").uuid().toCache("herald_pe_count") {
+                json -> String in
+                    guard let str = json["content"].rawString() else {return ""}
+                    return str
+                }.toCache("herald_pe_remain") {
+                    json -> String in
+                    guard let str = json["remain"].rawString() else {return ""}
+                    return str
                 }
-            }.run()
+        ).onFinish { success in
+            self.hideProgressDialog()
+            if success {
+                self.loadCache()
+                self.showMessage("刷新成功")
+            } else {
+                self.showMessage("刷新失败，请重试")
+            }
+        }.run()
     }
     
     func showError () {
-        title = "一卡通"
+        title = "跑操助手"
         showMessage("解析失败，请刷新")
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return history[section].count
-    }
-    
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return history[section][0].date
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CardTableViewCell", forIndexPath: indexPath) as! CardTableViewCell
-        
-        let model = history[indexPath.section][indexPath.row]
-        cell.time?.text = model.time
-        cell.place?.text = model.place
-        cell.type?.text = model.type
-        cell.cost?.text = model.cost
-        cell.left?.text = model.left
-        return cell
-    }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return history.count
-    }
-    
-    @IBAction func goToChargePage () {
-        showTipDialogIfUnknown("注意：由于一卡通中心配置问题，充值之后需要刷卡消费一次，一卡通余额才能正常显示哦", cachePostfix: "card_charge") {
-            () -> Void in
-            UIApplication.sharedApplication().openURL(NSURL(string: "http://58.192.115.47:8088/wechat-web/login/initlogin.html")!)
+    func hasDate(date : NSDate) -> Bool {
+        let unit = NSCalendarUnit(arrayLiteral: .Year, .Month, .Day)
+        let comp = NSCalendar.currentCalendar().components(unit, fromDate: date)
+        guard let sharpDate = NSCalendar.currentCalendar().dateFromComponents(comp) else { return false }
+        for k in history {
+            if k.compare(sharpDate) == NSComparisonResult.OrderedSame { return true }
         }
+        return false
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func calendar(calendar: FSCalendar, didSelectDate date: NSDate) {
+        if !hasDate(date) { calendar.deselectDate(date) }
+    }
+    
+    func calendar(calendar: FSCalendar, didDeselectDate date: NSDate) {
+        if hasDate(date) { calendar.selectDate(date) }
     }
 }

@@ -103,10 +103,19 @@ class CurriculumViewController : BaseViewController, UIScrollViewDelegate {
         
         // 如果开学日期比今天还晚，则是去年开学的。这里用while保证了thisWeek永远大于零
         guard let now = cal.date else {self.showError(); return}
-        guard let begin = beginOfTerm.date else {self.showError(); return}
+        guard var begin = beginOfTerm.date else {self.showError(); return}
         while (cal.date?.compare(beginOfTerm.date!) == NSComparisonResult.OrderedAscending) {
             cal.year -= 1
         }
+        
+        // 为了保险，检查开学日期的星期，不是周一的话往前推到周一
+        let components = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: begin)
+        
+        // 格里高利历中，weekday范围1~7，1为周日，需要转换成0到6，0为周一
+        let dayOfWeek = (components.weekday + 5) % 7
+        
+        // 将开学日期往前推到周一
+        begin = begin.dateByAddingTimeInterval(Double(-dayOfWeek * 86400))
         
         // 计算当前周
         thisWeek = Int(now.timeIntervalSinceDate(begin)) / 86400 / 7 + 1
@@ -148,6 +157,10 @@ class CurriculumViewController : BaseViewController, UIScrollViewDelegate {
         let page = abs(Int(scrollView.contentOffset.x / scrollView.frame.width + 0.5))
         title = "第 \(page + 1) 周"
         swiper.syncApperance(scrollView.contentOffset)
+    }
+    
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        swiper.beginDrag()
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {

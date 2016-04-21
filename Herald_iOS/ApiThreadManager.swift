@@ -16,9 +16,9 @@ class ApiThreadManager {
     
     typealias Runnable = () -> Void
     
-    var onResponse : Runnable = { }
+    var onResponse : (Bool, Int, String) -> Void = { _,_,_ in }
     
-    var onFinish : Runnable = { }
+    var onFinish : (Bool) -> Void = { _ in }
     
     var errorPool = NSMutableArray()
     
@@ -31,15 +31,15 @@ class ApiThreadManager {
         // 在线程列表中加入该线程
         requests.append(request)
         // 设置该线程结束时执行的操作
-        request.onFinish { _, _, _ in
+        request.onFinish { success, code, response in
             // 在数组中标记该线程已结束
             self.isRequestFinished[i] = true
             // 执行单个线程结束时的指定操作
-            self.onResponse()
+            self.onResponse(success, code, response)
             // 如果所有线程都结束了，执行所有线程结束时的指定操作
             for k in self.isRequestFinished {
                 if !k { return }
-                self.onFinish()
+                self.onFinish(self.errorPool.count == 0)
             }
         }
         return self
@@ -52,15 +52,19 @@ class ApiThreadManager {
         return self
     }
     
-    func onResponse (runnable : () -> Void) {
-        self.onResponse = runnable
+    func onResponse (handler : (Bool, Int, String) -> Void) -> ApiThreadManager {
+        self.onResponse = handler
+        return self
     }
     
-    func onFinish (runnable : () -> Void) {
-        self.onFinish = runnable
+    func onFinish (handler : (Bool) -> Void) -> ApiThreadManager {
+        self.onFinish = handler
+        return self
     }
     
-    func flushExceptions (message : String) {
-        // TODO
+    func run () {
+        for k in requests {
+            k.run()
+        }
     }
 }

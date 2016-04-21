@@ -8,11 +8,19 @@
 
 import Foundation
 import UIKit
+import FSCalendar
 
 class PedetailTableViewCell : UITableViewCell {
-    @IBOutlet var date : UILabel?
-    @IBOutlet var time : UILabel?
-    @IBOutlet var type : UILabel?
-    @IBOutlet var cost : UILabel?
-    @IBOutlet var left : UILabel?
+    
+    var year: Int?, month: Int?
+
+    var dates: [Int] = []
+    
+    var calendar = FSCalendar()
+    
+    override func willMoveToSuperview(newSuperview: UIView?) {
+        for k in subviews { k.removeFromSuperview() }
+        calendar.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+        addSubview(calendar)
+    }
 }

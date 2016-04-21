@@ -5,14 +5,8 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet weak var moduleTableView: UITableView!
     
-    let swiper = SwipeRefreshHeader()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        moduleTableView.delegate = self
-        
-        setupModuleList()
         
         self.moduleTableView.estimatedRowHeight = 74;
         self.moduleTableView.rowHeight = UITableViewAutomaticDimension;
@@ -21,6 +15,10 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
         let th = (tabBarController?.tabBar.frame.height)!
         let bottomPadding = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tw, height: th))
         moduleTableView.tableFooterView = bottomPadding
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        setupModuleList()
     }
     
     override func didReceiveMemoryWarning() {
@@ -39,8 +37,8 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
         sections.removeAll()
         sectionTitles.removeAll()
         
-        sectionTitles.append("模块管理")
-        let manager = AppModule(name: "", nameTip : "模块管理", desc : "管理各模块的显示/隐藏状态",
+        sectionTitles.append("")
+        let manager = AppModule(id: -1, name: "", nameTip : "模块管理", desc : "管理各模块的显示/隐藏状态",
                                 controller : "MODULE_MANAGER", icon : "ic_add", hasCard : true)
         manager.shortcutEnabled = true
         sections.append([manager])
@@ -80,7 +78,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     //初始化每一个Cell
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let moduleCell = moduleTableView.dequeueReusableCellWithIdentifier("moduleCell", forIndexPath: indexPath) as! ModuleTableViewCell
+        let moduleCell = moduleTableView.dequeueReusableCellWithIdentifier("ModuleTableViewCell", forIndexPath: indexPath) as! ModuleTableViewCell
         
         let module = sections[indexPath.section][indexPath.row]
         

@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/Alamofire.framework"
+  install_framework "Pods/FSCalendar.framework"
   install_framework "Pods/Kingfisher.framework"
   install_framework "Pods/MBProgressHUD.framework"
   install_framework "Pods/Reindeer.framework"
@@ -92,6 +93,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/Alamofire.framework"
+  install_framework "Pods/FSCalendar.framework"
   install_framework "Pods/Kingfisher.framework"
   install_framework "Pods/MBProgressHUD.framework"
   install_framework "Pods/Reindeer.framework"

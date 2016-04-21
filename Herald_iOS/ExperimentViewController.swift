@@ -27,6 +27,10 @@ class ExperimentViewController : BaseViewController, UITableViewDelegate, UITabl
         swiper.syncApperance((tableView?.contentOffset)!)
     }
     
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        swiper.beginDrag()
+    }
+    
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         swiper.endDrag()
     }
