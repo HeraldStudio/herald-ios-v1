@@ -96,12 +96,6 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        let controller = sections[indexPath.section][indexPath.row].controller
-        
-        if controller.containsString("http") {
-            UIApplication.sharedApplication().openURL(NSURL(string: controller)!)
-        } else if let vc = storyboard?.instantiateViewControllerWithIdentifier(controller) {
-            navigationController?.pushViewController(vc, animated: true)
-        }
+        sections[indexPath.section][indexPath.row].open(navigationController!)
     }
 }

@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class ExperimentViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet var tableView : UITableView?
+    @IBOutlet var tableView : UITableView!
     
     let swiper = SwipeRefreshHeader()
     
@@ -57,11 +57,11 @@ class ExperimentViewController : BaseViewController, UITableViewDelegate, UITabl
             
             var list : [ExperimentModel] = []
             for experiment in section.1 {
-                guard let name = experiment.1["name"].string else {showError(); return}
-                guard let date = experiment.1["Date"].string else {showError(); return}
-                guard let day = experiment.1["Day"].string else {showError(); return}
-                guard let place = experiment.1["Address"].string else {showError(); return}
-                guard let teacher = experiment.1["Teacher"].string else {showError(); return}
+                let name = experiment.1["name"].stringValue
+                let date = experiment.1["Date"].stringValue
+                let day = experiment.1["Day"].stringValue
+                let place = experiment.1["Address"].stringValue
+                let teacher = experiment.1["Teacher"].stringValue
                 
                 var grade : String = ""
                 if experiment.1["Grade"].string != nil {
@@ -88,7 +88,6 @@ class ExperimentViewController : BaseViewController, UITableViewDelegate, UITabl
                 self.hideProgressDialog()
                 if success {
                     self.loadCache()
-                    self.showMessage("刷新成功")
                 } else {
                     self.showMessage("刷新失败，请重试")
                 }

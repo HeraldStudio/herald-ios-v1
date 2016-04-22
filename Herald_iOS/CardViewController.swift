@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class CardViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet var tableView : UITableView?
+    @IBOutlet var tableView : UITableView!
     
     let swiper = SwipeRefreshHeader()
     
@@ -46,7 +46,7 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
             return
         }
         
-        guard let extra = JSON.parse(leftCache)["content"]["left"].string else { self.showError(); return }
+        let extra = JSON.parse(leftCache)["content"]["left"].stringValue
         title = "余额：" + extra
         
         let jsonCache = JSON.parse(cache)["content"]
@@ -54,7 +54,7 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
             
         history.removeAll()
         if jsonArray.count > 0 {
-            guard let lastLeftStr = jsonArray[0]["left"].string else { self.showError(); return }
+            let lastLeftStr = jsonArray[0]["left"].stringValue
             guard let lastLeft = Float(lastLeftStr) else { self.showError(); return }
             guard let left = Float(extra) else { self.showError(); return }
             var todayCost = String(format: "%.2f", left - lastLeft)
@@ -67,13 +67,14 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
         var lastDate = ""
         for i in 0 ..< jsonArray.count {
             let obj = jsonArray[i]
-            guard let datetimeStr = obj["date"].string else { self.showError(); return }
+            let datetimeStr = obj["date"].stringValue
             let date = datetimeStr.componentsSeparatedByString(" ")[0]
             let time = datetimeStr.componentsSeparatedByString(" ")[1]
-            guard let place = obj["system"].string else { self.showError(); return }
-            guard let type = obj["type"].string else { self.showError(); return }
-            guard var cost = obj["price"].string else { self.showError(); return }
-            guard let left = obj["left"].string else { self.showError(); return }
+            let place = obj["system"].stringValue
+            let type = obj["type"].stringValue
+            var cost = obj["price"].stringValue
+            let left = obj["left"].stringValue
+            
             if date != lastDate {
                 history.append([])
                 lastDate = date
@@ -106,7 +107,6 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
         let lastRefresh = CacheHelper.getCache("herald_card_date")
         let dateComp = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: NSDate())
         let stamp = "\(dateComp.year)/\(dateComp.month)/\(dateComp.day)"
-        var message = "当日消费刷新成功"
         
         // 若与当前日期不同，刷新完整流水记录
         if lastRefresh != stamp {
@@ -115,7 +115,6 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
                     guard let str = json.rawString() else {return ""}
                     return str
                 })
-            message = "当日消费及历史流水刷新成功"
         }
         
         // 若刷新成功，保存当前日期
@@ -124,7 +123,6 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
                     if success {
                         CacheHelper.setCache("herald_card_date", cacheValue: stamp)
                         self.loadCache()
-                        self.showMessage(message)
                     } else {
                         self.showMessage("刷新失败，你也可以到充值页面查询")
                     }

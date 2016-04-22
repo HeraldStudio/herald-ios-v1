@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class ExperimentTableViewCell : UITableViewCell {
-    @IBOutlet var name : UILabel?
-    @IBOutlet var timeAndPlace : UILabel?
-    @IBOutlet var teacher : UILabel?
-    @IBOutlet var grade : UILabel?
+    @IBOutlet var name : UILabel!
+    @IBOutlet var timeAndPlace : UILabel!
+    @IBOutlet var teacher : UILabel!
+    @IBOutlet var grade : UILabel!
 }

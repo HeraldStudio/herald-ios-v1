@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		35B0B9E24AE997C9060E6BC4 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283283296736ED980EE6E1A6 /* Pods.framework */; };
+		D306E0201CCA3ADF00FA3812 /* WebModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E01F1CCA3ADF00FA3812 /* WebModuleViewController.swift */; };
+		D306E0221CCA3DFD00FA3812 /* AppModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E0211CCA3DFD00FA3812 /* AppModule.swift */; };
+		D306E0241CCA3F7700FA3812 /* ExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E0231CCA3F7700FA3812 /* ExamViewController.swift */; };
+		D306E0261CCA3F8400FA3812 /* ExamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E0251CCA3F8400FA3812 /* ExamTableViewCell.swift */; };
+		D306E0281CCA403D00FA3812 /* ExamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E0271CCA403D00FA3812 /* ExamModel.swift */; };
+		D306E02A1CCA68A700FA3812 /* GradeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E0291CCA68A700FA3812 /* GradeModel.swift */; };
+		D306E02C1CCA68EB00FA3812 /* GradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E02B1CCA68EB00FA3812 /* GradeTableViewCell.swift */; };
+		D306E02E1CCA691F00FA3812 /* GradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E02D1CCA691F00FA3812 /* GradeViewController.swift */; };
 		D30A9BA11CBBA9100087D583 /* ApiThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30A9BA01CBBA9100087D583 /* ApiThreadManager.swift */; };
 		D315A0731CC9B4FC00446EA4 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D315A0721CC9B4FC00446EA4 /* BaseTableViewController.swift */; };
 		D31821B21CC3B07800992355 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D31821B11CC3B07800992355 /* LaunchScreen.storyboard */; };
@@ -72,6 +80,14 @@
 /* Begin PBXFileReference section */
 		283283296736ED980EE6E1A6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6878935004ACF38EDF397D4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D306E01F1CCA3ADF00FA3812 /* WebModuleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebModuleViewController.swift; sourceTree = "<group>"; };
+		D306E0211CCA3DFD00FA3812 /* AppModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModule.swift; sourceTree = "<group>"; };
+		D306E0231CCA3F7700FA3812 /* ExamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamViewController.swift; sourceTree = "<group>"; };
+		D306E0251CCA3F8400FA3812 /* ExamTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamTableViewCell.swift; sourceTree = "<group>"; };
+		D306E0271CCA403D00FA3812 /* ExamModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamModel.swift; sourceTree = "<group>"; };
+		D306E0291CCA68A700FA3812 /* GradeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeModel.swift; sourceTree = "<group>"; };
+		D306E02B1CCA68EB00FA3812 /* GradeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeTableViewCell.swift; sourceTree = "<group>"; };
+		D306E02D1CCA691F00FA3812 /* GradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeViewController.swift; sourceTree = "<group>"; };
 		D30A9BA01CBBA9100087D583 /* ApiThreadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiThreadManager.swift; sourceTree = "<group>"; };
 		D315A0721CC9B4FC00446EA4 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		D31821B11CC3B07800992355 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -181,6 +197,7 @@
 				D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */,
 				D30A9BA01CBBA9100087D583 /* ApiThreadManager.swift */,
 				D31821B51CC48D5400992355 /* ServiceHelper.swift */,
+				D306E0211CCA3DFD00FA3812 /* AppModule.swift */,
 			);
 			name = helper;
 			sourceTree = "<group>";
@@ -207,16 +224,13 @@
 			children = (
 				D3A0C17D1CBB7C5800744640 /* cardextra */,
 				D3A0C17E1CBB7C6100744640 /* curriculum */,
-				D3A0C17F1CBB7C6C00744640 /* emptyroom */,
 				D3A0C1801CBB7C7700744640 /* exam */,
 				D3A0C1811CBB7C7F00744640 /* experiment */,
 				D3A0C1821CBB7C8F00744640 /* grade */,
-				D3A0C1831CBB7CBD00744640 /* gymreserve */,
 				D3A0C1841CBB7CCE00744640 /* jwc */,
 				D3A0C1851CBB7CD800744640 /* lecture */,
 				D3A0C1861CBB7CDF00744640 /* library */,
 				D3A0C1871CBB7CE700744640 /* pedetail */,
-				D3A0C1881CBB7CF000744640 /* schedule */,
 				D3A0C1891CBB7D0D00744640 /* schoolbus */,
 				D3A0C18A1CBB7D1600744640 /* seunet */,
 				D3A0C18B1CBB7D1D00744640 /* srtp */,
@@ -227,6 +241,7 @@
 		D3A0C17C1CBB7C4B00744640 /* mod_webmodule */ = {
 			isa = PBXGroup;
 			children = (
+				D306E01F1CCA3ADF00FA3812 /* WebModuleViewController.swift */,
 			);
 			name = mod_webmodule;
 			sourceTree = "<group>";
@@ -252,16 +267,12 @@
 			name = curriculum;
 			sourceTree = "<group>";
 		};
-		D3A0C17F1CBB7C6C00744640 /* emptyroom */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = emptyroom;
-			sourceTree = "<group>";
-		};
 		D3A0C1801CBB7C7700744640 /* exam */ = {
 			isa = PBXGroup;
 			children = (
+				D306E0231CCA3F7700FA3812 /* ExamViewController.swift */,
+				D306E0251CCA3F8400FA3812 /* ExamTableViewCell.swift */,
+				D306E0271CCA403D00FA3812 /* ExamModel.swift */,
 			);
 			name = exam;
 			sourceTree = "<group>";
@@ -279,15 +290,11 @@
 		D3A0C1821CBB7C8F00744640 /* grade */ = {
 			isa = PBXGroup;
 			children = (
+				D306E02D1CCA691F00FA3812 /* GradeViewController.swift */,
+				D306E02B1CCA68EB00FA3812 /* GradeTableViewCell.swift */,
+				D306E0291CCA68A700FA3812 /* GradeModel.swift */,
 			);
 			name = grade;
-			sourceTree = "<group>";
-		};
-		D3A0C1831CBB7CBD00744640 /* gymreserve */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = gymreserve;
 			sourceTree = "<group>";
 		};
 		D3A0C1841CBB7CCE00744640 /* jwc */ = {
@@ -323,13 +330,6 @@
 				D3E6BD811CC8D4B20074FF6D /* PedetailViewController.swift */,
 			);
 			name = pedetail;
-			sourceTree = "<group>";
-		};
-		D3A0C1881CBB7CF000744640 /* schedule */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = schedule;
 			sourceTree = "<group>";
 		};
 		D3A0C1891CBB7D0D00744640 /* schoolbus */ = {
@@ -629,11 +629,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D306E0281CCA403D00FA3812 /* ExamModel.swift in Sources */,
 				D3F473491CCA068D00750FFB /* JwcNoticeModel.swift in Sources */,
 				D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */,
 				D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */,
 				D31821CE1CC856FF00992355 /* ExperimentViewController.swift in Sources */,
 				D31DE5141CC3597800E4891D /* CurriculumBlock.swift in Sources */,
+				D306E0221CCA3DFD00FA3812 /* AppModule.swift in Sources */,
 				D3A0C1721CBB7A9800744640 /* CardsViewController.swift in Sources */,
 				D3E6BD7F1CC8C07F0074FF6D /* ModuleManagerViewController.swift in Sources */,
 				D3F473471CCA05CD00750FFB /* JwcViewController.swift in Sources */,
@@ -646,8 +648,10 @@
 				D31DE50E1CC334EC00E4891D /* ModuleTableViewCell.swift in Sources */,
 				D31DE5181CC359D300E4891D /* CurriculumViewController.swift in Sources */,
 				D3A0C1771CBB7B2300744640 /* MyInfoViewController.swift in Sources */,
+				D306E02E1CCA691F00FA3812 /* GradeViewController.swift in Sources */,
 				D31821B61CC48D5400992355 /* ServiceHelper.swift in Sources */,
 				D3F473451CCA04C100750FFB /* JwcTableViewCell.swift in Sources */,
+				D306E02C1CCA68EB00FA3812 /* GradeTableViewCell.swift in Sources */,
 				D31DE5121CC3592F00E4891D /* ClassInfo.swift in Sources */,
 				D3F4734D1CCA153A00750FFB /* LectureModel.swift in Sources */,
 				D348580E1CBB4FF900B55E76 /* CacheHelper.swift in Sources */,
@@ -657,8 +661,12 @@
 				D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */,
 				D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */,
 				D31821C31CC5291000992355 /* CardHistoryModel.swift in Sources */,
+				D306E02A1CCA68A700FA3812 /* GradeModel.swift in Sources */,
+				D306E0241CCA3F7700FA3812 /* ExamViewController.swift in Sources */,
 				D3D35DDF1CBA2E8200B18092 /* LoginViewController.swift in Sources */,
 				D31821C11CC5256F00992355 /* CardTableViewCell.swift in Sources */,
+				D306E0261CCA3F8400FA3812 /* ExamTableViewCell.swift in Sources */,
+				D306E0201CCA3ADF00FA3812 /* WebModuleViewController.swift in Sources */,
 				D3325D051CC89BA0002060A5 /* SwipeRefreshHeader.swift in Sources */,
 				D31821BF1CC522D900992355 /* CardViewController.swift in Sources */,
 				D3D35DDD1CBA2E8200B18092 /* AppDelegate.swift in Sources */,

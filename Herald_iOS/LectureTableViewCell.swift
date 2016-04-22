@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class LectureTableViewCell : UITableViewCell {
-    @IBOutlet var topic : UILabel?
-    @IBOutlet var speaker : UILabel?
-    @IBOutlet var dateAndPlace : UILabel?
+    @IBOutlet var topic : UILabel!
+    @IBOutlet var speaker : UILabel!
+    @IBOutlet var dateAndPlace : UILabel!
 }

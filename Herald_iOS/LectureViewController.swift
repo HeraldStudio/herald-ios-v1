@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class LectureViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet var tableView : UITableView?
+    @IBOutlet var tableView : UITableView!
     
     let swiper = SwipeRefreshHeader()
     
@@ -54,10 +54,10 @@ class LectureViewController : BaseViewController, UITableViewDelegate, UITableVi
         list.removeAll()
         var noticeList : [LectureModel] = []
         for k in JSON.parse(noticeCache)["content"].arrayValue {
-            guard let topic = k["topic"].string else { showError(); return }
-            guard let speaker = k["speaker"].string else { showError(); return }
-            guard let date = k["date"].string else { showError(); return }
-            guard let location = k["location"].string else { showError(); return }
+            let topic = k["topic"].stringValue
+            let speaker = k["speaker"].stringValue
+            let date = k["date"].stringValue
+            let location = k["location"].stringValue
             
             let dateAndPlace = date + " @" + location
             let model = LectureModel(topic, speaker, dateAndPlace)
@@ -68,10 +68,10 @@ class LectureViewController : BaseViewController, UITableViewDelegate, UITableVi
         // 解析讲座记录缓存
         var recordList : [LectureModel] = []
         for k in JSON.parse(recordCache)["content"]["detial"].arrayValue {
-            guard let dateTime = k["date"].string else { showError(); return }
-            guard let place = k["place"].string else { showError(); return }
-            let dateAndTime = dateTime.componentsSeparatedByString(" ")
+            let dateTime = k["date"].stringValue
+            let place = k["place"].stringValue
             
+            let dateAndTime = dateTime.componentsSeparatedByString(" ")
             let model = LectureModel(dateAndTime[0], "打卡时间：" + dateAndTime[1], "讲座地点：" + place)
             recordList.append(model)
         }
@@ -99,7 +99,6 @@ class LectureViewController : BaseViewController, UITableViewDelegate, UITableVi
             self.hideProgressDialog()
             if success {
                 self.loadCache()
-                self.showMessage("刷新成功")
             } else {
                 self.showMessage("刷新失败，你也可以到充值页面查询")
             }

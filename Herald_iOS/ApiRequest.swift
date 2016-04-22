@@ -85,9 +85,7 @@ class ApiRequest {
             } else {
                 let responseJson = JSON.parse(response.result.value!)
                 for onFinishListener in onFinishListeners {
-                    guard let code = responseJson["code"].int else {
-                        fallthrough
-                    }
+                    let code = responseJson["code"].intValue
                     guard let jsonStr = responseJson.rawString() else {
                         fallthrough
                     }

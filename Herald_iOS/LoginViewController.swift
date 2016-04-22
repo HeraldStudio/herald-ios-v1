@@ -2,11 +2,11 @@ import UIKit
 
 class LoginViewController: BaseViewController {
 
-    @IBOutlet var username : UITextField?
+    @IBOutlet var username : UITextField!
     
-    @IBOutlet var password : UITextField?
+    @IBOutlet var password : UITextField!
     
-    @IBOutlet var button : UIButton?
+    @IBOutlet var button : UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -13,7 +13,7 @@ class CurriculumViewController : BaseViewController, UIScrollViewDelegate {
     
     var thisWeek = 0
     
-    @IBOutlet var scrollView : UIScrollView?
+    @IBOutlet var scrollView : UIScrollView!
     
     let swiper = SwipeRefreshHeader()
     
@@ -48,7 +48,6 @@ class CurriculumViewController : BaseViewController, UIScrollViewDelegate {
                 self.hideProgressDialog()
                 if success {
                     self.readLocal()
-                    self.showMessage("刷新成功")
                 } else {
                     self.showMessage("刷新失败")
                 }
@@ -84,15 +83,15 @@ class CurriculumViewController : BaseViewController, UIScrollViewDelegate {
         let sidebarArray = JSON.parse(sidebar)
         for i in 0 ..< sidebarArray.count {
             let obj = sidebarArray[i]
-            guard let lecturer = obj["lecturer"].string else {self.showError(); return}
-            guard let credit = obj["credit"].string else {self.showError(); return}
-            guard let course = obj["course"].string else {self.showError(); return}
+            let lecturer = obj["lecturer"].stringValue
+            let credit = obj["credit"].stringValue
+            let course = obj["course"].stringValue
             sidebarList.updateValue("授课教师：\(lecturer)\n课程学分：\(credit)", forKey: course)
         }
         
         // 读取开学日期
-        guard let startMonth = content["startdate"]["month"].int else {self.showError(); return}
-        guard let startDate = content["startdate"]["day"].int else {self.showError(); return}
+        let startMonth = content["startdate"]["month"].intValue
+        let startDate = content["startdate"]["day"].intValue
         let mostUnits = NSCalendarUnit(rawValue: UInt.max)
         let cal = NSCalendar.currentCalendar().components(mostUnits, fromDate: NSDate())
         let beginOfTerm = NSCalendar.currentCalendar().components(mostUnits, fromDate: NSDate())
