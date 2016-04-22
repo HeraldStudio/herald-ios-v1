@@ -44,7 +44,7 @@ class PedetailViewController : BaseViewController, FSCalendarDataSource, FSCalen
         
         // 遍历所有跑操记录
         for k in jsonArray.arrayValue {
-            guard let date = k["sign_date"].string else { showError(); return }
+            let date = k["sign_date"].stringValue
             
             let ymd = date.stringByReplacingOccurrencesOfString("-", withString: "/").componentsSeparatedByString("/")
             let unit = NSCalendarUnit(arrayLiteral: .Year, .Month, .Day)
@@ -82,7 +82,6 @@ class PedetailViewController : BaseViewController, FSCalendarDataSource, FSCalen
             self.hideProgressDialog()
             if success {
                 self.loadCache()
-                self.showMessage("刷新成功")
             } else {
                 self.showMessage("刷新失败，请重试")
             }

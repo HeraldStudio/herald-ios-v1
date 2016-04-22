@@ -51,7 +51,7 @@ class ModuleManagerViewController: UIViewController, UITableViewDelegate, UITabl
             moduleCell.cardSwitch.enabled = module.hasCard
             moduleCell.cardSwitch.alpha = module.hasCard ? 1 : 0
         
-        return moduleCell
+            return moduleCell
         }
     }
     

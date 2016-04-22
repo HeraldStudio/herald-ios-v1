@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class JwcViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet var tableView : UITableView?
+    @IBOutlet var tableView : UITableView!
     
     let swiper = SwipeRefreshHeader()
     
@@ -59,10 +59,10 @@ class JwcViewController : BaseViewController, UITableViewDelegate, UITableViewDa
             
             var list : [JwcNoticeModel] = []
             for experiment in section.1 {
-                guard let title = experiment.1["title"].string else {showError(); return}
-                guard let time = experiment.1["date"].string else {showError(); return}
-                guard let url = experiment.1["href"].string else {showError(); return}
-                
+                let title = experiment.1["title"].stringValue
+                let time = experiment.1["date"].stringValue
+                let url = experiment.1["href"].stringValue
+            
                 let model = JwcNoticeModel(title, time, url)
                 list.append(model)
             }
@@ -84,7 +84,6 @@ class JwcViewController : BaseViewController, UITableViewDelegate, UITableViewDa
                 self.hideProgressDialog()
                 if success {
                     self.loadCache()
-                    self.showMessage("刷新成功")
                 } else {
                     self.showMessage("刷新失败，请重试")
                 }

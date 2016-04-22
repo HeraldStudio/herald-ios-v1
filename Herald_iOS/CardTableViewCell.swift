@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 class CardTableViewCell : UITableViewCell {
-    @IBOutlet var time : UILabel?
-    @IBOutlet var place : UILabel?
-    @IBOutlet var type : UILabel?
-    @IBOutlet var cost : UILabel?
-    @IBOutlet var left : UILabel?
+    @IBOutlet var time : UILabel!
+    @IBOutlet var place : UILabel!
+    @IBOutlet var type : UILabel!
+    @IBOutlet var cost : UILabel!
+    @IBOutlet var left : UILabel!
 }

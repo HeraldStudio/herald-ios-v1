@@ -10,6 +10,6 @@ import Foundation
 import UIKit
 
 class JwcTableViewCell : UITableViewCell {
-    @IBOutlet var title : UILabel?
-    @IBOutlet var time : UILabel?
+    @IBOutlet var title : UILabel!
+    @IBOutlet var time : UILabel!
 }
