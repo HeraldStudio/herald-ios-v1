@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MBProgressHUD
 
-class BaseViewController : UIViewController {
+class BaseTableViewController : UITableViewController {
     
     var progressDialog : MBProgressHUD?
     
@@ -52,7 +52,7 @@ class BaseViewController : UIViewController {
                 (action: UIAlertAction) -> Void in
                 CacheHelper.setCache("tip_ignored_" + cachePostfix, cacheValue: "1")
                 runAfter()
-            })
+                })
             presentViewController(dialog, animated: true, completion: nil)
         } else {
             runAfter()

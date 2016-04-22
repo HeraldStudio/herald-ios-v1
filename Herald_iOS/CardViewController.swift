@@ -21,6 +21,7 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
         swiper.themeColor = navigationController?.navigationBar.backgroundColor
         tableView?.tableHeaderView = swiper
         loadCache()
+        refreshCache() // 自动判断是否需要刷新流水，不需要的话只刷新余额
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -38,16 +39,18 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
     var history : [[CardHistoryModel]] = []
     
     func loadCache() {
+        // 仅有余额的缓存，这个缓存刷新永远比完整的缓存快
+        let leftCache = CacheHelper.getCache("herald_card_left")
         let cache = CacheHelper.getCache("herald_card")
-        if cache == "" {
-            refreshCache()
+        if cache == "" || leftCache == "" {
             return
         }
         
+        guard let extra = JSON.parse(leftCache)["content"]["left"].string else { self.showError(); return }
+        title = "余额：" + extra
+        
         let jsonCache = JSON.parse(cache)["content"]
         let jsonArray = jsonCache["detial"]
-        guard let extra = jsonCache["left"].string else { self.showError(); return }
-        title = "余额：" + extra
             
         history.removeAll()
         if jsonArray.count > 0 {
@@ -90,20 +93,42 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("card").uuid().post("timedelta", "31")
-            .toCache("herald_card") {json -> String in
-                guard let str = json.rawString() else {return ""}
-                return str
-            }
-            .onFinish { success, _, _ in
-                self.hideProgressDialog()
-                if success {
-                    self.loadCache()
-                    self.showMessage("刷新成功")
-                } else {
-                    self.showMessage("刷新失败，你也可以到充值页面查询")
-                }
-            }.run()
+        
+        // 先加入刷新余额的请求
+        let manager = ApiThreadManager().add(
+            ApiRequest().api("card").uuid()
+                .toCache("herald_card_left") {json -> String in
+                    guard let str = json.rawString() else {return ""}
+                    return str
+            });
+        
+        // 取上次刷新日期，与当前日期比较
+        let lastRefresh = CacheHelper.getCache("herald_card_date")
+        let dateComp = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: NSDate())
+        let stamp = "\(dateComp.year)/\(dateComp.month)/\(dateComp.day)"
+        var message = "当日消费刷新成功"
+        
+        // 若与当前日期不同，刷新完整流水记录
+        if lastRefresh != stamp {
+            manager.add(ApiRequest().api("card").uuid().post("timedelta", "31")
+                .toCache("herald_card") {json -> String in
+                    guard let str = json.rawString() else {return ""}
+                    return str
+                })
+            message = "当日消费及历史流水刷新成功"
+        }
+        
+        // 若刷新成功，保存当前日期
+        manager.onFinish { success in
+                    self.hideProgressDialog()
+                    if success {
+                        CacheHelper.setCache("herald_card_date", cacheValue: stamp)
+                        self.loadCache()
+                        self.showMessage(message)
+                    } else {
+                        self.showMessage("刷新失败，你也可以到充值页面查询")
+                    }
+                }.run()
     }
     
     func showError () {

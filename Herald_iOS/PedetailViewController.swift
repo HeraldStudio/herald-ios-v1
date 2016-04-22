@@ -20,8 +20,6 @@ class PedetailViewController : BaseViewController, FSCalendarDataSource, FSCalen
     @IBOutlet weak var remainLabel : UILabel!
     
     override func viewDidLoad() {
-        themeColor = UIColor(red: 38/255, green: 166/255, blue: 154/255, alpha: 1)
-        
         let cache = CacheHelper.getCache("herald_pedetail")
         if cache != "" {
             loadCache()

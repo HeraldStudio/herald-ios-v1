@@ -30,24 +30,29 @@ class ModuleManagerViewController: UIViewController, UITableViewDelegate, UITabl
     
     //每一个section里面有多少个Cell
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return modules.count
+        return modules.count + 1
     }
     
     //初始化每一个Cell
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let moduleCell = moduleTableView.dequeueReusableCellWithIdentifier("ModuleManageTableViewCell", forIndexPath: indexPath) as! ModuleManageTableViewCell
         
-        let module = modules[indexPath.row]
+        if indexPath.row == 0 {
+            return moduleTableView.dequeueReusableCellWithIdentifier("ModuleManageTableHeaderCell", forIndexPath: indexPath)
+        } else {
+            let moduleCell = moduleTableView.dequeueReusableCellWithIdentifier("ModuleManageTableViewCell", forIndexPath: indexPath) as! ModuleManageTableViewCell
         
-        moduleCell.module = module.id
-        moduleCell.icon.image = UIImage(named: module.icon)
-        moduleCell.label.text = module.nameTip
-        moduleCell.shortcutSwitch.setOn(module.shortcutEnabled, animated: false)
-        moduleCell.cardSwitch.setOn(module.cardEnabled, animated: false)
-        moduleCell.cardSwitch.enabled = module.hasCard
-        moduleCell.cardSwitch.alpha = module.hasCard ? 1 : 0
+            let module = modules[indexPath.row - 1]
+        
+            moduleCell.module = module.id
+            moduleCell.icon.image = UIImage(named: module.icon)
+            moduleCell.label.text = module.nameTip
+            moduleCell.shortcutSwitch.setOn(module.shortcutEnabled, animated: false)
+            moduleCell.cardSwitch.setOn(module.cardEnabled, animated: false)
+            moduleCell.cardSwitch.enabled = module.hasCard
+            moduleCell.cardSwitch.alpha = module.hasCard ? 1 : 0
         
         return moduleCell
+        }
     }
     
     //选中一个Cell后执行的方法
