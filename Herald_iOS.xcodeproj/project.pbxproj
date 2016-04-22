@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		35B0B9E24AE997C9060E6BC4 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283283296736ED980EE6E1A6 /* Pods.framework */; };
-		4651EB981CC900ED00B3F490 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 4651EB971CC900ED00B3F490 /* .gitignore */; };
 		D30A9BA11CBBA9100087D583 /* ApiThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30A9BA01CBBA9100087D583 /* ApiThreadManager.swift */; };
 		D31821B21CC3B07800992355 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D31821B11CC3B07800992355 /* LaunchScreen.storyboard */; };
 		D31821B61CC48D5400992355 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821B51CC48D5400992355 /* ServiceHelper.swift */; };
@@ -65,7 +64,6 @@
 
 /* Begin PBXFileReference section */
 		283283296736ED980EE6E1A6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4651EB971CC900ED00B3F490 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		B6878935004ACF38EDF397D4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D30A9BA01CBBA9100087D583 /* ApiThreadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiThreadManager.swift; sourceTree = "<group>"; };
 		D31821B11CC3B07800992355 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -337,7 +335,6 @@
 		D3D35DD01CBA2E8200B18092 = {
 			isa = PBXGroup;
 			children = (
-				4651EB971CC900ED00B3F490 /* .gitignore */,
 				D3D35DDB1CBA2E8200B18092 /* Herald_iOS */,
 				D3D35DF01CBA2E8200B18092 /* Herald_iOSTests */,
 				D3D35DFB1CBA2E8200B18092 /* Herald_iOSUITests */,
@@ -536,11 +533,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
 				D31821CA1CC7BC0400992355 /* Main.storyboard in Resources */,
-=======
-				4651EB981CC900ED00B3F490 /* .gitignore in Resources */,
->>>>>>> 5ee12d3871219340e47862e69c501efd7ed9e459
 				D3D35DE41CBA2E8200B18092 /* Assets.xcassets in Resources */,
 				D31821B21CC3B07800992355 /* LaunchScreen.storyboard in Resources */,
 			);
