@@ -34,7 +34,7 @@ class BaseTableViewController : UITableViewController {
         alertDialog?.show(true)
         alertDialog?.labelText = message
         alertDialog?.mode = .Text
-        alertDialog?.minShowTime = Float(message.characters.count / 7) + 1
+        alertDialog?.minShowTime = Float(message.characters.count / 10) + 1
         alertDialog?.hide(true)
     }
     
