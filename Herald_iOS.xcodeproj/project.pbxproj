@@ -47,6 +47,9 @@
 		D3F473451CCA04C100750FFB /* JwcTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F473441CCA04C100750FFB /* JwcTableViewCell.swift */; };
 		D3F473471CCA05CD00750FFB /* JwcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F473461CCA05CD00750FFB /* JwcViewController.swift */; };
 		D3F473491CCA068D00750FFB /* JwcNoticeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F473481CCA068D00750FFB /* JwcNoticeModel.swift */; };
+		D3F4734B1CCA146800750FFB /* LectureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4734A1CCA146800750FFB /* LectureTableViewCell.swift */; };
+		D3F4734D1CCA153A00750FFB /* LectureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4734C1CCA153A00750FFB /* LectureModel.swift */; };
+		D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4734E1CCA15C900750FFB /* LectureViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +117,9 @@
 		D3F473441CCA04C100750FFB /* JwcTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcTableViewCell.swift; sourceTree = "<group>"; };
 		D3F473461CCA05CD00750FFB /* JwcViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcViewController.swift; sourceTree = "<group>"; };
 		D3F473481CCA068D00750FFB /* JwcNoticeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcNoticeModel.swift; sourceTree = "<group>"; };
+		D3F4734A1CCA146800750FFB /* LectureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureTableViewCell.swift; sourceTree = "<group>"; };
+		D3F4734C1CCA153A00750FFB /* LectureModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureModel.swift; sourceTree = "<group>"; };
+		D3F4734E1CCA15C900750FFB /* LectureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureViewController.swift; sourceTree = "<group>"; };
 		ED76AC9BE4F12BE2D1325536 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -238,10 +244,10 @@
 		D3A0C17E1CBB7C6100744640 /* curriculum */ = {
 			isa = PBXGroup;
 			children = (
-				D31DE5111CC3592F00E4891D /* ClassInfo.swift */,
-				D31DE5131CC3597800E4891D /* CurriculumBlock.swift */,
 				D31DE5171CC359D300E4891D /* CurriculumViewController.swift */,
 				D31DE5191CC35A3100E4891D /* CurriculumView.swift */,
+				D31DE5131CC3597800E4891D /* CurriculumBlock.swift */,
+				D31DE5111CC3592F00E4891D /* ClassInfo.swift */,
 			);
 			name = curriculum;
 			sourceTree = "<group>";
@@ -263,8 +269,8 @@
 		D3A0C1811CBB7C7F00744640 /* experiment */ = {
 			isa = PBXGroup;
 			children = (
-				D31821CB1CC8560F00992355 /* ExperimentTableViewCell.swift */,
 				D31821CD1CC856FF00992355 /* ExperimentViewController.swift */,
+				D31821CB1CC8560F00992355 /* ExperimentTableViewCell.swift */,
 				D31821CF1CC8573200992355 /* ExperimentModel.swift */,
 			);
 			name = experiment;
@@ -287,8 +293,8 @@
 		D3A0C1841CBB7CCE00744640 /* jwc */ = {
 			isa = PBXGroup;
 			children = (
-				D3F473441CCA04C100750FFB /* JwcTableViewCell.swift */,
 				D3F473461CCA05CD00750FFB /* JwcViewController.swift */,
+				D3F473441CCA04C100750FFB /* JwcTableViewCell.swift */,
 				D3F473481CCA068D00750FFB /* JwcNoticeModel.swift */,
 			);
 			name = jwc;
@@ -297,6 +303,9 @@
 		D3A0C1851CBB7CD800744640 /* lecture */ = {
 			isa = PBXGroup;
 			children = (
+				D3F4734E1CCA15C900750FFB /* LectureViewController.swift */,
+				D3F4734A1CCA146800750FFB /* LectureTableViewCell.swift */,
+				D3F4734C1CCA153A00750FFB /* LectureModel.swift */,
 			);
 			name = lecture;
 			sourceTree = "<group>";
@@ -621,6 +630,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3F473491CCA068D00750FFB /* JwcNoticeModel.swift in Sources */,
+				D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */,
 				D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */,
 				D31821CE1CC856FF00992355 /* ExperimentViewController.swift in Sources */,
 				D31DE5141CC3597800E4891D /* CurriculumBlock.swift in Sources */,
@@ -639,9 +649,11 @@
 				D31821B61CC48D5400992355 /* ServiceHelper.swift in Sources */,
 				D3F473451CCA04C100750FFB /* JwcTableViewCell.swift in Sources */,
 				D31DE5121CC3592F00E4891D /* ClassInfo.swift in Sources */,
+				D3F4734D1CCA153A00750FFB /* LectureModel.swift in Sources */,
 				D348580E1CBB4FF900B55E76 /* CacheHelper.swift in Sources */,
 				D3F3DCFB1CBB7792006887F5 /* SettingsHelper.swift in Sources */,
 				D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */,
+				D3F4734B1CCA146800750FFB /* LectureTableViewCell.swift in Sources */,
 				D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */,
 				D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */,
 				D31821C31CC5291000992355 /* CardHistoryModel.swift in Sources */,

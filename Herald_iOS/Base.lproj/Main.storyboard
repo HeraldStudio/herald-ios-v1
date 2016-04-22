@@ -230,8 +230,11 @@
             <objects>
                 <tabBarController id="lY0-bZ-nfJ" customClass="MainViewController" customModule="小猴偷米" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="小猴偷米" id="miU-js-AhO">
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="hIk-cs-u2E"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="KRK-tt-KeG"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="hIk-cs-u2E">
+                            <connections>
+                                <segue destination="aMb-aM-qeV" kind="show" id="v31-ul-1Xb"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="qXt-cc-13Q">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -255,7 +258,6 @@
                         <segue destination="nTs-TN-vbP" kind="relationship" relationship="viewControllers" id="GRT-1L-rrZ"/>
                         <segue destination="gdf-lK-ufu" kind="show" id="du0-NK-kHM"/>
                         <segue destination="jzJ-xf-gFs" kind="show" id="jRP-tX-O0b"/>
-                        <segue destination="aMb-aM-qeV" kind="show" id="xE2-Vi-uZi"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jef-eX-hcb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -951,12 +953,12 @@
                                             <exclude reference="qPm-Pf-epE"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="NUo-bA-esg"/>
-                                            <exclude reference="qZX-4w-rnJ"/>
-                                            <exclude reference="lzI-Uc-H12"/>
                                             <exclude reference="HiO-B4-J8i"/>
                                             <exclude reference="PUZ-sJ-bT9"/>
                                             <exclude reference="VYQ-Eg-DFz"/>
+                                            <exclude reference="lzI-Uc-H12"/>
+                                            <exclude reference="NUo-bA-esg"/>
+                                            <exclude reference="qZX-4w-rnJ"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
@@ -966,12 +968,12 @@
                                             <include reference="qPm-Pf-epE"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="NUo-bA-esg"/>
-                                            <include reference="qZX-4w-rnJ"/>
-                                            <include reference="lzI-Uc-H12"/>
                                             <include reference="HiO-B4-J8i"/>
                                             <include reference="PUZ-sJ-bT9"/>
                                             <include reference="VYQ-Eg-DFz"/>
+                                            <include reference="lzI-Uc-H12"/>
+                                            <include reference="NUo-bA-esg"/>
+                                            <include reference="qZX-4w-rnJ"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -1576,13 +1578,15 @@
             <objects>
                 <viewController storyboardIdentifier="MODULE_QUERY_JWC" title="教务通知" id="9Kw-5s-LJi" customClass="JwcViewController" customModule="小猴偷米" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="64" sectionHeaderHeight="18" sectionFooterHeight="18" id="sBg-BB-GLL">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="JwcTableViewCell" id="7jc-MS-JwH" customClass="JwcTableViewCell" customModule="小猴偷米" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="49.5" width="600" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7jc-MS-JwH" id="xNo-9v-X1Q">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="63.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="通知时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w9E-bN-2pg">
@@ -1684,18 +1688,166 @@
         <!--人文讲座-->
         <scene sceneID="sU8-0Z-Ose">
             <objects>
-                <viewController storyboardIdentifier="MODULE_QUERY_LECTURE" title="人文讲座" id="QwL-Ua-Z6I" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2UJ-3Z-RmH"/>
-                        <viewControllerLayoutGuide type="bottom" id="Ryt-zL-y5T"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6zr-qp-PAc">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="人文讲座" id="7dZ-fe-RTf"/>
+                <viewController storyboardIdentifier="MODULE_QUERY_LECTURE" title="人文讲座" id="QwL-Ua-Z6I" customClass="LectureViewController" customModule="小猴偷米" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="70" sectionHeaderHeight="18" sectionFooterHeight="18" id="AT8-4z-dcT">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LectureTableViewCell" id="AS5-0F-E3F" customClass="LectureTableViewCell" customModule="小猴偷米" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AS5-0F-E3F" id="heC-7O-Gq9">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="讲座主题" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pl9-FZ-Qpd">
+                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.0" green="0.70588235290000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间 @地点" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwp-qy-CM8">
+                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="主讲人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mow-8p-aKo">
+                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="dwp-qy-CM8" secondAttribute="trailing" constant="18" id="1vS-Es-7Pc"/>
+                                        <constraint firstItem="Mow-8p-aKo" firstAttribute="leading" secondItem="heC-7O-Gq9" secondAttribute="leading" constant="17" id="3Yg-MK-lDb"/>
+                                        <constraint firstAttribute="bottom" secondItem="dwp-qy-CM8" secondAttribute="bottom" constant="7.5" id="MQ7-yM-rIV"/>
+                                        <constraint firstAttribute="trailing" secondItem="pl9-FZ-Qpd" secondAttribute="trailing" constant="18" id="Otg-Av-Pme"/>
+                                        <constraint firstItem="pl9-FZ-Qpd" firstAttribute="top" secondItem="heC-7O-Gq9" secondAttribute="top" constant="7" id="TPJ-Qr-5C1"/>
+                                        <constraint firstItem="dwp-qy-CM8" firstAttribute="top" secondItem="Mow-8p-aKo" secondAttribute="bottom" constant="2" id="c92-Be-yQQ"/>
+                                        <constraint firstItem="Mow-8p-aKo" firstAttribute="top" secondItem="pl9-FZ-Qpd" secondAttribute="bottom" id="kwG-ze-PMT"/>
+                                        <constraint firstAttribute="trailing" secondItem="Mow-8p-aKo" secondAttribute="trailing" constant="18" id="rr2-8J-rIQ"/>
+                                        <constraint firstItem="pl9-FZ-Qpd" firstAttribute="leading" secondItem="heC-7O-Gq9" secondAttribute="leading" constant="17" id="tHi-zP-wHI"/>
+                                        <constraint firstItem="dwp-qy-CM8" firstAttribute="leading" secondItem="heC-7O-Gq9" secondAttribute="leading" constant="17" id="yqS-eU-8fa"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="pl9-FZ-Qpd"/>
+                                            <exclude reference="dwp-qy-CM8"/>
+                                            <exclude reference="Mow-8p-aKo"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="Otg-Av-Pme"/>
+                                            <exclude reference="TPJ-Qr-5C1"/>
+                                            <exclude reference="tHi-zP-wHI"/>
+                                            <exclude reference="3Yg-MK-lDb"/>
+                                            <exclude reference="kwG-ze-PMT"/>
+                                            <exclude reference="rr2-8J-rIQ"/>
+                                            <exclude reference="1vS-Es-7Pc"/>
+                                            <exclude reference="MQ7-yM-rIV"/>
+                                            <exclude reference="c92-Be-yQQ"/>
+                                            <exclude reference="yqS-eU-8fa"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="pl9-FZ-Qpd"/>
+                                            <include reference="dwp-qy-CM8"/>
+                                            <include reference="Mow-8p-aKo"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="Otg-Av-Pme"/>
+                                            <include reference="TPJ-Qr-5C1"/>
+                                            <include reference="tHi-zP-wHI"/>
+                                            <include reference="3Yg-MK-lDb"/>
+                                            <include reference="kwG-ze-PMT"/>
+                                            <include reference="rr2-8J-rIQ"/>
+                                            <include reference="1vS-Es-7Pc"/>
+                                            <include reference="MQ7-yM-rIV"/>
+                                            <include reference="c92-Be-yQQ"/>
+                                            <include reference="yqS-eU-8fa"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="dateAndPlace" destination="dwp-qy-CM8" id="HcF-an-Fwk"/>
+                                    <outlet property="speaker" destination="Mow-8p-aKo" id="gBq-aB-cTg"/>
+                                    <outlet property="topic" destination="pl9-FZ-Qpd" id="cUW-q9-2A1"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LectureEmptyTableViewCell" id="dNG-lf-xUx">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dNG-lf-xUx" id="M0a-L3-VoI">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无记录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2K-2j-G8z">
+                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="64" id="Ugf-we-pUT"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="Ugf-we-pUT"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="69.5"/>
+                                                <mask key="constraints">
+                                                    <include reference="Ugf-we-pUT"/>
+                                                </mask>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="I2K-2j-G8z" secondAttribute="bottom" id="7fQ-IB-4pF"/>
+                                        <constraint firstItem="I2K-2j-G8z" firstAttribute="leading" secondItem="M0a-L3-VoI" secondAttribute="leading" id="8Pe-nt-gfH"/>
+                                        <constraint firstItem="I2K-2j-G8z" firstAttribute="top" secondItem="M0a-L3-VoI" secondAttribute="top" id="S8R-fH-rWX"/>
+                                        <constraint firstAttribute="trailing" secondItem="I2K-2j-G8z" secondAttribute="trailing" id="n5f-vD-MRT"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="I2K-2j-G8z"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="7fQ-IB-4pF"/>
+                                            <exclude reference="8Pe-nt-gfH"/>
+                                            <exclude reference="S8R-fH-rWX"/>
+                                            <exclude reference="n5f-vD-MRT"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="I2K-2j-G8z"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="7fQ-IB-4pF"/>
+                                            <include reference="8Pe-nt-gfH"/>
+                                            <include reference="S8R-fH-rWX"/>
+                                            <include reference="n5f-vD-MRT"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="QwL-Ua-Z6I" id="hMP-72-7M5"/>
+                            <outlet property="delegate" destination="QwL-Ua-Z6I" id="hoU-mS-7XS"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="人文讲座" id="7dZ-fe-RTf">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Vha-Td-JMJ">
+                            <connections>
+                                <action selector="refreshCache" destination="QwL-Ua-Z6I" id="VlF-Q6-RFB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="AT8-4z-dcT" id="GzZ-3n-PuA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dxu-gX-k7Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
