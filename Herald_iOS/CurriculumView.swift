@@ -204,7 +204,7 @@ class CurriculumView : UIViewController {
             }
             
             block.userInteractionEnabled = true
-            let tapStepGestureRecognizer = UITapGestureRecognizer(target: block, action: Selector("showInfo"))
+            let tapStepGestureRecognizer = UITapGestureRecognizer(target: block, action: #selector(CurriculumBlock.showInfo))
             block.addGestureRecognizer(tapStepGestureRecognizer)
             self.view.addSubview(block)
         }

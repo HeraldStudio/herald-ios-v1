@@ -98,16 +98,13 @@ class CardsViewController: BaseViewController, UITableViewDelegate {
     
     //每一个section里面有多少个Cell
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 1
     }
     
     //初始化每一个Cell
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let moduleCell = cardsTableView.dequeueReusableCellWithIdentifier("cardsCell", forIndexPath: indexPath) as! CardsTableViewCell
         moduleCell.content?.text = "Hello, World! "
-        for _ in 0 ..< indexPath.row {
-            moduleCell.content?.text = (moduleCell.content?.text)! + "Hello, World! "
-        }
         return moduleCell
     }
     
