@@ -1,27 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="Xb2-3j-hhg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="Wf9-dQ-yIv">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--main-->
-        <scene sceneID="SDb-SQ-Uir">
+        <!--小猴偷米-->
+        <scene sceneID="ggb-Rx-O6K">
             <objects>
-                <viewController id="Xb2-3j-hhg" userLabel="main" sceneMemberID="viewController">
+                <viewController id="Wf9-dQ-yIv" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="HMQ-sX-Imf"/>
-                        <viewControllerLayoutGuide type="bottom" id="VQT-eH-ahQ"/>
+                        <viewControllerLayoutGuide type="top" id="HDO-EO-ogn"/>
+                        <viewControllerLayoutGuide type="bottom" id="Rcy-Pd-jd5"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="eq6-PU-b21">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <view key="view" contentMode="scaleToFill" id="24d-DG-fpE">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="28w-ys-b9j">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.0" green="0.70588235290000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="PjD-KL-dAP"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="PjD-KL-dAP"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="PjD-KL-dAP"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="28w-ys-b9j" secondAttribute="trailing" id="5LL-r7-HRF"/>
+                            <constraint firstItem="28w-ys-b9j" firstAttribute="leading" secondItem="24d-DG-fpE" secondAttribute="leading" id="j8R-Hb-tsS"/>
+                            <constraint firstItem="28w-ys-b9j" firstAttribute="top" secondItem="24d-DG-fpE" secondAttribute="top" id="kVT-NZ-hJN"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="28w-ys-b9j"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="5LL-r7-HRF"/>
+                                <exclude reference="j8R-Hb-tsS"/>
+                                <exclude reference="kVT-NZ-hJN"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="28w-ys-b9j"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="5LL-r7-HRF"/>
+                                <include reference="j8R-Hb-tsS"/>
+                                <include reference="kVT-NZ-hJN"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="小猴偷米" id="q5b-Ws-64V"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Htr-Tx-WCj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AYB-lQ-0D1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1707" y="-818"/>
+            <point key="canvasLocation" x="673.5" y="-818"/>
         </scene>
     </scenes>
+    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
