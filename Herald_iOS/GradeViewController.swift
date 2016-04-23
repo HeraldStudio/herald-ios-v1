@@ -98,14 +98,22 @@ class GradeViewController : BaseViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // 若为空，加一个条目提示用户这里是空的
+        if sections.count == 0 { return 1 }
         return sections[section].count
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        // 若为空，加一个条目提示用户这里是空的
+        if sections.count == 0 { return nil }
         return titles[section]
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // 若为空，加一个条目提示用户这里是空的
+        if sections.count == 0 {
+            return tableView.dequeueReusableCellWithIdentifier("GradeEmptyTableViewCell", forIndexPath: indexPath)
+        }
         let cell = tableView.dequeueReusableCellWithIdentifier("GradeTableViewCell", forIndexPath: indexPath) as! GradeTableViewCell
         
         let model = sections[indexPath.section][indexPath.row]
@@ -117,7 +125,8 @@ class GradeViewController : BaseViewController, UITableViewDelegate, UITableView
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return sections.count
+        // 若为空，加一个条目提示用户这里是空的
+        return sections.count > 0 ? sections.count : 1
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

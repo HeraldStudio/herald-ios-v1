@@ -119,13 +119,16 @@ class ExamViewController : BaseViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if sections[section].count == 0 {
+        // 考试倒计时页面如果为空，加一个提示；已结束的考试为空则不加提示
+        if section == 0 && sections[section].count == 0 {
             return 1
         }
         return sections[section].count
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        // 考试倒计时页面如果为空，加一个提示；已结束的考试为空则不加提示
+        if section == 1 && sections[section].count == 0 { return nil }
         return titles[section]
     }
     

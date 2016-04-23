@@ -139,14 +139,24 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // 若为空，加一个条目提示用户这里是空的
+        if history.count == 0 { return 1 }
         return history[section].count
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        // 若为空，加一个条目提示用户这里是空的
+        if history.count == 0 {
+            return nil
+        }
         return history[section][0].date
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // 若为空，加一个条目提示用户这里是空的
+        if history.count == 0 {
+            return tableView.dequeueReusableCellWithIdentifier("CardEmptyTableViewCell", forIndexPath: indexPath)
+        }
         let cell = tableView.dequeueReusableCellWithIdentifier("CardTableViewCell", forIndexPath: indexPath) as! CardTableViewCell
         
         let model = history[indexPath.section][indexPath.row]
@@ -159,7 +169,8 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return history.count
+        // 若为空，加一个条目提示用户这里是空的
+        return history.count > 0 ? history.count : 1
     }
     
     @IBAction func goToChargePage () {

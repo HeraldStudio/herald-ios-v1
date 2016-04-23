@@ -23,7 +23,7 @@ class SettingsHelper {
         
         // 无卡片的模块
         AppModule(id: 7, name: "seunet", nameTip: "校园网络", desc: "显示校园网使用情况及校园网账户余额信息", controller: "MODULE_QUERY_SEUNET", icon: "ic_seunet", hasCard: false),
-        AppModule(id: 8, name: "library", nameTip: "图书馆", desc: "查看图书馆实时借阅排行、已借书籍和馆藏图书搜索", controller: "MODULE_QUERY_LIBRARY", icon: "ic_library", hasCard: false),
+        AppModule(id: 8, name: "library", nameTip: "图书馆", desc: "查看图书馆实时借阅排行、已借书籍，并提供图书在线续借服务", controller: "MODULE_QUERY_LIBRARY", icon: "ic_library", hasCard: false),
         AppModule(id: 9, name: "grade", nameTip: "成绩查询", desc: "查询历史学期的科目成绩、学分以及绩点详情", controller: "MODULE_QUERY_GRADE", icon: "ic_grade", hasCard: false),
         AppModule(id: 10, name: "srtp", nameTip: "课外研学", desc: "提供SRTP学分及得分详情查询服务", controller: "MODULE_QUERY_SRTP", icon: "ic_srtp", hasCard: false),
         AppModule(id: 11, name: "schoolbus", nameTip: "校车助手", desc: "提供可实时更新的校车班车时间表", controller: "MODULE_QUERY_SCHOOLBUS", icon: "ic_bus", hasCard: false),
