@@ -63,7 +63,7 @@ class JwcViewController : BaseViewController, UITableViewDelegate, UITableViewDa
                 let time = experiment.1["date"].stringValue
                 let url = experiment.1["href"].stringValue
             
-                let model = JwcNoticeModel(title, time, url)
+                let model = JwcNoticeModel(title, "发布时间：" + time, url)
                 list.append(model)
             }
             noticeList.append(list)

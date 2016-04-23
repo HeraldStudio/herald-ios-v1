@@ -61,7 +61,7 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
             if !todayCost.containsString("-") && !todayCost.containsString("+") {
                 todayCost = (todayCost == "0.00" ? "-" : "+") + todayCost
             }
-            history.append([CardHistoryModel(date: "今天", time: "你可以到充值页面提前查看当天消费流水", place: "今日总消费", type: "未出账", cost: todayCost, left: extra)])
+            history.append([CardHistoryModel("今天", "你可以到充值页面提前查看当天消费流水", "今日总消费", "未出账", todayCost, extra)])
         }
         
         var lastDate = ""
@@ -82,7 +82,7 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
             if !cost.containsString("-") && !cost.containsString("+") {
                 cost = (cost == "0.00" ? "-" : "+") + cost
             }
-            let newElement = CardHistoryModel(date: date, time: time, place: place, type: type, cost: cost, left: left)
+            let newElement = CardHistoryModel(date, time, place, type, cost, left)
             guard var lastSection = history.last else { self.showError(); return }
             history.removeLast()
             lastSection.append(newElement)

@@ -76,25 +76,30 @@ class ApiRequest {
     
     func callback (response : Response <String, NSError>) -> Void {
         
+        var code = 0
+        let resp = response.result.value == nil ? "" : response.result.value!
+        
         switch response.result {
         case .Success:
             if isPlain {
                 for onFinishListener in onFinishListeners {
-                    onFinishListener(true, 200, response.result.value!)
+                    onFinishListener(true, 200, resp)
                 }
             } else {
-                let responseJson = JSON.parse(response.result.value!)
+                let responseJson = JSON.parse(resp)
+                code = responseJson["code"].intValue
+                guard let jsonStr = responseJson.rawString() else { fallthrough }
+                guard code == 200 else { fallthrough }
+                
                 for onFinishListener in onFinishListeners {
-                    let code = responseJson["code"].intValue
-                    guard let jsonStr = responseJson.rawString() else {
-                        fallthrough
-                    }
-                    onFinishListener(code == 200, code, jsonStr)
+                    onFinishListener(true, code, jsonStr)
                 }
             }
         case .Failure:
+            errorPool?.addObject(NSObject())
+            
             for onFinishListener in onFinishListeners {
-                onFinishListener(false, 0, "")
+                onFinishListener(false, code, resp)
             }
         }
     }

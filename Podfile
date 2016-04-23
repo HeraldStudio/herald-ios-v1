@@ -8,3 +8,4 @@ pod 'MBProgressHUD', '~> 0.9.2'
 pod "Reindeer"
 pod 'Kingfisher', '~> 2.2'
 pod 'FSCalendar'
+pod 'MagicPie'

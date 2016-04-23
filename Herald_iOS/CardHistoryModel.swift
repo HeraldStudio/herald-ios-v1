@@ -16,7 +16,7 @@ class CardHistoryModel {
     var cost : String
     var left : String
     
-    init (date : String, time : String, place : String, type : String, cost : String, left : String) {
+    init (_ date : String, _ time : String, _ place : String, _ type : String, _ cost : String, _ left : String) {
         self.date = date
         self.time = time
         self.place = place

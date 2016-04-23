@@ -83,7 +83,6 @@ class LectureViewController : BaseViewController, UITableViewDelegate, UITableVi
     @IBAction func refreshCache () {
         showProgressDialog()
         
-        // 先加入刷新余额的请求
         ApiThreadManager().addAll(
             ApiRequest().api("lecture").uuid()
                 .toCache("herald_lecture_records") {json -> String in

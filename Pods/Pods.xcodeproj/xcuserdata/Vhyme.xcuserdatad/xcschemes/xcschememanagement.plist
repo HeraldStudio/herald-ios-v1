@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MagicPie.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,17 +52,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>33D2C2A55D9AE3B12C2A3D22E9F77581</key>
+		<key>271EA30AB2120E36E8553BE1B8A5E409</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3A0206398540B89A3EF0C09710FF7839</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3A83374DF77A5798EA79473B0CB9473E</key>
+		<key>5E40AFCA19649CD3E321D8212944BB69</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,7 +72,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B78BDC7CA24877206960A50663B78603</key>
+		<key>C8F9359EEA596B601D362864ADABB7C6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CB6C142D00F244B82B9CA261B04401E1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DA8812B5380975A88ED25E92FF6FA440</key>
 		<dict>
 			<key>primary</key>
 			<true/>
