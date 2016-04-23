@@ -55,13 +55,17 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
         history.removeAll()
         if jsonArray.count > 0 {
             let lastLeftStr = jsonArray[0]["left"].stringValue
-            guard let lastLeft = Float(lastLeftStr) else { self.showError(); return }
-            guard let left = Float(extra) else { self.showError(); return }
-            var todayCost = String(format: "%.2f", left - lastLeft)
-            if !todayCost.containsString("-") && !todayCost.containsString("+") {
-                todayCost = (todayCost == "0.00" ? "-" : "+") + todayCost
+            
+            // 如果能查到上次余额，计算当天的总消费并显示成第一项
+            // 如果查不到上次余额，即31天内没有消费过，则无法计算当天总消费项目，直接跳过
+            if let lastLeft = Float(lastLeftStr) {
+                guard let left = Float(extra) else { self.showError(); return }
+                var todayCost = String(format: "%.2f", left - lastLeft)
+                if !todayCost.containsString("-") && !todayCost.containsString("+") {
+                    todayCost = (todayCost == "0.00" ? "-" : "+") + todayCost
+                }
+                history.append([CardHistoryModel("今天", "你可以到充值页面提前查看当天消费流水", "今日总消费", "未出账", todayCost, extra)])
             }
-            history.append([CardHistoryModel("今天", "你可以到充值页面提前查看当天消费流水", "今日总消费", "未出账", todayCost, extra)])
         }
         
         var lastDate = ""
@@ -120,8 +124,6 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
         // 若刷新成功，保存当前日期
         manager.onFinish { success in
                     self.hideProgressDialog()
-            print(CacheHelper.getCache("herald_card_left"))
-            print(CacheHelper.getCache("herald_card"))
                     if success {
                         CacheHelper.setCache("herald_card_date", cacheValue: stamp)
                         self.loadCache()
