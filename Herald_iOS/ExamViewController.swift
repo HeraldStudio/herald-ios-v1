@@ -84,20 +84,15 @@ class ExamViewController : BaseViewController, UITableViewDelegate, UITableViewD
 , interval)
             if interval >= 0 {
                 comingExams.append(model)
-                titles.append("未来的考试")
             } else {
                 endedExams.append(model)
-                titles.append("已结束的考试")
             }
         }
         
-        if comingExams.count > 0 {
-            sections.append(comingExams)
-        }
-        
-        if endedExams.count > 0 {
-            sections.append(endedExams)
-        }
+        titles.append("考试倒计时")
+        sections.append(comingExams)
+        titles.append("已结束的考试")
+        sections.append(endedExams)
         
         tableView?.reloadData()
     }
@@ -124,6 +119,9 @@ class ExamViewController : BaseViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if sections[section].count == 0 {
+            return 1
+        }
         return sections[section].count
     }
     
@@ -132,6 +130,10 @@ class ExamViewController : BaseViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if sections[indexPath.section].count == 0 {
+            return tableView.dequeueReusableCellWithIdentifier("ExamEmptyTableViewCell", forIndexPath: indexPath)
+        }
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("ExamTableViewCell", forIndexPath: indexPath) as! ExamTableViewCell
         
         let model = sections[indexPath.section][indexPath.row]

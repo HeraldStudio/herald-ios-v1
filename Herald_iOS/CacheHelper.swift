@@ -26,7 +26,8 @@ class CacheHelper : NSObject {
         "herald_pedetail",
         "herald_sidebar",
         "herald_exam",
-        "herald_schedule_cache_time"
+        "herald_schedule_cache_time",
+        "herald_library_borrowbook"
     ]
     
     static let cache = NSUserDefaults.withPrefix("herald_")
