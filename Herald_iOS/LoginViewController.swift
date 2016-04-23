@@ -32,7 +32,6 @@ class LoginViewController: BaseViewController {
             .onFinish { success, _, response in
                 self.hideProgressDialog()
                 if response.containsString("Unauthorized") {
-                    print("Unauthorized")
                     self.showMessage("密码错误，请重试")
                 } else if !success {
                     self.showMessage("网络异常，请重试")

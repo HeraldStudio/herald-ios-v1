@@ -120,6 +120,8 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
         // 若刷新成功，保存当前日期
         manager.onFinish { success in
                     self.hideProgressDialog()
+            print(CacheHelper.getCache("herald_card_left"))
+            print(CacheHelper.getCache("herald_card"))
                     if success {
                         CacheHelper.setCache("herald_card_date", cacheValue: stamp)
                         self.loadCache()

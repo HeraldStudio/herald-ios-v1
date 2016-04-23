@@ -18,7 +18,6 @@ class MyInfoViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        print("r\(indexPath.section),\(indexPath.row)")
         switch indexPath.section {
         case 0:
             switch indexPath.row {
