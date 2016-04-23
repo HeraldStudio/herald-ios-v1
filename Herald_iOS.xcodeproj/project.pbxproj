@@ -61,6 +61,7 @@
 		D3ED99E21CCB5BCB00001E2B /* LibraryBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99E11CCB5BCB00001E2B /* LibraryBookModel.swift */; };
 		D3ED99E41CCB64BE00001E2B /* LibraryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99E31CCB64BE00001E2B /* LibraryTableViewCell.swift */; };
 		D3ED99E61CCB651300001E2B /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99E51CCB651300001E2B /* LibraryViewController.swift */; };
+		D3ED99E81CCB870200001E2B /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99E71CCB870200001E2B /* AboutUsViewController.swift */; };
 		D3F3DCFB1CBB7792006887F5 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */; };
 		D3F473451CCA04C100750FFB /* JwcTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F473441CCA04C100750FFB /* JwcTableViewCell.swift */; };
 		D3F473471CCA05CD00750FFB /* JwcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F473461CCA05CD00750FFB /* JwcViewController.swift */; };
@@ -149,6 +150,7 @@
 		D3ED99E11CCB5BCB00001E2B /* LibraryBookModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryBookModel.swift; sourceTree = "<group>"; };
 		D3ED99E31CCB64BE00001E2B /* LibraryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryTableViewCell.swift; sourceTree = "<group>"; };
 		D3ED99E51CCB651300001E2B /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
+		D3ED99E71CCB870200001E2B /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
 		D3F473441CCA04C100750FFB /* JwcTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcTableViewCell.swift; sourceTree = "<group>"; };
 		D3F473461CCA05CD00750FFB /* JwcViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcViewController.swift; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 		D3D35E0A1CBA2FEE00B18092 /* mod_communicate */ = {
 			isa = PBXGroup;
 			children = (
+				D3ED99E71CCB870200001E2B /* AboutUsViewController.swift */,
 			);
 			name = mod_communicate;
 			sourceTree = "<group>";
@@ -691,6 +694,7 @@
 				D3ED99E21CCB5BCB00001E2B /* LibraryBookModel.swift in Sources */,
 				D31DE5121CC3592F00E4891D /* ClassInfo.swift in Sources */,
 				D3F4734D1CCA153A00750FFB /* LectureModel.swift in Sources */,
+				D3ED99E81CCB870200001E2B /* AboutUsViewController.swift in Sources */,
 				D348580E1CBB4FF900B55E76 /* CacheHelper.swift in Sources */,
 				D3ED99D41CCAF9FC00001E2B /* SeuNetViewController.swift in Sources */,
 				D3ED99DE1CCB3DB600001E2B /* SrtpTableViewCell.swift in Sources */,
