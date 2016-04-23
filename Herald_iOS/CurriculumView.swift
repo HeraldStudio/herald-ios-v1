@@ -114,8 +114,7 @@ class CurriculumView : UIViewController {
                     dayIndex : i, // 该列在所有列中的序号
                     dayDelta : i - dayOfWeek, // 该列的星期数与今天星期数之差
                     // 是否突出显示与今天同星期的列
-                    widenToday : curWeek && (dayOfWeek != 0 && dayOfWeek != 6 ||// TODO 当前周
-                        listOfList[dayOfWeek].count != 0))
+                    widenToday : curWeek && (dayOfWeek < 5 ||                        listOfList[dayOfWeek].count != 0))
                 j += 1
             }
             

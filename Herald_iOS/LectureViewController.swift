@@ -100,7 +100,7 @@ class LectureViewController : BaseViewController, UITableViewDelegate, UITableVi
             if success {
                 self.loadCache()
             } else {
-                self.showMessage("刷新失败，你也可以到充值页面查询")
+                self.showMessage("刷新失败，请重试")
             }
         }.run()
     }
