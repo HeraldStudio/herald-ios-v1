@@ -15,6 +15,8 @@ class CacheHelper : NSObject {
         "authUser",
         "authPwd",
         "herald_card",
+        "herald_card_left",
+        "herald_card_date",
         "herald_grade_gpa",
         "herald_lecture_records",
         "herald_experiment",

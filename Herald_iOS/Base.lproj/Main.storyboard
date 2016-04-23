@@ -2437,6 +2437,10 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="64" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="z0U-pU-26G">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="5Wn-JM-Ccj" id="ddg-ID-8Ni"/>
+                                    <outlet property="delegate" destination="5Wn-JM-Ccj" id="twc-js-9OW"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2480,7 +2484,9 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="图书馆" id="l30-ga-0Ng"/>
+                    <navigationItem key="navigationItem" title="图书馆" id="l30-ga-0Ng">
+                        <barButtonItem key="rightBarButtonItem" title="已借图书" id="9ey-Ah-4bX"/>
+                    </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="W8u-7N-m7c" id="1Rm-29-KSe"/>
