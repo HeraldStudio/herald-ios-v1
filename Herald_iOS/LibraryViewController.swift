@@ -162,12 +162,16 @@ class LibraryViewController : BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func displayLibraryAuthDialog () {
-        let dialog = UIAlertController(title: "绑定图书馆账号", message: "你还没有绑定图书馆账号，或者绑定的账号不正确，请输入在图书馆官网设定的图书馆密码，默认为一卡通号", preferredStyle: UIAlertControllerStyle.Alert)
+        let dialog = UIAlertController(title: "绑定图书馆账号", message: "你还没有绑定图书馆账号或账号不正确，请重新绑定：", preferredStyle: UIAlertControllerStyle.Alert)
         
         dialog.addTextFieldWithConfigurationHandler { field in
-            field.placeholder = "密码"
+            field.placeholder = "图书馆密码（默认为一卡通号）"
             field.secureTextEntry = true
         }
+        
+        dialog.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: {
+            _ in
+        }))
         
         dialog.addAction(UIAlertAction(title: "绑定", style: UIAlertActionStyle.Default, handler: { _ in
             if let password = dialog.textFields![0].text {
@@ -187,7 +191,7 @@ class LibraryViewController : BaseViewController, UITableViewDelegate, UITableVi
                     }.run()
             }
         }))
-        
+
         presentViewController(dialog, animated: true, completion: nil)
     }
 }
