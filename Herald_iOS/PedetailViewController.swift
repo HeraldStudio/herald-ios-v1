@@ -64,11 +64,6 @@ class PedetailViewController : BaseViewController, FSCalendarDataSource, FSCalen
     @IBAction func refreshCache () {
         showProgressDialog()
         ApiThreadManager().addAll(
-            ApiRequest().api("pedetail").uuid().toCache("herald_pedetail") {
-                json -> String in
-                    guard let str = json.rawString() else {return ""}
-                    return str
-                },
             ApiRequest().api("pe").uuid().toCache("herald_pe_count") {
                 json -> String in
                     guard let str = json["content"].rawString() else {return ""}
@@ -76,6 +71,11 @@ class PedetailViewController : BaseViewController, FSCalendarDataSource, FSCalen
                 }.toCache("herald_pe_remain") {
                     json -> String in
                     guard let str = json["remain"].rawString() else {return ""}
+                    return str
+                },
+            ApiRequest().api("pedetail").uuid().toCache("herald_pedetail") {
+                json -> String in
+                    guard let str = json.rawString() else {return ""}
                     return str
                 }
         ).onFinish { success in

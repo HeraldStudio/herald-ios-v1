@@ -51,6 +51,10 @@
 		D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */; };
 		D3E6BD7F1CC8C07F0074FF6D /* ModuleManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */; };
 		D3E6BD831CC8D4B20074FF6D /* PedetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD811CC8D4B20074FF6D /* PedetailViewController.swift */; };
+		D3ED99D41CCAF9FC00001E2B /* SeuNetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99D31CCAF9FC00001E2B /* SeuNetViewController.swift */; };
+		D3ED99D61CCB080000001E2B /* SchoolbusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99D51CCB080000001E2B /* SchoolbusModel.swift */; };
+		D3ED99D81CCB08B300001E2B /* SchoolbusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99D71CCB08B300001E2B /* SchoolbusTableViewCell.swift */; };
+		D3ED99DA1CCB091700001E2B /* SchoolbusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99D91CCB091700001E2B /* SchoolbusViewController.swift */; };
 		D3F3DCFB1CBB7792006887F5 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */; };
 		D3F473451CCA04C100750FFB /* JwcTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F473441CCA04C100750FFB /* JwcTableViewCell.swift */; };
 		D3F473471CCA05CD00750FFB /* JwcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F473461CCA05CD00750FFB /* JwcViewController.swift */; };
@@ -129,6 +133,10 @@
 		D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleManageTableViewCell.swift; sourceTree = "<group>"; };
 		D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleManagerViewController.swift; sourceTree = "<group>"; };
 		D3E6BD811CC8D4B20074FF6D /* PedetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedetailViewController.swift; sourceTree = "<group>"; };
+		D3ED99D31CCAF9FC00001E2B /* SeuNetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeuNetViewController.swift; sourceTree = "<group>"; };
+		D3ED99D51CCB080000001E2B /* SchoolbusModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolbusModel.swift; sourceTree = "<group>"; };
+		D3ED99D71CCB08B300001E2B /* SchoolbusTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolbusTableViewCell.swift; sourceTree = "<group>"; };
+		D3ED99D91CCB091700001E2B /* SchoolbusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchoolbusViewController.swift; sourceTree = "<group>"; };
 		D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
 		D3F473441CCA04C100750FFB /* JwcTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcTableViewCell.swift; sourceTree = "<group>"; };
 		D3F473461CCA05CD00750FFB /* JwcViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcViewController.swift; sourceTree = "<group>"; };
@@ -335,6 +343,9 @@
 		D3A0C1891CBB7D0D00744640 /* schoolbus */ = {
 			isa = PBXGroup;
 			children = (
+				D3ED99D91CCB091700001E2B /* SchoolbusViewController.swift */,
+				D3ED99D71CCB08B300001E2B /* SchoolbusTableViewCell.swift */,
+				D3ED99D51CCB080000001E2B /* SchoolbusModel.swift */,
 			);
 			name = schoolbus;
 			sourceTree = "<group>";
@@ -342,6 +353,7 @@
 		D3A0C18A1CBB7D1600744640 /* seunet */ = {
 			isa = PBXGroup;
 			children = (
+				D3ED99D31CCAF9FC00001E2B /* SeuNetViewController.swift */,
 			);
 			name = seunet;
 			sourceTree = "<group>";
@@ -648,13 +660,17 @@
 				D31DE50E1CC334EC00E4891D /* ModuleTableViewCell.swift in Sources */,
 				D31DE5181CC359D300E4891D /* CurriculumViewController.swift in Sources */,
 				D3A0C1771CBB7B2300744640 /* MyInfoViewController.swift in Sources */,
+				D3ED99DA1CCB091700001E2B /* SchoolbusViewController.swift in Sources */,
 				D306E02E1CCA691F00FA3812 /* GradeViewController.swift in Sources */,
 				D31821B61CC48D5400992355 /* ServiceHelper.swift in Sources */,
+				D3ED99D61CCB080000001E2B /* SchoolbusModel.swift in Sources */,
 				D3F473451CCA04C100750FFB /* JwcTableViewCell.swift in Sources */,
 				D306E02C1CCA68EB00FA3812 /* GradeTableViewCell.swift in Sources */,
 				D31DE5121CC3592F00E4891D /* ClassInfo.swift in Sources */,
 				D3F4734D1CCA153A00750FFB /* LectureModel.swift in Sources */,
 				D348580E1CBB4FF900B55E76 /* CacheHelper.swift in Sources */,
+				D3ED99D41CCAF9FC00001E2B /* SeuNetViewController.swift in Sources */,
+				D3ED99D81CCB08B300001E2B /* SchoolbusTableViewCell.swift in Sources */,
 				D3F3DCFB1CBB7792006887F5 /* SettingsHelper.swift in Sources */,
 				D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */,
 				D3F4734B1CCA146800750FFB /* LectureTableViewCell.swift in Sources */,

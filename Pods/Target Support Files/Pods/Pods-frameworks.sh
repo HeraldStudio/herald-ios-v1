@@ -88,6 +88,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/FSCalendar.framework"
   install_framework "Pods/Kingfisher.framework"
   install_framework "Pods/MBProgressHUD.framework"
+  install_framework "Pods/MagicPie.framework"
   install_framework "Pods/Reindeer.framework"
   install_framework "Pods/SwiftyJSON.framework"
 fi
@@ -96,6 +97,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/FSCalendar.framework"
   install_framework "Pods/Kingfisher.framework"
   install_framework "Pods/MBProgressHUD.framework"
+  install_framework "Pods/MagicPie.framework"
   install_framework "Pods/Reindeer.framework"
   install_framework "Pods/SwiftyJSON.framework"
 fi

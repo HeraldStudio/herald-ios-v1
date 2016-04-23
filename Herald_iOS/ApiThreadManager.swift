@@ -39,8 +39,8 @@ class ApiThreadManager {
             // 如果所有线程都结束了，执行所有线程结束时的指定操作
             for k in self.isRequestFinished {
                 if !k { return }
-                self.onFinish(self.errorPool.count == 0)
             }
+            self.onFinish(self.errorPool.count == 0)
         }
         return self
     }
