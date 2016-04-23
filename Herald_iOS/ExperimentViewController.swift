@@ -99,14 +99,22 @@ class ExperimentViewController : BaseViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // 若为空，加一个条目提示用户这里是空的
+        if sectionList.count == 0 { return 1 }
         return experimentList[section].count
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        // 若为空，加一个条目提示用户这里是空的
+        if sectionList.count == 0 { return nil }
         return sectionList[section]
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // 若为空，加一个条目提示用户这里是空的
+        if sectionList.count == 0 {
+            return tableView.dequeueReusableCellWithIdentifier("ExperimentEmptyTableViewCell", forIndexPath: indexPath)
+        }
         let cell = tableView.dequeueReusableCellWithIdentifier("ExperimentTableViewCell", forIndexPath: indexPath) as! ExperimentTableViewCell
         
         let model = experimentList[indexPath.section][indexPath.row]
@@ -118,7 +126,8 @@ class ExperimentViewController : BaseViewController, UITableViewDelegate, UITabl
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return sectionList.count
+        // 若为空，加一个条目提示用户这里是空的
+        return sectionList.count > 0 ? sectionList.count : 1
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

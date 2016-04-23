@@ -25,21 +25,5 @@ class LibraryTableViewCell : UITableViewCell {
             self.renew.titleLabel?.text = success ? "续借成功" : "续借失败"
             self.renew.enabled = !success
         }.run()
-        /*
-         new ApiRequest(getContext()).api(ApiHelper.API_RENEW).uuid()
-         .post("barcode", myBorrowBook.getBarcode())
-         .onFinish((success, code, response) -> {
-         if (success) {
-         toast.cancel();
-         toast.setText("《" + myBorrowBook.getTitle() + "》续借成功");
-         toast.setDuration(Toast.LENGTH_SHORT);
-         toast.show();
-         } else {
-         toast.cancel();
-         toast.setText("《" + myBorrowBook.getTitle() + "》续借失败");
-         toast.setDuration(Toast.LENGTH_SHORT);
-         toast.show();
-         }
-         }).run();*/
     }
 }
