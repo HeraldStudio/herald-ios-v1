@@ -3329,6 +3329,9 @@ Copyright (c) 2013 Alexandr Graschenkov
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="55.5"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
