@@ -349,16 +349,16 @@
                                             <exclude reference="W9d-zf-fYt"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="IC4-8C-xew"/>
-                                            <exclude reference="SBH-hh-dRE"/>
-                                            <exclude reference="xNc-i5-Bfd"/>
-                                            <exclude reference="1vI-eh-IJZ"/>
-                                            <exclude reference="JTc-Mf-xJ4"/>
-                                            <exclude reference="S5U-vF-d0a"/>
                                             <exclude reference="5p1-Tj-rx2"/>
                                             <exclude reference="7o9-ha-MjU"/>
                                             <exclude reference="ObK-L4-Di4"/>
                                             <exclude reference="hOp-r6-hp6"/>
+                                            <exclude reference="1vI-eh-IJZ"/>
+                                            <exclude reference="JTc-Mf-xJ4"/>
+                                            <exclude reference="S5U-vF-d0a"/>
+                                            <exclude reference="IC4-8C-xew"/>
+                                            <exclude reference="SBH-hh-dRE"/>
+                                            <exclude reference="xNc-i5-Bfd"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
@@ -368,16 +368,16 @@
                                             <include reference="W9d-zf-fYt"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="IC4-8C-xew"/>
-                                            <include reference="SBH-hh-dRE"/>
-                                            <include reference="xNc-i5-Bfd"/>
-                                            <include reference="1vI-eh-IJZ"/>
-                                            <include reference="JTc-Mf-xJ4"/>
-                                            <include reference="S5U-vF-d0a"/>
                                             <include reference="5p1-Tj-rx2"/>
                                             <include reference="7o9-ha-MjU"/>
                                             <include reference="ObK-L4-Di4"/>
                                             <include reference="hOp-r6-hp6"/>
+                                            <include reference="1vI-eh-IJZ"/>
+                                            <include reference="JTc-Mf-xJ4"/>
+                                            <include reference="S5U-vF-d0a"/>
+                                            <include reference="IC4-8C-xew"/>
+                                            <include reference="SBH-hh-dRE"/>
+                                            <include reference="xNc-i5-Bfd"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -389,10 +389,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CardsCellCurriculum" rowHeight="55" id="lep-BL-7fQ" customClass="CardsTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="115.5" width="400" height="66"/>
+                                <rect key="frame" x="0.0" y="115.5" width="400" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lep-BL-7fQ" id="ljf-bm-mzU">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="65.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="54.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="课程名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z0d-ZE-fmt">
@@ -444,14 +444,14 @@
                                             <exclude reference="7kO-jZ-kEJ"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="AYN-cp-G0d"/>
-                                            <exclude reference="MTt-cq-vtb"/>
+                                            <exclude reference="OLS-LH-N1Q"/>
                                             <exclude reference="1Oa-Mr-s70"/>
                                             <exclude reference="9dh-hb-Rp4"/>
                                             <exclude reference="Bhb-lf-Hk4"/>
                                             <exclude reference="e61-al-u8a"/>
                                             <exclude reference="g1T-9R-p76"/>
-                                            <exclude reference="OLS-LH-N1Q"/>
+                                            <exclude reference="AYN-cp-G0d"/>
+                                            <exclude reference="MTt-cq-vtb"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
@@ -461,14 +461,14 @@
                                             <include reference="7kO-jZ-kEJ"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="AYN-cp-G0d"/>
-                                            <include reference="MTt-cq-vtb"/>
+                                            <include reference="OLS-LH-N1Q"/>
                                             <include reference="1Oa-Mr-s70"/>
                                             <include reference="9dh-hb-Rp4"/>
                                             <include reference="Bhb-lf-Hk4"/>
                                             <include reference="e61-al-u8a"/>
                                             <include reference="g1T-9R-p76"/>
-                                            <include reference="OLS-LH-N1Q"/>
+                                            <include reference="AYN-cp-G0d"/>
+                                            <include reference="MTt-cq-vtb"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -480,10 +480,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CardsCellExperiment" rowHeight="55" id="5AH-Qj-VBn" customClass="CardsTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="115.5" width="400" height="66"/>
+                                <rect key="frame" x="0.0" y="170.5" width="400" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5AH-Qj-VBn" id="eNr-IL-QVU">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="65.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="54.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实验名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vmu-dq-vei">
@@ -535,14 +535,14 @@
                                             <exclude reference="A2V-LG-mal"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="9w5-xq-3yR"/>
-                                            <exclude reference="gIC-sg-HpH"/>
+                                            <exclude reference="uTu-1l-U3Q"/>
                                             <exclude reference="0As-TR-iQN"/>
                                             <exclude reference="LhG-F8-uXv"/>
                                             <exclude reference="SK0-QT-eiq"/>
                                             <exclude reference="kg2-kg-JUH"/>
                                             <exclude reference="z8p-nI-Ot9"/>
-                                            <exclude reference="uTu-1l-U3Q"/>
+                                            <exclude reference="9w5-xq-3yR"/>
+                                            <exclude reference="gIC-sg-HpH"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
@@ -552,14 +552,14 @@
                                             <include reference="A2V-LG-mal"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="9w5-xq-3yR"/>
-                                            <include reference="gIC-sg-HpH"/>
+                                            <include reference="uTu-1l-U3Q"/>
                                             <include reference="0As-TR-iQN"/>
                                             <include reference="LhG-F8-uXv"/>
                                             <include reference="SK0-QT-eiq"/>
                                             <include reference="kg2-kg-JUH"/>
                                             <include reference="z8p-nI-Ot9"/>
-                                            <include reference="uTu-1l-U3Q"/>
+                                            <include reference="9w5-xq-3yR"/>
+                                            <include reference="gIC-sg-HpH"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -571,10 +571,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CardsCellExam" rowHeight="55" id="0fa-ZO-sot" customClass="CardsTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="115.5" width="400" height="66"/>
+                                <rect key="frame" x="0.0" y="225.5" width="400" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0fa-ZO-sot" id="hAN-hd-wdI">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="65.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="54.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="考试科目" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GdA-Nh-bfn">
@@ -638,14 +638,14 @@
                                         <mask key="constraints">
                                             <exclude reference="EAA-yO-K4m"/>
                                             <exclude reference="Ti3-bB-cNp"/>
+                                            <exclude reference="z6W-oo-ZcI"/>
+                                            <exclude reference="Aad-Ge-3YU"/>
+                                            <exclude reference="sHb-2N-lPh"/>
                                             <exclude reference="5tW-og-Jja"/>
                                             <exclude reference="KE7-MP-CTJ"/>
                                             <exclude reference="SD8-fN-g64"/>
                                             <exclude reference="bv9-Bx-AZe"/>
                                             <exclude reference="nx0-Bv-H3q"/>
-                                            <exclude reference="z6W-oo-ZcI"/>
-                                            <exclude reference="Aad-Ge-3YU"/>
-                                            <exclude reference="sHb-2N-lPh"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
@@ -658,14 +658,14 @@
                                         <mask key="constraints">
                                             <include reference="EAA-yO-K4m"/>
                                             <include reference="Ti3-bB-cNp"/>
+                                            <include reference="z6W-oo-ZcI"/>
+                                            <include reference="Aad-Ge-3YU"/>
+                                            <include reference="sHb-2N-lPh"/>
                                             <include reference="5tW-og-Jja"/>
                                             <include reference="KE7-MP-CTJ"/>
                                             <include reference="SD8-fN-g64"/>
                                             <include reference="bv9-Bx-AZe"/>
                                             <include reference="nx0-Bv-H3q"/>
-                                            <include reference="z6W-oo-ZcI"/>
-                                            <include reference="Aad-Ge-3YU"/>
-                                            <include reference="sHb-2N-lPh"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -678,10 +678,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CardsCellLecture" rowHeight="55" id="L0J-fm-2LG" customClass="CardsTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="115.5" width="400" height="66"/>
+                                <rect key="frame" x="0.0" y="280.5" width="400" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L0J-fm-2LG" id="WbM-jb-i5X">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="65.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="54.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="讲座名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAn-Cv-lgU">
@@ -733,14 +733,14 @@
                                             <exclude reference="9Pu-f5-9Mk"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="Ldq-rD-dGC"/>
-                                            <exclude reference="gzE-P0-uAw"/>
+                                            <exclude reference="58W-IQ-kGe"/>
                                             <exclude reference="0bL-A0-dNu"/>
                                             <exclude reference="On5-VP-hU5"/>
                                             <exclude reference="mnZ-AY-ZKe"/>
                                             <exclude reference="n59-tw-she"/>
                                             <exclude reference="wuJ-LF-bPh"/>
-                                            <exclude reference="58W-IQ-kGe"/>
+                                            <exclude reference="Ldq-rD-dGC"/>
+                                            <exclude reference="gzE-P0-uAw"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
@@ -750,14 +750,14 @@
                                             <include reference="9Pu-f5-9Mk"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="Ldq-rD-dGC"/>
-                                            <include reference="gzE-P0-uAw"/>
+                                            <include reference="58W-IQ-kGe"/>
                                             <include reference="0bL-A0-dNu"/>
                                             <include reference="On5-VP-hU5"/>
                                             <include reference="mnZ-AY-ZKe"/>
                                             <include reference="n59-tw-she"/>
                                             <include reference="wuJ-LF-bPh"/>
-                                            <include reference="58W-IQ-kGe"/>
+                                            <include reference="Ldq-rD-dGC"/>
+                                            <include reference="gzE-P0-uAw"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -769,10 +769,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CardsCellJwc" rowHeight="55" id="ycr-xu-TgC" customClass="CardsTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="115.5" width="400" height="66"/>
+                                <rect key="frame" x="0.0" y="335.5" width="400" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ycr-xu-TgC" id="uzu-d9-Spk">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="65.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="54.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="通知标题" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qAw-1g-KxP">
@@ -815,12 +815,12 @@
                                             <exclude reference="8HX-IX-EJG"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="Jx1-lW-BS7"/>
-                                            <exclude reference="yoT-Ti-4yS"/>
-                                            <exclude reference="ymL-d3-3wx"/>
+                                            <exclude reference="Fdo-i2-N0B"/>
                                             <exclude reference="MT8-NM-6jL"/>
                                             <exclude reference="aVd-LG-zDT"/>
-                                            <exclude reference="Fdo-i2-N0B"/>
+                                            <exclude reference="ymL-d3-3wx"/>
+                                            <exclude reference="Jx1-lW-BS7"/>
+                                            <exclude reference="yoT-Ti-4yS"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
@@ -829,12 +829,12 @@
                                             <include reference="8HX-IX-EJG"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="Jx1-lW-BS7"/>
-                                            <include reference="yoT-Ti-4yS"/>
-                                            <include reference="ymL-d3-3wx"/>
+                                            <include reference="Fdo-i2-N0B"/>
                                             <include reference="MT8-NM-6jL"/>
                                             <include reference="aVd-LG-zDT"/>
-                                            <include reference="Fdo-i2-N0B"/>
+                                            <include reference="ymL-d3-3wx"/>
+                                            <include reference="Jx1-lW-BS7"/>
+                                            <include reference="yoT-Ti-4yS"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -845,10 +845,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CardsCellPedetail" rowHeight="55" id="3Jo-uc-mUD" customClass="CardsTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="115.5" width="400" height="66"/>
+                                <rect key="frame" x="0.0" y="390.5" width="400" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Jo-uc-mUD" id="awz-HJ-dZD">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="65.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="54.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="uK6-ZH-bx2">
@@ -883,10 +883,10 @@
                                                             <exclude reference="lgb-DB-bRX"/>
                                                         </mask>
                                                         <mask key="constraints">
-                                                            <exclude reference="0t3-9K-yfG"/>
-                                                            <exclude reference="Xs7-ZF-b15"/>
                                                             <exclude reference="WK7-Lz-8Lq"/>
                                                             <exclude reference="oPk-Uk-Z8P"/>
+                                                            <exclude reference="0t3-9K-yfG"/>
+                                                            <exclude reference="Xs7-ZF-b15"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="widthClass=compact">
@@ -895,10 +895,10 @@
                                                             <include reference="lgb-DB-bRX"/>
                                                         </mask>
                                                         <mask key="constraints">
-                                                            <include reference="0t3-9K-yfG"/>
-                                                            <include reference="Xs7-ZF-b15"/>
                                                             <include reference="WK7-Lz-8Lq"/>
                                                             <include reference="oPk-Uk-Z8P"/>
+                                                            <include reference="0t3-9K-yfG"/>
+                                                            <include reference="Xs7-ZF-b15"/>
                                                         </mask>
                                                     </variation>
                                                 </view>
@@ -931,10 +931,10 @@
                                                             <exclude reference="kvn-Og-gAm"/>
                                                         </mask>
                                                         <mask key="constraints">
-                                                            <exclude reference="q3T-pW-iOj"/>
-                                                            <exclude reference="dE2-og-cnA"/>
                                                             <exclude reference="js9-5R-izm"/>
                                                             <exclude reference="qNh-10-EOv"/>
+                                                            <exclude reference="dE2-og-cnA"/>
+                                                            <exclude reference="q3T-pW-iOj"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="widthClass=compact">
@@ -943,10 +943,10 @@
                                                             <include reference="kvn-Og-gAm"/>
                                                         </mask>
                                                         <mask key="constraints">
-                                                            <include reference="q3T-pW-iOj"/>
-                                                            <include reference="dE2-og-cnA"/>
                                                             <include reference="js9-5R-izm"/>
                                                             <include reference="qNh-10-EOv"/>
+                                                            <include reference="dE2-og-cnA"/>
+                                                            <include reference="q3T-pW-iOj"/>
                                                         </mask>
                                                     </variation>
                                                 </view>
@@ -979,10 +979,10 @@
                                                             <exclude reference="JPs-GH-T7K"/>
                                                         </mask>
                                                         <mask key="constraints">
-                                                            <exclude reference="LtC-j6-eF3"/>
                                                             <exclude reference="5Gv-n9-2cG"/>
-                                                            <exclude reference="q20-kR-2Y2"/>
+                                                            <exclude reference="LtC-j6-eF3"/>
                                                             <exclude reference="4cp-UA-WSS"/>
+                                                            <exclude reference="q20-kR-2Y2"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="widthClass=compact">
@@ -991,10 +991,10 @@
                                                             <include reference="JPs-GH-T7K"/>
                                                         </mask>
                                                         <mask key="constraints">
-                                                            <include reference="LtC-j6-eF3"/>
                                                             <include reference="5Gv-n9-2cG"/>
-                                                            <include reference="q20-kR-2Y2"/>
+                                                            <include reference="LtC-j6-eF3"/>
                                                             <include reference="4cp-UA-WSS"/>
+                                                            <include reference="q20-kR-2Y2"/>
                                                         </mask>
                                                     </variation>
                                                 </view>
@@ -1050,10 +1050,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CardsCellCard" rowHeight="55" id="xtv-jJ-v6K" customClass="CardsTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="115.5" width="400" height="66"/>
+                                <rect key="frame" x="0.0" y="445.5" width="400" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xtv-jJ-v6K" id="Rwz-D0-0AI">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="65.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="54.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="mTE-tf-inG">
@@ -1103,9 +1103,9 @@
                                             <exclude reference="mTE-tf-inG"/>
                                         </mask>
                                         <mask key="constraints">
+                                            <exclude reference="JJ8-t6-uQr"/>
                                             <exclude reference="RTU-v8-iD8"/>
                                             <exclude reference="Umx-BG-yvi"/>
-                                            <exclude reference="JJ8-t6-uQr"/>
                                             <exclude reference="WKe-XX-ME1"/>
                                         </mask>
                                     </variation>
@@ -1114,9 +1114,9 @@
                                             <include reference="mTE-tf-inG"/>
                                         </mask>
                                         <mask key="constraints">
+                                            <include reference="JJ8-t6-uQr"/>
                                             <include reference="RTU-v8-iD8"/>
                                             <include reference="Umx-BG-yvi"/>
-                                            <include reference="JJ8-t6-uQr"/>
                                             <include reference="WKe-XX-ME1"/>
                                         </mask>
                                     </variation>
@@ -3570,7 +3570,7 @@ Copyright (c) 2013 Alexandr Graschenkov
                                             <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="主讲人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mow-8p-aKo">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="主讲人" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mow-8p-aKo">
                                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
