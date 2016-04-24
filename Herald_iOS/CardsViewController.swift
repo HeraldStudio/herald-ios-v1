@@ -4,7 +4,7 @@ import Reindeer
 import Kingfisher
 import SwiftyJSON
 
-class CardsViewController: BaseViewController, UITableViewDelegate {
+class CardsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var cardsTableView: UITableView!
     
@@ -24,16 +24,7 @@ class CardsViewController: BaseViewController, UITableViewDelegate {
         
         setupSliderAndSwiper()
         refreshSlider()
-        
-        ApiRequest().url("http://android.heraldstudio.com/checkversion").uuid()
-            .post("schoolnum", "0", "versioncode", "0")
-            .toServiceCache("versioncheck_cache") { (json) -> String in json.rawString()!}
-            .onFinish { (_, _, _) -> Void in
-                self.refreshSlider()
-            }
-            .run()
-        
-        // Do any additional setup after loading the view, typically from a nib.
+        ServiceHelper.refreshCache {() in self.loadContent(true)}
     }
     
     func setupSliderAndSwiper () {
@@ -56,14 +47,16 @@ class CardsViewController: BaseViewController, UITableViewDelegate {
         // 刷新控件
         swiper.themeColor = navigationController?.navigationBar.backgroundColor
         swiper.contentView = slider.view
-        swiper.refresher = {() in self.showMessage("刷新测试")} // TODO
+        swiper.refresher = {() in
+            self.loadContent(true)
+        }
         cardsTableView.tableHeaderView = swiper
     }
     
     var links : [String] = []
     
     func refreshSlider () {
-        let cache = JSON.parse(CacheHelper.getServiceCache("versioncheck_cache"))
+        let cache = JSON.parse(ServiceHelper.get("versioncheck_cache"))
         let array = cache["content"]["sliderviews"]
         
         links.removeAll()
@@ -86,6 +79,38 @@ class CardsViewController: BaseViewController, UITableViewDelegate {
         slider.startRolling()
     }
     
+    /**
+     * 卡片列表部分
+     */
+    
+    var itemList : [CardsModel] = []
+    
+    func loadContent (refresh : Bool) {
+        /// 本地重载部分
+        
+        // 单独刷新快捷栏，不刷新轮播图。轮播图在轮播图数据下载完成后单独刷新。
+        refreshShortcutBox()
+        
+        // 清空卡片列表，等待载入
+        itemList.removeAll()
+        
+        // 加载推送缓存
+        if let item = ServiceHelper.getPushMessageItem() {
+            itemList.append(item)
+        }
+        
+        // 判断各模块是否开启并加载对应数据，暂时只有一个示例，为了给首页卡片的实现提供参考
+        if SettingsHelper.getModuleCardEnabled(2) {
+            //itemList.append(CurriculumCard())
+        }
+        
+        // TODO 没写完
+    }
+    
+    func refreshShortcutBox() {
+        // TODO
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -93,18 +118,18 @@ class CardsViewController: BaseViewController, UITableViewDelegate {
     
     //指定UITableView中有多少个section的，section分区，一个section里会包含多个Cell
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 0
     }
     
     //每一个section里面有多少个Cell
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 0
     }
     
     //初始化每一个Cell
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let moduleCell = cardsTableView.dequeueReusableCellWithIdentifier("cardsCell", forIndexPath: indexPath) as! CardsTableViewCell
-        moduleCell.content?.text = "Hello, World! "
+        moduleCell.content?.text = "Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! "
         return moduleCell
     }
     

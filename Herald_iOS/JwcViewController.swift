@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class JwcViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class JwcViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableView : UITableView!
     
@@ -42,7 +42,7 @@ class JwcViewController : BaseViewController, UITableViewDelegate, UITableViewDa
     var sectionList : [String] = []
     
     func loadCache() {
-        let cache = CacheHelper.getCache("herald_jwc")
+        let cache = CacheHelper.get("herald_jwc")
         if cache == "" {
             refreshCache()
             return
@@ -117,6 +117,6 @@ class JwcViewController : BaseViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        UIApplication.sharedApplication().openURL(NSURL(string: noticeList[indexPath.section][indexPath.row].url)!)
+        AppModule(title: "教务通知", url: noticeList[indexPath.section][indexPath.row].url).open(navigationController)
     }
 }

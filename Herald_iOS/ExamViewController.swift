@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class ExamViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableView : UITableView!
     
@@ -42,7 +42,7 @@ class ExamViewController : BaseViewController, UITableViewDelegate, UITableViewD
     var comingExams : [ExamModel] = []
     
     func loadCache() {
-        let cache = CacheHelper.getCache("herald_exam")
+        let cache = CacheHelper.get("herald_exam")
         if cache == "" {
             refreshCache()
             return

@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class CurriculumViewController : BaseViewController, UIScrollViewDelegate {
+class CurriculumViewController : UIViewController, UIScrollViewDelegate {
     
     var thisWeek = 0
     
@@ -55,8 +55,8 @@ class CurriculumViewController : BaseViewController, UIScrollViewDelegate {
     }
     
     func readLocal () {
-        let data = CacheHelper.getCache("herald_curriculum")
-        let sidebar = CacheHelper.getCache("herald_sidebar")
+        let data = CacheHelper.get("herald_curriculum")
+        let sidebar = CacheHelper.get("herald_sidebar")
         if data == "" {
             refreshCache()
             return

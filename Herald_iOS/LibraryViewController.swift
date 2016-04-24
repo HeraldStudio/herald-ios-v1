@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class LibraryViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class LibraryViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableView : UITableView!
     
@@ -38,8 +38,8 @@ class LibraryViewController : BaseViewController, UITableViewDelegate, UITableVi
     var list : [[LibraryBookModel]] = []
     
     func loadCache() {
-        let borrowCache = CacheHelper.getCache("herald_library_borrowbook")
-        let hotCache = CacheHelper.getCache("herald_library_hotbook")
+        let borrowCache = CacheHelper.get("herald_library_borrowbook")
+        let hotCache = CacheHelper.get("herald_library_hotbook")
         if borrowCache == "" || hotCache == "" {
             refreshCache()
             return
@@ -57,8 +57,7 @@ class LibraryViewController : BaseViewController, UITableViewDelegate, UITableVi
             let title = k["title"].stringValue
             let renewTime = k["renew_time"].stringValue
             
-            // 此处“未续借”、“已续借”字样若要修改，需要同时修改tableView(_:cellForRowAtIndexPath:)函数中的相应判断
-            let model = LibraryBookModel(title, author, "\(renderDate)借书 \(dueDate)到期 \(renewTime == "0" ? "未续借" : "已续借")", barcode, "")
+            let model = LibraryBookModel(title, author, "\(renderDate)借书 / \(dueDate)到期 / \(renewTime == "0" ? "点击续借" : "已续借")", barcode, "")
             borrowList.append(model)
         }
         list.append(borrowList)
@@ -134,11 +133,6 @@ class LibraryViewController : BaseViewController, UITableViewDelegate, UITableVi
                 cell.title.text = model.title
                 cell.line1.text = model.line1
                 cell.line2.text = model.line2
-                cell.barcode = model.barcode
-                cell.renew.alpha = model.line2.containsString("未续借") ? 0 : 1
-                cell.renew.enabled = model.line2.containsString("未续借")
-                
-                cell.renew.addTarget(cell, action: #selector(cell.renewBook), forControlEvents: UIControlEvents.PrimaryActionTriggered)
                 return cell
             } else { // 热门书籍
                 let cell = tableView.dequeueReusableCellWithIdentifier("LibraryHotBookTableViewCell", forIndexPath: indexPath) as! LibraryTableViewCell
@@ -159,6 +153,16 @@ class LibraryViewController : BaseViewController, UITableViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let barcode = list[indexPath.section][indexPath.row].barcode
+        if barcode != "" {
+            showProgressDialog()
+            ApiRequest().api("renew").uuid().post("barcode", barcode).onFinish({ _, _, response in
+                self.hideProgressDialog()
+                var response = JSON.parse(response)["content"].stringValue
+                response = response == "success" ? "续借成功" : response
+                self.showMessage(response)
+            }).run()
+        }
     }
     
     func displayLibraryAuthDialog () {

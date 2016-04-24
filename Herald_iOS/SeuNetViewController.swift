@@ -11,7 +11,7 @@ import UIKit
 import SwiftyJSON
 import MagicPie
 
-class SeuNetViewController : BaseViewController {
+class SeuNetViewController : UIViewController {
     
     @IBOutlet var usage : UILabel!
     
@@ -39,7 +39,7 @@ class SeuNetViewController : BaseViewController {
     }
     
     func loadCache (showPie : Bool) {
-        let cache = CacheHelper.getCache("herald_nic")
+        let cache = CacheHelper.get("herald_nic")
         if cache == "" {
             refreshCache()
             return

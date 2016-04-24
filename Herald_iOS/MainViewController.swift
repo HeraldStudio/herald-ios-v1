@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import DHCShakeNotifier
 
 /// 主页面
-class MainViewController: UITabBarController{
+class MainViewController: UITabBarController {
     
     /// 启动时的初始化
     override func viewDidLoad() {
         super.viewDidLoad()
+        if !ApiHelper.isLogin() {
+            presentViewController(storyboard!.instantiateViewControllerWithIdentifier("login"), animated: false) {}
+        }
         
         // 去除界面切换时导航栏的黑影
         navigationController?.view.backgroundColor = UIColor.whiteColor()
@@ -27,11 +31,18 @@ class MainViewController: UITabBarController{
                 }
             }
         }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
+    }
+    
+    func onShake () {
+        // 摇一摇事件
+    }
+    
+    override func finalize() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: DHCSHakeNotificationName, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
-        if !ApiHelper.isLogin() {
-            presentViewController(storyboard!.instantiateViewControllerWithIdentifier("login"), animated: false) {}
-        }
     }
 }
