@@ -40,8 +40,8 @@ class ExperimentCard {
                 guard let month = ymd[1] else { continue }
                 guard let day = ymd[2] else { continue }
                 
-                let now = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday, .Hour, .Minute], fromDate: NSDate())
-                let then = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday, .Hour, .Minute], fromDate: NSDate())
+                let now = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .WeekOfYear, .Weekday, .Hour, .Minute], fromDate: NSDate())
+                var then = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Hour, .Minute], fromDate: NSDate())
                 
                 (then.year, then.month, then.day) = (year, month, day)
                 switch jsonObject["Day"].stringValue {
@@ -49,6 +49,8 @@ class ExperimentCard {
                 case "下午": (then.hour, then.minute) = (13, 45)
                 default: (then.hour, then.minute) = (18, 15)
                 }
+                
+                then = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .WeekOfYear, .Weekday, .Hour, .Minute], fromDate: NSCalendar.currentCalendar().dateFromComponents(then)!)
                 
                 let row = CardsRowModel(experimentModel: ExperimentModel(json: jsonObject))
                 
