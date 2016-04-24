@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class CardViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class CardViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableView : UITableView!
     
@@ -40,8 +40,8 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
     
     func loadCache() {
         // 仅有余额的缓存，这个缓存刷新永远比完整的缓存快
-        let leftCache = CacheHelper.getCache("herald_card_left")
-        let cache = CacheHelper.getCache("herald_card")
+        let leftCache = CacheHelper.get("herald_card_left")
+        let cache = CacheHelper.get("herald_card")
         if cache == "" || leftCache == "" {
             return
         }
@@ -64,7 +64,7 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
                 if !todayCost.containsString("-") && !todayCost.containsString("+") {
                     todayCost = (todayCost == "0.00" ? "-" : "+") + todayCost
                 }
-                history.append([CardHistoryModel("今天", "你可以到充值页面提前查看当天消费流水", "今日总消费", "未出账", todayCost, extra)])
+                history.append([CardHistoryModel("今天", "你可以到充值页面提前查看当天消费流水", "今日总收支", "未出账", todayCost, extra)])
             }
         }
         
@@ -108,7 +108,7 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
             });
         
         // 取上次刷新日期，与当前日期比较
-        let lastRefresh = CacheHelper.getCache("herald_card_date")
+        let lastRefresh = CacheHelper.get("herald_card_date")
         let dateComp = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: NSDate())
         let stamp = "\(dateComp.year)/\(dateComp.month)/\(dateComp.day)"
         
@@ -125,10 +125,10 @@ class CardViewController : BaseViewController, UITableViewDelegate, UITableViewD
         manager.onFinish { success in
                     self.hideProgressDialog()
                     if success {
-                        CacheHelper.setCache("herald_card_date", cacheValue: stamp)
+                        CacheHelper.set("herald_card_date", cacheValue: stamp)
                         self.loadCache()
                     } else {
-                        self.showMessage("刷新失败，你也可以到充值页面查询")
+                        self.showMessage("刷新失败，请重试或到充值页面查询")
                     }
                 }.run()
     }

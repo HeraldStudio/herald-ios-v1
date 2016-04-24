@@ -32,13 +32,13 @@ class ApiHelper : NSObject {
     static func doLogout (context : UIViewController?) {
         
         //清除授权信息
-        authCache.put("authUser", withValue: "")
-        authCache.put("authPwd", withValue: "")
-        authCache.put("uuid", withValue: "")
-        authCache.put("cardnum", withValue: "")
-        authCache.put("schoolnum", withValue: "")
-        authCache.put("name", withValue: "")
-        authCache.put("sex", withValue: "")
+        authCache.set("authUser", "")
+        authCache.set("authPwd", "")
+        authCache.set("uuid", "")
+        authCache.set("cardnum", "")
+        authCache.set("schoolnum", "")
+        authCache.set("name", "")
+        authCache.set("sex", "")
         
         // 清除模块缓存
         // 注意此处的clearAllmoduleCache里的authUser和authPwd与上面清除的是不同的
@@ -63,33 +63,33 @@ class ApiHelper : NSObject {
     
     static func setAuth (user user : String, pwd : String) {
         // TODO 加密
-        CacheHelper.setCache("authUser", cacheValue: user)
-        CacheHelper.setCache("authPwd", cacheValue: pwd)
+        CacheHelper.set("authUser", cacheValue: user)
+        CacheHelper.set("authPwd", cacheValue: pwd)
     }
     
     static func getUserName () -> String {
-        return CacheHelper.getCache("authUser")
+        return CacheHelper.get("authUser")
     }
     
     static func getPassword () -> String {
-        return CacheHelper.getCache("authPwd")
+        return CacheHelper.get("authPwd")
     }
     
     static func setWifiAuth (user user : String, pwd : String) {
         // TODO 加密
-        CacheHelper.setCache("wifiAuthUser", cacheValue: user)
-        CacheHelper.setCache("wifiAuthPwd", cacheValue: pwd)
+        CacheHelper.set("wifiAuthUser", cacheValue: user)
+        CacheHelper.set("wifiAuthPwd", cacheValue: pwd)
     }
     
     static func getWifiUserName () -> String {
         // 若无校园网独立用户缓存，则使用登陆应用的账户
-        let cacheUser = CacheHelper.getCache("wifiAuthUser")
+        let cacheUser = CacheHelper.get("wifiAuthUser")
         return cacheUser == "" ? getUserName() : cacheUser
     }
     
     static func getWifiPassword () -> String {
         // 若无校园网独立用户缓存，则使用登陆应用的账户
-        let cachePwd = CacheHelper.getCache("authPwd")
+        let cachePwd = CacheHelper.get("authPwd")
         return cachePwd == "" ? getPassword() : cachePwd
     }
     
@@ -104,8 +104,8 @@ class ApiHelper : NSObject {
         return authCache.get(key)
     }
     
-    static func setAuthCache (key : String, withValue value : String) {
-        authCache.put(key, withValue: value)
+    static func setAuthCache (key : String, _ value : String) {
+        authCache.set(key, value)
     }
 
     static func getSchoolnum () -> String {

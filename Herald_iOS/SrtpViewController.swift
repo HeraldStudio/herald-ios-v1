@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class SrtpViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableView : UITableView!
     
@@ -38,7 +38,7 @@ class SrtpViewController : BaseViewController, UITableViewDelegate, UITableViewD
             "code": 200
          }
          */
-        let cache = CacheHelper.getCache("herald_srtp")
+        let cache = CacheHelper.get("herald_srtp")
         if cache == "" {
             refreshCache()
             return
@@ -84,7 +84,7 @@ class SrtpViewController : BaseViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("srtp").uuid()
+        ApiRequest().api("srtp").uuid().post("schoolnum", ApiHelper.getSchoolnum())
             .toCache("herald_srtp") {json -> String in
                 guard let str = json.rawString() else {return ""}
                 return str

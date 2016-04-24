@@ -53,9 +53,9 @@ class SettingsHelper {
     static func setModuleShortCutEnabled(moduleID : Int, enabled : Bool) {
     // flag为true则设置为选中，否则设置为不选中
     if (enabled) {
-            setCache("herald_settings_module_shortcutenabled_" + MODULES[moduleID].name, withValue: "1")
+            set("herald_settings_module_shortcutenabled_" + MODULES[moduleID].name, "1")
         } else {
-            setCache("herald_settings_module_shortcutenabled_" + MODULES[moduleID].name, withValue: "0")
+            set("herald_settings_module_shortcutenabled_" + MODULES[moduleID].name, "0")
         }
     }
     
@@ -66,7 +66,7 @@ class SettingsHelper {
      */
     static func getModuleShortcutEnabled (moduleID : Int) -> Bool {
         //获得某项模块的卡片是否显示
-        return getCache("herald_settings_module_shortcutenabled_" + MODULES[moduleID].name) != "0"
+        return get("herald_settings_module_shortcutenabled_" + MODULES[moduleID].name) != "0"
     }
     
     /**
@@ -79,9 +79,9 @@ class SettingsHelper {
         if !MODULES[moduleID].hasCard { return }
         // flag为true则设置为选中，否则设置为不选中
         if (enabled) {
-            setCache("herald_settings_module_cardenabled_" + MODULES[moduleID].name, withValue: "1")
+            set("herald_settings_module_cardenabled_" + MODULES[moduleID].name, "1")
         } else {
-            setCache("herald_settings_module_cardenabled_" + MODULES[moduleID].name, withValue: "0")
+            set("herald_settings_module_cardenabled_" + MODULES[moduleID].name, "0")
         }
     }
     
@@ -92,7 +92,7 @@ class SettingsHelper {
      */
     static func getModuleCardEnabled (moduleID : Int) -> Bool {
         //获得某项模块的卡片是否显示
-        return MODULES[moduleID].hasCard && getCache("herald_settings_module_cardenabled_" + MODULES[moduleID].name) != "0"
+        return MODULES[moduleID].hasCard && get("herald_settings_module_cardenabled_" + MODULES[moduleID].name) != "0"
     }
     
     /**
@@ -111,21 +111,21 @@ class SettingsHelper {
      * 获得是否选择自动登录seu
      */
     static func getWifiAutoLogin () -> Bool {
-        let seuauto = getCache("herald_settings_wifi_autologin")
+        let seuauto = get("herald_settings_wifi_autologin")
         return seuauto != "0"
     }
     
     static func setWifiAutoLogin (enabled : Bool) {
-        setCache("herald_settings_wifi_autologin", withValue: enabled ? "1" : "0")
+        set("herald_settings_wifi_autologin", enabled ? "1" : "0")
     }
     
     /**
      * 获得应用启动次数
      */
     static func getLaunchTimes () -> Int {
-        let times = getCache("herald_settings_launch_time")
+        let times = get("herald_settings_launch_time")
         if times == "" {
-            setCache("herald_settings_launch_time", withValue: "0")
+            set("herald_settings_launch_time", "0")
             return 0
         } else {
             return Int(times)!
@@ -138,16 +138,16 @@ class SettingsHelper {
      * @param times 要设置的次数
      */
     static func updateLaunchTimes (times : Int) {
-        setCache("herald_settings_launch_time", withValue: String(times))
+        set("herald_settings_launch_time", String(times))
     }
     
     static let settingsCache = NSUserDefaults.withPrefix("settings_")
     
-    static func getCache (key : String) -> String {
+    static func get (key : String) -> String {
         return settingsCache.get(key)
     }
     
-    static func setCache (key : String, withValue : String) {
-        settingsCache.put(key, withValue: withValue)
+    static func set (key : String, _ value: String) {
+        settingsCache.set(key, value)
     }
 }

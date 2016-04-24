@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class LectureViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class LectureViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableView : UITableView!
     
@@ -41,8 +41,8 @@ class LectureViewController : BaseViewController, UITableViewDelegate, UITableVi
     var list : [[LectureModel]] = []
     
     func loadCache() {
-        let noticeCache = CacheHelper.getCache("herald_lecture_notice")
-        let recordCache = CacheHelper.getCache("herald_lecture_records")
+        let noticeCache = CacheHelper.get("herald_lecture_notice")
+        let recordCache = CacheHelper.get("herald_lecture_records")
         if noticeCache == "" || recordCache == "" {
             return
         }

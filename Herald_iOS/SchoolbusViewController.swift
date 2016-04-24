@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class SchoolbusViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableView : UITableView!
     
@@ -44,7 +44,7 @@ class SchoolbusViewController : BaseViewController, UITableViewDelegate, UITable
     func loadCache(weekend : Bool) {
         control.selectedSegmentIndex = weekend ? 1 : 0
         
-        let cache = CacheHelper.getCache("herald_schoolbus")
+        let cache = CacheHelper.get("herald_schoolbus")
         if cache == "" {
             refreshCache()
             return

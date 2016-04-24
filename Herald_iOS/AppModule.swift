@@ -31,10 +31,16 @@ class AppModule {
         self.hasCard = hasCard
     }
     
+    /// 创建一个基于webview的页面，注意这里url中必须含有http
+    convenience init (title: String, url : String) {
+        self.init (id: -1, name: "", nameTip: title, desc: "", controller: url, icon: "", hasCard: false)
+    }
+    
     func open (navigationController : UINavigationController?) {
+        if controller == "" { return }
         if controller.containsString("http") {
-            CacheHelper.setCache("herald_webmodule_title", cacheValue: nameTip)
-            CacheHelper.setCache("herald_webmodule_url", cacheValue: controller)
+            CacheHelper.set("herald_webmodule_title", cacheValue: nameTip)
+            CacheHelper.set("herald_webmodule_url", cacheValue: controller)
             
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE")
             navigationController?.pushViewController(vc, animated: true)

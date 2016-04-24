@@ -11,7 +11,7 @@ import UIKit
 import SwiftyJSON
 import FSCalendar
 
-class PedetailViewController : BaseViewController, FSCalendarDataSource, FSCalendarDelegate {
+class PedetailViewController : UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     
     @IBOutlet weak var calendar : FSCalendar!
     
@@ -20,7 +20,7 @@ class PedetailViewController : BaseViewController, FSCalendarDataSource, FSCalen
     @IBOutlet weak var remainLabel : UILabel!
     
     override func viewDidLoad() {
-        let cache = CacheHelper.getCache("herald_pedetail")
+        let cache = CacheHelper.get("herald_pedetail")
         if cache != "" {
             loadCache()
         } else {
@@ -31,9 +31,9 @@ class PedetailViewController : BaseViewController, FSCalendarDataSource, FSCalen
     var history : [NSDate] = []
     
     func loadCache() {
-        let cache = CacheHelper.getCache("herald_pedetail")
-        let count = CacheHelper.getCache("herald_pe_count")
-        let remain = CacheHelper.getCache("herald_pe_remain")
+        let cache = CacheHelper.get("herald_pedetail")
+        let count = CacheHelper.get("herald_pe_count")
+        let remain = CacheHelper.get("herald_pe_remain")
         countLabel.text = count
         remainLabel.text = remain
         calendar?.reloadData()

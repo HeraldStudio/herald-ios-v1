@@ -32,7 +32,7 @@ class PrefixUserDefaults {
         return ""
     }
     
-    func put (key : String, withValue value : String) {
+    func set (key : String, _ value : String) {
         defaults.setObject(value, forKey: prefix + key)
         defaults.synchronize()
     }

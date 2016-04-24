@@ -1,8 +1,8 @@
 //
-//  BaseViewController.swift
+//  Dialogs.swift
 //  Herald_iOS
 //
-//  Created by 于海通 on 16/4/17.
+//  Created by 于海通 on 16/4/24.
 //  Copyright © 2016年 于海通. All rights reserved.
 //
 
@@ -10,7 +10,25 @@ import Foundation
 import UIKit
 import MBProgressHUD
 
-class BaseTableViewController : UITableViewController {
+class Dialogs {
+    
+    static var map : [UIViewController : Dialogs] = [:]
+    
+    var vc : UIViewController
+    
+    private init (_ vc : UIViewController) {
+        self.vc = vc
+    }
+    
+    static func getInstanceForVc (vc : UIViewController) -> Dialogs {
+        if let dialog = map[vc] {
+            return dialog
+        } else {
+            let newDialog = Dialogs(vc)
+            map.updateValue(newDialog, forKey: vc)
+            return newDialog
+        }
+    }
     
     var progressDialog : MBProgressHUD?
     
@@ -18,7 +36,7 @@ class BaseTableViewController : UITableViewController {
     
     func showProgressDialog () {
         hideProgressDialog()
-        progressDialog = MBProgressHUD(view: view)
+        progressDialog = MBProgressHUD(view: vc.view)
         UIApplication.sharedApplication().delegate?.window!!.addSubview(progressDialog!)
         progressDialog?.show(true)
         progressDialog?.labelText = "请稍候…"
@@ -29,7 +47,7 @@ class BaseTableViewController : UITableViewController {
     }
     
     func showMessage (message : String) {
-        alertDialog = MBProgressHUD(view: view)
+        alertDialog = MBProgressHUD(view: vc.view)
         UIApplication.sharedApplication().delegate?.window!!.addSubview(alertDialog!)
         alertDialog?.show(true)
         alertDialog?.labelText = message
@@ -38,22 +56,27 @@ class BaseTableViewController : UITableViewController {
         alertDialog?.hide(true)
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        hideProgressDialog()
+    func showQuestionDialog (message: String, runAfter: () -> Void) {
+        let dialog = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        dialog.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default){
+                (action: UIAlertAction) -> Void in runAfter()})
+        dialog.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel){
+                (action: UIAlertAction) -> Void in })
+        vc.presentViewController(dialog, animated: true, completion: nil)
     }
     
     func showTipDialogIfUnknown (message: String, cachePostfix: String, runAfter: () -> Void) {
-        let shown = CacheHelper.getCache("tip_ignored_" + cachePostfix) == "1"
+        let shown = CacheHelper.get("tip_ignored_" + cachePostfix) == "1"
         if !shown {
             let dialog = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             dialog.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default){
                 (action: UIAlertAction) -> Void in runAfter()})
             dialog.addAction(UIAlertAction(title: "不再提示", style: UIAlertActionStyle.Cancel){
                 (action: UIAlertAction) -> Void in
-                CacheHelper.setCache("tip_ignored_" + cachePostfix, cacheValue: "1")
+                CacheHelper.set("tip_ignored_" + cachePostfix, cacheValue: "1")
                 runAfter()
                 })
-            presentViewController(dialog, animated: true, completion: nil)
+            vc.presentViewController(dialog, animated: true, completion: nil)
         } else {
             runAfter()
         }

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class GradeViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableView : UITableView!
     
@@ -28,7 +28,7 @@ class GradeViewController : BaseViewController, UITableViewDelegate, UITableView
     var titles : [String] = []
     
     func loadCache() {
-        let cache = CacheHelper.getCache("herald_grade_gpa")
+        let cache = CacheHelper.get("herald_grade_gpa")
         if cache == "" {
             refreshCache()
             return

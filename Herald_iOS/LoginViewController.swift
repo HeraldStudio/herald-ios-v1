@@ -1,6 +1,6 @@
 import UIKit
 
-class LoginViewController: BaseViewController {
+class LoginViewController: UIViewController {
 
     @IBOutlet var username : UITextField!
     
@@ -36,7 +36,7 @@ class LoginViewController: BaseViewController {
                 } else if !success {
                     self.showMessage("网络异常，请重试")
                 } else {
-                    ApiHelper.setAuthCache("uuid", withValue: response)
+                    ApiHelper.setAuthCache("uuid", response)
                     ApiHelper.setAuth(user: self.username!.text!, pwd: self.password!.text!)
                     self.checkUUID()
                 }

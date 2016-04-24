@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-class WebModuleViewController : BaseViewController {
+class WebModuleViewController : UIViewController {
     
     @IBOutlet var webView : UIWebView!
     
     override func viewDidLoad () {
-        title = CacheHelper.getCache("herald_webmodule_title")
-        webView.loadRequest(NSURLRequest(URL: NSURL(string: CacheHelper.getCache("herald_webmodule_url"))!))
+        title = CacheHelper.get("herald_webmodule_title")
+        webView.loadRequest(NSURLRequest(URL: NSURL(string: CacheHelper.get("herald_webmodule_url"))!))
     }
     
     @IBAction func refresh () {

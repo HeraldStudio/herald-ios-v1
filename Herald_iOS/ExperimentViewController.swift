@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class ExperimentViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class ExperimentViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var tableView : UITableView!
     
@@ -40,7 +40,7 @@ class ExperimentViewController : BaseViewController, UITableViewDelegate, UITabl
     var sectionList : [String] = []
     
     func loadCache() {
-        let cache = CacheHelper.getCache("herald_experiment")
+        let cache = CacheHelper.get("herald_experiment")
         if cache == "" {
             refreshCache()
             return

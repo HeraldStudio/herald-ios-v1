@@ -31,27 +31,18 @@ class CacheHelper : NSObject {
     ]
     
     static let cache = NSUserDefaults.withPrefix("herald_")
-    static let serviceCache = NSUserDefaults.withPrefix("service_")
     
-    static func getCache (cacheName : String) -> String {
+    static func get(cacheName : String) -> String {
         return cache.get(cacheName)
     }
     
-    static func setCache (cacheName : String, cacheValue : String) {
-        cache.put(cacheName, withValue: cacheValue)
-    }
-    
-    static func getServiceCache (cacheName : String) -> String {
-        return serviceCache.get(cacheName)
-    }
-    
-    static func setServiceCache (cacheName : String, cacheValue : String) {
-        serviceCache.put(cacheName, withValue: cacheValue)
+    static func set(cacheName : String, cacheValue : String) {
+        cache.set(cacheName, cacheValue)
     }
     
     static func clearAllModuleCache () {
         for k in cacheNames {
-            setCache(k, cacheValue: "")
+            set(k, cacheValue: "")
         }
     }
 }
