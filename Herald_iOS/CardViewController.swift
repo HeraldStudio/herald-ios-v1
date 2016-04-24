@@ -72,8 +72,8 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         for i in 0 ..< jsonArray.count {
             let obj = jsonArray[i]
             let datetimeStr = obj["date"].stringValue
-            let date = datetimeStr.componentsSeparatedByString(" ")[0]
-            let time = datetimeStr.componentsSeparatedByString(" ")[1]
+            let date = datetimeStr.split(" ")[0]
+            let time = datetimeStr.split(" ")[1]
             let place = obj["system"].stringValue
             let type = obj["type"].stringValue
             var cost = obj["price"].stringValue

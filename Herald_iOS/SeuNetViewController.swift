@@ -49,9 +49,9 @@ class SeuNetViewController : UIViewController {
         var stateStr = JSON.parse(cache)["content"]["web"]["state"].stringValue
         var leftStr = JSON.parse(cache)["content"]["left"].stringValue
         
-        usageStr = usageStr.componentsSeparatedByString(" ")[0]
-        stateStr = "当前状态：" + stateStr.stringByReplacingOccurrencesOfString(",", withString: "，")
-        leftStr = leftStr.componentsSeparatedByString(" ")[0]
+        usageStr = usageStr.split(" ")[0]
+        stateStr = "当前状态：" + stateStr.replaceAll(",", "，")
+        leftStr = leftStr.split(" ")[0]
         
         usage.text = usageStr
         state.text = stateStr

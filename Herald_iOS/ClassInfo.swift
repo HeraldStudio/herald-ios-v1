@@ -15,11 +15,11 @@ class ClassInfo {
         place = json[2].string!;
         let timeStr = json[1].string!;
         var timeStrs = timeStr
-            .stringByReplacingOccurrencesOfString("]", withString: "-")
-            .stringByReplacingOccurrencesOfString("[", withString: "")
-            .stringByReplacingOccurrencesOfString("周", withString: "")
-            .stringByReplacingOccurrencesOfString("节", withString: "")
-            .componentsSeparatedByString("-");
+            .replaceAll("]", "-")
+            .replaceAll("[", "")
+            .replaceAll("周", "")
+            .replaceAll("节", "")
+            .split("-");
         startWeek = Int(timeStrs[0])!;
         endWeek = Int(timeStrs[1])!;
         startTime = Int(timeStrs[2])!;

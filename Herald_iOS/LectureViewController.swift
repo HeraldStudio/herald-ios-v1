@@ -41,7 +41,7 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
     var list : [[LectureModel]] = []
     
     func loadCache() {
-        let noticeCache = CacheHelper.get("herald_lecture_notice")
+        let noticeCache = CacheHelper.get("herald_lecture_notices")
         let recordCache = CacheHelper.get("herald_lecture_records")
         if noticeCache == "" || recordCache == "" {
             return
@@ -54,13 +54,7 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
         list.removeAll()
         var noticeList : [LectureModel] = []
         for k in JSON.parse(noticeCache)["content"].arrayValue {
-            let topic = k["topic"].stringValue
-            let speaker = k["speaker"].stringValue
-            let date = k["date"].stringValue
-            let location = k["location"].stringValue
-            
-            let dateAndPlace = date + " @" + location
-            let model = LectureModel(topic, speaker, dateAndPlace)
+            let model = LectureModel(json: k)
             noticeList.append(model)
         }
         list.append(noticeList)
@@ -71,7 +65,7 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
             let dateTime = k["date"].stringValue
             let place = k["place"].stringValue
             
-            let dateAndTime = dateTime.componentsSeparatedByString(" ")
+            let dateAndTime = dateTime.split(" ")
             let model = LectureModel(dateAndTime[0], "打卡时间：" + dateAndTime[1], "讲座地点：" + place)
             recordList.append(model)
         }
@@ -90,7 +84,7 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
                     return str
             },
             ApiRequest().url(ApiHelper.wechat_lecture_notice_url).uuid()
-                .toCache("herald_lecture_notice") {json -> String in
+                .toCache("herald_lecture_notices") {json -> String in
                     guard let str = json.rawString() else {return ""}
                     return str
             }

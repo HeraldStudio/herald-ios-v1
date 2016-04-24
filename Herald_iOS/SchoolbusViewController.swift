@@ -64,9 +64,9 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
             for experiment in section.1 {
                 let time = experiment.1["time"].stringValue
                 let desc = experiment.1["bus"].stringValue
-                let startEndStamps = time.componentsSeparatedByString("-")
-                let startStamps = startEndStamps[0].componentsSeparatedByString(":")
-                let endStamps = startEndStamps[1].componentsSeparatedByString(":")
+                let startEndStamps = time.split("-")
+                let startStamps = startEndStamps[0].split(":")
+                let endStamps = startEndStamps[1].split(":")
                 guard let startHour = Int(startStamps[0]) else { showError(); return }
                 guard let startMinute = Int(startStamps[1]) else { showError(); return }
                 guard let endHour = Int(endStamps[0]) else { showError(); return }

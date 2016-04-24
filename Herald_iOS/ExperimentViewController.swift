@@ -57,17 +57,7 @@ class ExperimentViewController : UIViewController, UITableViewDelegate, UITableV
             
             var list : [ExperimentModel] = []
             for experiment in section.1 {
-                let name = experiment.1["name"].stringValue
-                let date = experiment.1["Date"].stringValue
-                let day = experiment.1["Day"].stringValue
-                let place = experiment.1["Address"].stringValue
-                let teacher = experiment.1["Teacher"].stringValue
-                
-                var grade : String = ""
-                if experiment.1["Grade"].string != nil {
-                    grade = experiment.1["Grade"].string!
-                }
-                let model = ExperimentModel(name, date + day + " @" + place, teacher, grade)
+                let model = ExperimentModel(json: experiment.1)
                 list.append(model)
             }
             experimentList.append(list)

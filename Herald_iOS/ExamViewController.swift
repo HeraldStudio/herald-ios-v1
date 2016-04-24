@@ -55,37 +55,16 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
         endedExams.removeAll()
         comingExams.removeAll()
         
-        for item in jsonCache {
-            let course = item.1["course"].stringValue
-            let time = item.1["time"].stringValue
-            let location = item.1["location"].stringValue
-            let hour = item.1["hour"].stringValue
-            let teacher = item.1["teacher"].stringValue
-            
-            let ymd = time.componentsSeparatedByString(" ")[0].componentsSeparatedByString("-")
-            let comp = NSCalendar.currentCalendar()
-                .components(NSCalendarUnit(arrayLiteral: .Year, .Month, .Day), fromDate: NSDate())
-            
-            guard let fromDate = NSCalendar.currentCalendar().dateFromComponents(comp) else {showError(); return}
-            
-            guard let year = Int(ymd[0]) else {showError(); return}
-            guard let month = Int(ymd[1]) else {showError(); return}
-            guard let day = Int(ymd[2]) else {showError(); return}
-            
-            comp.year = year
-            comp.month = month
-            comp.day = day
-            
-            guard let toDate = NSCalendar.currentCalendar().dateFromComponents(comp) else {showError(); return}
-
-            let interval = Int(toDate.timeIntervalSinceDate(fromDate) / 86400)
-            
-            let model = ExamModel(course, time, "地点：\(location) 时长：\(hour)分钟 教师：\(teacher)"
-, interval)
-            if interval >= 0 {
-                comingExams.append(model)
-            } else {
-                endedExams.append(model)
+        for item in jsonCache.arrayValue {
+            do {
+                let model = try ExamModel(json: item)
+                if model.days >= 0 {
+                    comingExams.append(model)
+                } else {
+                    endedExams.append(model)
+                }
+            } catch {
+                continue
             }
         }
         

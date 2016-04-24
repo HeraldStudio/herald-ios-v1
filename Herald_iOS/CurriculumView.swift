@@ -190,8 +190,8 @@ class CurriculumView : UIViewController {
             
             block.root = self
             let place = info.place
-                .stringByReplacingOccurrencesOfString("(单)", withString: "")
-                .stringByReplacingOccurrencesOfString("(双)", withString: "")
+                .replaceAll("(单)", "")
+                .replaceAll("(双)", "")
             block.info = "课程名称：\(info.className)\n上课地点：\(place)\n上课周次：\(info.startWeek)~\(info.endWeek)周"
             if(info.place.containsString("(单)")){block.info += "单周"}
             if(info.place.containsString("(双)")){block.info += "双周"}

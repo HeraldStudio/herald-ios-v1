@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 /// 此类兼做讲座预告的模型和讲座记录的模型。
 class LectureModel {
@@ -18,5 +19,15 @@ class LectureModel {
         self.topic = topic
         self.speaker = speaker
         self.dateAndPlace = dateAndPlace
+    }
+    
+    convenience init (json : JSON) {
+        let topic = json["topic"].stringValue
+        let speaker = json["speaker"].stringValue
+        let date = json["date"].stringValue
+        let location = json["location"].stringValue
+        
+        let dateAndPlace = date + " @" + location
+        self.init(topic, speaker, dateAndPlace)
     }
 }
