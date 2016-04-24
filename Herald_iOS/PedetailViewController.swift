@@ -11,7 +11,7 @@ import UIKit
 import SwiftyJSON
 import FSCalendar
 
-class PedetailViewController : UIViewController, FSCalendarDataSource, FSCalendarDelegate {
+class PedetailViewController : UIViewController, FSCalendarDelegate {
     
     @IBOutlet weak var calendar : FSCalendar!
     
@@ -20,6 +20,7 @@ class PedetailViewController : UIViewController, FSCalendarDataSource, FSCalenda
     @IBOutlet weak var remainLabel : UILabel!
     
     override func viewDidLoad() {
+        calendar.delegate = self
         let cache = CacheHelper.get("herald_pedetail")
         if cache != "" {
             loadCache()
@@ -46,7 +47,7 @@ class PedetailViewController : UIViewController, FSCalendarDataSource, FSCalenda
         for k in jsonArray.arrayValue {
             let date = k["sign_date"].stringValue
             
-            let ymd = date.stringByReplacingOccurrencesOfString("-", withString: "/").componentsSeparatedByString("/")
+            let ymd = date.replaceAll("-", "/").split("/")
             let unit = NSCalendarUnit(arrayLiteral: .Year, .Month, .Day)
             let comp = NSCalendar.currentCalendar().components(unit, fromDate: NSDate())
             

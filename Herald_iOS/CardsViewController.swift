@@ -24,7 +24,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         setupSliderAndSwiper()
         refreshSlider()
-        ServiceHelper.refreshCache {() in self.loadContent(true)}
+        loadContent(true)
+        ServiceHelper.refreshCache {() in self.refreshSlider()}
     }
     
     func setupSliderAndSwiper () {
@@ -83,28 +84,46 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
      * 卡片列表部分
      */
     
-    var itemList : [CardsModel] = []
+    var cardList : [CardsModel] = []
     
     func loadContent (refresh : Bool) {
-        /// 本地重载部分
+        /// 本地重载
         
         // 单独刷新快捷栏，不刷新轮播图。轮播图在轮播图数据下载完成后单独刷新。
         refreshShortcutBox()
         
         // 清空卡片列表，等待载入
-        itemList.removeAll()
+        cardList.removeAll()
         
         // 加载推送缓存
         if let item = ServiceHelper.getPushMessageItem() {
-            itemList.append(item)
+            cardList.append(item)
         }
         
         // 判断各模块是否开启并加载对应数据，暂时只有一个示例，为了给首页卡片的实现提供参考
-        if SettingsHelper.getModuleCardEnabled(2) {
-            //itemList.append(CurriculumCard())
+        if SettingsHelper.getModuleCardEnabled(Module.Curriculum.rawValue) {
+            // 加载并解析课表缓存
+            cardList.append(CurriculumCard.getCard())
         }
         
-        // TODO 没写完
+        if SettingsHelper.getModuleCardEnabled(Module.Experiment.rawValue) {
+            // 加载并解析实验缓存
+            cardList.append(ExperimentCard.getCard())
+        }
+        
+        if SettingsHelper.getModuleCardEnabled(Module.Exam.rawValue) {
+            // 加载并解析考试缓存
+            cardList.append(ExamCard.getCard())
+        }
+        
+        if SettingsHelper.getModuleCardEnabled(Module.Lecture.rawValue) {
+            // 加载并解析人文讲座预告缓存
+            cardList.append(LectureCard.getCard())
+        }
+        
+        cardList = cardList.sort {$0.priority.rawValue < $1.priority.rawValue}
+        
+        cardsTableView.reloadData()
     }
     
     func refreshShortcutBox() {
@@ -118,24 +137,37 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     //指定UITableView中有多少个section的，section分区，一个section里会包含多个Cell
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 0
+        return cardList.count
     }
     
     //每一个section里面有多少个Cell
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return cardList[section].rows.count
     }
     
     //初始化每一个Cell
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let moduleCell = cardsTableView.dequeueReusableCellWithIdentifier("cardsCell", forIndexPath: indexPath) as! CardsTableViewCell
-        moduleCell.content?.text = "Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! Hello, World! "
-        return moduleCell
+        let model = cardList[indexPath.section]
+        let row = model.rows[indexPath.row]
+        let id = indexPath.row == 0 ? "CardsCellHeader" : model.cellId
+        let cell = cardsTableView.dequeueReusableCellWithIdentifier(id, forIndexPath: indexPath) as! CardsTableViewCell
+        
+        if let icon = row.icon { cell.icon.image = UIImage(named: icon) }
+        if let title = row.title { cell.title.text = title }
+        if let subtitle = row.subtitle { cell.subtitle.text = subtitle }
+        if let desc = row.desc { cell.desc.text = desc }
+        if let count1 = row.count1 { cell.count1.text = count1 }
+        if let count2 = row.count2 { cell.count2.text = count2 }
+        if let count3 = row.count3 { cell.count3.text = count3 }
+        
+        return cell
     }
     
     //选中一个Cell后执行的方法
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let model = cardList[indexPath.section]
+        AppModule(title: model.rows[0].title!, url: model.destination).open(navigationController)
     }
 
     func scrollViewDidScroll(scrollView: UIScrollView) {

@@ -39,6 +39,14 @@
 		D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858121CBB60A600B55E76 /* ApiRequest.swift */; };
 		D37708621CCC5D37006ED853 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708611CCC5D37006ED853 /* FeedbackViewController.swift */; };
 		D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708641CCC67DC006ED853 /* CardsModel.swift */; };
+		D39B87971CCCCA0200EC5280 /* CardsRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */; };
+		D39B879A1CCCEC2E00EC5280 /* CardCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87991CCCEC2E00EC5280 /* CardCard.swift */; };
+		D39B879C1CCCF02600EC5280 /* ExperimentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B879B1CCCF02600EC5280 /* ExperimentCard.swift */; };
+		D39B879E1CCD0C0B00EC5280 /* ExamCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B879D1CCD0C0B00EC5280 /* ExamCard.swift */; };
+		D39B87A01CCD0F0E00EC5280 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B879F1CCD0F0E00EC5280 /* Error.swift */; };
+		D39B87A21CCD120F00EC5280 /* LectureCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87A11CCD120F00EC5280 /* LectureCard.swift */; };
+		D39B87A41CCD12EC00EC5280 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87A31CCD12EC00EC5280 /* String.swift */; };
+		D39B87A61CCD194E00EC5280 /* PedetailCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87A51CCD194E00EC5280 /* PedetailCard.swift */; };
 		D3A0C1701CBB7A3A00744640 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C16F1CBB7A3A00744640 /* MainViewController.swift */; };
 		D3A0C1721CBB7A9800744640 /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1711CBB7A9800744640 /* CardsViewController.swift */; };
 		D3A0C1741CBB7AF500744640 /* ModulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */; };
@@ -125,6 +133,14 @@
 		D34858121CBB60A600B55E76 /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
 		D37708611CCC5D37006ED853 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		D37708641CCC67DC006ED853 /* CardsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsModel.swift; sourceTree = "<group>"; };
+		D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsRowModel.swift; sourceTree = "<group>"; };
+		D39B87991CCCEC2E00EC5280 /* CardCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCard.swift; sourceTree = "<group>"; };
+		D39B879B1CCCF02600EC5280 /* ExperimentCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentCard.swift; sourceTree = "<group>"; };
+		D39B879D1CCD0C0B00EC5280 /* ExamCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamCard.swift; sourceTree = "<group>"; };
+		D39B879F1CCD0F0E00EC5280 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		D39B87A11CCD120F00EC5280 /* LectureCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureCard.swift; sourceTree = "<group>"; };
+		D39B87A31CCD12EC00EC5280 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		D39B87A51CCD194E00EC5280 /* PedetailCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedetailCard.swift; sourceTree = "<group>"; };
 		D3A0C16F1CBB7A3A00744640 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D3A0C1711CBB7A9800744640 /* CardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
 		D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModulesViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +214,7 @@
 			children = (
 				D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */,
 				D3FBC2F31CCC524500305428 /* Dialogs.swift */,
+				D39B879F1CCD0F0E00EC5280 /* Error.swift */,
 			);
 			name = custom;
 			sourceTree = "<group>";
@@ -209,6 +226,7 @@
 				D3A0C1711CBB7A9800744640 /* CardsViewController.swift */,
 				D31821B81CC4D53300992355 /* CardsTableViewCell.swift */,
 				D37708641CCC67DC006ED853 /* CardsModel.swift */,
+				D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */,
 				D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */,
 				D31DE50D1CC334EC00E4891D /* ModuleTableViewCell.swift */,
 				D3A0C1761CBB7B2300744640 /* MyInfoViewController.swift */,
@@ -235,8 +253,22 @@
 			children = (
 				D34858101CBB57F600B55E76 /* NSUserDefaults.swift */,
 				D3FBC2F11CCC51F900305428 /* UIViewController.swift */,
+				D39B87A31CCD12EC00EC5280 /* String.swift */,
 			);
 			name = extension;
+			sourceTree = "<group>";
+		};
+		D39B87981CCCEC0C00EC5280 /* mod_cards */ = {
+			isa = PBXGroup;
+			children = (
+				D3EFC1D61CCC81A800BC37A5 /* CurriculumCard.swift */,
+				D39B87991CCCEC2E00EC5280 /* CardCard.swift */,
+				D39B879B1CCCF02600EC5280 /* ExperimentCard.swift */,
+				D39B879D1CCD0C0B00EC5280 /* ExamCard.swift */,
+				D39B87A11CCD120F00EC5280 /* LectureCard.swift */,
+				D39B87A51CCD194E00EC5280 /* PedetailCard.swift */,
+			);
+			name = mod_cards;
 			sourceTree = "<group>";
 		};
 		D3A0C1791CBB7C0000744640 /* mod_modulemanage */ = {
@@ -292,7 +324,6 @@
 				D31DE5191CC35A3100E4891D /* CurriculumView.swift */,
 				D31DE5131CC3597800E4891D /* CurriculumBlock.swift */,
 				D31DE5111CC3592F00E4891D /* ClassInfo.swift */,
-				D3EFC1D61CCC81A800BC37A5 /* CurriculumCard.swift */,
 			);
 			name = curriculum;
 			sourceTree = "<group>";
@@ -427,6 +458,7 @@
 				D348580F1CBB57DC00B55E76 /* extension */,
 				D348580A1CBB48EF00B55E76 /* helper */,
 				D3D35E0B1CBA2FFC00B18092 /* mod_auth */,
+				D39B87981CCCEC0C00EC5280 /* mod_cards */,
 				D3D35E0A1CBA2FEE00B18092 /* mod_communicate */,
 				D3A0C1791CBB7C0000744640 /* mod_modulemanage */,
 				D3A0C17A1CBB7C1200744640 /* mod_query */,
@@ -671,7 +703,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D39B87971CCCCA0200EC5280 /* CardsRowModel.swift in Sources */,
 				D306E0281CCA403D00FA3812 /* ExamModel.swift in Sources */,
+				D39B879C1CCCF02600EC5280 /* ExperimentCard.swift in Sources */,
 				D3ED99E61CCB651300001E2B /* LibraryViewController.swift in Sources */,
 				D3F473491CCA068D00750FFB /* JwcNoticeModel.swift in Sources */,
 				D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */,
@@ -681,6 +715,7 @@
 				D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */,
 				D31DE5141CC3597800E4891D /* CurriculumBlock.swift in Sources */,
 				D306E0221CCA3DFD00FA3812 /* AppModule.swift in Sources */,
+				D39B87A41CCD12EC00EC5280 /* String.swift in Sources */,
 				D3A0C1721CBB7A9800744640 /* CardsViewController.swift in Sources */,
 				D3E6BD7F1CC8C07F0074FF6D /* ModuleManagerViewController.swift in Sources */,
 				D3F473471CCA05CD00750FFB /* JwcViewController.swift in Sources */,
@@ -689,7 +724,9 @@
 				D31DE51A1CC35A3100E4891D /* CurriculumView.swift in Sources */,
 				D3ED99DC1CCB1DB400001E2B /* SrtpModel.swift in Sources */,
 				D31821CC1CC8560F00992355 /* ExperimentTableViewCell.swift in Sources */,
+				D39B879E1CCD0C0B00EC5280 /* ExamCard.swift in Sources */,
 				D31821D01CC8573200992355 /* ExperimentModel.swift in Sources */,
+				D39B87A01CCD0F0E00EC5280 /* Error.swift in Sources */,
 				D31DE50E1CC334EC00E4891D /* ModuleTableViewCell.swift in Sources */,
 				D31DE5181CC359D300E4891D /* CurriculumViewController.swift in Sources */,
 				D3A0C1771CBB7B2300744640 /* MyInfoViewController.swift in Sources */,
@@ -697,6 +734,8 @@
 				D3ED99DA1CCB091700001E2B /* SchoolbusViewController.swift in Sources */,
 				D306E02E1CCA691F00FA3812 /* GradeViewController.swift in Sources */,
 				D31821B61CC48D5400992355 /* ServiceHelper.swift in Sources */,
+				D39B87A21CCD120F00EC5280 /* LectureCard.swift in Sources */,
+				D39B87A61CCD194E00EC5280 /* PedetailCard.swift in Sources */,
 				D3ED99D61CCB080000001E2B /* SchoolbusModel.swift in Sources */,
 				D3F473451CCA04C100750FFB /* JwcTableViewCell.swift in Sources */,
 				D306E02C1CCA68EB00FA3812 /* GradeTableViewCell.swift in Sources */,
@@ -725,6 +764,7 @@
 				D306E0201CCA3ADF00FA3812 /* WebModuleViewController.swift in Sources */,
 				D3325D051CC89BA0002060A5 /* SwipeRefreshHeader.swift in Sources */,
 				D31821BF1CC522D900992355 /* CardViewController.swift in Sources */,
+				D39B879A1CCCEC2E00EC5280 /* CardCard.swift in Sources */,
 				D3D35DDD1CBA2E8200B18092 /* AppDelegate.swift in Sources */,
 				D3A0C1701CBB7A3A00744640 /* MainViewController.swift in Sources */,
 				D30A9BA11CBBA9100087D583 /* ApiThreadManager.swift in Sources */,

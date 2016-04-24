@@ -46,8 +46,7 @@ class ServiceHelper {
     static func getPushMessageItem() -> CardsModel? {
         let pushMessage = getPushMessageContent()
         if pushMessage != "" {
-            let fakeModule = AppModule(id: -1, name: "", nameTip: "小猴提示", desc: "", controller: "", icon: "ic_pushmsg", hasCard: false)
-            let card = CardsModel(fakeModule, "现在", pushMessage, Priority.CONTENT_NOTIFY)
+            let card = CardsModel(cellId: "", icon : "ic_pushmsg", title : "小猴提示", desc : pushMessage, dest : getPushMessageUrl(), priority : .CONTENT_NOTIFY)
             return card
         }
         return nil

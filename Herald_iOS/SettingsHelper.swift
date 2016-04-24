@@ -9,6 +9,25 @@
 import Foundation
 import UIKit
 
+enum Module : Int {
+    case Card
+    case Pedetail
+    case Curriculum
+    case Experiment
+    case Lecture
+    case Jwc
+    case Exam
+    case SeuNet
+    case Library
+    case Grade
+    case Srtp
+    case Schoolbus
+    case Schedule
+    case GymReserve
+    case Quanyi
+    case EmptyRoom
+}
+
 class SettingsHelper {
     static let MODULES : [AppModule] = [
         

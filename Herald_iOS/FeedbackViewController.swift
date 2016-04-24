@@ -15,6 +15,10 @@ class FeedbackViewController : UIViewController {
     
     @IBOutlet var contact : UITextField!
     
+    override func viewDidAppear(animated: Bool) {
+        editor.becomeFirstResponder()
+    }
+    
     @IBAction func submit () {
         let content = editor.text!
         let contact = self.contact.text!
