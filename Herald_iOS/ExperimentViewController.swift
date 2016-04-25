@@ -18,9 +18,12 @@ class ExperimentViewController : UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
-        swiper.themeColor = navigationController?.navigationBar.backgroundColor
         tableView?.tableHeaderView = swiper
         loadCache()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        setNavigationColor(swiper, 0x673ab7)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

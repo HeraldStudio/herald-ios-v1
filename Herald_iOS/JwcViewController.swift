@@ -18,11 +18,14 @@ class JwcViewController : UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
-        swiper.themeColor = navigationController?.navigationBar.backgroundColor
         tableView?.tableHeaderView = swiper
         tableView?.estimatedRowHeight = 64;
         tableView?.rowHeight = UITableViewAutomaticDimension;
         loadCache()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        setNavigationColor(swiper, 0x1976d2)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

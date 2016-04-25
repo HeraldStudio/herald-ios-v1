@@ -14,30 +14,36 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet var tableView : UITableView!
     
+    let swiper = SwipeRefreshHeader()
+
     override func viewDidLoad() {
+        swiper.refresher = {() in self.refreshCache()}
+        tableView?.tableHeaderView = swiper
         loadCache()
         tableView.estimatedRowHeight = 105;
         tableView.rowHeight = UITableViewAutomaticDimension;
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        setNavigationColor(swiper, 0xef5350)
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        swiper.syncApperance((tableView?.contentOffset)!)
+    }
+    
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        swiper.beginDrag()
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        swiper.endDrag()
     }
     
     var items : [SrtpModel] = []
     
     func loadCache() {
         
-        /* 示例数据
-         {
-            "content": [
-                {   "score": "及格", "total": "2.3", "name": "何永东", "card number": "09013123"     },
-         
-                {   "credit": "1.3", "proportion": "20%", "project": "东南大学先声校园客户端 良好",
-                    "department": "计算机科学与工程学院", "date": "2015年1月", "type": "研学作品", "total credit": "6.5"    },
-         
-                {   "credit": "1.0", "proportion": "", "project": "研讨课（92）—创业成功案例 朱志坚",
-                    "department": "", "date": "2015年5月", "type": "其它", "total credit": ""   }
-            ],
-            "code": 200
-         }
-         */
         let cache = CacheHelper.get("herald_srtp")
         if cache == "" {
             refreshCache()

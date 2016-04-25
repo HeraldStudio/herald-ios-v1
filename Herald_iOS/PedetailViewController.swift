@@ -29,6 +29,10 @@ class PedetailViewController : UIViewController, FSCalendarDelegate {
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        setNavigationColor(nil, 0x26a69a)
+    }
+    
     var history : [NSDate] = []
     
     func loadCache() {
@@ -91,6 +95,7 @@ class PedetailViewController : UIViewController, FSCalendarDelegate {
             ApiRequest().api("pedetail").uuid().toCache("herald_pedetail") {
                 json -> String in
                     guard let str = json.rawString() else {return ""}
+                    if !str.containsString("[") { throw E }
                     return str
                 }
         ]).onFinish { success in

@@ -45,5 +45,6 @@ class MainViewController: UITabBarController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        setNavigationColor(nil, 0x00b4ff)
     }
 }

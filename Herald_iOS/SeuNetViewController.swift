@@ -33,6 +33,10 @@ class SeuNetViewController : UIViewController {
         loadCache(false)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        setNavigationColor(nil, 0x7cb342)
+    }
+    
     // 把这个操作延迟到视图加载完成后，否则饼图会错位
     override func viewDidAppear(animated: Bool) {
         loadPie()

@@ -19,10 +19,13 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
-        swiper.themeColor = navigationController?.navigationBar.backgroundColor
         let top = (navigationController?.navigationBar.bounds.height)! + UIApplication.sharedApplication().statusBarFrame.height
         scrollView?.frame = CGRect(x: 0, y: top, width: view.bounds.width, height: view.bounds.height - top)
         readLocal()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        setNavigationColor(swiper, 0x00abd4)
     }
     
     @IBAction func refreshCache () {
@@ -39,7 +42,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
                 } else {
                     self.showMessage("刷新失败")
                 }
-        }
+        }.run()
     }
     
     func readLocal () {

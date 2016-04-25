@@ -38,6 +38,7 @@ class PedetailCard {
                 ApiRequest().api("pedetail").uuid().toCache("herald_pedetail") {
                     json -> String in
                     guard let str = json.rawString() else {return ""}
+                    if !str.containsString("[") { throw E }
                     return str
             }]
     }

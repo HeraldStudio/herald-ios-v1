@@ -18,9 +18,12 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
-        swiper.themeColor = navigationController?.navigationBar.backgroundColor
         tableView?.tableHeaderView = swiper
         loadCache()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        setNavigationColor(swiper, 0xe53935)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
