@@ -10,6 +10,38 @@ import Foundation
 import SwiftyJSON
 
 class PedetailCard {
+    
+    static func getRefresher () -> [ApiRequest] {
+        return [ApiRequest().api("pc").uuid().toCache("herald_pc_forecast") {
+                json -> String in
+                guard let str = json["content"].rawString() else {return ""}
+                return str
+            }.onFinish { success, code, _ in
+                let todayComp = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate())
+                let today = String(format: "%4d-%02d-%02d", todayComp.year, todayComp.month, todayComp.day)
+                if success {
+                    CacheHelper.set("herald_pc_date", cacheValue: today)
+                } else if code == 201 {
+                    CacheHelper.set("herald_pc_date", cacheValue: today)
+                    CacheHelper.set("herald_pc_forecast", cacheValue: "refreshing")
+                }
+            },
+                ApiRequest().api("pe").uuid().toCache("herald_pe_count") {
+                    json -> String in
+                    guard let str = json["content"].rawString() else {return ""}
+                    return str
+                    }.toCache("herald_pe_remain") {
+                        json -> String in
+                        guard let str = json["remain"].rawString() else {return ""}
+                        return str
+            },
+                ApiRequest().api("pedetail").uuid().toCache("herald_pedetail") {
+                    json -> String in
+                    guard let str = json.rawString() else {return ""}
+                    return str
+            }]
+    }
+    
     static func getCard() -> CardsModel {
         let date = CacheHelper.get("herald_pc_date")
         let forecast = CacheHelper.get("herald_pc_forecast")

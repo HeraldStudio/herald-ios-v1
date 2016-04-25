@@ -10,6 +10,15 @@ import Foundation
 import SwiftyJSON
 
 class JwcCard {
+    
+    static func getRefresher () -> [ApiRequest] {
+        return [ApiRequest().api("jwc").uuid().toCache("herald_jwc") {
+                json -> String in
+                guard let str = json.rawString() else {return ""}
+                return str
+            }]
+    }
+    
     static func getCard () -> CardsModel {
         let cache = CacheHelper.get("herald_jwc")
         let content = JSON.parse(cache)["content"]["教务信息"]

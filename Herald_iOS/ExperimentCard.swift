@@ -13,6 +13,15 @@ import SwiftyJSON
  * 读取实验缓存，转换成对应的时间轴条目
  **/
 class ExperimentCard {
+    
+    static func getRefresher () -> [ApiRequest] {
+        return [ApiRequest().api("phylab").uuid()
+            .toCache("herald_experiment") {json -> String in
+                guard let str = json.rawString() else {return ""}
+                return str
+            }]
+    }
+    
     static func getCard () -> CardsModel {
         let cache = CacheHelper.get("herald_experiment")
         let content = JSON.parse(cache)["content"]

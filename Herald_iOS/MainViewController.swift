@@ -17,6 +17,7 @@ class MainViewController: UITabBarController {
         super.viewDidLoad()
         if !ApiHelper.isLogin() {
             presentViewController(storyboard!.instantiateViewControllerWithIdentifier("login"), animated: false) {}
+            return
         }
         
         // 去除界面切换时导航栏的黑影

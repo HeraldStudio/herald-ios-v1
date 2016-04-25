@@ -13,6 +13,15 @@ import SwiftyJSON
  * 读取人文讲座预告缓存，转换成对应的时间轴条目
  **/
 class LectureCard {
+    
+    static func getRefresher () -> [ApiRequest] {
+        return [ApiRequest().url(ApiHelper.wechat_lecture_notice_url).uuid()
+            .toCache("herald_lecture_notices") {json -> String in
+                guard let str = json.rawString() else {return ""}
+                return str
+            }]
+    }
+    
     static func getCard() -> CardsModel {
         
         let cache = CacheHelper.get("herald_lecture_notices")

@@ -37,6 +37,7 @@ class CardsModel {
         header.title = appModule.nameTip
         header.desc = desc
         header.destination = appModule.controller
+        header.notifyDot = self.priority == Priority.CONTENT_NOTIFY
         rows.append(header)
         self.priority = priority
     }
@@ -49,6 +50,7 @@ class CardsModel {
         header.title = title
         header.desc = desc
         header.destination = dest
+        header.notifyDot = self.priority == Priority.CONTENT_NOTIFY
         rows.append(header)
         self.priority = priority
     }

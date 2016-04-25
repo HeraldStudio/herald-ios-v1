@@ -81,7 +81,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
     @IBAction func refreshCache () {
         showProgressDialog()
         
-        ApiThreadManager().addAll(
+        ApiThreadManager().addAll([
             ApiRequest().api("library").uuid()
                 .toCache("herald_library_borrowbook") {json -> String in
                     guard let str = json.rawString() else {return ""}
@@ -98,7 +98,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
                     guard let str = json.rawString() else {return ""}
                     return str
             }
-            ).onFinish { success in
+            ]).onFinish { success in
                 self.hideProgressDialog()
                 if success {
                     self.loadCache()

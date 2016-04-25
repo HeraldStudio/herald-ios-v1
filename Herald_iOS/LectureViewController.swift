@@ -77,7 +77,7 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
     @IBAction func refreshCache () {
         showProgressDialog()
         
-        ApiThreadManager().addAll(
+        ApiThreadManager().addAll([
             ApiRequest().api("lecture").uuid()
                 .toCache("herald_lecture_records") {json -> String in
                     guard let str = json.rawString() else {return ""}
@@ -88,7 +88,7 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
                     guard let str = json.rawString() else {return ""}
                     return str
             }
-        ).onFinish { success in
+        ]).onFinish { success in
             self.hideProgressDialog()
             if success {
                 self.loadCache()
