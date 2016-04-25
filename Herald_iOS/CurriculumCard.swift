@@ -42,33 +42,31 @@ class CurriculumCard {
         // 读取开学日期
         let startMonth = content["startdate"]["month"].intValue
         let startDate = content["startdate"]["day"].intValue
-        let mostUnits = NSCalendarUnit(rawValue: UInt.max)
-        let cal = NSCalendar.currentCalendar().components(mostUnits, fromDate: NSDate())
-        let beginOfTerm = NSCalendar.currentCalendar().components(mostUnits, fromDate: NSDate())
+        let cal = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday], fromDate: NSDate())
+        let beginOfTerm = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate())
         
         // 服务器端返回的startMonth是Java/JavaScript型的月份表示，变成实际月份要加1
         beginOfTerm.month = startMonth + 1
         beginOfTerm.day = startDate
         
         // 如果开学日期比今天还晚，则是去年开学的。这里用while保证了thisWeek永远大于零
-        let nowDate = cal.date!
-        var begin = beginOfTerm.date!
-        while (cal.date?.compare(beginOfTerm.date!) == NSComparisonResult.OrderedAscending) {
-            cal.year -= 1
+        let nowDate = NSCalendar.currentCalendar().dateFromComponents(cal)!
+        var begin = NSCalendar.currentCalendar().dateFromComponents(beginOfTerm)!
+        if (nowDate.compare(begin) == NSComparisonResult.OrderedAscending) {
+            beginOfTerm.year -= 1
+            begin = NSCalendar.currentCalendar().dateFromComponents(beginOfTerm)!
         }
         
         // 为了保险，检查开学日期的星期，不是周一的话往前推到周一
-        let components = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: begin)
-        
-        // 格里高利历中，weekday范围1~7，1为周日，需要转换成0到6，0为周一
-        var dayOfWeek = (components.weekday + 5) % 7
+        let k = (NSCalendar.currentCalendar().components([.Weekday], fromDate: begin).weekday + 5) % 7
         
         // 将开学日期往前推到周一
-        begin = begin.dateByAddingTimeInterval(Double(-dayOfWeek * 86400))
+        begin = begin.dateByAddingTimeInterval(Double(-k * 86400))
         
         // 计算当前周
         var thisWeek = Int(nowDate.timeIntervalSinceDate(begin)) / 86400 / 7 + 1
-        dayOfWeek = (cal.weekday + 5) % 7
+        
+        var dayOfWeek = (cal.weekday + 5) % 7
         
         // 枚举今天的课程
         var array = content[CurriculumView.WEEK_NUMS[dayOfWeek]].arrayValue

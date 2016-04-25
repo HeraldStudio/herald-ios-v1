@@ -864,19 +864,25 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
                                                     <color key="textColor" red="0.14901960784313725" green="0.65098039215686276" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" ambiguous="YES">
+                                                        <rect key="frame" x="-42" y="4" width="212" height="31"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="剩余次数" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgb-DB-bRX">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                                        <rect key="frame" x="-42" y="32.5" width="212" height="14.5"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="lgb-DB-bRX" firstAttribute="centerX" secondItem="nsc-eH-QgA" secondAttribute="centerX" id="0t3-9K-yfG"/>
                                                 <constraint firstItem="7be-5T-B07" firstAttribute="leading" secondItem="lgb-DB-bRX" secondAttribute="leading" id="1V6-VW-rIH"/>
                                                 <constraint firstItem="7be-5T-B07" firstAttribute="top" secondItem="nsc-eH-QgA" secondAttribute="top" constant="4" id="WK7-Lz-8Lq"/>
-                                                <constraint firstAttribute="height" constant="53" id="X3y-aV-NBe"/>
+                                                <constraint firstAttribute="height" constant="55" id="X3y-aV-NBe"/>
                                                 <constraint firstAttribute="bottom" secondItem="lgb-DB-bRX" secondAttribute="bottom" constant="7" id="Xs7-ZF-b15"/>
                                                 <constraint firstAttribute="width" constant="128" id="ikn-T8-qsB"/>
                                                 <constraint firstItem="7be-5T-B07" firstAttribute="centerX" secondItem="nsc-eH-QgA" secondAttribute="centerX" id="oPk-Uk-Z8P"/>
@@ -898,7 +904,8 @@
                                                     <exclude reference="s4w-iV-YwJ"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="widthClass=compact">
+                                            <variation key="widthClass=compact" ambiguous="YES">
+                                                <rect key="frame" x="136" y="1" width="128" height="55"/>
                                                 <mask key="subviews">
                                                     <include reference="7be-5T-B07"/>
                                                     <include reference="lgb-DB-bRX"/>
@@ -923,12 +930,18 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
                                                     <color key="textColor" red="0.14901960780000001" green="0.65098039220000004" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" ambiguous="YES">
+                                                        <rect key="frame" x="-42" y="4" width="212" height="31"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已跑次数" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nok-Ug-GxY">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" ambiguous="YES">
+                                                        <rect key="frame" x="-42" y="32.5" width="212" height="14.5"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -953,7 +966,8 @@
                                                     <exclude reference="nMh-Rp-mcc"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="widthClass=compact">
+                                            <variation key="widthClass=compact" ambiguous="YES">
+                                                <rect key="frame" x="8" y="1.5" width="128" height="54"/>
                                                 <mask key="subviews">
                                                     <include reference="NHx-Mf-GXW"/>
                                                     <include reference="Nok-Ug-GxY"/>
@@ -976,12 +990,18 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
                                                     <color key="textColor" red="0.14901960780000001" green="0.65098039220000004" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" ambiguous="YES">
+                                                        <rect key="frame" x="-42" y="4" width="212" height="31"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="剩余天数" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9v7-SH-qbZ">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                                        <rect key="frame" x="-42" y="32.5" width="212" height="14.5"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -1006,7 +1026,8 @@
                                                     <exclude reference="znh-vC-eRZ"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="widthClass=compact">
+                                            <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                                <rect key="frame" x="264" y="1.5" width="128" height="54"/>
                                                 <mask key="subviews">
                                                     <include reference="wIH-AD-wz2"/>
                                                     <include reference="9v7-SH-qbZ"/>

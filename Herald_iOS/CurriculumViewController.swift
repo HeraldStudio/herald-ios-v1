@@ -91,10 +91,11 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
         beginOfTerm.day = startDate
         
         // 如果开学日期比今天还晚，则是去年开学的。这里用while保证了thisWeek永远大于零
-        guard let now = NSCalendar.currentCalendar().dateFromComponents(cal) else {self.showError(); return}
-        guard var begin = NSCalendar.currentCalendar().dateFromComponents(beginOfTerm) else {self.showError(); return}
+        let now = NSCalendar.currentCalendar().dateFromComponents(cal)!
+        var begin = NSCalendar.currentCalendar().dateFromComponents(beginOfTerm)!
         while (now.compare(begin) == NSComparisonResult.OrderedAscending) {
-            cal.year -= 1
+            beginOfTerm.year -= 1
+            begin = NSCalendar.currentCalendar().dateFromComponents(beginOfTerm)!
         }
         
         // 为了保险，检查开学日期的星期，不是周一的话往前推到周一
