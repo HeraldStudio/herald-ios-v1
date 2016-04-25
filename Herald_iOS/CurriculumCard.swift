@@ -92,7 +92,7 @@ class CurriculumCard {
                 let startTime = NSCalendar.currentCalendar().dateFromComponents(today)!.timeIntervalSince1970 + Double(CurriculumView.CLASS_BEGIN_TIME[info.startTime - 1] * 60)
                 
                 // 下课时间
-                let endTime = startTime + 45 * 60
+                let endTime = NSCalendar.currentCalendar().dateFromComponents(today)!.timeIntervalSince1970 + Double((CurriculumView.CLASS_BEGIN_TIME[info.endTime - 1] + 45) * 60)
                 
                 // 快要下课的时间
                 let almostEndTime = endTime - 10 * 60
