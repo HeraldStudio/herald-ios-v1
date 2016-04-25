@@ -33,19 +33,25 @@ class CacheHelper : NSObject {
         "herald_library_borrowbook"
     ]
     
+    /// 调试用，覆盖某些特定的cache内容
+    static let overrides : [String : String] = [:]
+    
     static let cache = NSUserDefaults.withPrefix("herald_")
     
     static func get(cacheName : String) -> String {
+        if overrides.keys.contains(cacheName) {
+            return overrides[cacheName]!
+        }
         return cache.get(cacheName)
     }
     
-    static func set(cacheName : String, cacheValue : String) {
+    static func set(cacheName : String, _ cacheValue : String) {
         cache.set(cacheName, cacheValue)
     }
     
     static func clearAllModuleCache () {
         for k in cacheNames {
-            set(k, cacheValue: "")
+            set(k, "")
         }
     }
 }

@@ -40,8 +40,8 @@ class AppModule {
         if controller == "" { return }
         if controller.containsString("http") {
             navigationController?.showProgressDialog()
-            CacheHelper.set("herald_webmodule_title", cacheValue: nameTip)
-            CacheHelper.set("herald_webmodule_url", cacheValue: controller)
+            CacheHelper.set("herald_webmodule_title", nameTip)
+            CacheHelper.set("herald_webmodule_url", controller)
             
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE")
             navigationController?.pushViewController(vc, animated: true)

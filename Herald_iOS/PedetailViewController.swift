@@ -73,10 +73,10 @@ class PedetailViewController : UIViewController, FSCalendarDelegate {
                     let todayComp = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate())
                     let today = String(format: "%4d-%02d-%02d", todayComp.year, todayComp.month, todayComp.day)
                     if success {
-                        CacheHelper.set("herald_pc_date", cacheValue: today)
+                        CacheHelper.set("herald_pc_date", today)
                     } else if code == 201 {
-                        CacheHelper.set("herald_pc_date", cacheValue: today)
-                        CacheHelper.set("herald_pc_forecast", cacheValue: "refreshing")
+                        CacheHelper.set("herald_pc_date", today)
+                        CacheHelper.set("herald_pc_forecast", "refreshing")
                     }
                 },
             ApiRequest().api("pe").uuid().toCache("herald_pe_count") {

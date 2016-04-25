@@ -127,7 +127,7 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         manager.onFinish { success in
                     self.hideProgressDialog()
                     if success {
-                        CacheHelper.set("herald_card_date", cacheValue: stamp)
+                        CacheHelper.set("herald_card_date", stamp)
                         self.loadCache()
                     } else {
                         self.showMessage("刷新失败，请重试或到充值页面查询")

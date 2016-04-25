@@ -137,7 +137,7 @@ class ApiRequest {
             if(success) {
                 do {
                     let cache = try parser(JSON.parse(response))
-                    CacheHelper.set(key, cacheValue: cache)
+                    CacheHelper.set(key, cache)
                 } catch {
                     for k in self.onFinishListeners {
                         let onFinishListener = k
