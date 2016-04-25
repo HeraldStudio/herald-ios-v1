@@ -19,7 +19,7 @@ class ApiHelper : NSObject {
     static let wechat_lecture_notice_url = WWW_ROOT + "wechat2/lecture"
     static let feedback_url = WWW_ROOT + "service/feedback"
     
-    static let appid = "34cc6df78cfa7cd457284e4fc377559e"
+    static let appid = "9f9ce5c3605178daadc2d85ce9f8e064"
     
     static let authCache = NSUserDefaults.withPrefix("auth_")
     
@@ -63,8 +63,8 @@ class ApiHelper : NSObject {
     
     static func setAuth (user user : String, pwd : String) {
         // TODO 加密
-        CacheHelper.set("authUser", cacheValue: user)
-        CacheHelper.set("authPwd", cacheValue: pwd)
+        CacheHelper.set("authUser", user)
+        CacheHelper.set("authPwd", pwd)
     }
     
     static func getUserName () -> String {
@@ -77,8 +77,8 @@ class ApiHelper : NSObject {
     
     static func setWifiAuth (user user : String, pwd : String) {
         // TODO 加密
-        CacheHelper.set("wifiAuthUser", cacheValue: user)
-        CacheHelper.set("wifiAuthPwd", cacheValue: pwd)
+        CacheHelper.set("wifiAuthUser", user)
+        CacheHelper.set("wifiAuthPwd", pwd)
     }
     
     static func getWifiUserName () -> String {

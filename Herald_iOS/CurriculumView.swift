@@ -117,8 +117,6 @@ class CurriculumView : UIViewController {
                     widenToday : curWeek && (dayOfWeek < 5 ||                        listOfList[dayOfWeek].count != 0))
                 j += 1
             }
-            
-            // TODO 时间指示条
         }
     }
     

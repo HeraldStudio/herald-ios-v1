@@ -2384,14 +2384,14 @@ Copyright (c) 2013 Alexandr Graschenkov
                     </tableView>
                     <navigationItem key="navigationItem" title="一卡通" id="QpW-LI-x7G">
                         <rightBarButtonItems>
-                            <barButtonItem title="充值" id="JaF-GA-cex">
-                                <connections>
-                                    <action selector="goToChargePage" destination="csM-i5-Wk1" id="DqW-yD-AkY"/>
-                                </connections>
-                            </barButtonItem>
                             <barButtonItem systemItem="refresh" id="bVq-yc-p4J">
                                 <connections>
                                     <action selector="refreshCache" destination="csM-i5-Wk1" id="NSc-ZI-Wbz"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="充值" id="JaF-GA-cex">
+                                <connections>
+                                    <action selector="goToChargePage" destination="csM-i5-Wk1" id="DqW-yD-AkY"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>

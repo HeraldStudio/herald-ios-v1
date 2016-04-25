@@ -73,7 +73,7 @@ class Dialogs {
                 (action: UIAlertAction) -> Void in runAfter()})
             dialog.addAction(UIAlertAction(title: "不再提示", style: UIAlertActionStyle.Cancel){
                 (action: UIAlertAction) -> Void in
-                CacheHelper.set("tip_ignored_" + cachePostfix, cacheValue: "1")
+                CacheHelper.set("tip_ignored_" + cachePostfix, "1")
                 runAfter()
                 })
             vc.presentViewController(dialog, animated: true, completion: nil)
