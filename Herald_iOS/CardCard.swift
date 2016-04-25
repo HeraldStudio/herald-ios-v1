@@ -20,7 +20,7 @@ class CardCard {
     }
     
     static func getCard() -> CardsModel {
-        let cache = CacheHelper.get("herald_card")
+        let cache = CacheHelper.get("herald_card_left")
         let content = JSON.parse(cache)["content"]
         // 获取余额并且设置
         if let extra = Float(content["left"].stringValue) {
