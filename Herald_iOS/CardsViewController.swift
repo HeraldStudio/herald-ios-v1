@@ -23,9 +23,13 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         cardsTableView.rowHeight = UITableViewAutomaticDimension;
         
         setupSliderAndSwiper()
-        refreshSlider()
         loadContent(true)
         ServiceHelper.refreshCache {() in self.refreshSlider()}
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        refreshSlider()
+        loadContent(false)
     }
     
     func setupSliderAndSwiper () {
@@ -121,6 +125,21 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             cardList.append(LectureCard.getCard())
         }
         
+        if SettingsHelper.getModuleCardEnabled(Module.Pedetail.rawValue) {
+            // 加载并解析跑操预报缓存
+            cardList.append(PedetailCard.getCard())
+        }
+        
+        if SettingsHelper.getModuleCardEnabled(Module.Card.rawValue) {
+            // 加载并解析一卡通缓存
+            cardList.append(CardCard.getCard())
+        }
+        
+        if SettingsHelper.getModuleCardEnabled(Module.Jwc.rawValue) {
+            // 加载并解析一卡通缓存
+            cardList.append(JwcCard.getCard())
+        }
+        
         cardList = cardList.sort {$0.priority.rawValue < $1.priority.rawValue}
         
         cardsTableView.reloadData()
@@ -166,8 +185,9 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     //选中一个Cell后执行的方法
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
         let model = cardList[indexPath.section]
-        AppModule(title: model.rows[0].title!, url: model.destination).open(navigationController)
+        AppModule(title: model.rows[0].title!, url: model.rows[indexPath.row].destination).open(navigationController)
     }
 
     func scrollViewDidScroll(scrollView: UIScrollView) {

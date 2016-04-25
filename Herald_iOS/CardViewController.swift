@@ -14,6 +14,8 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet var tableView : UITableView!
     
+    static let url = "http://58.192.115.47:8088/wechat-web/login/initlogin.html"
+    
     let swiper = SwipeRefreshHeader()
     
     override func viewDidLoad() {
@@ -176,7 +178,7 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func goToChargePage () {
         showTipDialogIfUnknown("注意：由于一卡通中心配置问题，充值之后需要刷卡消费一次，一卡通余额才能正常显示哦", cachePostfix: "card_charge") {
             () -> Void in
-                UIApplication.sharedApplication().openURL(NSURL(string: "http://58.192.115.47:8088/wechat-web/login/initlogin.html")!)
+                UIApplication.sharedApplication().openURL(NSURL(string: CardViewController.url)!)
         }
     }
     

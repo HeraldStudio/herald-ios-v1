@@ -65,6 +65,20 @@ class PedetailViewController : UIViewController, FSCalendarDelegate {
     @IBAction func refreshCache () {
         showProgressDialog()
         ApiThreadManager().addAll(
+            ApiRequest().api("pc").uuid().toCache("herald_pc_forecast") {
+                    json -> String in
+                    guard let str = json["content"].rawString() else {return ""}
+                    return str
+                }.onFinish { success, code, _ in
+                    let todayComp = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate())
+                    let today = String(format: "%4d-%02d-%02d", todayComp.year, todayComp.month, todayComp.day)
+                    if success {
+                        CacheHelper.set("herald_pc_date", cacheValue: today)
+                    } else if code == 201 {
+                        CacheHelper.set("herald_pc_date", cacheValue: today)
+                        CacheHelper.set("herald_pc_forecast", cacheValue: "refreshing")
+                    }
+                },
             ApiRequest().api("pe").uuid().toCache("herald_pe_count") {
                 json -> String in
                     guard let str = json["content"].rawString() else {return ""}

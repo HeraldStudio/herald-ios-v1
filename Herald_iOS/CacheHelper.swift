@@ -25,6 +25,8 @@ class CacheHelper : NSObject {
         "herald_srtp",
         "herald_curriculum",
         "herald_pedetail",
+        "herald_pe_count",
+        "herald_pe_remain",
         "herald_sidebar",
         "herald_exam",
         "herald_schedule_cache_time",

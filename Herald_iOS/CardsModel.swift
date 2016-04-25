@@ -27,8 +27,6 @@ class CardsModel {
     var rows : [CardsRowModel] = []
     /// 该卡片的优先级
     var priority : Priority = .NO_CONTENT
-    /// 点击该卡片打开的目标，可以是url，也可以是controller id
-    var destination : String = ""
     
     /// 从已有的模块初始化一个卡片
     init (cellId: String, module : Module, desc : String, priority : Priority) {
@@ -38,9 +36,9 @@ class CardsModel {
         header.icon = appModule.icon
         header.title = appModule.nameTip
         header.desc = desc
+        header.destination = appModule.controller
         rows.append(header)
         self.priority = priority
-        self.destination = appModule.controller
     }
     
     /// 用自定义的项目初始化一个卡片
@@ -50,8 +48,8 @@ class CardsModel {
         header.icon = icon
         header.title = title
         header.desc = desc
+        header.destination = dest
         rows.append(header)
         self.priority = priority
-        self.destination = dest
     }
 }

@@ -35,6 +35,9 @@ class CardsRowModel {
     /// 某些情况下用来排序的标记
     var sortOrder : Int = 0
     
+    /// 头部或教务通知条目被点击时打开的目标，可以是url，也可以是controller id
+    var destination : String = ""
+    
     init () {}
     
     init (classInfo : ClassInfo, teacher: String) {
@@ -69,5 +72,17 @@ class CardsRowModel {
         self.title = lectureModel.topic
         self.subtitle = lectureModel.speaker
         self.desc = lectureModel.dateAndPlace
+    }
+    
+    init (pedetailCount : Int, remain : Int) {
+        self.count1 = String(pedetailCount)
+        self.count2 = String(max(45 - pedetailCount, 0))
+        self.count3 = String(remain)
+    }
+    
+    init (jwcNoticeModel : JwcNoticeModel) {
+        self.title = jwcNoticeModel.title
+        self.desc = jwcNoticeModel.time
+        self.destination = jwcNoticeModel.url
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class JwcNoticeModel {
     var title : String
@@ -17,5 +18,16 @@ class JwcNoticeModel {
         self.title = title
         self.time = time
         self.url = url
+    }
+    
+    init (json : JSON) {
+        let todayComp = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate())
+        let today = String(format: "%4d-%02d-%02d", todayComp.year, todayComp.month, todayComp.day)
+        let yesterdayComp = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate().dateByAddingTimeInterval(-86400))
+        let yesterday = String(format: "%4d-%02d-%02d", yesterdayComp.year, yesterdayComp.month, yesterdayComp.day)
+        
+        title = json["title"].stringValue
+        time = "发布时间：" + json["date"].stringValue.replaceAll(today, "今天").replaceAll(yesterday, "昨天")
+        url = json["href"].stringValue
     }
 }

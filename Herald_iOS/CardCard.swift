@@ -9,29 +9,22 @@
 import Foundation
 import SwiftyJSON
 
-/*class CardCard {
-    
-    static let 余额不足临界值 : Float = 20
+class CardCard {
     
     static func getCard() -> CardsModel {
         let cache = CacheHelper.get("herald_card")
         let content = JSON.parse(cache)["content"]
         // 获取余额并且设置
-        let _extra = Float(content["left"].stringValue)
-        let extra = _extra != nil ? _extra! : 0
-        
-        // 若检测到超过上次忽略时的余额，认为已经充值过了，取消忽略充值提醒
-        var isNumber = true
-        if let ignored = Float(CacheHelper.get("herald_card_charged")) {
-            if extra > ignored {
-                CacheHelper.set("herald_card_charged", cacheValue: "")
-                isNumber = false
+        if let extra = Float(content["left"].stringValue) {
+            if extra < 20 {
+                let model = CardsModel(cellId: "CardsCellCard", module: .Card, desc: "一卡通余额还有\(String(format: "%.2f", extra))元，快点我充值~\n如果已经充值过了，需要刷卡消费一次才会更新哦~", priority: .CONTENT_NOTIFY)
+                model.rows[0].destination = CardViewController.url
+                return model
+            } else {
+                return CardsModel(cellId: "CardsCellCard", module: .Card, desc: "你的一卡通余额还有\(String(format: "%.2f", extra))元", priority: .CONTENT_NO_NOTIFY)
             }
-        } else {isNumber = false}
-        
-        if extra < 余额不足临界值 {
-            // 若没有被忽略的充值提醒，或者超过上次忽略提醒时的余额，认为余额不足需要提醒
-            
+        } else {
+            return CardsModel(cellId: "CardsCellCard", module: .Card, desc: "一卡通余额数据加载失败，请手动刷新", priority: .NO_CONTENT)
         }
     }
-}*/
+}
