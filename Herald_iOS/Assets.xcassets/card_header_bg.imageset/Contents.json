@@ -5,23 +5,12 @@
       "scale" : "1x"
     },
     {
-      "resizing" : {
-        "mode" : "3-part-horizontal",
-        "center" : {
-          "mode" : "tile",
-          "width" : 1
-        },
-        "cap-insets" : {
-          "right" : 200,
-          "left" : 199
-        }
-      },
       "idiom" : "universal",
-      "filename" : "card_header_bg.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "card_header_bg.png",
       "scale" : "3x"
     }
   ],
