@@ -58,13 +58,8 @@ class JwcViewController : UIViewController, UITableViewDelegate, UITableViewData
             }
             
             var list : [JwcNoticeModel] = []
-            for experiment in section.1 {
-                let title = experiment.1["title"].stringValue
-                let time = experiment.1["date"].stringValue
-                let url = experiment.1["href"].stringValue
-            
-                let model = JwcNoticeModel(title, "发布时间：" + time, url)
-                list.append(model)
+            for experiment in section.1.arrayValue {
+                list.append(JwcNoticeModel(json: experiment))
             }
             noticeList.append(list)
             sectionList.append(section.0)
