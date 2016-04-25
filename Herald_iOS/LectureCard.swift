@@ -47,7 +47,7 @@ class LectureCard {
         
         // 今天有人文讲座
         if lectures.count > 0 {
-            let model = CardsModel(cellId: "CardsCellLecture", module: .Lecture, desc: "今天有新的人文讲座，有兴趣的同学欢迎来参加", priority: .CONTENT_NO_NOTIFY)
+            let model = CardsModel(cellId: "CardsCellLecture", module: .Lecture, desc: "今天有新的人文讲座，有兴趣的同学欢迎参加", priority: .CONTENT_NO_NOTIFY)
             model.rows.appendContentsOf(lectures)
             return model;
         }

@@ -39,11 +39,13 @@ class AppModule {
     func open (navigationController : UINavigationController?) {
         if controller == "" { return }
         if controller.containsString("http") {
+            navigationController?.showProgressDialog()
             CacheHelper.set("herald_webmodule_title", cacheValue: nameTip)
             CacheHelper.set("herald_webmodule_url", cacheValue: controller)
             
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE")
             navigationController?.pushViewController(vc, animated: true)
+            navigationController?.performSelector(#selector(navigationController?.hideProgressDialog), withObject: nil, afterDelay: 1)
         } else {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(controller)
             navigationController?.pushViewController(vc, animated: true)

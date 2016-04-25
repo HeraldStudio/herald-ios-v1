@@ -47,11 +47,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
         slider.setBannerTapHandler { (index) in
-            if self.links[index] != "" {
-                if let link = NSURL(string: self.links[index]) {
-                    UIApplication.sharedApplication().openURL(link)
-                }
-            }
+            AppModule(title: "小猴偷米", url: self.links[index]).open(self.navigationController)
         }
         
         // 刷新控件
