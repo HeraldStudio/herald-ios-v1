@@ -27,6 +27,18 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         setupSliderAndSwiper()
         loadContent(true)
+        
+        // 启动定时刷新，每当时间改变时触发本地重载
+        let seconds = 60 - NSDate().timeIntervalSince1970 % 60
+        performSelector(#selector(self.timeChanged), withObject: nil, afterDelay: seconds)
+    }
+    
+    // 定时刷新
+    func timeChanged() {
+        loadContent(false)
+        // 这里虽然seconds接近60，但是不写死，防止误差累积
+        let seconds = 60 - NSDate().timeIntervalSince1970 % 60
+        performSelector(#selector(self.timeChanged), withObject: nil, afterDelay: seconds)
     }
     
     override func viewDidAppear(animated: Bool) {

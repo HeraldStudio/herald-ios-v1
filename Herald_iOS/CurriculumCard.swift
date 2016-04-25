@@ -108,12 +108,12 @@ class CurriculumCard {
                 
                 // 快要上课的紧急提醒
                 if now >= startTime - 15 * 60 && now < startTime {
-                    let model = CardsModel(cellId: "CardsCellCurriculum", module: .Curriculum, desc: info.className + " 即将开始上课，请注意时间，准时上课", priority: .CONTENT_NOTIFY)
+                    let model = CardsModel(cellId: "CardsCellCurriculum", module: .Curriculum, desc: "即将开始上课，请注意时间，准时上课", priority: .CONTENT_NOTIFY)
                     model.rows.append(row)
                     return model
                 } else if now >= startTime && now < almostEndTime {
                     // 正在上课的提醒
-                    let model = CardsModel(cellId: "CardsCellCurriculum", module: .Curriculum, desc: info.className + " 正在上课中", priority: .CONTENT_NOTIFY)
+                    let model = CardsModel(cellId: "CardsCellCurriculum", module: .Curriculum, desc: "正在上课中", priority: .CONTENT_NOTIFY)
                     model.rows.append(row)
                     return model
                 }
