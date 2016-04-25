@@ -20,10 +20,16 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
-        swiper.themeColor = navigationController?.navigationBar.backgroundColor
         tableView?.tableHeaderView = swiper
-        loadCache()
         refreshCache() // 自动判断是否需要刷新流水，不需要的话只刷新余额
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        setNavigationColor(swiper, 0x03a9f4)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        loadCache()
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -178,7 +184,8 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func goToChargePage () {
         showTipDialogIfUnknown("注意：由于一卡通中心配置问题，充值之后需要刷卡消费一次，一卡通余额才能正常显示哦", cachePostfix: "card_charge") {
             () -> Void in
-                UIApplication.sharedApplication().openURL(NSURL(string: CardViewController.url)!)
+                self.title = "一卡通"
+                AppModule(title: "一卡通充值", url: CardViewController.url).open(self.navigationController)
         }
     }
     

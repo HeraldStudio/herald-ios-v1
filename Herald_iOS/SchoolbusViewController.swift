@@ -20,9 +20,12 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
-        swiper.themeColor = navigationController?.navigationBar.backgroundColor
         tableView?.tableHeaderView = swiper
         loadCache(nowWeekend())
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        setNavigationColor(swiper, 0x009688)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

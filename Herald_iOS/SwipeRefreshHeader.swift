@@ -49,7 +49,6 @@ class SwipeRefreshHeader : UIView {
         refresh.textColor = UIColor.whiteColor()
         refresh.textAlignment = .Center
         refresh.font = UIFont(name: "AppleSDGothicNeo-Thin", size: 54)
-        refresh.backgroundColor = themeColor
         
         addSubview(refresh)
         syncApperance(CGPoint(x: 0, y: 0))
@@ -58,6 +57,10 @@ class SwipeRefreshHeader : UIView {
     func syncApperance (contentOffset : CGPoint) {
         let x = contentOffset.x
         let y = contentOffset.y
+        
+        if themeColor != nil {
+            refresh.backgroundColor = themeColor!
+        }
         
         // 上滑变色动效
         var alpha : CGFloat = -y < fadeDistance ? (-y) / fadeDistance : 1;

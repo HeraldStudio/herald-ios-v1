@@ -66,7 +66,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         swiper.themeColor = navigationController?.navigationBar.backgroundColor
         swiper.contentView = slider.view
         swiper.refresher = {() in
-            self.loadContent(true)
+            self.dispatchRefreshUntilSwiperRecovers()
         }
         cardsTableView.tableHeaderView = swiper
     }
@@ -284,9 +284,24 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         let model = cardList[indexPath.section]
         AppModule(title: model.rows[0].title!, url: model.rows[indexPath.row].destination).open(navigationController)
     }
-
+    
+    /// 将刷新时间延迟到刷新控件恢复原形后再执行
+    /// 防止下拉刷新时突然恢复原状导致视觉上不舒服
+    func dispatchRefreshUntilSwiperRecovers () {
+        showProgressDialog()
+        willRefresh = true
+        if cardsTableView.contentOffset.y >= 0 {
+            loadContent(true)
+        }
+    }
+    
+    var willRefresh = false
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         swiper.syncApperance(scrollView.contentOffset)
+        if willRefresh && cardsTableView.contentOffset.y >= 0 {
+            loadContent(true)
+        }
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {

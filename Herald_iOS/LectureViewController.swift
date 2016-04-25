@@ -18,12 +18,15 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
-        swiper.themeColor = navigationController?.navigationBar.backgroundColor
         tableView?.tableHeaderView = swiper
         tableView?.estimatedRowHeight = 70;
         tableView?.rowHeight = UITableViewAutomaticDimension;
         loadCache()
         refreshCache()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        setNavigationColor(swiper, 0xf44336)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

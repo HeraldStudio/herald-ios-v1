@@ -32,10 +32,13 @@ class Dialogs {
     
     var progressDialog : MBProgressHUD?
     
+    var progressDialogShown = false
+    
     var alertDialog : MBProgressHUD?
     
     func showProgressDialog () {
-        hideProgressDialog()
+        if progressDialogShown { return }
+        progressDialogShown = true
         progressDialog = MBProgressHUD(view: vc.view)
         UIApplication.sharedApplication().delegate?.window!!.addSubview(progressDialog!)
         progressDialog?.show(true)
@@ -43,6 +46,8 @@ class Dialogs {
     }
     
     func hideProgressDialog () {
+        if !progressDialogShown { return }
+        progressDialogShown = false
         progressDialog?.hide(true)
     }
     
