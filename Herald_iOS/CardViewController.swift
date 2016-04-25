@@ -107,7 +107,7 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
                 .toCache("herald_card_left") {json -> String in
                     guard let str = json.rawString() else {return ""}
                     return str
-            });
+            })
         
         // 取上次刷新日期，与当前日期比较
         let lastRefresh = CacheHelper.get("herald_card_date")

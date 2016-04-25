@@ -13,6 +13,15 @@ import SwiftyJSON
  * 读取考试缓存，转换成对应的时间轴条目
  **/
 class ExamCard {
+    
+    static func getRefresher () -> [ApiRequest] {
+        return [ApiRequest().api("exam").uuid()
+            .toCache("herald_exam") {json -> String in
+                guard let str = json.rawString() else {return ""}
+                return str
+            }]
+    }
+
     static func getCard() -> CardsModel {
         let cache = CacheHelper.get("herald_exam")
         let json = JSON.parse(cache)["content"]

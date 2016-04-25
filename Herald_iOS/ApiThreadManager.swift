@@ -45,7 +45,7 @@ class ApiThreadManager {
         return self
     }
     
-    func addAll (newRequests : ApiRequest...) -> ApiThreadManager {
+    func addAll (newRequests : [ApiRequest]) -> ApiThreadManager {
         for request in newRequests {
             add(request)
         }

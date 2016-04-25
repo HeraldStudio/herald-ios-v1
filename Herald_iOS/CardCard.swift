@@ -11,6 +11,14 @@ import SwiftyJSON
 
 class CardCard {
     
+    static func getRefresher () -> [ApiRequest] {
+        return [ApiRequest().api("card").uuid()
+            .toCache("herald_card_left") {json -> String in
+                guard let str = json.rawString() else {return ""}
+                return str
+            }]
+    }
+    
     static func getCard() -> CardsModel {
         let cache = CacheHelper.get("herald_card")
         let content = JSON.parse(cache)["content"]

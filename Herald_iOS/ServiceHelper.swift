@@ -13,14 +13,10 @@ class ServiceHelper {
     
     static let serviceCache = NSUserDefaults.withPrefix("service_")
     
-    static func refreshCache (doAfter : (() -> Void)?) {
-        ApiRequest().url("http://android.heraldstudio.com/checkversion").uuid()
+    static func getRefresher () -> [ApiRequest] {
+        return [ApiRequest().url("http://android.heraldstudio.com/checkversion").uuid()
             .post("schoolnum", "0", "versioncode", "0")
-            .toServiceCache("versioncheck_cache") { (json) -> String in json.rawString()!}
-            .onFinish { (_, _, _) -> Void in
-                doAfter?()
-            }
-            .run()
+            .toServiceCache("versioncheck_cache") { (json) -> String in json.rawString()!}]
     }
     
     static func get(key : String) -> String {

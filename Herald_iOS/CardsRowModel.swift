@@ -14,6 +14,9 @@ class CardsRowModel {
     /// 卡片头部的模块图标，用资源id表示
     var icon : String?
     
+    /// 卡片头部的圆点提示
+    var notifyDot : Bool = false
+    
     /// 卡片头部的模块名称，以及课表、实验、考试、讲座、通知的大标题
     var title : String?
     

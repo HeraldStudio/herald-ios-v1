@@ -12,32 +12,26 @@ import UIKit
 class CardsTableViewCell: UITableViewCell {
     
     /// 卡片头部的模块图标
-    @IBOutlet var icon : UIImageView!
+    @IBOutlet var icon : UIImageView?
+    
+    /// 卡片头部的提示圆点
+    @IBOutlet var notifyDot : UIImageView?
     
     /// 卡片头部的模块名称，以及课表、实验、考试、讲座、通知的大标题
-    @IBOutlet var title : UILabel!
+    @IBOutlet var title : UILabel?
     
     /// 课表、实验的授课教师，考试的时长，讲座的主讲人
-    @IBOutlet var subtitle : UILabel!
+    @IBOutlet var subtitle : UILabel?
     
     /// 卡片头部的内容，课表、实验、考试、讲座的时间地点，通知的发布日期
-    @IBOutlet var desc : UILabel!
+    @IBOutlet var desc : UILabel?
     
     /// 考试的倒计时天数、跑操的已跑次数
-    @IBOutlet var count1 : UILabel!
+    @IBOutlet var count1 : UILabel?
     
     /// 跑操的剩余次数
-    @IBOutlet var count2 : UILabel!
+    @IBOutlet var count2 : UILabel?
     
     /// 跑操的剩余天数
-    @IBOutlet var count3 : UILabel!
-    
-    /// 一卡通查看明细
-    @IBOutlet var button1 : UIButton!
-    
-    /// 一卡通在线充值
-    @IBOutlet var button2 : UIButton!
-    
-    /// 一卡通忽略提醒
-    @IBOutlet var button3 : UIButton!
+    @IBOutlet var count3 : UILabel?
 }

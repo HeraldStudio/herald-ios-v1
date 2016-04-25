@@ -14,6 +14,14 @@ import SwiftyJSON
  **/
 class CurriculumCard {
     
+    static func getRefresher () -> [ApiRequest] {
+        return [ApiRequest().api("sidebar").uuid().toCache("herald_sidebar") {
+                json in json["content"].rawString()!
+            },ApiRequest().api("curriculum").uuid().toCache("herald_curriculum") {
+                json in json["content"].rawString()!
+            }]
+    }
+    
     static func getCard() -> CardsModel {
         let cache = CacheHelper.get("herald_curriculum")
         let now = NSDate().timeIntervalSince1970

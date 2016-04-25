@@ -27,41 +27,24 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     var enabledModules : [AppModule] = []
-    var disabledModules : [AppModule] = []
     var sections : [[AppModule]] = []
-    var sectionTitles : [String] = []
     
     func setupModuleList () {
         enabledModules.removeAll()
-        disabledModules.removeAll()
         sections.removeAll()
-        sectionTitles.removeAll()
-        
-        sectionTitles.append("")
         let manager = AppModule(id: -1, name: "", nameTip : "模块管理", desc : "管理各模块的显示/隐藏状态",
                                 controller : "MODULE_MANAGER", icon : "ic_add", hasCard : true)
         manager.shortcutEnabled = true
         sections.append([manager])
         
         for k in SettingsHelper.getSeuModuleList() {
-            if k.cardEnabled || k.shortcutEnabled {
+            if k.shortcutEnabled {
                 enabledModules.append(k)
-                if enabledModules.count == 1 {
-                    sectionTitles.append("显示在卡片或快捷栏的模块")
-                }
-            } else {
-                disabledModules.append(k)
-                if disabledModules.count == 1 {
-                    sectionTitles.append("完全隐藏的模块")
-                }
             }
         }
         
         if enabledModules.count > 0 {
             sections.append(enabledModules)
-        }
-        if disabledModules.count > 0 {
-            sections.append(disabledModules)
         }
         moduleTableView.reloadData()
     }
@@ -89,7 +72,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionTitles[section]
+        return section == 0 ? nil : "我的模块"
     }
     
     //选中一个Cell后执行的方法
