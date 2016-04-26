@@ -40,12 +40,14 @@ class CurriculumView : UIViewController {
     var sidebar : [String : String]!
     var week : Int!
     var curWeek : Bool!
+    var fontSize : CGFloat!
 
     func data (obj : JSON, sidebar : [String : String], week : Int, curWeek : Bool) {
         self.obj = obj
         self.sidebar = sidebar
         self.week = week
         self.curWeek = curWeek
+        fontSize = self.view.bounds.width / 28
     }
     
     var topPadding : CGFloat = 0
@@ -146,7 +148,7 @@ class CurriculumView : UIViewController {
         v.text = CurriculumView.WEEK_NUMS_CN[dayIndex]
         v.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
         v.textAlignment = .Center
-        v.font = UIFont(name: "HelveticaNeue", size: 14)
+        v.font = UIFont(name: "HelveticaNeue", size: fontSize)
         v.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(v)
         
@@ -175,7 +177,7 @@ class CurriculumView : UIViewController {
             block.text = info.className + "\n" + info.place
             block.textColor = UIColor.whiteColor()
             block.textAlignment = .Center
-            block.font = UIFont(name: "HelveticaNeue", size: 13)
+            block.font = UIFont(name: "HelveticaNeue", size: fontSize)
             block.lineBreakMode = .ByWordWrapping
             block.numberOfLines = 0
             var a = CurriculumView.BLOCK_COLORS[(info.className.utf16.count + info.className.utf8.count * 2) % CurriculumView.BLOCK_COLORS.count]
