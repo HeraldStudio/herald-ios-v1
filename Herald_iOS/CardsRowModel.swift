@@ -14,9 +14,6 @@ class CardsRowModel {
     /// 卡片头部的模块图标，用资源id表示
     var icon : String?
     
-    /// 卡片头部的圆点提示
-    var notifyDot : Bool = false
-    
     /// 卡片头部的模块名称，以及课表、实验、考试、讲座、通知的大标题
     var title : String?
     
@@ -42,6 +39,11 @@ class CardsRowModel {
     var destination : String = ""
     
     init () {}
+    
+    /// 用一个字符串表示所有内容，用来判断两个卡片是否相等，以便于计算卡片消息是否已读
+    var stringValue : String {
+        return "\(icon)|\(title)|\(subtitle)|\(desc)|\(count1)|\(count2)|\(count3)|\(sortOrder)|\(destination)"
+    }
     
     init (classInfo : ClassInfo, teacher: String) {
         self.title = classInfo.className

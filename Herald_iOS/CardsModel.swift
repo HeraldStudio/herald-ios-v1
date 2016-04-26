@@ -25,8 +25,15 @@ class CardsModel {
     var cellId : String
     /// 每一行的模型（含头部）
     var rows : [CardsRowModel] = []
-    /// 该卡片的优先级
-    var priority : Priority = .NO_CONTENT
+    /// 该卡片本身内容的优先级
+    var contentPriority : Priority = .NO_CONTENT
+    /// 该卡片实际显示的优先级
+    var displayPriority : Priority {
+        if contentPriority == .CONTENT_NOTIFY && isRead() {
+            return .CONTENT_NO_NOTIFY
+        }
+        return contentPriority
+    }
     
     /// 从已有的模块初始化一个卡片
     init (cellId: String, module : Module, desc : String, priority : Priority) {
@@ -37,9 +44,8 @@ class CardsModel {
         header.title = appModule.nameTip
         header.desc = desc
         header.destination = appModule.controller
-        header.notifyDot = priority == Priority.CONTENT_NOTIFY
         rows.append(header)
-        self.priority = priority
+        self.contentPriority = priority
     }
     
     /// 用自定义的项目初始化一个卡片
@@ -50,8 +56,26 @@ class CardsModel {
         header.title = title
         header.desc = desc
         header.destination = dest
-        header.notifyDot = priority == Priority.CONTENT_NOTIFY
         rows.append(header)
-        self.priority = priority
+        self.contentPriority = priority
+    }
+    
+    /// 用一个字符串表示所有内容，用来判断两个卡片是否相等，以便于计算卡片消息是否已读
+    var stringValue : String {
+        var ret = ""
+        for row in rows {
+            ret += row.stringValue
+        }
+        return String(ret.hashValue)
+    }
+    
+    /// 标记为已读
+    func markAsRead () {
+        CacheHelper.set("herald_cards_read_\(cellId)", stringValue)
+    }
+    
+    /// 判断是否已读
+    func isRead () -> Bool {
+        return CacheHelper.get("herald_cards_read_\(cellId)") == stringValue
     }
 }

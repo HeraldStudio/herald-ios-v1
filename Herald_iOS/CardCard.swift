@@ -32,7 +32,7 @@ class CardCard {
                 return CardsModel(cellId: "CardsCellCard", module: .Card, desc: "你的一卡通余额还有\(String(format: "%.2f", extra))元", priority: .CONTENT_NO_NOTIFY)
             }
         } else {
-            return CardsModel(cellId: "CardsCellCard", module: .Card, desc: "一卡通余额数据加载失败，请手动刷新", priority: .NO_CONTENT)
+            return CardsModel(cellId: "CardsCellCard", module: .Card, desc: "一卡通余额数据加载失败，请手动刷新", priority: .CONTENT_NOTIFY)
         }
     }
 }
