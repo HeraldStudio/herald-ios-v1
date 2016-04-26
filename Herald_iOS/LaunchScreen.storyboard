@@ -14,11 +14,12 @@
                         <viewControllerLayoutGuide type="bottom" id="Rcy-Pd-jd5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="24d-DG-fpE">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="28w-ys-b9j">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" red="0.0" green="0.70588235290000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="PjD-KL-dAP"/>
                                 </constraints>
@@ -33,31 +34,86 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="6XK-B4-r9b">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="6Go-aa-SSN"/>
+                                    <constraint firstAttribute="height" constant="64" id="Y3E-yB-Lm3"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="6Go-aa-SSN"/>
+                                        <exclude reference="Y3E-yB-Lm3"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="6Go-aa-SSN"/>
+                                        <include reference="Y3E-yB-Lm3"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小猴偷米" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3e-rF-xwR">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.0" green="0.70588235290000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一站式智能校园信息平台" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCL-Vj-gNW">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="28w-ys-b9j" secondAttribute="trailing" id="5LL-r7-HRF"/>
+                            <constraint firstItem="JCL-Vj-gNW" firstAttribute="top" secondItem="G3e-rF-xwR" secondAttribute="bottom" constant="3" id="Gw7-LT-lUs"/>
+                            <constraint firstItem="G3e-rF-xwR" firstAttribute="top" secondItem="6XK-B4-r9b" secondAttribute="bottom" constant="3" id="ODu-E3-4fB"/>
+                            <constraint firstItem="JCL-Vj-gNW" firstAttribute="centerX" secondItem="24d-DG-fpE" secondAttribute="centerX" id="UJ7-Fd-qeB"/>
+                            <constraint firstItem="6XK-B4-r9b" firstAttribute="centerX" secondItem="24d-DG-fpE" secondAttribute="centerX" id="WRe-Lm-1yD"/>
                             <constraint firstItem="28w-ys-b9j" firstAttribute="leading" secondItem="24d-DG-fpE" secondAttribute="leading" id="j8R-Hb-tsS"/>
                             <constraint firstItem="28w-ys-b9j" firstAttribute="top" secondItem="24d-DG-fpE" secondAttribute="top" id="kVT-NZ-hJN"/>
+                            <constraint firstItem="G3e-rF-xwR" firstAttribute="centerX" secondItem="24d-DG-fpE" secondAttribute="centerX" id="pSu-zq-C3O"/>
+                            <constraint firstItem="Rcy-Pd-jd5" firstAttribute="top" secondItem="JCL-Vj-gNW" secondAttribute="bottom" constant="34" id="z23-eh-twz"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="28w-ys-b9j"/>
+                                <exclude reference="6XK-B4-r9b"/>
+                                <exclude reference="G3e-rF-xwR"/>
+                                <exclude reference="JCL-Vj-gNW"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="5LL-r7-HRF"/>
                                 <exclude reference="j8R-Hb-tsS"/>
                                 <exclude reference="kVT-NZ-hJN"/>
+                                <exclude reference="WRe-Lm-1yD"/>
+                                <exclude reference="ODu-E3-4fB"/>
+                                <exclude reference="pSu-zq-C3O"/>
+                                <exclude reference="Gw7-LT-lUs"/>
+                                <exclude reference="UJ7-Fd-qeB"/>
+                                <exclude reference="z23-eh-twz"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="28w-ys-b9j"/>
+                                <include reference="6XK-B4-r9b"/>
+                                <include reference="G3e-rF-xwR"/>
+                                <include reference="JCL-Vj-gNW"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="5LL-r7-HRF"/>
                                 <include reference="j8R-Hb-tsS"/>
                                 <include reference="kVT-NZ-hJN"/>
+                                <include reference="WRe-Lm-1yD"/>
+                                <include reference="ODu-E3-4fB"/>
+                                <include reference="pSu-zq-C3O"/>
+                                <include reference="Gw7-LT-lUs"/>
+                                <include reference="UJ7-Fd-qeB"/>
+                                <include reference="z23-eh-twz"/>
                             </mask>
                         </variation>
                     </view>
@@ -68,5 +124,8 @@
             <point key="canvasLocation" x="673.5" y="-818"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo" width="192" height="192"/>
+    </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
