@@ -61,13 +61,13 @@ class PedetailCard {
         let row = CardsRowModel(pedetailCount: count, remain: remain)
         
         if record.containsString(todayStamp) {
-            let model = CardsModel(cellId: "CardsCellPedetail", module: .Pedetail, desc: "你今天的跑操已经到账。" + getRemainNotice(count, remain, false), priority: .CONTENT_NO_NOTIFY)
+            let model = CardsModel(cellId: "CardsCellPedetail", module: .Pedetail, desc: "你今天的跑操已经到账。" + getRemainNotice(count, remain, false), priority: .CONTENT_NOTIFY)
             model.rows.append(row)
             return model
         }
         
         if now >= startTime && date != todayStamp {
-            return CardsModel(cellId: "CardsCellPedetail", module: .Pedetail, desc: "跑操预告加载失败，请手动刷新", priority: .NO_CONTENT)
+            return CardsModel(cellId: "CardsCellPedetail", module: .Pedetail, desc: "跑操预告加载失败，请手动刷新", priority: .CONTENT_NOTIFY)
         }
         
         if now < startTime {

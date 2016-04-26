@@ -3,6 +3,7 @@ import UIKit
 import Reindeer
 import Kingfisher
 import SwiftyJSON
+import SWTableViewCell
 
 class CardsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -154,8 +155,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             cardList.append(JwcCard.getCard())
         }
         
-        // 有消息的排在前面，没消息的排在后面
-        cardList = cardList.sort {$0.priority.rawValue < $1.priority.rawValue}
+        // 有消息且未读的排在前面，没消息或已读的排在后面
+        cardList = cardList.sort {$0.displayPriority.rawValue < $1.displayPriority.rawValue}
         
         // 更新数据源，结束刷新
         cardsTableView.reloadData()
@@ -273,7 +274,17 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         if let count1 = row.count1 { cell.count1?.text = count1 }
         if let count2 = row.count2 { cell.count2?.text = count2 }
         if let count3 = row.count3 { cell.count3?.text = count3 }
-        cell.notifyDot?.alpha = row.notifyDot ? 1 : 0
+        cell.notifyDot?.alpha = indexPath.row == 0 && model.displayPriority == .CONTENT_NOTIFY ? 1 : 0
+        
+        /*if indexPath.row == 0 && model.displayPriority == .CONTENT_NOTIFY {
+            let array = NSMutableArray()
+            array.sw_addUtilityButtonWithColor(UIColor(red: 0, green: 180/255, blue: 255/255, alpha: 1), title: "标为已读")
+            cell.rightUtilityButtons = array as [AnyObject]
+            cell.delegate = cell
+            cell.onRead = {() in model.markAsRead(); self.loadContent(false)}
+        } else {
+            cell.rightUtilityButtons = nil
+        }*/
         
         return cell
     }
@@ -283,6 +294,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let model = cardList[indexPath.section]
+        model.markAsRead()
         AppModule(title: model.rows[0].title!, url: model.rows[indexPath.row].destination).open(navigationController)
     }
     

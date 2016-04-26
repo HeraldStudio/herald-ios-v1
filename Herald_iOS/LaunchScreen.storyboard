@@ -86,15 +86,15 @@
                                 <exclude reference="JCL-Vj-gNW"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="5LL-r7-HRF"/>
-                                <exclude reference="j8R-Hb-tsS"/>
-                                <exclude reference="kVT-NZ-hJN"/>
-                                <exclude reference="WRe-Lm-1yD"/>
+                                <exclude reference="z23-eh-twz"/>
                                 <exclude reference="ODu-E3-4fB"/>
                                 <exclude reference="pSu-zq-C3O"/>
                                 <exclude reference="Gw7-LT-lUs"/>
                                 <exclude reference="UJ7-Fd-qeB"/>
-                                <exclude reference="z23-eh-twz"/>
+                                <exclude reference="5LL-r7-HRF"/>
+                                <exclude reference="j8R-Hb-tsS"/>
+                                <exclude reference="kVT-NZ-hJN"/>
+                                <exclude reference="WRe-Lm-1yD"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -105,15 +105,15 @@
                                 <include reference="JCL-Vj-gNW"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="5LL-r7-HRF"/>
-                                <include reference="j8R-Hb-tsS"/>
-                                <include reference="kVT-NZ-hJN"/>
-                                <include reference="WRe-Lm-1yD"/>
+                                <include reference="z23-eh-twz"/>
                                 <include reference="ODu-E3-4fB"/>
                                 <include reference="pSu-zq-C3O"/>
                                 <include reference="Gw7-LT-lUs"/>
                                 <include reference="UJ7-Fd-qeB"/>
-                                <include reference="z23-eh-twz"/>
+                                <include reference="5LL-r7-HRF"/>
+                                <include reference="j8R-Hb-tsS"/>
+                                <include reference="kVT-NZ-hJN"/>
+                                <include reference="WRe-Lm-1yD"/>
                             </mask>
                         </variation>
                     </view>
