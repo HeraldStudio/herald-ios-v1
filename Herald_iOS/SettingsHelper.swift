@@ -115,18 +115,6 @@ class SettingsHelper {
     }
     
     /**
-     * 获得所有模块的快捷方式设置情况对象
-     */
-    static func getSeuModuleList () -> [AppModule] {
-        //获得所有模块快捷方式设置列表
-        for i in 0 ..< MODULES.count {
-            MODULES[i].cardEnabled = getModuleCardEnabled(i)
-            MODULES[i].shortcutEnabled = getModuleShortcutEnabled(i)
-        }
-        return MODULES
-    }
-    
-    /**
      * 获得是否选择自动登录seu
      */
     static func getWifiAutoLogin () -> Bool {

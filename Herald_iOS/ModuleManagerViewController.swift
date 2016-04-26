@@ -7,11 +7,20 @@ class ModuleManagerViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupModuleList()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    var modules : [AppModule] = []
+    
+    func setupModuleList () {
+        modules = SettingsHelper.MODULES
+        moduleTableView.reloadData()
     }
     
     //指定UITableView中有多少个section的，section分区，一个section里会包含多个Cell
@@ -21,7 +30,7 @@ class ModuleManagerViewController: UIViewController, UITableViewDelegate, UITabl
     
     //每一个section里面有多少个Cell
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SettingsHelper.getSeuModuleList().count + 1
+        return modules.count + 1
     }
     
     //初始化每一个Cell
@@ -32,13 +41,13 @@ class ModuleManagerViewController: UIViewController, UITableViewDelegate, UITabl
         } else {
             let moduleCell = moduleTableView.dequeueReusableCellWithIdentifier("ModuleManageTableViewCell", forIndexPath: indexPath) as! ModuleManageTableViewCell
         
-            let module = SettingsHelper.getSeuModuleList()[indexPath.row - 1]
+            let module = modules[indexPath.row - 1]
         
             moduleCell.module = module.id
             moduleCell.icon.image = UIImage(named: module.icon)
             moduleCell.label.text = module.nameTip
-            moduleCell.shortcutSwitch.setOn(module.shortcutEnabled, animated: false)
-            moduleCell.cardSwitch.setOn(module.cardEnabled, animated: false)
+            moduleCell.shortcutSwitch.setOn(SettingsHelper.getModuleShortcutEnabled(module.id), animated: false)
+            moduleCell.cardSwitch.setOn(SettingsHelper.getModuleCardEnabled(module.id), animated: false)
             moduleCell.cardSwitch.enabled = module.hasCard
             moduleCell.cardSwitch.alpha = module.hasCard ? 1 : 0
         
