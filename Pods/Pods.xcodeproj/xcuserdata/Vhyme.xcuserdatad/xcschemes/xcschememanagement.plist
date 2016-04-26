@@ -9,11 +9,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>DHCShakeNotifier.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>FSCalendar.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -49,11 +44,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SWTableViewCell.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,12 +52,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3095184FD1CD8A79BC94A3BE7E885F62</key>
+		<key>271EA30AB2120E36E8553BE1B8A5E409</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>497C74F8FD5B3D0205CC3F80A361D3AF</key>
+		<key>5E40AFCA19649CD3E321D8212944BB69</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,22 +67,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8A17B9722F8E95C579D382D4E2BEDEA8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8DD5502A34611CEF33934E72FC24808D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AE9612DE8CB9A09D190C6E0614BB5496</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>B2619B2813D910DBC9FE9714E0788D55</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C8F9359EEA596B601D362864ADABB7C6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CB6C142D00F244B82B9CA261B04401E1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -103,11 +88,6 @@
 			<true/>
 		</dict>
 		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F00AFA0F85B018DA84D110AB455F2795</key>
 		<dict>
 			<key>primary</key>
 			<true/>
