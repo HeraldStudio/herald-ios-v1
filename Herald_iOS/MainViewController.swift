@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import DHCShakeNotifier
+//import DHCShakeNotifier
 
 /// 主页面
 class MainViewController: UITabBarController {
@@ -33,15 +33,15 @@ class MainViewController: UITabBarController {
             }
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
     }
     
-    func onShake () {
+    //func onShake () {
         // 摇一摇事件
-    }
+    //}
     
     override func finalize() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: DHCSHakeNotificationName, object: nil)
+        //NSNotificationCenter.defaultCenter().removeObserver(self, name: DHCSHakeNotificationName, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {

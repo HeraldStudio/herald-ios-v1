@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SWTableViewCell
+//import SWTableViewCell
 
 /// 首页卡片中每一行（代表卡片头部或卡片中的一格）通用的视图
 class CardsTableViewCell: UITableViewCell /*SWTableViewCell, SWTableViewCellDelegate*/ {

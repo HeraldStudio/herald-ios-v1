@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'EBD7D7130D82C1C6FECCA9F7'
+               BlueprintIdentifier = '39A0854F330EFD60954252CF'
                BlueprintName = 'Reindeer'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Reindeer.framework'>

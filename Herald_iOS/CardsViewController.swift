@@ -3,7 +3,7 @@ import UIKit
 import Reindeer
 import Kingfisher
 import SwiftyJSON
-import SWTableViewCell
+//import SWTableViewCell
 
 class CardsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
