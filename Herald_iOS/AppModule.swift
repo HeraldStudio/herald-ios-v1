@@ -17,8 +17,6 @@ class AppModule {
     var controller : String
     var icon : String
     var hasCard : Bool
-    var shortcutEnabled = false
-    var cardEnabled = false
     
     init (id : Int, name : String, nameTip : String, desc : String,
           controller : String, icon : String, hasCard : Bool) {

@@ -34,11 +34,10 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
         sections.removeAll()
         let manager = AppModule(id: -1, name: "", nameTip : "模块管理", desc : "管理各模块的显示/隐藏状态",
                                 controller : "MODULE_MANAGER", icon : "ic_add", hasCard : true)
-        manager.shortcutEnabled = true
         sections.append([manager])
         
-        for k in SettingsHelper.getSeuModuleList() {
-            if k.shortcutEnabled {
+        for k in SettingsHelper.MODULES {
+            if SettingsHelper.getModuleShortcutEnabled(k.id) {
                 enabledModules.append(k)
             }
         }
