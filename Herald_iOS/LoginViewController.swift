@@ -8,6 +8,8 @@ class LoginViewController: UIViewController {
     
     @IBOutlet var button : UIButton!
     
+    @IBOutlet var background : UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -19,7 +21,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func buttonClicked() {
-        if username?.text! != "" {
+        if username?.text! != "" && password?.text != "" {
             doLogin()
         }
     }
@@ -52,6 +54,11 @@ class LoginViewController: UIViewController {
                 ApiHelper.doLogout(nil)
             }
         }.run()
+    }
+    
+    @IBAction func endEdit () {
+        username.resignFirstResponder()
+        password.resignFirstResponder()
     }
 }
 
