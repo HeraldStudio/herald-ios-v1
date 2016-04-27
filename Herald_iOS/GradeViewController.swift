@@ -64,7 +64,7 @@ class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDa
                 if extra != "" { desc += " (\(extra))" }
                 desc += " 学分：\(credit)"
                 
-                let model = GradeModel(name, desc, score)
+                let model = GradeModel(name, desc, "成绩："+score)
                 if titles.last == nil || titles.last! != semester {
                     sections.append([])
                     titles.append(semester)
