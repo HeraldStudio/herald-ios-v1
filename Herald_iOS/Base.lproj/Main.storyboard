@@ -1287,7 +1287,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="小猴偷米 iOS 1.1.0" id="sji-X1-u2g">
+                            <tableViewSection headerTitle="小猴偷米 iOS v1.2.0" id="sji-X1-u2g">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="G5U-4v-cyc">
                                         <rect key="frame" x="0.0" y="143.5" width="600" height="44"/>
@@ -1978,22 +1978,9 @@ Copyright (c) 2013 Alexandr Graschenkov
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="KXh-ZE-k3A">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="tintColor" red="0.0" green="0.70588235290000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="140" id="LHI-VP-JB5"/>
-                                </constraints>
                                 <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="LHI-VP-JB5"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="LHI-VP-JB5"/>
-                                    </mask>
-                                </variation>
                             </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyp-HW-p8u">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -2019,7 +2006,7 @@ Copyright (c) 2013 Alexandr Graschenkov
                                     <constraint firstAttribute="height" constant="30" id="v4t-k2-ZWi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="v4t-k2-ZWi"/>
@@ -2060,6 +2047,7 @@ Copyright (c) 2013 Alexandr Graschenkov
                             <constraint firstAttribute="trailing" secondItem="jMp-wh-wdP" secondAttribute="trailing" constant="15" id="2vG-Br-Ce4"/>
                             <constraint firstItem="vae-Xi-4Nv" firstAttribute="leading" secondItem="Waz-hX-XHO" secondAttribute="leading" constant="8" id="4kB-Ta-t7y"/>
                             <constraint firstItem="jMp-wh-wdP" firstAttribute="top" secondItem="vae-Xi-4Nv" secondAttribute="bottom" constant="12" id="4oI-eg-Gvk"/>
+                            <constraint firstItem="jMp-wh-wdP" firstAttribute="bottom" secondItem="Waz-hX-XHO" secondAttribute="centerY" id="5Dn-5L-bvx"/>
                             <constraint firstItem="KXh-ZE-k3A" firstAttribute="leading" secondItem="Waz-hX-XHO" secondAttribute="leading" constant="8" id="SZV-Rd-VWb"/>
                             <constraint firstItem="vae-Xi-4Nv" firstAttribute="top" secondItem="zt4-3e-43I" secondAttribute="bottom" constant="8" id="Y9c-Xk-zrA"/>
                             <constraint firstItem="KXh-ZE-k3A" firstAttribute="top" secondItem="gGs-AF-L8G" secondAttribute="bottom" constant="8" id="bk5-by-tY9"/>
@@ -2082,21 +2070,22 @@ Copyright (c) 2013 Alexandr Graschenkov
                                 <exclude reference="jMp-wh-wdP"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="kne-RF-dyV"/>
-                                <exclude reference="m3M-n2-shF"/>
-                                <exclude reference="ys2-Kb-4cf"/>
-                                <exclude reference="2vG-Br-Ce4"/>
-                                <exclude reference="4oI-eg-Gvk"/>
-                                <exclude reference="fDu-yp-GLx"/>
                                 <exclude reference="SZV-Rd-VWb"/>
                                 <exclude reference="bk5-by-tY9"/>
                                 <exclude reference="j3c-Ot-W8P"/>
                                 <exclude reference="kg6-FV-Bay"/>
                                 <exclude reference="lhe-ZQ-q5Y"/>
                                 <exclude reference="wkY-v9-lxD"/>
+                                <exclude reference="kne-RF-dyV"/>
+                                <exclude reference="m3M-n2-shF"/>
+                                <exclude reference="ys2-Kb-4cf"/>
                                 <exclude reference="4kB-Ta-t7y"/>
                                 <exclude reference="Y9c-Xk-zrA"/>
                                 <exclude reference="tX7-tB-sGy"/>
+                                <exclude reference="2vG-Br-Ce4"/>
+                                <exclude reference="4oI-eg-Gvk"/>
+                                <exclude reference="5Dn-5L-bvx"/>
+                                <exclude reference="fDu-yp-GLx"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -2108,21 +2097,22 @@ Copyright (c) 2013 Alexandr Graschenkov
                                 <include reference="jMp-wh-wdP"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="kne-RF-dyV"/>
-                                <include reference="m3M-n2-shF"/>
-                                <include reference="ys2-Kb-4cf"/>
-                                <include reference="2vG-Br-Ce4"/>
-                                <include reference="4oI-eg-Gvk"/>
-                                <include reference="fDu-yp-GLx"/>
                                 <include reference="SZV-Rd-VWb"/>
                                 <include reference="bk5-by-tY9"/>
                                 <include reference="j3c-Ot-W8P"/>
                                 <include reference="kg6-FV-Bay"/>
                                 <include reference="lhe-ZQ-q5Y"/>
                                 <include reference="wkY-v9-lxD"/>
+                                <include reference="kne-RF-dyV"/>
+                                <include reference="m3M-n2-shF"/>
+                                <include reference="ys2-Kb-4cf"/>
                                 <include reference="4kB-Ta-t7y"/>
                                 <include reference="Y9c-Xk-zrA"/>
                                 <include reference="tX7-tB-sGy"/>
+                                <include reference="2vG-Br-Ce4"/>
+                                <include reference="4oI-eg-Gvk"/>
+                                <include reference="5Dn-5L-bvx"/>
+                                <include reference="fDu-yp-GLx"/>
                             </mask>
                         </variation>
                     </view>
