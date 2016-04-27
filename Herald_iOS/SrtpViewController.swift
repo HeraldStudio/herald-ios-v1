@@ -80,7 +80,7 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
                 if proportion != "" {
                     totalCredit += " (工作比例：\(proportion))"
                 }
-                let model = SrtpModel(date, project, department, type, totalCredit, credit)
+                let model = SrtpModel(date, project, department, type, totalCredit, "学分："+credit)
                 items.append(model)
             }
         }

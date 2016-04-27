@@ -22,8 +22,6 @@ class MyInfoViewController: UITableViewController {
         case 0:
             switch indexPath.row {
             case 0:
-                showQuestionDialog("确定清空所有个人模块缓存吗？") { CacheHelper.clearAllModuleCache() }
-            case 1:
                 showQuestionDialog("确定要退出登录吗？") { ApiHelper.doLogout(self) }
             default:
                 break

@@ -114,7 +114,7 @@ class ExperimentViewController : UIViewController, UITableViewDelegate, UITableV
         cell.name?.text = model.name
         cell.timeAndPlace?.text = model.timeAndPlace
         cell.teacher?.text = model.teacher
-        cell.grade?.text = model.grade
+        cell.grade?.text = model.grade == "" ? "" : "成绩：\(model.grade)"
         return cell
     }
     

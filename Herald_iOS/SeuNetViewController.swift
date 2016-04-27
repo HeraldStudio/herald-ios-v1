@@ -57,17 +57,19 @@ class SeuNetViewController : UIViewController {
         stateStr = "当前状态：" + stateStr.replaceAll(",", "，")
         leftStr = leftStr.split(" ")[0]
         
-        usage.text = usageStr
         state.text = stateStr
         left.text = leftStr
         
-        guard let used = Float(usageStr) else { showError(); return }
-        self.used = used
+        // 有些人没开通网络服务，used这里的值是"暂无流量信息"，这种不能识别为数字的要当成数字0
+        let _used = Float(usageStr)
+        used = _used == nil ? 0 : _used!
         var total : Float = 10
         while used > total {
             total += 10
         }
         remain = total - used
+        
+        usage.text = String(format: "%.2f", used)
         
         if showPie {
             loadPie()

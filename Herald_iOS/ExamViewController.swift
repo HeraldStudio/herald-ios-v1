@@ -123,9 +123,9 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
         
         let model = sections[indexPath.section][indexPath.row]
         cell.course?.text = model.course
-        cell.time?.text = "考试时间：" + model.timeAndPlace
+        cell.time?.text = model.timeAndPlace
         cell.location?.text = model.periodAndTeacher
-        cell.days?.text = String(abs(model.days))
+        cell.days?.text = "还有\(abs(model.days))天"
         cell.days?.alpha = model.days >= 0 ? 1 : 0
         return cell
     }
