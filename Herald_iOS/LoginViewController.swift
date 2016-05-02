@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
     func doLogin () {
         let appid = ApiHelper.appid
         showProgressDialog()
-        ApiRequest().url(ApiHelper.auth_url).plain()
+        ApiRequest().url(ApiHelper.auth_url).noCheck200()
             .post("user", username!.text!, "password", password!.text!, "appid", appid)
             .onFinish { success, _, response in
                 self.hideProgressDialog()

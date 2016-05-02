@@ -12,7 +12,7 @@ import SwiftyJSON
 class PedetailCard {
     
     static func getRefresher () -> [ApiRequest] {
-        return [ApiRequest().api("pc").uuid().toCache("herald_pc_forecast") {
+        return [ApiRequest().api("pc").uuid().noCheck200().toCache("herald_pc_forecast") {
                 json -> String in
                 guard let str = json["content"].rawString() else {return ""}
                 return str

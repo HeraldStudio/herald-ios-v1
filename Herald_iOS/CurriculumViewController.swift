@@ -68,6 +68,13 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
                 }
             }
         }
+        
+        // 如果没课，什么也不做
+        if maxWeek < 1 {
+            showMessage("暂无课程")
+            return
+        }
+        
         var sidebarList : [String:String] = [:]
         
         // 将课程的授课教师和学分信息放入键值对
@@ -110,6 +117,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
         // 实例化各页
         removeAllPages()
         updateContentSize(maxWeek)
+        
         for i in 1 ... maxWeek {
             let page = CurriculumView()
             page.data(content, sidebar: sidebarList, week: i, curWeek: i == thisWeek)
@@ -141,6 +149,8 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        // 如果没课，什么也不做
+        if scrollView.contentSize.width == 0 { return }
         let page = abs(Int(scrollView.contentOffset.x / scrollView.frame.width + 0.5))
         title = "第 \(page + 1) 周"
         swiper.syncApperance(scrollView.contentOffset)
