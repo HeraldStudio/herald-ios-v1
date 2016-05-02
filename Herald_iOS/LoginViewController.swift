@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func buttonClicked() {
-        if username?.text! != "" && password?.text != "" {
+        if username?.text! != "" && password?.text! != "" {
             doLogin()
         }
     }

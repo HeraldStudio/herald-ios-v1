@@ -13,7 +13,7 @@ class MyInfoViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        version.text = "喜欢小猴就给个好评吧~ 当前版本：\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")!)"
+        version.text = "喜欢小猴就给个好评吧~ 当前版本：v\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")!)"
         // Do any additional setup after loading the view, typically from a nib.
     }
     
