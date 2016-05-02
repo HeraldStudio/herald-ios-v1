@@ -183,7 +183,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
         dialog.addAction(UIAlertAction(title: "绑定", style: UIAlertActionStyle.Default, handler: { _ in
             if let password = dialog.textFields![0].text {
                 self.showProgressDialog()
-                ApiRequest().url(ApiHelper.auth_update_url).plain()
+                ApiRequest().url(ApiHelper.auth_update_url).noCheck200()
                     .post("cardnum", ApiHelper.getUserName())
                     .post("password", ApiHelper.getPassword())
                     .post("lib_username", ApiHelper.getUserName())

@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
         //判断是否是首次启动
         let launchTimes = SettingsHelper.getLaunchTimes()
         if launchTimes == 0 {
@@ -26,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //启动次数递增
         SettingsHelper.updateLaunchTimes(launchTimes + 1)
+        
+        if !ApiHelper.isLogin() {
+            showLogin()
+        }
         
         return true
     }
@@ -52,6 +55,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func showLogin () {
+        self.window?.rootViewController = nil
+        let lvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("login")
+        self.window?.rootViewController = lvc
+    }
 }
 
