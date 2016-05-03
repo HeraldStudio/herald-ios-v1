@@ -5,8 +5,15 @@ class MyInfoViewController: UITableViewController {
     
     var parent : MainViewController?
     
+    @IBOutlet var version : UILabel!
+    
+    func checkVersion () {
+        UIApplication.sharedApplication().openURL(NSURL(string: "https://itunes.apple.com/us/app/xiao-hou-tou-mi/id1107998946")!)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        version.text = "喜欢小猴就给个好评吧~ 当前版本：v\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")!)"
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -23,6 +30,13 @@ class MyInfoViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 showQuestionDialog("确定要退出登录吗？") { ApiHelper.doLogout(self) }
+            default:
+                break
+            }
+        case 1:
+            switch indexPath.row {
+            case 2:
+                checkVersion()
             default:
                 break
             }

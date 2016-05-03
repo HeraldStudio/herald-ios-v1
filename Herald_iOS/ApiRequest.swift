@@ -38,10 +38,10 @@ class ApiRequest {
         return url(ApiHelper.getApiUrl(api))
     }
     
-    var isPlain = false
+    var dontCheck200 = false
     
-    func plain () -> ApiRequest {
-        isPlain = true
+    func noCheck200 () -> ApiRequest {
+        dontCheck200 = true
         return self
     }
     
@@ -81,13 +81,13 @@ class ApiRequest {
         
         switch response.result {
         case .Success:
-            if isPlain {
+            let responseJson = JSON.parse(resp)
+            code = responseJson["code"].intValue
+            if dontCheck200 {
                 for onFinishListener in onFinishListeners {
-                    onFinishListener(true, 200, resp)
+                    onFinishListener(true, code, resp)
                 }
             } else {
-                let responseJson = JSON.parse(resp)
-                code = responseJson["code"].intValue
                 guard let jsonStr = responseJson.rawString() else { fallthrough }
                 guard code == 200 else { fallthrough }
                 
