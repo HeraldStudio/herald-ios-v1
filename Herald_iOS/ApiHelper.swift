@@ -44,12 +44,7 @@ class ApiHelper : NSObject {
         // 注意此处的clearAllmoduleCache里的authUser和authPwd与上面清除的是不同的
         CacheHelper.clearAllModuleCache()
         
-        // 跳转到登录页
-        if let nc = context {
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let vc = sb.instantiateViewControllerWithIdentifier("login")
-            nc.presentViewController(vc, animated: true) {}
-        }
+        ((UIApplication.sharedApplication().delegate) as! AppDelegate).showLogin()
     }
     
     static func isLogin () -> Bool {
