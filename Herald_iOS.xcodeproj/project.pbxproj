@@ -38,6 +38,19 @@
 		D34858111CBB57F600B55E76 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858101CBB57F600B55E76 /* NSUserDefaults.swift */; };
 		D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858121CBB60A600B55E76 /* ApiRequest.swift */; };
 		D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34E95851CCDCCE700AD1119 /* JwcCard.swift */; };
+		D35490471CDC12A800E59615 /* ApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35490461CDC12A800E59615 /* ApiHelper.swift */; };
+		D35490491CDC12BE00E59615 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35490481CDC12BE00E59615 /* NSUserDefaults.swift */; };
+		D354904B1CDC12C900E59615 /* CacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354904A1CDC12C900E59615 /* CacheHelper.swift */; };
+		D354904F1CDC134900E59615 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354904E1CDC134900E59615 /* String.swift */; };
+		D35490561CDC2B2300E59615 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35490551CDC2B2300E59615 /* NotificationModel.swift */; };
+		D35490581CDC2BB400E59615 /* CurriculumNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35490571CDC2BB400E59615 /* CurriculumNotifier.swift */; };
+		D354905A1CDC4E1800E59615 /* ExperimentNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35490591CDC4E1800E59615 /* ExperimentNotifier.swift */; };
+		D354905C1CDC519100E59615 /* GCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354905B1CDC519100E59615 /* GCalendar.swift */; };
+		D35490611CDC51BA00E59615 /* GCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35490601CDC51BA00E59615 /* GCalendar.swift */; };
+		D3578AC31CDBACBB00B291D0 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3578AAE1CDBABE300B291D0 /* NotificationCenter.framework */; };
+		D3578AC61CDBACBB00B291D0 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3578AC51CDBACBB00B291D0 /* TodayViewController.swift */; };
+		D3578AC91CDBACBB00B291D0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3578AC71CDBACBB00B291D0 /* MainInterface.storyboard */; };
+		D3578ACD1CDBACBB00B291D0 /* Herald_iOS_Today.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D3578AC21CDBACBA00B291D0 /* Herald_iOS_Today.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D37708621CCC5D37006ED853 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708611CCC5D37006ED853 /* FeedbackViewController.swift */; };
 		D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708641CCC67DC006ED853 /* CardsModel.swift */; };
 		D39B87971CCCCA0200EC5280 /* CardsRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */; };
@@ -72,6 +85,7 @@
 		D3ED99E61CCB651300001E2B /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99E51CCB651300001E2B /* LibraryViewController.swift */; };
 		D3ED99E81CCB870200001E2B /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99E71CCB870200001E2B /* AboutUsViewController.swift */; };
 		D3EFC1D71CCC81A800BC37A5 /* CurriculumCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EFC1D61CCC81A800BC37A5 /* CurriculumCard.swift */; };
+		D3F375C71CDB3957004DDEA5 /* WifiLoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F375C61CDB3957004DDEA5 /* WifiLoginHelper.swift */; };
 		D3F3DCFB1CBB7792006887F5 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */; };
 		D3F473451CCA04C100750FFB /* JwcTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F473441CCA04C100750FFB /* JwcTableViewCell.swift */; };
 		D3F473471CCA05CD00750FFB /* JwcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F473461CCA05CD00750FFB /* JwcViewController.swift */; };
@@ -84,6 +98,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D3578ACB1CDBACBB00B291D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D3D35DD11CBA2E8200B18092 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D3578AC11CDBACBA00B291D0;
+			remoteInfo = Herald_iOS_Today;
+		};
 		D3D35DEE1CBA2E8200B18092 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D3D35DD11CBA2E8200B18092 /* Project object */;
@@ -99,6 +120,20 @@
 			remoteInfo = Herald_iOS;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D3578ABD1CDBABE300B291D0 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D3578ACD1CDBACBB00B291D0 /* Herald_iOS_Today.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		283283296736ED980EE6E1A6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +168,21 @@
 		D34858101CBB57F600B55E76 /* NSUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaults.swift; sourceTree = "<group>"; };
 		D34858121CBB60A600B55E76 /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
 		D34E95851CCDCCE700AD1119 /* JwcCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcCard.swift; sourceTree = "<group>"; };
+		D35490461CDC12A800E59615 /* ApiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHelper.swift; sourceTree = "<group>"; };
+		D35490481CDC12BE00E59615 /* NSUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaults.swift; sourceTree = "<group>"; };
+		D354904A1CDC12C900E59615 /* CacheHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheHelper.swift; sourceTree = "<group>"; };
+		D354904E1CDC134900E59615 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		D35490551CDC2B2300E59615 /* NotificationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
+		D35490571CDC2BB400E59615 /* CurriculumNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumNotifier.swift; sourceTree = "<group>"; };
+		D35490591CDC4E1800E59615 /* ExperimentNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentNotifier.swift; sourceTree = "<group>"; };
+		D354905B1CDC519100E59615 /* GCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCalendar.swift; sourceTree = "<group>"; };
+		D35490601CDC51BA00E59615 /* GCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCalendar.swift; sourceTree = "<group>"; };
+		D35490631CDC5A2200E59615 /* 小猴偷米.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "小猴偷米.entitlements"; sourceTree = "<group>"; };
+		D3578AAE1CDBABE300B291D0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		D3578AC21CDBACBA00B291D0 /* Herald_iOS_Today.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Herald_iOS_Today.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3578AC51CDBACBB00B291D0 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		D3578AC81CDBACBB00B291D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		D3578ACA1CDBACBB00B291D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D37708611CCC5D37006ED853 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		D37708641CCC67DC006ED853 /* CardsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsModel.swift; sourceTree = "<group>"; };
 		D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsRowModel.swift; sourceTree = "<group>"; };
@@ -173,6 +223,7 @@
 		D3ED99E51CCB651300001E2B /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		D3ED99E71CCB870200001E2B /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		D3EFC1D61CCC81A800BC37A5 /* CurriculumCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumCard.swift; sourceTree = "<group>"; };
+		D3F375C61CDB3957004DDEA5 /* WifiLoginHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiLoginHelper.swift; sourceTree = "<group>"; };
 		D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
 		D3F473441CCA04C100750FFB /* JwcTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcTableViewCell.swift; sourceTree = "<group>"; };
 		D3F473461CCA05CD00750FFB /* JwcViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcViewController.swift; sourceTree = "<group>"; };
@@ -186,6 +237,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D3578ABF1CDBACBA00B291D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3578AC31CDBACBB00B291D0 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D3D35DD61CBA2E8200B18092 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -217,6 +276,7 @@
 				D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */,
 				D3FBC2F31CCC524500305428 /* Dialogs.swift */,
 				D39B879F1CCD0F0E00EC5280 /* Error.swift */,
+				D354905B1CDC519100E59615 /* GCalendar.swift */,
 			);
 			name = custom;
 			sourceTree = "<group>";
@@ -239,13 +299,14 @@
 		D348580A1CBB48EF00B55E76 /* helper */ = {
 			isa = PBXGroup;
 			children = (
-				D348580B1CBB48FD00B55E76 /* ApiHelper.swift */,
-				D348580D1CBB4FF900B55E76 /* CacheHelper.swift */,
-				D34858121CBB60A600B55E76 /* ApiRequest.swift */,
-				D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */,
-				D30A9BA01CBBA9100087D583 /* ApiThreadManager.swift */,
-				D31821B51CC48D5400992355 /* ServiceHelper.swift */,
 				D306E0211CCA3DFD00FA3812 /* AppModule.swift */,
+				D348580B1CBB48FD00B55E76 /* ApiHelper.swift */,
+				D34858121CBB60A600B55E76 /* ApiRequest.swift */,
+				D30A9BA01CBBA9100087D583 /* ApiThreadManager.swift */,
+				D348580D1CBB4FF900B55E76 /* CacheHelper.swift */,
+				D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */,
+				D31821B51CC48D5400992355 /* ServiceHelper.swift */,
+				D3F375C61CDB3957004DDEA5 /* WifiLoginHelper.swift */,
 			);
 			name = helper;
 			sourceTree = "<group>";
@@ -258,6 +319,64 @@
 				D39B87A31CCD12EC00EC5280 /* String.swift */,
 			);
 			name = extension;
+			sourceTree = "<group>";
+		};
+		D354904D1CDC132F00E59615 /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				D35490481CDC12BE00E59615 /* NSUserDefaults.swift */,
+				D354904E1CDC134900E59615 /* String.swift */,
+			);
+			name = extension;
+			sourceTree = "<group>";
+		};
+		D35490501CDC135300E59615 /* helper */ = {
+			isa = PBXGroup;
+			children = (
+				D35490461CDC12A800E59615 /* ApiHelper.swift */,
+				D354904A1CDC12C900E59615 /* CacheHelper.swift */,
+			);
+			name = helper;
+			sourceTree = "<group>";
+		};
+		D35490511CDC138200E59615 /* widget_main */ = {
+			isa = PBXGroup;
+			children = (
+				D3578AC51CDBACBB00B291D0 /* TodayViewController.swift */,
+			);
+			name = widget_main;
+			sourceTree = "<group>";
+		};
+		D35490521CDC2AE500E59615 /* notifier */ = {
+			isa = PBXGroup;
+			children = (
+				D35490551CDC2B2300E59615 /* NotificationModel.swift */,
+				D35490571CDC2BB400E59615 /* CurriculumNotifier.swift */,
+				D35490591CDC4E1800E59615 /* ExperimentNotifier.swift */,
+			);
+			name = notifier;
+			sourceTree = "<group>";
+		};
+		D354905F1CDC51AE00E59615 /* custom */ = {
+			isa = PBXGroup;
+			children = (
+				D35490601CDC51BA00E59615 /* GCalendar.swift */,
+			);
+			name = custom;
+			sourceTree = "<group>";
+		};
+		D3578AC41CDBACBB00B291D0 /* Herald_iOS_Today */ = {
+			isa = PBXGroup;
+			children = (
+				D354905F1CDC51AE00E59615 /* custom */,
+				D3578AC71CDBACBB00B291D0 /* MainInterface.storyboard */,
+				D35490521CDC2AE500E59615 /* notifier */,
+				D35490511CDC138200E59615 /* widget_main */,
+				D354904D1CDC132F00E59615 /* extension */,
+				D35490501CDC135300E59615 /* helper */,
+				D3578ACA1CDBACBB00B291D0 /* Info.plist */,
+			);
+			path = Herald_iOS_Today;
 			sourceTree = "<group>";
 		};
 		D39B87981CCCEC0C00EC5280 /* mod_cards */ = {
@@ -433,6 +552,7 @@
 				D3D35DDB1CBA2E8200B18092 /* Herald_iOS */,
 				D3D35DF01CBA2E8200B18092 /* Herald_iOSTests */,
 				D3D35DFB1CBA2E8200B18092 /* Herald_iOSUITests */,
+				D3578AC41CDBACBB00B291D0 /* Herald_iOS_Today */,
 				D3D35DDA1CBA2E8200B18092 /* Products */,
 				DD11F4816A147BF4EB866EB6 /* Pods */,
 				F527AB77D4F37A7ED7959F74 /* Frameworks */,
@@ -445,6 +565,7 @@
 				D3D35DD91CBA2E8200B18092 /* 小猴偷米.app */,
 				D3D35DED1CBA2E8200B18092 /* Herald_iOSTests.xctest */,
 				D3D35DF81CBA2E8200B18092 /* Herald_iOSUITests.xctest */,
+				D3578AC21CDBACBA00B291D0 /* Herald_iOS_Today.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -452,6 +573,7 @@
 		D3D35DDB1CBA2E8200B18092 /* Herald_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				D35490631CDC5A2200E59615 /* 小猴偷米.entitlements */,
 				D31821C81CC7BC0400992355 /* Main.storyboard */,
 				D31821B11CC3B07800992355 /* LaunchScreen.storyboard */,
 				D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */,
@@ -519,6 +641,7 @@
 			isa = PBXGroup;
 			children = (
 				283283296736ED980EE6E1A6 /* Pods.framework */,
+				D3578AAE1CDBABE300B291D0 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -526,6 +649,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D3578AC11CDBACBA00B291D0 /* Herald_iOS_Today */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D3578ACE1CDBACBB00B291D0 /* Build configuration list for PBXNativeTarget "Herald_iOS_Today" */;
+			buildPhases = (
+				D3578ABE1CDBACBA00B291D0 /* Sources */,
+				D3578ABF1CDBACBA00B291D0 /* Frameworks */,
+				D3578AC01CDBACBA00B291D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Herald_iOS_Today;
+			productName = Herald_iOS_Today;
+			productReference = D3578AC21CDBACBA00B291D0 /* Herald_iOS_Today.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		D3D35DD81CBA2E8200B18092 /* Herald_iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D3D35E011CBA2E8200B18092 /* Build configuration list for PBXNativeTarget "Herald_iOS" */;
@@ -536,10 +676,12 @@
 				D3D35DD71CBA2E8200B18092 /* Resources */,
 				0B8948C67D3C219565E1DD35 /* Embed Pods Frameworks */,
 				F4FB81568F51A7183763D838 /* Copy Pods Resources */,
+				D3578ABD1CDBABE300B291D0 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D3578ACC1CDBACBB00B291D0 /* PBXTargetDependency */,
 			);
 			name = Herald_iOS;
 			productName = Herald_iOS;
@@ -592,9 +734,18 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = HeraldStudio;
 				TargetAttributes = {
+					D3578AC11CDBACBA00B291D0 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = MW9PK9KE48;
+					};
 					D3D35DD81CBA2E8200B18092 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 9837P5SWZ9;
+						DevelopmentTeam = MW9PK9KE48;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					D3D35DEC1CBA2E8200B18092 = {
 						CreatedOnToolsVersion = 7.3;
@@ -622,11 +773,20 @@
 				D3D35DD81CBA2E8200B18092 /* Herald_iOS */,
 				D3D35DEC1CBA2E8200B18092 /* Herald_iOSTests */,
 				D3D35DF71CBA2E8200B18092 /* Herald_iOSUITests */,
+				D3578AC11CDBACBA00B291D0 /* Herald_iOS_Today */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D3578AC01CDBACBA00B291D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D3578AC91CDBACBB00B291D0 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D3D35DD71CBA2E8200B18092 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -702,6 +862,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D3578ABE1CDBACBA00B291D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D35490581CDC2BB400E59615 /* CurriculumNotifier.swift in Sources */,
+				D35490561CDC2B2300E59615 /* NotificationModel.swift in Sources */,
+				D354904B1CDC12C900E59615 /* CacheHelper.swift in Sources */,
+				D3578AC61CDBACBB00B291D0 /* TodayViewController.swift in Sources */,
+				D354905A1CDC4E1800E59615 /* ExperimentNotifier.swift in Sources */,
+				D35490471CDC12A800E59615 /* ApiHelper.swift in Sources */,
+				D354904F1CDC134900E59615 /* String.swift in Sources */,
+				D35490491CDC12BE00E59615 /* NSUserDefaults.swift in Sources */,
+				D35490611CDC51BA00E59615 /* GCalendar.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D3D35DD51CBA2E8200B18092 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -711,6 +887,7 @@
 				D39B879C1CCCF02600EC5280 /* ExperimentCard.swift in Sources */,
 				D3ED99E61CCB651300001E2B /* LibraryViewController.swift in Sources */,
 				D3F473491CCA068D00750FFB /* JwcNoticeModel.swift in Sources */,
+				D354905C1CDC519100E59615 /* GCalendar.swift in Sources */,
 				D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */,
 				D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */,
 				D31821CE1CC856FF00992355 /* ExperimentViewController.swift in Sources */,
@@ -774,6 +951,7 @@
 				D3A0C1741CBB7AF500744640 /* ModulesViewController.swift in Sources */,
 				D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */,
 				D3E6BD831CC8D4B20074FF6D /* PedetailViewController.swift in Sources */,
+				D3F375C71CDB3957004DDEA5 /* WifiLoginHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -796,6 +974,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D3578ACC1CDBACBB00B291D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D3578AC11CDBACBA00B291D0 /* Herald_iOS_Today */;
+			targetProxy = D3578ACB1CDBACBB00B291D0 /* PBXContainerItemProxy */;
+		};
 		D3D35DEF1CBA2E8200B18092 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D3D35DD81CBA2E8200B18092 /* Herald_iOS */;
@@ -817,9 +1000,45 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
+		D3578AC71CDBACBB00B291D0 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D3578AC81CDBACBB00B291D0 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D3578ACF1CDBACBB00B291D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = Herald_iOS_Today/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test.Herald-iOS-Today";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D3578AD01CDBACBB00B291D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = Herald_iOS_Today/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test.Herald-iOS-Today";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		D3D35DFF1CBA2E8200B18092 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -838,8 +1057,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -861,7 +1080,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "764f49b0-6cfd-4acc-b610-382c4cefe429";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -886,8 +1105,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -902,7 +1121,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "764f49b0-6cfd-4acc-b610-382c4cefe429";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -914,15 +1133,16 @@
 			baseConfigurationReference = ED76AC9BE4F12BE2D1325536 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "764f49b0-6cfd-4acc-b610-382c4cefe429";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -932,15 +1152,16 @@
 			baseConfigurationReference = B6878935004ACF38EDF397D4 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "764f49b0-6cfd-4acc-b610-382c4cefe429";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -994,6 +1215,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D3578ACE1CDBACBB00B291D0 /* Build configuration list for PBXNativeTarget "Herald_iOS_Today" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D3578ACF1CDBACBB00B291D0 /* Debug */,
+				D3578AD01CDBACBB00B291D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D3D35DD41CBA2E8200B18092 /* Build configuration list for PBXProject "Herald_iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

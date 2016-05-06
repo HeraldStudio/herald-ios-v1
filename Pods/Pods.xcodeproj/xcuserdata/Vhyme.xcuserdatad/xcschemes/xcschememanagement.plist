@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>DHCShakeNotifier.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FSCalendar.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,12 +57,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>271EA30AB2120E36E8553BE1B8A5E409</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5E40AFCA19649CD3E321D8212944BB69</key>
+		<key>1740D26A087D3DED5B53D388AE4BF1D3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,22 +67,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8A17B9722F8E95C579D382D4E2BEDEA8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>93B774DC3AA92890DDDA40C7F460F9C6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9514FF772F565848FEC895E678C37306</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B2619B2813D910DBC9FE9714E0788D55</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C8F9359EEA596B601D362864ADABB7C6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CB6C142D00F244B82B9CA261B04401E1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>DA8812B5380975A88ED25E92FF6FA440</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E4735A815FD7B4973541DB7D40CA4474</key>
 		<dict>
 			<key>primary</key>
 			<true/>

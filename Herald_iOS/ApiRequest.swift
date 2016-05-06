@@ -45,6 +45,13 @@ class ApiRequest {
         return self
     }
     
+    var isGet = false
+    
+    func get () -> ApiRequest {
+        isGet = true
+        return self
+    }
+    
     /**
      * 联网设置部分
      * builder  参数表
@@ -170,7 +177,7 @@ class ApiRequest {
      * 执行部分
      **/
     func run () {
-        Alamofire.request(.POST, url!, parameters: map)
-            .responseString(completionHandler: callback)
+        let request = Alamofire.request(isGet ? .GET : .POST, url!, parameters: map, encoding: .URL)
+        request.responseString(completionHandler: callback)
     }
 }
