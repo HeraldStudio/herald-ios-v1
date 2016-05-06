@@ -44,13 +44,7 @@ class ClassInfo {
     }
     
     func time60ToHourMinute(time: Int) -> String{
-        let minute = time % 60;
-        let hour = time / 60;
-        var str = String(hour);
-        str += ":";
-        if(minute < 10){ str += "0"; }
-        str += String(minute);
-        return str;
+        return String(format: "%d:%02d", time / 60, time % 60);
     }
     
     

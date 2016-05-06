@@ -40,7 +40,7 @@ class Dialogs {
         if progressDialogShown { return }
         progressDialogShown = true
         progressDialog = MBProgressHUD(view: vc.view)
-        UIApplication.sharedApplication().delegate?.window!!.addSubview(progressDialog!)
+        vc.view.addSubview(progressDialog!)
         progressDialog?.show(true)
         progressDialog?.labelText = "请稍候…"
     }
@@ -57,7 +57,7 @@ class Dialogs {
         alertDialog?.hide(true)
         
         alertDialog = MBProgressHUD(view: vc.view)
-        UIApplication.sharedApplication().delegate?.window!!.addSubview(alertDialog!)
+        vc.view.addSubview(alertDialog!)
         alertDialog?.show(true)
         alertDialog?.labelText = message
         alertDialog?.mode = .Text
@@ -68,26 +68,9 @@ class Dialogs {
     func showQuestionDialog (message: String, runAfter: () -> Void) {
         let dialog = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         dialog.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default){
-                (action: UIAlertAction) -> Void in runAfter()})
+            (action: UIAlertAction) -> Void in runAfter()})
         dialog.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel){
-                (action: UIAlertAction) -> Void in })
+            (action: UIAlertAction) -> Void in })
         vc.presentViewController(dialog, animated: true, completion: nil)
-    }
-    
-    func showTipDialogIfUnknown (message: String, cachePostfix: String, runAfter: () -> Void) {
-        let shown = CacheHelper.get("tip_ignored_" + cachePostfix) == "1"
-        if !shown {
-            let dialog = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-            dialog.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default){
-                (action: UIAlertAction) -> Void in runAfter()})
-            dialog.addAction(UIAlertAction(title: "不再提示", style: UIAlertActionStyle.Cancel){
-                (action: UIAlertAction) -> Void in
-                CacheHelper.set("tip_ignored_" + cachePostfix, "1")
-                runAfter()
-                })
-            vc.presentViewController(dialog, animated: true, completion: nil)
-        } else {
-            runAfter()
-        }
     }
 }
