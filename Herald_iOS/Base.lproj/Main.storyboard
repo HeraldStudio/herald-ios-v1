@@ -2420,6 +2420,9 @@ Copyright (c) 2013 Alexandr Graschenkov  [MIT] DHCShakeNotifier (github.co
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                         <dataDetectorType key="dataDetectorTypes"/>
+                        <connections>
+                            <outlet property="delegate" destination="GHm-8e-AOt" id="uv8-Wd-pUJ"/>
+                        </connections>
                     </webView>
                     <navigationItem key="navigationItem" title="WebModule" id="pHf-kM-WYR">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="STi-iG-0RD">
