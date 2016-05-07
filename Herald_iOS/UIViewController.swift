@@ -12,23 +12,23 @@ import MBProgressHUD
 
 extension UIViewController {
     func showProgressDialog() {
-        Dialogs.getInstanceForVc(self).showProgressDialog()
+        Dialogs.showProgressDialog()
     }
     
     func hideProgressDialog() {
-        Dialogs.getInstanceForVc(self).hideProgressDialog()
+        Dialogs.hideProgressDialog()
     }
     
     func showMessage(message : String) {
-        Dialogs.getInstanceForVc(self).showMessage(message)
+        Dialogs.showMessage(message)
     }
     
     func showTipDialogIfUnknown (message: String, cachePostfix: String, runAfter: () -> Void) {
-        Dialogs.getInstanceForVc(self).showTipDialogIfUnknown(message, cachePostfix: cachePostfix, runAfter: runAfter)
+        Dialogs.showTipDialogIfUnknown(message, cachePostfix: cachePostfix, runAfter: runAfter)
     }
     
     func showQuestionDialog (message: String, runAfter: () -> Void) {
-        Dialogs.getInstanceForVc(self).showQuestionDialog(message, runAfter: runAfter)
+        Dialogs.showQuestionDialog(message, runAfter: runAfter)
     }
     
     func setNavigationColor (swiper: SwipeRefreshHeader?, _ color: Int) {

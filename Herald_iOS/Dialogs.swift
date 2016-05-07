@@ -8,64 +8,36 @@
 
 import Foundation
 import UIKit
-import MBProgressHUD
+import Toast_Swift
+import SVProgressHUD
 
 class Dialogs {
     
-    static var map : [UIViewController : Dialogs] = [:]
-    
-    var vc : UIViewController
-    
-    private init (_ vc : UIViewController) {
-        self.vc = vc
+    static func showProgressDialog () {
+        SVProgressHUD.setDefaultStyle(.Custom)
+        SVProgressHUD.setBackgroundColor(UIColor(red: 0, green: 0, blue: 0, alpha: 0.8))
+        SVProgressHUD.setForegroundColor(UIColor.whiteColor())
+        SVProgressHUD.show()
     }
     
-    static func getInstanceForVc (vc : UIViewController) -> Dialogs {
-        if let dialog = map[vc] {
-            return dialog
-        } else {
-            let newDialog = Dialogs(vc)
-            map.updateValue(newDialog, forKey: vc)
-            return newDialog
-        }
+    static func hideProgressDialog () {
+        SVProgressHUD.dismiss()
     }
     
-    var progressDialog : MBProgressHUD?
-    
-    var progressDialogShown = false
-    
-    var alertDialog : MBProgressHUD?
-    
-    func showProgressDialog () {
-        if progressDialogShown { return }
-        progressDialogShown = true
-        progressDialog = MBProgressHUD(view: vc.view)
-        UIApplication.sharedApplication().delegate?.window!!.addSubview(progressDialog!)
-        progressDialog?.show(true)
-        progressDialog?.labelText = "请稍候…"
+    static func showMessage (message : String) {
+        let vc : UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController)!
+        var style = ToastStyle()
+        style.messageFont = UIFont.systemFontOfSize(14)
+        style.horizontalPadding = 20
+        style.verticalPadding = 10
+        style.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
+        ToastManager.shared.style = style
+        let toastPoint = CGPoint(x: vc.view.bounds.width / 2, y: vc.view.bounds.maxY - 100)
+        vc.view.makeToast(message, duration: Double(message.characters.count / 10) + 1, position: toastPoint)
     }
     
-    func hideProgressDialog () {
-        if !progressDialogShown { return }
-        progressDialogShown = false
-        progressDialog?.hide(true)
-    }
-    
-    func showMessage (message : String) {
-        // 先立即隐藏上一条消息
-        alertDialog?.minShowTime = 0
-        alertDialog?.hide(true)
-        
-        alertDialog = MBProgressHUD(view: vc.view)
-        UIApplication.sharedApplication().delegate?.window!!.addSubview(alertDialog!)
-        alertDialog?.show(true)
-        alertDialog?.labelText = message
-        alertDialog?.mode = .Text
-        alertDialog?.minShowTime = Float(message.characters.count / 10) + 1
-        alertDialog?.hide(true)
-    }
-    
-    func showQuestionDialog (message: String, runAfter: () -> Void) {
+    static func showQuestionDialog (message: String, runAfter: () -> Void) {
+        let vc : UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController)!
         let dialog = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         dialog.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default){
                 (action: UIAlertAction) -> Void in runAfter()})
@@ -74,7 +46,8 @@ class Dialogs {
         vc.presentViewController(dialog, animated: true, completion: nil)
     }
     
-    func showTipDialogIfUnknown (message: String, cachePostfix: String, runAfter: () -> Void) {
+    static func showTipDialogIfUnknown (message: String, cachePostfix: String, runAfter: () -> Void) {
+        let vc : UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController)!
         let shown = CacheHelper.get("tip_ignored_" + cachePostfix) == "1"
         if !shown {
             let dialog = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.Alert)

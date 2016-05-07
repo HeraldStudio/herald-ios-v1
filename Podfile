@@ -4,7 +4,8 @@ use_frameworks!
 
 pod 'Alamofire', '~> 3.3'
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
-pod 'MBProgressHUD', '~> 0.9.2'
+pod 'Toast-Swift', '~> 1.3.0'
+pod 'SVProgressHUD'
 pod 'Reindeer'
 pod 'Kingfisher', '~> 2.2'
 pod 'FSCalendar'
