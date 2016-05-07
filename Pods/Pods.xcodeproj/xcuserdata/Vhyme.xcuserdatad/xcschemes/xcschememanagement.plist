@@ -24,11 +24,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>MBProgressHUD.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>MagicPie.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -49,7 +44,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SVProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Toast-Swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -57,7 +62,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1740D26A087D3DED5B53D388AE4BF1D3</key>
+		<key>19917428AA12389042B843DDB5F231FA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1D3C05C8F9B8EC766AAB9C903AAE2734</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,17 +77,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>826BD9396072DA123C239DBE7BFF5455</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>8A17B9722F8E95C579D382D4E2BEDEA8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>93B774DC3AA92890DDDA40C7F460F9C6</key>
+		<key>8D8BECEB78289C53E1E402E57EC596BD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9514FF772F565848FEC895E678C37306</key>
+		<key>995DDB8F50D759CE297AC130C6D1A01E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,12 +107,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E4735A815FD7B4973541DB7D40CA4474</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
+		<key>DEB0516F454CE602D3C0C1120F394722</key>
 		<dict>
 			<key>primary</key>
 			<true/>
