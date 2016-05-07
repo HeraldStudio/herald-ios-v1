@@ -84,7 +84,7 @@ class ApiHelper : NSObject {
     
     static func getWifiPassword () -> String {
         // 若无校园网独立用户缓存，则使用登陆应用的账户
-        let cachePwd = CacheHelper.get("authPwd")
+        let cachePwd = CacheHelper.get("wifiAuthPwd")
         return cachePwd == "" ? getPassword() : cachePwd
     }
     
