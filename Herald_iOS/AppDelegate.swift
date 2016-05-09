@@ -30,7 +30,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             showLogin()
         }
         
+        if #available(iOS 9.0, *) {
+            let test1 = UIApplicationShortcutItem.init(type: "exam", localizedTitle: "考试助手", localizedSubtitle: "", icon: UIApplicationShortcutIcon.init(templateImageName: ""), userInfo: nil)
+            let test2 = UIApplicationShortcutItem.init(type: "curriculum", localizedTitle: "课表助手", localizedSubtitle: "", icon: UIApplicationShortcutIcon.init(templateImageName: ""), userInfo: nil)
+            let test3 = UIApplicationShortcutItem.init(type: "card", localizedTitle: "一卡通", localizedSubtitle: "", icon: UIApplicationShortcutIcon.init(templateImageName: ""), userInfo: nil)
+            application.shortcutItems = [test1,test2,test3]
+        } else {
+            // Fallback on earlier versions
+        }
+        
         return true
+    }
+    
+    @available(iOS 9.0, *)
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+        
+        var desVC = String()
+        switch shortcutItem.type {
+        case "exam":
+            desVC = "MODULE_QUERY_EXAM"
+        case "curriculum":
+            desVC = "MODULE_QUERY_CURRICULUM"
+        case "card":
+            desVC = "MODULE_QUERY_CARDEXTRA"
+        default:
+            return
+        }
+        
+        let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(desVC)
+        let view = self.window?.rootViewController as! UINavigationController
+        view.pushViewController(detailVC, animated: true)
     }
 
     func applicationWillResignActive(application: UIApplication) {
