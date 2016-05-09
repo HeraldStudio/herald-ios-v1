@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 9.0, *) {
             let test1 = UIApplicationShortcutItem.init(type: "exam", localizedTitle: "考试助手", localizedSubtitle: "", icon: UIApplicationShortcutIcon.init(templateImageName: ""), userInfo: nil)
             let test2 = UIApplicationShortcutItem.init(type: "curriculum", localizedTitle: "课表助手", localizedSubtitle: "", icon: UIApplicationShortcutIcon.init(templateImageName: ""), userInfo: nil)
-            let test3 = UIApplicationShortcutItem.init(type: "card", localizedTitle: "一卡通", localizedSubtitle: "", icon: UIApplicationShortcutIcon.init(templateImageName: ""), userInfo: nil)
+            let test3 = UIApplicationShortcutItem.init(type: "card", localizedTitle: "一卡通充值", localizedSubtitle: "", icon: UIApplicationShortcutIcon.init(templateImageName: ""), userInfo: nil)
             application.shortcutItems = [test1,test2,test3]
         } else {
             // Fallback on earlier versions
@@ -52,14 +52,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case "curriculum":
             desVC = "MODULE_QUERY_CURRICULUM"
         case "card":
-            desVC = "MODULE_QUERY_CARDEXTRA"
+            desVC = "WEBMODULE"
         default:
             return
         }
         
-        let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(desVC)
         let view = self.window?.rootViewController as! UINavigationController
-        view.pushViewController(detailVC, animated: true)
+        if desVC == "WEBMODULE" {
+            CacheHelper.set("herald_webmodule_title", "充值")
+            CacheHelper.set("herald_webmodule_url", "http://58.192.115.47:8088/wechat-web/login/initlogin.html")
+            
+            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE")
+            view.pushViewController(detailVC, animated: true)
+
+        } else {
+            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(desVC)
+            view.pushViewController(detailVC, animated: true)
+        }
+        
     }
 
     func applicationWillResignActive(application: UIApplication) {

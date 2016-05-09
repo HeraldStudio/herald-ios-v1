@@ -15,12 +15,18 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
         let th = (tabBarController?.tabBar.frame.height)!
         let bottomPadding = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tw, height: th))
         moduleTableView.tableFooterView = bottomPadding
-        print("viewDidLoad")
+        
+        //cell注册3D touch代理
+        //因为cell的管理使用不是很完善，暂时删除内部cell按压预览
+        if #available(iOS 9.0, *) {
+            if traitCollection.forceTouchCapability == .Available {
+                self.registerForPreviewingWithDelegate(self, sourceView: moduleTableView)
+            }
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
         setupModuleList()
-        print("viewDidAppear")
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,12 +70,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let moduleCell = moduleTableView.dequeueReusableCellWithIdentifier("ModuleTableViewCell", forIndexPath: indexPath) as! ModuleTableViewCell
         
-        //cell注册3D touch代理
-        if #available(iOS 9.0, *) {
-            if traitCollection.forceTouchCapability == .Available {
-                self.registerForPreviewingWithDelegate(self, sourceView: moduleCell)
-            }
-        }
+        
         
         let module = sections[indexPath.section][indexPath.row]
         
@@ -77,7 +78,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
         moduleCell.label.text = module.nameTip
         moduleCell.detail.text = module.desc
         
-        moduleCell.selectionStyle = UITableViewCellSelectionStyle.None
+        //moduleCell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return moduleCell
     }
@@ -101,23 +102,29 @@ extension ModulesViewController:UIViewControllerPreviewingDelegate {
     //peek
     @available(iOS 9.0, *)
     func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-
-        let cell = previewingContext.sourceView as! ModuleTableViewCell
         
-        //通过触摸点的位置获取的是相对于cell的坐标，需要转换为moduleTableView的，然后获得indexPath
-        let tableViewLocation = cell.convertPoint(location, toView: moduleTableView)
-        let indexPath = moduleTableView.indexPathForRowAtPoint(tableViewLocation)
+        //通过触摸点的位置获取的是相对于moduleTableView的indexPath
+        guard let indexPath = moduleTableView.indexPathForRowAtPoint(location) else {
+                return nil
+        }
 
-        previewingContext.sourceRect = cell.bounds
+        let cell = moduleTableView.cellForRowAtIndexPath(indexPath) as! ModuleTableViewCell
+        
+        previewingContext.sourceRect = cell.frame
         
         if cell.label!.text == "课表助手" || cell.label!.text == "模块管理" {
             return nil
         }
         
-        if sections[indexPath!.section][indexPath!.row].controller.hasPrefix("http") {
-            return nil
+        if sections[indexPath.section][indexPath.row].controller.hasPrefix("http") {
+            CacheHelper.set("herald_webmodule_title", sections[indexPath.section][indexPath.row].nameTip)
+            CacheHelper.set("herald_webmodule_url", sections[indexPath.section][indexPath.row].controller)
+            
+            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE")
+            return detailVC
+            //return nil
         }else {
-            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(sections[indexPath!.section][indexPath!.row].controller)
+            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(sections[indexPath.section][indexPath.row].controller)
             detailVC.preferredContentSize = CGSizeMake(SCREEN_WIDTH, 600)
             return detailVC
         }
