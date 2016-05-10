@@ -13,6 +13,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     let swiper = SwipeRefreshHeader()
     
+    var sliderData = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if !ApiHelper.isLogin() {
@@ -82,9 +84,18 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     var links : [String] = []
     
+    func refreshSliderIfNeeded () {
+        let cache = JSON.parse(ServiceHelper.get("versioncheck_cache"))
+        let array = cache["content"]["sliderviews"]
+        if sliderData != array.stringValue {
+            refreshSlider()
+        }
+    }
+    
     func refreshSlider () {
         let cache = JSON.parse(ServiceHelper.get("versioncheck_cache"))
         let array = cache["content"]["sliderviews"]
+        sliderData = array.stringValue
         
         links.removeAll()
         var pics : [AnyObject?] = []
@@ -115,8 +126,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     func loadContent (refresh : Bool) {
         /// 本地重载
         
-        // 单独刷新快捷栏，不刷新轮播图。轮播图在轮播图数据下载完成后单独刷新。
-        refreshShortcutBox()
+        refreshSliderIfNeeded()
         
         // 清空卡片列表，等待载入
         cardList.removeAll()
