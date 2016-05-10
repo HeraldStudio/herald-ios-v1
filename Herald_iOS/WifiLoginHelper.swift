@@ -71,7 +71,6 @@ class WifiLoginHelper {
     
     private func logoutThenLogin () {
         ApiRequest().url("http://w.seu.edu.cn/portal/logout.php").noCheck200().onFinish { success, _, response in
-            print(response)
             if success {
                 //self.vc.showMessage("摇一摇：退出成功，正在尝试登录~")
                 self.loginToService()
