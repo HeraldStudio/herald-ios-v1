@@ -82,7 +82,6 @@
 		D3F4734D1CCA153A00750FFB /* LectureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4734C1CCA153A00750FFB /* LectureModel.swift */; };
 		D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4734E1CCA15C900750FFB /* LectureViewController.swift */; };
 		D3FBC2F21CCC51F900305428 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FBC2F11CCC51F900305428 /* UIViewController.swift */; };
-		D3FBC2F41CCC524500305428 /* Dialogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FBC2F31CCC524500305428 /* Dialogs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -199,7 +198,6 @@
 		D3F4734C1CCA153A00750FFB /* LectureModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureModel.swift; sourceTree = "<group>"; };
 		D3F4734E1CCA15C900750FFB /* LectureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureViewController.swift; sourceTree = "<group>"; };
 		D3FBC2F11CCC51F900305428 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		D3FBC2F31CCC524500305428 /* Dialogs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialogs.swift; sourceTree = "<group>"; };
 		DA028C4F1CDF422F005343DE /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		ED76AC9BE4F12BE2D1325536 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -234,7 +232,6 @@
 			isa = PBXGroup;
 			children = (
 				D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */,
-				D3FBC2F31CCC524500305428 /* Dialogs.swift */,
 				D39B879F1CCD0F0E00EC5280 /* Error.swift */,
 				D354905B1CDC519100E59615 /* GCalendar.swift */,
 			);
@@ -790,7 +787,6 @@
 				D31821C31CC5291000992355 /* CardHistoryModel.swift in Sources */,
 				D306E02A1CCA68A700FA3812 /* GradeModel.swift in Sources */,
 				D306E0241CCA3F7700FA3812 /* ExamViewController.swift in Sources */,
-				D3FBC2F41CCC524500305428 /* Dialogs.swift in Sources */,
 				D3D35DDF1CBA2E8200B18092 /* LoginViewController.swift in Sources */,
 				D31821C11CC5256F00992355 /* CardTableViewCell.swift in Sources */,
 				D306E0261CCA3F8400FA3812 /* ExamTableViewCell.swift in Sources */,
