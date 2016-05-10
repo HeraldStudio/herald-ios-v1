@@ -19,15 +19,15 @@ extension UIViewController {
     }
     
     func showMessage(message : String) {
-        Dialogs.showMessage(message)
+        Dialogs.showMessage(self, message: message)
     }
     
     func showTipDialogIfUnknown (message: String, cachePostfix: String, runAfter: () -> Void) {
-        Dialogs.showTipDialogIfUnknown(message, cachePostfix: cachePostfix, runAfter: runAfter)
+        Dialogs.showTipDialogIfUnknown(self, message: message, cachePostfix: cachePostfix, runAfter: runAfter)
     }
     
     func showQuestionDialog (message: String, runAfter: () -> Void) {
-        Dialogs.showQuestionDialog(message, runAfter: runAfter)
+        Dialogs.showQuestionDialog(self, message: message, runAfter: runAfter)
     }
     
     func setNavigationColor (swiper: SwipeRefreshHeader?, _ color: Int) {
