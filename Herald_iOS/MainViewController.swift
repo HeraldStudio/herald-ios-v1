@@ -20,6 +20,8 @@ class MainViewController: UITabBarController {
         navigationController?.view.backgroundColor = UIColor.whiteColor()
         
         tabBar.tintColor = UIColor(red: 0, green: 180/255, blue: 255/255, alpha: 1)
+        
+        initialize()
     }
     
     func initialize() {

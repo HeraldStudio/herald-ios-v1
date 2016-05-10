@@ -20,6 +20,8 @@ class FeedbackViewController : UIViewController {
     }
     
     @IBAction func submit () {
+        endEdit()
+        
         let content = editor.text!
         let contact = self.contact.text!
         if content == "" {
@@ -38,5 +40,10 @@ class FeedbackViewController : UIViewController {
                     self.editor.text = ""
                 }
             }.run()
+    }
+    
+    @IBAction func endEdit () {
+        editor.resignFirstResponder()
+        contact.resignFirstResponder()
     }
 }
