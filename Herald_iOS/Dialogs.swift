@@ -24,8 +24,7 @@ class Dialogs {
         SVProgressHUD.dismiss()
     }
     
-    static func showMessage (message : String) {
-        let vc : UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController)!
+    static func showMessage (vc : UIViewController, message : String) {
         var style = ToastStyle()
         style.messageFont = UIFont.systemFontOfSize(14)
         style.horizontalPadding = 20
@@ -36,8 +35,7 @@ class Dialogs {
         vc.view.makeToast(message, duration: 1, position: toastPoint)
     }
     
-    static func showQuestionDialog (message: String, runAfter: () -> Void) {
-        let vc : UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController)!
+    static func showQuestionDialog (vc : UIViewController, message: String, runAfter: () -> Void) {
         let dialog = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         dialog.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default){
                 (action: UIAlertAction) -> Void in runAfter()})
@@ -46,8 +44,7 @@ class Dialogs {
         vc.presentViewController(dialog, animated: true, completion: nil)
     }
     
-    static func showTipDialogIfUnknown (message: String, cachePostfix: String, runAfter: () -> Void) {
-        let vc : UIViewController = (UIApplication.sharedApplication().keyWindow?.rootViewController)!
+    static func showTipDialogIfUnknown (vc : UIViewController, message: String, cachePostfix: String, runAfter: () -> Void) {
         let shown = CacheHelper.get("tip_ignored_" + cachePostfix) == "1"
         if !shown {
             let dialog = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.Alert)

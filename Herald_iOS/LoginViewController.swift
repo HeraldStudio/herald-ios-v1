@@ -22,8 +22,11 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func buttonClicked() {
+        endEdit()
         if username?.text! != "" && password?.text! != "" {
             doLogin()
+        } else {
+            showMessage("输入不完整，请重试")
         }
     }
     

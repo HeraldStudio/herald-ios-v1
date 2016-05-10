@@ -23,9 +23,9 @@ class WifiLoginHelper {
     func checkAndLogin () {
         if WifiLoginHelper.working { return }
         WifiLoginHelper.working = true
-        vc.showProgressDialog()
         
         vc.showTipDialogIfUnknown("欢迎使用摇一摇登录校园网~\n由于iOS限制，快跟小猴学使用姿势：\n\n1、请在系统[设置]-[Wi-Fi]-[seu-wlan]-关闭[自动连接]开关才能正常使用~\n\n2、摇一摇之前请手动连接seu-wlan，等状态栏出现Wi-Fi图标后（如果没出现请参照第1条）即可在小猴首页摇一摇登录~", cachePostfix: "wifi") {
+            self.vc.showProgressDialog()
             //self.vc.showMessage("摇一摇：正在检测网络环境~")
             self.beginCheck()
         }
