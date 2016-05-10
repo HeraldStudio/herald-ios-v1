@@ -52,7 +52,7 @@ class LoginViewController: UIViewController {
     func checkUUID () {
         ApiRequest().api("user").uuid().onFinish { (success, code, response) in
             if success {
-                self.presentViewController(self.storyboard!.instantiateViewControllerWithIdentifier("main"), animated: true) {}
+                ((UIApplication.sharedApplication().delegate) as! AppDelegate).showMain()
             } else {
                 self.showMessage("网络异常，请重试")
                 ApiHelper.doLogout(nil)
