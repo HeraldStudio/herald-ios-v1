@@ -334,25 +334,32 @@ extension CardsViewController:UIViewControllerPreviewingDelegate {
         guard let indexPath = cardsTableView.indexPathForRowAtPoint(location) else {
             return nil
         }
+        
         let cell = cardsTableView.cellForRowAtIndexPath(indexPath) as! CardsTableViewCell
         previewingContext.sourceRect = cell.frame
         
-        //排除课表助手的预览
-        if cell.title!.text == "课表助手" {
+        //排除课表助手,跑操助手次数cell的预览
+        if cardList[indexPath.section].rows[0].title == "跑操助手" {
+            if indexPath.row != 0 {
+                return nil
+            }
+        }else if cell.title!.text == "课表助手" {
             return nil
         }
         
-        if !cardList[indexPath.section].rows[0].destination.hasPrefix("http") {
-            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(cardList[indexPath.section].rows[0].destination)
-            detailVC.preferredContentSize = CGSizeMake(SCREEN_WIDTH, 600)
-            return detailVC
-        }else {
-            //存在spinner卡顿情况，因此可考虑删除webview的预览
-            CacheHelper.set("herald_webmodule_title", cardList[indexPath.section].rows[0].title!)
-            CacheHelper.set("herald_webmodule_url", cardList[indexPath.section].rows[0].destination)
+        if cardList[indexPath.section].rows[indexPath.row].destination.hasPrefix("http") {
+            //存在spinner卡顿情况，仅针对教务通知子cell
+            CacheHelper.set("herald_webmodule_title", cardList[indexPath.section].rows[indexPath.row].title!)
+            CacheHelper.set("herald_webmodule_url", cardList[indexPath.section].rows[indexPath.row].destination)
             
             let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE")
             return detailVC
+        } else if !cardList[indexPath.section].rows[indexPath.row].destination.isEmpty {
+            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(cardList[indexPath.section].rows[indexPath.row].destination)
+            detailVC.preferredContentSize = CGSizeMake(SCREEN_WIDTH, 600)
+            return detailVC
+        } else {
+            return nil
         }
     }
     
