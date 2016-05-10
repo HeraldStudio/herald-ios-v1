@@ -45,6 +45,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @available(iOS 9.0, *)
     func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
         
+        //判断是否登录
+        if !ApiHelper.isLogin() {
+            showLogin()
+            return
+        }
+        
         var desVC = String()
         switch shortcutItem.type {
         case "exam":
