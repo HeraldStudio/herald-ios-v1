@@ -20,8 +20,12 @@ class MainViewController: UITabBarController {
         navigationController?.view.backgroundColor = UIColor.whiteColor()
         
         tabBar.tintColor = UIColor(red: 0, green: 180/255, blue: 255/255, alpha: 1)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
+    }
+    
+    func initialize() {
+        if ApiHelper.isLogin() {
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
+        }
     }
     
     func onShake () {

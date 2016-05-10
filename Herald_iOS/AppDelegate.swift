@@ -95,6 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func showLogin () {
+        self.window?.rootViewController?.dismissViewControllerAnimated(true, completion: nil)
         self.window?.rootViewController = nil
         let lvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("login")
         self.window?.rootViewController = lvc
