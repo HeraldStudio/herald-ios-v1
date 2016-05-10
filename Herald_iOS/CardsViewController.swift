@@ -32,6 +32,13 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         // 启动定时刷新，每当时间改变时触发本地重载
         let seconds = 60 - NSDate().timeIntervalSince1970 % 60
         performSelector(#selector(self.timeChanged), withObject: nil, afterDelay: seconds)
+        
+        //cell注册3D touch代理
+        if #available(iOS 9.0, *) {
+            if traitCollection.forceTouchCapability == .Available {
+                self.registerForPreviewingWithDelegate(self, sourceView: cardsTableView)
+            }
+        }
     }
     
     // 定时刷新
@@ -276,6 +283,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         if let count3 = row.count3 { cell.count3?.text = count3 }
         cell.notifyDot?.alpha = indexPath.row == 0 && model.displayPriority == .CONTENT_NOTIFY ? 1 : 0
         
+        //cell.selectionStyle = UITableViewCellSelectionStyle.None
+        
         /*if indexPath.row == 0 && model.displayPriority == .CONTENT_NOTIFY {
             let array = NSMutableArray()
             array.sw_addUtilityButtonWithColor(UIColor(red: 0, green: 180/255, blue: 255/255, alpha: 1), title: "标为已读")
@@ -315,3 +324,40 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 }
 
+//3d touch遵守协议
+extension CardsViewController:UIViewControllerPreviewingDelegate {
+    
+    //peek
+    @available(iOS 9.0, *)
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard let indexPath = cardsTableView.indexPathForRowAtPoint(location) else {
+            return nil
+        }
+        let cell = cardsTableView.cellForRowAtIndexPath(indexPath) as! CardsTableViewCell
+        previewingContext.sourceRect = cell.frame
+        
+        //排除课表助手的预览
+        if cell.title!.text == "课表助手" {
+            return nil
+        }
+        
+        if !cardList[indexPath.section].rows[0].destination.hasPrefix("http") {
+            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(cardList[indexPath.section].rows[0].destination)
+            detailVC.preferredContentSize = CGSizeMake(SCREEN_WIDTH, 600)
+            return detailVC
+        }else {
+            //存在spinner卡顿情况，因此可考虑删除webview的预览
+            CacheHelper.set("herald_webmodule_title", cardList[indexPath.section].rows[0].title!)
+            CacheHelper.set("herald_webmodule_url", cardList[indexPath.section].rows[0].destination)
+            
+            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE")
+            return detailVC
+        }
+    }
+    
+    //pop
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        showViewController(viewControllerToCommit, sender: self)
+    }
+}

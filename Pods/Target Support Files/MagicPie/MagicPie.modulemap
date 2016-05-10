@@ -1,0 +1,6 @@
+framework module MagicPie {
+  umbrella header "MagicPie-umbrella.h"
+
+  export *
+  module * { export * }
+}
