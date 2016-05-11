@@ -90,4 +90,11 @@ class CardsRowModel {
         self.desc = jwcNoticeModel.time
         self.destination = jwcNoticeModel.url
     }
+    
+    init (activityModel : ActivityModel) {
+        self.title = activityModel.title
+        self.subtitle = activityModel.state.rawValue
+        self.desc = activityModel.activityTime + " @ " + activityModel.location
+        self.destination = activityModel.detailUrl
+    }
 }

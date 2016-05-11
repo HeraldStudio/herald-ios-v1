@@ -152,6 +152,9 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             cardList.append(ExamCard.getCard())
         }
         
+        // 加载校园活动缓存
+        cardList.append(ActivityCard.getCard())
+        
         if SettingsHelper.getModuleCardEnabled(Module.Lecture.rawValue) {
             // 加载并解析人文讲座预告缓存
             cardList.append(LectureCard.getCard())
@@ -220,6 +223,9 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
                 manager.addAll(ExamCard.getRefresher())
             }
         }
+        
+        // 直接刷新校园活动
+        manager.addAll(ActivityCard.getRefresher())
         
         if SettingsHelper.getModuleCardEnabled(Module.Lecture.rawValue) {
             // 直接刷新人文讲座预告
@@ -345,26 +351,29 @@ extension CardsViewController:UIViewControllerPreviewingDelegate {
             return nil
         }
         
+        let cardTitle = cardList[indexPath.section].rows[0].title!
+        
         let cell = cardsTableView.cellForRowAtIndexPath(indexPath) as! CardsTableViewCell
         previewingContext.sourceRect = cell.frame
         
-        //排除课表助手,跑操助手次数cell的预览
-        if cardList[indexPath.section].rows[0].title == "跑操助手" {
-            if indexPath.row != 0 {
-                return nil
-            }
-        }else if cell.title!.text == "课表助手" {
+        // 白名单机制，只有部分模块可以预览
+        if !["实验助手", "考试助手", "一卡通", "教务通知", "人文讲座", "校园活动", "小猴提示"].contains(cardTitle) {
             return nil
         }
         
-        if cardList[indexPath.section].rows[indexPath.row].destination.hasPrefix("http") {
+        // 校园活动的标题是切换tab，不能预览
+        if cardTitle == "校园活动" && indexPath.row == 0 {
+            return nil
+        }
+        
+        let destination = cardList[indexPath.section].rows[indexPath.row].destination
+        if destination.hasPrefix("http") {
             //存在spinner卡顿情况，仅针对教务通知子cell
-            CacheHelper.set("herald_webmodule_title", cardList[indexPath.section].rows[indexPath.row].title!)
             CacheHelper.set("herald_webmodule_url", cardList[indexPath.section].rows[indexPath.row].destination)
             
             let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE")
             return detailVC
-        } else if !cardList[indexPath.section].rows[indexPath.row].destination.isEmpty {
+        } else if !destination.isEmpty && !destination.hasPrefix("TAB") {
             let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(cardList[indexPath.section].rows[indexPath.row].destination)
             detailVC.preferredContentSize = CGSizeMake(SCREEN_WIDTH, 600)
             return detailVC

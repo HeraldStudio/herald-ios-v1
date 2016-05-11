@@ -173,6 +173,23 @@ class ApiRequest {
         return self
     }
     
+    func toAuthCache (key : String, withParser parser : JSONParser) -> ApiRequest {
+        onFinish {
+            success, _, response in
+            if(success) {
+                do {
+                    let cache = try parser(JSON.parse(response))
+                    ApiHelper.setAuthCache(key, cache)
+                } catch {
+                    for onFinishListener in self.onFinishListeners {
+                        onFinishListener(false, 0, "")
+                    }
+                }
+            }
+        }
+        return self
+    }
+    
     /**
      * 执行部分
      **/
