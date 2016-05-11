@@ -130,6 +130,31 @@ public class GCalendar : CustomDebugStringConvertible {
         setTime(h, m, s)
     }
     
+    /// 构造函数，根据字符串构造对应的时间，允许-/:. 等分隔符，
+    /// 根据分割出来的子串个数，依次填到年/月/日/时/分/秒中
+    public convenience init (_ src : String) {
+        let int = src
+            .replaceAll("/", "-")
+            .replaceAll(":", "-")
+            .replaceAll(".", "-")
+            .replaceAll(" ", "-")
+            .replaceAll("年", "-")
+            .replaceAll("月", "-")
+            .replaceAll("日", "-")
+            .recursiveReplaceAll("--", "-")
+            .split("-").map { s -> Int in
+            Int(s) == nil ? 1 : Int(s)!
+        }
+        self.init(GCalendarPrecision(rawValue: min(5, max(0, int.count)))!)
+        
+        if int.count > 0 { self.year = int[0] }
+        if int.count > 1 { self.month = int[1] }
+        if int.count > 2 { self.day = int[2] }
+        if int.count > 3 { self.hour = int[3] }
+        if int.count > 4 { self.minute = int[4] }
+        if int.count > 5 { self.second = int[5] }
+    }
+    
     /// 立即同步 srcComp 中的更改到 date 和 dstComp
     private func sync() {
         date = calendar.dateFromComponents(srcComp)!

@@ -8,7 +8,6 @@
         <!--小猴偷米-->
         <scene sceneID="ggb-Rx-O6K">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AYB-lQ-0D1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Wf9-dQ-yIv" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HDO-EO-ogn"/>
@@ -50,6 +49,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="小猴偷米" id="q5b-Ws-64V"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AYB-lQ-0D1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="359.19999999999999" y="-774.37333333333333"/>
         </scene>

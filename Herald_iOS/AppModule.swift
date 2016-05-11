@@ -42,6 +42,10 @@ class AppModule {
             
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE")
             navigationController?.pushViewController(vc, animated: true)
+        } else if controller.hasPrefix("TAB") {
+            if let tab = Int(controller.replaceAll("TAB", "")) {
+                (navigationController?.childViewControllers[0] as? UITabBarController)?.selectedIndex = tab
+            }
         } else {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(controller)
             navigationController?.pushViewController(vc, animated: true)

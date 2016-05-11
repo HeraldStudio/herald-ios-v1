@@ -50,7 +50,9 @@ class LoginViewController: UIViewController {
     }
     
     func checkUUID () {
-        ApiRequest().api("user").uuid().onFinish { (success, code, response) in
+        ApiRequest().api("user").uuid().toAuthCache("schoolnum") { json in
+            return json["content"]["schoolnum"].stringValue
+        }.onFinish { (success, code, response) in
             if success {
                 ((UIApplication.sharedApplication().delegate) as! AppDelegate).showMain()
             } else {

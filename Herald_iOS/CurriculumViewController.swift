@@ -62,10 +62,12 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
         for weekNum in CurriculumView.WEEK_NUMS {
             let arr = content[weekNum]
             for i in 0 ..< arr.count {
-                let info = ClassInfo(json: arr[i])
-                if info.endWeek > maxWeek {
-                    maxWeek = info.endWeek
-                }
+                do {
+                    let info = try ClassInfo(json: arr[i])
+                    if info.endWeek > maxWeek {
+                        maxWeek = info.endWeek
+                    }
+                } catch {}
             }
         }
         

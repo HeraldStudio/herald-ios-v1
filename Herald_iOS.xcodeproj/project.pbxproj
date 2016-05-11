@@ -39,6 +39,11 @@
 		D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858121CBB60A600B55E76 /* ApiRequest.swift */; };
 		D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34E95851CCDCCE700AD1119 /* JwcCard.swift */; };
 		D354905C1CDC519100E59615 /* GCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354905B1CDC519100E59615 /* GCalendar.swift */; };
+		D35FC6221CE2FEF400BE844C /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6211CE2FEF400BE844C /* ActivityViewController.swift */; };
+		D35FC6241CE301F700BE844C /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6231CE301F700BE844C /* ActivityModel.swift */; };
+		D35FC6261CE31A3500BE844C /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6251CE31A3500BE844C /* ActivityTableViewCell.swift */; };
+		D35FC6281CE3236300BE844C /* PullLoadFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6271CE3236300BE844C /* PullLoadFooter.swift */; };
+		D35FC62A1CE33A1E00BE844C /* ActivityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6291CE33A1E00BE844C /* ActivityCard.swift */; };
 		D37708621CCC5D37006ED853 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708611CCC5D37006ED853 /* FeedbackViewController.swift */; };
 		D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708641CCC67DC006ED853 /* CardsModel.swift */; };
 		D39B87971CCCCA0200EC5280 /* CardsRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */; };
@@ -149,6 +154,11 @@
 		D34E95851CCDCCE700AD1119 /* JwcCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcCard.swift; sourceTree = "<group>"; };
 		D354905B1CDC519100E59615 /* GCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCalendar.swift; sourceTree = "<group>"; };
 		D3578AAE1CDBABE300B291D0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		D35FC6211CE2FEF400BE844C /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		D35FC6231CE301F700BE844C /* ActivityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
+		D35FC6251CE31A3500BE844C /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
+		D35FC6271CE3236300BE844C /* PullLoadFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullLoadFooter.swift; sourceTree = "<group>"; };
+		D35FC6291CE33A1E00BE844C /* ActivityCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCard.swift; sourceTree = "<group>"; };
 		D37708611CCC5D37006ED853 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		D37708641CCC67DC006ED853 /* CardsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsModel.swift; sourceTree = "<group>"; };
 		D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsRowModel.swift; sourceTree = "<group>"; };
@@ -232,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */,
+				D35FC6271CE3236300BE844C /* PullLoadFooter.swift */,
 				D39B879F1CCD0F0E00EC5280 /* Error.swift */,
 				D354905B1CDC519100E59615 /* GCalendar.swift */,
 			);
@@ -246,6 +257,9 @@
 				D31821B81CC4D53300992355 /* CardsTableViewCell.swift */,
 				D37708641CCC67DC006ED853 /* CardsModel.swift */,
 				D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */,
+				D35FC6211CE2FEF400BE844C /* ActivityViewController.swift */,
+				D35FC6251CE31A3500BE844C /* ActivityTableViewCell.swift */,
+				D35FC6231CE301F700BE844C /* ActivityModel.swift */,
 				D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */,
 				D31DE50D1CC334EC00E4891D /* ModuleTableViewCell.swift */,
 				D3A0C1761CBB7B2300744640 /* MyInfoViewController.swift */,
@@ -288,6 +302,7 @@
 				D39B87A11CCD120F00EC5280 /* LectureCard.swift */,
 				D39B87A51CCD194E00EC5280 /* PedetailCard.swift */,
 				D34E95851CCDCCE700AD1119 /* JwcCard.swift */,
+				D35FC6291CE33A1E00BE844C /* ActivityCard.swift */,
 			);
 			name = mod_cards;
 			sourceTree = "<group>";
@@ -737,6 +752,7 @@
 				D39B879C1CCCF02600EC5280 /* ExperimentCard.swift in Sources */,
 				D3ED99E61CCB651300001E2B /* LibraryViewController.swift in Sources */,
 				D3F473491CCA068D00750FFB /* JwcNoticeModel.swift in Sources */,
+				D35FC6241CE301F700BE844C /* ActivityModel.swift in Sources */,
 				D354905C1CDC519100E59615 /* GCalendar.swift in Sources */,
 				D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */,
 				D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */,
@@ -757,6 +773,7 @@
 				D39B879E1CCD0C0B00EC5280 /* ExamCard.swift in Sources */,
 				D31821D01CC8573200992355 /* ExperimentModel.swift in Sources */,
 				D39B87A01CCD0F0E00EC5280 /* Error.swift in Sources */,
+				D35FC62A1CE33A1E00BE844C /* ActivityCard.swift in Sources */,
 				D31DE50E1CC334EC00E4891D /* ModuleTableViewCell.swift in Sources */,
 				D31DE5181CC359D300E4891D /* CurriculumViewController.swift in Sources */,
 				D3A0C1771CBB7B2300744640 /* MyInfoViewController.swift in Sources */,
@@ -778,6 +795,7 @@
 				D3ED99D41CCAF9FC00001E2B /* SeuNetViewController.swift in Sources */,
 				D3ED99DE1CCB3DB600001E2B /* SrtpTableViewCell.swift in Sources */,
 				D3ED99D81CCB08B300001E2B /* SchoolbusTableViewCell.swift in Sources */,
+				D35FC6281CE3236300BE844C /* PullLoadFooter.swift in Sources */,
 				D3F3DCFB1CBB7792006887F5 /* SettingsHelper.swift in Sources */,
 				D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */,
 				D3EFC1D71CCC81A800BC37A5 /* CurriculumCard.swift in Sources */,
@@ -785,6 +803,7 @@
 				D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */,
 				D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */,
 				D31821C31CC5291000992355 /* CardHistoryModel.swift in Sources */,
+				D35FC6221CE2FEF400BE844C /* ActivityViewController.swift in Sources */,
 				D306E02A1CCA68A700FA3812 /* GradeModel.swift in Sources */,
 				D306E0241CCA3F7700FA3812 /* ExamViewController.swift in Sources */,
 				D3D35DDF1CBA2E8200B18092 /* LoginViewController.swift in Sources */,
@@ -792,6 +811,7 @@
 				D306E0261CCA3F8400FA3812 /* ExamTableViewCell.swift in Sources */,
 				D306E0201CCA3ADF00FA3812 /* WebModuleViewController.swift in Sources */,
 				D3325D051CC89BA0002060A5 /* SwipeRefreshHeader.swift in Sources */,
+				D35FC6261CE31A3500BE844C /* ActivityTableViewCell.swift in Sources */,
 				D31821BF1CC522D900992355 /* CardViewController.swift in Sources */,
 				D39B879A1CCCEC2E00EC5280 /* CardCard.swift in Sources */,
 				D3D35DDD1CBA2E8200B18092 /* AppDelegate.swift in Sources */,
@@ -865,8 +885,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -888,7 +908,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -913,8 +933,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -929,7 +949,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -941,6 +961,7 @@
 			baseConfigurationReference = ED76AC9BE4F12BE2D1325536 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -950,6 +971,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -959,6 +982,7 @@
 			baseConfigurationReference = B6878935004ACF38EDF397D4 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -968,6 +992,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
