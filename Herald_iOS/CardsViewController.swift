@@ -13,7 +13,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     let swiper = SwipeRefreshHeader()
     
-    var sliderData = ""
+    var sliderData = JSON.parse("[]")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +87,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     func refreshSliderIfNeeded () {
         let cache = JSON.parse(ServiceHelper.get("versioncheck_cache"))
         let array = cache["content"]["sliderviews"]
-        if sliderData != array.stringValue {
+        if sliderData != array {
             refreshSlider()
         }
     }
@@ -95,7 +95,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     func refreshSlider () {
         let cache = JSON.parse(ServiceHelper.get("versioncheck_cache"))
         let array = cache["content"]["sliderviews"]
-        sliderData = array.stringValue
+        sliderData = array
         
         links.removeAll()
         var pics : [AnyObject?] = []
@@ -112,9 +112,16 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
         
-        if pics.count == 0 { return }
+        if pics.count == 0 {
+            pics.append("")
+            links.append("")
+        }
         slider.images = pics
-        slider.startRolling()
+        if slider.images.count > 1 {
+            slider.startRolling()
+        } else {
+            slider.stopRolling()
+        }
     }
     
     /**
