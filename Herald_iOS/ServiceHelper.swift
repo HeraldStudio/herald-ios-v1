@@ -42,7 +42,7 @@ class ServiceHelper {
     static func getPushMessageItem() -> CardsModel? {
         let pushMessage = getPushMessageContent()
         if pushMessage != "" {
-            let card = CardsModel(cellId: "", icon : "ic_pushmsg", title : "小猴提示", desc : pushMessage, dest : getPushMessageUrl(), priority : .CONTENT_NOTIFY)
+            let card = CardsModel(cellId: "", icon : "ic_pushmsg", title : "小猴提示", desc : pushMessage, dest : getPushMessageUrl(), message: "", priority : .CONTENT_NOTIFY)
             return card
         }
         return nil
