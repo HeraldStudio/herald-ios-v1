@@ -45,7 +45,7 @@ class ActivityModel {
     }
     
     enum ActivityState : String {
-        case Coming = "未开始"
+        case Coming = "即将开始"
         case Going = "进行中"
         case Gone = "已结束"
     }
