@@ -24,7 +24,7 @@ class ExamModel {
     
     convenience init (json : JSON) throws {
         let course = json["course"].stringValue
-        let time = json["time"].stringValue
+        let time = json["time"].stringValue.split("(")[0]
         let location = json["location"].stringValue
         let hour = json["hour"].stringValue
         // let teacher = json["teacher"].stringValue
