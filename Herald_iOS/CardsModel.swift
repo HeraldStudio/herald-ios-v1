@@ -49,13 +49,14 @@ class CardsModel {
     }
     
     /// 用自定义的项目初始化一个卡片
-    init (cellId: String, icon : String, title : String, desc : String, dest : String, priority : Priority) {
+    init (cellId: String, icon : String, title : String, desc : String, dest : String, message : String, priority : Priority) {
         self.cellId = cellId
         let header = CardsRowModel()
         header.icon = icon
         header.title = title
         header.desc = desc
         header.destination = dest
+        header.message = message
         rows.append(header)
         self.contentPriority = priority
     }

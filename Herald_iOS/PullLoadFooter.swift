@@ -38,7 +38,7 @@ class PullLoadFooter : UIView {
         self.frame = CGRect(x: 0, y: 0, width: (UIApplication.sharedApplication().keyWindow?.frame.width)!, height: realHeight)
         
         load.frame = self.frame
-        load.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
+        load.textColor = UIColor.lightGrayColor()
         load.textAlignment = .Center
         load.font = UIFont.systemFontOfSize(16)
         
