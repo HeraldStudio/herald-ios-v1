@@ -40,6 +40,10 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         refresh()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        tableView.reloadData()
+    }
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         swiper.syncApperance((tableView?.contentOffset)!)
         puller.syncApperance()
@@ -138,7 +142,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         cell.state.textColor = model.state == .Going ? navigationController?.navigationBar.barTintColor : UIColor.grayColor()
         
         cell.pic.kf_setImageWithURL(NSURL(string: model.picUrl)!, placeholderImage: UIImage(named: "default_herald"))
-        cell.intro.text = "活动时间：\(model.activityTime) / 地点：\(model.location)\n\(model.intro)"
+        cell.intro.text = "活动时间：\(model.activityTime)\n活动地点：\(model.location)\n\n\(model.intro)" + (model.detailUrl != "" ? "\n\n查看详情 >" : "")
         
         return cell
     }

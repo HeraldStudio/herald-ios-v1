@@ -306,7 +306,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         if let count3 = row.count3 { cell.count3?.text = count3 }
         cell.notifyDot?.alpha = indexPath.row == 0 && model.displayPriority == .CONTENT_NOTIFY ? 1 : 0
         
-        cell.userInteractionEnabled = row.destination != "" || indexPath.row == 0 && !model.isRead()
+        cell.userInteractionEnabled = row.destination != "" || row.message != "" || indexPath.row == 0
         if indexPath.row == 0 {
             cell.arrow?.hidden = row.destination == ""
         }
@@ -332,14 +332,18 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         let model = cardList[indexPath.section]
         let destination = model.rows[indexPath.row].destination
+        let message = model.rows[indexPath.row].message
+        
         if destination != "" {
-            model.markAsRead()
             AppModule(title: model.rows[0].title!, url: destination).open(navigationController)
-        } else if !model.isRead() {
-            model.markAsRead()
-            showMessage(model.rows[0].title == "校园活动" ? "陛下请移步活动版块查看~" : "卡片无详情")
-            loadContent(false)
+        } else if message != "" {
+            showMessage(message)
+        } else {
+            showMessage("卡片无详情")
         }
+        
+        model.markAsRead()
+        loadContent(false)
     }
     
     func refresh () {
