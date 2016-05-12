@@ -299,6 +299,11 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         if let count3 = row.count3 { cell.count3?.text = count3 }
         cell.notifyDot?.alpha = indexPath.row == 0 && model.displayPriority == .CONTENT_NOTIFY ? 1 : 0
         
+        cell.userInteractionEnabled = row.destination != "" || indexPath.row == 0 && !model.isRead()
+        if indexPath.row == 0 {
+            cell.arrow?.hidden = row.destination == ""
+        }
+        
         //cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         /*if indexPath.row == 0 && model.displayPriority == .CONTENT_NOTIFY {
@@ -319,8 +324,13 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let model = cardList[indexPath.section]
+        let destination = model.rows[indexPath.row].destination
+        if destination != "" {
+            AppModule(title: model.rows[0].title!, url: destination).open(navigationController)
+        } else if !model.isRead() {
+            showMessage("卡片无详情")
+        }
         model.markAsRead()
-        AppModule(title: model.rows[0].title!, url: model.rows[indexPath.row].destination).open(navigationController)
     }
     
     func refresh () {

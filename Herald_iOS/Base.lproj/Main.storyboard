@@ -252,6 +252,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
+                                    <outlet property="arrow" destination="iR2-S1-FeY" id="31E-hk-bxM"/>
                                     <outlet property="desc" destination="bde-dX-UTy" id="fHd-yR-F87"/>
                                     <outlet property="icon" destination="W9d-zf-fYt" id="cZN-dd-nhg"/>
                                     <outlet property="notifyDot" destination="ANJ-FN-1f9" id="zca-Oo-RoQ"/>
@@ -715,7 +716,7 @@
                                         <constraint firstItem="1HG-QB-YSZ" firstAttribute="top" secondItem="pao-Zk-BzQ" secondAttribute="bottom" constant="8" id="yus-fb-yNK"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="assoc" destination="NVe-kT-5F1" id="gg5-xs-F5t"/>
                                     <outlet property="intro" destination="Zjs-4t-aGr" id="DHR-Sm-GGA"/>
@@ -737,7 +738,7 @@
                                                 <constraint firstAttribute="height" constant="58" id="AYr-Pv-pHF"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
