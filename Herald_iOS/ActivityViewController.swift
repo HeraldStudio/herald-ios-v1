@@ -84,15 +84,18 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
                 if success {
                     self.page += 1
                     let array = JSON.parse(response)["content"].arrayValue
+                    self.tableView.beginUpdates()
                     for k in array {
                         self.data.append(ActivityModel(k))
+                        self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: self.data.count - 1, inSection: 0)], withRowAnimation: .Bottom)
                     }
+                    self.tableView.endUpdates()
                     
                     if array.count == 0 {
                         self.showMessage("没有更多数据")
                         self.puller.disable("没有更多数据")
                     }
-                    self.tableView.reloadData()
+                    //self.tableView.reloadData()
                 } else {
                     self.showMessage("加载失败，请重试")
                 }
@@ -138,5 +141,27 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         cell.intro.text = "活动时间：\(model.activityTime) / 地点：\(model.location)\n\(model.intro)"
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        var rotation = CATransform3D()
+        rotation = CATransform3DMakeTranslation(0, 50, 20)
+        
+        rotation = CATransform3DScale(rotation, 0.9, 0.9, 1)
+        rotation.m34 = 1.0 / -600
+        
+        cell.layer.shadowColor = UIColor.blackColor().CGColor
+        cell.layer.shadowOffset = CGSizeMake(10, 10)
+        cell.alpha = 0
+        
+        cell.layer.transform = rotation
+        
+        UIView.beginAnimations("rotation", context: nil)
+        UIView.setAnimationDuration(0.6)
+        cell.layer.transform = CATransform3DIdentity
+        cell.alpha = 1
+        cell.layer.shadowOffset = CGSizeMake(0, 0)
+        UIView.commitAnimations()
     }
 }

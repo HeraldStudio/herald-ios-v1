@@ -35,6 +35,9 @@ class CardsTableViewCell: UITableViewCell /*SWTableViewCell, SWTableViewCellDele
     
     /// 跑操的剩余天数
     @IBOutlet var count3 : UILabel?
+    
+    /// 向右的箭头，如果没有destination，应当隐藏这个箭头
+    @IBOutlet var arrow : UIView?
     /*
     
     var onRead : (() -> Void)?

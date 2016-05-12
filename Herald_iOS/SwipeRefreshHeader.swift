@@ -46,7 +46,6 @@ class SwipeRefreshHeader : UIView {
         self.frame = CGRect(x: 0, y: 0, width: (UIApplication.sharedApplication().keyWindow?.frame.width)!, height: realHeight)
         
         refresh.frame = self.frame
-        refresh.textColor = UIColor.whiteColor()
         refresh.textAlignment = .Center
         refresh.font = UIFont(name: "AppleSDGothicNeo-Thin", size: 54)
         
@@ -63,11 +62,16 @@ class SwipeRefreshHeader : UIView {
         }
         
         // 上滑变色动效
-        var alpha : CGFloat = -y < fadeDistance ? (-y) / fadeDistance : 1;
-        if frame.maxY == 0 { alpha = 1 }
+        let alpha : CGFloat = -y < fadeDistance ? (-y) / fadeDistance : 1;
         
         refresh.text = -y >= refreshDistance && dragging ? "[REFRESH]" : "REFRESH"
-        refresh.alpha = alpha
+        if frame.maxY == 0 {
+            refresh.alpha = 1
+            refresh.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: min(1, alpha * 3))
+        } else {
+            refresh.alpha = alpha
+            refresh.textColor = UIColor.whiteColor()
+        }
         
         // 弹性放大动效
         refresh.frame = CGRect(x: x, y: min(y, 0), width: frame.width, height: frame.maxY - min(y, 0))

@@ -19,6 +19,13 @@ class MainViewController: UITabBarController {
         // 去除界面切换时导航栏的黑影
         navigationController?.view.backgroundColor = UIColor.whiteColor()
         
+        // 去除导航栏下的横线
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+        // 去除tabbar上的横线
+        tabBar.clipsToBounds = true
+        
         tabBar.tintColor = UIColor(red: 0, green: 180/255, blue: 255/255, alpha: 1)
         
         initialize()
