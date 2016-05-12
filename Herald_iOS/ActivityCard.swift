@@ -33,7 +33,7 @@ class ActivityCard {
         
         if allActivities.count == 0 {
             // 无活动信息
-            return CardsModel(cellId: "CardsCellActivity", icon : "ic_activity-1", title : "校园活动", desc : "最近没有新的热门校园活动", dest : "", message: "", priority : .NO_CONTENT)
+            return CardsModel(cellId: "CardsCellActivity", icon : "ic_activity-1", title : "校园活动", desc : "最近没有新的热门校园活动", dest : "TAB1", message: "", priority : .NO_CONTENT)
         } else {
             let model = CardsModel(cellId: "CardsCellActivity", icon : "ic_activity-1", title : "校园活动", desc : "最近有新的热门校园活动，欢迎来参加~", dest : "TAB1", message: "", priority : .CONTENT_NOTIFY)
             model.rows.appendContentsOf(allActivities)
