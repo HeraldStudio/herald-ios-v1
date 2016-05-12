@@ -47,7 +47,7 @@ class CurriculumView : UIViewController {
         self.sidebar = sidebar
         self.week = week
         self.curWeek = curWeek
-        fontSize = self.view.bounds.width / 28
+        fontSize = min(16, self.view.bounds.width / 28)
     }
     
     var topPadding : CGFloat = 0
