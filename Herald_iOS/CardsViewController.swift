@@ -335,7 +335,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         if destination != "" {
             AppModule(title: model.rows[0].title!, url: destination).open(navigationController)
         } else if !model.isRead() {
-            showMessage("卡片无详情")
+            showMessage(model.rows[0].title == "校园活动" ? "陛下请移步活动版块查看~" : "卡片无详情")
+            loadContent(false)
         }
         model.markAsRead()
     }
