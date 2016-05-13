@@ -33,10 +33,12 @@
 		D31DE5181CC359D300E4891D /* CurriculumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5171CC359D300E4891D /* CurriculumViewController.swift */; };
 		D31DE51A1CC35A3100E4891D /* CurriculumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5191CC35A3100E4891D /* CurriculumView.swift */; };
 		D3325D051CC89BA0002060A5 /* SwipeRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */; };
+		D33678F81CE5971C001E7C25 /* CurriculumNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */; };
 		D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348580B1CBB48FD00B55E76 /* ApiHelper.swift */; };
 		D348580E1CBB4FF900B55E76 /* CacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348580D1CBB4FF900B55E76 /* CacheHelper.swift */; };
 		D34858111CBB57F600B55E76 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858101CBB57F600B55E76 /* NSUserDefaults.swift */; };
 		D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858121CBB60A600B55E76 /* ApiRequest.swift */; };
+		D34BCC731CE5D379005F4164 /* ExamNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BCC721CE5D379005F4164 /* ExamNotifier.swift */; };
 		D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34E95851CCDCCE700AD1119 /* JwcCard.swift */; };
 		D354905C1CDC519100E59615 /* GCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354905B1CDC519100E59615 /* GCalendar.swift */; };
 		D35FC6221CE2FEF400BE844C /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6211CE2FEF400BE844C /* ActivityViewController.swift */; };
@@ -46,6 +48,7 @@
 		D35FC62A1CE33A1E00BE844C /* ActivityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6291CE33A1E00BE844C /* ActivityCard.swift */; };
 		D37708621CCC5D37006ED853 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708611CCC5D37006ED853 /* FeedbackViewController.swift */; };
 		D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708641CCC67DC006ED853 /* CardsModel.swift */; };
+		D38A7E5E1CE5ABFF0033926E /* ExperimentNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38A7E5D1CE5ABFF0033926E /* ExperimentNotifier.swift */; };
 		D39B87971CCCCA0200EC5280 /* CardsRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */; };
 		D39B879A1CCCEC2E00EC5280 /* CardCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87991CCCEC2E00EC5280 /* CardCard.swift */; };
 		D39B879C1CCCF02600EC5280 /* ExperimentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B879B1CCCF02600EC5280 /* ExperimentCard.swift */; };
@@ -147,10 +150,12 @@
 		D31DE5171CC359D300E4891D /* CurriculumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumViewController.swift; sourceTree = "<group>"; };
 		D31DE5191CC35A3100E4891D /* CurriculumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumView.swift; sourceTree = "<group>"; };
 		D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeRefreshHeader.swift; sourceTree = "<group>"; };
+		D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumNotifier.swift; sourceTree = "<group>"; };
 		D348580B1CBB48FD00B55E76 /* ApiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHelper.swift; sourceTree = "<group>"; };
 		D348580D1CBB4FF900B55E76 /* CacheHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheHelper.swift; sourceTree = "<group>"; };
 		D34858101CBB57F600B55E76 /* NSUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaults.swift; sourceTree = "<group>"; };
 		D34858121CBB60A600B55E76 /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
+		D34BCC721CE5D379005F4164 /* ExamNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamNotifier.swift; sourceTree = "<group>"; };
 		D34E95851CCDCCE700AD1119 /* JwcCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcCard.swift; sourceTree = "<group>"; };
 		D354905B1CDC519100E59615 /* GCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCalendar.swift; sourceTree = "<group>"; };
 		D3578AAE1CDBABE300B291D0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -161,6 +166,7 @@
 		D35FC6291CE33A1E00BE844C /* ActivityCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCard.swift; sourceTree = "<group>"; };
 		D37708611CCC5D37006ED853 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		D37708641CCC67DC006ED853 /* CardsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsModel.swift; sourceTree = "<group>"; };
+		D38A7E5D1CE5ABFF0033926E /* ExperimentNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentNotifier.swift; sourceTree = "<group>"; };
 		D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsRowModel.swift; sourceTree = "<group>"; };
 		D39B87991CCCEC2E00EC5280 /* CardCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCard.swift; sourceTree = "<group>"; };
 		D39B879B1CCCF02600EC5280 /* ExperimentCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentCard.swift; sourceTree = "<group>"; };
@@ -497,6 +503,7 @@
 				D39B87981CCCEC0C00EC5280 /* mod_cards */,
 				D3D35E0A1CBA2FEE00B18092 /* mod_communicate */,
 				D3A0C1791CBB7C0000744640 /* mod_modulemanage */,
+				D3DE9A951CE581A30090EF0D /* mod_notifiers */,
 				D3A0C17A1CBB7C1200744640 /* mod_query */,
 				D3A0C17C1CBB7C4B00744640 /* mod_webmodule */,
 				D3D35DE81CBA2E8200B18092 /* Info.plist */,
@@ -537,6 +544,16 @@
 				D3D35DDE1CBA2E8200B18092 /* LoginViewController.swift */,
 			);
 			name = mod_auth;
+			sourceTree = "<group>";
+		};
+		D3DE9A951CE581A30090EF0D /* mod_notifiers */ = {
+			isa = PBXGroup;
+			children = (
+				D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */,
+				D38A7E5D1CE5ABFF0033926E /* ExperimentNotifier.swift */,
+				D34BCC721CE5D379005F4164 /* ExamNotifier.swift */,
+			);
+			name = mod_notifiers;
 			sourceTree = "<group>";
 		};
 		DD11F4816A147BF4EB866EB6 /* Pods */ = {
@@ -633,7 +650,7 @@
 						DevelopmentTeam = HMBY8X7FLF;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -807,6 +824,7 @@
 				D306E02A1CCA68A700FA3812 /* GradeModel.swift in Sources */,
 				D306E0241CCA3F7700FA3812 /* ExamViewController.swift in Sources */,
 				D3D35DDF1CBA2E8200B18092 /* LoginViewController.swift in Sources */,
+				D38A7E5E1CE5ABFF0033926E /* ExperimentNotifier.swift in Sources */,
 				D31821C11CC5256F00992355 /* CardTableViewCell.swift in Sources */,
 				D306E0261CCA3F8400FA3812 /* ExamTableViewCell.swift in Sources */,
 				D306E0201CCA3ADF00FA3812 /* WebModuleViewController.swift in Sources */,
@@ -820,7 +838,9 @@
 				D3A0C1741CBB7AF500744640 /* ModulesViewController.swift in Sources */,
 				D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */,
 				D3E6BD831CC8D4B20074FF6D /* PedetailViewController.swift in Sources */,
+				D34BCC731CE5D379005F4164 /* ExamNotifier.swift in Sources */,
 				D3F375C71CDB3957004DDEA5 /* WifiLoginHelper.swift in Sources */,
+				D33678F81CE5971C001E7C25 /* CurriculumNotifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -885,8 +905,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -908,7 +928,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -933,8 +953,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -949,7 +969,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

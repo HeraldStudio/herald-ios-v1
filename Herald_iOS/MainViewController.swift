@@ -32,6 +32,21 @@ class MainViewController: UITabBarController {
     }
     
     func initialize() {
+        
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        
+        if SettingsHelper.getModuleCardEnabled(Module.Curriculum.rawValue) {
+            CurriculumNotifier.scheduleNotifications()
+        }
+        
+        if SettingsHelper.getModuleCardEnabled(Module.Experiment.rawValue) {
+            ExperimentNotifier.scheduleNotifications()
+        }
+        
+        if SettingsHelper.getModuleCardEnabled(Module.Exam.rawValue) {
+            ExamNotifier.scheduleNotifications()
+        }
+        
         if ApiHelper.isLogin() {
             NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
         }
