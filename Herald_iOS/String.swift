@@ -17,4 +17,12 @@ extension String {
     func replaceAll (src : String, _ dst : String) -> String {
         return stringByReplacingOccurrencesOfString(src, withString: dst)
     }
+    
+    func recursiveReplaceAll (src : String, _ dst : String) -> String {
+        var a = self
+        while a.containsString(src) {
+            a = a.replaceAll(src, dst)
+        }
+        return a
+    }
 }

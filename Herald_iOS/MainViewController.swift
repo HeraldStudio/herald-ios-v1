@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import DHCShakeNotifier
+import DHCShakeNotifier
 
 /// 主页面
 class MainViewController: UITabBarController {
@@ -19,17 +19,32 @@ class MainViewController: UITabBarController {
         // 去除界面切换时导航栏的黑影
         navigationController?.view.backgroundColor = UIColor.whiteColor()
         
+        // 去除导航栏下的横线
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+        // 去除tabbar上的横线
+        tabBar.clipsToBounds = true
+        
         tabBar.tintColor = UIColor(red: 0, green: 180/255, blue: 255/255, alpha: 1)
         
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
+        initialize()
     }
     
-    //func onShake () {
-        // 摇一摇事件
-    //}
+    func initialize() {
+        if ApiHelper.isLogin() {
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
+        }
+    }
+    
+    func onShake () {
+        if SettingsHelper.getWifiAutoLogin() {
+            WifiLoginHelper(self).checkAndLogin()
+        }
+    }
     
     override func finalize() {
-        //NSNotificationCenter.defaultCenter().removeObserver(self, name: DHCSHakeNotificationName, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: DHCSHakeNotificationName, object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -26,7 +26,7 @@ class CurriculumCard {
         let cache = CacheHelper.get("herald_curriculum")
         let now = NSDate().timeIntervalSince1970
         if cache == "" {
-            return CardsModel(cellId: "CardsCellCurriculum", module: Module.Curriculum, desc: "课表数据加载失败，请手动刷新", priority: .NO_CONTENT)
+            return CardsModel(cellId: "CardsCellCurriculum", module: Module.Curriculum, desc: "课表数据加载失败，请手动刷新", priority: .CONTENT_NOTIFY)
         }
         
         let content = JSON.parse(cache)
@@ -76,46 +76,48 @@ class CurriculumCard {
         var remainingClasses : [CardsRowModel] = []
         
         for j in 0 ..< array.count {
-            let info = ClassInfo(json: array[j])
-            info.weekNum = CurriculumView.WEEK_NUMS_CN[dayOfWeek]
-            let _teacher = sidebarInfo[info.className]
-            let teacher = _teacher != nil ? _teacher! : ""
-            let row = CardsRowModel(classInfo: info, teacher: teacher)
-            
-            // 如果该课程本周上课
-            if info.startWeek <= thisWeek && info.endWeek >= thisWeek && info.isFitEvenOrOdd(thisWeek) {
-                classCount += 1
-                // 上课时间
-                let today = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday], fromDate: NSDate())
-                let startTime = NSCalendar.currentCalendar().dateFromComponents(today)!.timeIntervalSince1970 + Double(CurriculumView.CLASS_BEGIN_TIME[info.startTime - 1] * 60)
+            do {
+                let info = try ClassInfo(json: array[j])
+                info.weekNum = CurriculumView.WEEK_NUMS_CN[dayOfWeek]
+                let _teacher = sidebarInfo[info.className]
+                let teacher = _teacher != nil ? _teacher! : ""
+                let row = CardsRowModel(classInfo: info, teacher: teacher)
                 
-                // 下课时间
-                let endTime = NSCalendar.currentCalendar().dateFromComponents(today)!.timeIntervalSince1970 + Double((CurriculumView.CLASS_BEGIN_TIME[info.endTime - 1] + 45) * 60)
-                
-                // 快要下课的时间
-                let almostEndTime = endTime - 10 * 60
-                
-                // 如果是还没到时间的课，放在“你今天(还)有x节课”的列表里备用
-                // 只要没有快上课或正在上课的提醒导致中途退出循环的话，这个列表就会显示
-                if now < startTime {
-                    if now >= almostEndTime && now < endTime {
-                        classAlmostEnd = true
+                // 如果该课程本周上课
+                if info.startWeek <= thisWeek && info.endWeek >= thisWeek && info.isFitEvenOrOdd(thisWeek) {
+                    classCount += 1
+                    // 上课时间
+                    let today = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday], fromDate: NSDate())
+                    let startTime = NSCalendar.currentCalendar().dateFromComponents(today)!.timeIntervalSince1970 + Double(CurriculumView.CLASS_BEGIN_TIME[info.startTime - 1] * 60)
+                    
+                    // 下课时间
+                    let endTime = NSCalendar.currentCalendar().dateFromComponents(today)!.timeIntervalSince1970 + Double((CurriculumView.CLASS_BEGIN_TIME[info.endTime - 1] + 45) * 60)
+                    
+                    // 快要下课的时间
+                    let almostEndTime = endTime - 10 * 60
+                    
+                    // 如果是还没到时间的课，放在“你今天(还)有x节课”的列表里备用
+                    // 只要没有快上课或正在上课的提醒导致中途退出循环的话，这个列表就会显示
+                    if now < startTime {
+                        if now >= almostEndTime && now < endTime {
+                            classAlmostEnd = true
+                        }
+                        remainingClasses.append(row)
                     }
-                    remainingClasses.append(row)
+                    
+                    // 快要上课的紧急提醒
+                    if now >= startTime - 15 * 60 && now < startTime {
+                        let model = CardsModel(cellId: "CardsCellCurriculum", module: .Curriculum, desc: "即将开始上课，请注意时间，准时上课", priority: .CONTENT_NOTIFY)
+                        model.rows.append(row)
+                        return model
+                    } else if now >= startTime && now < almostEndTime {
+                        // 正在上课的提醒
+                        let model = CardsModel(cellId: "CardsCellCurriculum", module: .Curriculum, desc: "正在上课中", priority: .CONTENT_NOTIFY)
+                        model.rows.append(row)
+                        return model
+                    }
                 }
-                
-                // 快要上课的紧急提醒
-                if now >= startTime - 15 * 60 && now < startTime {
-                    let model = CardsModel(cellId: "CardsCellCurriculum", module: .Curriculum, desc: "即将开始上课，请注意时间，准时上课", priority: .CONTENT_NOTIFY)
-                    model.rows.append(row)
-                    return model
-                } else if now >= startTime && now < almostEndTime {
-                    // 正在上课的提醒
-                    let model = CardsModel(cellId: "CardsCellCurriculum", module: .Curriculum, desc: "正在上课中", priority: .CONTENT_NOTIFY)
-                    model.rows.append(row)
-                    return model
-                }
-            }
+            } catch {}
         }
         // 此处退出循环有三种可能：可能是今天没课，可能是课与课之间或早上的没上课状态，也可能是课上完了的状态
         
@@ -141,16 +143,18 @@ class CurriculumCard {
         classCount = 0
         var rowList : [CardsRowModel] = []
         for j in 0 ..< array.count {
-            let info = ClassInfo(json: array[j])
-            info.weekNum = CurriculumView.WEEK_NUMS_CN[dayOfWeek]
-            let _teacher = sidebarInfo[info.className]
-            let teacher = _teacher != nil ? _teacher! : ""
-            let row = CardsRowModel(classInfo: info, teacher: teacher)
-            // 如果该课程本周上课
-            if info.startWeek <= thisWeek && info.endWeek >= thisWeek && info.isFitEvenOrOdd(thisWeek) {
-                classCount += 1
-                rowList.append(row)
-            }
+            do {
+                let info = try ClassInfo(json: array[j])
+                info.weekNum = CurriculumView.WEEK_NUMS_CN[dayOfWeek]
+                let _teacher = sidebarInfo[info.className]
+                let teacher = _teacher != nil ? _teacher! : ""
+                let row = CardsRowModel(classInfo: info, teacher: teacher)
+                // 如果该课程本周上课
+                if info.startWeek <= thisWeek && info.endWeek >= thisWeek && info.isFitEvenOrOdd(thisWeek) {
+                    classCount += 1
+                    rowList.append(row)
+                }
+            } catch {}
         }
         let model = CardsModel(cellId: "CardsCellCurriculum",
                                module: .Curriculum,

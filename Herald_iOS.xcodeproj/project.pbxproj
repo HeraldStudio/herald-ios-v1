@@ -38,6 +38,12 @@
 		D34858111CBB57F600B55E76 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858101CBB57F600B55E76 /* NSUserDefaults.swift */; };
 		D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858121CBB60A600B55E76 /* ApiRequest.swift */; };
 		D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34E95851CCDCCE700AD1119 /* JwcCard.swift */; };
+		D354905C1CDC519100E59615 /* GCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354905B1CDC519100E59615 /* GCalendar.swift */; };
+		D35FC6221CE2FEF400BE844C /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6211CE2FEF400BE844C /* ActivityViewController.swift */; };
+		D35FC6241CE301F700BE844C /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6231CE301F700BE844C /* ActivityModel.swift */; };
+		D35FC6261CE31A3500BE844C /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6251CE31A3500BE844C /* ActivityTableViewCell.swift */; };
+		D35FC6281CE3236300BE844C /* PullLoadFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6271CE3236300BE844C /* PullLoadFooter.swift */; };
+		D35FC62A1CE33A1E00BE844C /* ActivityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6291CE33A1E00BE844C /* ActivityCard.swift */; };
 		D37708621CCC5D37006ED853 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708611CCC5D37006ED853 /* FeedbackViewController.swift */; };
 		D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708641CCC67DC006ED853 /* CardsModel.swift */; };
 		D39B87971CCCCA0200EC5280 /* CardsRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */; };
@@ -72,6 +78,7 @@
 		D3ED99E61CCB651300001E2B /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99E51CCB651300001E2B /* LibraryViewController.swift */; };
 		D3ED99E81CCB870200001E2B /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99E71CCB870200001E2B /* AboutUsViewController.swift */; };
 		D3EFC1D71CCC81A800BC37A5 /* CurriculumCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EFC1D61CCC81A800BC37A5 /* CurriculumCard.swift */; };
+		D3F375C71CDB3957004DDEA5 /* WifiLoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F375C61CDB3957004DDEA5 /* WifiLoginHelper.swift */; };
 		D3F3DCFB1CBB7792006887F5 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */; };
 		D3F473451CCA04C100750FFB /* JwcTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F473441CCA04C100750FFB /* JwcTableViewCell.swift */; };
 		D3F473471CCA05CD00750FFB /* JwcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F473461CCA05CD00750FFB /* JwcViewController.swift */; };
@@ -80,7 +87,6 @@
 		D3F4734D1CCA153A00750FFB /* LectureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4734C1CCA153A00750FFB /* LectureModel.swift */; };
 		D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4734E1CCA15C900750FFB /* LectureViewController.swift */; };
 		D3FBC2F21CCC51F900305428 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FBC2F11CCC51F900305428 /* UIViewController.swift */; };
-		D3FBC2F41CCC524500305428 /* Dialogs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FBC2F31CCC524500305428 /* Dialogs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +105,19 @@
 			remoteInfo = Herald_iOS;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D3578ABD1CDBABE300B291D0 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		283283296736ED980EE6E1A6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +152,13 @@
 		D34858101CBB57F600B55E76 /* NSUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaults.swift; sourceTree = "<group>"; };
 		D34858121CBB60A600B55E76 /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
 		D34E95851CCDCCE700AD1119 /* JwcCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcCard.swift; sourceTree = "<group>"; };
+		D354905B1CDC519100E59615 /* GCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCalendar.swift; sourceTree = "<group>"; };
+		D3578AAE1CDBABE300B291D0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		D35FC6211CE2FEF400BE844C /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		D35FC6231CE301F700BE844C /* ActivityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
+		D35FC6251CE31A3500BE844C /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
+		D35FC6271CE3236300BE844C /* PullLoadFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullLoadFooter.swift; sourceTree = "<group>"; };
+		D35FC6291CE33A1E00BE844C /* ActivityCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCard.swift; sourceTree = "<group>"; };
 		D37708611CCC5D37006ED853 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		D37708641CCC67DC006ED853 /* CardsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsModel.swift; sourceTree = "<group>"; };
 		D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsRowModel.swift; sourceTree = "<group>"; };
@@ -173,6 +199,7 @@
 		D3ED99E51CCB651300001E2B /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		D3ED99E71CCB870200001E2B /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		D3EFC1D61CCC81A800BC37A5 /* CurriculumCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumCard.swift; sourceTree = "<group>"; };
+		D3F375C61CDB3957004DDEA5 /* WifiLoginHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiLoginHelper.swift; sourceTree = "<group>"; };
 		D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
 		D3F473441CCA04C100750FFB /* JwcTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcTableViewCell.swift; sourceTree = "<group>"; };
 		D3F473461CCA05CD00750FFB /* JwcViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcViewController.swift; sourceTree = "<group>"; };
@@ -181,7 +208,7 @@
 		D3F4734C1CCA153A00750FFB /* LectureModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureModel.swift; sourceTree = "<group>"; };
 		D3F4734E1CCA15C900750FFB /* LectureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureViewController.swift; sourceTree = "<group>"; };
 		D3FBC2F11CCC51F900305428 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		D3FBC2F31CCC524500305428 /* Dialogs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialogs.swift; sourceTree = "<group>"; };
+		DA028C4F1CDF422F005343DE /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		ED76AC9BE4F12BE2D1325536 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -215,8 +242,9 @@
 			isa = PBXGroup;
 			children = (
 				D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */,
-				D3FBC2F31CCC524500305428 /* Dialogs.swift */,
+				D35FC6271CE3236300BE844C /* PullLoadFooter.swift */,
 				D39B879F1CCD0F0E00EC5280 /* Error.swift */,
+				D354905B1CDC519100E59615 /* GCalendar.swift */,
 			);
 			name = custom;
 			sourceTree = "<group>";
@@ -229,6 +257,9 @@
 				D31821B81CC4D53300992355 /* CardsTableViewCell.swift */,
 				D37708641CCC67DC006ED853 /* CardsModel.swift */,
 				D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */,
+				D35FC6211CE2FEF400BE844C /* ActivityViewController.swift */,
+				D35FC6251CE31A3500BE844C /* ActivityTableViewCell.swift */,
+				D35FC6231CE301F700BE844C /* ActivityModel.swift */,
 				D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */,
 				D31DE50D1CC334EC00E4891D /* ModuleTableViewCell.swift */,
 				D3A0C1761CBB7B2300744640 /* MyInfoViewController.swift */,
@@ -239,13 +270,14 @@
 		D348580A1CBB48EF00B55E76 /* helper */ = {
 			isa = PBXGroup;
 			children = (
-				D348580B1CBB48FD00B55E76 /* ApiHelper.swift */,
-				D348580D1CBB4FF900B55E76 /* CacheHelper.swift */,
-				D34858121CBB60A600B55E76 /* ApiRequest.swift */,
-				D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */,
-				D30A9BA01CBBA9100087D583 /* ApiThreadManager.swift */,
-				D31821B51CC48D5400992355 /* ServiceHelper.swift */,
 				D306E0211CCA3DFD00FA3812 /* AppModule.swift */,
+				D348580B1CBB48FD00B55E76 /* ApiHelper.swift */,
+				D34858121CBB60A600B55E76 /* ApiRequest.swift */,
+				D30A9BA01CBBA9100087D583 /* ApiThreadManager.swift */,
+				D348580D1CBB4FF900B55E76 /* CacheHelper.swift */,
+				D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */,
+				D31821B51CC48D5400992355 /* ServiceHelper.swift */,
+				D3F375C61CDB3957004DDEA5 /* WifiLoginHelper.swift */,
 			);
 			name = helper;
 			sourceTree = "<group>";
@@ -270,6 +302,7 @@
 				D39B87A11CCD120F00EC5280 /* LectureCard.swift */,
 				D39B87A51CCD194E00EC5280 /* PedetailCard.swift */,
 				D34E95851CCDCCE700AD1119 /* JwcCard.swift */,
+				D35FC6291CE33A1E00BE844C /* ActivityCard.swift */,
 			);
 			name = mod_cards;
 			sourceTree = "<group>";
@@ -518,7 +551,9 @@
 		F527AB77D4F37A7ED7959F74 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DA028C4F1CDF422F005343DE /* Reveal.framework */,
 				283283296736ED980EE6E1A6 /* Pods.framework */,
+				D3578AAE1CDBABE300B291D0 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -536,6 +571,7 @@
 				D3D35DD71CBA2E8200B18092 /* Resources */,
 				0B8948C67D3C219565E1DD35 /* Embed Pods Frameworks */,
 				F4FB81568F51A7183763D838 /* Copy Pods Resources */,
+				D3578ABD1CDBABE300B291D0 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -595,6 +631,11 @@
 					D3D35DD81CBA2E8200B18092 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 9837P5SWZ9;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					D3D35DEC1CBA2E8200B18092 = {
 						CreatedOnToolsVersion = 7.3;
@@ -711,6 +752,8 @@
 				D39B879C1CCCF02600EC5280 /* ExperimentCard.swift in Sources */,
 				D3ED99E61CCB651300001E2B /* LibraryViewController.swift in Sources */,
 				D3F473491CCA068D00750FFB /* JwcNoticeModel.swift in Sources */,
+				D35FC6241CE301F700BE844C /* ActivityModel.swift in Sources */,
+				D354905C1CDC519100E59615 /* GCalendar.swift in Sources */,
 				D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */,
 				D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */,
 				D31821CE1CC856FF00992355 /* ExperimentViewController.swift in Sources */,
@@ -730,6 +773,7 @@
 				D39B879E1CCD0C0B00EC5280 /* ExamCard.swift in Sources */,
 				D31821D01CC8573200992355 /* ExperimentModel.swift in Sources */,
 				D39B87A01CCD0F0E00EC5280 /* Error.swift in Sources */,
+				D35FC62A1CE33A1E00BE844C /* ActivityCard.swift in Sources */,
 				D31DE50E1CC334EC00E4891D /* ModuleTableViewCell.swift in Sources */,
 				D31DE5181CC359D300E4891D /* CurriculumViewController.swift in Sources */,
 				D3A0C1771CBB7B2300744640 /* MyInfoViewController.swift in Sources */,
@@ -751,6 +795,7 @@
 				D3ED99D41CCAF9FC00001E2B /* SeuNetViewController.swift in Sources */,
 				D3ED99DE1CCB3DB600001E2B /* SrtpTableViewCell.swift in Sources */,
 				D3ED99D81CCB08B300001E2B /* SchoolbusTableViewCell.swift in Sources */,
+				D35FC6281CE3236300BE844C /* PullLoadFooter.swift in Sources */,
 				D3F3DCFB1CBB7792006887F5 /* SettingsHelper.swift in Sources */,
 				D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */,
 				D3EFC1D71CCC81A800BC37A5 /* CurriculumCard.swift in Sources */,
@@ -758,14 +803,15 @@
 				D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */,
 				D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */,
 				D31821C31CC5291000992355 /* CardHistoryModel.swift in Sources */,
+				D35FC6221CE2FEF400BE844C /* ActivityViewController.swift in Sources */,
 				D306E02A1CCA68A700FA3812 /* GradeModel.swift in Sources */,
 				D306E0241CCA3F7700FA3812 /* ExamViewController.swift in Sources */,
-				D3FBC2F41CCC524500305428 /* Dialogs.swift in Sources */,
 				D3D35DDF1CBA2E8200B18092 /* LoginViewController.swift in Sources */,
 				D31821C11CC5256F00992355 /* CardTableViewCell.swift in Sources */,
 				D306E0261CCA3F8400FA3812 /* ExamTableViewCell.swift in Sources */,
 				D306E0201CCA3ADF00FA3812 /* WebModuleViewController.swift in Sources */,
 				D3325D051CC89BA0002060A5 /* SwipeRefreshHeader.swift in Sources */,
+				D35FC6261CE31A3500BE844C /* ActivityTableViewCell.swift in Sources */,
 				D31821BF1CC522D900992355 /* CardViewController.swift in Sources */,
 				D39B879A1CCCEC2E00EC5280 /* CardCard.swift in Sources */,
 				D3D35DDD1CBA2E8200B18092 /* AppDelegate.swift in Sources */,
@@ -774,6 +820,7 @@
 				D3A0C1741CBB7AF500744640 /* ModulesViewController.swift in Sources */,
 				D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */,
 				D3E6BD831CC8D4B20074FF6D /* PedetailViewController.swift in Sources */,
+				D3F375C71CDB3957004DDEA5 /* WifiLoginHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,7 +908,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "764f49b0-6cfd-4acc-b610-382c4cefe429";
+				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -902,7 +949,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "764f49b0-6cfd-4acc-b610-382c4cefe429";
+				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -914,6 +961,7 @@
 			baseConfigurationReference = ED76AC9BE4F12BE2D1325536 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -922,7 +970,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "764f49b0-6cfd-4acc-b610-382c4cefe429";
+				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -932,6 +982,7 @@
 			baseConfigurationReference = B6878935004ACF38EDF397D4 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -940,7 +991,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "764f49b0-6cfd-4acc-b610-382c4cefe429";
+				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

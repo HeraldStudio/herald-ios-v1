@@ -45,6 +45,13 @@ class ApiRequest {
         return self
     }
     
+    var isGet = false
+    
+    func get () -> ApiRequest {
+        isGet = true
+        return self
+    }
+    
     /**
      * 联网设置部分
      * builder  参数表
@@ -166,11 +173,28 @@ class ApiRequest {
         return self
     }
     
+    func toAuthCache (key : String, withParser parser : JSONParser) -> ApiRequest {
+        onFinish {
+            success, _, response in
+            if(success) {
+                do {
+                    let cache = try parser(JSON.parse(response))
+                    ApiHelper.setAuthCache(key, cache)
+                } catch {
+                    for onFinishListener in self.onFinishListeners {
+                        onFinishListener(false, 0, "")
+                    }
+                }
+            }
+        }
+        return self
+    }
+    
     /**
      * 执行部分
      **/
     func run () {
-        Alamofire.request(.POST, url!, parameters: map)
-            .responseString(completionHandler: callback)
+        let request = Alamofire.request(isGet ? .GET : .POST, url!, parameters: map, encoding: .URL)
+        request.responseString(completionHandler: callback)
     }
 }

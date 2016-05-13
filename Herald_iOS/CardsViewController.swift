@@ -13,6 +13,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     let swiper = SwipeRefreshHeader()
     
+    var sliderData = JSON.parse("[]")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if !ApiHelper.isLogin() {
@@ -32,6 +34,13 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         // 启动定时刷新，每当时间改变时触发本地重载
         let seconds = 60 - NSDate().timeIntervalSince1970 % 60
         performSelector(#selector(self.timeChanged), withObject: nil, afterDelay: seconds)
+        
+        //cell注册3D touch代理
+        if #available(iOS 9.0, *) {
+            if traitCollection.forceTouchCapability == .Available {
+                self.registerForPreviewingWithDelegate(self, sourceView: cardsTableView)
+            }
+        }
     }
     
     // 定时刷新
@@ -75,9 +84,18 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     var links : [String] = []
     
+    func refreshSliderIfNeeded () {
+        let cache = JSON.parse(ServiceHelper.get("versioncheck_cache"))
+        let array = cache["content"]["sliderviews"]
+        if sliderData != array {
+            refreshSlider()
+        }
+    }
+    
     func refreshSlider () {
         let cache = JSON.parse(ServiceHelper.get("versioncheck_cache"))
         let array = cache["content"]["sliderviews"]
+        sliderData = array
         
         links.removeAll()
         var pics : [AnyObject?] = []
@@ -94,9 +112,16 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
         
-        if pics.count == 0 { return }
+        if pics.count == 0 {
+            pics.append("")
+            links.append("")
+        }
         slider.images = pics
-        slider.startRolling()
+        if slider.images.count > 1 {
+            slider.startRolling()
+        } else {
+            slider.stopRolling()
+        }
     }
     
     /**
@@ -108,8 +133,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     func loadContent (refresh : Bool) {
         /// 本地重载
         
-        // 单独刷新快捷栏，不刷新轮播图。轮播图在轮播图数据下载完成后单独刷新。
-        refreshShortcutBox()
+        refreshSliderIfNeeded()
         
         // 清空卡片列表，等待载入
         cardList.removeAll()
@@ -134,6 +158,9 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             // 加载并解析考试缓存
             cardList.append(ExamCard.getCard())
         }
+        
+        // 加载校园活动缓存
+        cardList.append(ActivityCard.getCard())
         
         if SettingsHelper.getModuleCardEnabled(Module.Lecture.rawValue) {
             // 加载并解析人文讲座预告缓存
@@ -203,6 +230,9 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
                 manager.addAll(ExamCard.getRefresher())
             }
         }
+        
+        // 直接刷新校园活动
+        manager.addAll(ActivityCard.getRefresher())
         
         if SettingsHelper.getModuleCardEnabled(Module.Lecture.rawValue) {
             // 直接刷新人文讲座预告
@@ -276,6 +306,13 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         if let count3 = row.count3 { cell.count3?.text = count3 }
         cell.notifyDot?.alpha = indexPath.row == 0 && model.displayPriority == .CONTENT_NOTIFY ? 1 : 0
         
+        cell.userInteractionEnabled = row.destination != "" || row.message != "" || indexPath.row == 0
+        if indexPath.row == 0 {
+            cell.arrow?.hidden = row.destination == ""
+        }
+        
+        //cell.selectionStyle = UITableViewCellSelectionStyle.None
+        
         /*if indexPath.row == 0 && model.displayPriority == .CONTENT_NOTIFY {
             let array = NSMutableArray()
             array.sw_addUtilityButtonWithColor(UIColor(red: 0, green: 180/255, blue: 255/255, alpha: 1), title: "标为已读")
@@ -294,8 +331,19 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let model = cardList[indexPath.section]
+        let destination = model.rows[indexPath.row].destination
+        let message = model.rows[indexPath.row].message
+        
+        if destination != "" {
+            AppModule(title: model.rows[0].title!, url: destination).open(navigationController)
+        } else if message != "" {
+            showMessage(message)
+        } else {
+            showMessage("卡片无详情")
+        }
+        
         model.markAsRead()
-        AppModule(title: model.rows[0].title!, url: model.rows[indexPath.row].destination).open(navigationController)
+        loadContent(false)
     }
     
     func refresh () {
@@ -315,3 +363,50 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 }
 
+//3d touch遵守协议
+extension CardsViewController:UIViewControllerPreviewingDelegate {
+    
+    //peek
+    @available(iOS 9.0, *)
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard let indexPath = cardsTableView.indexPathForRowAtPoint(location) else {
+            return nil
+        }
+        
+        let cardTitle = cardList[indexPath.section].rows[0].title!
+        
+        let cell = cardsTableView.cellForRowAtIndexPath(indexPath) as! CardsTableViewCell
+        previewingContext.sourceRect = cell.frame
+        
+        // 白名单机制，只有部分模块可以预览
+        if !["实验助手", "考试助手", "一卡通", "教务通知", "人文讲座", "校园活动", "小猴提示"].contains(cardTitle) {
+            return nil
+        }
+        
+        // 校园活动的标题是切换tab，不能预览
+        if cardTitle == "校园活动" && indexPath.row == 0 {
+            return nil
+        }
+        
+        let destination = cardList[indexPath.section].rows[indexPath.row].destination
+        if destination.hasPrefix("http") {
+            //存在spinner卡顿情况，仅针对教务通知子cell
+            CacheHelper.set("herald_webmodule_url", cardList[indexPath.section].rows[indexPath.row].destination)
+            
+            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE")
+            return detailVC
+        } else if !destination.isEmpty && !destination.hasPrefix("TAB") {
+            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(cardList[indexPath.section].rows[indexPath.row].destination)
+            detailVC.preferredContentSize = CGSizeMake(SCREEN_WIDTH, 600)
+            return detailVC
+        } else {
+            return nil
+        }
+    }
+    
+    //pop
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        showViewController(viewControllerToCommit, sender: self)
+    }
+}

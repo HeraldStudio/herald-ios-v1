@@ -47,7 +47,7 @@ class CurriculumView : UIViewController {
         self.sidebar = sidebar
         self.week = week
         self.curWeek = curWeek
-        fontSize = self.view.bounds.width / 28
+        fontSize = min(16, self.view.bounds.width / 28)
     }
     
     var topPadding : CGFloat = 0
@@ -87,13 +87,15 @@ class CurriculumView : UIViewController {
             // 剔除不属于本周的课程，并将对应的课程添加到对应星期的列表中
             var list : [ClassInfo] = []
             for j in 0 ..< array.count {
-                let info = ClassInfo(json: array[j])
-                info.weekNum = CurriculumView.WEEK_NUMS_CN[i]
-                let startWeek = info.startWeek
-                let endWeek = info.endWeek
-                if(endWeek >= week && startWeek <= week && info.isFitEvenOrOdd(week)){
-                    list.append(info)
-                }
+                do {
+                    let info = try ClassInfo(json: array[j])
+                    info.weekNum = CurriculumView.WEEK_NUMS_CN[i]
+                    let startWeek = info.startWeek
+                    let endWeek = info.endWeek
+                    if(endWeek >= week && startWeek <= week && info.isFitEvenOrOdd(week)){
+                        list.append(info)
+                    }
+                } catch {}
             }
             
             // 根据周六或周日无课的天数对列数进行删减

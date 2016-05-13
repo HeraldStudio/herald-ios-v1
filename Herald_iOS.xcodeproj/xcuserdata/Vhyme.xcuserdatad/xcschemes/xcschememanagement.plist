@@ -9,9 +9,29 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Herald_iOS_Today.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>12</integer>
+		</dict>
+		<key>today-ext.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>D3578AAC1CDBABE300B291D0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D3578AC11CDBACBA00B291D0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D3D35DD81CBA2E8200B18092</key>
 		<dict>
 			<key>primary</key>
