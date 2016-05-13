@@ -72,10 +72,10 @@ class ExperimentCard {
                 if then.year == now.year && then.weekOfYear == now.weekOfYear {
                     // 如果发现今天有实验
                     if then.weekday == now.weekday {
-                        // 如果是半小时之内快要开始的实验，放弃之前所有操作，直接返回这个实验的提醒
+                        // 如果是15分钟之内快要开始的实验，放弃之前所有操作，直接返回这个实验的提醒
                         let nowStamp = now.hour * 60 + now.minute
                         let thenStamp = then.hour * 60 + then.minute
-                        if nowStamp < thenStamp && nowStamp >= thenStamp - 30 {
+                        if nowStamp < thenStamp && nowStamp >= thenStamp - 15 {
                             let model = CardsModel(cellId: "CardsCellExperiment", module: .Experiment, desc: "你有1个实验即将开始，请注意时间准时参加", priority: .CONTENT_NOTIFY)
                             model.rows.append(row)
                             return model
