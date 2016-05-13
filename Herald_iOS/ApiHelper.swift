@@ -40,6 +40,9 @@ class ApiHelper : NSObject {
         authCache.set("name", "")
         authCache.set("sex", "")
         
+        // 清除通知
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        
         // 清除模块缓存
         // 注意此处的clearAllmoduleCache里的authUser和authPwd与上面清除的是不同的
         CacheHelper.clearAllModuleCache()
