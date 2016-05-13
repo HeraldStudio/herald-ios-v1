@@ -28,7 +28,7 @@ class ExamNotifier {
                 not.soundName = UILocalNotificationDefaultSoundName
                 
                 guard examItem.timeAndPlace.split("@").count > 1 else { return }
-                let place = examItem.timeAndPlace.split("@")[1]
+                let place = examItem.timeAndPlace.split("@")[1].replaceAll(" ", "")
                 not.alertBody = "[\(place)] " + examItem.course + " 将在半小时后开始考试，请注意时间，准时参加"
                 
                 UIApplication.sharedApplication().scheduleLocalNotification(not)
