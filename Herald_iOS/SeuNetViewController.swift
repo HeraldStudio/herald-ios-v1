@@ -53,6 +53,7 @@ class SeuNetViewController : UIViewController {
         var stateStr = JSON.parse(cache)["content"]["web"]["state"].stringValue
         var leftStr = JSON.parse(cache)["content"]["left"].stringValue
         
+        let usageUnit = usageStr.split(" ").count > 1 ? usageStr.split(" ")[1] : ""
         usageStr = usageStr.split(" ")[0]
         stateStr = "当前状态：" + stateStr.replaceAll(",", "，")
         leftStr = leftStr.split(" ")[0]
@@ -63,6 +64,12 @@ class SeuNetViewController : UIViewController {
         // 有些人没开通网络服务，used这里的值是"暂无流量信息"，这种不能识别为数字的要当成数字0
         let _used = Float(usageStr)
         used = _used == nil ? 0 : _used!
+        if usageUnit == "KB" {
+            used /= 1024 * 1024
+        } else if usageUnit == "MB" {
+            used /= 1024
+        }
+        
         var total : Float = 10
         while used > total {
             total += 10

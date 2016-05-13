@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -21,8 +22,11 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func buttonClicked() {
+        endEdit()
         if username?.text! != "" && password?.text! != "" {
             doLogin()
+        } else {
+            showMessage("输入不完整，请重试")
         }
     }
     
@@ -46,9 +50,11 @@ class LoginViewController: UIViewController {
     }
     
     func checkUUID () {
-        ApiRequest().api("user").uuid().onFinish { (success, code, response) in
+        ApiRequest().api("user").uuid().toAuthCache("schoolnum") { json in
+            return json["content"]["schoolnum"].stringValue
+        }.onFinish { (success, code, response) in
             if success {
-                self.presentViewController(self.storyboard!.instantiateViewControllerWithIdentifier("main"), animated: true) {}
+                ((UIApplication.sharedApplication().delegate) as! AppDelegate).showMain()
             } else {
                 self.showMessage("网络异常，请重试")
                 ApiHelper.doLogout(nil)

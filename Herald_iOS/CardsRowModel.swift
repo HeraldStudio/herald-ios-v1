@@ -35,8 +35,11 @@ class CardsRowModel {
     /// 某些情况下用来排序的标记
     var sortOrder : Int = 0
     
-    /// 头部或教务通知条目被点击时打开的目标，可以是url，也可以是controller id
+    /// 头部或条目被点击时打开的目标，可以是url，也可以是controller id
     var destination : String = ""
+    
+    /// 点击时显示的消息，若message和destination都为空，则不响应点击
+    var message : String = ""
     
     init () {}
     
@@ -89,5 +92,12 @@ class CardsRowModel {
         self.title = jwcNoticeModel.title
         self.desc = jwcNoticeModel.time
         self.destination = jwcNoticeModel.url
+    }
+    
+    init (activityModel : ActivityModel) {
+        self.title = activityModel.title
+        self.subtitle = activityModel.state.rawValue
+        self.desc = activityModel.activityTime + " @ " + activityModel.location
+        self.destination = activityModel.detailUrl
     }
 }

@@ -9,7 +9,15 @@
 import Foundation
 import UIKit
 
-class WebModuleViewController : UIViewController {
+class WebModuleViewController : UIViewController, UIWebViewDelegate {
+    
+    func webViewDidStartLoad(webView: UIWebView) {
+        showProgressDialog()
+    }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        hideProgressDialog()
+    }
     
     let webModuleColors = [
         Module.Schedule : 0xe54f40,

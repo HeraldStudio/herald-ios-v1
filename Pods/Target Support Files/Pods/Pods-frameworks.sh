@@ -85,19 +85,23 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/Alamofire.framework"
+  install_framework "Pods/DHCShakeNotifier.framework"
   install_framework "Pods/FSCalendar.framework"
   install_framework "Pods/Kingfisher.framework"
-  install_framework "Pods/MBProgressHUD.framework"
   install_framework "Pods/MagicPie.framework"
   install_framework "Pods/Reindeer.framework"
+  install_framework "Pods/SVProgressHUD.framework"
   install_framework "Pods/SwiftyJSON.framework"
+  install_framework "Pods/Toast_Swift.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/Alamofire.framework"
+  install_framework "Pods/DHCShakeNotifier.framework"
   install_framework "Pods/FSCalendar.framework"
   install_framework "Pods/Kingfisher.framework"
-  install_framework "Pods/MBProgressHUD.framework"
   install_framework "Pods/MagicPie.framework"
   install_framework "Pods/Reindeer.framework"
+  install_framework "Pods/SVProgressHUD.framework"
   install_framework "Pods/SwiftyJSON.framework"
+  install_framework "Pods/Toast_Swift.framework"
 fi

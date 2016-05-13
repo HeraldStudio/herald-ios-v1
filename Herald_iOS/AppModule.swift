@@ -37,13 +37,15 @@ class AppModule {
     func open (navigationController : UINavigationController?) {
         if controller == "" { return }
         if controller.containsString("http") {
-            navigationController?.showProgressDialog()
             CacheHelper.set("herald_webmodule_title", nameTip)
             CacheHelper.set("herald_webmodule_url", controller)
             
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE")
             navigationController?.pushViewController(vc, animated: true)
-            navigationController?.performSelector(#selector(navigationController?.hideProgressDialog), withObject: nil, afterDelay: 1)
+        } else if controller.hasPrefix("TAB") {
+            if let tab = Int(controller.replaceAll("TAB", "")) {
+                (navigationController?.childViewControllers[0] as? UITabBarController)?.selectedIndex = tab
+            }
         } else {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(controller)
             navigationController?.pushViewController(vc, animated: true)

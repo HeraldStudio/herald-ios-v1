@@ -9,17 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>DHCShakeNotifier.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FSCalendar.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Kingfisher.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -44,7 +44,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SVProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Toast-Swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -52,12 +62,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>271EA30AB2120E36E8553BE1B8A5E409</key>
+		<key>19917428AA12389042B843DDB5F231FA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5E40AFCA19649CD3E321D8212944BB69</key>
+		<key>1D3C05C8F9B8EC766AAB9C903AAE2734</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,17 +77,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>826BD9396072DA123C239DBE7BFF5455</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8A17B9722F8E95C579D382D4E2BEDEA8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8D8BECEB78289C53E1E402E57EC596BD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>995DDB8F50D759CE297AC130C6D1A01E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B2619B2813D910DBC9FE9714E0788D55</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C8F9359EEA596B601D362864ADABB7C6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CB6C142D00F244B82B9CA261B04401E1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,7 +107,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
+		<key>DEB0516F454CE602D3C0C1120F394722</key>
 		<dict>
 			<key>primary</key>
 			<true/>
