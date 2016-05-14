@@ -21,12 +21,12 @@ class ExamNotifier {
                 cal -= 30 * 60
                 if cal < GCalendar() { return }
                 
-                debugPrint("Sheduled notification: Exam \(examItem.course), \(cal)")
+                //debugPrint("Sheduled notification: Exam \(examItem.course), \(cal)")
                 let not = UILocalNotification()
                 not.fireDate = cal.getDate()
                 not.timeZone = NSTimeZone.defaultTimeZone()
                 not.soundName = UILocalNotificationDefaultSoundName
-                
+                not.applicationIconBadgeNumber = 1
                 guard examItem.timeAndPlace.split("@").count > 1 else { return }
                 let place = examItem.timeAndPlace.split("@")[1].replaceAll(" ", "")
                 not.alertBody = "[\(place)] " + examItem.course + " 将在半小时后开始考试，请注意时间，准时参加"

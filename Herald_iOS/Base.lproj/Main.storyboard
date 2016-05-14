@@ -412,7 +412,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="活动名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xh4-wS-h2e">
-                                            <rect key="frame" x="16" y="8" width="68" height="21"/>
+                                            <rect key="frame" x="16" y="8" width="368" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.090196078431372548" green="0.42352941176470588" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -423,29 +423,20 @@
                                             <color key="textColor" white="0.40999999999999998" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="活动状态" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zC1-N3-Cz9">
-                                            <rect key="frame" x="90" y="11" width="294" height="17"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" white="0.40999999999999998" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="ZiD-tI-AjI" secondAttribute="trailing" constant="16" id="1vp-ji-n1H"/>
-                                        <constraint firstItem="zC1-N3-Cz9" firstAttribute="leading" secondItem="Xh4-wS-h2e" secondAttribute="trailing" constant="6" id="8RD-kx-ams"/>
                                         <constraint firstItem="Xh4-wS-h2e" firstAttribute="leading" secondItem="0Nq-gc-uTM" secondAttribute="leadingMargin" constant="8" id="Bak-Pn-U5d"/>
-                                        <constraint firstItem="ZiD-tI-AjI" firstAttribute="top" secondItem="zC1-N3-Cz9" secondAttribute="bottom" constant="1" id="Fc1-f2-bQ0"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Xh4-wS-h2e" secondAttribute="trailing" constant="8" id="ct1-yE-Nh2"/>
                                         <constraint firstAttribute="bottom" secondItem="ZiD-tI-AjI" secondAttribute="bottom" constant="10" id="gPu-M8-ChM"/>
                                         <constraint firstItem="ZiD-tI-AjI" firstAttribute="top" secondItem="Xh4-wS-h2e" secondAttribute="bottom" id="lBY-xE-ucG"/>
                                         <constraint firstItem="Xh4-wS-h2e" firstAttribute="top" secondItem="0Nq-gc-uTM" secondAttribute="topMargin" id="oP3-T6-sKt"/>
                                         <constraint firstItem="ZiD-tI-AjI" firstAttribute="leading" secondItem="0Nq-gc-uTM" secondAttribute="leading" constant="16" id="wsb-4c-Ryw"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="zC1-N3-Cz9" secondAttribute="trailing" constant="8" id="xi5-tO-Q4k"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="desc" destination="ZiD-tI-AjI" id="z90-jS-0u6"/>
-                                    <outlet property="subtitle" destination="zC1-N3-Cz9" id="3a3-A2-cvf"/>
                                     <outlet property="title" destination="Xh4-wS-h2e" id="e93-NR-dcO"/>
                                 </connections>
                             </tableViewCell>
@@ -679,13 +670,13 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_herald" translatesAutoresizingMaskIntoConstraints="NO" id="1HG-QB-YSZ">
-                                            <rect key="frame" x="7" y="72" width="306" height="122.5"/>
+                                            <rect key="frame" x="7" y="72" width="306" height="123"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="1HG-QB-YSZ" secondAttribute="height" multiplier="5:2" id="Te8-7v-9mF"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="活动介绍" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zjs-4t-aGr">
-                                            <rect key="frame" x="26" y="206" width="268" height="27.5"/>
+                                            <rect key="frame" x="26" y="206" width="268" height="28"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -2676,14 +2667,14 @@ Copyright (c) 2013 Alexandr Graschenkov  [MIT] DHCShakeNotifier (github.co
                     <navigationItem key="navigationItem" id="wKF-jn-Qra">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="hzx-A2-07O">
-                            <rect key="frame" x="100" y="8" width="121" height="29"/>
+                            <rect key="frame" x="99.5" y="7" width="121" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="工作日"/>
-                                <segment title="双休日"/>
+                                <segment title="休息日"/>
                             </segments>
                             <connections>
-                                <action selector="switchWeekdayAndWeekend" destination="ouz-q1-x6x" eventType="touchUpInside" id="vcU-7b-bUo"/>
+                                <action selector="switchWeekdayAndWeekend" destination="ouz-q1-x6x" eventType="valueChanged" id="Yd9-Bb-X5Y"/>
                             </connections>
                         </segmentedControl>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="f0Y-WY-FFD">
