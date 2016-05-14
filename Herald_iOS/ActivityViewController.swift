@@ -40,7 +40,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         refresh()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         tableView.reloadData()
     }
     
