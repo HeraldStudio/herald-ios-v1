@@ -647,7 +647,7 @@
 				TargetAttributes = {
 					D3D35DD81CBA2E8200B18092 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = MW9PK9KE48;
+						DevelopmentTeam = 9837P5SWZ9;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -988,7 +988,7 @@
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
+				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
 				PRODUCT_NAME = "小猴偷米";
 				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -1009,7 +1009,7 @@
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
+				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
 				PRODUCT_NAME = "小猴偷米";
 				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
