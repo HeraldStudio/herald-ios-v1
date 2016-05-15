@@ -398,7 +398,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="count1" destination="h8q-Iw-J5C" id="glG-Tb-epB"/>
+                                    <outlet property="count0" destination="h8q-Iw-J5C" id="pgb-in-efA"/>
                                     <outlet property="desc" destination="qN0-H4-6WP" id="qow-Z5-ODu"/>
                                     <outlet property="subtitle" destination="Ug6-zf-sIj" id="N70-Oo-dIe"/>
                                     <outlet property="title" destination="GdA-Nh-bfn" id="hbh-xH-zCj"/>
@@ -647,7 +647,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="230" sectionHeaderHeight="28" sectionFooterHeight="28" id="Yp4-5C-gtB">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ActivityTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ActivityTableViewCell" rowHeight="249" id="Q8j-F0-JZI" customClass="ActivityTableViewCell" customModule="小猴偷米" customModuleProvider="target">
@@ -1613,6 +1613,86 @@ Copyright (c) 2013 Alexandr Graschenkov  [MIT] DHCShakeNotifier (github.co
             </objects>
             <point key="canvasLocation" x="1795.2" y="-1481.5333333333333"/>
         </scene>
+        <!--添加考试-->
+        <scene sceneID="OuH-aE-Fzi">
+            <objects>
+                <viewController storyboardIdentifier="MODULE_CUSTOM_EXAM" id="ocU-WU-oUm" customClass="CustomExamViewController" customModule="小猴偷米" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KYW-yt-YUU"/>
+                        <viewControllerLayoutGuide type="bottom" id="meQ-7s-BHA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FeW-SJ-GqD">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="考试名称" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gcZ-BJ-yNh">
+                                <rect key="frame" x="16" y="13" width="288" height="30"/>
+                                <color key="tintColor" red="0.96078431369999995" green="0.090196078430000007" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="考试地点（可留空）" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zSH-5E-MV8">
+                                <rect key="frame" x="16" y="56" width="288" height="30"/>
+                                <color key="tintColor" red="0.96078431369999995" green="0.090196078430000007" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="考试时长（分钟，可留空）" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5yH-Jv-PEJ">
+                                <rect key="frame" x="16" y="99" width="288" height="30"/>
+                                <color key="tintColor" red="0.96078431369999995" green="0.090196078430000007" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                            </textField>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Gs5-Tb-1Fn">
+                                <rect key="frame" x="0.0" y="144" width="320" height="216"/>
+                                <color key="tintColor" red="0.96078431369999995" green="0.090196078430000007" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <date key="date" timeIntervalSinceReferenceDate="485015952.35117799">
+                                    <!--2016-05-15 14:39:12 +0000-->
+                                </date>
+                            </datePicker>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5yH-Jv-PEJ" firstAttribute="leading" secondItem="FeW-SJ-GqD" secondAttribute="leading" constant="16" id="BYv-40-bXg"/>
+                            <constraint firstItem="5yH-Jv-PEJ" firstAttribute="top" secondItem="zSH-5E-MV8" secondAttribute="bottom" constant="13" id="Eer-E2-70k"/>
+                            <constraint firstAttribute="trailing" secondItem="5yH-Jv-PEJ" secondAttribute="trailing" constant="16" id="I4o-PW-h0x"/>
+                            <constraint firstItem="zSH-5E-MV8" firstAttribute="leading" secondItem="FeW-SJ-GqD" secondAttribute="leading" constant="16" id="JGq-VN-q4L"/>
+                            <constraint firstItem="Gs5-Tb-1Fn" firstAttribute="leading" secondItem="FeW-SJ-GqD" secondAttribute="leading" id="LI2-LW-4YU"/>
+                            <constraint firstItem="Gs5-Tb-1Fn" firstAttribute="top" secondItem="5yH-Jv-PEJ" secondAttribute="bottom" constant="15" id="NZI-Tp-MN4"/>
+                            <constraint firstAttribute="trailing" secondItem="Gs5-Tb-1Fn" secondAttribute="trailing" id="UDv-Uo-lTX"/>
+                            <constraint firstItem="zSH-5E-MV8" firstAttribute="top" secondItem="gcZ-BJ-yNh" secondAttribute="bottom" constant="13" id="dom-9J-iKZ"/>
+                            <constraint firstItem="gcZ-BJ-yNh" firstAttribute="top" secondItem="KYW-yt-YUU" secondAttribute="bottom" constant="13" id="lYQ-a8-5JH"/>
+                            <constraint firstItem="gcZ-BJ-yNh" firstAttribute="leading" secondItem="FeW-SJ-GqD" secondAttribute="leading" constant="16" id="n3U-C9-Nze"/>
+                            <constraint firstAttribute="trailing" secondItem="gcZ-BJ-yNh" secondAttribute="trailing" constant="16" id="pMu-ph-e0X"/>
+                            <constraint firstAttribute="trailing" secondItem="zSH-5E-MV8" secondAttribute="trailing" constant="16" id="tFz-B4-rsg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="添加考试" id="VcS-pm-2Vz">
+                        <rightBarButtonItems>
+                            <barButtonItem title="保存" id="KT3-WS-yo6">
+                                <connections>
+                                    <action selector="save" destination="ocU-WU-oUm" id="QBf-YX-UBN"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="stop" id="1vj-qS-cwP">
+                                <connections>
+                                    <action selector="delete" destination="ocU-WU-oUm" id="VTD-jk-5PR"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="examMinutes" destination="5yH-Jv-PEJ" id="Kzm-mL-eFN"/>
+                        <outlet property="examName" destination="gcZ-BJ-yNh" id="MNi-aw-Mig"/>
+                        <outlet property="examPlace" destination="zSH-5E-MV8" id="XE4-c6-Plk"/>
+                        <outlet property="examTime" destination="Gs5-Tb-1Fn" id="0zr-Kl-1Hu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iwj-iZ-vxz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2259" y="-2157"/>
+        </scene>
         <!--考试助手-->
         <scene sceneID="dUf-8u-3CB">
             <objects>
@@ -1623,7 +1703,7 @@ Copyright (c) 2013 Alexandr Graschenkov  [MIT] DHCShakeNotifier (github.co
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExamTableViewCell" id="KNi-XK-e59" customClass="ExamTableViewCell" customModule="小猴偷米" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ExamTableViewCell" id="KNi-XK-e59" customClass="ExamTableViewCell" customModule="小猴偷米" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="320" height="72"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KNi-XK-e59" id="DX7-Tx-0tf">
@@ -1640,10 +1720,7 @@ Copyright (c) 2013 Alexandr Graschenkov  [MIT] DHCShakeNotifier (github.co
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="考试地点" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1C-1J-RWS">
-                                            <rect key="frame" x="16" y="43" width="290" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="aBt-OU-eEQ"/>
-                                            </constraints>
+                                            <rect key="frame" x="16" y="46" width="290" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -1669,9 +1746,11 @@ Copyright (c) 2013 Alexandr Graschenkov  [MIT] DHCShakeNotifier (github.co
                                         <constraint firstItem="8he-LV-dIh" firstAttribute="leading" secondItem="DX7-Tx-0tf" secondAttribute="leading" constant="16" id="GD0-Yh-lkq"/>
                                         <constraint firstItem="X2o-AH-pD2" firstAttribute="leading" secondItem="DX7-Tx-0tf" secondAttribute="leading" constant="16" id="Jrt-7d-9ue"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="K1C-1J-RWS" secondAttribute="trailing" constant="6" id="Mhk-Jc-Rcs"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="8he-LV-dIh" secondAttribute="bottom" constant="8" id="W5b-oG-uBK"/>
+                                        <constraint firstAttribute="bottom" secondItem="K1C-1J-RWS" secondAttribute="bottom" constant="8" id="csI-DC-ujP"/>
                                         <constraint firstItem="V4q-77-cyN" firstAttribute="leading" secondItem="X2o-AH-pD2" secondAttribute="trailing" constant="8" id="e0b-Lu-JH0"/>
                                         <constraint firstItem="X2o-AH-pD2" firstAttribute="top" secondItem="DX7-Tx-0tf" secondAttribute="top" constant="8" id="evb-aF-6uY"/>
-                                        <constraint firstItem="K1C-1J-RWS" firstAttribute="top" secondItem="X2o-AH-pD2" secondAttribute="bottom" constant="14" id="n5O-4y-5jW"/>
+                                        <constraint firstItem="K1C-1J-RWS" firstAttribute="top" secondItem="X2o-AH-pD2" secondAttribute="bottom" constant="17" id="n5O-4y-5jW"/>
                                         <constraint firstItem="8he-LV-dIh" firstAttribute="top" secondItem="DX7-Tx-0tf" secondAttribute="top" constant="27" id="oe8-m4-Lwx"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="8he-LV-dIh" secondAttribute="trailing" constant="6" id="tnY-v0-ncH"/>
                                         <constraint firstAttribute="trailing" secondItem="V4q-77-cyN" secondAttribute="trailing" constant="14" id="uHz-aU-HoU"/>
@@ -1692,7 +1771,7 @@ Copyright (c) 2013 Alexandr Graschenkov  [MIT] DHCShakeNotifier (github.co
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="空空如也，是不是该庆祝一下…" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5u1-lF-nhI">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="空空如也，是不是该庆祝一下…" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5u1-lF-nhI">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -1714,11 +1793,18 @@ Copyright (c) 2013 Alexandr Graschenkov  [MIT] DHCShakeNotifier (github.co
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="考试助手" id="Ejg-z1-Yej">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="nfa-aa-Y2u">
-                            <connections>
-                                <action selector="refreshCache" destination="eSB-zy-AYS" id="osO-Ar-vPr"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="nfa-aa-Y2u">
+                                <connections>
+                                    <action selector="refreshCache" destination="eSB-zy-AYS" id="osO-Ar-vPr"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="vbZ-A1-4Ej">
+                                <connections>
+                                    <segue destination="ocU-WU-oUm" kind="push" id="rUw-Q8-rPS"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
@@ -2582,11 +2668,18 @@ Copyright (c) 2013 Alexandr Graschenkov  [MIT] DHCShakeNotifier (github.co
                         </connections>
                     </webView>
                     <navigationItem key="navigationItem" title="WebModule" id="pHf-kM-WYR">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="STi-iG-0RD">
-                            <connections>
-                                <action selector="refresh" destination="GHm-8e-AOt" id="YGd-jO-0bI"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="STi-iG-0RD">
+                                <connections>
+                                    <action selector="refresh" destination="GHm-8e-AOt" id="YGd-jO-0bI"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="action" id="SuQ-es-oXD">
+                                <connections>
+                                    <action selector="share" destination="GHm-8e-AOt" id="5TO-Rn-Jsr"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
@@ -2667,7 +2760,7 @@ Copyright (c) 2013 Alexandr Graschenkov  [MIT] DHCShakeNotifier (github.co
                     <navigationItem key="navigationItem" id="wKF-jn-Qra">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="hzx-A2-07O">
-                            <rect key="frame" x="99.5" y="7" width="121" height="30"/>
+                            <rect key="frame" x="100" y="7" width="121" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="工作日"/>

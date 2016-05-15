@@ -17,6 +17,7 @@
 		D306E02C1CCA68EB00FA3812 /* GradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E02B1CCA68EB00FA3812 /* GradeTableViewCell.swift */; };
 		D306E02E1CCA691F00FA3812 /* GradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E02D1CCA691F00FA3812 /* GradeViewController.swift */; };
 		D30A9BA11CBBA9100087D583 /* ApiThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30A9BA01CBBA9100087D583 /* ApiThreadManager.swift */; };
+		D3150F0F1CE8C3DA00E95EB6 /* CustomExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3150F0E1CE8C3DA00E95EB6 /* CustomExamViewController.swift */; };
 		D31821B21CC3B07800992355 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D31821B11CC3B07800992355 /* LaunchScreen.storyboard */; };
 		D31821B61CC48D5400992355 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821B51CC48D5400992355 /* ServiceHelper.swift */; };
 		D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821B81CC4D53300992355 /* CardsTableViewCell.swift */; };
@@ -134,6 +135,7 @@
 		D306E02B1CCA68EB00FA3812 /* GradeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeTableViewCell.swift; sourceTree = "<group>"; };
 		D306E02D1CCA691F00FA3812 /* GradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeViewController.swift; sourceTree = "<group>"; };
 		D30A9BA01CBBA9100087D583 /* ApiThreadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiThreadManager.swift; sourceTree = "<group>"; };
+		D3150F0E1CE8C3DA00E95EB6 /* CustomExamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomExamViewController.swift; sourceTree = "<group>"; };
 		D31821B11CC3B07800992355 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D31821B51CC48D5400992355 /* ServiceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
 		D31821B81CC4D53300992355 /* CardsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsTableViewCell.swift; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 				D306E0231CCA3F7700FA3812 /* ExamViewController.swift */,
 				D306E0251CCA3F8400FA3812 /* ExamTableViewCell.swift */,
 				D306E0271CCA403D00FA3812 /* ExamModel.swift */,
+				D3150F0E1CE8C3DA00E95EB6 /* CustomExamViewController.swift */,
 			);
 			name = exam;
 			sourceTree = "<group>";
@@ -647,7 +650,7 @@
 				TargetAttributes = {
 					D3D35DD81CBA2E8200B18092 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 9837P5SWZ9;
+						DevelopmentTeam = MW9PK9KE48;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -843,6 +846,7 @@
 				D3E6BD831CC8D4B20074FF6D /* PedetailViewController.swift in Sources */,
 				D34BCC731CE5D379005F4164 /* ExamNotifier.swift in Sources */,
 				D3F375C71CDB3957004DDEA5 /* WifiLoginHelper.swift in Sources */,
+				D3150F0F1CE8C3DA00E95EB6 /* CustomExamViewController.swift in Sources */,
 				D33678F81CE5971C001E7C25 /* CurriculumNotifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -985,15 +989,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1006,15 +1010,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

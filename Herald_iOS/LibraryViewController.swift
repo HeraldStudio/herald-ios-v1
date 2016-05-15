@@ -27,7 +27,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        swiper.syncApperance((tableView?.contentOffset)!)
+        swiper.syncApperance()
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {

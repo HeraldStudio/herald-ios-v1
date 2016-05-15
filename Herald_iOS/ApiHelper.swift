@@ -1,5 +1,8 @@
 import UIKit
 
+/**
+ * ApiHelper | API相关、登录相关
+ */
 class ApiHelper : NSObject {
     // heraldstudio.com 主站API
     static let WWW_ROOT = "http://www.heraldstudio.com/"
