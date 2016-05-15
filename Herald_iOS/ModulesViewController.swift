@@ -1,16 +1,26 @@
-import Foundation
 import UIKit
 
+/**
+ * ModulesViewController | 模块列表界面，模块列表视图代理和数据源
+ * 负责模块列表视图以及模块管理按钮的处理
+ */
 class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    /// 整体部分：初始化、模块管理按钮
+    /////////////////////////////////////////////////////////////////////////////////////
+    
+    /// 绑定的列表视图
     @IBOutlet weak var moduleTableView: UITableView!
     
+    /// 界面实例化时的初始化
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 为列表视图设置自适应高度
         self.moduleTableView.estimatedRowHeight = 74;
         self.moduleTableView.rowHeight = UITableViewAutomaticDimension;
         
+        // 为列表视图添加底部 padding，防止滚动到底部时部分内容被 TabBar 覆盖
         let tw = (tabBarController?.tabBar.frame.width)!
         let th = (tabBarController?.tabBar.frame.height)!
         let bottomPadding = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tw, height: th))
@@ -25,72 +35,87 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    /// 界面显示完成的事件
     override func viewDidAppear(animated: Bool) {
         setupModuleList()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-    var enabledModules : [AppModule] = []
-    var sections : [[AppModule]] = []
-    
+    /// 加载模块列表
     func setupModuleList () {
-        enabledModules.removeAll()
+        
+        // 清空列表原有数据
         sections.removeAll()
+        
+        // 第二个分区的模块列表
+        var enabledModules : [AppModule] = []
+        
+        // 将模块管理伪装成一个模块加入到第一个分区中，并将这个分区加入到列表中
         let manager = AppModule(id: -1, name: "", nameTip : "模块管理", desc : "管理各模块的显示/隐藏状态",
                                 controller : "MODULE_MANAGER", icon : "ic_add", hasCard : true)
         sections.append([manager])
         
+        // 将各个模块加入到第二个分区中
         for k in SettingsHelper.MODULES {
             if SettingsHelper.getModuleShortcutEnabled(k.id) {
                 enabledModules.append(k)
             }
         }
         
+        // 如果非空，将第二个分区加入到列表中
         if enabledModules.count > 0 {
             sections.append(enabledModules)
         }
+        
+        // 显式调用表格重载数据
         moduleTableView.reloadData()
     }
     
-    //指定UITableView中有多少个section的，section分区，一个section里会包含多个Cell
+    /// 模块列表部分：模块列表数据源
+    /////////////////////////////////////////////////////////////////////////////////////
+    
+    /// 模块列表
+    var sections : [[AppModule]] = []
+    
+    /// 列表分区数目
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sections.count
     }
     
-    //每一个section里面有多少个Cell
+    /// 列表某分区中条目数目
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].count
     }
     
-    //初始化每一个Cell
+    /// 实例化列表条目
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        // 实例化
         let moduleCell = moduleTableView.dequeueReusableCellWithIdentifier("ModuleTableViewCell", forIndexPath: indexPath) as! ModuleTableViewCell
-        
-        
         
         let module = sections[indexPath.section][indexPath.row]
         
+        // 数据绑定
         moduleCell.icon.image = UIImage(named: module.icon)
         moduleCell.label.text = module.nameTip
         moduleCell.detail.text = module.desc
         
-        //moduleCell.selectionStyle = UITableViewCellSelectionStyle.None
-        
         return moduleCell
     }
     
+    /// 列表分区标题
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return section == 0 ? nil : "我的模块"
     }
     
-    //选中一个Cell后执行的方法
+    /// 模块列表部分：模块列表代理
+    /////////////////////////////////////////////////////////////////////////////////////
+    
+    /// 自定义列表条目点击事件
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
+        // 打开对应的模块
         sections[indexPath.section][indexPath.row].open(navigationController!)
     }
 }

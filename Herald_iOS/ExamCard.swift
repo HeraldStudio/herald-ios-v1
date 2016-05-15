@@ -40,7 +40,7 @@ class ExamCard {
         if (examList.count == 0) {
             return CardsModel(cellId: "CardsCellExam", module: .Exam, desc: "最近没有新的考试安排", priority: .NO_CONTENT)
         } else {
-            let model = CardsModel(cellId: "CardsCellExam", module: .Exam, desc: "你最近有\(examList.count)场考试，抓紧时间复习吧", priority: .CONTENT_NOTIFY)
+            let model = CardsModel(cellId: "CardsCellExam", module: .Exam, desc: "你最近有\(examList.count)场考试，抓紧时间复习吧", priority: .CONTENT_NO_NOTIFY)
             model.rows.appendContentsOf(examList)
             return model;
         }
