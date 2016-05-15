@@ -29,7 +29,7 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        swiper.syncApperance((tableView?.contentOffset)!)
+        swiper.syncApperance()
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {

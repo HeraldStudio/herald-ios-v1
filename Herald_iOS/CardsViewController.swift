@@ -397,6 +397,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         if let desc = row.desc { cell.desc?.text = desc }
         
         // 若模型有数字、视图有数字，将模型指定的描述显示在视图上
+        if let count0 = row.count0 { cell.count0?.text = count0 }
         if let count1 = row.count1 { cell.count1?.text = count1 }
         if let count2 = row.count2 { cell.count2?.text = count2 }
         if let count3 = row.count3 { cell.count3?.text = count3 }
@@ -438,8 +439,10 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
         // 标记为已读
-        model.markAsRead()
-        
+        if indexPath.row == 0 {
+            model.markAsRead()
+        }
+            
         // 根据新的已读状态重载卡片列表顺序
         loadContent(false)
     }

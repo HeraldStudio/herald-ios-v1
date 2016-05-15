@@ -53,13 +53,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    /// 加载并安排应用通知，同下
+    /// 在应用结束或转到后台时安排通知
     func applicationWillTerminate(application: UIApplication) {
-        applicationDidEnterBackground(application)
+        reloadNotifications()
+    }
+    
+    func applicationDidEnterBackground(application: UIApplication) {
+        reloadNotifications()
     }
     
     /// 加载并安排应用通知
-    func applicationDidEnterBackground(application: UIApplication) {
+    func reloadNotifications() {
         
         // 先清除旧的通知
         UIApplication.sharedApplication().cancelAllLocalNotifications()

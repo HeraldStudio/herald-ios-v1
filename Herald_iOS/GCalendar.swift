@@ -122,6 +122,12 @@ public class GCalendar : CustomDebugStringConvertible {
         setTime(h, m, s)
     }
     
+    /// 构造函数，通过 NSDate 构造时间
+    public convenience init (_ date: NSDate) {
+        self.init()
+        rawTime = Int64(date.timeIntervalSince1970)
+    }
+    
     /// 构造函数，根据字符串构造对应的时间，允许-/:. 等分隔符，
     /// 根据分割出来的子串个数，依次填到年/月/日/时/分/秒中
     public convenience init (_ src : String) {

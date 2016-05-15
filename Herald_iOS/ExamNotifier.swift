@@ -16,23 +16,32 @@ class ExamNotifier {
         
         for exam in json.arrayValue {
             do {
-                let examItem = try ExamModel(json: exam)
-                let cal = GCalendar(examItem.timeAndPlace.split("@")[0])
-                cal -= 30 * 60
-                if cal < GCalendar() { return }
-                
-                //debugPrint("Sheduled notification: Exam \(examItem.course), \(cal)")
-                let not = UILocalNotification()
-                not.fireDate = cal.getDate()
-                not.timeZone = NSTimeZone.defaultTimeZone()
-                not.soundName = UILocalNotificationDefaultSoundName
-                not.applicationIconBadgeNumber = 1
-                guard examItem.timeAndPlace.split("@").count > 1 else { return }
-                let place = examItem.timeAndPlace.split("@")[1].replaceAll(" ", "")
-                not.alertBody = "[\(place)] " + examItem.course + " 将在半小时后开始考试，请注意时间，准时参加"
-                
-                UIApplication.sharedApplication().scheduleLocalNotification(not)
+                scheduleNotificationsForExam(try ExamModel(json: exam))
             } catch { continue }
         }
+        
+        let customCache = CacheHelper.get("herald_exam_custom_\(ApiHelper.getUserName())")
+        let jsonCustom = JSON.parse(customCache)
+        
+        for exam in jsonCustom.arrayValue {
+            do {
+                scheduleNotificationsForExam(try ExamModel(json: exam))
+            } catch { continue }
+        }
+    }
+    
+    static func scheduleNotificationsForExam(model : ExamModel){
+        let cal = GCalendar(model.time)
+        cal -= 30 * 60
+        if cal < GCalendar() { return }
+        
+        let not = UILocalNotification()
+        not.fireDate = cal.getDate()
+        not.timeZone = NSTimeZone.defaultTimeZone()
+        not.soundName = UILocalNotificationDefaultSoundName
+        not.applicationIconBadgeNumber = 1
+        not.alertBody = (model.location == "" ? "" : "[\(model.location)] ") + model.course + " 将在半小时后开始考试，请注意时间，准时参加"
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(not)
     }
 }

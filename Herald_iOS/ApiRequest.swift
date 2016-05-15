@@ -1,24 +1,10 @@
-//
-//  ApiRequest.swift
-//  Herald_iOS
-//
-//  Created by 于海通 on 16/4/11.
-//  Copyright © 2016年 于海通. All rights reserved.
-//
-
-import Foundation
 import Alamofire
 import SwiftyJSON
 
 class ApiRequest {
     
-    static let CONN_TIMEOUT = 10000, READ_TIMEOUT = 10000
-    
     /**
      * 构造部分
-     * context  当前上下文
-     * exceptionPool   是否吞掉错误消息
-     * url      请求的目标url
      **/
     var errorPool : NSMutableArray?
     

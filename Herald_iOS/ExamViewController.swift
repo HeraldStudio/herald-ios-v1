@@ -18,17 +18,22 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
     let swiper = SwipeRefreshHeader()
     
     override func viewDidLoad() {
+        tableView.estimatedRowHeight = 45
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
         swiper.refresher = {() in self.refreshCache()}
         tableView?.tableHeaderView = swiper
-        loadCache()
+        
+        showTipDialogIfUnknown("考试模块支持添加考试咯~\n\n点击右上角加号即可添加考试，添加好的考试与其它考试一样可以显示倒计时和通知提醒；\n\n点击添加好的考试也可以编辑或删除~", cachePostfix: "custom_exam") {}
     }
     
     override func viewWillAppear(animated: Bool) {
         setNavigationColor(swiper, 0xf5176c)
+        loadCache()
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        swiper.syncApperance((tableView?.contentOffset)!)
+        swiper.syncApperance()
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
@@ -45,13 +50,24 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
     var comingExams : [ExamModel] = []
     
     func loadCache() {
+        
+        // 学校考试
         let cache = CacheHelper.get("herald_exam")
+        
         if cache == "" {
             refreshCache()
             return
         }
         
+        // 自定义考试
+        var customCache = CacheHelper.get("herald_exam_custom_\(ApiHelper.getUserName())")
+        if customCache == "" {
+            customCache = "[]"
+        }
+        
         let jsonCache = JSON.parse(cache)["content"]
+        
+        let jsonCustomCache = JSON.parse(customCache)
         
         sections.removeAll()
         titles.removeAll()
@@ -70,6 +86,24 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
                 continue
             }
         }
+        
+        for i in 0 ..< jsonCustomCache.arrayValue.count {
+            let item = jsonCustomCache.arrayValue[i]
+            do {
+                let model = try ExamModel(json: item)
+                model.customIndex = i
+                if model.days >= 0 {
+                    comingExams.append(model)
+                } else {
+                    endedExams.append(model)
+                }
+            } catch {
+                continue
+            }
+        }
+        
+        comingExams = comingExams.sort({$0.days < $1.days})
+        endedExams = endedExams.sort({$0.days > $1.days})
         
         titles.append("考试倒计时")
         sections.append(comingExams)
@@ -124,7 +158,7 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
         let model = sections[indexPath.section][indexPath.row]
         cell.course?.text = model.course
         cell.time?.text = model.timeAndPlace
-        cell.location?.text = model.periodAndTeacher
+        cell.location?.text = model.period
         cell.days?.text = "还有\(abs(model.days))天"
         cell.days?.alpha = model.days >= 0 ? 1 : 0
         return cell
@@ -136,5 +170,14 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let item = sections[indexPath.section][indexPath.row]
+        if item.customIndex == -1 {
+            showMessage("固定的考试不允许编辑~")
+        } else {
+            let vc = storyboard?.instantiateViewControllerWithIdentifier("MODULE_CUSTOM_EXAM") as! CustomExamViewController
+            vc.index = item.customIndex
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }

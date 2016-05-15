@@ -18,7 +18,10 @@ class CardsRowModel {
     /// 卡片头部的内容，课表、实验、考试、讲座的时间地点，通知的发布日期
     var desc : String?
     
-    /// 考试的倒计时天数、跑操的已跑次数
+    /// 考试的倒计时天数
+    var count0 : String?
+    
+    /// 跑操的已跑次数
     var count1 : String?
     
     /// 跑操的剩余次数
@@ -38,7 +41,7 @@ class CardsRowModel {
     
     /// 用一个字符串表示所有内容，用来判断两个卡片是否相等，以便于计算卡片消息是否已读
     var stringValue : String {
-        return "\(icon)|\(title)|\(subtitle)|\(desc)|\(count1)|\(count2)|\(count3)|\(sortOrder)|\(destination)"
+        return "|\(icon)|\(title)|\(subtitle)|\(desc)|\(count0)|\(count1)|\(count2)|\(count3)|\(sortOrder)|\(destination)|"
     }
     
     /// 保留默认构造函数，以便构造自定义的模型
@@ -70,12 +73,13 @@ class CardsRowModel {
     /// 从考试模块的原始数据构造一行卡片详情
     init (examModel : ExamModel) {
         self.title = examModel.course
-        self.subtitle = examModel.periodAndTeacher
+        self.subtitle = examModel.period
         self.desc = examModel.timeAndPlace
-        self.count1 = "\(examModel.days)天"
+        self.count0 = "\(examModel.days)天"
+        self.sortOrder = examModel.days
     }
     
-    /// 从考试模块的原始数据构造一行卡片详情
+    /// 从人文讲座模块的原始数据构造一行卡片详情
     init (lectureModel : LectureModel) {
         self.title = lectureModel.topic
         self.subtitle = lectureModel.speaker
@@ -102,5 +106,8 @@ class CardsRowModel {
         self.subtitle = activityModel.state.rawValue
         self.desc = activityModel.activityTime + " @ " + activityModel.location
         self.destination = activityModel.detailUrl
+        if destination == "" {
+            destination = "TAB1"
+        }
     }
 }

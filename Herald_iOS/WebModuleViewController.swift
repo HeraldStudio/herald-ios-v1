@@ -44,6 +44,10 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate {
         }
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        hideProgressDialog()
+    }
+    
     @IBAction func refresh () {
         webView.reload()
     }
@@ -54,5 +58,21 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate {
     
     @IBAction func forward () {
         webView.goForward()
+    }
+    
+    @IBAction func share () {
+        let _shareUrl = webView.stringByEvaluatingJavaScriptFromString("window.location.href")
+        let shareUrl = _shareUrl == nil ? "" : _shareUrl!
+        
+        let module = (title == nil || title! == "小猴偷米") ? "" : " - \(title!)"
+        let prefix = "来自小猴偷米App\(module)的分享："
+        let __title = webView.stringByEvaluatingJavaScriptFromString("document.title")
+        let _title = __title == nil ? "" : __title!
+        let shareText = prefix + _title + " " + shareUrl
+        
+        let items : [AnyObject] = [shareText]
+        let vc = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        vc.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]
+        presentViewController(vc, animated: true, completion: nil)
     }
 }

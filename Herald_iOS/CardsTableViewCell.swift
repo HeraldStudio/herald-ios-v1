@@ -21,7 +21,10 @@ class CardsTableViewCell: UITableViewCell {
     /// 卡片头部的内容，课表、实验、考试、讲座的时间地点，通知的发布日期
     @IBOutlet var desc : UILabel?
     
-    /// 考试的倒计时天数、跑操的已跑次数
+    /// 考试的倒计时天数
+    @IBOutlet var count0 : UILabel?
+    
+    /// 跑操的已跑次数
     @IBOutlet var count1 : UILabel?
     
     /// 跑操的剩余次数

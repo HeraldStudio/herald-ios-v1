@@ -62,6 +62,9 @@ class SwipeRefreshHeader : UIView {
     
     /// 重绘
     func syncApperance () {
+        if superview == nil {
+            return
+        }
         let x = (superview! as! UIScrollView).contentOffset.x
         let y = (superview! as! UIScrollView).contentOffset.y
         

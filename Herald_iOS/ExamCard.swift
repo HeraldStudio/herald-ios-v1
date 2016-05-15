@@ -24,7 +24,9 @@ class ExamCard {
 
     static func getCard() -> CardsModel {
         let cache = CacheHelper.get("herald_exam")
+        let customCache = CacheHelper.get("herald_exam_custom_\(ApiHelper.getUserName())")
         let json = JSON.parse(cache)["content"]
+        let jsonCustom = JSON.parse(customCache)
         
         var examList : [CardsRowModel] = []
         
@@ -36,6 +38,17 @@ class ExamCard {
                 }
             } catch { continue }
         }
+        
+        for exam in jsonCustom.arrayValue {
+            do {
+                let examItem = try ExamModel(json: exam)
+                if (examItem.days >= 0) {
+                    examList.append(CardsRowModel(examModel: examItem))
+                }
+            } catch { continue }
+        }
+        
+        examList = examList.sort({$0.sortOrder < $1.sortOrder})
         
         if (examList.count == 0) {
             return CardsModel(cellId: "CardsCellExam", module: .Exam, desc: "最近没有新的考试安排", priority: .NO_CONTENT)

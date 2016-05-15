@@ -51,8 +51,8 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
         var enabledModules : [AppModule] = []
         
         // 将模块管理伪装成一个模块加入到第一个分区中，并将这个分区加入到列表中
-        let manager = AppModule(id: -1, name: "", nameTip : "模块管理", desc : "管理各模块的显示/隐藏状态",
-                                controller : "MODULE_MANAGER", icon : "ic_add", hasCard : true)
+        let manager = AppModule(-1, "", "模块管理", "管理各模块的显示/隐藏状态",
+                                "MODULE_MANAGER", "ic_add", true)
         sections.append([manager])
         
         // 将各个模块加入到第二个分区中

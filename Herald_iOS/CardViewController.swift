@@ -33,7 +33,7 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        swiper.syncApperance((tableView?.contentOffset)!)
+        swiper.syncApperance()
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
