@@ -60,10 +60,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// 加载并安排应用通知
     func applicationDidEnterBackground(application: UIApplication) {
+        
         // 先清除旧的通知
         UIApplication.sharedApplication().cancelAllLocalNotifications()
+        
         // 若已登录，注册新的通知
         if ApiHelper.isLogin() {
+            
             // 加载课表通知
             if SettingsHelper.getModuleCardEnabled(Module.Curriculum.rawValue) {
                 CurriculumNotifier.scheduleNotifications()
@@ -125,26 +128,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// 使主窗口立即跳转到登录界面
     func showLogin () {
+        
         // 关闭当前界面
         self.window?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
+        
         // 销毁当前界面
         /// TODO 貌似Swift不需要这句？
         self.window?.rootViewController = nil
+        
         // 实例化新的界面
         let lvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("login")
+        
         // 打开新的界面
         self.window?.rootViewController = lvc
     }
     
     /// 使主窗口立即跳转到主界面
     func showMain () {
+        
         // 关闭当前界面
         self.window?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
+        
         // 销毁当前界面
         /// TODO 貌似Swift不需要这句？
         self.window?.rootViewController = nil
+        
         // 实例化新的界面
         let mvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("main")
+        
         // 打开新的界面
         self.window?.rootViewController = mvc
     }

@@ -1,67 +1,62 @@
-import Foundation
 import UIKit
 
+/**
+ * MyInfoViewController | 设置界面
+ * 设置界面主要是静态列表，这个类主要负责管理其中的动态内容、以及一些无法用 Segue 表示的点击事件
+ */
 class MyInfoViewController: UITableViewController {
     
-    var parent : MainViewController?
-    
+    /// 摇一摇登录校园网的开关
     @IBOutlet var wifiSwitch : UISwitch!
     
+    /// 版本信息显示
     @IBOutlet var version : UILabel!
     
+    /// 跳转到 App Store 发布页面，用于检查更新或发布评论
     func checkVersion () {
         UIApplication.sharedApplication().openURL(NSURL(string: "https://itunes.apple.com/us/app/xiao-hou-tou-mi/id1107998946")!)
     }
     
+    /// 界面实例化时的初始化
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /// 初始化摇一摇的开关状态
         wifiSwitch.setOn(SettingsHelper.getWifiAutoLogin(), animated: false)
+        
+        /// 初始化版本信息的显示
         version.text = "当前版本：v\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")!)"
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+    /// 一些自定义的点击事件
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        switch indexPath.section {
-        case 0:
-            switch indexPath.row {
-            case 0:
-                showQuestionDialog("确定要退出登录吗？") { ApiHelper.doLogout(self) }
-            default:
-                break
-            }
-        case 1:
-            switch indexPath.row {
-            case 0:
-                wifiSwitch.setOn(!wifiSwitch.on, animated: true)
-                wifiStateChanged()
-            case 1:
-                displayWifiSetDialog()
-            default:
-                break
-            }
-        case 2:
-            switch indexPath.row {
-            case 2:
-                checkVersion()
-            default:
-                break
-            }
+        switch (indexPath.section, indexPath.row) {
+        case (0, 0):
+            /// 退出登录
+            showQuestionDialog("确定要退出登录吗？") { ApiHelper.doLogout(self) }
+        case (1, 0):
+            /// 摇一摇开关
+            wifiSwitch.setOn(!wifiSwitch.on, animated: true)
+            wifiStateChanged()
+        case (1, 1):
+            /// 自定义校园网登录账号
+            displayWifiSetDialog()
+        case (2, 2):
+            /// 给我们评分（App Store不允许有版本更新按钮，因此更名）
+            checkVersion()
         default:
             break
         }
     }
     
+    /// 同步摇一摇开关状态到设置
     @IBAction func wifiStateChanged () {
         SettingsHelper.setWifiAutoLogin(wifiSwitch.on)
     }
     
+    /// 显示摇一摇账号设置对话框
     func displayWifiSetDialog () {
         let dialog = UIAlertController(title: "自定义校园网登录账号", message: "你可以在这里设置用独立账号登陆校园网；校园网查询模块不受此设置影响", preferredStyle: UIAlertControllerStyle.Alert)
         

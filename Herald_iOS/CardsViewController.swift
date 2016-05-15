@@ -1,4 +1,3 @@
-import Foundation
 import UIKit
 import Reindeer
 import Kingfisher
@@ -13,9 +12,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     /// 整体部分：初始化、轮播图、集成下拉刷新
     /////////////////////////////////////////////////////////////////////////////////////
     
-    
     /// 绑定的列表视图
-    @IBOutlet weak var cardsTableView: UITableView!
+    @IBOutlet var cardsTableView: UITableView!
     
     /// 轮播图视图
     let slider = BannerPageViewController()
@@ -66,8 +64,10 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     /// 定时刷新，即每当时间改变时重新解析本地缓存，并加载卡片内容
     func timeChanged() {
+        
         // 解析本地缓存，重载卡片内容
         loadContent(false)
+        
         // 到下一分钟的剩余秒数，这里虽然接近 60，但是不写死，防止误差累积
         let seconds = 60 - NSDate().timeIntervalSince1970 % 60
         performSelector(#selector(self.timeChanged), withObject: nil, afterDelay: seconds)
@@ -75,37 +75,51 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     /// 界面显示完成的事件
     override func viewDidAppear(animated: Bool) {
+        
         // 若未登录，不作操作
         if !ApiHelper.isLogin() {
             return
         }
+        
         // 解析本地缓存，重载卡片内容
         loadContent(false)
     }
     
     /// 初始化轮播图和下拉刷新控件
     func setupSliderAndSwiper () {
+        
+        /// 初始化轮播图
+        
         // 轮播图宽高比 5:2
         slider.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.width * CGFloat(0.4))
+        
         // 轮播图自动切换间隔 5秒
         slider.interval = 5
+        
         // 轮播图无法加载时的默认图片
         slider.placeholderImage = UIImage(named: "default_herald")
+        
         // 定义 KingFisher 为轮播图在线图片加载器
         slider.setRemoteImageFetche { (imageView, url, placeHolderImage) in
             imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: placeHolderImage)
         }
+        
         // 轮播图点击时的事件
         slider.setBannerTapHandler { (index) in
             AppModule(title: "小猴偷米", url: self.links[index]).open(self.navigationController)
         }
         
+        /// 初始化下拉刷新控件
+        
         // 下拉刷新控件蒙版颜色
         swiper.themeColor = navigationController?.navigationBar.backgroundColor
+        
         // 设置轮播图为下拉刷新控件内嵌视图
         swiper.contentView = slider.view
+        
         // 设置下拉刷新控件刷新事件
         swiper.refresher = {() in
+            
             // 此处为了防止列表立即刷新导致列表在下拉后突然弹回，延迟1秒刷新，加载框提前显示
             self.showProgressDialog()
             self.performSelector(#selector(self.refresh), withObject: nil, afterDelay: 1)
@@ -113,6 +127,27 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // 设置下拉刷新控件为列表页头视图
         cardsTableView.tableHeaderView = swiper
+    }
+    
+    /// 下拉刷新控件用到的刷新函数
+    func refresh () {
+        loadContent(true)
+    }
+    
+    /// 下拉刷新控件用到的三个 hook
+    // 滚动时刷新显示
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        swiper.syncApperance()
+    }
+    
+    // 开始拖动，以下两个函数用于让下拉刷新控件判断是否已经松手，保证不会在松手后出现“[REFRESH]”
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        swiper.beginDrag()
+    }
+    
+    // 结束拖动
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        swiper.endDrag()
     }
     
     /// 各个轮播图点击时打开的链接
@@ -131,13 +166,16 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     func refreshSlider () {
         let cache = JSON.parse(ServiceHelper.get("versioncheck_cache"))
         let array = cache["content"]["sliderviews"]
+        
         // 同步缓冲数据，以便下一次判断
         sliderData = array
         
         // 清空链接列表
         links.removeAll()
+        
         // 清空图片列表
         var pics : [AnyObject?] = []
+        
         // 逐个添加图片和对应链接
         for i in 0 ..< array.count {
             let pic = array[i]
@@ -169,9 +207,6 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     /// 卡片列表部分：卡片刷新
     /////////////////////////////////////////////////////////////////////////////////////
-    
-    /// 卡片列表
-    var cardList : [CardsModel] = []
     
     func loadContent (refresh : Bool) {
         /// 本地重载
@@ -317,6 +352,9 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     /// 卡片列表部分：卡片列表数据源
     /////////////////////////////////////////////////////////////////////////////////////
     
+    /// 卡片列表
+    var cardList : [CardsModel] = []
+    
     /// 列表分区数目
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return cardList.count
@@ -329,27 +367,41 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     /// 实例化列表条目
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        /// 实例化
+        
         // 该卡片的卡片模型对象
         let model = cardList[indexPath.section]
+        
         // 该卡片的卡片模型对象中对应的行模型对象
         let row = model.rows[indexPath.row]
+        
         // 要实例化的布局标识符，若为卡片头部，使用头部布局；否则，使用该卡片指定的内容布局
         let id = indexPath.row == 0 ? "CardsCellHeader" : model.cellId
+        
         // 实例化或重用对应的布局
         let cell = cardsTableView.dequeueReusableCellWithIdentifier(id, forIndexPath: indexPath) as! CardsTableViewCell
         
+        /// 数据绑定
+        
         // 若模型有图标、视图有图标，将模型指定的图标显示在视图上
         if let icon = row.icon { cell.icon?.image = UIImage(named: icon) }
+        
         // 若模型有标题、视图有标题，将模型指定的标题显示在视图上
         if let title = row.title { cell.title?.text = title }
+        
         // 若模型有副标题、视图有副标题，将模型指定的副标题显示在视图上
         if let subtitle = row.subtitle { cell.subtitle?.text = subtitle }
+        
         // 若模型有描述、视图有描述，将模型指定的描述显示在视图上
         if let desc = row.desc { cell.desc?.text = desc }
+        
         // 若模型有数字、视图有数字，将模型指定的描述显示在视图上
         if let count1 = row.count1 { cell.count1?.text = count1 }
         if let count2 = row.count2 { cell.count2?.text = count2 }
         if let count3 = row.count3 { cell.count3?.text = count3 }
+        
+        /// 布局调整
         
         // 若视图有小红点，按照卡片的显示优先级改变小红点状态
         cell.notifyDot?.alpha = indexPath.row == 0 && model.displayPriority == .CONTENT_NOTIFY ? 1 : 0
@@ -368,7 +420,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     /// 卡片列表部分：卡片列表代理
     /////////////////////////////////////////////////////////////////////////////////////
     
-    // 卡片列表项的点击事件
+    /// 卡片列表项的点击事件
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
@@ -390,24 +442,6 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // 根据新的已读状态重载卡片列表顺序
         loadContent(false)
-    }
-    
-    /// 刷新函数
-    func refresh () {
-        loadContent(true)
-    }
-    
-    /// 
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        swiper.syncApperance(scrollView.contentOffset)
-    }
-    
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        swiper.beginDrag()
-    }
-    
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        swiper.endDrag()
     }
 }
 
