@@ -49,6 +49,7 @@
 		D35FC62A1CE33A1E00BE844C /* ActivityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6291CE33A1E00BE844C /* ActivityCard.swift */; };
 		D37708621CCC5D37006ED853 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708611CCC5D37006ED853 /* FeedbackViewController.swift */; };
 		D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708641CCC67DC006ED853 /* CardsModel.swift */; };
+		D38879801CEAB601004294A8 /* GymRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388797F1CEAB601004294A8 /* GymRecordModel.swift */; };
 		D38A7E5E1CE5ABFF0033926E /* ExperimentNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38A7E5D1CE5ABFF0033926E /* ExperimentNotifier.swift */; };
 		D39B87971CCCCA0200EC5280 /* CardsRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */; };
 		D39B879A1CCCEC2E00EC5280 /* CardCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87991CCCEC2E00EC5280 /* CardCard.swift */; };
@@ -67,6 +68,15 @@
 		D3D35DE41CBA2E8200B18092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3D35DE31CBA2E8200B18092 /* Assets.xcassets */; };
 		D3D35DF21CBA2E8200B18092 /* Herald_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D35DF11CBA2E8200B18092 /* Herald_iOSTests.swift */; };
 		D3D35DFD1CBA2E8200B18092 /* Herald_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D35DFC1CBA2E8200B18092 /* Herald_iOSUITests.swift */; };
+		D3D5D4371CE95101000E406A /* GymReserveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D4361CE95101000E406A /* GymReserveViewController.swift */; };
+		D3D5D43D1CE95603000E406A /* GymSportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D43C1CE95603000E406A /* GymSportModel.swift */; };
+		D3D5D43F1CE97149000E406A /* GymChooseTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D43E1CE97149000E406A /* GymChooseTimeViewController.swift */; };
+		D3D5D4411CE9737B000E406A /* GymTimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D4401CE9737B000E406A /* GymTimeModel.swift */; };
+		D3D5D4431CE99426000E406A /* GymNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D4421CE99426000E406A /* GymNewViewController.swift */; };
+		D3D5D4491CE99D19000E406A /* GymReserveCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D4481CE99D19000E406A /* GymReserveCells.swift */; };
+		D3D5D44B1CE99D63000E406A /* NoSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */; };
+		D3D5D44D1CE99EDC000E406A /* GymFriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D44C1CE99EDC000E406A /* GymFriendModel.swift */; };
+		D3D5D44F1CE9AFF1000E406A /* GymAddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D44E1CE9AFF1000E406A /* GymAddFriendViewController.swift */; };
 		D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */; };
 		D3E6BD7F1CC8C07F0074FF6D /* ModuleManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */; };
 		D3E6BD831CC8D4B20074FF6D /* PedetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD811CC8D4B20074FF6D /* PedetailViewController.swift */; };
@@ -168,6 +178,7 @@
 		D35FC6291CE33A1E00BE844C /* ActivityCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCard.swift; sourceTree = "<group>"; };
 		D37708611CCC5D37006ED853 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		D37708641CCC67DC006ED853 /* CardsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsModel.swift; sourceTree = "<group>"; };
+		D388797F1CEAB601004294A8 /* GymRecordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymRecordModel.swift; sourceTree = "<group>"; };
 		D38A7E5D1CE5ABFF0033926E /* ExperimentNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentNotifier.swift; sourceTree = "<group>"; };
 		D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsRowModel.swift; sourceTree = "<group>"; };
 		D39B87991CCCEC2E00EC5280 /* CardCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCard.swift; sourceTree = "<group>"; };
@@ -192,6 +203,15 @@
 		D3D35DF81CBA2E8200B18092 /* Herald_iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Herald_iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3D35DFC1CBA2E8200B18092 /* Herald_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Herald_iOSUITests.swift; sourceTree = "<group>"; };
 		D3D35DFE1CBA2E8200B18092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3D5D4361CE95101000E406A /* GymReserveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymReserveViewController.swift; sourceTree = "<group>"; };
+		D3D5D43C1CE95603000E406A /* GymSportModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymSportModel.swift; sourceTree = "<group>"; };
+		D3D5D43E1CE97149000E406A /* GymChooseTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymChooseTimeViewController.swift; sourceTree = "<group>"; };
+		D3D5D4401CE9737B000E406A /* GymTimeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymTimeModel.swift; sourceTree = "<group>"; };
+		D3D5D4421CE99426000E406A /* GymNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymNewViewController.swift; sourceTree = "<group>"; };
+		D3D5D4481CE99D19000E406A /* GymReserveCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymReserveCells.swift; sourceTree = "<group>"; };
+		D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoSelectionTableViewCell.swift; sourceTree = "<group>"; };
+		D3D5D44C1CE99EDC000E406A /* GymFriendModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymFriendModel.swift; sourceTree = "<group>"; };
+		D3D5D44E1CE9AFF1000E406A /* GymAddFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymAddFriendViewController.swift; sourceTree = "<group>"; };
 		D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleManageTableViewCell.swift; sourceTree = "<group>"; };
 		D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleManagerViewController.swift; sourceTree = "<group>"; };
 		D3E6BD811CC8D4B20074FF6D /* PedetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedetailViewController.swift; sourceTree = "<group>"; };
@@ -253,6 +273,7 @@
 				D35FC6271CE3236300BE844C /* PullLoadFooter.swift */,
 				D39B879F1CCD0F0E00EC5280 /* Error.swift */,
 				D354905B1CDC519100E59615 /* GCalendar.swift */,
+				D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */,
 			);
 			name = custom;
 			sourceTree = "<group>";
@@ -332,6 +353,7 @@
 				D3A0C1801CBB7C7700744640 /* exam */,
 				D3A0C1811CBB7C7F00744640 /* experiment */,
 				D3A0C1821CBB7C8F00744640 /* grade */,
+				D3D5D4351CE950E6000E406A /* gymreserve */,
 				D3A0C1841CBB7CCE00744640 /* jwc */,
 				D3A0C1851CBB7CD800744640 /* lecture */,
 				D3A0C1861CBB7CDF00744640 /* library */,
@@ -547,6 +569,22 @@
 				D3D35DDE1CBA2E8200B18092 /* LoginViewController.swift */,
 			);
 			name = mod_auth;
+			sourceTree = "<group>";
+		};
+		D3D5D4351CE950E6000E406A /* gymreserve */ = {
+			isa = PBXGroup;
+			children = (
+				D3D5D4361CE95101000E406A /* GymReserveViewController.swift */,
+				D3D5D4481CE99D19000E406A /* GymReserveCells.swift */,
+				D3D5D43C1CE95603000E406A /* GymSportModel.swift */,
+				D388797F1CEAB601004294A8 /* GymRecordModel.swift */,
+				D3D5D43E1CE97149000E406A /* GymChooseTimeViewController.swift */,
+				D3D5D4401CE9737B000E406A /* GymTimeModel.swift */,
+				D3D5D4421CE99426000E406A /* GymNewViewController.swift */,
+				D3D5D44C1CE99EDC000E406A /* GymFriendModel.swift */,
+				D3D5D44E1CE9AFF1000E406A /* GymAddFriendViewController.swift */,
+			);
+			name = gymreserve;
 			sourceTree = "<group>";
 		};
 		D3DE9A951CE581A30090EF0D /* mod_notifiers */ = {
@@ -770,18 +808,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3D5D43F1CE97149000E406A /* GymChooseTimeViewController.swift in Sources */,
 				D39B87971CCCCA0200EC5280 /* CardsRowModel.swift in Sources */,
 				D306E0281CCA403D00FA3812 /* ExamModel.swift in Sources */,
 				D39B879C1CCCF02600EC5280 /* ExperimentCard.swift in Sources */,
+				D38879801CEAB601004294A8 /* GymRecordModel.swift in Sources */,
 				D3ED99E61CCB651300001E2B /* LibraryViewController.swift in Sources */,
 				D3F473491CCA068D00750FFB /* JwcNoticeModel.swift in Sources */,
 				D35FC6241CE301F700BE844C /* ActivityModel.swift in Sources */,
+				D3D5D4491CE99D19000E406A /* GymReserveCells.swift in Sources */,
 				D354905C1CDC519100E59615 /* GCalendar.swift in Sources */,
 				D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */,
 				D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */,
 				D31821CE1CC856FF00992355 /* ExperimentViewController.swift in Sources */,
 				D3ED99E41CCB64BE00001E2B /* LibraryTableViewCell.swift in Sources */,
 				D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */,
+				D3D5D4411CE9737B000E406A /* GymTimeModel.swift in Sources */,
 				D31DE5141CC3597800E4891D /* CurriculumBlock.swift in Sources */,
 				D306E0221CCA3DFD00FA3812 /* AppModule.swift in Sources */,
 				D39B87A41CCD12EC00EC5280 /* String.swift in Sources */,
@@ -791,6 +833,7 @@
 				D34858111CBB57F600B55E76 /* NSUserDefaults.swift in Sources */,
 				D3ED99E01CCB3DFD00001E2B /* SrtpViewController.swift in Sources */,
 				D31DE51A1CC35A3100E4891D /* CurriculumView.swift in Sources */,
+				D3D5D43D1CE95603000E406A /* GymSportModel.swift in Sources */,
 				D3ED99DC1CCB1DB400001E2B /* SrtpModel.swift in Sources */,
 				D31821CC1CC8560F00992355 /* ExperimentTableViewCell.swift in Sources */,
 				D39B879E1CCD0C0B00EC5280 /* ExamCard.swift in Sources */,
@@ -810,11 +853,13 @@
 				D3F473451CCA04C100750FFB /* JwcTableViewCell.swift in Sources */,
 				D306E02C1CCA68EB00FA3812 /* GradeTableViewCell.swift in Sources */,
 				D3ED99E21CCB5BCB00001E2B /* LibraryBookModel.swift in Sources */,
+				D3D5D44D1CE99EDC000E406A /* GymFriendModel.swift in Sources */,
 				D31DE5121CC3592F00E4891D /* ClassInfo.swift in Sources */,
 				D3F4734D1CCA153A00750FFB /* LectureModel.swift in Sources */,
 				D37708621CCC5D37006ED853 /* FeedbackViewController.swift in Sources */,
 				D3ED99E81CCB870200001E2B /* AboutUsViewController.swift in Sources */,
 				D348580E1CBB4FF900B55E76 /* CacheHelper.swift in Sources */,
+				D3D5D4371CE95101000E406A /* GymReserveViewController.swift in Sources */,
 				D3ED99D41CCAF9FC00001E2B /* SeuNetViewController.swift in Sources */,
 				D3ED99DE1CCB3DB600001E2B /* SrtpTableViewCell.swift in Sources */,
 				D3ED99D81CCB08B300001E2B /* SchoolbusTableViewCell.swift in Sources */,
@@ -825,7 +870,10 @@
 				D3F4734B1CCA146800750FFB /* LectureTableViewCell.swift in Sources */,
 				D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */,
 				D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */,
+				D3D5D44F1CE9AFF1000E406A /* GymAddFriendViewController.swift in Sources */,
+				D3D5D44B1CE99D63000E406A /* NoSelectionTableViewCell.swift in Sources */,
 				D31821C31CC5291000992355 /* CardHistoryModel.swift in Sources */,
+				D3D5D4431CE99426000E406A /* GymNewViewController.swift in Sources */,
 				D35FC6221CE2FEF400BE844C /* ActivityViewController.swift in Sources */,
 				D306E02A1CCA68A700FA3812 /* GradeModel.swift in Sources */,
 				D306E0241CCA3F7700FA3812 /* ExamViewController.swift in Sources */,
