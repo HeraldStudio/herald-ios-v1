@@ -60,7 +60,6 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         tableView?.tableHeaderView = swiper
         
         /// 联网刷新列表内容
-        loadCache()
         refreshCache()
     }
     
@@ -97,10 +96,9 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         ApiRequest().get().url("http://115.28.27.150/herald/api/v1/huodong/get").toCache("herald_activity") { json in json.rawString()! }
             .onFinish { success, _, _ in
                 self.hideProgressDialog()
+                self.loadCache()
                 
-                if success {
-                    self.loadCache()
-                } else {
+                if !success {
                     self.showMessage("刷新失败，请重试")
                 }
         }.run()
