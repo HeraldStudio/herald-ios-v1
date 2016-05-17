@@ -21,7 +21,6 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate {
     
     let webModuleColors = [
         Module.Schedule : 0xe54f40,
-        Module.GymReserve : 0x377ef4,
         Module.EmptyRoom : 0x3188cb,
         Module.Quanyi : 0xed7f0e
     ]
