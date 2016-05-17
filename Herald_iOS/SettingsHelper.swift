@@ -18,12 +18,12 @@ enum Module : Int {
     case Jwc
     case Exam
     case SeuNet
+    case GymReserve
     case Library
     case Grade
     case Srtp
     case Schoolbus
     case Schedule
-    case GymReserve
     case Quanyi
     case EmptyRoom
 }
@@ -42,12 +42,12 @@ class SettingsHelper {
         
         // 无卡片的模块
         AppModule(7, "seunet", "校园网络", "显示校园网使用情况及校园网账户余额信息", "MODULE_QUERY_SEUNET", "ic_seunet", false),
-        AppModule(8, "library", "图书馆", "查看图书馆实时借阅排行、已借书籍，并提供图书在线续借服务", "MODULE_QUERY_LIBRARY", "ic_library", false),
-        AppModule(9, "grade", "成绩查询", "查询历史学期的科目成绩、学分以及绩点详情", "MODULE_QUERY_GRADE", "ic_grade", false),
-        AppModule(10, "srtp", "课外研学", "提供SRTP学分及得分详情查询服务", "MODULE_QUERY_SRTP", "ic_srtp", false),
-        AppModule(11, "schoolbus", "校车助手", "提供可实时更新的校车班车时间表", "MODULE_QUERY_SCHOOLBUS", "ic_bus", false),
-        AppModule(12, "schedule", "校历查询 Web", "显示当前年度各学期的学校校历安排", "http://heraldstudio.com/static/images/xiaoli.jpg", "ic_schedule", false),
-        AppModule(13, "gymreserve", "场馆预约 Web", "提供体育场馆在线预约和查询服务", "http://115.28.27.150/heraldapp/#/yuyue/home", "ic_gymreserve", false),
+        AppModule(8, "gymreserve", "场馆预约", "提供体育场馆预约和查询服务", "MODULE_GYMRESERVE", "ic_gymreserve", false),
+        AppModule(9, "library", "图书馆", "查看图书馆实时借阅排行、已借书籍，并提供图书在线续借服务", "MODULE_QUERY_LIBRARY", "ic_library", false),
+        AppModule(10, "grade", "成绩查询", "查询历史学期的科目成绩、学分以及绩点详情", "MODULE_QUERY_GRADE", "ic_grade", false),
+        AppModule(11, "srtp", "课外研学", "提供SRTP学分及得分详情查询服务", "MODULE_QUERY_SRTP", "ic_srtp", false),
+        AppModule(12, "schoolbus", "校车助手", "提供可实时更新的校车班车时间表", "MODULE_QUERY_SCHOOLBUS", "ic_bus", false),
+        AppModule(13, "schedule", "校历查询 Web", "显示当前年度各学期的学校校历安排", "http://heraldstudio.com/static/images/xiaoli.jpg", "ic_schedule", false),
         AppModule(14, "quanyi", "权益服务 Web", "向东大校会权益部反馈投诉信息", "https://jinshuju.net/f/By3aTK", "ic_quanyi", false),
         AppModule(15, "emptyroom", "空教室 Web", "提供指定时间内的空教室信息查询服务", "http://115.28.27.150/queryEmptyClassrooms/m", "ic_emptyroom", false)
     ]

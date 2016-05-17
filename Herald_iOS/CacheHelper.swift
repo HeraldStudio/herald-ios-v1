@@ -30,7 +30,9 @@ class CacheHelper : NSObject {
         "herald_sidebar",
         "herald_exam",
         "herald_schedule_cache_time",
-        "herald_library_borrowbook"
+        "herald_library_borrowbook",
+        "herald_gymreserve_userid",
+        "herald_gymreserve_phone"
     ]
     
     /// 调试用，覆盖某些特定的cache内容
