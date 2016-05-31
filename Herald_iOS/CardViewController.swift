@@ -45,6 +45,10 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         setNavigationColor(swiper, 0x03a9f4)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        loadCache()
+    }
+    
     /// 下拉刷新和上拉加载控件用到的三个 hook
     // 滚动时刷新显示
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -70,14 +74,13 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     func loadCache() {
         // 仅有余额的缓存，这个缓存刷新永远比完整的缓存快
-        let leftCache = CacheHelper.get("herald_card_left")
         let todayCache = CacheHelper.get("herald_card_today")
         let cache = CacheHelper.get("herald_card")
-        if cache == "" || leftCache == "" || todayCache == "" {
+        if cache == "" || todayCache == "" {
             return
         }
         
-        let extra = JSON.parse(leftCache)["content"]["left"].stringValue
+        let extra = JSON.parse(todayCache)["content"]["cardLeft"].stringValue.replaceAll(",", "")
         title = "余额：" + extra
         
         history.removeAll()
@@ -109,10 +112,9 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         showProgressDialog()
         
         // 先加入刷新余额的请求
-        let manager = ApiThreadManager().addAll([
-            ApiRequest().api("card").uuid().toCache("herald_card_left"),
+        let manager = ApiThreadManager().add(
             ApiRequest().api("card").uuid().post("timedelta", "1").toCache("herald_card_today")
-        ])
+        )
         
         // 取上次刷新日期，与当前日期比较
         let lastRefresh = CacheHelper.get("herald_card_date")
