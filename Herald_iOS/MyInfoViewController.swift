@@ -35,7 +35,7 @@ class MyInfoViewController: UITableViewController {
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             /// 退出登录
-            showQuestionDialog("确定要退出登录吗？") { ApiHelper.doLogout(self) }
+            showQuestionDialog("确定要退出登录吗？") { ApiHelper.doLogout(nil) }
         case (1, 0):
             /// 摇一摇开关
             wifiSwitch.setOn(!wifiSwitch.on, animated: true)

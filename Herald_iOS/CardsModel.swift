@@ -38,9 +38,9 @@ class CardsModel {
     }
     
     /// 从已有的模块初始化一个卡片
-    init (cellId: String, module : Module, desc : String, priority : Priority) {
+    init (cellId: String, module : AppModule, desc : String, priority : Priority) {
         self.cellId = cellId
-        let appModule = SettingsHelper.MODULES[module.rawValue]
+        let appModule = module
         let header = CardsRowModel()
         header.icon = appModule.icon
         header.title = appModule.nameTip

@@ -90,11 +90,7 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("srtp").uuid().post("schoolnum", ApiHelper.getSchoolnum())
-            .toCache("herald_srtp") {json -> String in
-                guard let str = json.rawString() else {return ""}
-                return str
-            }
+        ApiRequest().api("srtp").uuid().post("schoolnum", ApiHelper.getSchoolnum()).toCache("herald_srtp")
             .onFinish { success, _, _ in
                 self.hideProgressDialog()
                 if success {

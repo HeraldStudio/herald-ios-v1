@@ -16,14 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// 带参数的启动结束事件
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        // 判断是否首次启动，若为首次启动，设置默认的模块开启状态
-        let launchTimes = SettingsHelper.getLaunchTimes()
-        if launchTimes == 0 {
-            SettingsHelper.setDefaultConfig()
-        }
-        
         // 启动次数递增
-        SettingsHelper.updateLaunchTimes(launchTimes + 1)
+        SettingsHelper.launchTimes += 1
         
         /// 设置主屏幕图标 3D Touch 菜单
         /// TODO 考虑去掉考试助手和课表助手入口，换成其它的
@@ -72,17 +66,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if ApiHelper.isLogin() {
             
             // 加载课表通知
-            if SettingsHelper.getModuleCardEnabled(Module.Curriculum.rawValue) {
+            if R.module.curriculum.cardEnabled {
                 CurriculumNotifier.scheduleNotifications()
             }
             
             // 加载实验通知
-            if SettingsHelper.getModuleCardEnabled(Module.Experiment.rawValue) {
+            if R.module.experiment.cardEnabled {
                 ExperimentNotifier.scheduleNotifications()
             }
             
             // 加载考试通知
-            if SettingsHelper.getModuleCardEnabled(Module.Exam.rawValue) {
+            if R.module.exam.cardEnabled {
                 ExamNotifier.scheduleNotifications()
             }
         }
@@ -104,34 +98,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // 获取目标界面
-        var desVC = String()
+        let rootVC = self.window?.rootViewController as! UINavigationController
         switch shortcutItem.type {
         case "exam":
-            desVC = "MODULE_QUERY_EXAM"
+            R.module.exam.open(rootVC)
         case "curriculum":
-            desVC = "MODULE_QUERY_CURRICULUM"
+            R.module.curriculum.open(rootVC)
         case "card":
-            desVC = "WEBMODULE"
+            AppModule(title: "一卡通充值", url: "http://58.192.115.47:8088/wechat-web/login/initlogin.html").open(rootVC)
         default:
             return
-        }
-        
-        // 跳转到目标界面
-        let view = self.window?.rootViewController as! UINavigationController
-        if desVC == "WEBMODULE" {
-            CacheHelper.set("herald_webmodule_title", "充值")
-            CacheHelper.set("herald_webmodule_url", "http://58.192.115.47:8088/wechat-web/login/initlogin.html")
-            
-            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE")
-            view.pushViewController(detailVC, animated: true)
-        } else {
-            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(desVC)
-            view.pushViewController(detailVC, animated: true)
         }
     }
     
     /// 使主窗口立即跳转到登录界面
-    func showLogin () {
+    func showLogin () -> UIViewController {
         
         // 关闭当前界面
         self.window?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
@@ -145,10 +126,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 打开新的界面
         self.window?.rootViewController = lvc
+        
+        return lvc
     }
     
     /// 使主窗口立即跳转到主界面
-    func showMain () {
+    func showMain () -> UIViewController {
         
         // 关闭当前界面
         self.window?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
@@ -162,6 +145,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 打开新的界面
         self.window?.rootViewController = mvc
+        
+        return mvc
     }
 }
 

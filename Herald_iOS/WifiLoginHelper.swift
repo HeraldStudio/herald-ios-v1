@@ -86,6 +86,10 @@ class WifiLoginHelper {
         let username = ApiHelper.getWifiUserName()
         let password = ApiHelper.getWifiPassword()
         
+        /// 前方大坑！前方大坑！
+        // w.seu.edu.cn 的服务器在登录的时候是按参数顺序取参数的，第一个参数作为用户名，
+        // 第二个参数作为密码，而 Alamofire 传参数时会将 Key 按字母顺序排序，因此若用户名 Key
+        // 为 username ，密码 Key 为 password，会导致参数倒置，登录失败！
         ApiRequest().url("http://w.seu.edu.cn/portal/login.php").noCheck200()
             .post("p1", username, "p2", password)
             .onFinish { success, _, response in

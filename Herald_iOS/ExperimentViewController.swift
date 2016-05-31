@@ -72,11 +72,7 @@ class ExperimentViewController : UIViewController, UITableViewDelegate, UITableV
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("phylab").uuid()
-            .toCache("herald_experiment") {json -> String in
-                guard let str = json.rawString() else {return ""}
-                return str
-            }
+        ApiRequest().api("phylab").uuid().toCache("herald_experiment")
             .onFinish { success, _, _ in
                 self.hideProgressDialog()
                 if success {

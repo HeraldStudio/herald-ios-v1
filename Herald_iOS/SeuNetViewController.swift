@@ -103,18 +103,15 @@ class SeuNetViewController : UIViewController {
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("nic").uuid()
-            .toCache("herald_nic") {json -> String in
-                guard let str = json.rawString() else {return ""}
-                return str
-        }.onFinish { success, _, _ in
-            self.hideProgressDialog()
-            if success {
-                self.loadCache(true)
-            } else {
-                self.showMessage("刷新失败，请重试")
-            }
-        }.run()
+        ApiRequest().api("nic").uuid().toCache("herald_nic")
+            .onFinish { success, _, _ in
+                self.hideProgressDialog()
+                if success {
+                    self.loadCache(true)
+                } else {
+                    self.showMessage("刷新失败，请重试")
+                }
+            }.run()
     }
     
     func showError() {

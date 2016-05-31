@@ -56,8 +56,8 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
         sections.append([manager])
         
         // 将各个模块加入到第二个分区中
-        for k in SettingsHelper.MODULES {
-            if SettingsHelper.getModuleShortcutEnabled(k.id) {
+        for k in R.module.array {
+            if k.shortcutEnabled {
                 enabledModules.append(k)
             }
         }

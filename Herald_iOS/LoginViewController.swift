@@ -50,14 +50,13 @@ class LoginViewController: UIViewController {
     }
     
     func checkUUID () {
-        ApiRequest().api("user").uuid().toAuthCache("schoolnum") { json in
-            return json["content"]["schoolnum"].stringValue
-        }.onFinish { (success, code, response) in
+        ApiRequest().api("user").uuid()
+            .toAuthCache("schoolnum") { json in json["content"]["schoolnum"] }
+            .onFinish { (success, code, response) in
             if success {
                 ((UIApplication.sharedApplication().delegate) as! AppDelegate).showMain()
             } else {
-                self.showMessage("网络异常，请重试")
-                ApiHelper.doLogout(nil)
+                ApiHelper.doLogout("用户不存在或网络异常，请重试")
             }
         }.run()
     }
