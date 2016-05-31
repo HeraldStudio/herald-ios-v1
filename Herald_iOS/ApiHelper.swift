@@ -23,7 +23,7 @@ class ApiHelper : NSObject {
     
     // TODO dealApiException
     
-    static func doLogout (context : UIViewController?) {
+    static func doLogout (message: String?) {
         
         //清除授权信息
         authCache.set("authUser", "")
@@ -41,7 +41,10 @@ class ApiHelper : NSObject {
         // 注意此处的clearAllmoduleCache里的authUser和authPwd与上面清除的是不同的
         CacheHelper.clearAllModuleCache()
         
-        ((UIApplication.sharedApplication().delegate) as! AppDelegate).showLogin()
+        let vc = ((UIApplication.sharedApplication().delegate) as! AppDelegate).showLogin()
+        if message != nil {
+            vc.showMessage(message!)
+        }
     }
     
     static func isLogin () -> Bool {

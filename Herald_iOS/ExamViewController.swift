@@ -116,10 +116,7 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func refreshCache () {
         showProgressDialog()
         ApiRequest().api("exam").uuid()
-            .toCache("herald_exam") {json -> String in
-                guard let str = json.rawString() else {return ""}
-                return str
-            }
+            .toCache("herald_exam")
             .onFinish { success, _, _ in
                 self.hideProgressDialog()
                 if success {

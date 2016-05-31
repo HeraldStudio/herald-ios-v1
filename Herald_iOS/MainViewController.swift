@@ -28,8 +28,8 @@ class MainViewController: UITabBarController {
         // 修改 TabBar 高亮图标的颜色
         tabBar.tintColor = UIColor(red: 0, green: 180/255, blue: 255/255, alpha: 1)
         
-        /// 注册摇一摇事件
         if ApiHelper.isLogin() {
+            // 注册摇一摇事件
             NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
         }
     }

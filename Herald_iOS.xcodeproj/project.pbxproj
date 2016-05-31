@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		35B0B9E24AE997C9060E6BC4 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283283296736ED980EE6E1A6 /* Pods.framework */; };
+		D30661C81CF2C38D006583C2 /* GameCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661C71CF2C38D006583C2 /* GameCardModel.swift */; };
+		D30661CA1CF2C50E006583C2 /* GameCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661C91CF2C50E006583C2 /* GameCreateViewController.swift */; };
+		D30661CC1CF30016006583C2 /* GameCreateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661CB1CF30016006583C2 /* GameCreateTableViewCell.swift */; };
+		D30661CE1CF3011B006583C2 /* GameAvailableCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661CD1CF3011B006583C2 /* GameAvailableCardTableViewCell.swift */; };
 		D306E0201CCA3ADF00FA3812 /* WebModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E01F1CCA3ADF00FA3812 /* WebModuleViewController.swift */; };
 		D306E0221CCA3DFD00FA3812 /* AppModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E0211CCA3DFD00FA3812 /* AppModule.swift */; };
 		D306E0241CCA3F7700FA3812 /* ExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E0231CCA3F7700FA3812 /* ExamViewController.swift */; };
@@ -51,6 +55,7 @@
 		D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708641CCC67DC006ED853 /* CardsModel.swift */; };
 		D38879801CEAB601004294A8 /* GymRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388797F1CEAB601004294A8 /* GymRecordModel.swift */; };
 		D38A7E5E1CE5ABFF0033926E /* ExperimentNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38A7E5D1CE5ABFF0033926E /* ExperimentNotifier.swift */; };
+		D391B3561CFD05FA00DDE1FD /* UIStoryBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D391B3551CFD05FA00DDE1FD /* UIStoryBoard.swift */; };
 		D39B87971CCCCA0200EC5280 /* CardsRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */; };
 		D39B879A1CCCEC2E00EC5280 /* CardCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87991CCCEC2E00EC5280 /* CardCard.swift */; };
 		D39B879C1CCCF02600EC5280 /* ExperimentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B879B1CCCF02600EC5280 /* ExperimentCard.swift */; };
@@ -63,6 +68,8 @@
 		D3A0C1721CBB7A9800744640 /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1711CBB7A9800744640 /* CardsViewController.swift */; };
 		D3A0C1741CBB7AF500744640 /* ModulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */; };
 		D3A0C1771CBB7B2300744640 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1761CBB7B2300744640 /* MyInfoViewController.swift */; };
+		D3AC6FC01CF410B000000BF6 /* GameShowCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AC6FBF1CF410B000000BF6 /* GameShowCardViewController.swift */; };
+		D3AC6FC21CF4135800000BF6 /* GameShowCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AC6FC11CF4135800000BF6 /* GameShowCardTableViewCell.swift */; };
 		D3D35DDD1CBA2E8200B18092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */; };
 		D3D35DDF1CBA2E8200B18092 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D35DDE1CBA2E8200B18092 /* LoginViewController.swift */; };
 		D3D35DE41CBA2E8200B18092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3D35DE31CBA2E8200B18092 /* Assets.xcassets */; };
@@ -77,6 +84,8 @@
 		D3D5D44B1CE99D63000E406A /* NoSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */; };
 		D3D5D44D1CE99EDC000E406A /* GymFriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D44C1CE99EDC000E406A /* GymFriendModel.swift */; };
 		D3D5D44F1CE9AFF1000E406A /* GymAddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D44E1CE9AFF1000E406A /* GymAddFriendViewController.swift */; };
+		D3D849FC1CFBD88200F083DF /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D849FB1CFBD88200F083DF /* JSON.swift */; };
+		D3D849FF1CFBE75000F083DF /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D849FE1CFBE75000F083DF /* R.swift */; };
 		D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */; };
 		D3E6BD7F1CC8C07F0074FF6D /* ModuleManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */; };
 		D3E6BD831CC8D4B20074FF6D /* PedetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD811CC8D4B20074FF6D /* PedetailViewController.swift */; };
@@ -136,6 +145,10 @@
 /* Begin PBXFileReference section */
 		283283296736ED980EE6E1A6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6878935004ACF38EDF397D4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D30661C71CF2C38D006583C2 /* GameCardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCardModel.swift; sourceTree = "<group>"; };
+		D30661C91CF2C50E006583C2 /* GameCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCreateViewController.swift; sourceTree = "<group>"; };
+		D30661CB1CF30016006583C2 /* GameCreateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCreateTableViewCell.swift; sourceTree = "<group>"; };
+		D30661CD1CF3011B006583C2 /* GameAvailableCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAvailableCardTableViewCell.swift; sourceTree = "<group>"; };
 		D306E01F1CCA3ADF00FA3812 /* WebModuleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebModuleViewController.swift; sourceTree = "<group>"; };
 		D306E0211CCA3DFD00FA3812 /* AppModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModule.swift; sourceTree = "<group>"; };
 		D306E0231CCA3F7700FA3812 /* ExamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +193,7 @@
 		D37708641CCC67DC006ED853 /* CardsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsModel.swift; sourceTree = "<group>"; };
 		D388797F1CEAB601004294A8 /* GymRecordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymRecordModel.swift; sourceTree = "<group>"; };
 		D38A7E5D1CE5ABFF0033926E /* ExperimentNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentNotifier.swift; sourceTree = "<group>"; };
+		D391B3551CFD05FA00DDE1FD /* UIStoryBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryBoard.swift; sourceTree = "<group>"; };
 		D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsRowModel.swift; sourceTree = "<group>"; };
 		D39B87991CCCEC2E00EC5280 /* CardCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCard.swift; sourceTree = "<group>"; };
 		D39B879B1CCCF02600EC5280 /* ExperimentCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentCard.swift; sourceTree = "<group>"; };
@@ -192,6 +206,8 @@
 		D3A0C1711CBB7A9800744640 /* CardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
 		D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModulesViewController.swift; sourceTree = "<group>"; };
 		D3A0C1761CBB7B2300744640 /* MyInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
+		D3AC6FBF1CF410B000000BF6 /* GameShowCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameShowCardViewController.swift; sourceTree = "<group>"; };
+		D3AC6FC11CF4135800000BF6 /* GameShowCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameShowCardTableViewCell.swift; sourceTree = "<group>"; };
 		D3D35DD91CBA2E8200B18092 /* 小猴偷米.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "小猴偷米.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3D35DDE1CBA2E8200B18092 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +228,8 @@
 		D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		D3D5D44C1CE99EDC000E406A /* GymFriendModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymFriendModel.swift; sourceTree = "<group>"; };
 		D3D5D44E1CE9AFF1000E406A /* GymAddFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymAddFriendViewController.swift; sourceTree = "<group>"; };
+		D3D849FB1CFBD88200F083DF /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		D3D849FE1CFBE75000F083DF /* R.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.swift; sourceTree = "<group>"; };
 		D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleManageTableViewCell.swift; sourceTree = "<group>"; };
 		D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleManagerViewController.swift; sourceTree = "<group>"; };
 		D3E6BD811CC8D4B20074FF6D /* PedetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedetailViewController.swift; sourceTree = "<group>"; };
@@ -301,9 +319,9 @@
 			children = (
 				D306E0211CCA3DFD00FA3812 /* AppModule.swift */,
 				D348580B1CBB48FD00B55E76 /* ApiHelper.swift */,
+				D348580D1CBB4FF900B55E76 /* CacheHelper.swift */,
 				D34858121CBB60A600B55E76 /* ApiRequest.swift */,
 				D30A9BA01CBBA9100087D583 /* ApiThreadManager.swift */,
-				D348580D1CBB4FF900B55E76 /* CacheHelper.swift */,
 				D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */,
 				D31821B51CC48D5400992355 /* ServiceHelper.swift */,
 				D3F375C61CDB3957004DDEA5 /* WifiLoginHelper.swift */,
@@ -317,8 +335,23 @@
 				D34858101CBB57F600B55E76 /* NSUserDefaults.swift */,
 				D3FBC2F11CCC51F900305428 /* UIViewController.swift */,
 				D39B87A31CCD12EC00EC5280 /* String.swift */,
+				D3D849FB1CFBD88200F083DF /* JSON.swift */,
+				D391B3551CFD05FA00DDE1FD /* UIStoryBoard.swift */,
 			);
 			name = extension;
+			sourceTree = "<group>";
+		};
+		D34859591CF2C31D00EFCDB2 /* deskgame */ = {
+			isa = PBXGroup;
+			children = (
+				D30661C71CF2C38D006583C2 /* GameCardModel.swift */,
+				D30661C91CF2C50E006583C2 /* GameCreateViewController.swift */,
+				D30661CB1CF30016006583C2 /* GameCreateTableViewCell.swift */,
+				D30661CD1CF3011B006583C2 /* GameAvailableCardTableViewCell.swift */,
+				D3AC6FBF1CF410B000000BF6 /* GameShowCardViewController.swift */,
+				D3AC6FC11CF4135800000BF6 /* GameShowCardTableViewCell.swift */,
+			);
+			name = deskgame;
 			sourceTree = "<group>";
 		};
 		D39B87981CCCEC0C00EC5280 /* mod_cards */ = {
@@ -348,6 +381,7 @@
 		D3A0C17A1CBB7C1200744640 /* mod_query */ = {
 			isa = PBXGroup;
 			children = (
+				D34859591CF2C31D00EFCDB2 /* deskgame */,
 				D3A0C17D1CBB7C5800744640 /* cardextra */,
 				D3A0C17E1CBB7C6100744640 /* curriculum */,
 				D3A0C1801CBB7C7700744640 /* exam */,
@@ -519,6 +553,7 @@
 				D31821C81CC7BC0400992355 /* Main.storyboard */,
 				D31821B11CC3B07800992355 /* LaunchScreen.storyboard */,
 				D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */,
+				D3D849FE1CFBE75000F083DF /* R.swift */,
 				D3D35DE31CBA2E8200B18092 /* Assets.xcassets */,
 				D34858091CBB46AF00B55E76 /* app_main */,
 				D31DE50C1CC334D800E4891D /* custom */,
@@ -688,7 +723,7 @@
 				TargetAttributes = {
 					D3D35DD81CBA2E8200B18092 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 9837P5SWZ9;
+						DevelopmentTeam = MW9PK9KE48;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -819,8 +854,10 @@
 				D3D5D4491CE99D19000E406A /* GymReserveCells.swift in Sources */,
 				D354905C1CDC519100E59615 /* GCalendar.swift in Sources */,
 				D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */,
+				D391B3561CFD05FA00DDE1FD /* UIStoryBoard.swift in Sources */,
 				D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */,
 				D31821CE1CC856FF00992355 /* ExperimentViewController.swift in Sources */,
+				D30661C81CF2C38D006583C2 /* GameCardModel.swift in Sources */,
 				D3ED99E41CCB64BE00001E2B /* LibraryTableViewCell.swift in Sources */,
 				D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */,
 				D3D5D4411CE9737B000E406A /* GymTimeModel.swift in Sources */,
@@ -853,7 +890,9 @@
 				D3F473451CCA04C100750FFB /* JwcTableViewCell.swift in Sources */,
 				D306E02C1CCA68EB00FA3812 /* GradeTableViewCell.swift in Sources */,
 				D3ED99E21CCB5BCB00001E2B /* LibraryBookModel.swift in Sources */,
+				D3D849FC1CFBD88200F083DF /* JSON.swift in Sources */,
 				D3D5D44D1CE99EDC000E406A /* GymFriendModel.swift in Sources */,
+				D30661CE1CF3011B006583C2 /* GameAvailableCardTableViewCell.swift in Sources */,
 				D31DE5121CC3592F00E4891D /* ClassInfo.swift in Sources */,
 				D3F4734D1CCA153A00750FFB /* LectureModel.swift in Sources */,
 				D37708621CCC5D37006ED853 /* FeedbackViewController.swift in Sources */,
@@ -862,7 +901,9 @@
 				D3D5D4371CE95101000E406A /* GymReserveViewController.swift in Sources */,
 				D3ED99D41CCAF9FC00001E2B /* SeuNetViewController.swift in Sources */,
 				D3ED99DE1CCB3DB600001E2B /* SrtpTableViewCell.swift in Sources */,
+				D3AC6FC21CF4135800000BF6 /* GameShowCardTableViewCell.swift in Sources */,
 				D3ED99D81CCB08B300001E2B /* SchoolbusTableViewCell.swift in Sources */,
+				D30661CC1CF30016006583C2 /* GameCreateTableViewCell.swift in Sources */,
 				D35FC6281CE3236300BE844C /* PullLoadFooter.swift in Sources */,
 				D3F3DCFB1CBB7792006887F5 /* SettingsHelper.swift in Sources */,
 				D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */,
@@ -871,6 +912,7 @@
 				D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */,
 				D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */,
 				D3D5D44F1CE9AFF1000E406A /* GymAddFriendViewController.swift in Sources */,
+				D30661CA1CF2C50E006583C2 /* GameCreateViewController.swift in Sources */,
 				D3D5D44B1CE99D63000E406A /* NoSelectionTableViewCell.swift in Sources */,
 				D31821C31CC5291000992355 /* CardHistoryModel.swift in Sources */,
 				D3D5D4431CE99426000E406A /* GymNewViewController.swift in Sources */,
@@ -886,10 +928,12 @@
 				D35FC6261CE31A3500BE844C /* ActivityTableViewCell.swift in Sources */,
 				D31821BF1CC522D900992355 /* CardViewController.swift in Sources */,
 				D39B879A1CCCEC2E00EC5280 /* CardCard.swift in Sources */,
+				D3D849FF1CFBE75000F083DF /* R.swift in Sources */,
 				D3D35DDD1CBA2E8200B18092 /* AppDelegate.swift in Sources */,
 				D3A0C1701CBB7A3A00744640 /* MainViewController.swift in Sources */,
 				D30A9BA11CBBA9100087D583 /* ApiThreadManager.swift in Sources */,
 				D3A0C1741CBB7AF500744640 /* ModulesViewController.swift in Sources */,
+				D3AC6FC01CF410B000000BF6 /* GameShowCardViewController.swift in Sources */,
 				D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */,
 				D3E6BD831CC8D4B20074FF6D /* PedetailViewController.swift in Sources */,
 				D34BCC731CE5D379005F4164 /* ExamNotifier.swift in Sources */,
@@ -1037,15 +1081,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1058,15 +1102,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

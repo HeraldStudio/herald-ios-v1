@@ -12,11 +12,7 @@ import SwiftyJSON
 class CardCard {
     
     static func getRefresher () -> [ApiRequest] {
-        return [ApiRequest().api("card").uuid()
-            .toCache("herald_card_left") {json -> String in
-                guard let str = json.rawString() else {return ""}
-                return str
-            }]
+        return [ApiRequest().api("card").uuid().toCache("herald_card_left")]
     }
     
     static func getCard() -> CardsModel {
@@ -25,14 +21,14 @@ class CardCard {
         // 获取余额并且设置
         if let extra = Float(content["left"].stringValue) {
             if extra < 20 {
-                let model = CardsModel(cellId: "CardsCellCard", module: .Card, desc: "一卡通余额还有\(String(format: "%.2f", extra))元，快点我充值~\n如果已经充值过了，需要刷卡消费一次才会更新哦~", priority: .CONTENT_NOTIFY)
+                let model = CardsModel(cellId: "CardsCellCard", module: R.module.card, desc: "一卡通余额还有\(String(format: "%.2f", extra))元，快点我充值~\n如果已经充值过了，需要刷卡消费一次才会更新哦~", priority: .CONTENT_NOTIFY)
                 model.rows[0].destination = CardViewController.url
                 return model
             } else {
-                return CardsModel(cellId: "CardsCellCard", module: .Card, desc: "你的一卡通余额还有\(String(format: "%.2f", extra))元", priority: .CONTENT_NO_NOTIFY)
+                return CardsModel(cellId: "CardsCellCard", module: R.module.card, desc: "你的一卡通余额还有\(String(format: "%.2f", extra))元", priority: .CONTENT_NO_NOTIFY)
             }
         } else {
-            return CardsModel(cellId: "CardsCellCard", module: .Card, desc: "一卡通余额数据加载失败，请手动刷新", priority: .CONTENT_NOTIFY)
+            return CardsModel(cellId: "CardsCellCard", module: R.module.card, desc: "一卡通余额数据加载失败，请手动刷新", priority: .CONTENT_NOTIFY)
         }
     }
 }

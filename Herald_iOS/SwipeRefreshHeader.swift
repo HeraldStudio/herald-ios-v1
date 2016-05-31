@@ -34,6 +34,9 @@ class SwipeRefreshHeader : UIView {
     /// 下拉刷新控件没有拉伸时的原始高度
     var realHeight = CGFloat(0)
     
+    /// 下拉刷新中的文字，默认为REFRESH
+    var tipText = "REFRESH"
+    
     /// 视图被展示时的操作
     override func didMoveToSuperview() {
         
@@ -77,7 +80,7 @@ class SwipeRefreshHeader : UIView {
         let alpha : CGFloat = -y < fadeDistance ? (-y) / fadeDistance : 1;
         
         // 更新刷新提示文字内容
-        refresh.text = -y >= refreshDistance && dragging ? "[REFRESH]" : "REFRESH"
+        refresh.text = -y >= refreshDistance && dragging ? "[\(tipText)]" : tipText
         
         // 根据有无子视图，设置对应的颜色和透明度
         if frame.maxY == 0 {
@@ -109,7 +112,7 @@ class SwipeRefreshHeader : UIView {
     func endDrag () {
         dragging = false
         guard let text = refresh.text else { return }
-        if text == "[REFRESH]" {
+        if text == "[\(tipText)]" {
             refresher?()
         }
     }

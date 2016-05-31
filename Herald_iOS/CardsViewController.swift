@@ -100,13 +100,20 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         slider.placeholderImage = UIImage(named: "default_herald")
         
         // 定义 KingFisher 为轮播图在线图片加载器
-        slider.setRemoteImageFetche { (imageView, url, placeHolderImage) in
-            imageView.kf_setImageWithURL(NSURL(string: url)!, placeholderImage: placeHolderImage)
+        slider.setRemoteImageFetche { (imageView, urlStr, placeHolderImage) in
+            if let url = NSURL(string: urlStr) {
+                imageView.kf_setImageWithURL(url, placeholderImage: UIImage(named: "default_herald"))
+            } else {
+                imageView.image = UIImage(named: "default_herald")
+            }
         }
         
         // 轮播图点击时的事件
         slider.setBannerTapHandler { (index) in
-            AppModule(title: "小猴偷米", url: self.links[index]).open(self.navigationController)
+            AppModule(
+                title: self.titles[index],
+                url: self.links[index]
+                ).open(self.navigationController)
         }
         
         /// 初始化下拉刷新控件
@@ -153,6 +160,9 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     /// 各个轮播图点击时打开的链接
     var links : [String] = []
     
+    /// 各个轮播图点击时打开的页面标题
+    var titles : [String] = []
+    
     /// 判断轮播图数据是否变化，若变化，重载轮播图
     func refreshSliderIfNeeded () {
         let cache = JSON.parse(ServiceHelper.get("versioncheck_cache"))
@@ -173,6 +183,9 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         // 清空链接列表
         links.removeAll()
         
+        // 清空标题列表
+        titles.removeAll()
+        
         // 清空图片列表
         var pics : [AnyObject?] = []
         
@@ -182,11 +195,13 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             if let url = pic["imageurl"].string {
                 pics.append(url)
                 
-                if let link = pic["url"].string {
-                    links.append(link)
-                } else {
-                    links.append("")
+                links.append(pic["url"].stringValue)
+                
+                var title = pic["title"].stringValue
+                if title == "" {
+                    title = "小猴偷米"
                 }
+                titles.append(title)
             }
         }
         
@@ -194,6 +209,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         if pics.count == 0 {
             pics.append("")
             links.append("")
+            titles.append("")
         }
         // 设置为轮播图的图片列表
         slider.images = pics
@@ -222,17 +238,17 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
         // 判断各模块是否开启并加载对应数据，暂时只有一个示例，为了给首页卡片的实现提供参考
-        if SettingsHelper.getModuleCardEnabled(Module.Curriculum.rawValue) {
+        if R.module.curriculum.cardEnabled {
             // 加载并解析课表缓存
             cardList.append(CurriculumCard.getCard())
         }
         
-        if SettingsHelper.getModuleCardEnabled(Module.Experiment.rawValue) {
+        if R.module.experiment.cardEnabled {
             // 加载并解析实验缓存
             cardList.append(ExperimentCard.getCard())
         }
         
-        if SettingsHelper.getModuleCardEnabled(Module.Exam.rawValue) {
+        if R.module.exam.cardEnabled {
             // 加载并解析考试缓存
             cardList.append(ExamCard.getCard())
         }
@@ -240,22 +256,22 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         // 加载校园活动缓存
         cardList.append(ActivityCard.getCard())
         
-        if SettingsHelper.getModuleCardEnabled(Module.Lecture.rawValue) {
+        if R.module.lecture.cardEnabled {
             // 加载并解析人文讲座预告缓存
             cardList.append(LectureCard.getCard())
         }
         
-        if SettingsHelper.getModuleCardEnabled(Module.Pedetail.rawValue) {
+        if R.module.pedetail.cardEnabled {
             // 加载并解析跑操预报缓存
             cardList.append(PedetailCard.getCard())
         }
         
-        if SettingsHelper.getModuleCardEnabled(Module.Card.rawValue) {
+        if R.module.card.cardEnabled {
             // 加载并解析一卡通缓存
             cardList.append(CardCard.getCard())
         }
         
-        if SettingsHelper.getModuleCardEnabled(Module.Jwc.rawValue) {
+        if R.module.jwc.cardEnabled {
             // 加载并解析一卡通缓存
             cardList.append(JwcCard.getCard())
         }
@@ -288,21 +304,21 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         // 刷新版本信息和推送消息
         manager.addAll(ServiceHelper.getRefresher())
         
-        if SettingsHelper.getModuleCardEnabled(Module.Curriculum.rawValue) {
+        if R.module.curriculum.cardEnabled {
             // 仅当课表数据不存在时刷新课表
             if CacheHelper.get("herald_curriculum") == "" || CacheHelper.get("herald_sidebar") == "" {
                 manager.addAll(CurriculumCard.getRefresher())
             }
         }
         
-        if SettingsHelper.getModuleCardEnabled(Module.Experiment.rawValue) {
+        if R.module.experiment.cardEnabled {
             // 仅当实验数据不存在时刷新实验
             if CacheHelper.get("herald_experiment") == "" {
                 manager.addAll(ExperimentCard.getRefresher())
             }
         }
         
-        if SettingsHelper.getModuleCardEnabled(Module.Exam.rawValue) {
+        if R.module.exam.cardEnabled {
             // 仅当考试数据不存在时刷新考试
             if CacheHelper.get("herald_exam") == "" {
                 manager.addAll(ExamCard.getRefresher())
@@ -312,12 +328,12 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         // 直接刷新校园活动
         manager.addAll(ActivityCard.getRefresher())
         
-        if SettingsHelper.getModuleCardEnabled(Module.Lecture.rawValue) {
+        if R.module.lecture.cardEnabled {
             // 直接刷新人文讲座预告
             manager.addAll(LectureCard.getRefresher())
         }
         
-        if SettingsHelper.getModuleCardEnabled(Module.Pedetail.rawValue) {
+        if R.module.pedetail.cardEnabled {
             // 仅当已到开始时间时，允许刷新
             let _now = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Hour, .Minute], fromDate: NSDate())
             let now = _now.hour * 60 + _now.minute
@@ -327,12 +343,12 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
         
-        if SettingsHelper.getModuleCardEnabled(Module.Card.rawValue) {
+        if R.module.card.cardEnabled {
             // 直接刷新一卡通数据
             manager.addAll(CardCard.getRefresher())
         }
         
-        if SettingsHelper.getModuleCardEnabled(Module.Jwc.rawValue) {
+        if R.module.jwc.cardEnabled{
             // 直接刷新教务处数据
             manager.addAll(JwcCard.getRefresher())
         }
@@ -477,9 +493,8 @@ extension CardsViewController:UIViewControllerPreviewingDelegate {
         let destination = cardList[indexPath.section].rows[indexPath.row].destination
         if destination.hasPrefix("http") {
             //存在spinner卡顿情况，仅针对教务通知子cell
-            CacheHelper.set("herald_webmodule_url", cardList[indexPath.section].rows[indexPath.row].destination)
-            
-            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE")
+            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE") as! WebModuleViewController
+            detailVC.url = cardList[indexPath.section].rows[indexPath.row].destination
             return detailVC
         } else if !destination.isEmpty && !destination.hasPrefix("TAB") {
             let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(cardList[indexPath.section].rows[indexPath.row].destination)

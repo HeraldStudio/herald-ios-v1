@@ -12,35 +12,28 @@ import SwiftyJSON
 class PedetailCard {
     
     static func getRefresher () -> [ApiRequest] {
-        return [ApiRequest().api("pc").uuid().noCheck200().toCache("herald_pc_forecast") {
-                json -> String in
-                guard let str = json["content"].rawString() else {return ""}
-                return str
-            }.onFinish { success, code, _ in
-                let todayComp = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate())
-                let today = String(format: "%4d-%02d-%02d", todayComp.year, todayComp.month, todayComp.day)
-                if success {
-                    CacheHelper.set("herald_pc_date", today)
-                } else if code == 201 {
-                    CacheHelper.set("herald_pc_date", today)
-                    CacheHelper.set("herald_pc_forecast", "refreshing")
+        return [
+            ApiRequest().api("pc").uuid().noCheck200().toCache("herald_pc_forecast") {
+                    json in json["content"]
                 }
+                .onFinish { success, code, _ in
+                    let todayComp = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate())
+                    let today = String(format: "%4d-%02d-%02d", todayComp.year, todayComp.month, todayComp.day)
+                    if success {
+                        CacheHelper.set("herald_pc_date", today)
+                    } else if code == 201 {
+                        CacheHelper.set("herald_pc_date", today)
+                        CacheHelper.set("herald_pc_forecast", "refreshing")
+                    }
             },
-                ApiRequest().api("pe").uuid().toCache("herald_pe_count") {
-                    json -> String in
-                    guard let str = json["content"].rawString() else {return ""}
-                    return str
-                    }.toCache("herald_pe_remain") {
-                        json -> String in
-                        guard let str = json["remain"].rawString() else {return ""}
-                        return str
-            },
-                ApiRequest().api("pedetail").uuid().toCache("herald_pedetail") {
-                    json -> String in
-                    guard let str = json.rawString() else {return ""}
-                    if !str.containsString("[") { throw E }
-                    return str
-            }]
+            ApiRequest().api("pe").uuid()
+                .toCache("herald_pe_count") { json in json["content"] }
+                .toCache("herald_pe_remain") { json in json["remain"] },
+            ApiRequest().api("pedetail").uuid().toCache("herald_pedetail") {
+                json in if !json.rawStringValue.containsString("[") { throw E }
+                return json
+            }
+        ]
     }
     
     static func getCard() -> CardsModel {
@@ -61,30 +54,30 @@ class PedetailCard {
         let row = CardsRowModel(pedetailCount: count, remain: remain)
         
         if record.containsString(todayStamp) {
-            let model = CardsModel(cellId: "CardsCellPedetail", module: .Pedetail, desc: "你今天的跑操已经到账。" + getRemainNotice(count, remain, false), priority: .CONTENT_NOTIFY)
+            let model = CardsModel(cellId: "CardsCellPedetail", module: R.module.pedetail, desc: "你今天的跑操已经到账。" + getRemainNotice(count, remain, false), priority: .CONTENT_NOTIFY)
             model.rows.append(row)
             return model
         }
         
         if now >= startTime && date != todayStamp {
-            return CardsModel(cellId: "CardsCellPedetail", module: .Pedetail, desc: "跑操预告加载失败，请手动刷新", priority: .CONTENT_NOTIFY)
+            return CardsModel(cellId: "CardsCellPedetail", module: R.module.pedetail, desc: "跑操预告加载失败，请手动刷新", priority: .CONTENT_NOTIFY)
         }
         
         if now < startTime {
             // 跑操时间没到
-            let model = CardsModel(cellId: "CardsCellPedetail", module: .Pedetail, desc: "小猴会在早上跑操时间实时显示跑操预告\n" + getRemainNotice(count, remain, false), priority: .CONTENT_NO_NOTIFY)
+            let model = CardsModel(cellId: "CardsCellPedetail", module: R.module.pedetail, desc: "小猴会在早上跑操时间实时显示跑操预告\n" + getRemainNotice(count, remain, false), priority: .CONTENT_NO_NOTIFY)
             model.rows.append(row)
             return model
         } else if now >= endTime {
             // 跑操时间已过
             if !forecast.containsString("跑操") {
                 // 没有跑操预告信息
-                let model = CardsModel(cellId: "CardsCellPedetail", module: .Pedetail, desc: "今天没有跑操预告信息\n" + getRemainNotice(count, remain, false), priority: .CONTENT_NO_NOTIFY)
+                let model = CardsModel(cellId: "CardsCellPedetail", module: R.module.pedetail, desc: "今天没有跑操预告信息\n" + getRemainNotice(count, remain, false), priority: .CONTENT_NO_NOTIFY)
                 model.rows.append(row)
                 return model
             } else {
                 // 有跑操预告信息但时间已过
-                let model = CardsModel(cellId: "CardsCellPedetail", module: .Pedetail, desc: "\(forecast)(已结束)\n" + getRemainNotice(count, remain, false), priority: .CONTENT_NO_NOTIFY)
+                let model = CardsModel(cellId: "CardsCellPedetail", module: R.module.pedetail, desc: "\(forecast)(已结束)\n" + getRemainNotice(count, remain, false), priority: .CONTENT_NO_NOTIFY)
                 model.rows.append(row)
                 return model
             }
@@ -92,12 +85,12 @@ class PedetailCard {
             // 处于跑操时间
             if !forecast.containsString("跑操") {
                 // 还没有跑操预告信息
-                let model = CardsModel(cellId: "CardsCellPedetail", module: .Pedetail, desc: "目前暂无跑操预报信息，过一会再来看吧~\n" + getRemainNotice(count, remain, false), priority: .CONTENT_NO_NOTIFY)
+                let model = CardsModel(cellId: "CardsCellPedetail", module: R.module.pedetail, desc: "目前暂无跑操预报信息，过一会再来看吧~\n" + getRemainNotice(count, remain, false), priority: .CONTENT_NO_NOTIFY)
                 model.rows.append(row)
                 return model
             } else {
                 // 有跑操预告信息
-                let model = CardsModel(cellId: "CardsCellPedetail", module: .Pedetail, desc: "小猴预测\(forecast)\n" + getRemainNotice(count, remain, forecast.containsString("今天正常跑操")), priority: .CONTENT_NOTIFY)
+                let model = CardsModel(cellId: "CardsCellPedetail", module: R.module.pedetail, desc: "小猴预测\(forecast)\n" + getRemainNotice(count, remain, forecast.containsString("今天正常跑操")), priority: .CONTENT_NOTIFY)
                 model.rows.append(row)
                 return model
             }

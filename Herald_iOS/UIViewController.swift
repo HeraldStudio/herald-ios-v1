@@ -5,6 +5,8 @@ import Toast_Swift
 /**
  * UIViewController | 提示框功能
  * 实现基本VC中通过函数直接显示对话框、加载框、提示消息的功能
+ * 
+ * 注意：加载框是全局单例的，因此如果调用多次 showProgressDialog()，再调用一次hideProgressDialog() 既可隐藏。
  */
 extension UIViewController {
     
@@ -86,15 +88,10 @@ extension UIViewController {
             let windowLevelNormal = window.windowLevel == UIWindowLevelNormal
             
             if windowOnMainScreen && windowIsVisible && windowLevelNormal {
-                if let frontToBackViewControllers = window.rootViewController?.childViewControllers.reverse() {
-                    for vc in frontToBackViewControllers {
-                        if vc.isViewLoaded() {
-                            return vc
-                        }
+                if let vc = window.rootViewController {
+                    if vc.isViewLoaded() {
+                        return vc
                     }
-                    return nil
-                } else {
-                    return window.rootViewController
                 }
             }
         }

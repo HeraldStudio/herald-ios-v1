@@ -41,20 +41,14 @@ class GymReserveViewController : UIViewController, UITableViewDataSource, UITabl
         ApiThreadManager().addAll([
             ApiRequest()
                 .api("yuyue").uuid().post("method", "getDate")
-                .toCache("herald_gymreserve_timelist_and_itemlist") { json in
-                    json.rawString()!
-                },
+                .toCache("herald_gymreserve_timelist_and_itemlist"),
             ApiRequest()
                 .api("yuyue").uuid().post("method", "myOrder")
-                .toCache("herald_gymreserve_myorder") { json in
-                    json.rawString()!
-                },
+                .toCache("herald_gymreserve_myorder"),
             // 预获取用户手机号
             ApiRequest()
                 .api("yuyue").uuid().post("method", "getPhone")
-                .toCache("herald_gymreserve_phone") { json in
-                    json["content"]["phone"].stringValue
-                }
+                .toCache("herald_gymreserve_phone") { json in json["content"]["phone"] }
         ]).onFinish { success in
             self.hideProgressDialog()
             if success {
@@ -68,9 +62,7 @@ class GymReserveViewController : UIViewController, UITableViewDataSource, UITabl
         if CacheHelper.get("herald_gymreserve_userid") == "" {
             ApiRequest().api("yuyue").uuid().post("method", "getFriendList")
                 .post("cardNo", ApiHelper.getUserName())
-                .toCache("herald_gymreserve_userid", withParser: { json in
-                    String(json["content"][0]["userId"].intValue)
-                }).run()
+                .toCache("herald_gymreserve_userid") { json in json["content"][0]["userId"] }.run()
         }
     }
     

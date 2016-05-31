@@ -16,7 +16,7 @@ class ServiceHelper {
     static func getRefresher () -> [ApiRequest] {
         return [ApiRequest().url("http://android.heraldstudio.com/checkversion").uuid()
             .post("schoolnum", ApiHelper.getSchoolnum(), "versioncode", "-1")
-            .toServiceCache("versioncheck_cache") { (json) -> String in json.rawString()!}]
+            .toServiceCache("versioncheck_cache")]
     }
     
     static func get(key : String) -> String {

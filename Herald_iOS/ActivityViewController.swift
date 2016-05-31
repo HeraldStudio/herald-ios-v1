@@ -26,9 +26,9 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         /// 初始化上拉加载控件
         
         // 上拉加载控件初始高度与 TabBar 一致，防止滚动到底部时部分内容被 TabBar 覆盖
-        let tw = (tabBarController?.tabBar.frame.width)!
-        let th = (tabBarController?.tabBar.frame.height)! + 8
-        puller.frame = CGRect(x: 0, y: 0, width: tw, height: th)
+        let tw = tabBarController?.tabBar.frame.width
+        let th = tabBarController?.tabBar.frame.height
+        puller.frame = CGRect(x: 0, y: 0, width: (tw != nil ? tw! : 0), height: (th != nil ? th! + 8 : 8))
         
         // 设置上拉加载控件的加载事件
         puller.loader = {() in
@@ -93,7 +93,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
     /// 联网刷新并存入缓存，若成功，载入缓存内容；否则显示错误提示
     @IBAction func refreshCache() {
         showProgressDialog()
-        ApiRequest().get().url("http://115.28.27.150/herald/api/v1/huodong/get").toCache("herald_activity") { json in json.rawString()! }
+        ApiRequest().get().url("http://115.28.27.150/herald/api/v1/huodong/get").toCache("herald_activity")
             .onFinish { success, _, _ in
                 self.hideProgressDialog()
                 self.loadCache()
@@ -183,7 +183,13 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         cell.title.text = model.title
         cell.assoc.text = model.assoc
         cell.state.text = model.state.rawValue
-        cell.pic.kf_setImageWithURL(NSURL(string: model.picUrl)!, placeholderImage: UIImage(named: "default_herald"))
+        
+        if let url = NSURL(string: model.picUrl) {
+            cell.pic.kf_setImageWithURL(url, placeholderImage: UIImage(named: "default_herald"))
+        } else {
+            cell.pic.image = UIImage(named: "default_herald")
+        }
+        
         cell.intro.text = "活动时间：\(model.activityTime)\n活动地点：\(model.location)\n\n\(model.intro)" + (model.detailUrl != "" ? "\n\n查看详情 >" : "")
         
         // 布局调整

@@ -165,9 +165,7 @@ class GymNewViewController : UIViewController, UITableViewDataSource, UITableVie
                             ApiRequest()
                                 .api("yuyue").uuid().post("method", "myOrder")
                                 // 新预约记录直接存入缓存
-                                .toCache("herald_gymreserve_myorder") { json in
-                                    json.rawString()!
-                                }
+                                .toCache("herald_gymreserve_myorder")
                                 .onFinish { newSuccess, _, response in
                                     self.hideProgressDialog()
                                     self.working = false

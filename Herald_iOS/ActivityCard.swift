@@ -12,11 +12,7 @@ import SwiftyJSON
 class ActivityCard {
     
     static func getRefresher () -> [ApiRequest] {
-        return [ApiRequest().get().url("http://115.28.27.150/herald/api/v1/huodong/get?type=hot").toCache("herald_activity_hot") {
-            json -> String in
-            guard let str = json.rawString() else {return ""}
-            return str
-            }]
+        return [ApiRequest().get().url("http://115.28.27.150/herald/api/v1/huodong/get?type=hot").toCache("herald_activity_hot")]
     }
     
     static func getCard () -> CardsModel {

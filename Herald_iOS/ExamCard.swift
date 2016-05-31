@@ -15,11 +15,7 @@ import SwiftyJSON
 class ExamCard {
     
     static func getRefresher () -> [ApiRequest] {
-        return [ApiRequest().api("exam").uuid()
-            .toCache("herald_exam") {json -> String in
-                guard let str = json.rawString() else {return ""}
-                return str
-            }]
+        return [ApiRequest().api("exam").uuid().toCache("herald_exam")]
     }
 
     static func getCard() -> CardsModel {
@@ -51,9 +47,9 @@ class ExamCard {
         examList = examList.sort({$0.sortOrder < $1.sortOrder})
         
         if (examList.count == 0) {
-            return CardsModel(cellId: "CardsCellExam", module: .Exam, desc: "最近没有新的考试安排", priority: .NO_CONTENT)
+            return CardsModel(cellId: "CardsCellExam", module: R.module.exam, desc: "最近没有新的考试安排", priority: .NO_CONTENT)
         } else {
-            let model = CardsModel(cellId: "CardsCellExam", module: .Exam, desc: "你最近有\(examList.count)场考试，抓紧时间复习吧", priority: .CONTENT_NO_NOTIFY)
+            let model = CardsModel(cellId: "CardsCellExam", module: R.module.exam, desc: "你最近有\(examList.count)场考试，抓紧时间复习吧", priority: .CONTENT_NO_NOTIFY)
             model.rows.appendContentsOf(examList)
             return model;
         }

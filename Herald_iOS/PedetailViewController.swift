@@ -69,11 +69,8 @@ class PedetailViewController : UIViewController, FSCalendarDelegate {
     @IBAction func refreshCache () {
         showProgressDialog()
         ApiThreadManager().addAll([
-            ApiRequest().api("pc").uuid().noCheck200().toCache("herald_pc_forecast") {
-                    json -> String in
-                    guard let str = json["content"].rawString() else {return ""}
-                    return str
-                }.onFinish { success, code, _ in
+            ApiRequest().api("pc").uuid().noCheck200().toCache("herald_pc_forecast") { json in json["content"] }
+                .onFinish { success, code, _ in
                     let todayComp = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate())
                     let today = String(format: "%4d-%02d-%02d", todayComp.year, todayComp.month, todayComp.day)
                     if success {
@@ -83,21 +80,13 @@ class PedetailViewController : UIViewController, FSCalendarDelegate {
                         CacheHelper.set("herald_pc_forecast", "refreshing")
                     }
                 },
-            ApiRequest().api("pe").uuid().toCache("herald_pe_count") {
-                json -> String in
-                    guard let str = json["content"].rawString() else {return ""}
-                    return str
-                }.toCache("herald_pe_remain") {
-                    json -> String in
-                    guard let str = json["remain"].rawString() else {return ""}
-                    return str
-                },
+            ApiRequest().api("pe").uuid()
+                .toCache("herald_pe_count") { json in json["content"] }
+                .toCache("herald_pe_remain") { json in json["remain"] },
             ApiRequest().api("pedetail").uuid().toCache("herald_pedetail") {
-                json -> String in
-                    guard let str = json.rawString() else {return ""}
-                    if !str.containsString("[") { throw E }
-                    return str
-                }
+                json in if !json.rawStringValue.containsString("[") { throw E }
+                return json
+            }
         ]).onFinish { success in
             self.hideProgressDialog()
             if success {
