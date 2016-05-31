@@ -62,7 +62,7 @@ class PullLoadFooter : UIView {
         }
         
         // 设置透明度和区域
-        load.alpha = min(height / realHeight, 1)
+        load.alpha = min(height / max(16, realHeight), 1)
         load.frame = CGRect(x: 0, y: topPadding, width: frame.width, height: height)
     }
     
