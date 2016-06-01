@@ -990,7 +990,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Howie-Vinci.Herald";
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "430cfdaa-f7c1-48e1-8839-1d2ad787df31";
+				PROVISIONING_PROFILE = "e89d4455-de48-4797-ab5c-00ea3c5f7f8b";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1011,7 +1011,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Howie-Vinci.Herald";
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "430cfdaa-f7c1-48e1-8839-1d2ad787df31";
+				PROVISIONING_PROFILE = "e89d4455-de48-4797-ab5c-00ea3c5f7f8b";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
