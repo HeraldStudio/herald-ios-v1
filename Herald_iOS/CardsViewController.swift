@@ -500,6 +500,7 @@ extension CardsViewController:UIViewControllerPreviewingDelegate {
             //存在spinner卡顿情况，仅针对教务通知子cell
             let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE") as! WebModuleViewController
             detailVC.url = cardList[indexPath.section].rows[indexPath.row].destination
+            detailVC.title = cardList[indexPath.section].rows[0].title!
             return detailVC
         } else if !destination.isEmpty && !destination.hasPrefix("TAB") {
             let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(cardList[indexPath.section].rows[indexPath.row].destination)
