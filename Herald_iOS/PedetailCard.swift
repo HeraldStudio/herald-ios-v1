@@ -45,6 +45,10 @@ class PedetailCard {
         let _remain = Int(CacheHelper.get("herald_pe_remain"))
         let remain = _remain != nil ? _remain! : 0
         
+        if record == "" {
+            return CardsModel(cellId: "CardsCellPedetail", module: R.module.pedetail, desc: "跑操数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
+        }
+        
         let _now = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Hour, .Minute], fromDate: NSDate())
         let now = _now.hour * 60 + _now.minute
         let startTime = 6 * 60 + 20
@@ -60,7 +64,7 @@ class PedetailCard {
         }
         
         if now >= startTime && date != todayStamp {
-            return CardsModel(cellId: "CardsCellPedetail", module: R.module.pedetail, desc: "跑操预告加载失败，请手动刷新", priority: .CONTENT_NOTIFY)
+            return CardsModel(cellId: "CardsCellPedetail", module: R.module.pedetail, desc: "跑操预告数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
         }
         
         if now < startTime {

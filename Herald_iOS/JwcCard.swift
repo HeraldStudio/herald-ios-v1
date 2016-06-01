@@ -17,6 +17,10 @@ class JwcCard {
     
     static func getCard () -> CardsModel {
         let cache = CacheHelper.get("herald_jwc")
+        if cache == "" {
+            return CardsModel(cellId: "CardsCellJwc", module: R.module.jwc, desc: "教务通知数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
+        }
+        
         let content = JSON.parse(cache)["content"]["教务信息"]
         
         var allNotices : [CardsRowModel] = []

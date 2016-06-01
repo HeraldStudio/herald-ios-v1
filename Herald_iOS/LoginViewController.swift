@@ -36,10 +36,11 @@ class LoginViewController: UIViewController {
         ApiRequest().url(ApiHelper.auth_url).noCheck200()
             .post("user", username!.text!, "password", password!.text!, "appid", appid)
             .onFinish { success, _, response in
-                self.hideProgressDialog()
                 if response.containsString("Unauthorized") {
+                    self.hideProgressDialog()
                     self.showMessage("密码错误，请重试")
                 } else if !success {
+                    self.hideProgressDialog()
                     self.showMessage("网络异常，请重试")
                 } else {
                     ApiHelper.setAuthCache("uuid", response)
@@ -56,6 +57,7 @@ class LoginViewController: UIViewController {
             if success {
                 ((UIApplication.sharedApplication().delegate) as! AppDelegate).showMain()
             } else {
+                self.hideProgressDialog()
                 ApiHelper.doLogout("用户不存在或网络异常，请重试")
             }
         }.run()

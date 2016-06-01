@@ -28,7 +28,7 @@ class CardCard {
                 return CardsModel(cellId: "CardsCellCard", module: R.module.card, desc: "你的一卡通余额还有\(String(format: "%.2f", extra))元", priority: .CONTENT_NO_NOTIFY)
             }
         } else {
-            return CardsModel(cellId: "CardsCellCard", module: R.module.card, desc: "一卡通余额数据加载失败，请手动刷新", priority: .CONTENT_NOTIFY)
+            return CardsModel(cellId: "CardsCellCard", module: R.module.card, desc: "一卡通数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
         }
     }
 }

@@ -64,8 +64,10 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
     }
     
     /// 当视图准备显示前，显式调用列表重绘，以便切换 Tab 时产生动画效果
+    /// 当准备从其它界面返回时，设置导航栏颜色
     override func viewWillAppear(animated: Bool) {
         tableView.reloadData()
+        setNavigationColor(swiper, 0x176ccc)
     }
     
     /// 下拉刷新和上拉加载控件用到的三个 hook

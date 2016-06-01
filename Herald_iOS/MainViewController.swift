@@ -34,11 +34,6 @@ class MainViewController: UITabBarController {
         }
     }
     
-    /// 当准备从其它界面返回时，设置导航栏颜色
-    override func viewWillAppear(animated: Bool) {
-        setNavigationColor(nil, 0x00b4ff)
-    }
-    
     /// 响应摇一摇事件
     func onShake () {
         if SettingsHelper.wifiAutoLogin {

@@ -20,6 +20,10 @@ class ExamCard {
 
     static func getCard() -> CardsModel {
         let cache = CacheHelper.get("herald_exam")
+        if cache == "" {
+            return CardsModel(cellId: "CardsCellExam", module: R.module.exam, desc: "考试数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
+        }
+        
         let customCache = CacheHelper.get("herald_exam_custom_\(ApiHelper.getUserName())")
         let json = JSON.parse(cache)["content"]
         let jsonCustom = JSON.parse(customCache)

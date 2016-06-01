@@ -36,6 +36,11 @@ class MyInfoViewController: UITableViewController {
         version.text = "当前版本：v\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")!)"
     }
     
+    /// 当准备从其它界面返回时，设置导航栏颜色
+    override func viewWillAppear(animated: Bool) {
+        setNavigationColor(nil, 0x00b4ff)
+    }
+    
     /// 一些自定义的点击事件
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)

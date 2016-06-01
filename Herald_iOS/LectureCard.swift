@@ -19,8 +19,10 @@ class LectureCard {
     }
     
     static func getCard() -> CardsModel {
-        
         let cache = CacheHelper.get("herald_lecture_notices")
+        if cache == "" {
+            return CardsModel(cellId: "CardsCellLecture", module: R.module.lecture, desc: "人文讲座数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
+        }
         
         let jsonArray = JSON.parse(cache)["content"]
         var lectures : [CardsRowModel] = []
