@@ -29,7 +29,7 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        swiper.syncApperance((tableView?.contentOffset)!)
+        swiper.syncApperance()
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
@@ -102,11 +102,7 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("schoolbus").uuid().toCache("herald_schoolbus") {
-            json -> String in
-            guard let str = json.rawString() else {return ""}
-            return str
-            }
+        ApiRequest().api("schoolbus").uuid().toCache("herald_schoolbus")
             .onFinish { success, _, _ in
                 self.hideProgressDialog()
                 if success {

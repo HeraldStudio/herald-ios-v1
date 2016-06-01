@@ -1,12 +1,5 @@
-//
-//  ErrorType.swift
-//  Herald_iOS
-//
-//  Created by 于海通 on 16/4/24.
-//  Copyright © 2016年 于海通. All rights reserved.
-//
-
 import Foundation
 
+/// 一个全局的异常，需要抛异常时只要 throw E 即可
 class Error : ErrorType {}
 let E = Error()

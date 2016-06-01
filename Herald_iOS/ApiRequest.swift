@@ -1,24 +1,10 @@
-//
-//  ApiRequest.swift
-//  Herald_iOS
-//
-//  Created by 于海通 on 16/4/11.
-//  Copyright © 2016年 于海通. All rights reserved.
-//
-
-import Foundation
 import Alamofire
 import SwiftyJSON
 
 class ApiRequest {
     
-    static let CONN_TIMEOUT = 10000, READ_TIMEOUT = 10000
-    
     /**
      * 构造部分
-     * context  当前上下文
-     * exceptionPool   是否吞掉错误消息
-     * url      请求的目标url
      **/
     var errorPool : NSMutableArray?
     
@@ -42,6 +28,13 @@ class ApiRequest {
     
     func noCheck200 () -> ApiRequest {
         dontCheck200 = true
+        return self
+    }
+    
+    var isDebug = false
+    
+    func debug () -> ApiRequest {
+        isDebug = true
         return self
     }
     
@@ -96,7 +89,14 @@ class ApiRequest {
                 }
             } else {
                 guard let jsonStr = responseJson.rawString() else { fallthrough }
-                guard code == 200 else { fallthrough }
+                guard code == 200 else {
+                    if code == 400 {
+                        ApiHelper.doLogout("用户身份已过期，请重新登录")
+                        break
+                    } else {
+                        fallthrough
+                    }
+                }
                 
                 for onFinishListener in onFinishListeners {
                     onFinishListener(true, code, jsonStr)
@@ -136,14 +136,14 @@ class ApiRequest {
      * toCache      将目标数据存入缓存的回调策略
      * toCache()    用于设置三级回调策略的函数
      **/
-    typealias JSONParser = JSON throws -> String
+    typealias JSONParser = JSON throws -> JSON
     
-    func toCache (key : String, withParser parser : JSONParser) -> ApiRequest {
+    func toCache (key : String, withParser parser : JSONParser = {json in json}) -> ApiRequest {
         onFinish {
             success, _, response in
             if(success) {
                 do {
-                    let cache = try parser(JSON.parse(response))
+                    let cache = try parser(JSON.parse(response)).rawStringValue
                     CacheHelper.set(key, cache)
                 } catch {
                     for k in self.onFinishListeners {
@@ -156,12 +156,12 @@ class ApiRequest {
         return self
     }
     
-    func toServiceCache (key : String, withParser parser : JSONParser) -> ApiRequest {
+    func toServiceCache (key : String, withParser parser : JSONParser = {json in json}) -> ApiRequest {
         onFinish {
             success, _, response in
             if(success) {
                 do {
-                    let cache = try parser(JSON.parse(response))
+                    let cache = try parser(JSON.parse(response)).rawStringValue
                     ServiceHelper.set(key, cache)
                 } catch {
                     for onFinishListener in self.onFinishListeners {
@@ -173,12 +173,12 @@ class ApiRequest {
         return self
     }
     
-    func toAuthCache (key : String, withParser parser : JSONParser) -> ApiRequest {
+    func toAuthCache (key : String, withParser parser : JSONParser = {json in json}) -> ApiRequest {
         onFinish {
             success, _, response in
             if(success) {
                 do {
-                    let cache = try parser(JSON.parse(response))
+                    let cache = try parser(JSON.parse(response)).rawStringValue
                     ApiHelper.setAuthCache(key, cache)
                 } catch {
                     for onFinishListener in self.onFinishListeners {
@@ -195,6 +195,9 @@ class ApiRequest {
      **/
     func run () {
         let request = Alamofire.request(isGet ? .GET : .POST, url!, parameters: map, encoding: .URL)
+        if isDebug {
+            debugPrint(request)
+        }
         request.responseString(completionHandler: callback)
     }
 }

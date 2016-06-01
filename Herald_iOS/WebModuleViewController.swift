@@ -20,10 +20,9 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate {
     }
     
     let webModuleColors = [
-        Module.Schedule : 0xe54f40,
-        Module.GymReserve : 0x377ef4,
-        Module.EmptyRoom : 0x3188cb,
-        Module.Quanyi : 0xed7f0e
+        R.module.schedule : 0xe54f40,
+        R.module.emptyroom : 0x3188cb,
+        R.module.quanyi : 0xed7f0e
     ]
     
     @IBOutlet var webView : UIWebView!
@@ -31,17 +30,21 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate {
     var url : String = ""
     
     override func viewDidLoad () {
-        title = CacheHelper.get("herald_webmodule_title")
-        url = CacheHelper.get("herald_webmodule_url")
-        webView.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
+        if let _url = NSURL(string: url) {
+            webView.loadRequest(NSURLRequest(URL: _url))
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
         for (key, value) in webModuleColors {
-            if url == SettingsHelper.MODULES[key.rawValue].controller {
+            if url == key.controller {
                 setNavigationColor(nil, value)
             }
         }
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        hideProgressDialog()
     }
     
     @IBAction func refresh () {
@@ -54,5 +57,21 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate {
     
     @IBAction func forward () {
         webView.goForward()
+    }
+    
+    @IBAction func share () {
+        let _shareUrl = webView.stringByEvaluatingJavaScriptFromString("window.location.href")
+        let shareUrl = _shareUrl == nil ? "" : _shareUrl!
+        
+        let module = (title == nil || title! == "小猴偷米") ? "" : " - \(title!)"
+        let prefix = "来自小猴偷米App\(module)的分享："
+        let __title = webView.stringByEvaluatingJavaScriptFromString("document.title")
+        let _title = __title == nil ? "" : __title!
+        let shareText = prefix + _title + " " + shareUrl
+        
+        let items : [AnyObject] = [shareText]
+        let vc = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        vc.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]
+        presentViewController(vc, animated: true, completion: nil)
     }
 }

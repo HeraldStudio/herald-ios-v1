@@ -1,11 +1,3 @@
-//
-//  GCalendar.swift
-//  Herald_iOS
-//
-//  Created by 于海通 on 16/5/6.
-//  Copyright © 2016年 HeraldStudio. All rights reserved.
-//
-
 import Foundation
 
 /// 格里高利历中的简单日期/时间计算类实现。
@@ -128,6 +120,12 @@ public class GCalendar : CustomDebugStringConvertible {
         self.init(.Second)
         setDate(y, M, d)
         setTime(h, m, s)
+    }
+    
+    /// 构造函数，通过 NSDate 构造时间
+    public convenience init (_ date: NSDate) {
+        self.init()
+        rawTime = Int64(date.timeIntervalSince1970)
     }
     
     /// 构造函数，根据字符串构造对应的时间，允许-/:. 等分隔符，
@@ -281,6 +279,12 @@ public class GCalendar : CustomDebugStringConvertible {
 }
 
 /// 各种运算符重载
+// 用来代替赋值
+func << (left: GCalendar, right: GCalendar) -> GCalendar {
+    left.rawTime = right.rawTime
+    return left
+}
+
 // 自加一段时间
 func += (left: GCalendar, right: Int) -> GCalendar {
     left.rawTime = left.rawTime + right

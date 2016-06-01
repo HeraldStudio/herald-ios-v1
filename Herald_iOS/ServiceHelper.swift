@@ -15,8 +15,11 @@ class ServiceHelper {
     
     static func getRefresher () -> [ApiRequest] {
         return [ApiRequest().url("http://android.heraldstudio.com/checkversion").uuid()
-            .post("schoolnum", ApiHelper.getSchoolnum(), "versioncode", "-1")
-            .toServiceCache("versioncheck_cache") { (json) -> String in json.rawString()!}]
+            .post("schoolnum", ApiHelper.getSchoolnum())
+            .post("versioncode", "\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion")!)")
+            .post("versionname", "V\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")!)")
+            .post("versiontype", "iOS")
+            .toServiceCache("versioncheck_cache")]
     }
     
     static func get(key : String) -> String {

@@ -1,18 +1,17 @@
-//
-//  MainViewController.swift
-//  主界面分页滑动切换
-//
-//  Created by Howie on 16/3/27.
-//  Copyright © 2016年 Howie. All rights reserved.
-//
-
 import UIKit
 import DHCShakeNotifier
 
-/// 主页面
+/**
+ * MainViewController | 应用程序主界面
+ * 负责处理全局UI初始化等处理
+ *
+ * 注意：此 ViewController 不是程序主入口要直接打开的，直接打开的是它的父 ViewController 
+ *      即 UINavigationController。之所以重写这个 UITabBarController 而不重写
+ *      UINavigationController 是为了便于控制 TabBar。
+ */
 class MainViewController: UITabBarController {
     
-    /// 启动时的初始化
+    /// 界面实例化时的初始化
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,46 +22,27 @@ class MainViewController: UITabBarController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
-        // 去除tabbar上的横线
+        // 去除 TabBar 上的横线
         tabBar.clipsToBounds = true
         
+        // 修改 TabBar 高亮图标的颜色
         tabBar.tintColor = UIColor(red: 0, green: 180/255, blue: 255/255, alpha: 1)
         
-        initialize()
-    }
-    
-    func initialize() {
-        
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
-        
-        if SettingsHelper.getModuleCardEnabled(Module.Curriculum.rawValue) {
-            CurriculumNotifier.scheduleNotifications()
-        }
-        
-        if SettingsHelper.getModuleCardEnabled(Module.Experiment.rawValue) {
-            ExperimentNotifier.scheduleNotifications()
-        }
-        
-        if SettingsHelper.getModuleCardEnabled(Module.Exam.rawValue) {
-            ExamNotifier.scheduleNotifications()
-        }
-        
         if ApiHelper.isLogin() {
+            // 注册摇一摇事件
             NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
         }
     }
     
+    /// 响应摇一摇事件
     func onShake () {
-        if SettingsHelper.getWifiAutoLogin() {
+        if SettingsHelper.wifiAutoLogin {
             WifiLoginHelper(self).checkAndLogin()
         }
     }
     
+    /// 反注册摇一摇事件
     override func finalize() {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: DHCSHakeNotificationName, object: nil)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        setNavigationColor(nil, 0x00b4ff)
     }
 }
