@@ -66,17 +66,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if ApiHelper.isLogin() {
             
             // 加载课表通知
-            if R.module.curriculum.cardEnabled {
+            if SettingsHelper.curriculumNotificationEnabled {
                 CurriculumNotifier.scheduleNotifications()
             }
             
             // 加载实验通知
-            if R.module.experiment.cardEnabled {
+            if SettingsHelper.experimentNotificationEnabled {
                 ExperimentNotifier.scheduleNotifications()
             }
             
             // 加载考试通知
-            if R.module.exam.cardEnabled {
+            if SettingsHelper.examNotificationEnabled {
                 ExamNotifier.scheduleNotifications()
             }
         }
