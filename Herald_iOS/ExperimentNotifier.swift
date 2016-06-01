@@ -17,14 +17,14 @@ class ExperimentNotifier {
         
         if cal < GCalendar() { return }
         
-        debugPrint("Sheduled notification: Experiment \(model.name), \(cal)")
+        //debugPrint("Sheduled notification: Experiment \(model.name), \(cal)")
         let date = cal.getDate()
         
         let not = UILocalNotification()
         not.fireDate = date
         not.timeZone = NSTimeZone.defaultTimeZone()
         not.soundName = UILocalNotificationDefaultSoundName
-        
+        not.applicationIconBadgeNumber = 1
         guard model.timeAndPlace.split("@").count > 1 else { return }
         let place = model.timeAndPlace.split("@")[1]
         not.alertBody = "[实验地点 \(place)] " + model.name + " 将在15分钟后开始实验，请注意时间，准时参加"

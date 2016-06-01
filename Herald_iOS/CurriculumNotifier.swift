@@ -22,14 +22,14 @@ class CurriculumNotifier {
                 cal -= 15 * 60
                 if cal < GCalendar() { continue }
                 
-                debugPrint("Sheduled notification: Curriculum \(info.className), \(cal)")
+                //debugPrint("Sheduled notification: Curriculum \(info.className), \(cal)")
                 let date = cal.getDate()
                 
                 let not = UILocalNotification()
                 not.fireDate = date
                 not.timeZone = NSTimeZone.defaultTimeZone()
                 not.soundName = UILocalNotificationDefaultSoundName
-                
+                not.applicationIconBadgeNumber = 1
                 let place = info.place.replaceAll("(单)", "").replaceAll("(双)", "")
                 not.alertBody = "[\(place)] " + info.className + " 将在15分钟后开始上课，请注意时间，准时上课"
                 

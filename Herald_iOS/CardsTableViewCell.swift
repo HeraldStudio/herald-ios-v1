@@ -1,16 +1,10 @@
-//
-//  CardsTableViewCell
-//  TestNavigation
-//
-//  Created by Howie on 16/3/29.
-//  Copyright © 2016年 Howie. All rights reserved.
-//
-
 import UIKit
-//import SWTableViewCell
 
-/// 首页卡片中每一行（代表卡片头部或卡片中的一格）通用的视图
-class CardsTableViewCell: UITableViewCell /*SWTableViewCell, SWTableViewCellDelegate*/ {
+/**
+ * CardsTableViewCell | 首页卡片列表项视图
+ * 首页卡片中每一行（代表卡片头部或卡片中的一格）通用的视图
+ */
+class CardsTableViewCell: UITableViewCell {
     
     /// 卡片头部的模块图标
     @IBOutlet var icon : UIImageView?
@@ -27,7 +21,10 @@ class CardsTableViewCell: UITableViewCell /*SWTableViewCell, SWTableViewCellDele
     /// 卡片头部的内容，课表、实验、考试、讲座的时间地点，通知的发布日期
     @IBOutlet var desc : UILabel?
     
-    /// 考试的倒计时天数、跑操的已跑次数
+    /// 考试的倒计时天数
+    @IBOutlet var count0 : UILabel?
+    
+    /// 跑操的已跑次数
     @IBOutlet var count1 : UILabel?
     
     /// 跑操的剩余次数
@@ -38,10 +35,4 @@ class CardsTableViewCell: UITableViewCell /*SWTableViewCell, SWTableViewCellDele
     
     /// 向右的箭头，如果没有destination，应当隐藏这个箭头
     @IBOutlet var arrow : UIView?
-    /*
-    
-    var onRead : (() -> Void)?
-    func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
-        onRead?()
-    }*/
 }

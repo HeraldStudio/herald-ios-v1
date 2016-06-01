@@ -30,12 +30,14 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiThreadManager().addAll([ApiRequest().api("sidebar").uuid().toCache("herald_sidebar") {
-                json in json["content"].rawString()!
-            },
-            ApiRequest().api("curriculum").uuid().toCache("herald_curriculum") {
-                json in json["content"].rawString()!
-            }]).onFinish { success in
+        ApiThreadManager().addAll([
+            ApiRequest().api("sidebar").uuid().toCache("herald_sidebar") {
+                    json in json["content"]
+                },
+                ApiRequest().api("curriculum").uuid().toCache("herald_curriculum") {
+                    json in json["content"]
+                }
+            ]).onFinish { success in
                 self.hideProgressDialog()
                 if success {
                     self.readLocal()
@@ -155,7 +157,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
         if scrollView.contentSize.width == 0 { return }
         let page = abs(Int(scrollView.contentOffset.x / scrollView.frame.width + 0.5))
         title = "第 \(page + 1) 周"
-        swiper.syncApperance(scrollView.contentOffset)
+        swiper.syncApperance()
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {

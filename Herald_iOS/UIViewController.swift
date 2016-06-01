@@ -1,17 +1,16 @@
-//
-//  UIViewController.swift
-//  Herald_iOS
-//
-//  Created by 于海通 on 16/4/24.
-//  Copyright © 2016年 于海通. All rights reserved.
-//
-
-import Foundation
 import UIKit
 import SVProgressHUD
 import Toast_Swift
 
+/**
+ * UIViewController | 提示框功能
+ * 实现基本VC中通过函数直接显示对话框、加载框、提示消息的功能
+ * 
+ * 注意：加载框是全局单例的，因此如果调用多次 showProgressDialog()，再调用一次hideProgressDialog() 既可隐藏。
+ */
 extension UIViewController {
+    
+    /// 显示加载框（全局单例）
     func showProgressDialog() {
         SVProgressHUD.setDefaultStyle(.Custom)
         SVProgressHUD.setBackgroundColor(UIColor(red: 0, green: 0, blue: 0, alpha: 0.8))
@@ -19,10 +18,12 @@ extension UIViewController {
         SVProgressHUD.show()
     }
     
+    /// 隐藏加载框（全局单例）
     func hideProgressDialog() {
         SVProgressHUD.dismiss()
     }
     
+    /// 显示提示消息
     func showMessage(message : String) {
         if let vc = getTopViewController() {
             var style = ToastStyle()
@@ -36,6 +37,7 @@ extension UIViewController {
         }
     }
     
+    /// 显示确认对话框
     func showQuestionDialog (message: String, runAfter: () -> Void) {
         let dialog = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         dialog.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default){
@@ -45,6 +47,7 @@ extension UIViewController {
         getTopViewController()?.presentViewController(dialog, animated: true, completion: nil)
     }
     
+    /// 显示带有“不再提示”按钮的对话框
     func showTipDialogIfUnknown (message: String, cachePostfix: String, runAfter: () -> Void) {
         let shown = CacheHelper.get("tip_ignored_" + cachePostfix) == "1"
         if !shown {
@@ -62,6 +65,7 @@ extension UIViewController {
         }
     }
     
+    /// 设置导航栏颜色，参数是 Java 风格的不透明颜色值，例如 0x2bbfff
     func setNavigationColor (swiper: SwipeRefreshHeader?, _ color: Int) {
         var color = color
         let blue = CGFloat(color % 0x100) / 0xFF
@@ -70,10 +74,21 @@ extension UIViewController {
         color /= 0x100
         let red = CGFloat(color % 0x100) / 0xFF
         let _color = UIColor(red: red, green: green, blue: blue, alpha: 1)
-        self.navigationController?.navigationBar.barTintColor = _color
+        
+        if let bar = self.navigationController?.navigationBar {
+            UIView.beginAnimations(nil, context: nil)
+            UIView.setAnimationCurve(.Linear)
+            UIView.setAnimationDelegate(self)
+            UIView.setAnimationDuration(0.3)
+            bar.barTintColor = _color
+            UIView.commitAnimations()
+        }
+        
         swiper?.themeColor = _color
     }
     
+    /// 获取当前最顶层的VC，以防止提示消息显示不出来
+    // 参考了 SVProgressHUD 中获取最顶层窗口的实现
     func getTopViewController() -> UIViewController? {
         let frontToBackWindows = UIApplication.sharedApplication().windows.reverse()
         for window in frontToBackWindows {
@@ -82,15 +97,10 @@ extension UIViewController {
             let windowLevelNormal = window.windowLevel == UIWindowLevelNormal
             
             if windowOnMainScreen && windowIsVisible && windowLevelNormal {
-                if let frontToBackViewControllers = window.rootViewController?.childViewControllers.reverse() {
-                    for vc in frontToBackViewControllers {
-                        if vc.isViewLoaded() {
-                            return vc
-                        }
+                if let vc = window.rootViewController {
+                    if vc.isViewLoaded() {
+                        return vc
                     }
-                    return nil
-                } else {
-                    return window.rootViewController
                 }
             }
         }

@@ -11,42 +11,32 @@ import SwiftyJSON
 
 class ExamModel {
     var course : String
-    var timeAndPlace : String
-    var periodAndTeacher : String
-    var days : Int
+    var time : String
+    var location : String
+    var hour : String
+    var customIndex = -1
     
-    init (_ course : String, _ timeAndPlace : String, _ periodAndTeacher : String, _ days : Int) {
-        self.course = course
-        self.timeAndPlace = timeAndPlace
-        self.periodAndTeacher = periodAndTeacher
-        self.days = days
+    var timeAndPlace : String {
+        if location == "" {
+            return time
+        } else {
+            return time + " @ " + location
+        }
     }
     
-    convenience init (json : JSON) throws {
-        let course = json["course"].stringValue
-        let time = json["time"].stringValue.split("(")[0]
-        let location = json["location"].stringValue
-        let hour = json["hour"].stringValue
-        // let teacher = json["teacher"].stringValue
-        
-        let ymd = time.split(" ")[0].split("-")
-        let comp = NSCalendar.currentCalendar()
-            .components(NSCalendarUnit(arrayLiteral: .Year, .Month, .Day), fromDate: NSDate())
-        
-        guard let fromDate = NSCalendar.currentCalendar().dateFromComponents(comp) else { throw E }
-        
-        guard let year = Int(ymd[0]) else { throw E }
-        guard let month = Int(ymd[1]) else { throw E }
-        guard let day = Int(ymd[2]) else { throw E }
-        
-        comp.year = year
-        comp.month = month
-        comp.day = day
-        
-        guard let toDate = NSCalendar.currentCalendar().dateFromComponents(comp) else { throw E }
-        
-        let interval = Int(toDate.timeIntervalSinceDate(fromDate) / 86400)
-        
-        self.init(course, time + " @ " + location, "\(hour)分钟", interval)
+    var period : String {
+        return hour == "" ? "" : hour + "分钟"
+    }
+    
+    var days : Int {
+        let ymd = time.split(" ")[0]
+        return (GCalendar(ymd) - GCalendar(.Day)) / 86400
+    }
+    
+    init (json : JSON) throws {
+        course = json["course"].stringValue
+        time = json["time"].stringValue.split("(")[0]
+        location = json["location"].stringValue
+        hour = json["hour"].stringValue
     }
 }
