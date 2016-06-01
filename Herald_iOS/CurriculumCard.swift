@@ -29,7 +29,7 @@ class CurriculumCard {
         let cache = CacheHelper.get("herald_curriculum")
         let now = NSDate().timeIntervalSince1970
         if cache == "" {
-            return CardsModel(cellId: "CardsCellCurriculum", module: R.module.curriculum, desc: "课表数据加载失败，请手动刷新", priority: .CONTENT_NOTIFY)
+            return CardsModel(cellId: "CardsCellCurriculum", module: R.module.curriculum, desc: "课表数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
         }
         
         let content = JSON.parse(cache)

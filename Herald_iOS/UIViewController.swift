@@ -74,7 +74,16 @@ extension UIViewController {
         color /= 0x100
         let red = CGFloat(color % 0x100) / 0xFF
         let _color = UIColor(red: red, green: green, blue: blue, alpha: 1)
-        self.navigationController?.navigationBar.barTintColor = _color
+        
+        if let bar = self.navigationController?.navigationBar {
+            UIView.beginAnimations(nil, context: nil)
+            UIView.setAnimationCurve(.Linear)
+            UIView.setAnimationDelegate(self)
+            UIView.setAnimationDuration(0.3)
+            bar.barTintColor = _color
+            UIView.commitAnimations()
+        }
+        
         swiper?.themeColor = _color
     }
     

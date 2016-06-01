@@ -17,6 +17,10 @@ class ActivityCard {
     
     static func getCard () -> CardsModel {
         let cache = CacheHelper.get("herald_activity_hot")
+        if cache == "" {
+            return CardsModel(cellId: "CardsCellActivity", icon : "ic_activity-1", title : "校园活动", desc: "热门活动数据为空，请尝试刷新", dest : "TAB1", message: "", priority: .CONTENT_NOTIFY)
+        }
+        
         let content = JSON.parse(cache)["content"]
         
         var allActivities : [CardsRowModel] = []

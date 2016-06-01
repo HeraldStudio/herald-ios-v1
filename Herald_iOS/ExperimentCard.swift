@@ -20,6 +20,10 @@ class ExperimentCard {
     
     static func getCard () -> CardsModel {
         let cache = CacheHelper.get("herald_experiment")
+        if cache == "" {
+            return CardsModel(cellId: "CardsCellExperiment", module: R.module.experiment, desc: "实验数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
+        }
+        
         let content = JSON.parse(cache)["content"]
         var todayHasExperiments = false
         // 时间未到的所有实验

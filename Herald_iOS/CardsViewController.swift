@@ -62,15 +62,9 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
-    /// 定时刷新，即每当时间改变时重新解析本地缓存，并加载卡片内容
-    func timeChanged() {
-        
-        // 解析本地缓存，重载卡片内容
-        loadContent(false)
-        
-        // 到下一分钟的剩余秒数，这里虽然接近 60，但是不写死，防止误差累积
-        let seconds = 60 - NSDate().timeIntervalSince1970 % 60
-        performSelector(#selector(self.timeChanged), withObject: nil, afterDelay: seconds)
+    /// 当准备从其它界面返回时，设置导航栏颜色
+    override func viewWillAppear(animated: Bool) {
+        setNavigationColor(swiper, 0x00b4ff)
     }
     
     /// 界面显示完成的事件
@@ -83,6 +77,17 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // 解析本地缓存，重载卡片内容
         loadContent(false)
+    }
+    
+    /// 定时刷新，即每当时间改变时重新解析本地缓存，并加载卡片内容
+    func timeChanged() {
+        
+        // 解析本地缓存，重载卡片内容
+        loadContent(false)
+        
+        // 到下一分钟的剩余秒数，这里虽然接近 60，但是不写死，防止误差累积
+        let seconds = 60 - NSDate().timeIntervalSince1970 % 60
+        performSelector(#selector(self.timeChanged), withObject: nil, afterDelay: seconds)
     }
     
     /// 初始化轮播图和下拉刷新控件
