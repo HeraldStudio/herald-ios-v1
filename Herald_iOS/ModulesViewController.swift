@@ -146,10 +146,10 @@ extension ModulesViewController:UIViewControllerPreviewingDelegate {
         }
         
         if sections[indexPath.section][indexPath.row].controller.hasPrefix("http") {
-            CacheHelper.set("herald_webmodule_title", sections[indexPath.section][indexPath.row].nameTip)
-            CacheHelper.set("herald_webmodule_url", sections[indexPath.section][indexPath.row].controller)
+            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE") as! WebModuleViewController
             
-            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE")
+            detailVC.title = sections[indexPath.section][indexPath.row].nameTip
+            detailVC.url = sections[indexPath.section][indexPath.row].controller
             return detailVC
             //return nil
         }else {
