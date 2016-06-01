@@ -12,18 +12,6 @@ import UIKit
 class SettingsHelper {
     
     /**
-     * 获得是否选择自动登录seu
-     */
-    static func getWifiAutoLogin () -> Bool {
-        let seuauto = get("herald_settings_wifi_autologin")
-        return seuauto != "0"
-    }
-    
-    static func setWifiAutoLogin (enabled : Bool) {
-        set("herald_settings_wifi_autologin", enabled ? "1" : "0")
-    }
-    
-    /**
      * 应用启动次数
      */
     static var launchTimes : Int {
@@ -48,5 +36,37 @@ class SettingsHelper {
     
     static func set (key : String, _ value: String) {
         settingsCache.set(key, value)
+    }
+    
+    static var wifiAutoLogin : Bool {
+        get {
+            return get("herald_settings_wifi_autologin") != "0"
+        } set {
+            set("herald_settings_wifi_autologin", newValue ? "1" : "0")
+        }
+    }
+    
+    static var curriculumNotificationEnabled : Bool {
+        get {
+            return get("curriculum_notification_enabled") == "1"
+        } set {
+            set("curriculum_notification_enabled", newValue ? "1" : "0")
+        }
+    }
+    
+    static var experimentNotificationEnabled : Bool {
+        get {
+            return get("experiment_notification_enabled") != "0"
+        } set {
+            set("experiment_notification_enabled", newValue ? "1" : "0")
+        }
+    }
+    
+    static var examNotificationEnabled : Bool {
+        get {
+            return get("exam_notification_enabled") != "0"
+        } set {
+            set("exam_notification_enabled", newValue ? "1" : "0")
+        }
     }
 }

@@ -9,6 +9,11 @@ class MyInfoViewController: UITableViewController {
     /// 摇一摇登录校园网的开关
     @IBOutlet var wifiSwitch : UISwitch!
     
+    /// 上课提醒、实验提醒、考试提醒的开关
+    @IBOutlet var curriculumSwitch : UISwitch!
+    @IBOutlet var experimentSwitch : UISwitch!
+    @IBOutlet var examSwitch : UISwitch!
+    
     /// 版本信息显示
     @IBOutlet var version : UILabel!
     
@@ -21,8 +26,11 @@ class MyInfoViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /// 初始化摇一摇的开关状态
-        wifiSwitch.setOn(SettingsHelper.getWifiAutoLogin(), animated: false)
+        /// 初始化开关状态
+        wifiSwitch.setOn(SettingsHelper.wifiAutoLogin, animated: false)
+        curriculumSwitch.setOn(SettingsHelper.curriculumNotificationEnabled, animated: false)
+        experimentSwitch.setOn(SettingsHelper.experimentNotificationEnabled, animated: false)
+        examSwitch.setOn(SettingsHelper.examNotificationEnabled, animated: false)
         
         /// 初始化版本信息的显示
         version.text = "当前版本：v\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")!)"
@@ -36,14 +44,10 @@ class MyInfoViewController: UITableViewController {
         case (0, 0):
             /// 退出登录
             showQuestionDialog("确定要退出登录吗？") { ApiHelper.doLogout(nil) }
-        case (1, 0):
-            /// 摇一摇开关
-            wifiSwitch.setOn(!wifiSwitch.on, animated: true)
-            wifiStateChanged()
         case (1, 1):
             /// 自定义校园网登录账号
             displayWifiSetDialog()
-        case (2, 2):
+        case (3, 2):
             /// 给我们评分（App Store不允许有版本更新按钮，因此更名）
             checkVersion()
         default:
@@ -51,9 +55,21 @@ class MyInfoViewController: UITableViewController {
         }
     }
     
-    /// 同步摇一摇开关状态到设置
+    /// 同步开关状态到设置
     @IBAction func wifiStateChanged () {
-        SettingsHelper.setWifiAutoLogin(wifiSwitch.on)
+        SettingsHelper.wifiAutoLogin = wifiSwitch.on
+    }
+    
+    @IBAction func curriculumStateChanged () {
+        SettingsHelper.curriculumNotificationEnabled = curriculumSwitch.on
+    }
+    
+    @IBAction func experimentStateChanged () {
+        SettingsHelper.experimentNotificationEnabled = experimentSwitch.on
+    }
+    
+    @IBAction func examStateChanged () {
+        SettingsHelper.examNotificationEnabled = examSwitch.on
     }
     
     /// 显示摇一摇账号设置对话框

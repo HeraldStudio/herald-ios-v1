@@ -41,7 +41,7 @@ class MainViewController: UITabBarController {
     
     /// 响应摇一摇事件
     func onShake () {
-        if SettingsHelper.getWifiAutoLogin() {
+        if SettingsHelper.wifiAutoLogin {
             WifiLoginHelper(self).checkAndLogin()
         }
     }
