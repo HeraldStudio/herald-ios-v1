@@ -63,8 +63,7 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate {
         let _shareUrl = webView.stringByEvaluatingJavaScriptFromString("window.location.href")
         let shareUrl = _shareUrl == nil ? "" : _shareUrl!
         
-        let module = (title == nil || title! == "小猴偷米") ? "" : " - \(title!)"
-        let prefix = "来自小猴偷米App\(module)的分享："
+        let prefix = "[分享自小猴偷米App] "
         let __title = webView.stringByEvaluatingJavaScriptFromString("document.title")
         let _title = __title == nil ? "" : __title!
         let shareText = prefix + _title + " " + shareUrl
