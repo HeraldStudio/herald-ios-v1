@@ -186,7 +186,7 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @IBAction func goToChargePage () {
-        showTipDialogIfUnknown("注意：由于一卡通中心配置问题，充值之后需要刷卡消费一次，一卡通余额才能正常显示哦", cachePostfix: "card_charge") {
+        showTipDialogIfUnknown("注意：充值之后需要在食堂刷卡机上刷卡，充值金额才能到账哦", cachePostfix: "card_charge") {
             () -> Void in
                 self.title = "一卡通"
                 AppModule(title: "一卡通充值", url: CardViewController.url).open(self.navigationController)
