@@ -52,6 +52,7 @@
 		D35FC62A1CE33A1E00BE844C /* ActivityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6291CE33A1E00BE844C /* ActivityCard.swift */; };
 		D37708621CCC5D37006ED853 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708611CCC5D37006ED853 /* FeedbackViewController.swift */; };
 		D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708641CCC67DC006ED853 /* CardsModel.swift */; };
+		D37A1DAD1D0269880040A7D1 /* AboutUsContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A1DAC1D0269880040A7D1 /* AboutUsContentTableViewCell.swift */; };
 		D38879801CEAB601004294A8 /* GymRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388797F1CEAB601004294A8 /* GymRecordModel.swift */; };
 		D38A7E5E1CE5ABFF0033926E /* ExperimentNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38A7E5D1CE5ABFF0033926E /* ExperimentNotifier.swift */; };
 		D38D2F401CFDC49400E0E5BE /* CardRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38D2F3F1CFDC49400E0E5BE /* CardRecordModel.swift */; };
@@ -189,6 +190,7 @@
 		D35FC6291CE33A1E00BE844C /* ActivityCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCard.swift; sourceTree = "<group>"; };
 		D37708611CCC5D37006ED853 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		D37708641CCC67DC006ED853 /* CardsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsModel.swift; sourceTree = "<group>"; };
+		D37A1DAC1D0269880040A7D1 /* AboutUsContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsContentTableViewCell.swift; sourceTree = "<group>"; };
 		D388797F1CEAB601004294A8 /* GymRecordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymRecordModel.swift; sourceTree = "<group>"; };
 		D38A7E5D1CE5ABFF0033926E /* ExperimentNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentNotifier.swift; sourceTree = "<group>"; };
 		D38D2F3F1CFDC49400E0E5BE /* CardRecordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardRecordModel.swift; sourceTree = "<group>"; };
@@ -591,6 +593,7 @@
 			children = (
 				D3ED99E71CCB870200001E2B /* AboutUsViewController.swift */,
 				D37708611CCC5D37006ED853 /* FeedbackViewController.swift */,
+				D37A1DAC1D0269880040A7D1 /* AboutUsContentTableViewCell.swift */,
 			);
 			name = mod_communicate;
 			sourceTree = "<group>";
@@ -720,7 +723,7 @@
 				TargetAttributes = {
 					D3D35DD81CBA2E8200B18092 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = HMBY8X7FLF;
+						DevelopmentTeam = MW9PK9KE48;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -848,6 +851,7 @@
 				D3ED99E61CCB651300001E2B /* LibraryViewController.swift in Sources */,
 				D3F473491CCA068D00750FFB /* JwcNoticeModel.swift in Sources */,
 				D35FC6241CE301F700BE844C /* ActivityModel.swift in Sources */,
+				D37A1DAD1D0269880040A7D1 /* AboutUsContentTableViewCell.swift in Sources */,
 				D3D5D4491CE99D19000E406A /* GymReserveCells.swift in Sources */,
 				D354905C1CDC519100E59615 /* GCalendar.swift in Sources */,
 				D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */,
@@ -1077,15 +1081,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: left.in@icloud.com (C6WP5Z6BAT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Howie-Vinci.Herald";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "e89d4455-de48-4797-ab5c-00ea3c5f7f8b";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1098,15 +1102,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: left.in@icloud.com (C6WP5Z6BAT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Howie-Vinci.Herald";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "e89d4455-de48-4797-ab5c-00ea3c5f7f8b";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

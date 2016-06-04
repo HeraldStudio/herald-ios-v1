@@ -54,7 +54,7 @@ class LoginViewController: UIViewController {
         ApiRequest().api("user").uuid()
             .toAuthCache("schoolnum") { json in json["content"]["schoolnum"] }
             .onFinish { (success, code, response) in
-            if success {
+            if success && ApiHelper.authCache.get("schoolnum").characters.count == 8 {
                 ((UIApplication.sharedApplication().delegate) as! AppDelegate).showMain()
             } else {
                 self.hideProgressDialog()
