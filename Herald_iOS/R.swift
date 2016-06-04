@@ -32,4 +32,63 @@ class R {
         static let emptyroom = AppModule(15, "emptyroom", "空教室 Web", "提供指定时间内的空教室信息查询服务", "http://115.28.27.150/queryEmptyClassrooms/m", "ic_emptyroom", false)
         //static let deskgame = AppModule(16, "deskgame", "桌游助手", "方便大家娱乐的小猴桌游发牌器", "MODULE_DESKGAME", "ic_emptyroom", false)
     }
+    
+    class string {
+        static let aboutUsText =
+            "        东南大学小猴偷米工作室，成立于2016年3月，前身为2001年6月成立的东南大学先声网，代表产品有小猴偷米校园服务微信公众号、东南大学最有影响力毕业生投票网站、东南大学机甲帝国智能体平台等等。\n" +
+            "        作为东大的一份子，我们致力于为东大学子们提供更好的信息平台，涵盖学习、生活、娱乐的服务。\n" +
+            "        作为爱好技术的一群人，我们对新的知识，新的世界，始终保持高涨的热情。\n" +
+            "        我们为学生社团、组织和各类积极向上、基于学生的活动提供宣传平台，也为有梦想的你，提供成长的平台。\n" +
+            "        不论你是热爱技术、擅长设计、精于文编，还是菜鸟小白，只要有兴趣，我们都欢迎你的加入！"
+        static let contactUsText =
+            "如果你需要这样的宣传或是加入我们，请联系：\n" +
+            "梁同学   156-5191-8580\n" +
+            "如果你对客户端有更好的建议,请联系:\n" +
+            "何同学   187-9588-9958\n" +
+            "简历投递邮箱：\n" +
+            "heraldseu@outlook.com"
+        static let termsText = "本软件在许可范围内使用了如下开源框架：\n" +
+            "[MIT] Alamofire\n" +
+            "(github.com/Alamofire/Alamofire)\n" +
+            "Copyright (c) 2014–2016 Alamofire Software Foundation (http://alamofire.org/)\n" +
+            "\n" +
+            "[MIT] SwiftyJSON\n" +
+            "(github.com/SwiftyJSON/SwiftyJSON)\n" +
+            "Copyright (c) 2014 Ruoyu Fu\n" +
+            "\n" +
+            "[MIT] SVProgressHUD\n" +
+            "(github.com/SVProgressHUD/SVProgressHUD)\n" +
+            "Copyright (c) 2011-2016 Sam Vermette, Tobias Tiemerding and contributors.\n" +
+            "\n" +
+            "[MIT] Toast-Swift\n" +
+            "(github.com/scalessec/Toast-Swift)\n" +
+            "Copyright (c) 2015 Charles Scalesse.\n" +
+            "\n" +
+            "[MIT] Reindeer\n" +
+            "(github.com/Evilcome/Reindeer)\n" +
+            "Copyright (c) 2015 Evilcome <evilcome.com@gmail.com>\n" +
+            "\n" +
+            "[MIT] Kingfisher\n" +
+            "(github.com/onevcat/Kingfisher)\n" +
+            "Copyright (c) 2015 Wei Wang\n" +
+            "\n" +
+            "[MIT] FSCalendar\n" +
+            "(github.com/WenchaoD/FSCalendar)\n" +
+            "Copyright (c) 2013-2016 FSCalendar\n" +
+            "\n" +
+            "[MIT] MagicPie\n" +
+            "(github.com/AlexandrGraschenkov/MagicPie)\n" +
+            "Copyright (c) 2013 Alexandr Graschenkov\n" +
+            "\n" +
+            "[MIT] DHCShakeNotifier\n" +
+            "(github.com/Daniel1of1/DHCShakeNotifier)\n" +
+            "Copyright (c) 2013 Daniel Haight\n" +
+            "\n" +
+            "本软件在许可范围内使用了如下设计作品：\n" +
+            "[CC-BY] monkey by Zille Sophie Bostinius from the Noun Project\n" +
+            "\n" +
+            "小猴偷米工作室对以上框架和设计作品的作者致以诚挚的感谢。\n" +
+            "\n" +
+            "本软件所有数据来自学校网站或其他第三方，受学校网站或其他第三方数据的不确定性影响，本软件显示的数据可能会出现某些不正常情况，包含但不限于无法连接、信息错误、显示延迟或自相矛盾等。小猴偷米工作室不对以上问题导致的任何后果负责。"
+    }
 }

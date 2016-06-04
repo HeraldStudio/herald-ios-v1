@@ -73,7 +73,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
             let name = k["name"].stringValue
             let author = k["author"].stringValue
             
-            let model = LibraryBookModel(name, author, place, "", "剩余"+count+"本")
+            let model = LibraryBookModel(name, author, place, "", "借阅"+count+"次")
             hotList.append(model)
         }
         list.append(hotList)
