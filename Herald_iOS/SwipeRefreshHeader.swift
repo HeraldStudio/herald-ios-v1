@@ -54,7 +54,7 @@ class SwipeRefreshHeader : UIView {
         self.frame = CGRect(x: 0, y: 0, width: (UIApplication.sharedApplication().keyWindow?.frame.width)!, height: realHeight)
         
         // 添加刷新提示文字
-        refresh.frame = self.frame
+        refresh.frame = CGRect(x: 0, y: 0, width: (UIApplication.sharedApplication().keyWindow?.frame.width)!, height: 0)
         refresh.textAlignment = .Center
         refresh.font = UIFont(name: "AppleSDGothicNeo-Thin", size: 54)
         addSubview(refresh)
@@ -76,24 +76,20 @@ class SwipeRefreshHeader : UIView {
             refresh.backgroundColor = themeColor!
         }
         
-        // 上滑变色动效
-        let alpha : CGFloat = -y < fadeDistance ? (-y) / fadeDistance : 1;
+        // 文字的透明度因子
+        let textAlpha : CGFloat = -y < fadeDistance ? (-y) / fadeDistance : 1;
         
         // 更新刷新提示文字内容
-        refresh.text = -y >= refreshDistance && dragging ? "[\(tipText)]" : tipText
+        refresh.text = isHighlight ? "[\(tipText)]" : tipText
         
-        // 根据有无子视图，设置对应的颜色和透明度
-        if frame.maxY == 0 {
-            refresh.alpha = 1
-            refresh.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: min(1, alpha * 3))
-        } else {
-            refresh.alpha = alpha
-            refresh.textColor = UIColor.whiteColor()
-        }
+        // 设置对应的颜色和透明度
+        refresh.alpha = 1
+        refresh.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: min(1, textAlpha * 3))
         
         // 弹性放大动效
-        refresh.frame = CGRect(x: x, y: min(y, 0), width: frame.width, height: frame.maxY - min(y, 0))
-        contentView?.frame = CGRect(x: x, y: min(y, 0), width: frame.width, height: frame.maxY - min(y, 0))
+        let transitionPercent = max(0, min(1, (-y - refreshDistance + 20) / 40))
+        refresh.frame = CGRect(x: x, y: min(y, 0) - 1, width: frame.width, height: frame.maxY * transitionPercent - min(y, 0) + 1)
+        contentView?.frame = CGRect(x: x, y: 0, width: frame.width, height: frame.maxY)
     }
     
     /// 记录是否正在拖动
@@ -102,6 +98,12 @@ class SwipeRefreshHeader : UIView {
     // 但没有触发刷新，造成视觉上的不一致。因此有了这个 dragging 变量，只有拖动的时候才会显示[REFRESH]，
     // 不拖动时即使距离超过了触发距离也只显示REFRESH。
     var dragging = false
+    
+    var isHighlight : Bool {
+        let y = (superview! as! UIScrollView).contentOffset.y
+        let val = -y >= refreshDistance && dragging
+        return val
+    }
     
     /// 记录拖动开始，需要在父视图代理中调用
     func beginDrag () {

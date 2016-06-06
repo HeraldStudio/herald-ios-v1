@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		35B0B9E24AE997C9060E6BC4 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283283296736ED980EE6E1A6 /* Pods.framework */; };
+		BCAFB77BE851C62062F8A047 /* Pods_Herald_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41885719C03915D508964A23 /* Pods_Herald_iOS.framework */; };
 		D30661C81CF2C38D006583C2 /* GameCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661C71CF2C38D006583C2 /* GameCardModel.swift */; };
 		D30661CA1CF2C50E006583C2 /* GameCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661C91CF2C50E006583C2 /* GameCreateViewController.swift */; };
 		D30661CC1CF30016006583C2 /* GameCreateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661CB1CF30016006583C2 /* GameCreateTableViewCell.swift */; };
@@ -143,8 +143,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		17613A96BDD193BC61871BC6 /* Pods-Herald_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Herald_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Herald_iOS/Pods-Herald_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		283283296736ED980EE6E1A6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B6878935004ACF38EDF397D4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		41885719C03915D508964A23 /* Pods_Herald_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Herald_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C275CEB73A1293164D3C08CA /* Pods-Herald_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Herald_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Herald_iOS/Pods-Herald_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D30661C71CF2C38D006583C2 /* GameCardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCardModel.swift; sourceTree = "<group>"; };
 		D30661C91CF2C50E006583C2 /* GameCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCreateViewController.swift; sourceTree = "<group>"; };
 		D30661CB1CF30016006583C2 /* GameCreateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCreateTableViewCell.swift; sourceTree = "<group>"; };
@@ -255,7 +257,6 @@
 		D3F4734E1CCA15C900750FFB /* LectureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureViewController.swift; sourceTree = "<group>"; };
 		D3FBC2F11CCC51F900305428 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		DA028C4F1CDF422F005343DE /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
-		ED76AC9BE4F12BE2D1325536 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,7 +264,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35B0B9E24AE997C9060E6BC4 /* Pods.framework in Frameworks */,
+				BCAFB77BE851C62062F8A047 /* Pods_Herald_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +285,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C5D7C416B0428CA4D287A9D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C275CEB73A1293164D3C08CA /* Pods-Herald_iOS.debug.xcconfig */,
+				17613A96BDD193BC61871BC6 /* Pods-Herald_iOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D31DE50C1CC334D800E4891D /* custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,8 +541,8 @@
 				D3D35DF01CBA2E8200B18092 /* Herald_iOSTests */,
 				D3D35DFB1CBA2E8200B18092 /* Herald_iOSUITests */,
 				D3D35DDA1CBA2E8200B18092 /* Products */,
-				DD11F4816A147BF4EB866EB6 /* Pods */,
 				F527AB77D4F37A7ED7959F74 /* Frameworks */,
+				8C5D7C416B0428CA4D287A9D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -632,21 +642,13 @@
 			name = mod_notifiers;
 			sourceTree = "<group>";
 		};
-		DD11F4816A147BF4EB866EB6 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				ED76AC9BE4F12BE2D1325536 /* Pods.debug.xcconfig */,
-				B6878935004ACF38EDF397D4 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		F527AB77D4F37A7ED7959F74 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				DA028C4F1CDF422F005343DE /* Reveal.framework */,
 				283283296736ED980EE6E1A6 /* Pods.framework */,
 				D3578AAE1CDBABE300B291D0 /* NotificationCenter.framework */,
+				41885719C03915D508964A23 /* Pods_Herald_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -658,13 +660,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D3D35E011CBA2E8200B18092 /* Build configuration list for PBXNativeTarget "Herald_iOS" */;
 			buildPhases = (
-				4954EB5E836F24FAC4EE9B06 /* Check Pods Manifest.lock */,
+				2C92DDECCE79BA01E1AF61C0 /* [CP] Check Pods Manifest.lock */,
 				D3D35DD51CBA2E8200B18092 /* Sources */,
 				D3D35DD61CBA2E8200B18092 /* Frameworks */,
 				D3D35DD71CBA2E8200B18092 /* Resources */,
-				0B8948C67D3C219565E1DD35 /* Embed Pods Frameworks */,
-				F4FB81568F51A7183763D838 /* Copy Pods Resources */,
 				D3578ABD1CDBABE300B291D0 /* Embed App Extensions */,
+				CA5DA88F3068205510FA6E72 /* [CP] Embed Pods Frameworks */,
+				0501FB9659E2BD24C5558A28 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -723,7 +725,7 @@
 				TargetAttributes = {
 					D3D35DD81CBA2E8200B18092 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = JFQBLHLDR7;
+						DevelopmentTeam = 9837P5SWZ9;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -791,29 +793,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0B8948C67D3C219565E1DD35 /* Embed Pods Frameworks */ = {
+		0501FB9659E2BD24C5558A28 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Herald_iOS/Pods-Herald_iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4954EB5E836F24FAC4EE9B06 /* Check Pods Manifest.lock */ = {
+		2C92DDECCE79BA01E1AF61C0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -821,19 +823,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F4FB81568F51A7183763D838 /* Copy Pods Resources */ = {
+		CA5DA88F3068205510FA6E72 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Herald_iOS/Pods-Herald_iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1077,16 +1079,16 @@
 		};
 		D3D35E021CBA2E8200B18092 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ED76AC9BE4F12BE2D1325536 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = C275CEB73A1293164D3C08CA /* Pods-Herald_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
 				PRODUCT_NAME = "小猴偷米";
 				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
@@ -1098,16 +1100,16 @@
 		};
 		D3D35E031CBA2E8200B18092 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B6878935004ACF38EDF397D4 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 17613A96BDD193BC61871BC6 /* Pods-Herald_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
 				PRODUCT_NAME = "小猴偷米";
 				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
