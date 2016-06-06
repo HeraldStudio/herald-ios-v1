@@ -63,13 +63,19 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
         // 计算总周数
         for weekNum in CurriculumView.WEEK_NUMS {
             let arr = content[weekNum]
+            var hasInvalid = false
             for i in 0 ..< arr.count {
                 do {
                     let info = try ClassInfo(json: arr[i])
                     if info.endWeek > maxWeek {
                         maxWeek = info.endWeek
                     }
-                } catch {}
+                } catch {
+                    hasInvalid = true
+                }
+            }
+            if hasInvalid {
+                showInvalidClassError()
             }
         }
         
@@ -140,6 +146,10 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
     func showError () {
         title = "课表助手"
         showMessage("解析失败，请刷新")
+    }
+    
+    func showInvalidClassError() {
+        showTipDialogIfUnknown("部分课程导入失败，请刷新重试。\n\n注意：暂不支持导入辅修课，敬请期待后续版本。", cachePostfix: "curriculum_invalid_class") {}
     }
     
     func removeAllPages () {

@@ -301,6 +301,9 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         showProgressDialog()
         
+        // 暂时关闭列表的下拉刷新
+        cardsTableView.bounces = false
+        
         // 线程管理器
         let manager = ApiThreadManager().onResponse { success, _, _ in
             if success { self.loadContent(false) }
@@ -364,6 +367,10 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
          **/
         manager.onFinish { success in
             self.hideProgressDialog()
+            
+            // 暂时关闭列表的下拉刷新
+            self.cardsTableView.bounces = true
+            
             if !success {
                 self.showMessage("部分数据刷新失败")
             }

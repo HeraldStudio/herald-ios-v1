@@ -12,6 +12,10 @@ class ClassInfo {
     var startWeek, endWeek, startTime, endTime : Int
     
     init (json : JSON) throws {
+        if json.count < 3 {
+            throw E
+        }
+        
         className = json[0].stringValue
         place = json[2].stringValue
         let timeStr = json[1].stringValue
@@ -21,6 +25,10 @@ class ClassInfo {
             .replaceAll("周", "")
             .replaceAll("节", "")
             .split("-")
+        
+        if timeStrs.count < 4 {
+            throw E
+        }
         
         if let k = Int(timeStrs[0]) {
             startWeek = k
