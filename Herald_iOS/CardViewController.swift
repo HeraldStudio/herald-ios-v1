@@ -1,11 +1,3 @@
-//
-//  CardViewController.swift
-//  Herald_iOS
-//
-//  Created by 于海通 on 16/4/18.
-//  Copyright © 2016年 于海通. All rights reserved.
-//
-
 import Foundation
 import UIKit
 import SwiftyJSON
@@ -17,10 +9,27 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
     static let url = "http://58.192.115.47:8088/wechat-web/login/initlogin.html"
     
     let swiper = SwipeRefreshHeader()
+    let puller = PullLoadFooter()
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
         tableView?.tableHeaderView = swiper
+        
+        // 设置上拉加载控件的加载事件
+        puller.loader = {() in
+            let oldCount = self.history.count
+            self.displayDays += 7
+            self.loadCache()
+            let newCount = self.history.count
+            if oldCount == newCount {
+                self.puller.disable("没有更多数据")
+            }
+        }
+        
+        // 设置上拉加载控件为列表页脚视图
+        tableView.tableFooterView = puller
+        
+        loadCache()
         refreshCache() // 自动判断是否需要刷新流水，不需要的话只刷新余额
     }
     
@@ -32,72 +41,59 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         loadCache()
     }
     
+    /// 下拉刷新和上拉加载控件用到的三个 hook
+    // 滚动时刷新显示
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        swiper.syncApperance((tableView?.contentOffset)!)
+        swiper.syncApperance()
+        puller.syncApperance()
     }
     
+    // 开始拖动，以下两个函数用于让下拉刷新控件判断是否已经松手，保证不会在松手后出现“[REFRESH]”
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         swiper.beginDrag()
+        puller.beginDrag()
     }
     
+    // 结束拖动
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         swiper.endDrag()
+        puller.endDrag()
     }
     
-    var history : [[CardHistoryModel]] = []
+    var history : [[CardRecordModel]] = []
+    
+    var displayDays = 7
     
     func loadCache() {
         // 仅有余额的缓存，这个缓存刷新永远比完整的缓存快
-        let leftCache = CacheHelper.get("herald_card_left")
+        let todayCache = CacheHelper.get("herald_card_today")
         let cache = CacheHelper.get("herald_card")
-        if cache == "" || leftCache == "" {
+        if cache == "" || todayCache == "" {
             return
         }
         
-        let extra = JSON.parse(leftCache)["content"]["left"].stringValue
+        let extra = JSON.parse(todayCache)["content"]["cardLeft"].stringValue.replaceAll(",", "")
         title = "余额：" + extra
         
-        let jsonCache = JSON.parse(cache)["content"]
-        let jsonArray = jsonCache["detial"]
-            
         history.removeAll()
-        if jsonArray.count > 0 {
-            let lastLeftStr = jsonArray[0]["left"].stringValue
-            
-            // 如果能查到上次余额，计算当天的总消费并显示成第一项
-            // 如果查不到上次余额，即31天内没有消费过，则无法计算当天总消费项目，直接跳过
-            if let lastLeft = Float(lastLeftStr) {
-                guard let left = Float(extra) else { self.showError(); return }
-                var todayCost = String(format: "%.2f", left - lastLeft)
-                if !todayCost.containsString("-") && !todayCost.containsString("+") {
-                    todayCost = (todayCost == "0.00" ? "-" : "+") + todayCost
-                }
-                history.append([CardHistoryModel("今天", "你可以到充值页面提前查看当天消费流水", "今日总收支", "未出账", todayCost, extra)])
-            }
-        }
+        let jsonCache = JSON.parse(cache)["content"]
+        let jsonTodayCache = JSON.parse(todayCache)["content"]
+        let jsonArray = jsonTodayCache["detail"].arrayValue + jsonCache["detial"].arrayValue
         
         var lastDate = ""
-        for i in 0 ..< jsonArray.count {
-            let obj = jsonArray[i]
-            let datetimeStr = obj["date"].stringValue
-            let date = datetimeStr.split(" ")[0]
-            let time = datetimeStr.split(" ")[1]
-            let place = obj["system"].stringValue
-            let type = obj["type"].stringValue
-            var cost = obj["price"].stringValue
-            let left = obj["left"].stringValue
-            
-            if date != lastDate {
+        for json in jsonArray {
+            let model = CardRecordModel(json: json)
+            if model.date != lastDate {
+                if history.count >= displayDays {
+                    break
+                }
                 history.append([])
-                lastDate = date
+                lastDate = model.date
             }
-            if !cost.containsString("-") && !cost.containsString("+") {
-                cost = (cost == "0.00" ? "-" : "+") + cost
-            }
-            let newElement = CardHistoryModel(date, time, place, type, cost, left)
+            
             guard var lastSection = history.last else { self.showError(); return }
             history.removeLast()
-            lastSection.append(newElement)
+            lastSection.append(model)
             history.append(lastSection)
         }
         
@@ -109,11 +105,8 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         
         // 先加入刷新余额的请求
         let manager = ApiThreadManager().add(
-            ApiRequest().api("card").uuid()
-                .toCache("herald_card_left") {json -> String in
-                    guard let str = json.rawString() else {return ""}
-                    return str
-            })
+            ApiRequest().api("card").uuid().post("timedelta", "1").toCache("herald_card_today")
+        )
         
         // 取上次刷新日期，与当前日期比较
         let lastRefresh = CacheHelper.get("herald_card_date")
@@ -122,11 +115,7 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         
         // 若与当前日期不同，刷新完整流水记录
         if lastRefresh != stamp {
-            manager.add(ApiRequest().api("card").uuid().post("timedelta", "31")
-                .toCache("herald_card") {json -> String in
-                    guard let str = json.rawString() else {return ""}
-                    return str
-                })
+            manager.add(ApiRequest().api("card").uuid().post("timedelta", "31").toCache("herald_card"))
         }
         
         // 若刷新成功，保存当前日期
@@ -134,6 +123,8 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
                     self.hideProgressDialog()
                     if success {
                         CacheHelper.set("herald_card_date", stamp)
+                        self.displayDays = 7
+                        self.puller.enable()
                         self.loadCache()
                     } else {
                         self.showMessage("刷新失败，请重试或到充值页面查询")
@@ -157,7 +148,20 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         if history.count == 0 {
             return nil
         }
-        return history[section][0].date
+        var consume : Float = 0.0
+        var charge : Float = 0.0
+        for model in history[section] {
+            if model.isConsume {
+                consume -= model.costNum
+            } else {
+                charge += model.costNum
+            }
+        }
+        
+        let consumeTip = consume == 0 ? "" : " / 总支出：\(consume)"
+        let chargeTip = charge == 0 ? "" : " / 总收入：\(charge)"
+        
+        return history[section][0].displayDate + consumeTip + chargeTip
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -182,7 +186,7 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @IBAction func goToChargePage () {
-        showTipDialogIfUnknown("注意：由于一卡通中心配置问题，充值之后需要刷卡消费一次，一卡通余额才能正常显示哦", cachePostfix: "card_charge") {
+        showTipDialogIfUnknown("注意：充值之后需要在食堂刷卡机上刷卡，充值金额才能到账哦", cachePostfix: "card_charge") {
             () -> Void in
                 self.title = "一卡通"
                 AppModule(title: "一卡通充值", url: CardViewController.url).open(self.navigationController)

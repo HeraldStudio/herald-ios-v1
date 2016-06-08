@@ -27,7 +27,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        swiper.syncApperance((tableView?.contentOffset)!)
+        swiper.syncApperance()
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
@@ -73,7 +73,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
             let name = k["name"].stringValue
             let author = k["author"].stringValue
             
-            let model = LibraryBookModel(name, author, place, "", "剩余"+count+"本")
+            let model = LibraryBookModel(name, author, place, "", "借阅"+count+"次")
             hotList.append(model)
         }
         list.append(hotList)
@@ -85,22 +85,15 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
         showProgressDialog()
         
         ApiThreadManager().addAll([
-            ApiRequest().api("library").uuid()
-                .toCache("herald_library_borrowbook") {json -> String in
-                    guard let str = json.rawString() else {return ""}
-                    return str
-                }.onFinish {
+            ApiRequest().api("library").uuid().toCache("herald_library_borrowbook")
+                .onFinish {
                     _, code, _ in
                     if code == 401 {
                         self.displayLibraryAuthDialog()
                     }
                 }
             ,
-            ApiRequest().api("library_hot").uuid()
-                .toCache("herald_library_hotbook") {json -> String in
-                    guard let str = json.rawString() else {return ""}
-                    return str
-            }
+            ApiRequest().api("library_hot").uuid().toCache("herald_library_hotbook")
             ]).onFinish { success in
                 self.hideProgressDialog()
                 if success {

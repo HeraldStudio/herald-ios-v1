@@ -29,7 +29,7 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        swiper.syncApperance((tableView?.contentOffset)!)
+        swiper.syncApperance()
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
@@ -64,7 +64,7 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
                 let project = item["project"].stringValue
                 var department = item["department"].stringValue
                 var type = item["type"].stringValue
-                var totalCredit = item["totalCredit"].stringValue
+                var totalCredit = item["total credit"].stringValue
                 let proportion = item["proportion"].stringValue
                 let credit = item["credit"].stringValue
                 
@@ -90,11 +90,7 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("srtp").uuid().post("schoolnum", ApiHelper.getSchoolnum())
-            .toCache("herald_srtp") {json -> String in
-                guard let str = json.rawString() else {return ""}
-                return str
-            }
+        ApiRequest().api("srtp").uuid().post("schoolnum", ApiHelper.getSchoolnum()).toCache("herald_srtp")
             .onFinish { success, _, _ in
                 self.hideProgressDialog()
                 if success {
@@ -115,7 +111,7 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if items.count > 1 {
+        if items.count > 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("SrtpTableViewCell", forIndexPath: indexPath) as! SrtpTableViewCell
         
             let model = items[indexPath.row]

@@ -82,11 +82,7 @@ class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("gpa").uuid()
-            .toCache("herald_grade_gpa") {json -> String in
-                guard let str = json.rawString() else {return ""}
-                return str
-            }
+        ApiRequest().api("gpa").uuid().toCache("herald_grade_gpa")
             .onFinish { success, _, _ in
                 self.hideProgressDialog()
                 if success {

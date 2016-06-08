@@ -1,11 +1,3 @@
-//
-//  GCalendar.swift
-//  Herald_iOS
-//
-//  Created by 于海通 on 16/5/6.
-//  Copyright © 2016年 HeraldStudio. All rights reserved.
-//
-
 import Foundation
 
 /// 格里高利历中的简单日期/时间计算类实现。
@@ -130,6 +122,12 @@ public class GCalendar : CustomDebugStringConvertible {
         setTime(h, m, s)
     }
     
+    /// 构造函数，通过 NSDate 构造时间
+    public convenience init (_ date: NSDate) {
+        self.init()
+        rawTime = Int64(date.timeIntervalSince1970)
+    }
+    
     /// 构造函数，根据字符串构造对应的时间，允许-/:. 等分隔符，
     /// 根据分割出来的子串个数，依次填到年/月/日/时/分/秒中
     public convenience init (_ src : String) {
@@ -143,13 +141,13 @@ public class GCalendar : CustomDebugStringConvertible {
             .replaceAll("日", "-")
             .recursiveReplaceAll("--", "-")
             .split("-").map { s -> Int in
-            Int(s) == nil ? 1 : Int(s)!
+                Int(s) == nil ? 0 : Int(s)!
         }
-        self.init(GCalendarPrecision(rawValue: min(5, max(0, int.count)))!)
+        self.init(GCalendarPrecision(rawValue: min(5, max(0, int.count - 1)))!)
         
-        if int.count > 0 { self.year = int[0] }
-        if int.count > 1 { self.month = int[1] }
-        if int.count > 2 { self.day = int[2] }
+        if int.count > 0 { self.year = max(1970, int[0]) }
+        if int.count > 1 { self.month = max(1, int[1]) }
+        if int.count > 2 { self.day = max(1, int[2]) }
         if int.count > 3 { self.hour = int[3] }
         if int.count > 4 { self.minute = int[4] }
         if int.count > 5 { self.second = int[5] }
@@ -274,35 +272,45 @@ public class GCalendar : CustomDebugStringConvertible {
             backSync()
         }
     }
+    
+    public func getDate() -> NSDate {
+        return date
+    }
 }
 
 /// 各种运算符重载
+// 用来代替赋值
+func << (left: GCalendar, right: GCalendar) -> GCalendar {
+    left.rawTime = right.rawTime
+    return left
+}
+
 // 自加一段时间
-func += (left: GCalendar, right: Int64) -> GCalendar {
+func += (left: GCalendar, right: Int) -> GCalendar {
     left.rawTime = left.rawTime + right
     return left
 }
 
 // 加上一段时间
-func + (left: GCalendar, right: Int64) -> GCalendar {
+func + (left: GCalendar, right: Int) -> GCalendar {
     let ret = GCalendar(left)
     return ret += right
 }
 
 // 自减一段时间
-func -= (left: GCalendar, right: Int64) -> GCalendar {
+func -= (left: GCalendar, right: Int) -> GCalendar {
     left.rawTime = left.rawTime - right
     return left
 }
 
 // 减去一段时间
-func - (left: GCalendar, right: Int64) -> GCalendar {
+func - (left: GCalendar, right: Int) -> GCalendar {
     let ret = GCalendar(left)
     return ret -= right
 }
 
 // 求时间差
-func - (left: GCalendar, right: GCalendar) -> Int64 {
+func - (left: GCalendar, right: GCalendar) -> Int {
     return left.rawTime - right.rawTime
 }
 

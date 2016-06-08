@@ -30,12 +30,14 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiThreadManager().addAll([ApiRequest().api("sidebar").uuid().toCache("herald_sidebar") {
-                json in json["content"].rawString()!
-            },
-            ApiRequest().api("curriculum").uuid().toCache("herald_curriculum") {
-                json in json["content"].rawString()!
-            }]).onFinish { success in
+        ApiThreadManager().addAll([
+            ApiRequest().api("sidebar").uuid().toCache("herald_sidebar") {
+                    json in json["content"]
+                },
+                ApiRequest().api("curriculum").uuid().toCache("herald_curriculum") {
+                    json in json["content"]
+                }
+            ]).onFinish { success in
                 self.hideProgressDialog()
                 if success {
                     self.readLocal()
@@ -61,13 +63,19 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
         // 计算总周数
         for weekNum in CurriculumView.WEEK_NUMS {
             let arr = content[weekNum]
+            var hasInvalid = false
             for i in 0 ..< arr.count {
                 do {
                     let info = try ClassInfo(json: arr[i])
                     if info.endWeek > maxWeek {
                         maxWeek = info.endWeek
                     }
-                } catch {}
+                } catch {
+                    hasInvalid = true
+                }
+            }
+            if hasInvalid {
+                showInvalidClassError()
             }
         }
         
@@ -140,6 +148,10 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
         showMessage("解析失败，请刷新")
     }
     
+    func showInvalidClassError() {
+        showTipDialogIfUnknown("部分课程导入失败，请刷新重试。\n\n注意：暂不支持导入辅修课，敬请期待后续版本。", cachePostfix: "curriculum_invalid_class") {}
+    }
+    
     func removeAllPages () {
         for k in scrollView!.subviews {
             k.removeFromSuperview()
@@ -155,7 +167,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
         if scrollView.contentSize.width == 0 { return }
         let page = abs(Int(scrollView.contentOffset.x / scrollView.frame.width + 0.5))
         title = "第 \(page + 1) 周"
-        swiper.syncApperance(scrollView.contentOffset)
+        swiper.syncApperance()
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {

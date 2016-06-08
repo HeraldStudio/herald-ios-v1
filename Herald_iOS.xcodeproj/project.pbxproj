@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		35B0B9E24AE997C9060E6BC4 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283283296736ED980EE6E1A6 /* Pods.framework */; };
+		BCAFB77BE851C62062F8A047 /* Pods_Herald_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41885719C03915D508964A23 /* Pods_Herald_iOS.framework */; };
+		D30661C81CF2C38D006583C2 /* GameCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661C71CF2C38D006583C2 /* GameCardModel.swift */; };
+		D30661CA1CF2C50E006583C2 /* GameCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661C91CF2C50E006583C2 /* GameCreateViewController.swift */; };
+		D30661CC1CF30016006583C2 /* GameCreateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661CB1CF30016006583C2 /* GameCreateTableViewCell.swift */; };
+		D30661CE1CF3011B006583C2 /* GameAvailableCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661CD1CF3011B006583C2 /* GameAvailableCardTableViewCell.swift */; };
 		D306E0201CCA3ADF00FA3812 /* WebModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E01F1CCA3ADF00FA3812 /* WebModuleViewController.swift */; };
 		D306E0221CCA3DFD00FA3812 /* AppModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E0211CCA3DFD00FA3812 /* AppModule.swift */; };
 		D306E0241CCA3F7700FA3812 /* ExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E0231CCA3F7700FA3812 /* ExamViewController.swift */; };
@@ -17,12 +21,12 @@
 		D306E02C1CCA68EB00FA3812 /* GradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E02B1CCA68EB00FA3812 /* GradeTableViewCell.swift */; };
 		D306E02E1CCA691F00FA3812 /* GradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E02D1CCA691F00FA3812 /* GradeViewController.swift */; };
 		D30A9BA11CBBA9100087D583 /* ApiThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30A9BA01CBBA9100087D583 /* ApiThreadManager.swift */; };
+		D3150F0F1CE8C3DA00E95EB6 /* CustomExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3150F0E1CE8C3DA00E95EB6 /* CustomExamViewController.swift */; };
 		D31821B21CC3B07800992355 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D31821B11CC3B07800992355 /* LaunchScreen.storyboard */; };
 		D31821B61CC48D5400992355 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821B51CC48D5400992355 /* ServiceHelper.swift */; };
 		D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821B81CC4D53300992355 /* CardsTableViewCell.swift */; };
 		D31821BF1CC522D900992355 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821BE1CC522D900992355 /* CardViewController.swift */; };
 		D31821C11CC5256F00992355 /* CardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821C01CC5256F00992355 /* CardTableViewCell.swift */; };
-		D31821C31CC5291000992355 /* CardHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821C21CC5291000992355 /* CardHistoryModel.swift */; };
 		D31821CA1CC7BC0400992355 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D31821C81CC7BC0400992355 /* Main.storyboard */; };
 		D31821CC1CC8560F00992355 /* ExperimentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821CB1CC8560F00992355 /* ExperimentTableViewCell.swift */; };
 		D31821CE1CC856FF00992355 /* ExperimentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821CD1CC856FF00992355 /* ExperimentViewController.swift */; };
@@ -33,10 +37,12 @@
 		D31DE5181CC359D300E4891D /* CurriculumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5171CC359D300E4891D /* CurriculumViewController.swift */; };
 		D31DE51A1CC35A3100E4891D /* CurriculumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5191CC35A3100E4891D /* CurriculumView.swift */; };
 		D3325D051CC89BA0002060A5 /* SwipeRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */; };
+		D33678F81CE5971C001E7C25 /* CurriculumNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */; };
 		D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348580B1CBB48FD00B55E76 /* ApiHelper.swift */; };
 		D348580E1CBB4FF900B55E76 /* CacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348580D1CBB4FF900B55E76 /* CacheHelper.swift */; };
 		D34858111CBB57F600B55E76 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858101CBB57F600B55E76 /* NSUserDefaults.swift */; };
 		D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858121CBB60A600B55E76 /* ApiRequest.swift */; };
+		D34BCC731CE5D379005F4164 /* ExamNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BCC721CE5D379005F4164 /* ExamNotifier.swift */; };
 		D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34E95851CCDCCE700AD1119 /* JwcCard.swift */; };
 		D354905C1CDC519100E59615 /* GCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354905B1CDC519100E59615 /* GCalendar.swift */; };
 		D35FC6221CE2FEF400BE844C /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6211CE2FEF400BE844C /* ActivityViewController.swift */; };
@@ -46,6 +52,10 @@
 		D35FC62A1CE33A1E00BE844C /* ActivityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6291CE33A1E00BE844C /* ActivityCard.swift */; };
 		D37708621CCC5D37006ED853 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708611CCC5D37006ED853 /* FeedbackViewController.swift */; };
 		D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708641CCC67DC006ED853 /* CardsModel.swift */; };
+		D37A1DAD1D0269880040A7D1 /* AboutUsContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A1DAC1D0269880040A7D1 /* AboutUsContentTableViewCell.swift */; };
+		D38879801CEAB601004294A8 /* GymRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D388797F1CEAB601004294A8 /* GymRecordModel.swift */; };
+		D38A7E5E1CE5ABFF0033926E /* ExperimentNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38A7E5D1CE5ABFF0033926E /* ExperimentNotifier.swift */; };
+		D38D2F401CFDC49400E0E5BE /* CardRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38D2F3F1CFDC49400E0E5BE /* CardRecordModel.swift */; };
 		D39B87971CCCCA0200EC5280 /* CardsRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */; };
 		D39B879A1CCCEC2E00EC5280 /* CardCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87991CCCEC2E00EC5280 /* CardCard.swift */; };
 		D39B879C1CCCF02600EC5280 /* ExperimentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B879B1CCCF02600EC5280 /* ExperimentCard.swift */; };
@@ -58,11 +68,24 @@
 		D3A0C1721CBB7A9800744640 /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1711CBB7A9800744640 /* CardsViewController.swift */; };
 		D3A0C1741CBB7AF500744640 /* ModulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */; };
 		D3A0C1771CBB7B2300744640 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1761CBB7B2300744640 /* MyInfoViewController.swift */; };
+		D3AC6FC01CF410B000000BF6 /* GameShowCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AC6FBF1CF410B000000BF6 /* GameShowCardViewController.swift */; };
+		D3AC6FC21CF4135800000BF6 /* GameShowCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AC6FC11CF4135800000BF6 /* GameShowCardTableViewCell.swift */; };
 		D3D35DDD1CBA2E8200B18092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */; };
 		D3D35DDF1CBA2E8200B18092 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D35DDE1CBA2E8200B18092 /* LoginViewController.swift */; };
 		D3D35DE41CBA2E8200B18092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3D35DE31CBA2E8200B18092 /* Assets.xcassets */; };
 		D3D35DF21CBA2E8200B18092 /* Herald_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D35DF11CBA2E8200B18092 /* Herald_iOSTests.swift */; };
 		D3D35DFD1CBA2E8200B18092 /* Herald_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D35DFC1CBA2E8200B18092 /* Herald_iOSUITests.swift */; };
+		D3D5D4371CE95101000E406A /* GymReserveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D4361CE95101000E406A /* GymReserveViewController.swift */; };
+		D3D5D43D1CE95603000E406A /* GymSportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D43C1CE95603000E406A /* GymSportModel.swift */; };
+		D3D5D43F1CE97149000E406A /* GymChooseTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D43E1CE97149000E406A /* GymChooseTimeViewController.swift */; };
+		D3D5D4411CE9737B000E406A /* GymTimeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D4401CE9737B000E406A /* GymTimeModel.swift */; };
+		D3D5D4431CE99426000E406A /* GymNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D4421CE99426000E406A /* GymNewViewController.swift */; };
+		D3D5D4491CE99D19000E406A /* GymReserveCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D4481CE99D19000E406A /* GymReserveCells.swift */; };
+		D3D5D44B1CE99D63000E406A /* NoSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */; };
+		D3D5D44D1CE99EDC000E406A /* GymFriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D44C1CE99EDC000E406A /* GymFriendModel.swift */; };
+		D3D5D44F1CE9AFF1000E406A /* GymAddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D44E1CE9AFF1000E406A /* GymAddFriendViewController.swift */; };
+		D3D849FC1CFBD88200F083DF /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D849FB1CFBD88200F083DF /* JSON.swift */; };
+		D3D849FF1CFBE75000F083DF /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D849FE1CFBE75000F083DF /* R.swift */; };
 		D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */; };
 		D3E6BD7F1CC8C07F0074FF6D /* ModuleManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */; };
 		D3E6BD831CC8D4B20074FF6D /* PedetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD811CC8D4B20074FF6D /* PedetailViewController.swift */; };
@@ -120,8 +143,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		17613A96BDD193BC61871BC6 /* Pods-Herald_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Herald_iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Herald_iOS/Pods-Herald_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		283283296736ED980EE6E1A6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B6878935004ACF38EDF397D4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		41885719C03915D508964A23 /* Pods_Herald_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Herald_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C275CEB73A1293164D3C08CA /* Pods-Herald_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Herald_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Herald_iOS/Pods-Herald_iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		D30661C71CF2C38D006583C2 /* GameCardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCardModel.swift; sourceTree = "<group>"; };
+		D30661C91CF2C50E006583C2 /* GameCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCreateViewController.swift; sourceTree = "<group>"; };
+		D30661CB1CF30016006583C2 /* GameCreateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCreateTableViewCell.swift; sourceTree = "<group>"; };
+		D30661CD1CF3011B006583C2 /* GameAvailableCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAvailableCardTableViewCell.swift; sourceTree = "<group>"; };
 		D306E01F1CCA3ADF00FA3812 /* WebModuleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebModuleViewController.swift; sourceTree = "<group>"; };
 		D306E0211CCA3DFD00FA3812 /* AppModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModule.swift; sourceTree = "<group>"; };
 		D306E0231CCA3F7700FA3812 /* ExamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamViewController.swift; sourceTree = "<group>"; };
@@ -131,12 +160,12 @@
 		D306E02B1CCA68EB00FA3812 /* GradeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeTableViewCell.swift; sourceTree = "<group>"; };
 		D306E02D1CCA691F00FA3812 /* GradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeViewController.swift; sourceTree = "<group>"; };
 		D30A9BA01CBBA9100087D583 /* ApiThreadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiThreadManager.swift; sourceTree = "<group>"; };
+		D3150F0E1CE8C3DA00E95EB6 /* CustomExamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomExamViewController.swift; sourceTree = "<group>"; };
 		D31821B11CC3B07800992355 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D31821B51CC48D5400992355 /* ServiceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
 		D31821B81CC4D53300992355 /* CardsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsTableViewCell.swift; sourceTree = "<group>"; };
 		D31821BE1CC522D900992355 /* CardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		D31821C01CC5256F00992355 /* CardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableViewCell.swift; sourceTree = "<group>"; };
-		D31821C21CC5291000992355 /* CardHistoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHistoryModel.swift; sourceTree = "<group>"; };
 		D31821C91CC7BC0400992355 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D31821CB1CC8560F00992355 /* ExperimentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentTableViewCell.swift; sourceTree = "<group>"; };
 		D31821CD1CC856FF00992355 /* ExperimentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentViewController.swift; sourceTree = "<group>"; };
@@ -147,10 +176,12 @@
 		D31DE5171CC359D300E4891D /* CurriculumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumViewController.swift; sourceTree = "<group>"; };
 		D31DE5191CC35A3100E4891D /* CurriculumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumView.swift; sourceTree = "<group>"; };
 		D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeRefreshHeader.swift; sourceTree = "<group>"; };
+		D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumNotifier.swift; sourceTree = "<group>"; };
 		D348580B1CBB48FD00B55E76 /* ApiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHelper.swift; sourceTree = "<group>"; };
 		D348580D1CBB4FF900B55E76 /* CacheHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheHelper.swift; sourceTree = "<group>"; };
 		D34858101CBB57F600B55E76 /* NSUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaults.swift; sourceTree = "<group>"; };
 		D34858121CBB60A600B55E76 /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
+		D34BCC721CE5D379005F4164 /* ExamNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamNotifier.swift; sourceTree = "<group>"; };
 		D34E95851CCDCCE700AD1119 /* JwcCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcCard.swift; sourceTree = "<group>"; };
 		D354905B1CDC519100E59615 /* GCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCalendar.swift; sourceTree = "<group>"; };
 		D3578AAE1CDBABE300B291D0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -161,6 +192,10 @@
 		D35FC6291CE33A1E00BE844C /* ActivityCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCard.swift; sourceTree = "<group>"; };
 		D37708611CCC5D37006ED853 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		D37708641CCC67DC006ED853 /* CardsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsModel.swift; sourceTree = "<group>"; };
+		D37A1DAC1D0269880040A7D1 /* AboutUsContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsContentTableViewCell.swift; sourceTree = "<group>"; };
+		D388797F1CEAB601004294A8 /* GymRecordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymRecordModel.swift; sourceTree = "<group>"; };
+		D38A7E5D1CE5ABFF0033926E /* ExperimentNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentNotifier.swift; sourceTree = "<group>"; };
+		D38D2F3F1CFDC49400E0E5BE /* CardRecordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardRecordModel.swift; sourceTree = "<group>"; };
 		D39B87961CCCCA0200EC5280 /* CardsRowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsRowModel.swift; sourceTree = "<group>"; };
 		D39B87991CCCEC2E00EC5280 /* CardCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCard.swift; sourceTree = "<group>"; };
 		D39B879B1CCCF02600EC5280 /* ExperimentCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentCard.swift; sourceTree = "<group>"; };
@@ -173,6 +208,8 @@
 		D3A0C1711CBB7A9800744640 /* CardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
 		D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModulesViewController.swift; sourceTree = "<group>"; };
 		D3A0C1761CBB7B2300744640 /* MyInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
+		D3AC6FBF1CF410B000000BF6 /* GameShowCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameShowCardViewController.swift; sourceTree = "<group>"; };
+		D3AC6FC11CF4135800000BF6 /* GameShowCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameShowCardTableViewCell.swift; sourceTree = "<group>"; };
 		D3D35DD91CBA2E8200B18092 /* 小猴偷米.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "小猴偷米.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3D35DDE1CBA2E8200B18092 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +221,17 @@
 		D3D35DF81CBA2E8200B18092 /* Herald_iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Herald_iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3D35DFC1CBA2E8200B18092 /* Herald_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Herald_iOSUITests.swift; sourceTree = "<group>"; };
 		D3D35DFE1CBA2E8200B18092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3D5D4361CE95101000E406A /* GymReserveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymReserveViewController.swift; sourceTree = "<group>"; };
+		D3D5D43C1CE95603000E406A /* GymSportModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymSportModel.swift; sourceTree = "<group>"; };
+		D3D5D43E1CE97149000E406A /* GymChooseTimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymChooseTimeViewController.swift; sourceTree = "<group>"; };
+		D3D5D4401CE9737B000E406A /* GymTimeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymTimeModel.swift; sourceTree = "<group>"; };
+		D3D5D4421CE99426000E406A /* GymNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymNewViewController.swift; sourceTree = "<group>"; };
+		D3D5D4481CE99D19000E406A /* GymReserveCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymReserveCells.swift; sourceTree = "<group>"; };
+		D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoSelectionTableViewCell.swift; sourceTree = "<group>"; };
+		D3D5D44C1CE99EDC000E406A /* GymFriendModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymFriendModel.swift; sourceTree = "<group>"; };
+		D3D5D44E1CE9AFF1000E406A /* GymAddFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymAddFriendViewController.swift; sourceTree = "<group>"; };
+		D3D849FB1CFBD88200F083DF /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		D3D849FE1CFBE75000F083DF /* R.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.swift; sourceTree = "<group>"; };
 		D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleManageTableViewCell.swift; sourceTree = "<group>"; };
 		D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleManagerViewController.swift; sourceTree = "<group>"; };
 		D3E6BD811CC8D4B20074FF6D /* PedetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedetailViewController.swift; sourceTree = "<group>"; };
@@ -209,7 +257,6 @@
 		D3F4734E1CCA15C900750FFB /* LectureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureViewController.swift; sourceTree = "<group>"; };
 		D3FBC2F11CCC51F900305428 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		DA028C4F1CDF422F005343DE /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
-		ED76AC9BE4F12BE2D1325536 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,7 +264,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35B0B9E24AE997C9060E6BC4 /* Pods.framework in Frameworks */,
+				BCAFB77BE851C62062F8A047 /* Pods_Herald_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +285,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C5D7C416B0428CA4D287A9D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C275CEB73A1293164D3C08CA /* Pods-Herald_iOS.debug.xcconfig */,
+				17613A96BDD193BC61871BC6 /* Pods-Herald_iOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D31DE50C1CC334D800E4891D /* custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +301,7 @@
 				D35FC6271CE3236300BE844C /* PullLoadFooter.swift */,
 				D39B879F1CCD0F0E00EC5280 /* Error.swift */,
 				D354905B1CDC519100E59615 /* GCalendar.swift */,
+				D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */,
 			);
 			name = custom;
 			sourceTree = "<group>";
@@ -272,9 +329,9 @@
 			children = (
 				D306E0211CCA3DFD00FA3812 /* AppModule.swift */,
 				D348580B1CBB48FD00B55E76 /* ApiHelper.swift */,
+				D348580D1CBB4FF900B55E76 /* CacheHelper.swift */,
 				D34858121CBB60A600B55E76 /* ApiRequest.swift */,
 				D30A9BA01CBBA9100087D583 /* ApiThreadManager.swift */,
-				D348580D1CBB4FF900B55E76 /* CacheHelper.swift */,
 				D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */,
 				D31821B51CC48D5400992355 /* ServiceHelper.swift */,
 				D3F375C61CDB3957004DDEA5 /* WifiLoginHelper.swift */,
@@ -288,8 +345,22 @@
 				D34858101CBB57F600B55E76 /* NSUserDefaults.swift */,
 				D3FBC2F11CCC51F900305428 /* UIViewController.swift */,
 				D39B87A31CCD12EC00EC5280 /* String.swift */,
+				D3D849FB1CFBD88200F083DF /* JSON.swift */,
 			);
 			name = extension;
+			sourceTree = "<group>";
+		};
+		D34859591CF2C31D00EFCDB2 /* deskgame */ = {
+			isa = PBXGroup;
+			children = (
+				D30661C71CF2C38D006583C2 /* GameCardModel.swift */,
+				D30661C91CF2C50E006583C2 /* GameCreateViewController.swift */,
+				D30661CB1CF30016006583C2 /* GameCreateTableViewCell.swift */,
+				D30661CD1CF3011B006583C2 /* GameAvailableCardTableViewCell.swift */,
+				D3AC6FBF1CF410B000000BF6 /* GameShowCardViewController.swift */,
+				D3AC6FC11CF4135800000BF6 /* GameShowCardTableViewCell.swift */,
+			);
+			name = deskgame;
 			sourceTree = "<group>";
 		};
 		D39B87981CCCEC0C00EC5280 /* mod_cards */ = {
@@ -319,11 +390,13 @@
 		D3A0C17A1CBB7C1200744640 /* mod_query */ = {
 			isa = PBXGroup;
 			children = (
+				D34859591CF2C31D00EFCDB2 /* deskgame */,
 				D3A0C17D1CBB7C5800744640 /* cardextra */,
 				D3A0C17E1CBB7C6100744640 /* curriculum */,
 				D3A0C1801CBB7C7700744640 /* exam */,
 				D3A0C1811CBB7C7F00744640 /* experiment */,
 				D3A0C1821CBB7C8F00744640 /* grade */,
+				D3D5D4351CE950E6000E406A /* gymreserve */,
 				D3A0C1841CBB7CCE00744640 /* jwc */,
 				D3A0C1851CBB7CD800744640 /* lecture */,
 				D3A0C1861CBB7CDF00744640 /* library */,
@@ -348,7 +421,7 @@
 			children = (
 				D31821BE1CC522D900992355 /* CardViewController.swift */,
 				D31821C01CC5256F00992355 /* CardTableViewCell.swift */,
-				D31821C21CC5291000992355 /* CardHistoryModel.swift */,
+				D38D2F3F1CFDC49400E0E5BE /* CardRecordModel.swift */,
 			);
 			name = cardextra;
 			sourceTree = "<group>";
@@ -370,6 +443,7 @@
 				D306E0231CCA3F7700FA3812 /* ExamViewController.swift */,
 				D306E0251CCA3F8400FA3812 /* ExamTableViewCell.swift */,
 				D306E0271CCA403D00FA3812 /* ExamModel.swift */,
+				D3150F0E1CE8C3DA00E95EB6 /* CustomExamViewController.swift */,
 			);
 			name = exam;
 			sourceTree = "<group>";
@@ -467,8 +541,8 @@
 				D3D35DF01CBA2E8200B18092 /* Herald_iOSTests */,
 				D3D35DFB1CBA2E8200B18092 /* Herald_iOSUITests */,
 				D3D35DDA1CBA2E8200B18092 /* Products */,
-				DD11F4816A147BF4EB866EB6 /* Pods */,
 				F527AB77D4F37A7ED7959F74 /* Frameworks */,
+				8C5D7C416B0428CA4D287A9D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -488,6 +562,7 @@
 				D31821C81CC7BC0400992355 /* Main.storyboard */,
 				D31821B11CC3B07800992355 /* LaunchScreen.storyboard */,
 				D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */,
+				D3D849FE1CFBE75000F083DF /* R.swift */,
 				D3D35DE31CBA2E8200B18092 /* Assets.xcassets */,
 				D34858091CBB46AF00B55E76 /* app_main */,
 				D31DE50C1CC334D800E4891D /* custom */,
@@ -497,6 +572,7 @@
 				D39B87981CCCEC0C00EC5280 /* mod_cards */,
 				D3D35E0A1CBA2FEE00B18092 /* mod_communicate */,
 				D3A0C1791CBB7C0000744640 /* mod_modulemanage */,
+				D3DE9A951CE581A30090EF0D /* mod_notifiers */,
 				D3A0C17A1CBB7C1200744640 /* mod_query */,
 				D3A0C17C1CBB7C4B00744640 /* mod_webmodule */,
 				D3D35DE81CBA2E8200B18092 /* Info.plist */,
@@ -527,6 +603,7 @@
 			children = (
 				D3ED99E71CCB870200001E2B /* AboutUsViewController.swift */,
 				D37708611CCC5D37006ED853 /* FeedbackViewController.swift */,
+				D37A1DAC1D0269880040A7D1 /* AboutUsContentTableViewCell.swift */,
 			);
 			name = mod_communicate;
 			sourceTree = "<group>";
@@ -539,13 +616,30 @@
 			name = mod_auth;
 			sourceTree = "<group>";
 		};
-		DD11F4816A147BF4EB866EB6 /* Pods */ = {
+		D3D5D4351CE950E6000E406A /* gymreserve */ = {
 			isa = PBXGroup;
 			children = (
-				ED76AC9BE4F12BE2D1325536 /* Pods.debug.xcconfig */,
-				B6878935004ACF38EDF397D4 /* Pods.release.xcconfig */,
+				D3D5D4361CE95101000E406A /* GymReserveViewController.swift */,
+				D3D5D4481CE99D19000E406A /* GymReserveCells.swift */,
+				D3D5D43C1CE95603000E406A /* GymSportModel.swift */,
+				D388797F1CEAB601004294A8 /* GymRecordModel.swift */,
+				D3D5D43E1CE97149000E406A /* GymChooseTimeViewController.swift */,
+				D3D5D4401CE9737B000E406A /* GymTimeModel.swift */,
+				D3D5D4421CE99426000E406A /* GymNewViewController.swift */,
+				D3D5D44C1CE99EDC000E406A /* GymFriendModel.swift */,
+				D3D5D44E1CE9AFF1000E406A /* GymAddFriendViewController.swift */,
 			);
-			name = Pods;
+			name = gymreserve;
+			sourceTree = "<group>";
+		};
+		D3DE9A951CE581A30090EF0D /* mod_notifiers */ = {
+			isa = PBXGroup;
+			children = (
+				D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */,
+				D38A7E5D1CE5ABFF0033926E /* ExperimentNotifier.swift */,
+				D34BCC721CE5D379005F4164 /* ExamNotifier.swift */,
+			);
+			name = mod_notifiers;
 			sourceTree = "<group>";
 		};
 		F527AB77D4F37A7ED7959F74 /* Frameworks */ = {
@@ -554,6 +648,7 @@
 				DA028C4F1CDF422F005343DE /* Reveal.framework */,
 				283283296736ED980EE6E1A6 /* Pods.framework */,
 				D3578AAE1CDBABE300B291D0 /* NotificationCenter.framework */,
+				41885719C03915D508964A23 /* Pods_Herald_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -565,13 +660,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D3D35E011CBA2E8200B18092 /* Build configuration list for PBXNativeTarget "Herald_iOS" */;
 			buildPhases = (
-				4954EB5E836F24FAC4EE9B06 /* Check Pods Manifest.lock */,
+				2C92DDECCE79BA01E1AF61C0 /* [CP] Check Pods Manifest.lock */,
 				D3D35DD51CBA2E8200B18092 /* Sources */,
 				D3D35DD61CBA2E8200B18092 /* Frameworks */,
 				D3D35DD71CBA2E8200B18092 /* Resources */,
-				0B8948C67D3C219565E1DD35 /* Embed Pods Frameworks */,
-				F4FB81568F51A7183763D838 /* Copy Pods Resources */,
 				D3578ABD1CDBABE300B291D0 /* Embed App Extensions */,
+				CA5DA88F3068205510FA6E72 /* [CP] Embed Pods Frameworks */,
+				0501FB9659E2BD24C5558A28 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -633,6 +728,9 @@
 						DevelopmentTeam = 9837P5SWZ9;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
 						};
@@ -695,29 +793,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0B8948C67D3C219565E1DD35 /* Embed Pods Frameworks */ = {
+		0501FB9659E2BD24C5558A28 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Herald_iOS/Pods-Herald_iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4954EB5E836F24FAC4EE9B06 /* Check Pods Manifest.lock */ = {
+		2C92DDECCE79BA01E1AF61C0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -725,19 +823,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F4FB81568F51A7183763D838 /* Copy Pods Resources */ = {
+		CA5DA88F3068205510FA6E72 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Herald_iOS/Pods-Herald_iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -747,18 +845,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3D5D43F1CE97149000E406A /* GymChooseTimeViewController.swift in Sources */,
 				D39B87971CCCCA0200EC5280 /* CardsRowModel.swift in Sources */,
 				D306E0281CCA403D00FA3812 /* ExamModel.swift in Sources */,
 				D39B879C1CCCF02600EC5280 /* ExperimentCard.swift in Sources */,
+				D38879801CEAB601004294A8 /* GymRecordModel.swift in Sources */,
 				D3ED99E61CCB651300001E2B /* LibraryViewController.swift in Sources */,
 				D3F473491CCA068D00750FFB /* JwcNoticeModel.swift in Sources */,
 				D35FC6241CE301F700BE844C /* ActivityModel.swift in Sources */,
+				D37A1DAD1D0269880040A7D1 /* AboutUsContentTableViewCell.swift in Sources */,
+				D3D5D4491CE99D19000E406A /* GymReserveCells.swift in Sources */,
 				D354905C1CDC519100E59615 /* GCalendar.swift in Sources */,
 				D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */,
 				D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */,
 				D31821CE1CC856FF00992355 /* ExperimentViewController.swift in Sources */,
+				D30661C81CF2C38D006583C2 /* GameCardModel.swift in Sources */,
 				D3ED99E41CCB64BE00001E2B /* LibraryTableViewCell.swift in Sources */,
 				D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */,
+				D3D5D4411CE9737B000E406A /* GymTimeModel.swift in Sources */,
 				D31DE5141CC3597800E4891D /* CurriculumBlock.swift in Sources */,
 				D306E0221CCA3DFD00FA3812 /* AppModule.swift in Sources */,
 				D39B87A41CCD12EC00EC5280 /* String.swift in Sources */,
@@ -768,6 +872,7 @@
 				D34858111CBB57F600B55E76 /* NSUserDefaults.swift in Sources */,
 				D3ED99E01CCB3DFD00001E2B /* SrtpViewController.swift in Sources */,
 				D31DE51A1CC35A3100E4891D /* CurriculumView.swift in Sources */,
+				D3D5D43D1CE95603000E406A /* GymSportModel.swift in Sources */,
 				D3ED99DC1CCB1DB400001E2B /* SrtpModel.swift in Sources */,
 				D31821CC1CC8560F00992355 /* ExperimentTableViewCell.swift in Sources */,
 				D39B879E1CCD0C0B00EC5280 /* ExamCard.swift in Sources */,
@@ -787,14 +892,20 @@
 				D3F473451CCA04C100750FFB /* JwcTableViewCell.swift in Sources */,
 				D306E02C1CCA68EB00FA3812 /* GradeTableViewCell.swift in Sources */,
 				D3ED99E21CCB5BCB00001E2B /* LibraryBookModel.swift in Sources */,
+				D3D849FC1CFBD88200F083DF /* JSON.swift in Sources */,
+				D3D5D44D1CE99EDC000E406A /* GymFriendModel.swift in Sources */,
+				D30661CE1CF3011B006583C2 /* GameAvailableCardTableViewCell.swift in Sources */,
 				D31DE5121CC3592F00E4891D /* ClassInfo.swift in Sources */,
 				D3F4734D1CCA153A00750FFB /* LectureModel.swift in Sources */,
 				D37708621CCC5D37006ED853 /* FeedbackViewController.swift in Sources */,
 				D3ED99E81CCB870200001E2B /* AboutUsViewController.swift in Sources */,
 				D348580E1CBB4FF900B55E76 /* CacheHelper.swift in Sources */,
+				D3D5D4371CE95101000E406A /* GymReserveViewController.swift in Sources */,
 				D3ED99D41CCAF9FC00001E2B /* SeuNetViewController.swift in Sources */,
 				D3ED99DE1CCB3DB600001E2B /* SrtpTableViewCell.swift in Sources */,
+				D3AC6FC21CF4135800000BF6 /* GameShowCardTableViewCell.swift in Sources */,
 				D3ED99D81CCB08B300001E2B /* SchoolbusTableViewCell.swift in Sources */,
+				D30661CC1CF30016006583C2 /* GameCreateTableViewCell.swift in Sources */,
 				D35FC6281CE3236300BE844C /* PullLoadFooter.swift in Sources */,
 				D3F3DCFB1CBB7792006887F5 /* SettingsHelper.swift in Sources */,
 				D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */,
@@ -802,25 +913,35 @@
 				D3F4734B1CCA146800750FFB /* LectureTableViewCell.swift in Sources */,
 				D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */,
 				D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */,
-				D31821C31CC5291000992355 /* CardHistoryModel.swift in Sources */,
+				D3D5D44F1CE9AFF1000E406A /* GymAddFriendViewController.swift in Sources */,
+				D30661CA1CF2C50E006583C2 /* GameCreateViewController.swift in Sources */,
+				D3D5D44B1CE99D63000E406A /* NoSelectionTableViewCell.swift in Sources */,
+				D3D5D4431CE99426000E406A /* GymNewViewController.swift in Sources */,
 				D35FC6221CE2FEF400BE844C /* ActivityViewController.swift in Sources */,
 				D306E02A1CCA68A700FA3812 /* GradeModel.swift in Sources */,
 				D306E0241CCA3F7700FA3812 /* ExamViewController.swift in Sources */,
 				D3D35DDF1CBA2E8200B18092 /* LoginViewController.swift in Sources */,
+				D38A7E5E1CE5ABFF0033926E /* ExperimentNotifier.swift in Sources */,
 				D31821C11CC5256F00992355 /* CardTableViewCell.swift in Sources */,
 				D306E0261CCA3F8400FA3812 /* ExamTableViewCell.swift in Sources */,
 				D306E0201CCA3ADF00FA3812 /* WebModuleViewController.swift in Sources */,
 				D3325D051CC89BA0002060A5 /* SwipeRefreshHeader.swift in Sources */,
 				D35FC6261CE31A3500BE844C /* ActivityTableViewCell.swift in Sources */,
 				D31821BF1CC522D900992355 /* CardViewController.swift in Sources */,
+				D38D2F401CFDC49400E0E5BE /* CardRecordModel.swift in Sources */,
 				D39B879A1CCCEC2E00EC5280 /* CardCard.swift in Sources */,
+				D3D849FF1CFBE75000F083DF /* R.swift in Sources */,
 				D3D35DDD1CBA2E8200B18092 /* AppDelegate.swift in Sources */,
 				D3A0C1701CBB7A3A00744640 /* MainViewController.swift in Sources */,
 				D30A9BA11CBBA9100087D583 /* ApiThreadManager.swift in Sources */,
 				D3A0C1741CBB7AF500744640 /* ModulesViewController.swift in Sources */,
+				D3AC6FC01CF410B000000BF6 /* GameShowCardViewController.swift in Sources */,
 				D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */,
 				D3E6BD831CC8D4B20074FF6D /* PedetailViewController.swift in Sources */,
+				D34BCC731CE5D379005F4164 /* ExamNotifier.swift in Sources */,
 				D3F375C71CDB3957004DDEA5 /* WifiLoginHelper.swift in Sources */,
+				D3150F0F1CE8C3DA00E95EB6 /* CustomExamViewController.swift in Sources */,
+				D33678F81CE5971C001E7C25 /* CurriculumNotifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -908,7 +1029,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
+				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -949,7 +1070,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
+				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -958,19 +1079,19 @@
 		};
 		D3D35E021CBA2E8200B18092 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ED76AC9BE4F12BE2D1325536 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = C275CEB73A1293164D3C08CA /* Pods-Herald_iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
+				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -979,19 +1100,19 @@
 		};
 		D3D35E031CBA2E8200B18092 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B6878935004ACF38EDF397D4 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 17613A96BDD193BC61871BC6 /* Pods-Herald_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "9b7185be-cd4d-421b-9b36-7ed2d2218be3";
+				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
