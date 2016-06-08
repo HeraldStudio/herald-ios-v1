@@ -19,7 +19,7 @@ class ModuleManagerViewController: UIViewController, UITableViewDelegate, UITabl
     var modules : [AppModule] = []
     
     func setupModuleList () {
-        modules = SettingsHelper.MODULES
+        modules = R.module.array
         moduleTableView.reloadData()
     }
     
@@ -43,11 +43,11 @@ class ModuleManagerViewController: UIViewController, UITableViewDelegate, UITabl
         
             let module = modules[indexPath.row - 1]
         
-            moduleCell.module = module.id
+            moduleCell.module = module
             moduleCell.icon.image = UIImage(named: module.icon)
             moduleCell.label.text = module.nameTip
-            moduleCell.shortcutSwitch.setOn(SettingsHelper.getModuleShortcutEnabled(module.id), animated: false)
-            moduleCell.cardSwitch.setOn(SettingsHelper.getModuleCardEnabled(module.id), animated: false)
+            moduleCell.shortcutSwitch.setOn(module.shortcutEnabled, animated: false)
+            moduleCell.cardSwitch.setOn(module.cardEnabled, animated: false)
             moduleCell.cardSwitch.enabled = module.hasCard
             moduleCell.cardSwitch.alpha = module.hasCard ? 1 : 0
         

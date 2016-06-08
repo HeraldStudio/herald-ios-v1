@@ -15,15 +15,15 @@ import SwiftyJSON
 class ExperimentCard {
     
     static func getRefresher () -> [ApiRequest] {
-        return [ApiRequest().api("phylab").uuid()
-            .toCache("herald_experiment") {json -> String in
-                guard let str = json.rawString() else {return ""}
-                return str
-            }]
+        return [ApiRequest().api("phylab").uuid().toCache("herald_experiment")]
     }
     
     static func getCard () -> CardsModel {
         let cache = CacheHelper.get("herald_experiment")
+        if cache == "" {
+            return CardsModel(cellId: "CardsCellExperiment", module: R.module.experiment, desc: "实验数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
+        }
+        
         let content = JSON.parse(cache)["content"]
         var todayHasExperiments = false
         // 时间未到的所有实验
@@ -72,11 +72,11 @@ class ExperimentCard {
                 if then.year == now.year && then.weekOfYear == now.weekOfYear {
                     // 如果发现今天有实验
                     if then.weekday == now.weekday {
-                        // 如果是半小时之内快要开始的实验，放弃之前所有操作，直接返回这个实验的提醒
+                        // 如果是15分钟之内快要开始的实验，放弃之前所有操作，直接返回这个实验的提醒
                         let nowStamp = now.hour * 60 + now.minute
                         let thenStamp = then.hour * 60 + then.minute
-                        if nowStamp < thenStamp && nowStamp >= thenStamp - 30 {
-                            let model = CardsModel(cellId: "CardsCellExperiment", module: .Experiment, desc: "你有1个实验即将开始，请注意时间准时参加", priority: .CONTENT_NOTIFY)
+                        if nowStamp < thenStamp && nowStamp >= thenStamp - 15 {
+                            let model = CardsModel(cellId: "CardsCellExperiment", module: R.module.experiment, desc: "你有1个实验即将开始，请注意时间准时参加", priority: .CONTENT_NOTIFY)
                             model.rows.append(row)
                             return model
                         }
@@ -84,7 +84,7 @@ class ExperimentCard {
                         // 如果是已经开始还未结束的实验，放弃之前所有操作，直接返回这个实验的提醒
                         let endStamp = thenStamp + 3 * 60
                         if nowStamp >= thenStamp && nowStamp < endStamp {
-                            let model = CardsModel(cellId: "CardsCellExperiment", module: .Experiment, desc: "1个实验正在进行", priority: .CONTENT_NOTIFY)
+                            let model = CardsModel(cellId: "CardsCellExperiment", module: R.module.experiment, desc: "1个实验正在进行", priority: .CONTENT_NOTIFY)
                             model.rows.append(row)
                             return model
                         }
@@ -124,7 +124,7 @@ class ExperimentCard {
         
         // 今天和本周均无实验
         if N == 0 {
-            let model = CardsModel(cellId: "CardsCellExperiment", module: .Experiment, desc: (M == 0 ? "你没有未完成的实验，" : ("本学期你还有\(M)个实验，"))
+            let model = CardsModel(cellId: "CardsCellExperiment", module: R.module.experiment, desc: (M == 0 ? "你没有未完成的实验，" : ("本学期你还有\(M)个实验，"))
                 + "实验助手可以智能提醒你参加即将开始的实验", priority: M == 0 ? .NO_CONTENT : .CONTENT_NO_NOTIFY)
             allExperiments = allExperiments.sort {$0.sortOrder < $1.sortOrder}
             model.rows.appendContentsOf(allExperiments)
@@ -132,7 +132,7 @@ class ExperimentCard {
         }
         
         // 今天或本周有实验
-        let model = CardsModel(cellId: "CardsCellExperiment", module: .Experiment, desc: (todayHasExperiments ? "今天有" : "本周有") + "\(N)个实验，请注意准时参加", priority: .CONTENT_NO_NOTIFY)
+        let model = CardsModel(cellId: "CardsCellExperiment", module: R.module.experiment, desc: (todayHasExperiments ? "今天有" : "本周有") + "\(N)个实验，请注意准时参加", priority: .CONTENT_NO_NOTIFY)
         currExperiments = currExperiments.sort {$0.sortOrder < $1.sortOrder}
         model.rows.appendContentsOf(currExperiments)
         return model

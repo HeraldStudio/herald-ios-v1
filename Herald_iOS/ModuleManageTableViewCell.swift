@@ -10,7 +10,7 @@ import UIKit
 
 class ModuleManageTableViewCell: UITableViewCell {
     
-    var module = 0
+    var module : AppModule?
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var cardSwitch: UISwitch!
@@ -32,14 +32,17 @@ class ModuleManageTableViewCell: UITableViewCell {
     }
     
     @IBAction func switchShortcut () {
-        let oldEnabled = SettingsHelper.getModuleShortcutEnabled(module)
-        SettingsHelper.setModuleShortCutEnabled(module, enabled: !oldEnabled)
-        shortcutSwitch.setOn(!oldEnabled, animated: true)
+        if module != nil {
+            module!.shortcutEnabled = !(module!.shortcutEnabled)
+            shortcutSwitch.setOn(module!.shortcutEnabled, animated: true)
+        }
     }
     
     @IBAction func switchCard () {
-        let oldEnabled = SettingsHelper.getModuleCardEnabled(module)
-        SettingsHelper.setModuleCardEnabled(module, enabled: !oldEnabled)
-        cardSwitch.setOn(!oldEnabled, animated: true)
+        if module != nil {
+            if !(module?.hasCard)! { return }
+            module!.cardEnabled = !(module!.cardEnabled)
+            shortcutSwitch.setOn(module!.cardEnabled, animated: true)
+        }
     }
 }

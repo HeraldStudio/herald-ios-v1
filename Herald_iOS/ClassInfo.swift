@@ -8,9 +8,14 @@ import SwiftyJSON;
 class ClassInfo {
     var className, place : String
     var weekNum : String = ""
+    var weekDay : Int = 0
     var startWeek, endWeek, startTime, endTime : Int
     
     init (json : JSON) throws {
+        if json.count < 3 {
+            throw E
+        }
+        
         className = json[0].stringValue
         place = json[2].stringValue
         let timeStr = json[1].stringValue
@@ -20,6 +25,10 @@ class ClassInfo {
             .replaceAll("周", "")
             .replaceAll("节", "")
             .split("-")
+        
+        if timeStrs.count < 4 {
+            throw E
+        }
         
         if let k = Int(timeStrs[0]) {
             startWeek = k
@@ -58,6 +67,4 @@ class ClassInfo {
     func time60ToHourMinute(time: Int) -> String{
         return String(format: "%d:%02d", time / 60, time % 60)
     }
-    
-    
 }

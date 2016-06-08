@@ -1,14 +1,9 @@
-//
-//  CardsRowModel.swift
-//  Herald_iOS
-//
-//  Created by 于海通 on 16/4/24.
-//  Copyright © 2016年 于海通. All rights reserved.
-//
-
 import Foundation
 
-/// 首页卡片每一行（代表卡片头部或卡片中的一格）通用的模型
+/**
+ * CardsRowModel | 首页卡片行模型
+ * 首页卡片每一行（代表卡片头部或卡片中的一格）通用的模型
+ */
 class CardsRowModel {
     
     /// 卡片头部的模块图标，用资源id表示
@@ -23,7 +18,10 @@ class CardsRowModel {
     /// 卡片头部的内容，课表、实验、考试、讲座的时间地点，通知的发布日期
     var desc : String?
     
-    /// 考试的倒计时天数、跑操的已跑次数
+    /// 考试的倒计时天数
+    var count0 : String?
+    
+    /// 跑操的已跑次数
     var count1 : String?
     
     /// 跑操的剩余次数
@@ -41,13 +39,15 @@ class CardsRowModel {
     /// 点击时显示的消息，若message和destination都为空，则不响应点击
     var message : String = ""
     
-    init () {}
-    
     /// 用一个字符串表示所有内容，用来判断两个卡片是否相等，以便于计算卡片消息是否已读
     var stringValue : String {
-        return "\(icon)|\(title)|\(subtitle)|\(desc)|\(count1)|\(count2)|\(count3)|\(sortOrder)|\(destination)"
+        return "|\(icon)|\(title)|\(subtitle)|\(desc)|\(count0)|\(count1)|\(count2)|\(count3)|\(sortOrder)|\(destination)|"
     }
     
+    /// 保留默认构造函数，以便构造自定义的模型
+    init () {}
+    
+    /// 从课表模块的原始数据构造一行卡片详情
     init (classInfo : ClassInfo, teacher: String) {
         self.title = classInfo.className
         self.subtitle = teacher
@@ -58,6 +58,7 @@ class CardsRowModel {
         self.desc = time + " @ " + place
     }
     
+    /// 从实验模块的原始数据构造一行卡片详情
     init (experimentModel : ExperimentModel) {
         self.title = experimentModel.name
         self.subtitle = experimentModel.teacher
@@ -69,35 +70,44 @@ class CardsRowModel {
         self.sortOrder = ((year * 100) + month) * 100 + day
     }
     
+    /// 从考试模块的原始数据构造一行卡片详情
     init (examModel : ExamModel) {
         self.title = examModel.course
-        self.subtitle = examModel.periodAndTeacher
+        self.subtitle = examModel.period
         self.desc = examModel.timeAndPlace
-        self.count1 = "\(examModel.days)天"
+        self.count0 = "\(examModel.days)天"
+        self.sortOrder = examModel.days
     }
     
+    /// 从人文讲座模块的原始数据构造一行卡片详情
     init (lectureModel : LectureModel) {
         self.title = lectureModel.topic
         self.subtitle = lectureModel.speaker
         self.desc = lectureModel.dateAndPlace
     }
     
+    /// 从跑操模块的原始数据构造一行卡片详情
     init (pedetailCount : Int, remain : Int) {
         self.count1 = String(pedetailCount)
         self.count2 = String(max(45 - pedetailCount, 0))
         self.count3 = String(remain)
     }
     
+    /// 从教务通知的原始数据构造一行卡片详情
     init (jwcNoticeModel : JwcNoticeModel) {
         self.title = jwcNoticeModel.title
         self.desc = jwcNoticeModel.time
         self.destination = jwcNoticeModel.url
     }
     
+    /// 从活动版块的原始数据构造一行卡片详情
     init (activityModel : ActivityModel) {
         self.title = activityModel.title
         self.subtitle = activityModel.state.rawValue
         self.desc = activityModel.activityTime + " @ " + activityModel.location
         self.destination = activityModel.detailUrl
+        if destination == "" {
+            destination = "TAB1"
+        }
     }
 }

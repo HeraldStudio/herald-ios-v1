@@ -30,7 +30,7 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        swiper.syncApperance((tableView?.contentOffset)!)
+        swiper.syncApperance()
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
@@ -81,16 +81,8 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
         showProgressDialog()
         
         ApiThreadManager().addAll([
-            ApiRequest().api("lecture").uuid()
-                .toCache("herald_lecture_records") {json -> String in
-                    guard let str = json.rawString() else {return ""}
-                    return str
-            },
-            ApiRequest().url(ApiHelper.wechat_lecture_notice_url).uuid()
-                .toCache("herald_lecture_notices") {json -> String in
-                    guard let str = json.rawString() else {return ""}
-                    return str
-            }
+            ApiRequest().api("lecture").uuid().toCache("herald_lecture_records"),
+            ApiRequest().url(ApiHelper.wechat_lecture_notice_url).uuid().toCache("herald_lecture_notices")
         ]).onFinish { success in
             self.hideProgressDialog()
             if success {

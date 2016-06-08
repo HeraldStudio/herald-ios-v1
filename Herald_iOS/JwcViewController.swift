@@ -29,7 +29,7 @@ class JwcViewController : UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        swiper.syncApperance((tableView?.contentOffset)!)
+        swiper.syncApperance()
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
@@ -73,11 +73,7 @@ class JwcViewController : UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("jwc").uuid().toCache("herald_jwc") {
-            json -> String in
-                guard let str = json.rawString() else {return ""}
-                return str
-            }
+        ApiRequest().api("jwc").uuid().toCache("herald_jwc")
             .onFinish { success, _, _ in
                 self.hideProgressDialog()
                 if success {

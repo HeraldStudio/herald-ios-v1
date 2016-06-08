@@ -15,16 +15,18 @@ import SwiftyJSON
 class ExamCard {
     
     static func getRefresher () -> [ApiRequest] {
-        return [ApiRequest().api("exam").uuid()
-            .toCache("herald_exam") {json -> String in
-                guard let str = json.rawString() else {return ""}
-                return str
-            }]
+        return [ApiRequest().api("exam").uuid().toCache("herald_exam")]
     }
 
     static func getCard() -> CardsModel {
         let cache = CacheHelper.get("herald_exam")
+        if cache == "" {
+            return CardsModel(cellId: "CardsCellExam", module: R.module.exam, desc: "考试数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
+        }
+        
+        let customCache = CacheHelper.get("herald_exam_custom_\(ApiHelper.getUserName())")
         let json = JSON.parse(cache)["content"]
+        let jsonCustom = JSON.parse(customCache)
         
         var examList : [CardsRowModel] = []
         
@@ -37,10 +39,21 @@ class ExamCard {
             } catch { continue }
         }
         
+        for exam in jsonCustom.arrayValue {
+            do {
+                let examItem = try ExamModel(json: exam)
+                if (examItem.days >= 0) {
+                    examList.append(CardsRowModel(examModel: examItem))
+                }
+            } catch { continue }
+        }
+        
+        examList = examList.sort({$0.sortOrder < $1.sortOrder})
+        
         if (examList.count == 0) {
-            return CardsModel(cellId: "CardsCellExam", module: .Exam, desc: "最近没有新的考试安排", priority: .NO_CONTENT)
+            return CardsModel(cellId: "CardsCellExam", module: R.module.exam, desc: "最近没有新的考试安排", priority: .NO_CONTENT)
         } else {
-            let model = CardsModel(cellId: "CardsCellExam", module: .Exam, desc: "你最近有\(examList.count)场考试，抓紧时间复习吧", priority: .CONTENT_NOTIFY)
+            let model = CardsModel(cellId: "CardsCellExam", module: R.module.exam, desc: "你最近有\(examList.count)场考试，抓紧时间复习吧", priority: .CONTENT_NO_NOTIFY)
             model.rows.appendContentsOf(examList)
             return model;
         }
