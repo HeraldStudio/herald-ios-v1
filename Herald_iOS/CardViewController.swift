@@ -72,13 +72,13 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
             return
         }
         
-        let extra = JSON.parse(todayCache)["content"]["cardLeft"].stringValue.replaceAll(",", "")
+        let extra = JSON.parse(todayCache)["content"]["left"].stringValue.replaceAll(",", "")
         title = "余额：" + extra
         
         history.removeAll()
         let jsonCache = JSON.parse(cache)["content"]
         let jsonTodayCache = JSON.parse(todayCache)["content"]
-        let jsonArray = jsonTodayCache["detail"].arrayValue + jsonCache["detial"].arrayValue
+        let jsonArray = jsonTodayCache["detial"].arrayValue + jsonCache["detial"].arrayValue
         
         var lastDate = ""
         for json in jsonArray {

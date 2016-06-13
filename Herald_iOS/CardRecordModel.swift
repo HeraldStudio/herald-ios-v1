@@ -10,9 +10,6 @@ class CardRecordModel {
     init (json : JSON) {
         jsonDate = json["date"].stringValue
         jsonSystem = json["system"].stringValue
-        if jsonSystem == "" {
-            jsonSystem = json["mail"].stringValue
-        }
         jsonPrice = json["price"].stringValue
         jsonType = json["type"].stringValue
         jsonLeft = json["left"].stringValue
