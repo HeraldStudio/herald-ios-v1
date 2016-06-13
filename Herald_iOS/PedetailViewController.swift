@@ -64,6 +64,10 @@ class PedetailViewController : UIViewController, FSCalendarDelegate {
             calendar?.selectDate(historyDate)
             history.append(historyDate)
         }
+        
+        if history.count == 0 {
+            showMessage("本学期暂时没有跑操记录")
+        }
     }
     
     @IBAction func refreshCache () {
