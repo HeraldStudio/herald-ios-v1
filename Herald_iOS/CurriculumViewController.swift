@@ -61,9 +61,10 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
         let content = JSON.parse(data)
         
         // 计算总周数
+        var hasInvalid = false
+        
         for weekNum in CurriculumView.WEEK_NUMS {
             let arr = content[weekNum]
-            var hasInvalid = false
             for i in 0 ..< arr.count {
                 do {
                     let info = try ClassInfo(json: arr[i])
@@ -74,9 +75,9 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
                     hasInvalid = true
                 }
             }
-            if hasInvalid {
-                showInvalidClassError()
-            }
+        }
+        if hasInvalid {
+            showInvalidClassError()
         }
         
         // 如果没课，什么也不做
@@ -136,7 +137,11 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
             page.loadData()
         }
         
-        scrollView?.scrollRectToVisible((scrollView?.subviews[thisWeek - 1].frame)!, animated: true)
+        // 防止当前学期结束导致下标越界
+        // 不过前面已经保证过这里 scrollView.subviews.count > 0，不需要再做此判断
+        let curPage = min(thisWeek - 1, scrollView.subviews.count - 1)
+        scrollView?.scrollRectToVisible((scrollView?.subviews[curPage].frame)!, animated: true)
+        
         let page = abs(Int(scrollView!.contentOffset.x / scrollView!.frame.width))
         title = "第 \(page + 1) 周"
         
