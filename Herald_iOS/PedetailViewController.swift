@@ -105,9 +105,8 @@ class PedetailViewController : UIViewController, FSCalendarDelegate {
     }
     
     func hasDate(date : NSDate) -> Bool {
-        let comp = GCalendar(.Day)
         for k in history {
-            if k.timeIntervalSince1970 == comp.getDate().timeIntervalSince1970 { return true }
+            if k.timeIntervalSince1970 == date.timeIntervalSince1970 { return true }
         }
         return false
     }
