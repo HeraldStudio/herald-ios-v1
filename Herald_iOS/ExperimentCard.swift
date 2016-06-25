@@ -49,29 +49,26 @@ class ExperimentCard {
                 guard let month = ymd[1] else { continue }
                 guard let day = ymd[2] else { continue }
                 
-                let now = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .WeekOfYear, .Weekday, .Hour, .Minute], fromDate: NSDate())
-                var then = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Hour, .Minute], fromDate: NSDate())
+                let now = GCalendar()
+                let then = GCalendar(year, month, day)
                 
-                (then.year, then.month, then.day) = (year, month, day)
                 switch jsonObject["Day"].stringValue {
                 case "上午": (then.hour, then.minute) = (9, 45)
                 case "下午": (then.hour, then.minute) = (13, 45)
                 default: (then.hour, then.minute) = (18, 15)
                 }
                 
-                then = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .WeekOfYear, .Weekday, .Hour, .Minute], fromDate: NSCalendar.currentCalendar().dateFromComponents(then)!)
-                
                 let row = CardsRowModel(experimentModel: ExperimentModel(json: jsonObject))
                 
                 // 没开始的实验全部单独记录下来
-                if NSCalendar.currentCalendar().dateFromComponents(then)?.timeIntervalSince1970 > NSDate().timeIntervalSince1970 {
+                if then > now {
                     allExperiments.append(row)
                 }
                 
                 // 属于同一周
                 if then.year == now.year && then.weekOfYear == now.weekOfYear {
                     // 如果发现今天有实验
-                    if then.weekday == now.weekday {
+                    if then.dayOfWeekFromSunday == now.dayOfWeekFromSunday {
                         // 如果是15分钟之内快要开始的实验，放弃之前所有操作，直接返回这个实验的提醒
                         let nowStamp = now.hour * 60 + now.minute
                         let thenStamp = then.hour * 60 + then.minute
@@ -106,7 +103,7 @@ class ExperimentCard {
                     }
                     
                     // 如果不是今天的实验但已经结束，跳过它
-                    if then.weekday <= now.weekday {
+                    if then.dayOfWeekFromSunday.rawValue <= now.dayOfWeekFromSunday.rawValue {
                         continue
                     }
                     
