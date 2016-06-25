@@ -72,13 +72,13 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
             return
         }
         
-        let extra = JSON.parse(todayCache)["content"]["cardLeft"].stringValue.replaceAll(",", "")
+        let extra = JSON.parse(todayCache)["content"]["left"].stringValue.replaceAll(",", "")
         title = "余额：" + extra
         
         history.removeAll()
         let jsonCache = JSON.parse(cache)["content"]
         let jsonTodayCache = JSON.parse(todayCache)["content"]
-        let jsonArray = jsonTodayCache["detail"].arrayValue + jsonCache["detial"].arrayValue
+        let jsonArray = jsonTodayCache["detial"].arrayValue + jsonCache["detial"].arrayValue
         
         var lastDate = ""
         for json in jsonArray {
@@ -110,8 +110,8 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         
         // 取上次刷新日期，与当前日期比较
         let lastRefresh = CacheHelper.get("herald_card_date")
-        let dateComp = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: NSDate())
-        let stamp = "\(dateComp.year)/\(dateComp.month)/\(dateComp.day)"
+        let date = GCalendar(.Day)
+        let stamp = "\(date.year)/\(date.month)/\(date.day)"
         
         // 若与当前日期不同，刷新完整流水记录
         if lastRefresh != stamp {

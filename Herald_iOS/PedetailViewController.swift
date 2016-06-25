@@ -52,17 +52,19 @@ class PedetailViewController : UIViewController, FSCalendarDelegate {
             let date = k["sign_date"].stringValue
             
             let ymd = date.replaceAll("-", "/").split("/")
-            let unit = NSCalendarUnit(arrayLiteral: .Year, .Month, .Day)
-            let comp = NSCalendar.currentCalendar().components(unit, fromDate: NSDate())
+            let comp = GCalendar(.Day)
             
             guard let year = Int(ymd[0]) else { showError(); return }
             guard let month = Int(ymd[1]) else { showError(); return }
             guard let day = Int(ymd[2]) else { showError(); return }
             comp.year = year; comp.month = month; comp.day = day
             
-            guard let historyDate = NSCalendar.currentCalendar().dateFromComponents(comp) else { showError(); return }
-            calendar?.selectDate(historyDate)
-            history.append(historyDate)
+            calendar?.selectDate(comp.getDate())
+            history.append(comp.getDate())
+        }
+        
+        if history.count == 0 {
+            showMessage("本学期暂时没有跑操记录")
         }
     }
     
@@ -71,7 +73,7 @@ class PedetailViewController : UIViewController, FSCalendarDelegate {
         ApiThreadManager().addAll([
             ApiRequest().api("pc").uuid().noCheck200().toCache("herald_pc_forecast") { json in json["content"] }
                 .onFinish { success, code, _ in
-                    let todayComp = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate())
+                    let todayComp = GCalendar(.Day)
                     let today = String(format: "%4d-%02d-%02d", todayComp.year, todayComp.month, todayComp.day)
                     if success {
                         CacheHelper.set("herald_pc_date", today)
@@ -103,11 +105,8 @@ class PedetailViewController : UIViewController, FSCalendarDelegate {
     }
     
     func hasDate(date : NSDate) -> Bool {
-        let unit = NSCalendarUnit(arrayLiteral: .Year, .Month, .Day)
-        let comp = NSCalendar.currentCalendar().components(unit, fromDate: date)
-        guard let sharpDate = NSCalendar.currentCalendar().dateFromComponents(comp) else { return false }
         for k in history {
-            if k.compare(sharpDate) == NSComparisonResult.OrderedSame { return true }
+            if k.timeIntervalSince1970 == date.timeIntervalSince1970 { return true }
         }
         return false
     }

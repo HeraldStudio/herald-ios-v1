@@ -40,14 +40,16 @@ class CurriculumView : UIViewController {
     var sidebar : [String : String]!
     var week : Int!
     var curWeek : Bool!
+    var beginOfTerm : GCalendar!
     var fontSize : CGFloat!
 
-    func data (obj : JSON, sidebar : [String : String], week : Int, curWeek : Bool) {
+    func data (obj : JSON, sidebar : [String : String], week : Int, curWeek : Bool, beginOfTerm : GCalendar) {
         self.obj = obj
         self.sidebar = sidebar
         self.week = week
         self.curWeek = curWeek
-        fontSize = min(16, self.view.bounds.width / 28)
+        self.beginOfTerm = beginOfTerm
+        fontSize = min(15, self.view.bounds.width / 30)
     }
     
     var topPadding : CGFloat = 0
@@ -71,10 +73,7 @@ class CurriculumView : UIViewController {
         columnsCount = 7
         
         // 开始求当天的星期
-        let components = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: NSDate())
-        
-        // 格里高利历中，weekday范围1~7，1为周日，需要转换成0到6，0为周一
-        let dayOfWeek = (components.weekday + 5) % 7
+        let dayOfWeek = GCalendar(.Day).dayOfWeekFromMonday.rawValue
         
         // 双重列表，用每个子列表表示一天的课程
         var listOfList : [[ClassInfo]] = []
@@ -141,15 +140,19 @@ class CurriculumView : UIViewController {
         w *= width / (CGFloat(columnsCount) + addition)
         
         // 绘制星期标题
+        let cal = GCalendar(beginOfTerm)
+        cal += ((week - 1) * 7 + dayIndex) * 86400
+        
         let v = UILabel(frame: CGRect(
             x : x ,
             y : topPadding,
             width : w ,
             height : height / CGFloat(CurriculumView.PERIOD_COUNT + 1)
             ))
-        v.text = CurriculumView.WEEK_NUMS_CN[dayIndex]
-        v.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
+        v.text = String(format: "%d月%d日\n\(CurriculumView.WEEK_NUMS_CN[dayIndex])", cal.month, cal.day)
+        v.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
         v.textAlignment = .Center
+        v.numberOfLines = 0
         v.font = UIFont(name: "HelveticaNeue", size: fontSize)
         v.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(v)

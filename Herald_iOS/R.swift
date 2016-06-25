@@ -8,7 +8,7 @@ class R {
     class module {
         static let array = [
             card, pedetail, curriculum, experiment, lecture, jwc, exam,
-            seunet, gymreserve, library, grade, srtp, schoolbus, schedule, quanyi, emptyroom
+            seunet, gymreserve, library, grade, srtp, schoolbus, schedule, quanyi, emptyroom//, deskgame
         ]
         
         // 有卡片的模块

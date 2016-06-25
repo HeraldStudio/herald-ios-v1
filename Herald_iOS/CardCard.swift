@@ -19,9 +19,9 @@ class CardCard {
         let cache = CacheHelper.get("herald_card_today")
         let content = JSON.parse(cache)["content"]
         // 获取余额并且设置
-        if let extra = Float(content["cardLeft"].stringValue.replaceAll(",", "")) {
+        if let extra = Float(content["left"].stringValue.replaceAll(",", "")) {
             if extra < 20 {
-                let model = CardsModel(cellId: "CardsCellCard", module: R.module.card, desc: "一卡通余额还有\(String(format: "%.2f", extra))元，快点我充值~\n如果已经充值过了，需要刷卡消费一次才会更新哦~", priority: .CONTENT_NOTIFY)
+                let model = CardsModel(cellId: "CardsCellCard", module: R.module.card, desc: "一卡通余额还有\(String(format: "%.2f", extra))元，快点我充值~\n如果已经充值过了，需要在食堂刷卡一次才会更新哦~", priority: .CONTENT_NOTIFY)
                 model.rows[0].destination = CardViewController.url
                 return model
             } else {

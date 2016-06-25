@@ -58,7 +58,7 @@ class CurriculumNotifier {
         }
         
         // 为了保险，检查开学日期的星期，不是周一的话往前推到周一
-        cal -= (cal.dayOfWeek.rawValue + 6) % 7 * 24 * 60 * 60
+        cal -= cal.dayOfWeekFromMonday.rawValue * 24 * 60 * 60
         
         for i in 0 ..< 7 {
             for k in content[CurriculumView.WEEK_NUMS[i]].arrayValue {

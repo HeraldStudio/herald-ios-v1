@@ -21,9 +21,9 @@ class JwcNoticeModel {
     }
     
     init (json : JSON) {
-        let todayComp = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate())
+        let todayComp = GCalendar(.Day)
         let today = String(format: "%4d-%02d-%02d", todayComp.year, todayComp.month, todayComp.day)
-        let yesterdayComp = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate().dateByAddingTimeInterval(-86400))
+        let yesterdayComp = todayComp - 86400
         let yesterday = String(format: "%4d-%02d-%02d", yesterdayComp.year, yesterdayComp.month, yesterdayComp.day)
         
         title = json["title"].stringValue

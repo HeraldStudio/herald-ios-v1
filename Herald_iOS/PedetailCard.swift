@@ -17,7 +17,7 @@ class PedetailCard {
                     json in json["content"]
                 }
                 .onFinish { success, code, _ in
-                    let todayComp = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate())
+                    let todayComp = GCalendar(.Day)
                     let today = String(format: "%4d-%02d-%02d", todayComp.year, todayComp.month, todayComp.day)
                     if success {
                         CacheHelper.set("herald_pc_date", today)
@@ -49,7 +49,7 @@ class PedetailCard {
             return CardsModel(cellId: "CardsCellPedetail", module: R.module.pedetail, desc: "跑操数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
         }
         
-        let _now = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Hour, .Minute], fromDate: NSDate())
+        let _now = GCalendar()
         let now = _now.hour * 60 + _now.minute
         let startTime = 6 * 60 + 20
         let endTime = 7 * 60 + 20

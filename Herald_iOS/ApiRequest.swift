@@ -195,9 +195,13 @@ class ApiRequest {
      **/
     func run () {
         let request = Alamofire.request(isGet ? .GET : .POST, url!, parameters: map, encoding: .URL)
-        if isDebug {
-            debugPrint(request)
+        
+        request.responseString { response in
+            if self.isDebug {
+                debugPrint(request)
+                debugPrint(response)
+            }
+            self.callback(response)
         }
-        request.responseString(completionHandler: callback)
     }
 }
