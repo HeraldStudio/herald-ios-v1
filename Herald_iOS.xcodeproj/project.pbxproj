@@ -37,10 +37,13 @@
 		D31DE5181CC359D300E4891D /* CurriculumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5171CC359D300E4891D /* CurriculumViewController.swift */; };
 		D31DE51A1CC35A3100E4891D /* CurriculumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5191CC35A3100E4891D /* CurriculumView.swift */; };
 		D3325D051CC89BA0002060A5 /* SwipeRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */; };
+		D33438501D1A185300CD49D6 /* LibrarySearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D334384F1D1A185300CD49D6 /* LibrarySearchTableViewCell.swift */; };
+		D33438521D1A18B400CD49D6 /* LibrarySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33438511D1A18B400CD49D6 /* LibrarySearchViewController.swift */; };
+		D33438591D1A2DE900CD49D6 /* NirKxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D33438581D1A2DE900CD49D6 /* NirKxMenu.m */; };
 		D33678F81CE5971C001E7C25 /* CurriculumNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */; };
 		D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348580B1CBB48FD00B55E76 /* ApiHelper.swift */; };
 		D348580E1CBB4FF900B55E76 /* CacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348580D1CBB4FF900B55E76 /* CacheHelper.swift */; };
-		D34858111CBB57F600B55E76 /* NSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858101CBB57F600B55E76 /* NSUserDefaults.swift */; };
+		D34858111CBB57F600B55E76 /* ExtNSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858101CBB57F600B55E76 /* ExtNSUserDefaults.swift */; };
 		D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858121CBB60A600B55E76 /* ApiRequest.swift */; };
 		D34BCC731CE5D379005F4164 /* ExamNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BCC721CE5D379005F4164 /* ExamNotifier.swift */; };
 		D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34E95851CCDCCE700AD1119 /* JwcCard.swift */; };
@@ -62,7 +65,7 @@
 		D39B879E1CCD0C0B00EC5280 /* ExamCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B879D1CCD0C0B00EC5280 /* ExamCard.swift */; };
 		D39B87A01CCD0F0E00EC5280 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B879F1CCD0F0E00EC5280 /* Error.swift */; };
 		D39B87A21CCD120F00EC5280 /* LectureCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87A11CCD120F00EC5280 /* LectureCard.swift */; };
-		D39B87A41CCD12EC00EC5280 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87A31CCD12EC00EC5280 /* String.swift */; };
+		D39B87A41CCD12EC00EC5280 /* ExtString.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87A31CCD12EC00EC5280 /* ExtString.swift */; };
 		D39B87A61CCD194E00EC5280 /* PedetailCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39B87A51CCD194E00EC5280 /* PedetailCard.swift */; };
 		D3A0C1701CBB7A3A00744640 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C16F1CBB7A3A00744640 /* MainViewController.swift */; };
 		D3A0C1721CBB7A9800744640 /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1711CBB7A9800744640 /* CardsViewController.swift */; };
@@ -84,7 +87,7 @@
 		D3D5D44B1CE99D63000E406A /* NoSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */; };
 		D3D5D44D1CE99EDC000E406A /* GymFriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D44C1CE99EDC000E406A /* GymFriendModel.swift */; };
 		D3D5D44F1CE9AFF1000E406A /* GymAddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D44E1CE9AFF1000E406A /* GymAddFriendViewController.swift */; };
-		D3D849FC1CFBD88200F083DF /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D849FB1CFBD88200F083DF /* JSON.swift */; };
+		D3D849FC1CFBD88200F083DF /* ExtJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D849FB1CFBD88200F083DF /* ExtJSON.swift */; };
 		D3D849FF1CFBE75000F083DF /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D849FE1CFBE75000F083DF /* R.swift */; };
 		D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */; };
 		D3E6BD7F1CC8C07F0074FF6D /* ModuleManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */; };
@@ -109,7 +112,7 @@
 		D3F4734B1CCA146800750FFB /* LectureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4734A1CCA146800750FFB /* LectureTableViewCell.swift */; };
 		D3F4734D1CCA153A00750FFB /* LectureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4734C1CCA153A00750FFB /* LectureModel.swift */; };
 		D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4734E1CCA15C900750FFB /* LectureViewController.swift */; };
-		D3FBC2F21CCC51F900305428 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FBC2F11CCC51F900305428 /* UIViewController.swift */; };
+		D3FBC2F21CCC51F900305428 /* ExtUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FBC2F11CCC51F900305428 /* ExtUIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,10 +179,15 @@
 		D31DE5171CC359D300E4891D /* CurriculumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumViewController.swift; sourceTree = "<group>"; };
 		D31DE5191CC35A3100E4891D /* CurriculumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumView.swift; sourceTree = "<group>"; };
 		D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeRefreshHeader.swift; sourceTree = "<group>"; };
+		D334384F1D1A185300CD49D6 /* LibrarySearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibrarySearchTableViewCell.swift; sourceTree = "<group>"; };
+		D33438511D1A18B400CD49D6 /* LibrarySearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibrarySearchViewController.swift; sourceTree = "<group>"; };
+		D33438551D1A2DE900CD49D6 /* Herald_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Herald_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		D33438571D1A2DE900CD49D6 /* NirKxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NirKxMenu.h; sourceTree = "<group>"; };
+		D33438581D1A2DE900CD49D6 /* NirKxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NirKxMenu.m; sourceTree = "<group>"; };
 		D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumNotifier.swift; sourceTree = "<group>"; };
 		D348580B1CBB48FD00B55E76 /* ApiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHelper.swift; sourceTree = "<group>"; };
 		D348580D1CBB4FF900B55E76 /* CacheHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheHelper.swift; sourceTree = "<group>"; };
-		D34858101CBB57F600B55E76 /* NSUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSUserDefaults.swift; sourceTree = "<group>"; };
+		D34858101CBB57F600B55E76 /* ExtNSUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtNSUserDefaults.swift; sourceTree = "<group>"; };
 		D34858121CBB60A600B55E76 /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
 		D34BCC721CE5D379005F4164 /* ExamNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamNotifier.swift; sourceTree = "<group>"; };
 		D34E95851CCDCCE700AD1119 /* JwcCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcCard.swift; sourceTree = "<group>"; };
@@ -202,7 +210,7 @@
 		D39B879D1CCD0C0B00EC5280 /* ExamCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamCard.swift; sourceTree = "<group>"; };
 		D39B879F1CCD0F0E00EC5280 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		D39B87A11CCD120F00EC5280 /* LectureCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureCard.swift; sourceTree = "<group>"; };
-		D39B87A31CCD12EC00EC5280 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		D39B87A31CCD12EC00EC5280 /* ExtString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtString.swift; sourceTree = "<group>"; };
 		D39B87A51CCD194E00EC5280 /* PedetailCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedetailCard.swift; sourceTree = "<group>"; };
 		D3A0C16F1CBB7A3A00744640 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D3A0C1711CBB7A9800744640 /* CardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
@@ -230,7 +238,7 @@
 		D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		D3D5D44C1CE99EDC000E406A /* GymFriendModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymFriendModel.swift; sourceTree = "<group>"; };
 		D3D5D44E1CE9AFF1000E406A /* GymAddFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymAddFriendViewController.swift; sourceTree = "<group>"; };
-		D3D849FB1CFBD88200F083DF /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		D3D849FB1CFBD88200F083DF /* ExtJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtJSON.swift; sourceTree = "<group>"; };
 		D3D849FE1CFBE75000F083DF /* R.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.swift; sourceTree = "<group>"; };
 		D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleManageTableViewCell.swift; sourceTree = "<group>"; };
 		D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleManagerViewController.swift; sourceTree = "<group>"; };
@@ -255,7 +263,7 @@
 		D3F4734A1CCA146800750FFB /* LectureTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureTableViewCell.swift; sourceTree = "<group>"; };
 		D3F4734C1CCA153A00750FFB /* LectureModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureModel.swift; sourceTree = "<group>"; };
 		D3F4734E1CCA15C900750FFB /* LectureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureViewController.swift; sourceTree = "<group>"; };
-		D3FBC2F11CCC51F900305428 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		D3FBC2F11CCC51F900305428 /* ExtUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtUIViewController.swift; sourceTree = "<group>"; };
 		DA028C4F1CDF422F005343DE /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -297,11 +305,18 @@
 		D31DE50C1CC334D800E4891D /* custom */ = {
 			isa = PBXGroup;
 			children = (
+				D33438571D1A2DE900CD49D6 /* NirKxMenu.h */,
+				D33438581D1A2DE900CD49D6 /* NirKxMenu.m */,
+				D34858101CBB57F600B55E76 /* ExtNSUserDefaults.swift */,
+				D3FBC2F11CCC51F900305428 /* ExtUIViewController.swift */,
+				D39B87A31CCD12EC00EC5280 /* ExtString.swift */,
+				D3D849FB1CFBD88200F083DF /* ExtJSON.swift */,
 				D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */,
 				D35FC6271CE3236300BE844C /* PullLoadFooter.swift */,
 				D39B879F1CCD0F0E00EC5280 /* Error.swift */,
 				D354905B1CDC519100E59615 /* GCalendar.swift */,
 				D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */,
+				D33438551D1A2DE900CD49D6 /* Herald_iOS-Bridging-Header.h */,
 			);
 			name = custom;
 			sourceTree = "<group>";
@@ -337,17 +352,6 @@
 				D3F375C61CDB3957004DDEA5 /* WifiLoginHelper.swift */,
 			);
 			name = helper;
-			sourceTree = "<group>";
-		};
-		D348580F1CBB57DC00B55E76 /* extension */ = {
-			isa = PBXGroup;
-			children = (
-				D34858101CBB57F600B55E76 /* NSUserDefaults.swift */,
-				D3FBC2F11CCC51F900305428 /* UIViewController.swift */,
-				D39B87A31CCD12EC00EC5280 /* String.swift */,
-				D3D849FB1CFBD88200F083DF /* JSON.swift */,
-			);
-			name = extension;
 			sourceTree = "<group>";
 		};
 		D34859591CF2C31D00EFCDB2 /* deskgame */ = {
@@ -493,6 +497,8 @@
 			children = (
 				D3ED99E51CCB651300001E2B /* LibraryViewController.swift */,
 				D3ED99E31CCB64BE00001E2B /* LibraryTableViewCell.swift */,
+				D33438511D1A18B400CD49D6 /* LibrarySearchViewController.swift */,
+				D334384F1D1A185300CD49D6 /* LibrarySearchTableViewCell.swift */,
 				D3ED99E11CCB5BCB00001E2B /* LibraryBookModel.swift */,
 			);
 			name = library;
@@ -566,7 +572,6 @@
 				D3D35DE31CBA2E8200B18092 /* Assets.xcassets */,
 				D34858091CBB46AF00B55E76 /* app_main */,
 				D31DE50C1CC334D800E4891D /* custom */,
-				D348580F1CBB57DC00B55E76 /* extension */,
 				D348580A1CBB48EF00B55E76 /* helper */,
 				D3D35E0B1CBA2FFC00B18092 /* mod_auth */,
 				D39B87981CCCEC0C00EC5280 /* mod_cards */,
@@ -725,13 +730,13 @@
 				TargetAttributes = {
 					D3D35DD81CBA2E8200B18092 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 9837P5SWZ9;
+						DevelopmentTeam = MW9PK9KE48;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
 							};
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -847,6 +852,7 @@
 			files = (
 				D3D5D43F1CE97149000E406A /* GymChooseTimeViewController.swift in Sources */,
 				D39B87971CCCCA0200EC5280 /* CardsRowModel.swift in Sources */,
+				D33438501D1A185300CD49D6 /* LibrarySearchTableViewCell.swift in Sources */,
 				D306E0281CCA403D00FA3812 /* ExamModel.swift in Sources */,
 				D39B879C1CCCF02600EC5280 /* ExperimentCard.swift in Sources */,
 				D38879801CEAB601004294A8 /* GymRecordModel.swift in Sources */,
@@ -865,11 +871,12 @@
 				D3D5D4411CE9737B000E406A /* GymTimeModel.swift in Sources */,
 				D31DE5141CC3597800E4891D /* CurriculumBlock.swift in Sources */,
 				D306E0221CCA3DFD00FA3812 /* AppModule.swift in Sources */,
-				D39B87A41CCD12EC00EC5280 /* String.swift in Sources */,
+				D39B87A41CCD12EC00EC5280 /* ExtString.swift in Sources */,
 				D3A0C1721CBB7A9800744640 /* CardsViewController.swift in Sources */,
+				D33438591D1A2DE900CD49D6 /* NirKxMenu.m in Sources */,
 				D3E6BD7F1CC8C07F0074FF6D /* ModuleManagerViewController.swift in Sources */,
 				D3F473471CCA05CD00750FFB /* JwcViewController.swift in Sources */,
-				D34858111CBB57F600B55E76 /* NSUserDefaults.swift in Sources */,
+				D34858111CBB57F600B55E76 /* ExtNSUserDefaults.swift in Sources */,
 				D3ED99E01CCB3DFD00001E2B /* SrtpViewController.swift in Sources */,
 				D31DE51A1CC35A3100E4891D /* CurriculumView.swift in Sources */,
 				D3D5D43D1CE95603000E406A /* GymSportModel.swift in Sources */,
@@ -882,7 +889,7 @@
 				D31DE50E1CC334EC00E4891D /* ModuleTableViewCell.swift in Sources */,
 				D31DE5181CC359D300E4891D /* CurriculumViewController.swift in Sources */,
 				D3A0C1771CBB7B2300744640 /* MyInfoViewController.swift in Sources */,
-				D3FBC2F21CCC51F900305428 /* UIViewController.swift in Sources */,
+				D3FBC2F21CCC51F900305428 /* ExtUIViewController.swift in Sources */,
 				D3ED99DA1CCB091700001E2B /* SchoolbusViewController.swift in Sources */,
 				D306E02E1CCA691F00FA3812 /* GradeViewController.swift in Sources */,
 				D31821B61CC48D5400992355 /* ServiceHelper.swift in Sources */,
@@ -892,7 +899,7 @@
 				D3F473451CCA04C100750FFB /* JwcTableViewCell.swift in Sources */,
 				D306E02C1CCA68EB00FA3812 /* GradeTableViewCell.swift in Sources */,
 				D3ED99E21CCB5BCB00001E2B /* LibraryBookModel.swift in Sources */,
-				D3D849FC1CFBD88200F083DF /* JSON.swift in Sources */,
+				D3D849FC1CFBD88200F083DF /* ExtJSON.swift in Sources */,
 				D3D5D44D1CE99EDC000E406A /* GymFriendModel.swift in Sources */,
 				D30661CE1CF3011B006583C2 /* GameAvailableCardTableViewCell.swift in Sources */,
 				D31DE5121CC3592F00E4891D /* ClassInfo.swift in Sources */,
@@ -917,6 +924,7 @@
 				D30661CA1CF2C50E006583C2 /* GameCreateViewController.swift in Sources */,
 				D3D5D44B1CE99D63000E406A /* NoSelectionTableViewCell.swift in Sources */,
 				D3D5D4431CE99426000E406A /* GymNewViewController.swift in Sources */,
+				D33438521D1A18B400CD49D6 /* LibrarySearchViewController.swift in Sources */,
 				D35FC6221CE2FEF400BE844C /* ActivityViewController.swift in Sources */,
 				D306E02A1CCA68A700FA3812 /* GradeModel.swift in Sources */,
 				D306E0241CCA3F7700FA3812 /* ExamViewController.swift in Sources */,
@@ -1083,16 +1091,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Herald_iOS/Herald_iOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1104,16 +1113,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Herald_iOS/Herald_iOS-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

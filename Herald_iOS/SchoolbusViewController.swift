@@ -77,7 +77,7 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
                 
                 // 如果今天双休日，要显示的也是双休日，或者今天工作日，要显示的也是工作日，则判断并高亮当前的车
                 if nowWeekend() == weekend {
-                    let nowComp = NSCalendar.currentCalendar().components(NSCalendarUnit(arrayLiteral: .Hour, .Minute), fromDate: NSDate())
+                    let nowComp = GCalendar()
                     
                     let nowTime60 = nowComp.hour * 60 + nowComp.minute
                     let startTime60 = startHour * 60 + startMinute
@@ -144,11 +144,7 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
     }
     
     func nowWeekend () -> Bool {
-        let nowComp = NSCalendar.currentCalendar().components(NSCalendarUnit(arrayLiteral: .Weekday), fromDate: NSDate())
-        
-        let dayOfWeek = (nowComp.weekday + 5) % 7
-        
-        return dayOfWeek >= 5
+        return GCalendar().dayOfWeekFromMonday.rawValue >= 5
     }
     
     @IBAction func switchWeekdayAndWeekend () {

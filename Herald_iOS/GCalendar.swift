@@ -49,8 +49,8 @@ public class GCalendar : CustomDebugStringConvertible {
         case Second
     }
     
-    /// 表示星期的枚举值，星期虽不可设置，但可以被使用者查询到。遵守可转换成字符串的协议。
-    public enum DayOfWeek : Int, CustomDebugStringConvertible {
+    /// 表示星期（从周日开始）的枚举值，星期虽不可设置，但可以被使用者查询到。遵守可转换成字符串的协议。
+    public enum DayOfWeekFromSunday : Int, CustomDebugStringConvertible {
         case Sunday
         case Monday
         case Tuesday
@@ -61,6 +61,21 @@ public class GCalendar : CustomDebugStringConvertible {
         
         public var debugDescription: String {
             return ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][self.rawValue]
+        }
+    }
+    
+    /// 表示星期（从周一开始）的枚举值，星期虽不可设置，但可以被使用者查询到。遵守可转换成字符串的协议。
+    public enum DayOfWeekFromMonday : Int, CustomDebugStringConvertible {
+        case Monday
+        case Tuesday
+        case Wednesday
+        case Thursday
+        case Friday
+        case Saturday
+        case Sunday
+        
+        public var debugDescription: String {
+            return ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][self.rawValue]
         }
     }
     
@@ -218,11 +233,19 @@ public class GCalendar : CustomDebugStringConvertible {
         }
     }
     
-    /// 星期的获取
-    public var dayOfWeek : DayOfWeek {
+    /// 星期的获取（0为周日，1为周一，以此类推）
+    public var dayOfWeekFromSunday : DayOfWeekFromSunday {
         get {
             // dstComp.weekday 是以1为周日，2为周一，以此类推，因此要减1
-            return DayOfWeek(rawValue: dstComp.weekday - 1)!
+            return DayOfWeekFromSunday(rawValue: (dstComp.weekday - 1) % 7)!
+        }
+    }
+    
+    /// 星期的获取（0为周一，1为周二，以此类推）
+    public var dayOfWeekFromMonday : DayOfWeekFromMonday {
+        get {
+            // dstComp.weekday 是以1为周日，2为周一，以此类推，因此要+5
+            return DayOfWeekFromMonday(rawValue: (dstComp.weekday + 5) % 7)!
         }
     }
     
@@ -259,7 +282,7 @@ public class GCalendar : CustomDebugStringConvertible {
     /// 用字符串表示
     public var debugDescription: String {
         get {
-            return String(format: "%d-%02d-%02d %02d:%02d:%02d \(dayOfWeek)", year, month, day, hour, minute, second)
+            return String(format: "%d-%02d-%02d %02d:%02d:%02d \(dayOfWeekFromSunday)", year, month, day, hour, minute, second)
         }
     }
     

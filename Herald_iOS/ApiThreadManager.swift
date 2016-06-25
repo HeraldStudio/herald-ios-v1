@@ -14,6 +14,13 @@ class ApiThreadManager {
     
     var errorPool = NSMutableArray()
     
+    var isDebug = false
+    
+    func debug () -> ApiThreadManager {
+        isDebug = true
+        return self
+    }
+    
     func add (request : ApiRequest) -> ApiThreadManager {
         // 吃掉该线程的消息显示
         request.errorPool(errorPool)
@@ -22,6 +29,10 @@ class ApiThreadManager {
         isRequestFinished.append(false)
         // 在线程列表中加入该线程
         requests.append(request)
+        // Debug设置
+        if isDebug {
+            request.debug()
+        }
         // 设置该线程结束时执行的操作
         request.onFinish { success, code, response in
             // 在数组中标记该线程已结束

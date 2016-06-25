@@ -144,69 +144,26 @@ class GymNewViewController : UIViewController, UITableViewDataSource, UITableVie
             showProgressDialog()
             working = true
             
-            /// 一级请求，获取预约前的第一项预约记录id
-            ApiRequest()
-                .api("yuyue").uuid().post("method", "myOrder")
-                .onFinish { oldSuccess, _, response in
-                    let oldId0 = JSON.parse(response)["content"]["rows"][0]["id"].intValue
+            ApiRequest().api("yuyue").uuid()
+                .post("method", "new")
+                .post("orderVO.itemId", "\(self.sport.id)")
+                .post("orderVO.useTime", self.useTime)
+                .post("orderVO.useMode", self.halfEnabled ? "2" : "1")
+                .post("orderVO.phone", self.phoneCell.phone.text!)
+                .post("useUserIds", "[" + self.invitedFriends.map { s in "\"\(s.userId)\"" }.joinWithSeparator(",") + "]" )
+                .post("orderVO.remark", self.useTime)
+                .onFinish { success, _, response in
+                    self.hideProgressDialog()
+                    self.working = false
+                    let code = JSON.parse(response)["content"]["code"].intValue
                     
-                    /// 二级请求，执行预约
-                    ApiRequest().api("yuyue").uuid()
-                        .post("method", "new")
-                        .post("orderVO.itemId", "\(self.sport.id)")
-                        .post("orderVO.useTime", self.useTime)
-                        .post("orderVO.useMode", self.halfEnabled ? "2" : "1")
-                        .post("orderVO.phone", self.phoneCell.phone.text!)
-                        .post("useUserIds", "[" + self.invitedFriends.map { s in "\"\(s.userId)\"" }.joinWithSeparator(",") + "]" )
-                        .post("orderVO.remark", self.useTime)
-                        .onFinish { midSuccess, _, _ in
-                            
-                            /// 三级请求，获取预约后的第一项预约记录id
-                            ApiRequest()
-                                .api("yuyue").uuid().post("method", "myOrder")
-                                // 新预约记录直接存入缓存
-                                .toCache("herald_gymreserve_myorder")
-                                .onFinish { newSuccess, _, response in
-                                    self.hideProgressDialog()
-                                    self.working = false
-                                    
-                                    let newId0 = JSON.parse(response)["content"]["rows"][0]["id"].intValue
-                                    let success = oldId0 != newId0 && midSuccess
-                                    
-                                    /// 若id不同，说明预约成功
-                                    if oldSuccess && newSuccess {
-                                        if success {
-                                            self.showMessage("预约成功")
-                                            self.finished = true
-                                            self.showQuestionDialog("预约成功，你可以分享给好友或备忘录，防止忘记有关信息喔~", runAfter: { 
-                                                self.shareResult()
-                                            })
-                                        } else {
-                                            self.showQuestionDialog("预约失败，请尝试重新选择时段", runAfter: {
-                                                self.dismiss()
-                                            })
-                                        }
-                                    } else {
-                                        self.showMessage("判断预约结果失败，请手动检查是否已预约")
-                                    }
-                                }.run()
-                        }.run()
+                    if success && code == 0 {
+                        self.showQuestionDialog("新增预约成功") { self.dismiss() }
+                    } else {
+                        self.showQuestionDialog("预约失败，请尝试重新选择时段") { self.dismiss() }
+                    }
                 }.run()
         }
-    }
-    
-    func shareResult () {
-        let shareUrl = "http://app.heraldstudio.com"
-        let shareText = "我使用新版 #小猴偷米App# 成功预约了 \(useTime!) 的\(sport.name)馆"
-            + (sport.allowHalf ? "（\(halfEnabled ? "半场" : "全场")）" : "")
-            + "，并邀请"
-            + invitedFriends.map { model -> String in model.name }.joinWithSeparator("、")
-            + "一起参与~ " + shareUrl
-        
-        let items : [AnyObject] = [shareText]
-        let vc = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        vc.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]
-        presentViewController(vc, animated: true, completion: nil)
     }
     
     func dismiss () {

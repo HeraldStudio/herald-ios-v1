@@ -34,7 +34,7 @@ class LectureCard {
             guard let month = Int(mdStr[0]) else { continue }
             guard let day = Int(mdStr[1]) else { continue }
             
-            let time = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Hour, .Minute], fromDate: NSDate())
+            let time = GCalendar()
             if (time.month == month && time.day == day) {
                 if (time.hour * 60 + time.minute < 19 * 60) {
                     let row = CardsRowModel(lectureModel: LectureModel(json: lecture))

@@ -18,7 +18,9 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
-        tableView?.tableHeaderView = swiper
+        tableView.tableHeaderView = swiper
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 72
         loadCache()
     }
     
@@ -52,29 +54,14 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
         // 解析已借图书缓存
         var borrowList : [LibraryBookModel] = []
         for k in JSON.parse(borrowCache)["content"].arrayValue {
-            let dueDate = k["due_date"].stringValue
-            let author = k["author"].stringValue
-            let barcode = k["barcode"].stringValue
-            let renderDate = k["render_date"].stringValue
-            //  let place = k["place"].stringValue
-            let title = k["title"].stringValue
-            let renewTime = k["renew_time"].stringValue
-            
-            let model = LibraryBookModel(title, author, "\(renderDate)借书 / \(dueDate)到期 / \(renewTime == "0" ? "点击续借" : "已续借")", barcode, "")
-            borrowList.append(model)
+            borrowList.append(LibraryBookModel(borrowedBookJson: k))
         }
         list.append(borrowList)
         
         // 解析热门图书缓存
         var hotList : [LibraryBookModel] = []
         for k in JSON.parse(hotCache)["content"].arrayValue {
-            let count = k["count"].stringValue
-            let place = k["place"].stringValue
-            let name = k["name"].stringValue
-            let author = k["author"].stringValue
-            
-            let model = LibraryBookModel(name, author, place, "", "借阅"+count+"次")
-            hotList.append(model)
+            hotList.append(LibraryBookModel(hotBookJson: k))
         }
         list.append(hotList)
         
@@ -129,6 +116,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
                 cell.title.text = model.title
                 cell.line1.text = model.line1
                 cell.line2.text = model.line2
+                cell.count.text = model.count
                 return cell
             } else { // 热门书籍
                 let cell = tableView.dequeueReusableCellWithIdentifier("LibraryHotBookTableViewCell", forIndexPath: indexPath) as! LibraryTableViewCell

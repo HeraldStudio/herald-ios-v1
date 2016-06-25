@@ -13,15 +13,18 @@ class GymReserveViewController : UIViewController, UITableViewDataSource, UITabl
         tableView.estimatedRowHeight = 40
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        refreshCache()
+        loadCache()
         if GCalendar().hour < 8 || GCalendar().hour >= 20 {
             showMessage("当前不在预约时间，晚些再来吧~")
         }
     }
     
     override func viewWillAppear(animated: Bool) {
-        loadCache()
         setNavigationColor(swiper, 0x0075ef)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        refreshCache()
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -82,8 +85,18 @@ class GymReserveViewController : UIViewController, UITableViewDataSource, UITabl
         }
         
         myOrder.removeAll()
+        var hasInvalid = false
+        
         for item in JSON.parse(myOrderCache)["content"]["rows"].arrayValue {
-            myOrder.append(GymRecordModel(json: item))
+            let model = GymRecordModel(json: item)
+            myOrder.append(model)
+            
+            if model.floorName == "" && model.state == 2 {
+                hasInvalid = true
+            }
+        }
+        if hasInvalid {
+            showQuestionDialog("预约记录中包含无效地点记录，预约将无法正常生效，请及时取消！") {}
         }
         
         tableView.reloadData()

@@ -27,7 +27,7 @@ class CurriculumCard {
     
     static func getCard() -> CardsModel {
         let cache = CacheHelper.get("herald_curriculum")
-        let now = NSDate().timeIntervalSince1970
+        let now = GCalendar()
         if cache == "" {
             return CardsModel(cellId: "CardsCellCurriculum", module: R.module.curriculum, desc: "课表数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
         }
@@ -45,31 +45,28 @@ class CurriculumCard {
         // 读取开学日期
         let startMonth = content["startdate"]["month"].intValue
         let startDate = content["startdate"]["day"].intValue
-        let cal = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday], fromDate: NSDate())
-        let beginOfTerm = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate())
+        let nowDate = GCalendar(.Day)
+        let beginOfTerm = GCalendar(.Day)
         
         // 服务器端返回的startMonth是Java/JavaScript型的月份表示，变成实际月份要加1
         beginOfTerm.month = startMonth + 1
         beginOfTerm.day = startDate
         
         // 如果开学日期比今天还晚，则是去年开学的。这里用while保证了thisWeek永远大于零
-        let nowDate = NSCalendar.currentCalendar().dateFromComponents(cal)!
-        var begin = NSCalendar.currentCalendar().dateFromComponents(beginOfTerm)!
-        if (nowDate.compare(begin) == NSComparisonResult.OrderedAscending) {
+        if nowDate < beginOfTerm {
             beginOfTerm.year -= 1
-            begin = NSCalendar.currentCalendar().dateFromComponents(beginOfTerm)!
         }
         
         // 为了保险，检查开学日期的星期，不是周一的话往前推到周一
-        let k = (NSCalendar.currentCalendar().components([.Weekday], fromDate: begin).weekday + 5) % 7
+        let k = beginOfTerm.dayOfWeekFromMonday.rawValue
         
         // 将开学日期往前推到周一
-        begin = begin.dateByAddingTimeInterval(Double(-k * 86400))
+        beginOfTerm -= k * 86400
         
         // 计算当前周
-        var thisWeek = Int(nowDate.timeIntervalSinceDate(begin)) / 86400 / 7 + 1
+        var thisWeek = (nowDate - beginOfTerm) / 86400 / 7 + 1
         
-        var dayOfWeek = (cal.weekday + 5) % 7
+        var dayOfWeek = nowDate.dayOfWeekFromMonday.rawValue
         
         // 枚举今天的课程
         var array = content[CurriculumView.WEEK_NUMS[dayOfWeek]].arrayValue
@@ -90,12 +87,11 @@ class CurriculumCard {
                 if info.startWeek <= thisWeek && info.endWeek >= thisWeek && info.isFitEvenOrOdd(thisWeek) {
                     classCount += 1
                     // 上课时间
-                    let today = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday], fromDate: NSDate())
-                    let startTime = NSCalendar.currentCalendar().dateFromComponents(today)!.timeIntervalSince1970 + Double(CurriculumView.CLASS_BEGIN_TIME[info.startTime - 1] * 60)
+                    let startTime = GCalendar(.Day) + CurriculumView.CLASS_BEGIN_TIME[info.startTime - 1] * 60
                     
                     // 下课时间
-                    let endTime = NSCalendar.currentCalendar().dateFromComponents(today)!.timeIntervalSince1970 + Double((CurriculumView.CLASS_BEGIN_TIME[info.endTime - 1] + 45) * 60)
-                    
+                    let endTime = GCalendar(.Day) + (CurriculumView.CLASS_BEGIN_TIME[info.endTime - 1] + 45) * 60
+
                     // 快要下课的时间
                     let almostEndTime = endTime - 10 * 60
                     
@@ -120,7 +116,9 @@ class CurriculumCard {
                         return model
                     }
                 }
-            } catch {}
+            } catch {
+                // 该课程信息不标准，例如辅修课等，无法被识别，则跳过
+            }
         }
         // 此处退出循环有三种可能：可能是今天没课，可能是课与课之间或早上的没上课状态，也可能是课上完了的状态
         

@@ -61,9 +61,10 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
         let content = JSON.parse(data)
         
         // 计算总周数
+        var hasInvalid = false
+        
         for weekNum in CurriculumView.WEEK_NUMS {
             let arr = content[weekNum]
-            var hasInvalid = false
             for i in 0 ..< arr.count {
                 do {
                     let info = try ClassInfo(json: arr[i])
@@ -74,9 +75,9 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
                     hasInvalid = true
                 }
             }
-            if hasInvalid {
-                showInvalidClassError()
-            }
+        }
+        if hasInvalid {
+            showInvalidClassError()
         }
         
         // 如果没课，什么也不做
@@ -100,29 +101,26 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
         // 读取开学日期
         let startMonth = content["startdate"]["month"].intValue
         let startDate = content["startdate"]["day"].intValue
-        let cal = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate())
-        let beginOfTerm = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate())
+        let today = GCalendar(.Day)
+        let beginOfTerm = GCalendar(.Day)
         
         // 服务器端返回的startMonth是Java/JavaScript型的月份表示，变成实际月份要加1
         beginOfTerm.month = startMonth + 1
         beginOfTerm.day = startDate
         
         // 如果开学日期比今天还晚，则是去年开学的。这里用while保证了thisWeek永远大于零
-        let now = NSCalendar.currentCalendar().dateFromComponents(cal)!
-        var begin = NSCalendar.currentCalendar().dateFromComponents(beginOfTerm)!
-        while (now.compare(begin) == NSComparisonResult.OrderedAscending) {
+        while (today < beginOfTerm) {
             beginOfTerm.year -= 1
-            begin = NSCalendar.currentCalendar().dateFromComponents(beginOfTerm)!
         }
         
         // 为了保险，检查开学日期的星期，不是周一的话往前推到周一
-        let k = (NSCalendar.currentCalendar().components([.Weekday], fromDate: begin).weekday + 5) % 7
+        let k = beginOfTerm.dayOfWeekFromMonday.rawValue
         
         // 将开学日期往前推到周一
-        begin = begin.dateByAddingTimeInterval(Double(-k * 86400))
+        beginOfTerm -= k * 86400
         
         // 计算当前周
-        thisWeek = Int(now.timeIntervalSinceDate(begin)) / 86400 / 7 + 1
+        thisWeek = (today - beginOfTerm) / 86400 / 7 + 1
         
         // 实例化各页
         removeAllPages()
@@ -130,13 +128,17 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
         
         for i in 1 ... maxWeek {
             let page = CurriculumView()
-            page.data(content, sidebar: sidebarList, week: i, curWeek: i == thisWeek)
+            page.data(content, sidebar: sidebarList, week: i, curWeek: i == thisWeek, beginOfTerm : beginOfTerm)
             page.view.frame = CGRect(x: CGFloat(i - 1) * (scrollView?.frame.width)!, y: 0, width: (scrollView?.frame.width)!, height: (scrollView?.frame.height)!)
             scrollView?.addSubview(page.view)
             page.loadData()
         }
         
-        scrollView?.scrollRectToVisible((scrollView?.subviews[thisWeek - 1].frame)!, animated: true)
+        // 防止当前学期结束导致下标越界
+        // 不过前面已经保证过这里 scrollView.subviews.count > 0，不需要再做此判断
+        let curPage = min(thisWeek - 1, scrollView.subviews.count - 1)
+        scrollView?.scrollRectToVisible((scrollView?.subviews[curPage].frame)!, animated: true)
+        
         let page = abs(Int(scrollView!.contentOffset.x / scrollView!.frame.width))
         title = "第 \(page + 1) 周"
         

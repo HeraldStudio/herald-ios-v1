@@ -29,6 +29,10 @@ class CustomExamViewController : UIViewController {
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        setNavigationColor(nil, 0xf5176c)
+    }
+    
     @IBAction func save () {
         endEdit()
         

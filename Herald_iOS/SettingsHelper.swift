@@ -38,14 +38,6 @@ class SettingsHelper {
         settingsCache.set(key, value)
     }
     
-    static var wifiAutoLogin : Bool {
-        get {
-            return get("herald_settings_wifi_autologin") != "0"
-        } set {
-            set("herald_settings_wifi_autologin", newValue ? "1" : "0")
-        }
-    }
-    
     static var curriculumNotificationEnabled : Bool {
         get {
             return get("curriculum_notification_enabled") == "1"
@@ -67,6 +59,21 @@ class SettingsHelper {
             return get("exam_notification_enabled") != "0"
         } set {
             set("exam_notification_enabled", newValue ? "1" : "0")
+        }
+    }
+    
+    /// 模块设置变化的监听器
+    typealias ModuleSettingsChangeListener = () -> Void
+    
+    static var moduleSettingsChangeListeners : [ModuleSettingsChangeListener] = []
+    
+    static func addModuleSettingsChangeListener (listener : ModuleSettingsChangeListener) {
+        moduleSettingsChangeListeners.append(listener)
+    }
+    
+    static func notifyModuleSettingsChanged () {
+        for function in moduleSettingsChangeListeners {
+            function()
         }
     }
 }
