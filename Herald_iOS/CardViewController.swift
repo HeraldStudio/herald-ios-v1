@@ -110,8 +110,8 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         
         // 取上次刷新日期，与当前日期比较
         let lastRefresh = CacheHelper.get("herald_card_date")
-        let dateComp = NSCalendar.currentCalendar().components(NSCalendarUnit(rawValue: UInt.max), fromDate: NSDate())
-        let stamp = "\(dateComp.year)/\(dateComp.month)/\(dateComp.day)"
+        let date = GCalendar(.Day)
+        let stamp = "\(date.year)/\(date.month)/\(date.day)"
         
         // 若与当前日期不同，刷新完整流水记录
         if lastRefresh != stamp {

@@ -101,29 +101,26 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
         // 读取开学日期
         let startMonth = content["startdate"]["month"].intValue
         let startDate = content["startdate"]["day"].intValue
-        let cal = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate())
-        let beginOfTerm = NSCalendar.currentCalendar().components([.Year, .Month, .Day], fromDate: NSDate())
+        let today = GCalendar(.Day)
+        let beginOfTerm = GCalendar(.Day)
         
         // 服务器端返回的startMonth是Java/JavaScript型的月份表示，变成实际月份要加1
         beginOfTerm.month = startMonth + 1
         beginOfTerm.day = startDate
         
         // 如果开学日期比今天还晚，则是去年开学的。这里用while保证了thisWeek永远大于零
-        let now = NSCalendar.currentCalendar().dateFromComponents(cal)!
-        var begin = NSCalendar.currentCalendar().dateFromComponents(beginOfTerm)!
-        while (now.compare(begin) == NSComparisonResult.OrderedAscending) {
+        while (today < beginOfTerm) {
             beginOfTerm.year -= 1
-            begin = NSCalendar.currentCalendar().dateFromComponents(beginOfTerm)!
         }
         
         // 为了保险，检查开学日期的星期，不是周一的话往前推到周一
-        let k = (NSCalendar.currentCalendar().components([.Weekday], fromDate: begin).weekday + 5) % 7
+        let k = beginOfTerm.dayOfWeekFromMonday.rawValue
         
         // 将开学日期往前推到周一
-        begin = begin.dateByAddingTimeInterval(Double(-k * 86400))
+        beginOfTerm -= k * 86400
         
         // 计算当前周
-        thisWeek = Int(now.timeIntervalSinceDate(begin)) / 86400 / 7 + 1
+        thisWeek = (today - beginOfTerm) / 86400 / 7 + 1
         
         // 实例化各页
         removeAllPages()
@@ -131,7 +128,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
         
         for i in 1 ... maxWeek {
             let page = CurriculumView()
-            page.data(content, sidebar: sidebarList, week: i, curWeek: i == thisWeek)
+            page.data(content, sidebar: sidebarList, week: i, curWeek: i == thisWeek, beginOfTerm : beginOfTerm)
             page.view.frame = CGRect(x: CGFloat(i - 1) * (scrollView?.frame.width)!, y: 0, width: (scrollView?.frame.width)!, height: (scrollView?.frame.height)!)
             scrollView?.addSubview(page.view)
             page.loadData()
