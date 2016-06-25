@@ -37,6 +37,9 @@
 		D31DE5181CC359D300E4891D /* CurriculumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5171CC359D300E4891D /* CurriculumViewController.swift */; };
 		D31DE51A1CC35A3100E4891D /* CurriculumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5191CC35A3100E4891D /* CurriculumView.swift */; };
 		D3325D051CC89BA0002060A5 /* SwipeRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */; };
+		D33438501D1A185300CD49D6 /* LibrarySearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D334384F1D1A185300CD49D6 /* LibrarySearchTableViewCell.swift */; };
+		D33438521D1A18B400CD49D6 /* LibrarySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33438511D1A18B400CD49D6 /* LibrarySearchViewController.swift */; };
+		D33438591D1A2DE900CD49D6 /* NirKxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D33438581D1A2DE900CD49D6 /* NirKxMenu.m */; };
 		D33678F81CE5971C001E7C25 /* CurriculumNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */; };
 		D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348580B1CBB48FD00B55E76 /* ApiHelper.swift */; };
 		D348580E1CBB4FF900B55E76 /* CacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348580D1CBB4FF900B55E76 /* CacheHelper.swift */; };
@@ -176,6 +179,11 @@
 		D31DE5171CC359D300E4891D /* CurriculumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumViewController.swift; sourceTree = "<group>"; };
 		D31DE5191CC35A3100E4891D /* CurriculumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumView.swift; sourceTree = "<group>"; };
 		D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeRefreshHeader.swift; sourceTree = "<group>"; };
+		D334384F1D1A185300CD49D6 /* LibrarySearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibrarySearchTableViewCell.swift; sourceTree = "<group>"; };
+		D33438511D1A18B400CD49D6 /* LibrarySearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibrarySearchViewController.swift; sourceTree = "<group>"; };
+		D33438551D1A2DE900CD49D6 /* Herald_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Herald_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		D33438571D1A2DE900CD49D6 /* NirKxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NirKxMenu.h; sourceTree = "<group>"; };
+		D33438581D1A2DE900CD49D6 /* NirKxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NirKxMenu.m; sourceTree = "<group>"; };
 		D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumNotifier.swift; sourceTree = "<group>"; };
 		D348580B1CBB48FD00B55E76 /* ApiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHelper.swift; sourceTree = "<group>"; };
 		D348580D1CBB4FF900B55E76 /* CacheHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheHelper.swift; sourceTree = "<group>"; };
@@ -297,6 +305,8 @@
 		D31DE50C1CC334D800E4891D /* custom */ = {
 			isa = PBXGroup;
 			children = (
+				D33438571D1A2DE900CD49D6 /* NirKxMenu.h */,
+				D33438581D1A2DE900CD49D6 /* NirKxMenu.m */,
 				D34858101CBB57F600B55E76 /* ExtNSUserDefaults.swift */,
 				D3FBC2F11CCC51F900305428 /* ExtUIViewController.swift */,
 				D39B87A31CCD12EC00EC5280 /* ExtString.swift */,
@@ -306,6 +316,7 @@
 				D39B879F1CCD0F0E00EC5280 /* Error.swift */,
 				D354905B1CDC519100E59615 /* GCalendar.swift */,
 				D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */,
+				D33438551D1A2DE900CD49D6 /* Herald_iOS-Bridging-Header.h */,
 			);
 			name = custom;
 			sourceTree = "<group>";
@@ -486,6 +497,8 @@
 			children = (
 				D3ED99E51CCB651300001E2B /* LibraryViewController.swift */,
 				D3ED99E31CCB64BE00001E2B /* LibraryTableViewCell.swift */,
+				D33438511D1A18B400CD49D6 /* LibrarySearchViewController.swift */,
+				D334384F1D1A185300CD49D6 /* LibrarySearchTableViewCell.swift */,
 				D3ED99E11CCB5BCB00001E2B /* LibraryBookModel.swift */,
 			);
 			name = library;
@@ -717,13 +730,13 @@
 				TargetAttributes = {
 					D3D35DD81CBA2E8200B18092 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 9837P5SWZ9;
+						DevelopmentTeam = MW9PK9KE48;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
 							};
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -839,6 +852,7 @@
 			files = (
 				D3D5D43F1CE97149000E406A /* GymChooseTimeViewController.swift in Sources */,
 				D39B87971CCCCA0200EC5280 /* CardsRowModel.swift in Sources */,
+				D33438501D1A185300CD49D6 /* LibrarySearchTableViewCell.swift in Sources */,
 				D306E0281CCA403D00FA3812 /* ExamModel.swift in Sources */,
 				D39B879C1CCCF02600EC5280 /* ExperimentCard.swift in Sources */,
 				D38879801CEAB601004294A8 /* GymRecordModel.swift in Sources */,
@@ -859,6 +873,7 @@
 				D306E0221CCA3DFD00FA3812 /* AppModule.swift in Sources */,
 				D39B87A41CCD12EC00EC5280 /* ExtString.swift in Sources */,
 				D3A0C1721CBB7A9800744640 /* CardsViewController.swift in Sources */,
+				D33438591D1A2DE900CD49D6 /* NirKxMenu.m in Sources */,
 				D3E6BD7F1CC8C07F0074FF6D /* ModuleManagerViewController.swift in Sources */,
 				D3F473471CCA05CD00750FFB /* JwcViewController.swift in Sources */,
 				D34858111CBB57F600B55E76 /* ExtNSUserDefaults.swift in Sources */,
@@ -909,6 +924,7 @@
 				D30661CA1CF2C50E006583C2 /* GameCreateViewController.swift in Sources */,
 				D3D5D44B1CE99D63000E406A /* NoSelectionTableViewCell.swift in Sources */,
 				D3D5D4431CE99426000E406A /* GymNewViewController.swift in Sources */,
+				D33438521D1A18B400CD49D6 /* LibrarySearchViewController.swift in Sources */,
 				D35FC6221CE2FEF400BE844C /* ActivityViewController.swift in Sources */,
 				D306E02A1CCA68A700FA3812 /* GradeModel.swift in Sources */,
 				D306E0241CCA3F7700FA3812 /* ExamViewController.swift in Sources */,
@@ -998,8 +1014,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: vhyme@live.cn (7779NLYF4N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: vhyme@live.cn (7779NLYF4N)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1021,7 +1037,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1046,8 +1062,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: vhyme@live.cn (7779NLYF4N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: vhyme@live.cn (7779NLYF4N)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1062,7 +1078,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1075,16 +1091,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: vhyme@live.cn (7779NLYF4N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: vhyme@live.cn (7779NLYF4N)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Herald_iOS/Herald_iOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1096,16 +1113,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: vhyme@live.cn (7779NLYF4N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: vhyme@live.cn (7779NLYF4N)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Herald_iOS/Herald_iOS-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

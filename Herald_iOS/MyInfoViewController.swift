@@ -6,9 +6,6 @@ import UIKit
  */
 class MyInfoViewController: UITableViewController {
     
-    /// 摇一摇登录校园网的开关
-    @IBOutlet var wifiSwitch : UISwitch!
-    
     /// 上课提醒、实验提醒、考试提醒的开关
     @IBOutlet var curriculumSwitch : UISwitch!
     @IBOutlet var experimentSwitch : UISwitch!
@@ -27,7 +24,6 @@ class MyInfoViewController: UITableViewController {
         super.viewDidLoad()
         
         /// 初始化开关状态
-        wifiSwitch.setOn(SettingsHelper.wifiAutoLogin, animated: false)
         curriculumSwitch.setOn(SettingsHelper.curriculumNotificationEnabled, animated: false)
         experimentSwitch.setOn(SettingsHelper.experimentNotificationEnabled, animated: false)
         examSwitch.setOn(SettingsHelper.examNotificationEnabled, animated: false)
@@ -49,10 +45,10 @@ class MyInfoViewController: UITableViewController {
         case (0, 0):
             /// 退出登录
             showQuestionDialog("确定要退出登录吗？") { ApiHelper.doLogout(nil) }
-        case (1, 1):
+        case (0, 1):
             /// 自定义校园网登录账号
             displayWifiSetDialog()
-        case (3, 2):
+        case (2, 1):
             /// 给我们评分（App Store不允许有版本更新按钮，因此更名）
             checkVersion()
         default:
@@ -60,11 +56,7 @@ class MyInfoViewController: UITableViewController {
         }
     }
     
-    /// 同步开关状态到设置
-    @IBAction func wifiStateChanged () {
-        SettingsHelper.wifiAutoLogin = wifiSwitch.on
-    }
-    
+    /// 同步开关状态到设置    
     @IBAction func curriculumStateChanged () {
         SettingsHelper.curriculumNotificationEnabled = curriculumSwitch.on
     }

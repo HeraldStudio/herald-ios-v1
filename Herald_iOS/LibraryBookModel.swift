@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class LibraryBookModel {
     var title : String
@@ -15,11 +16,31 @@ class LibraryBookModel {
     var barcode : String
     var count : String
     
-    init (_ title : String, _ line1 : String, _ line2 : String, _ barcode : String, _ count : String) {
-        self.title = title
-        self.line1 = line1
-        self.line2 = line2
-        self.barcode = barcode
-        self.count = count
+    init (borrowedBookJson json : JSON) {
+        title = json["title"].stringValue
+        line1 = json["author"].stringValue
+        let dueDate = json["due_date"].stringValue
+        let renderDate = json["render_date"].stringValue
+        let renewTime = json["renew_time"].stringValue
+        line2 = "\(renderDate)借书 / \(dueDate)到期"
+        
+        barcode = json["barcode"].stringValue
+        count = renewTime == "0" ? "点击续借" : "已续借"
+    }
+    
+    init (hotBookJson json : JSON) {
+        self.title = json["name"].stringValue
+        self.line1 = json["author"].stringValue
+        self.line2 = json["place"].stringValue
+        self.barcode = ""
+        self.count = "借阅" + json["count"].stringValue + "次"
+    }
+    
+    init (searchResultJson json : JSON) {
+        self.title = json["name"].stringValue
+        self.line1 = json["author"].stringValue + "，" + json["publish"].stringValue
+        self.line2 = json["index"].stringValue
+        self.barcode = ""
+        self.count = "剩余" + json["left"].stringValue + "本"
     }
 }

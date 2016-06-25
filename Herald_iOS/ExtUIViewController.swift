@@ -33,7 +33,7 @@ extension UIViewController {
             style.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
             ToastManager.shared.style = style
             let toastPoint = CGPoint(x: vc.view.bounds.width / 2, y: vc.view.bounds.maxY - 100)
-            vc.view.makeToast(message, duration: 1, position: toastPoint)
+            vc.view.makeToast(message, duration: max(1, Double(message.characters.count) / 15), position: toastPoint)
         }
     }
     
