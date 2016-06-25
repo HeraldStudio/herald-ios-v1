@@ -42,7 +42,7 @@ class ModuleManageTableViewCell: UITableViewCell {
         if module != nil {
             if !(module?.hasCard)! { return }
             module!.cardEnabled = !(module!.cardEnabled)
-            shortcutSwitch.setOn(module!.cardEnabled, animated: true)
+            cardSwitch.setOn(module!.cardEnabled, animated: true)
         }
     }
 }

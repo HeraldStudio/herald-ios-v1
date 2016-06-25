@@ -60,6 +60,7 @@ class AppModule : Hashable {
             } else {
                 SettingsHelper.set("herald_settings_module_cardenabled_" + name, "0")
             }
+            SettingsHelper.notifyModuleSettingsChanged()
         }
     }
     
@@ -68,13 +69,13 @@ class AppModule : Hashable {
         get {
             return SettingsHelper.get("herald_settings_module_shortcutenabled_" + name) != "0"
         } set {
-            if !hasCard { return }
             // flag为true则设置为选中，否则设置为不选中
             if (newValue) {
                 SettingsHelper.set("herald_settings_module_shortcutenabled_" + name, "1")
             } else {
                 SettingsHelper.set("herald_settings_module_shortcutenabled_" + name, "0")
             }
+            SettingsHelper.notifyModuleSettingsChanged()
         }
     }
     
