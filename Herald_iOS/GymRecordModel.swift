@@ -45,7 +45,7 @@ class GymRecordModel {
     
     var floorNameTip : String {
         if floorName == "" {
-            return "未知地点"
+            return "无效地点"
         }
         return floorName
     }

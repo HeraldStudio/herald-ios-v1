@@ -24,23 +24,20 @@ class WifiLoginHelper {
         if WifiLoginHelper.working { return }
         WifiLoginHelper.working = true
         
-        vc.showTipDialogIfUnknown("欢迎使用摇一摇登录校园网~\n由于iOS限制，快跟小猴学使用姿势：\n\n1、请在系统[设置]-[Wi-Fi]-[seu-wlan]-关闭[自动连接]开关才能正常使用~\n\n2、摇一摇之前请手动连接seu-wlan，等状态栏出现Wi-Fi图标后（如果没出现请参照第1条）即可在小猴首页摇一摇登录~", cachePostfix: "wifi") {
+        //vc.showTipDialogIfUnknown("注意：请先进入 [设置]-[Wi-Fi]-\"seu-wlan\" 右侧的 [i] 按钮，关闭 [自动连接]，才能正常使用~", cachePostfix: "wifi") {
             self.vc.showProgressDialog()
-            //self.vc.showMessage("摇一摇：正在检测网络环境~")
             self.beginCheck()
-        }
+        //}
     }
     
     private func beginCheck () {
         ApiRequest().url("https://selfservice.seu.edu.cn/selfservice/index.php").noCheck200().onFinish { success, code, response in
             if !response.containsString("403 Forbidden") {
-                self.vc.showMessage("摇一摇：坐稳扶好，准备发车啦~")
-                //self.vc.showMessage("摇一摇：网络通畅，正在查询登录状态~")
                 self.checkOnlineStatus()
             } else {
                 self.vc.hideProgressDialog()
                 WifiLoginHelper.working = false
-                self.vc.showMessage("摇一摇：网络异常，请先手动连接到seu-wlan~")
+                self.vc.showMessage("网络异常，请先手动连接到 seu-wlan，并等待网络图标变成 Wi-Fi 图标之后再试~\n\n如果系统弹出登录页面，请到 Wi-Fi 设置中关闭 seu-wlan 的 [自动登录] 功能再试~")
             }
         }.run()
     }
@@ -59,12 +56,12 @@ class WifiLoginHelper {
                 } else {
                     self.vc.hideProgressDialog()
                     WifiLoginHelper.working = false
-                    self.vc.showMessage("摇一摇：已登录状态，不用再摇了~")
+                    self.vc.showMessage("已登录状态，不用再摇了~")
                 }
             } else {
                 self.vc.hideProgressDialog()
                 WifiLoginHelper.working = false
-                self.vc.showMessage("摇一摇：信号有点差，换个姿势试试？")
+                self.vc.showMessage("信号有点差，换个姿势试试？")
             }
         }.run()
     }
@@ -72,12 +69,11 @@ class WifiLoginHelper {
     private func logoutThenLogin () {
         ApiRequest().url("http://w.seu.edu.cn/portal/logout.php").noCheck200().onFinish { success, _, response in
             if success {
-                //self.vc.showMessage("摇一摇：退出成功，正在尝试登录~")
                 self.loginToService()
             } else {
                 self.vc.hideProgressDialog()
                 WifiLoginHelper.working = false
-                self.vc.showMessage("摇一摇：已登录账号退出失败，请重试~")
+                self.vc.showMessage("已登录账号退出失败，请重试~")
             }
         }.run()
     }
@@ -102,16 +98,16 @@ class WifiLoginHelper {
                         && info["login_expire"].string != nil
                         && info["login_remain"].int != nil
                         && info["login_time"].int != nil {
-                        self.vc.showMessage("摇一摇：小猴登陆校园网成功~")
+                        self.vc.showMessage("小猴登陆校园网成功~")
                     } else {
                         if let error = JSON.parse(response)["error"].string {
-                            self.vc.showMessage("摇一摇：登录失败，\(error.replaceAll(",", "，"))")
+                            self.vc.showMessage("登录失败，\(error.replaceAll(",", "，"))")
                         } else {
-                            self.vc.showMessage("摇一摇：登录失败，出现未知错误")
+                            self.vc.showMessage("登录失败，出现未知错误")
                         }
                     }
                 } else {
-                    self.vc.showMessage("摇一摇：信号有点差，换个姿势试试？")
+                    self.vc.showMessage("信号有点差，换个姿势试试？")
                 }
                 self.vc.hideProgressDialog()
                 WifiLoginHelper.working = false
