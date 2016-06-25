@@ -307,7 +307,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         cardsTableView.bounces = false
         
         // 线程管理器
-        let manager = ApiThreadManager().onResponse { success, _, _ in
+        let manager = ApiThreadManager()/*.debug()*/.onResponse { success, _, _ in
             if success { self.loadContent(false) }
         }
         
