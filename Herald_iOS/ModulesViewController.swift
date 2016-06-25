@@ -26,6 +26,9 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
         let bottomPadding = UIView(frame: CGRect(x: 0.0, y: 0.0, width: tw, height: th))
         moduleTableView.tableFooterView = bottomPadding
         
+        // 载入模块列表
+        setupModuleList()
+        
         //cell注册3D touch代理
         //因为cell的管理使用不是很完善，暂时删除内部cell按压预览
         if #available(iOS 9.0, *) {
@@ -33,16 +36,22 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.registerForPreviewingWithDelegate(self, sourceView: moduleTableView)
             }
         }
+        
+        // 当模块设置改变时刷新
+        SettingsHelper.addModuleSettingsChangeListener {
+            
+            // 若未登录，不作操作
+            if !ApiHelper.isLogin() {
+                return
+            }
+            
+            self.setupModuleList()
+        }
     }
     
     /// 当准备从其它界面返回时，设置导航栏颜色
     override func viewWillAppear(animated: Bool) {
         setNavigationColor(nil, 0x00b4ff)
-    }
-    
-    /// 界面显示完成的事件
-    override func viewDidAppear(animated: Bool) {
-        setupModuleList()
     }
     
     /// 加载模块列表

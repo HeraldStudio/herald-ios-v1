@@ -47,6 +47,9 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         // 初始化轮播图和下拉刷新
         setupSliderAndSwiper()
         
+        // 解析本地缓存，重载卡片内容
+        loadContent(false)
+        
         // 联网刷新列表内容
         loadContent(true)
         
@@ -60,23 +63,22 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
                 self.registerForPreviewingWithDelegate(self, sourceView: cardsTableView)
             }
         }
+        
+        // 当模块设置改变时刷新
+        SettingsHelper.addModuleSettingsChangeListener { 
+            
+            // 若未登录，不作操作
+            if !ApiHelper.isLogin() {
+                return
+            }
+            
+            self.loadContent(false)
+        }
     }
     
     /// 当准备从其它界面返回时，设置导航栏颜色
     override func viewWillAppear(animated: Bool) {
         setNavigationColor(swiper, 0x00b4ff)
-    }
-    
-    /// 界面显示完成的事件
-    override func viewDidAppear(animated: Bool) {
-        
-        // 若未登录，不作操作
-        if !ApiHelper.isLogin() {
-            return
-        }
-        
-        // 解析本地缓存，重载卡片内容
-        loadContent(false)
     }
     
     /// 定时刷新，即每当时间改变时重新解析本地缓存，并加载卡片内容

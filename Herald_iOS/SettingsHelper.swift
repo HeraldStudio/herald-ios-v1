@@ -61,4 +61,19 @@ class SettingsHelper {
             set("exam_notification_enabled", newValue ? "1" : "0")
         }
     }
+    
+    /// 模块设置变化的监听器
+    typealias ModuleSettingsChangeListener = () -> Void
+    
+    static var moduleSettingsChangeListeners : [ModuleSettingsChangeListener] = []
+    
+    static func addModuleSettingsChangeListener (listener : ModuleSettingsChangeListener) {
+        moduleSettingsChangeListeners.append(listener)
+    }
+    
+    static func notifyModuleSettingsChanged () {
+        for function in moduleSettingsChangeListeners {
+            function()
+        }
+    }
 }
