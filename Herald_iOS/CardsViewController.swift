@@ -239,8 +239,13 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         // 清空卡片列表，等待载入
         cardList.removeAll()
         
+        // 加载版本更新缓存
+        if let item = ServiceCard.getCheckVersionCard() {
+            cardList.append(item)
+        }
+        
         // 加载推送缓存
-        if let item = ServiceHelper.getPushMessageItem() {
+        if let item = ServiceCard.getPushMessageCard() {
             cardList.append(item)
         }
         
@@ -312,7 +317,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
         // 刷新版本信息和推送消息
-        manager.addAll(ServiceHelper.getRefresher())
+        manager.addAll(ServiceCard.getRefresher())
         
         if R.module.curriculum.cardEnabled {
             // 仅当课表数据不存在时刷新课表
