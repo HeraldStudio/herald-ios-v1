@@ -71,7 +71,9 @@ class PedetailViewController : UIViewController, FSCalendarDelegate {
     @IBAction func refreshCache () {
         showProgressDialog()
         ApiThreadManager().addAll([
-            ApiRequest().api("pc").uuid().noCheck200().toCache("herald_pc_forecast") { json in json["content"] }
+            ApiRequest().api("pc").uuid().noCheck200().toCache("herald_pc_forecast") {
+                    json in json["content"]
+                }
                 .onFinish { success, code, _ in
                     let todayComp = GCalendar(.Day)
                     let today = String(format: "%4d-%02d-%02d", todayComp.year, todayComp.month, todayComp.day)
