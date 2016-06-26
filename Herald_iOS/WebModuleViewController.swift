@@ -17,6 +17,7 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate {
     
     func webViewDidFinishLoad(webView: UIWebView) {
         hideProgressDialog()
+        refreshLeftBarItems()
     }
     
     let webModuleColors = [
@@ -31,7 +32,13 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate {
     
     override func viewDidLoad () {
         if let _url = NSURL(string: url) {
-            webView.loadRequest(NSURLRequest(URL: _url))
+            // 若是检查更新的链接，直接用 App Store 打开并关闭 Webview
+            if url == R.string.update_url {
+                UIApplication.sharedApplication().openURL(_url)
+                dismiss()
+            } else {
+                webView.loadRequest(NSURLRequest(URL: _url))
+            }
         }
     }
     
@@ -47,12 +54,28 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate {
         hideProgressDialog()
     }
     
+    func dismiss () {
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func refreshLeftBarItems () {
+        if webView.canGoBack {
+            navigationItem.leftBarButtonItems = [
+                UIBarButtonItem(barButtonSystemItem: .Stop, target: self, action: #selector(self.dismiss)),
+                UIBarButtonItem(title: "后退", style: .Plain, target: self, action: #selector(self.back))
+            ]
+        } else {
+            navigationItem.leftBarButtonItems = nil
+        }
+    }
+    
     @IBAction func refresh () {
         webView.reload()
     }
     
     @IBAction func back () {
         webView.goBack()
+        refreshLeftBarItems()
     }
     
     @IBAction func forward () {

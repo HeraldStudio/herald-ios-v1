@@ -16,7 +16,7 @@ class MyInfoViewController: UITableViewController {
     
     /// 跳转到 App Store 发布页面，用于检查更新或发布评论
     func checkVersion () {
-        UIApplication.sharedApplication().openURL(NSURL(string: "https://itunes.apple.com/us/app/xiao-hou-tou-mi/id1107998946")!)
+        UIApplication.sharedApplication().openURL(NSURL(string: R.string.update_url)!)
     }
     
     /// 界面实例化时的初始化
