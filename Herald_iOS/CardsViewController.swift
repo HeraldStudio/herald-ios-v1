@@ -345,7 +345,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         if R.module.pedetail.cardEnabled {
             // 仅当已到开始时间时，允许刷新
-            let _now = GCalendar(.Day)
+            let _now = GCalendar()
             let now = _now.hour * 60 + _now.minute
             let startTime = 6 * 60 + 20
             if now >= startTime {
