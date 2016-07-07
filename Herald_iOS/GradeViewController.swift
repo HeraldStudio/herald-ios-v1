@@ -82,7 +82,8 @@ class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("gpa").uuid().toCache("herald_grade_gpa")
+        ApiRequest().api("gpa").uuid()
+            .toCache("herald_grade_gpa", notifyModuleIfChanged: R.module.grade)
             .onFinish { success, _, _ in
                 self.hideProgressDialog()
                 if success {
@@ -91,6 +92,12 @@ class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDa
                     self.showMessage("刷新失败，请重试")
                 }
             }.run()
+    }
+    
+    static func remoteRefreshNotifyDotState() -> ApiRequest {
+        return
+            ApiRequest().api("gpa").uuid()
+                .toCache("herald_grade_gpa", notifyModuleIfChanged: R.module.grade)
     }
     
     func showError () {

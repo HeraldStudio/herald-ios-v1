@@ -72,7 +72,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
         showProgressDialog()
         
         ApiThreadManager().addAll([
-            ApiRequest().api("library").uuid().toCache("herald_library_borrowbook")
+            ApiRequest().api("library").uuid().toCache("herald_library_borrowbook", notifyModuleIfChanged: R.module.library)
                 .onFinish {
                     _, code, _ in
                     if code == 401 {
@@ -89,6 +89,11 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
                     self.showMessage("刷新失败，请重试")
                 }
             }.run()
+    }
+    
+    static func remoteRefreshNotifyDotState() -> ApiRequest {
+        return
+            ApiRequest().api("library").uuid().toCache("herald_library_borrowbook", notifyModuleIfChanged: R.module.library)
     }
     
     func showError () {
