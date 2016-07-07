@@ -117,6 +117,9 @@ class ShortcutBoxCell : UIView {
     /// 字体大小
     let fontSize : CGFloat = 12
     
+    /// 小红点大小
+    let notifyDotSize : CGFloat = 12
+    
     /// 当前图标代表的模块
     var module : AppModule
     
@@ -178,6 +181,23 @@ class ShortcutBoxCell : UIView {
         // 放置文字
         addSubview(label)
         
+        /// 初始化并放置小红点
+        if module.hasUpdates {
+            
+            // 计算位置
+            let notifyDotX = iconSidePadding + iconSize - notifyDotSize
+            let notifyDotY = outerPadding
+            
+            // 初始化小红点控件
+            let notifyDot = UIImageView(image: UIImage(named: "notify_dot"))
+            
+            // 设置小红点显示区域
+            notifyDot.frame = CGRect(x: notifyDotX, y: notifyDotY, width: notifyDotSize, height: notifyDotSize)
+            
+            // 放置小红点
+            addSubview(notifyDot)
+        }
+        
         /// 设置点击事件
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.launch))
         addGestureRecognizer(tapGesture)
@@ -187,12 +207,15 @@ class ShortcutBoxCell : UIView {
         addGestureRecognizer(longGesture)
     }
     
-    // 打开该模块
+    /// 打开该模块
     func launch() {
+        if module.hasUpdates {
+            module.hasUpdates = false
+        }
         module.open()
     }
     
-    // 询问删除快捷方式
+    /// 询问删除快捷方式
     func askToDelete() {
         
         if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate {

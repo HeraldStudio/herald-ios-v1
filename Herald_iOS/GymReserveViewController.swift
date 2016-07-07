@@ -47,7 +47,7 @@ class GymReserveViewController : UIViewController, UITableViewDataSource, UITabl
                 .toCache("herald_gymreserve_timelist_and_itemlist"),
             ApiRequest()
                 .api("yuyue").uuid().post("method", "myOrder")
-                .toCache("herald_gymreserve_myorder"),
+                .toCache("herald_gymreserve_myorder", notifyModuleIfChanged: R.module.gymreserve),
             // 预获取用户手机号
             ApiRequest()
                 .api("yuyue").uuid().post("method", "getPhone")
@@ -67,6 +67,12 @@ class GymReserveViewController : UIViewController, UITableViewDataSource, UITabl
                 .post("cardNo", ApiHelper.getUserName())
                 .toCache("herald_gymreserve_userid") { json in json["content"][0]["userId"] }.run()
         }
+    }
+    
+    static func remoteRefreshNotifyDotState() -> ApiRequest {
+        return ApiRequest()
+            .api("yuyue").uuid().post("method", "myOrder")
+            .toCache("herald_gymreserve_myorder", notifyModuleIfChanged: R.module.gymreserve)
     }
     
     func loadCache() {

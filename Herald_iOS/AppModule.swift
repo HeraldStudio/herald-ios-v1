@@ -83,6 +83,16 @@ class AppModule : Hashable {
         }
     }
     
+    /// 用来标识一个不带卡片的模块数据是否有更新
+    var hasUpdates : Bool {
+        get {
+            return !hasCard && SettingsHelper.get("herald_settings_module_hasupdates_" + name) == "1"
+        } set {
+            SettingsHelper.set("herald_settings_module_hasupdates_" + name, newValue ? "1" : "0")
+            SettingsHelper.notifyModuleSettingsChanged()
+        }
+    }
+    
     /// 打开模块
     func open (){
         if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate {

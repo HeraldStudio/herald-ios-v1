@@ -346,7 +346,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
         if R.module.pedetail.cardEnabled {
-            // 仅当已到开始时间时，允许刷新
+            // 仅当已到开始时间时，允许刷新跑操
             let _now = GCalendar()
             let now = _now.hour * 60 + _now.minute
             let startTime = 6 * 60 + 20
@@ -364,6 +364,13 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             // 直接刷新教务处数据
             manager.addAll(JwcCard.getRefresher())
         }
+        
+        manager.addAll([
+                GymReserveViewController.remoteRefreshNotifyDotState(),
+                SrtpViewController.remoteRefreshNotifyDotState(),
+                GradeViewController.remoteRefreshNotifyDotState(),
+                LibraryViewController.remoteRefreshNotifyDotState()
+            ])
 
         /**
          * 结束刷新部分
