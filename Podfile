@@ -13,5 +13,6 @@ target "Herald_iOS" do
 	pod 'FSCalendar'
 	pod 'MagicPie'
 	pod 'DHCShakeNotifier'
+	pod 'KKGridView'
 
 end

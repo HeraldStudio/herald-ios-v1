@@ -214,7 +214,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         
         // 打开对应的详情页面
         if model.detailUrl != "" {
-            AppModule(title: "校园活动", url: model.detailUrl).open(navigationController)
+            AppModule(title: "校园活动", url: model.detailUrl).open()
         } else {
             showMessage("该活动没有详情页面")
         }

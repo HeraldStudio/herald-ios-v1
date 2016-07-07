@@ -31,6 +31,10 @@ class R {
         static let quanyi = AppModule(14, "quanyi", "权益服务 Web", "向东大校会权益部反馈投诉信息", "https://jinshuju.net/f/By3aTK", "ic_quanyi", false)
         static let emptyroom = AppModule(15, "emptyroom", "空教室 Web", "提供指定时间内的空教室信息查询服务", "http://115.28.27.150/queryEmptyClassrooms/m", "ic_emptyroom", false)
         //static let deskgame = AppModule(16, "deskgame", "桌游助手", "方便大家娱乐的小猴桌游发牌器", "MODULE_DESKGAME", "ic_emptyroom", false)
+        
+        // 特殊的模块，模块管理
+        static let moduleManager = AppModule(-1, "", "模块管理", "管理各模块的显示/隐藏状态",
+                                             "MODULE_MANAGER", "ic_add", true)
     }
     
     class string {

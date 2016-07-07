@@ -67,7 +67,11 @@ class AppModule : Hashable {
     /// 快捷方式是否开启
     var shortcutEnabled : Bool {
         get {
-            return SettingsHelper.get("herald_settings_module_shortcutenabled_" + name) != "0"
+            let cache = SettingsHelper.get("herald_settings_module_shortcutenabled_" + name)
+            if cache == "" {
+                return !hasCard
+            }
+            return cache != "0"
         } set {
             // flag为true则设置为选中，否则设置为不选中
             if (newValue) {
@@ -80,29 +84,32 @@ class AppModule : Hashable {
     }
     
     /// 打开模块
-    func open (navigationController : UINavigationController?) {
-        
-        // 空模块不做任何事
-        if controller == "" { return }
-        
-        // Web 页面，交给 WebModule 打开
-        if controller.hasPrefix("http") {
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE") as! WebModuleViewController
-            vc.title = nameTip
-            vc.url = controller
-            
-            navigationController?.pushViewController(vc, animated: true)
-            
-        // 切换到指定的 Tab，只适用于首页的 Tab
-        } else if controller.hasPrefix("TAB") {
-            if let tab = Int(controller.replaceAll("TAB", "")) {
-                (navigationController?.childViewControllers[0] as? UITabBarController)?.selectedIndex = tab
+    func open (){
+        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            if let navigationController = delegate.navigationController {
+                // 空模块不做任何事
+                if controller == "" { return }
+                
+                // Web 页面，交给 WebModule 打开
+                if controller.hasPrefix("http") {
+                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE") as! WebModuleViewController
+                    vc.title = nameTip
+                    vc.url = controller
+                    
+                    navigationController.pushViewController(vc, animated: true)
+                    
+                    // 切换到指定的 Tab，只适用于首页的 Tab
+                } else if controller.hasPrefix("TAB") {
+                    if let tab = Int(controller.replaceAll("TAB", "")) {
+                        (navigationController.childViewControllers[0] as? UITabBarController)?.selectedIndex = tab
+                    }
+                    
+                    // 切换到指定的VC
+                } else {
+                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(controller)
+                    navigationController.pushViewController(vc, animated: true)
+                }
             }
-            
-        // 切换到指定的VC
-        } else {
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(controller)
-            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

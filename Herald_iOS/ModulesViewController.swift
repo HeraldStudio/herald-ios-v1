@@ -64,13 +64,11 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
         var enabledModules : [AppModule] = []
         
         // 将模块管理伪装成一个模块加入到第一个分区中，并将这个分区加入到列表中
-        let manager = AppModule(-1, "", "模块管理", "管理各模块的显示/隐藏状态",
-                                "MODULE_MANAGER", "ic_add", true)
-        sections.append([manager])
+        sections.append([R.module.moduleManager])
         
         // 将各个模块加入到第二个分区中
         for k in R.module.array {
-            if k.shortcutEnabled {
+            if k.shortcutEnabled || k.cardEnabled {
                 enabledModules.append(k)
             }
         }
@@ -118,7 +116,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     /// 列表分区标题
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? nil : "我的模块"
+        return section == 0 ? nil : "已启用的模块"
     }
     
     /// 模块列表部分：模块列表代理
@@ -129,7 +127,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         // 打开对应的模块
-        sections[indexPath.section][indexPath.row].open(navigationController!)
+        sections[indexPath.section][indexPath.row].open()
     }
 }
 

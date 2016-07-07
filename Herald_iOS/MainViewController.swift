@@ -15,6 +15,11 @@ class MainViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 注册导航控制器
+        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            delegate.navigationController = navigationController
+        }
+        
         // 去除界面切换时导航栏的黑影
         navigationController?.view.backgroundColor = UIColor.whiteColor()
         
@@ -113,7 +118,7 @@ class MainViewController: UITabBarController {
         // 此对话框也与上述函数中的对话框共用缓存键名，只要忽略其中任意一个，两个对话框都不会再显示
         showTipDialogIfUnknown("注意：充值之后需要在食堂刷卡机上刷卡，充值金额才能到账哦", cachePostfix: "card_charge") {
             () -> Void in
-            AppModule(title: "一卡通充值", url: CardViewController.url).open(self.navigationController)
+            AppModule(title: "一卡通充值", url: CardViewController.url).open()
         }
     }
     
