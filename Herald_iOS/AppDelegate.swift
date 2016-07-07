@@ -10,6 +10,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// 应用程序的主显示窗口
     var window: UIWindow?
     
+    /// 用来显示模块界面的导航控制器
+    var navigationController: UINavigationController?
+    
     /// 无参数的启动结束事件，似乎不会触发
     func applicationDidFinishLaunching(application: UIApplication) {}
     
@@ -98,14 +101,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // 获取目标界面
-        let rootVC = self.window?.rootViewController as! UINavigationController
         switch shortcutItem.type {
         case "exam":
-            R.module.exam.open(rootVC)
+            R.module.exam.open()
         case "curriculum":
-            R.module.curriculum.open(rootVC)
+            R.module.curriculum.open()
         case "card":
-            AppModule(title: "一卡通充值", url: "http://58.192.115.47:8088/wechat-web/login/initlogin.html").open(rootVC)
+            AppModule(title: "一卡通充值", url: "http://58.192.115.47:8088/wechat-web/login/initlogin.html").open()
         default:
             return
         }

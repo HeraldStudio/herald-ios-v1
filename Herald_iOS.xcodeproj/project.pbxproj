@@ -90,6 +90,7 @@
 		D3D5D44F1CE9AFF1000E406A /* GymAddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D44E1CE9AFF1000E406A /* GymAddFriendViewController.swift */; };
 		D3D849FC1CFBD88200F083DF /* ExtJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D849FB1CFBD88200F083DF /* ExtJSON.swift */; };
 		D3D849FF1CFBE75000F083DF /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D849FE1CFBE75000F083DF /* R.swift */; };
+		D3E079231D2E7A0D00D5FBB3 /* ShortcutBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E079221D2E7A0D00D5FBB3 /* ShortcutBoxView.swift */; };
 		D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */; };
 		D3E6BD7F1CC8C07F0074FF6D /* ModuleManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */; };
 		D3E6BD831CC8D4B20074FF6D /* PedetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD811CC8D4B20074FF6D /* PedetailViewController.swift */; };
@@ -242,6 +243,7 @@
 		D3D5D44E1CE9AFF1000E406A /* GymAddFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymAddFriendViewController.swift; sourceTree = "<group>"; };
 		D3D849FB1CFBD88200F083DF /* ExtJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtJSON.swift; sourceTree = "<group>"; };
 		D3D849FE1CFBE75000F083DF /* R.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.swift; sourceTree = "<group>"; };
+		D3E079221D2E7A0D00D5FBB3 /* ShortcutBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutBoxView.swift; sourceTree = "<group>"; };
 		D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleManageTableViewCell.swift; sourceTree = "<group>"; };
 		D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleManagerViewController.swift; sourceTree = "<group>"; };
 		D3E6BD811CC8D4B20074FF6D /* PedetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PedetailViewController.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				D354905B1CDC519100E59615 /* GCalendar.swift */,
 				D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */,
 				D33438551D1A2DE900CD49D6 /* Herald_iOS-Bridging-Header.h */,
+				D3E079221D2E7A0D00D5FBB3 /* ShortcutBoxView.swift */,
 			);
 			name = custom;
 			sourceTree = "<group>";
@@ -939,6 +942,7 @@
 				D306E0201CCA3ADF00FA3812 /* WebModuleViewController.swift in Sources */,
 				D3325D051CC89BA0002060A5 /* SwipeRefreshHeader.swift in Sources */,
 				D35FC6261CE31A3500BE844C /* ActivityTableViewCell.swift in Sources */,
+				D3E079231D2E7A0D00D5FBB3 /* ShortcutBoxView.swift in Sources */,
 				D31821BF1CC522D900992355 /* CardViewController.swift in Sources */,
 				D38D2F401CFDC49400E0E5BE /* CardRecordModel.swift in Sources */,
 				D39B879A1CCCEC2E00EC5280 /* CardCard.swift in Sources */,

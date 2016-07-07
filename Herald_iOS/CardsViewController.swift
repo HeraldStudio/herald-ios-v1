@@ -45,7 +45,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         cardsTableView.rowHeight = UITableViewAutomaticDimension;
         
         // 初始化轮播图和下拉刷新
-        setupSliderAndSwiper()
+        setupHeaders()
         
         // 解析本地缓存，重载卡片内容
         loadContent(false)
@@ -92,8 +92,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         performSelector(#selector(self.timeChanged), withObject: nil, afterDelay: seconds)
     }
     
-    /// 初始化轮播图和下拉刷新控件
-    func setupSliderAndSwiper () {
+    /// 初始化轮播图、下拉刷新控件和快捷栏
+    func setupHeaders () {
         
         /// 初始化轮播图
         
@@ -117,10 +117,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // 轮播图点击时的事件
         slider.setBannerTapHandler { (index) in
-            AppModule(
-                title: self.titles[index],
-                url: self.links[index]
-                ).open(self.navigationController)
+            AppModule(title: self.titles[index],url: self.links[index]).open()
         }
         
         /// 初始化下拉刷新控件
@@ -390,23 +387,51 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     /// 卡片列表
     var cardList : [CardsModel] = []
     
+    /// 是否要显示快捷栏
+    var hasShortcutBox : Bool {
+        return R.module.array.filter{$0.shortcutEnabled}.count != 0
+    }
+    
+    /// 快捷栏个数，即上面那个布尔函数的Int形式，方便使用
+    var shortcutBoxCount : Int {
+        return hasShortcutBox ? 1 : 0
+    }
+    
     /// 列表分区数目
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return cardList.count
+        return shortcutBoxCount + cardList.count
     }
     
     /// 列表某分区中条目数目
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cardList[section].rows.count
+        if hasShortcutBox {
+            if section == 0 {
+                return 1
+            } else {
+                return cardList[section - 1].rows.count
+            }
+        } else {
+            return cardList[section].rows.count
+        }
     }
     
     /// 实例化列表条目
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        var cardIndex = indexPath.section
+        
+        if hasShortcutBox {
+            if indexPath.section == 0 {
+                return tableView.dequeueReusableCellWithIdentifier("CardsCellShortcutBox")!
+            } else {
+                cardIndex -= 1
+            }
+        }
+        
         /// 实例化
         
         // 该卡片的卡片模型对象
-        let model = cardList[indexPath.section]
+        let model = cardList[cardIndex]
         
         // 该卡片的卡片模型对象中对应的行模型对象
         let row = model.rows[indexPath.row]
@@ -415,7 +440,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         let id = indexPath.row == 0 ? "CardsCellHeader" : model.cellId
         
         // 实例化或重用对应的布局
-        let cell = cardsTableView.dequeueReusableCellWithIdentifier(id, forIndexPath: indexPath) as! CardsTableViewCell
+        let cell = cardsTableView.dequeueReusableCellWithIdentifier(id) as! CardsTableViewCell
         
         /// 数据绑定
         
@@ -453,6 +478,15 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         return cell
     }
     
+    /// 为了兼容动态改变高度的快捷栏，需要复写此方法
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if hasShortcutBox && indexPath.section == 0 {
+            return ShortcutBoxView.precalculateHeight()
+        }
+        
+        return UITableViewAutomaticDimension
+    }
+    
     /// 卡片列表部分：卡片列表代理
     /////////////////////////////////////////////////////////////////////////////////////
     
@@ -460,13 +494,23 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        let model = cardList[indexPath.section]
+        var cardIndex = indexPath.section
+        
+        if hasShortcutBox {
+            if indexPath.section == 0 {
+                return
+            } else {
+                cardIndex -= 1
+            }
+        }
+        
+        let model = cardList[cardIndex]
         let destination = model.rows[indexPath.row].destination
         let message = model.rows[indexPath.row].message
         
         // 若有目标界面，打开目标界面；否则若有消息，显示消息；否则显示卡片无详情
         if destination != "" {
-            AppModule(title: model.rows[0].title!, url: destination).open(navigationController)
+            AppModule(title: model.rows[0].title!, url: destination).open()
         } else if message != "" {
             showMessage(message)
         } else {
@@ -494,7 +538,17 @@ extension CardsViewController:UIViewControllerPreviewingDelegate {
             return nil
         }
         
-        let cardTitle = cardList[indexPath.section].rows[0].title!
+        var cardIndex = indexPath.section
+        
+        if hasShortcutBox {
+            if indexPath.section == 0 {
+                return nil
+            } else {
+                cardIndex -= 1
+            }
+        }
+        
+        let cardTitle = cardList[cardIndex].rows[0].title!
         
         let cell = cardsTableView.cellForRowAtIndexPath(indexPath) as! CardsTableViewCell
         previewingContext.sourceRect = cell.frame
@@ -509,15 +563,15 @@ extension CardsViewController:UIViewControllerPreviewingDelegate {
             return nil
         }
         
-        let destination = cardList[indexPath.section].rows[indexPath.row].destination
+        let destination = cardList[cardIndex].rows[indexPath.row].destination
         if destination.hasPrefix("http") {
             //存在spinner卡顿情况，仅针对教务通知子cell
             let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE") as! WebModuleViewController
-            detailVC.url = cardList[indexPath.section].rows[indexPath.row].destination
-            detailVC.title = cardList[indexPath.section].rows[0].title!
+            detailVC.url = cardList[cardIndex].rows[indexPath.row].destination
+            detailVC.title = cardList[cardIndex].rows[0].title!
             return detailVC
         } else if !destination.isEmpty && !destination.hasPrefix("TAB") {
-            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(cardList[indexPath.section].rows[indexPath.row].destination)
+            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(cardList[cardIndex].rows[indexPath.row].destination)
             detailVC.preferredContentSize = CGSizeMake(SCREEN_WIDTH, 600)
             return detailVC
         } else {
