@@ -95,31 +95,29 @@ class AppModule : Hashable {
     
     /// 打开模块
     func open (){
-        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate {
-            if let navigationController = delegate.navigationController {
-                // 空模块不做任何事
-                if controller == "" { return }
-                
-                // Web 页面，交给 WebModule 打开
-                if controller.hasPrefix("http") {
-                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE") as! WebModuleViewController
-                    vc.title = nameTip
-                    vc.url = controller
-                    
-                    navigationController.pushViewController(vc, animated: true)
-                    
-                    // 切换到指定的 Tab，只适用于首页的 Tab
-                } else if controller.hasPrefix("TAB") {
-                    if let tab = Int(controller.replaceAll("TAB", "")) {
-                        (navigationController.childViewControllers[0] as? UITabBarController)?.selectedIndex = tab
-                    }
-                    
-                    // 切换到指定的VC
-                } else {
-                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(controller)
-                    navigationController.pushViewController(vc, animated: true)
+        // 空模块不做任何事
+        if controller == "" { return }
+        
+        // Web 页面，交给 WebModule 打开
+        if controller.hasPrefix("http") {
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE") as! WebModuleViewController
+            vc.title = nameTip
+            vc.url = controller
+            
+            AppDelegate.instance.rightController.pushViewController(vc, animated: true)
+            
+            // 切换到指定的 Tab，只适用于首页的 Tab
+        } else if controller.hasPrefix("TAB") {
+            if let tab = Int(controller.replaceAll("TAB", "")) {
+                if let tabVC = AppDelegate.instance.leftController.childViewControllers[0] as? UITabBarController {
+                    tabVC.selectedIndex = tab
                 }
             }
+            
+            // 切换到指定的VC
+        } else {
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(controller)
+            AppDelegate.instance.rightController.pushViewController(vc, animated: true)
         }
     }
 }

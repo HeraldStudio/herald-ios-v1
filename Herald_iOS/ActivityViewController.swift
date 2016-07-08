@@ -17,7 +17,8 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
     var page = 0
     
     /// 下拉刷新和上拉加载方面的处理
-    let swiper = SwipeRefreshHeader()
+    let swiper = SwipeRefreshHeader(.Left)
+    
     let puller = PullLoadFooter()
     
     /// 界面实例化时的初始化

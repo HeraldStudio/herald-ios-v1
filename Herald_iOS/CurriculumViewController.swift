@@ -15,12 +15,12 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
     
     @IBOutlet var scrollView : UIScrollView!
     
-    let swiper = SwipeRefreshHeader()
+    let swiper = SwipeRefreshHeader(.Right)
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
         let top = (navigationController?.navigationBar.bounds.height)! + UIApplication.sharedApplication().statusBarFrame.height
-        scrollView?.frame = CGRect(x: 0, y: top, width: view.bounds.width, height: view.bounds.height - top)
+        scrollView?.frame = CGRect(x: 0, y: top, width: AppDelegate.instance.rightController.view.bounds.width, height: view.bounds.height - top)
         readLocal()
     }
     

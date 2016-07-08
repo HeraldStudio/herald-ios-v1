@@ -1,6 +1,6 @@
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginGodViewController: UIViewController {
 
     @IBOutlet var username : UITextField!
     
