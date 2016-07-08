@@ -37,7 +37,7 @@ class WifiLoginHelper {
             } else {
                 self.vc.hideProgressDialog()
                 WifiLoginHelper.working = false
-                self.vc.showMessage("网络异常，请先手动连接到 seu-wlan，并等待网络图标变成 Wi-Fi 图标之后再试~\n\n如果系统弹出登录页面，请到 Wi-Fi 设置中关闭 seu-wlan 的 [自动登录] 功能再试~")
+                self.vc.showMessage("校园网状态异常，请先手动连接到 seu-wlan，并等待网络图标变成 Wi-Fi 图标之后再试~\n\n如果系统弹出登录页面，请到 Wi-Fi 设置中关闭 seu-wlan 的 [自动登录] 功能再试~")
             }
         }.run()
     }
@@ -56,12 +56,12 @@ class WifiLoginHelper {
                 } else {
                     self.vc.hideProgressDialog()
                     WifiLoginHelper.working = false
-                    self.vc.showMessage("已登录状态，不用再摇了~")
+                    self.vc.showMessage("已登录校园网，无需重复登录~")
                 }
             } else {
                 self.vc.hideProgressDialog()
                 WifiLoginHelper.working = false
-                self.vc.showMessage("信号有点差，换个姿势试试？")
+                self.vc.showMessage("校园网信号不佳，换个姿势试试？")
             }
         }.run()
     }
@@ -98,16 +98,16 @@ class WifiLoginHelper {
                         && info["login_expire"].string != nil
                         && info["login_remain"].int != nil
                         && info["login_time"].int != nil {
-                        self.vc.showMessage("小猴登陆校园网成功~")
+                        self.vc.showMessage("小猴登录校园网成功~")
                     } else {
                         if let error = JSON.parse(response)["error"].string {
-                            self.vc.showMessage("登录失败，\(error.replaceAll(",", "，"))")
+                            self.vc.showMessage("登录失败：\(error.replaceAll(",", "，"))")
                         } else {
                             self.vc.showMessage("登录失败，出现未知错误")
                         }
                     }
                 } else {
-                    self.vc.showMessage("信号有点差，换个姿势试试？")
+                    self.vc.showMessage("校园网信号不佳，换个姿势试试？")
                 }
                 self.vc.hideProgressDialog()
                 WifiLoginHelper.working = false

@@ -1,10 +1,13 @@
 import UIKit
 
 /**
- * MyInfoViewController | 设置界面
+ * SettingsViewController | 设置界面
  * 设置界面主要是静态列表，这个类主要负责管理其中的动态内容、以及一些无法用 Segue 表示的点击事件
  */
-class MyInfoViewController: UITableViewController {
+class SettingsViewController: UITableViewController {
+    
+    /// 摇一摇登录校园网的开关
+    @IBOutlet var wifiSwitch : UISwitch!
     
     /// 上课提醒、实验提醒、考试提醒的开关
     @IBOutlet var curriculumSwitch : UISwitch!
@@ -24,6 +27,7 @@ class MyInfoViewController: UITableViewController {
         super.viewDidLoad()
         
         /// 初始化开关状态
+        wifiSwitch.setOn(SettingsHelper.wifiAutoLogin, animated: false)
         curriculumSwitch.setOn(SettingsHelper.curriculumNotificationEnabled, animated: false)
         experimentSwitch.setOn(SettingsHelper.experimentNotificationEnabled, animated: false)
         examSwitch.setOn(SettingsHelper.examNotificationEnabled, animated: false)
@@ -48,7 +52,7 @@ class MyInfoViewController: UITableViewController {
         case (0, 1):
             /// 自定义校园网登录账号
             displayWifiSetDialog()
-        case (2, 1):
+        case (3, 1):
             /// 给我们评分（App Store不允许有版本更新按钮，因此更名）
             checkVersion()
         default:
@@ -56,7 +60,11 @@ class MyInfoViewController: UITableViewController {
         }
     }
     
-    /// 同步开关状态到设置    
+    /// 同步开关状态到设置
+    @IBAction func wifiStateChanged () {
+        SettingsHelper.wifiAutoLogin = wifiSwitch.on
+    }
+    
     @IBAction func curriculumStateChanged () {
         SettingsHelper.curriculumNotificationEnabled = curriculumSwitch.on
     }

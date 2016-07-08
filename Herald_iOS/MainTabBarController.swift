@@ -33,42 +33,23 @@ class MainTabBarController: UITabBarController {
         
         // 修改 TabBar 高亮图标的颜色
         tabBar.tintColor = UIColor(red: 0, green: 180/255, blue: 255/255, alpha: 1)
-    }
-    
-    override func viewDidAppear(animated: Bool) {
         
-        // 若没打开过新版弹出菜单，提示用户弹出菜单更新了
-        if SettingsHelper.get("popmenu_intro") != "0" {
-            showPopupMenuIntro()
+        if ApiHelper.isLogin() {
+            // 注册摇一摇事件
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
         }
     }
     
-    /// 显示介绍新版弹出菜单的提示
-    @IBAction func showPopupMenuIntro () {
-        
-        let menuArray = [
-            KxMenuItem("不再需要摇一摇了，试试新版加号菜单吧", image: UIImage(), target: self, action: #selector(self.showPopupMenu))
-        ]
-        
-        // 设置菜单箭头指向的区域
-        let rect = CGRect(x: view.frame.width - 49, y: 0, width: 49, height: 0)
-        
-        // 设置菜单内容字体
-        KxMenu.setTitleFont(UIFont(name: "HelveticaNeue", size: 14))
-        
-        KxMenu.showMenuInView(view, fromRect: rect, menuItems: menuArray, withOptions: OptionalConfiguration(
-            arrowSize: 9,
-            marginXSpacing: 7,
-            marginYSpacing: 7,
-            intervalSpacing: 15,
-            menuCornerRadius: 4,
-            maskToBackground: true,
-            shadowOfMenu: false,
-            hasSeperatorLine: true,
-            seperatorLineHasInsets: false,
-            textColor: Color(R: 0.2, G: 0.2, B: 0.2),
-            menuBackgroundColor: Color(R: 1, G: 1, B: 1)
-            ))
+    /// 响应摇一摇事件
+    func onShake () {
+        if SettingsHelper.wifiAutoLogin {
+            WifiLoginHelper(self).checkAndLogin()
+        }
+    }
+    
+    /// 反注册摇一摇事件
+    override func finalize() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: DHCSHakeNotificationName, object: nil)
     }
     
     /// 显示右上角弹出菜单
@@ -81,7 +62,6 @@ class MainTabBarController: UITabBarController {
         let menuArray = [
             KxMenuItem("登录校园网", image: UIImage(named: "action_wifi"), target: self, action: #selector(self.loginToWifi)),
             KxMenuItem("一卡通充值", image: UIImage(named: "action_charge"), target: self, action: #selector(self.cardCharge)),
-            KxMenuItem("添加考试", image: UIImage(named: "action_add_exam"), target: self, action: #selector(self.customExam)),
             KxMenuItem("模块管理", image: UIImage(named: "action_module_manage"), target: self, action: #selector(self.moduleManage))
         ]
         
@@ -120,13 +100,6 @@ class MainTabBarController: UITabBarController {
         showTipDialogIfUnknown("注意：充值之后需要在食堂刷卡机上刷卡，充值金额才能到账哦", cachePostfix: "card_charge") {
             () -> Void in
             AppModule(title: "一卡通充值", url: CardViewController.url).open()
-        }
-    }
-    
-    /// 弹出菜单操作：添加考试
-    func customExam () {
-        if let vc = storyboard?.instantiateViewControllerWithIdentifier("MODULE_CUSTOM_EXAM") {
-            AppDelegate.instance.rightController.pushViewController(vc, animated: true)
         }
     }
     

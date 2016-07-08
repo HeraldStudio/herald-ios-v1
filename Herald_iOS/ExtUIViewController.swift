@@ -75,16 +75,21 @@ extension UIViewController {
         let red = CGFloat(color % 0x100) / 0xFF
         let _color = UIColor(red: red, green: green, blue: blue, alpha: 1)
         
+        setNavigationColor(swiper, uiColor: _color)
+    }
+    
+    /// 设置导航栏颜色
+    func setNavigationColor (swiper: SwipeRefreshHeader?, uiColor color: UIColor) {
         if let bar = self.navigationController?.navigationBar {
             UIView.beginAnimations(nil, context: nil)
             UIView.setAnimationCurve(.Linear)
             UIView.setAnimationDelegate(self)
             UIView.setAnimationDuration(0.3)
-            bar.barTintColor = _color
+            bar.barTintColor = color
             UIView.commitAnimations()
         }
         
-        swiper?.themeColor = _color
+        swiper?.themeColor = color
     }
     
     /// 获取当前最顶层的VC，以防止提示消息显示不出来

@@ -1,6 +1,6 @@
 import UIKit
 
-class LoginGodViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     @IBOutlet var username : UITextField!
     
@@ -19,6 +19,11 @@ class LoginGodViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    /// 手机只支持竖屏，平板支持横屏和竖屏
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return AppDelegate.isPad ? .AllButUpsideDown : .Portrait
     }
     
     @IBAction func buttonClicked() {
