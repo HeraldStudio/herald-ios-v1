@@ -14,7 +14,7 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet var tableView : UITableView!
     
-    let swiper = SwipeRefreshHeader()
+    let swiper = SwipeRefreshHeader(.Right)
 
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}

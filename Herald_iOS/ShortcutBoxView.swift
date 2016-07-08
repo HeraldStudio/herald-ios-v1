@@ -18,26 +18,19 @@ class ShortcutBoxView : UIView {
     
     static func precalculateHeight() -> CGFloat {
         
-        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate {
-            
-            if let navigationController = delegate.navigationController {
-                
-                let width = navigationController.view.frame.width
-                
-                // 获取已启用快捷方式的模块列表
-                let dataSource = R.module.array.filter { $0.shortcutEnabled } + [R.module.moduleManager]
-                
-                // 根据尺寸计算列数
-                let columnCount = Int(width / minCellWidth)
-                
-                // 根据总数和列数计算行数
-                let rowCount = Int(ceil(Float(dataSource.count) / Float(columnCount)))
-                
-                // 根据行数计算高度
-                return cellHeight * CGFloat(rowCount)
-            }
-        }
-        return 0
+        let width = AppDelegate.instance.leftController.view.frame.width
+        
+        // 获取已启用快捷方式的模块列表
+        let dataSource = R.module.array.filter { $0.shortcutEnabled } + [R.module.moduleManager]
+        
+        // 根据尺寸计算列数
+        let columnCount = Int(width / minCellWidth)
+        
+        // 根据总数和列数计算行数
+        let rowCount = Int(ceil(Float(dataSource.count) / Float(columnCount)))
+        
+        // 根据行数计算高度
+        return cellHeight * CGFloat(rowCount)
     }
     
     /// 重新载入数据
@@ -52,47 +45,41 @@ class ShortcutBoxView : UIView {
         // 获取已启用快捷方式的模块列表
         dataSource = R.module.array.filter { $0.shortcutEnabled } + [R.module.moduleManager]
         
-        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+        let width = AppDelegate.instance.leftController.view.frame.width
+        
+        // 根据尺寸计算列数
+        let columnCount = Int(width / ShortcutBoxView.minCellWidth)
+        
+        // 根据总数和列数计算行数
+        let rowCount = Int(ceil(Float(dataSource.count) / Float(columnCount)))
+        
+        // 根据行数计算高度
+        let height = ShortcutBoxView.cellHeight * CGFloat(rowCount)
+        
+        // 设置高度
+        frame = CGRect(x: frame.minX, y: frame.minY, width: width, height: height)
+        
+        // 设置背景色
+        backgroundColor = UIColor.whiteColor()
+        
+        /// 布局各个快捷图标
+        // 根据尺寸计算实际列宽
+        let cellWidth = width / CGFloat(columnCount)
+        
+        for index in 0 ..< dataSource.count {
             
-            if let navigationController = delegate.navigationController {
-                
-                let width = navigationController.view.frame.width
-                
-                // 根据尺寸计算列数
-                let columnCount = Int(width / ShortcutBoxView.minCellWidth)
-                
-                // 根据总数和列数计算行数
-                let rowCount = Int(ceil(Float(dataSource.count) / Float(columnCount)))
-                
-                // 根据行数计算高度
-                let height = ShortcutBoxView.cellHeight * CGFloat(rowCount)
-                
-                // 设置高度
-                frame = CGRect(x: frame.minX, y: frame.minY, width: width, height: height)
-                
-                // 设置背景色
-                backgroundColor = UIColor.whiteColor()
-                
-                /// 布局各个快捷图标
-                // 根据尺寸计算实际列宽
-                let cellWidth = width / CGFloat(columnCount)
-                
-                for index in 0 ..< dataSource.count {
-                    
-                    // 计算图标位置
-                    let xPos = index % columnCount
-                    let yPos = index / columnCount
-                    let x = CGFloat(xPos) * cellWidth
-                    let y = CGFloat(yPos) * ShortcutBoxView.cellHeight
-                    
-                    // 得到图标区域
-                    let rect = CGRect(x: x, y: y, width: cellWidth, height: ShortcutBoxView.cellHeight)
-                    
-                    let cell = layoutCellAt(index, inRect: rect)
-                    
-                    cell.backgroundColor = ((xPos + yPos) % 2 == 0) ? UIColor(white: 248/255, alpha: 1) : UIColor.whiteColor()
-                }
-            }
+            // 计算图标位置
+            let xPos = index % columnCount
+            let yPos = index / columnCount
+            let x = CGFloat(xPos) * cellWidth
+            let y = CGFloat(yPos) * ShortcutBoxView.cellHeight
+            
+            // 得到图标区域
+            let rect = CGRect(x: x, y: y, width: cellWidth, height: ShortcutBoxView.cellHeight)
+            
+            let cell = layoutCellAt(index, inRect: rect)
+            
+            cell.backgroundColor = ((xPos + yPos) % 2 == 0) ? UIColor(white: 248/255, alpha: 1) : UIColor.whiteColor()
         }
     }
     
@@ -217,14 +204,8 @@ class ShortcutBoxCell : UIView {
     
     /// 询问删除快捷方式
     func askToDelete() {
-        
-        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate {
-            
-            if let navigationController = delegate.navigationController {
-                navigationController.showQuestionDialog("确定移除此模块的快捷方式吗？") {
-                    self.module.shortcutEnabled = false
-                }
-            }
+        AppDelegate.instance.leftController.showQuestionDialog("确定移除此模块的快捷方式吗？") {
+            self.module.shortcutEnabled = false
         }
     }
 }

@@ -19,7 +19,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     let slider = BannerPageViewController()
     
     /// 下拉刷新视图
-    let swiper = SwipeRefreshHeader()
+    let swiper = SwipeRefreshHeader(.Left)
     
     /// 轮播图的数据，用于比较当前数据与新数据是否一致，不一致则重载轮播图
     /// 避免轮播图在刷新过程中出现不必要的闪烁，起到缓冲的作用
@@ -98,7 +98,9 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         /// 初始化轮播图
         
         // 轮播图宽高比 5:2
-        slider.view.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.width * CGFloat(0.4))
+        slider.view.frame = CGRect(x: 0, y: 0,
+                                   width: AppDelegate.instance.leftController.view.frame.width,
+                                   height: AppDelegate.instance.leftController.view.frame.width * CGFloat(0.4))
         
         // 轮播图自动切换间隔 5秒
         slider.interval = 5

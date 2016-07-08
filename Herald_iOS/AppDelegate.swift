@@ -10,8 +10,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// 应用程序的主显示窗口
     var window: UIWindow?
     
-    /// 用来显示模块界面的导航控制器
-    var navigationController: UINavigationController?
+    /// 用来显示主界面的导航控制器，在平板模式下是左侧视图
+    var leftController: UINavigationController!
+    
+    /// 用来显示模块界面的导航控制器，在平板模式下是右侧视图
+    var rightController: UINavigationController!
+    
+    /// 对获取AppDelegate单例的语句进行简化
+    static var instance : AppDelegate {
+        return UIApplication.sharedApplication().delegate as! AppDelegate
+    }
     
     /// 无参数的启动结束事件，似乎不会触发
     func applicationDidFinishLaunching(application: UIApplication) {}
@@ -47,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         
+        showMain()
         return true
     }
     
@@ -124,7 +133,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = nil
         
         // 实例化新的界面
-        let lvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("login")
+        let lvc = AppDelegate.instantiateLoginGodController()
         
         // 打开新的界面
         self.window?.rootViewController = lvc
@@ -143,12 +152,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = nil
         
         // 实例化新的界面
-        let mvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("main")
+        let mvc = AppDelegate.instantiateMainGodController()
         
         // 打开新的界面
         self.window?.rootViewController = mvc
         
         return mvc
+    }
+    
+    static var isPad : Bool {
+        return UI_USER_INTERFACE_IDIOM() == .Pad
+    }
+    
+    static func instantiateLoginGodController() -> UIViewController {
+        let id = "LoginGodViewController"
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(id)
+    }
+    
+    static func instantiateMainGodController() -> UIViewController {
+        let id = isPad ? "MainSplitController" : "MainNavigationController"
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(id)
     }
 }
 

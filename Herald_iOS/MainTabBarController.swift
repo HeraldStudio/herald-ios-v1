@@ -5,20 +5,21 @@ import DHCShakeNotifier
  * MainViewController | 应用程序主界面
  * 负责处理全局UI初始化等处理
  *
- * 注意：此 ViewController 不是程序主入口要直接打开的，直接打开的是它的父 ViewController 
- *      即 UINavigationController。之所以重写这个 UITabBarController 而不重写
- *      UINavigationController 是为了便于控制 TabBar。
+ * 注意：此 ViewController 并不是最顶层的根布局。实际的布局树是如下这样的：
+ * 
+ * - Spilt View Controller (UISplitViewController)
+ * |
+ * | - Left View Controller (UINavigationController)
+ * | |
+ * | | - Main View Controller (UITabBarController)
+ * |
+ * | - Right View Controller (UINavigationController)
  */
-class MainViewController: UITabBarController {
+class MainTabBarController: UITabBarController {
     
     /// 界面实例化时的初始化
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 注册导航控制器
-        if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate {
-            delegate.navigationController = navigationController
-        }
         
         // 去除界面切换时导航栏的黑影
         navigationController?.view.backgroundColor = UIColor.whiteColor()
@@ -125,14 +126,14 @@ class MainViewController: UITabBarController {
     /// 弹出菜单操作：添加考试
     func customExam () {
         if let vc = storyboard?.instantiateViewControllerWithIdentifier("MODULE_CUSTOM_EXAM") {
-            navigationController?.pushViewController(vc, animated: true)
+            AppDelegate.instance.rightController.pushViewController(vc, animated: true)
         }
     }
     
     /// 弹出菜单操作：模块管理
     func moduleManage () {
         if let vc = storyboard?.instantiateViewControllerWithIdentifier("MODULE_MANAGER") {
-            navigationController?.pushViewController(vc, animated: true)
+            AppDelegate.instance.rightController.pushViewController(vc, animated: true)
         }
     }
 }
