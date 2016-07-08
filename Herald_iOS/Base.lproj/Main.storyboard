@@ -3589,10 +3589,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BF3-z5-CRl" customClass="FSCalendar">
-                                <rect key="frame" x="15" y="210" width="290" height="290"/>
+                                <rect key="frame" x="15" y="210" width="290" height="294"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="BF3-z5-CRl" secondAttribute="height" multiplier="1:1" priority="999" id="CuJ-ge-MjN"/>
+                                    <constraint firstAttribute="width" secondItem="BF3-z5-CRl" secondAttribute="height" multiplier="3:4" priority="999" id="CuJ-ge-MjN"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="adjustsFontSizeToFitContentSize" value="NO"/>
