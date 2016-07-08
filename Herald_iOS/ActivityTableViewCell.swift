@@ -3,7 +3,7 @@ import UIKit
 /**
  * ActivityTableViewCell | 活动版块列表项视图
  */
-class ActivityTableViewCell : UITableViewCell {
+class ActivityTableViewCell : NoSelectionTableViewCell {
     
     /// 活动标题
     @IBOutlet var title : UILabel!
@@ -20,9 +20,9 @@ class ActivityTableViewCell : UITableViewCell {
     /// 活动介绍，包括时间地点和简介
     @IBOutlet var intro : UILabel!
     
-    /// 设置未点击和点击时的背景图
+    // 修正iPad端背景白色不透明的问题
     override func didMoveToSuperview() {
-        backgroundView = UIImageView(image: UIImage(named: "activity_card_bg"))
-        selectedBackgroundView = UIImageView(image: UIImage(named: "activity_card_bg_selected"))
+        self.backgroundColor = UIColor.clearColor()
+        self.selectedBackgroundView = UIImageView(image: UIImage())
     }
 }

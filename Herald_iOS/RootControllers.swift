@@ -1,26 +1,17 @@
 import UIKit
 
-/// 主页总框架
-class MainGodViewController : UIViewController {
-    
-    var vc : UIViewController?
-    
-    override func viewDidAppear(animated: Bool) {
-        let id = AppDelegate.isPad ? "MainSplitController" : "MainNavigationController"
-        vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(id)
-        super.presentViewController(vc!, animated: false) {}
-    }
-    
-    override func presentViewController(viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
-        vc?.presentViewController(viewControllerToPresent, animated: flag, completion: completion)
-    }
-}
-
 /// 手机根布局导航框架
 class MainNavigationController : UINavigationController {
+    
+    /// 同时充当左右栏
     override func viewDidLoad() {
         AppDelegate.instance.leftController = self
         AppDelegate.instance.rightController = self
+    }
+    
+    /// 覆盖默认设置，只支持竖屏
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return .Portrait
     }
 }
 
@@ -29,14 +20,22 @@ class MainSplitController : UISplitViewController, UISplitViewControllerDelegate
     
     override func viewDidLoad() {
         delegate = self
+        
+        // 微调中间分割线颜色
+        view.backgroundColor = UIColor(white: 192/255, alpha: 1)
+        
+        // 设置左栏宽度。为了防止横竖屏切换时布局错位，此宽度直接写死，不允许自适应
+        minimumPrimaryColumnWidth = 360
+        maximumPrimaryColumnWidth = 360
     }
     
+    /// 覆盖默认设置，支持横屏和竖屏
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return .AllButUpsideDown
+    }
+    
+    /// 永不隐藏左栏
     func splitViewController(svc: UISplitViewController, shouldHideViewController vc: UIViewController, inOrientation orientation: UIInterfaceOrientation) -> Bool {
-        if orientation == .Portrait || orientation == .PortraitUpsideDown {
-            if vc == AppDelegate.instance.rightController {
-                return true
-            }
-        }
         return false
     }
 }

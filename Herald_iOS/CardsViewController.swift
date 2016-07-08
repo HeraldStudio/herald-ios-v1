@@ -348,13 +348,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
         if R.module.pedetail.cardEnabled {
-            // 仅当已到开始时间时，允许刷新跑操
-            let _now = GCalendar()
-            let now = _now.hour * 60 + _now.minute
-            let startTime = 6 * 60 + 20
-            if now >= startTime {
-                manager.addAll(PedetailCard.getRefresher())
-            }
+            // 直接刷新跑操数据
+            manager.addAll(PedetailCard.getRefresher())
         }
         
         if R.module.card.cardEnabled {

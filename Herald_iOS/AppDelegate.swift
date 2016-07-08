@@ -165,7 +165,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     static func instantiateLoginGodController() -> UIViewController {
-        let id = "LoginGodViewController"
+        let id = "LoginViewController"
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(id)
     }
     

@@ -28,6 +28,11 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
         setNavigationColor(swiper, 0x00abd4)
     }
     
+    /// 当屏幕旋转时重新布局
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        readLocal()
+    }
+    
     @IBAction func refreshCache () {
         showProgressDialog()
         ApiThreadManager().addAll([
