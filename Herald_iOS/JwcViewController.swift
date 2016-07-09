@@ -14,7 +14,7 @@ class JwcViewController : UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet var tableView : UITableView!
     
-    let swiper = SwipeRefreshHeader()
+    let swiper = SwipeRefreshHeader(.Right)
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
@@ -111,6 +111,6 @@ class JwcViewController : UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        AppModule(title: "教务通知", url: noticeList[indexPath.section][indexPath.row].url).open(navigationController)
+        AppModule(title: "教务通知", url: noticeList[indexPath.section][indexPath.row].url).open()
     }
 }

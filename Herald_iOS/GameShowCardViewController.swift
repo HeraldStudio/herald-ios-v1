@@ -26,7 +26,7 @@ class GameShowCardViewController : UIViewController, UITableViewDataSource, UITa
         if token != "" {
             
             // 实例化下拉刷新控件，自定义其刷新事件及提示文字，并设为列表头视图
-            swiper = SwipeRefreshHeader()
+            swiper = SwipeRefreshHeader(.Right)
             swiper?.refresher = {() in self.askPickCard()}
             swiper?.tipText = "PICK"
             tableView?.tableHeaderView = swiper

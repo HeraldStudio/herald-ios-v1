@@ -39,6 +39,11 @@ extension UIViewController {
     
     /// 显示确认对话框
     func showQuestionDialog (message: String, runAfter: () -> Void) {
+        
+        // 若已有窗口，不作处理
+        if getTopViewController()?.presentedViewController != nil {
+            return
+        }
         let dialog = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         dialog.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default){
             (action: UIAlertAction) -> Void in runAfter()})
@@ -49,6 +54,11 @@ extension UIViewController {
     
     /// 显示带有“不再提示”按钮的对话框
     func showTipDialogIfUnknown (message: String, cachePostfix: String, runAfter: () -> Void) {
+        
+        // 若已有窗口，不作处理
+        if getTopViewController()?.presentedViewController != nil {
+            return
+        }
         let shown = CacheHelper.get("tip_ignored_" + cachePostfix) == "1"
         if !shown {
             let dialog = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -75,16 +85,21 @@ extension UIViewController {
         let red = CGFloat(color % 0x100) / 0xFF
         let _color = UIColor(red: red, green: green, blue: blue, alpha: 1)
         
+        setNavigationColor(swiper, uiColor: _color)
+    }
+    
+    /// 设置导航栏颜色
+    func setNavigationColor (swiper: SwipeRefreshHeader?, uiColor color: UIColor) {
         if let bar = self.navigationController?.navigationBar {
             UIView.beginAnimations(nil, context: nil)
             UIView.setAnimationCurve(.Linear)
             UIView.setAnimationDelegate(self)
             UIView.setAnimationDuration(0.3)
-            bar.barTintColor = _color
+            bar.barTintColor = color
             UIView.commitAnimations()
         }
         
-        swiper?.themeColor = _color
+        swiper?.themeColor = color
     }
     
     /// 获取当前最顶层的VC，以防止提示消息显示不出来

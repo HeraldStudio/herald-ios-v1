@@ -8,7 +8,7 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     static let url = "http://58.192.115.47:8088/wechat-web/login/initlogin.html"
     
-    let swiper = SwipeRefreshHeader()
+    let swiper = SwipeRefreshHeader(.Right)
     let puller = PullLoadFooter()
     
     override func viewDidLoad() {
@@ -189,7 +189,7 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         showTipDialogIfUnknown("注意：充值之后需要在食堂刷卡机上刷卡，充值金额才能到账哦", cachePostfix: "card_charge") {
             () -> Void in
                 self.title = "一卡通"
-                AppModule(title: "一卡通充值", url: CardViewController.url).open(self.navigationController)
+                AppModule(title: "一卡通充值", url: CardViewController.url).open()
         }
     }
     

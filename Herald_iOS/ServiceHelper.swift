@@ -13,41 +13,11 @@ class ServiceHelper {
     
     static let serviceCache = NSUserDefaults.withPrefix("service_")
     
-    static func getRefresher () -> [ApiRequest] {
-        return [ApiRequest().url("http://android.heraldstudio.com/checkversion").uuid()
-            .post("schoolnum", ApiHelper.getSchoolnum())
-            .post("versioncode", "\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion")!)")
-            .post("versionname", "V\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")!)")
-            .post("versiontype", "iOS")
-            .toServiceCache("versioncheck_cache")]
-    }
-    
     static func get(key : String) -> String {
         return serviceCache.get(key)
     }
     
     static func set(key : String, _ value : String) {
         serviceCache.set(key, value)
-    }
-    
-    static func getPushMessageContent() -> String {
-        // 获得服务器端推送消息
-        let cache = get("versioncheck_cache")
-        return JSON.parse(cache)["content"]["message"]["content"].stringValue
-    }
-    
-    static func getPushMessageUrl() -> String {
-        // 获得服务器端推送消息
-        let cache = get("versioncheck_cache")
-        return JSON.parse(cache)["content"]["message"]["url"].stringValue
-    }
-    
-    static func getPushMessageItem() -> CardsModel? {
-        let pushMessage = getPushMessageContent()
-        if pushMessage != "" {
-            let card = CardsModel(cellId: "", icon : "ic_pushmsg", title : "小猴提示", desc : pushMessage, dest : getPushMessageUrl(), message: "", priority : .CONTENT_NOTIFY)
-            return card
-        }
-        return nil
     }
 }

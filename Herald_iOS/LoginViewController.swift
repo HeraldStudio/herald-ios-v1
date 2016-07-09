@@ -21,6 +21,11 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /// 手机只支持竖屏，平板支持横屏和竖屏
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return AppDelegate.isPad ? .AllButUpsideDown : .Portrait
+    }
+    
     @IBAction func buttonClicked() {
         endEdit()
         if username?.text! != "" && password?.text! != "" {

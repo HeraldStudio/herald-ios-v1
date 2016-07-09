@@ -67,7 +67,11 @@ class AppModule : Hashable {
     /// 快捷方式是否开启
     var shortcutEnabled : Bool {
         get {
-            return SettingsHelper.get("herald_settings_module_shortcutenabled_" + name) != "0"
+            let cache = SettingsHelper.get("herald_settings_module_shortcutenabled_" + name)
+            if cache == "" {
+                return !hasCard
+            }
+            return cache != "0"
         } set {
             // flag为true则设置为选中，否则设置为不选中
             if (newValue) {
@@ -79,9 +83,18 @@ class AppModule : Hashable {
         }
     }
     
+    /// 用来标识一个不带卡片的模块数据是否有更新
+    var hasUpdates : Bool {
+        get {
+            return !hasCard && SettingsHelper.get("herald_settings_module_hasupdates_" + name) == "1"
+        } set {
+            SettingsHelper.set("herald_settings_module_hasupdates_" + name, newValue ? "1" : "0")
+            SettingsHelper.notifyModuleSettingsChanged()
+        }
+    }
+    
     /// 打开模块
-    func open (navigationController : UINavigationController?) {
-        
+    func open (){
         // 空模块不做任何事
         if controller == "" { return }
         
@@ -91,18 +104,20 @@ class AppModule : Hashable {
             vc.title = nameTip
             vc.url = controller
             
-            navigationController?.pushViewController(vc, animated: true)
+            AppDelegate.instance.rightController.pushViewController(vc, animated: true)
             
-        // 切换到指定的 Tab，只适用于首页的 Tab
+            // 切换到指定的 Tab，只适用于首页的 Tab
         } else if controller.hasPrefix("TAB") {
             if let tab = Int(controller.replaceAll("TAB", "")) {
-                (navigationController?.childViewControllers[0] as? UITabBarController)?.selectedIndex = tab
+                if let tabVC = AppDelegate.instance.leftController.childViewControllers[0] as? UITabBarController {
+                    tabVC.selectedIndex = tab
+                }
             }
             
-        // 切换到指定的VC
+            // 切换到指定的VC
         } else {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(controller)
-            navigationController?.pushViewController(vc, animated: true)
+            AppDelegate.instance.rightController.pushViewController(vc, animated: true)
         }
     }
 }

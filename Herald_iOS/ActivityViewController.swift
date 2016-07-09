@@ -17,7 +17,8 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
     var page = 0
     
     /// 下拉刷新和上拉加载方面的处理
-    let swiper = SwipeRefreshHeader()
+    let swiper = SwipeRefreshHeader(.Left)
+    
     let puller = PullLoadFooter()
     
     /// 界面实例化时的初始化
@@ -214,7 +215,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         
         // 打开对应的详情页面
         if model.detailUrl != "" {
-            AppModule(title: "校园活动", url: model.detailUrl).open(navigationController)
+            AppModule(title: "校园活动", url: model.detailUrl).open()
         } else {
             showMessage("该活动没有详情页面")
         }

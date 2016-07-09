@@ -13,7 +13,7 @@ class GymChooseTimeViewController : UIViewController, UITableViewDataSource, UIT
     
     var dateList : [String] = []
     
-    let swiper = SwipeRefreshHeader()
+    let swiper = SwipeRefreshHeader(.Right)
     
     override func viewWillAppear(animated: Bool) {
         setNavigationColor(swiper, 0x0075ef)
