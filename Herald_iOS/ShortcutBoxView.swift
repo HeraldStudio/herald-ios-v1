@@ -189,7 +189,10 @@ class ShortcutBoxCell : UIView {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.launch))
         addGestureRecognizer(tapGesture)
         
-        /// 设置长按事件
+        /// 设置长按事件（模块管理按钮不设置）
+        if module == R.module.moduleManager {
+            return
+        }
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.askToDelete))
         addGestureRecognizer(longGesture)
     }
