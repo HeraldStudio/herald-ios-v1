@@ -39,6 +39,11 @@ extension UIViewController {
     
     /// 显示确认对话框
     func showQuestionDialog (message: String, runAfter: () -> Void) {
+        
+        // 若已有窗口，不作处理
+        if getTopViewController()?.presentedViewController != nil {
+            return
+        }
         let dialog = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         dialog.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default){
             (action: UIAlertAction) -> Void in runAfter()})
@@ -49,6 +54,11 @@ extension UIViewController {
     
     /// 显示带有“不再提示”按钮的对话框
     func showTipDialogIfUnknown (message: String, cachePostfix: String, runAfter: () -> Void) {
+        
+        // 若已有窗口，不作处理
+        if getTopViewController()?.presentedViewController != nil {
+            return
+        }
         let shown = CacheHelper.get("tip_ignored_" + cachePostfix) == "1"
         if !shown {
             let dialog = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.Alert)
