@@ -13,6 +13,14 @@ import UIKit
 
 class SwipeRefreshHeader : UIView {
     
+    /// 表示在平板视图时，该控件放在左侧还是右侧
+    enum SwipeRefreshHeaderDisplayPlace {
+        case Left
+        case Right
+    }
+    
+    var displayPlace : SwipeRefreshHeaderDisplayPlace = .Left
+    
     /// 背景不透明度从0淡入到1的距离。若 contentView 留空，则始终不透明，不会淡入淡出
     let fadeDistance : CGFloat = 150
     
@@ -37,8 +45,26 @@ class SwipeRefreshHeader : UIView {
     /// 下拉刷新中的文字，默认为REFRESH
     var tipText = "REFRESH"
     
+    init(_ place : SwipeRefreshHeaderDisplayPlace) {
+        self.displayPlace = place
+        super.init(frame: CGRect())
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     /// 视图被展示时的操作
     override func didMoveToSuperview() {
+        
+        var rootController : UIViewController
+        
+        switch displayPlace {
+        case .Left:
+            rootController = AppDelegate.instance.leftController
+        default:
+            rootController = AppDelegate.instance.rightController
+        }
         
         // 先移除所有子视图，以防万一
         for k in subviews { k.removeFromSuperview() }
@@ -51,10 +77,10 @@ class SwipeRefreshHeader : UIView {
         }
         
         // 计算尺寸
-        self.frame = CGRect(x: 0, y: 0, width: (UIApplication.sharedApplication().keyWindow?.frame.width)!, height: realHeight)
+        self.frame = CGRect(x: 0, y: 0, width: rootController.view.frame.width, height: realHeight)
         
         // 添加刷新提示文字
-        refresh.frame = CGRect(x: 0, y: 0, width: (UIApplication.sharedApplication().keyWindow?.frame.width)!, height: 0)
+        refresh.frame = CGRect(x: 0, y: 0, width: rootController.view.frame.width, height: 0)
         refresh.textAlignment = .Center
         refresh.font = UIFont(name: "AppleSDGothicNeo-Thin", size: 54)
         addSubview(refresh)

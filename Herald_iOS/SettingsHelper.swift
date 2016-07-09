@@ -38,6 +38,15 @@ class SettingsHelper {
         settingsCache.set(key, value)
     }
     
+    // 摇一摇默认关闭
+    static var wifiAutoLogin : Bool {
+        get {
+            return get("herald_settings_wifi_autologin") == "1"
+        } set {
+            set("herald_settings_wifi_autologin", newValue ? "1" : "0")
+        }
+    }
+    
     static var curriculumNotificationEnabled : Bool {
         get {
             return get("curriculum_notification_enabled") == "1"

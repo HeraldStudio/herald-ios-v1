@@ -5,11 +5,17 @@ import DHCShakeNotifier
  * MainViewController | 应用程序主界面
  * 负责处理全局UI初始化等处理
  *
- * 注意：此 ViewController 不是程序主入口要直接打开的，直接打开的是它的父 ViewController 
- *      即 UINavigationController。之所以重写这个 UITabBarController 而不重写
- *      UINavigationController 是为了便于控制 TabBar。
+ * 注意：此 ViewController 并不是最顶层的根布局。实际的布局树是如下这样的：
+ * 
+ * - Spilt View Controller (UISplitViewController)
+ * |
+ * | - Left View Controller (UINavigationController)
+ * | |
+ * | | - Main View Controller (UITabBarController)
+ * |
+ * | - Right View Controller (UINavigationController)
  */
-class MainViewController: UITabBarController {
+class MainTabBarController: UITabBarController {
     
     /// 界面实例化时的初始化
     override func viewDidLoad() {
@@ -27,42 +33,23 @@ class MainViewController: UITabBarController {
         
         // 修改 TabBar 高亮图标的颜色
         tabBar.tintColor = UIColor(red: 0, green: 180/255, blue: 255/255, alpha: 1)
-    }
-    
-    override func viewDidAppear(animated: Bool) {
         
-        // 若没打开过新版弹出菜单，提示用户弹出菜单更新了
-        if SettingsHelper.get("popmenu_intro") != "0" {
-            showPopupMenuIntro()
+        if ApiHelper.isLogin() {
+            // 注册摇一摇事件
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
         }
     }
     
-    /// 显示介绍新版弹出菜单的提示
-    @IBAction func showPopupMenuIntro () {
-        
-        let menuArray = [
-            KxMenuItem("不再需要摇一摇了，试试新版加号菜单吧", image: UIImage(), target: self, action: #selector(self.showPopupMenu))
-        ]
-        
-        // 设置菜单箭头指向的区域
-        let rect = CGRect(x: view.frame.width - 49, y: 0, width: 49, height: 0)
-        
-        // 设置菜单内容字体
-        KxMenu.setTitleFont(UIFont(name: "HelveticaNeue", size: 14))
-        
-        KxMenu.showMenuInView(view, fromRect: rect, menuItems: menuArray, withOptions: OptionalConfiguration(
-            arrowSize: 9,
-            marginXSpacing: 7,
-            marginYSpacing: 7,
-            intervalSpacing: 15,
-            menuCornerRadius: 4,
-            maskToBackground: true,
-            shadowOfMenu: false,
-            hasSeperatorLine: true,
-            seperatorLineHasInsets: false,
-            textColor: Color(R: 0.2, G: 0.2, B: 0.2),
-            menuBackgroundColor: Color(R: 1, G: 1, B: 1)
-            ))
+    /// 响应摇一摇事件
+    func onShake () {
+        if SettingsHelper.wifiAutoLogin {
+            WifiLoginHelper(self).checkAndLogin()
+        }
+    }
+    
+    /// 反注册摇一摇事件
+    override func finalize() {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: DHCSHakeNotificationName, object: nil)
     }
     
     /// 显示右上角弹出菜单
@@ -75,7 +62,6 @@ class MainViewController: UITabBarController {
         let menuArray = [
             KxMenuItem("登录校园网", image: UIImage(named: "action_wifi"), target: self, action: #selector(self.loginToWifi)),
             KxMenuItem("一卡通充值", image: UIImage(named: "action_charge"), target: self, action: #selector(self.cardCharge)),
-            KxMenuItem("添加考试", image: UIImage(named: "action_add_exam"), target: self, action: #selector(self.customExam)),
             KxMenuItem("模块管理", image: UIImage(named: "action_module_manage"), target: self, action: #selector(self.moduleManage))
         ]
         
@@ -113,21 +99,14 @@ class MainViewController: UITabBarController {
         // 此对话框也与上述函数中的对话框共用缓存键名，只要忽略其中任意一个，两个对话框都不会再显示
         showTipDialogIfUnknown("注意：充值之后需要在食堂刷卡机上刷卡，充值金额才能到账哦", cachePostfix: "card_charge") {
             () -> Void in
-            AppModule(title: "一卡通充值", url: CardViewController.url).open(self.navigationController)
-        }
-    }
-    
-    /// 弹出菜单操作：添加考试
-    func customExam () {
-        if let vc = storyboard?.instantiateViewControllerWithIdentifier("MODULE_CUSTOM_EXAM") {
-            navigationController?.pushViewController(vc, animated: true)
+            AppModule(title: "一卡通充值", url: CardViewController.url).open()
         }
     }
     
     /// 弹出菜单操作：模块管理
     func moduleManage () {
         if let vc = storyboard?.instantiateViewControllerWithIdentifier("MODULE_MANAGER") {
-            navigationController?.pushViewController(vc, animated: true)
+            AppDelegate.instance.rightController.pushViewController(vc, animated: true)
         }
     }
 }

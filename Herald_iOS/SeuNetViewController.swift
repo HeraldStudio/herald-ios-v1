@@ -83,6 +83,10 @@ class SeuNetViewController : UIViewController {
         }
     }
     
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        loadPie()
+    }
+    
     func loadPie () {
         if container.layer.sublayers != nil {
             for k in container.layer.sublayers! {

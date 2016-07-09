@@ -14,7 +14,7 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet var tableView : UITableView!
     
-    let swiper = SwipeRefreshHeader()
+    let swiper = SwipeRefreshHeader(.Right)
 
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
@@ -90,7 +90,8 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("srtp").uuid().post("schoolnum", ApiHelper.getSchoolnum()).toCache("herald_srtp")
+        ApiRequest().api("srtp").uuid().post("schoolnum", ApiHelper.getSchoolnum())
+            .toCache("herald_srtp", notifyModuleIfChanged: R.module.srtp)
             .onFinish { success, _, _ in
                 self.hideProgressDialog()
                 if success {
@@ -99,6 +100,12 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
                     self.showMessage("刷新失败，请重试")
                 }
             }.run()
+    }
+    
+    static func remoteRefreshNotifyDotState() -> ApiRequest {
+        return
+            ApiRequest().api("srtp").uuid().post("schoolnum", ApiHelper.getSchoolnum())
+                .toCache("herald_srtp", notifyModuleIfChanged: R.module.srtp)
     }
     
     func showError () {

@@ -31,6 +31,10 @@ class R {
         static let quanyi = AppModule(14, "quanyi", "权益服务 Web", "向东大校会权益部反馈投诉信息", "https://jinshuju.net/f/By3aTK", "ic_quanyi", false)
         static let emptyroom = AppModule(15, "emptyroom", "空教室 Web", "提供指定时间内的空教室信息查询服务", "http://115.28.27.150/queryEmptyClassrooms/m", "ic_emptyroom", false)
         //static let deskgame = AppModule(16, "deskgame", "桌游助手", "方便大家娱乐的小猴桌游发牌器", "MODULE_DESKGAME", "ic_emptyroom", false)
+        
+        // 特殊的模块，模块管理
+        static let moduleManager = AppModule(-1, "", "模块管理", "管理各模块的显示/隐藏状态",
+                                             "MODULE_MANAGER", "ic_add", true)
     }
     
     class string {
@@ -46,10 +50,10 @@ class R {
             "不论你是热爱技术、擅长设计、精于文编，还是菜鸟小白，只要有兴趣，我们都欢迎你的加入！"
         static let contactUsText =
             "招新/赞助/合作/活动宣传热线：\n" +
-            "梁同学   156-5191-8580\n" +
+            "祁同学   151-5187-8798\n" +
             "\n" +
-            "客户端报障/建议热线：\n" +
-            "何同学   187-9588-9958\n" +
+            "客户端报障/建议信箱：\n" +
+            "于同学   vhyme@live.cn\n" +
             "\n" +
             "简历投递邮箱：\n" +
             "heraldseu@outlook.com"
@@ -59,5 +63,6 @@ class R {
             "小猴偷米工作室对其作者致以诚挚的感谢。\n" +
             "\n" +
             "本软件所有数据来自学校网站或其他第三方，受学校网站或其他第三方数据的不确定性影响，本软件显示的数据可能会出现某些不正常情况，包含但不限于无法连接、信息错误、显示延迟或自相矛盾等。小猴偷米工作室不对以上问题导致的任何后果负责。"
+        static let update_url = "https://itunes.apple.com/us/app/xiao-hou-tou-mi/id1107998946"
     }
 }
