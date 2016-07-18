@@ -311,69 +311,68 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         cardsTableView.bounces = false
         
         // 线程管理器
-        let manager = ApiThreadManager()/*.debug()*/.onResponse { success, _, _ in
-            if success { self.loadContent(false) }
-        }
+        var parallelRequest : ApiRequest = ApiEmptyRequest()
         
         // 刷新版本信息和推送消息
-        manager.addAll(ServiceCard.getRefresher())
+        parallelRequest += ServiceCard.getRefresher()
         
         if R.module.curriculum.cardEnabled {
             // 仅当课表数据不存在时刷新课表
             if CacheHelper.get("herald_curriculum") == "" || CacheHelper.get("herald_sidebar") == "" {
-                manager.addAll(CurriculumCard.getRefresher())
+                parallelRequest += CurriculumCard.getRefresher()
             }
         }
         
         if R.module.experiment.cardEnabled {
             // 仅当实验数据不存在时刷新实验
             if CacheHelper.get("herald_experiment") == "" {
-                manager.addAll(ExperimentCard.getRefresher())
+                parallelRequest += ExperimentCard.getRefresher()
             }
         }
         
         if R.module.exam.cardEnabled {
             // 仅当考试数据不存在时刷新考试
             if CacheHelper.get("herald_exam") == "" {
-                manager.addAll(ExamCard.getRefresher())
+                parallelRequest += ExamCard.getRefresher()
             }
         }
         
         // 直接刷新校园活动
-        manager.addAll(ActivityCard.getRefresher())
+        parallelRequest += ActivityCard.getRefresher()
         
         if R.module.lecture.cardEnabled {
             // 直接刷新人文讲座预告
-            manager.addAll(LectureCard.getRefresher())
+            parallelRequest += LectureCard.getRefresher()
         }
         
         if R.module.pedetail.cardEnabled {
             // 直接刷新跑操数据
-            manager.addAll(PedetailCard.getRefresher())
+            parallelRequest += PedetailCard.getRefresher()
         }
         
         if R.module.card.cardEnabled {
             // 直接刷新一卡通数据
-            manager.addAll(CardCard.getRefresher())
+            parallelRequest += CardCard.getRefresher()
         }
         
         if R.module.jwc.cardEnabled{
             // 直接刷新教务处数据
-            manager.addAll(JwcCard.getRefresher())
+            parallelRequest += JwcCard.getRefresher()
         }
         
-        manager.addAll([
-                GymReserveViewController.remoteRefreshNotifyDotState(),
-                SrtpViewController.remoteRefreshNotifyDotState(),
-                GradeViewController.remoteRefreshNotifyDotState(),
+        parallelRequest +=
+                GymReserveViewController.remoteRefreshNotifyDotState() +
+                SrtpViewController.remoteRefreshNotifyDotState() +
+                GradeViewController.remoteRefreshNotifyDotState() +
                 LibraryViewController.remoteRefreshNotifyDotState()
-            ])
 
         /**
          * 结束刷新部分
          * 当最后一个线程结束时调用这一部分，刷新结束
          **/
-        manager.onFinish { success in
+        parallelRequest.onResponse { _, _, _ in
+            self.loadContent(false)
+        }.onFinish { success in
             self.hideProgressDialog()
             
             // 暂时关闭列表的下拉刷新

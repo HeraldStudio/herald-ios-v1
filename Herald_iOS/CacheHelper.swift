@@ -18,7 +18,6 @@ class CacheHelper : NSObject {
         "herald_card_left",
         "herald_card_date",
         "herald_card_today",
-        "herald_card_charged",
         "herald_grade_gpa",
         "herald_lecture_records",
         "herald_experiment",

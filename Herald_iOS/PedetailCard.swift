@@ -11,12 +11,12 @@ import SwiftyJSON
 
 class PedetailCard {
     
-    static func getRefresher () -> [ApiRequest] {
-        return [
-            ApiRequest().api("pc").uuid().noCheck200().toCache("herald_pc_forecast") {
+    static func getRefresher () -> ApiRequest {
+        return
+            ApiSimpleRequest(checkJson200: false).api("pc").uuid().toCache("herald_pc_forecast") {
                     json in json["content"]
                 }
-                .onFinish { success, code, _ in
+                .onResponse { success, code, _ in
                     let todayComp = GCalendar(.Day)
                     let today = String(format: "%4d-%02d-%02d", todayComp.year, todayComp.month, todayComp.day)
                     if success {
@@ -25,15 +25,14 @@ class PedetailCard {
                         CacheHelper.set("herald_pc_date", today)
                         CacheHelper.set("herald_pc_forecast", "refreshing")
                     }
-            },
-            ApiRequest().api("pe").uuid()
+            }
+            + ApiSimpleRequest(checkJson200: true).api("pe").uuid()
                 .toCache("herald_pe_count") { json in json["content"] }
-                .toCache("herald_pe_remain") { json in json["remain"] },
-            ApiRequest().api("pedetail").uuid().toCache("herald_pedetail") {
+                .toCache("herald_pe_remain") { json in json["remain"] }
+            + ApiSimpleRequest(checkJson200: true).api("pedetail").uuid().toCache("herald_pedetail") {
                 json in if !json.rawStringValue.containsString("[") { throw E }
                 return json
-            }
-        ]
+        }
     }
     
     static func getCard() -> CardsModel {

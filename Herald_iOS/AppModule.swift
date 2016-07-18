@@ -3,7 +3,7 @@ import UIKit
 /**
  * AppModule | 应用模块
  *
- * 注意：这里允许伪模块的存在，真的模块作为常量保存在 SettingsHelper 中，
+ * 注意：这里允许伪模块的存在，真的模块作为常量保存在 R 中，
  *      而伪模块可以使用构造函数动态创建，用于临时打开某个界面或转到某个 Web 页等。
  */
 class AppModule : Hashable {
@@ -44,6 +44,7 @@ class AppModule : Hashable {
         self.init (-1, "", title, "", url, "", false)
     }
     
+    /// 用于比较两个模块是否相等
     var hashValue : Int {
         return controller.hashValue
     }
@@ -55,11 +56,7 @@ class AppModule : Hashable {
         } set {
             if !hasCard { return }
             // flag为true则设置为选中，否则设置为不选中
-            if (newValue) {
-                SettingsHelper.set("herald_settings_module_cardenabled_" + name, "1")
-            } else {
-                SettingsHelper.set("herald_settings_module_cardenabled_" + name, "0")
-            }
+            SettingsHelper.set("herald_settings_module_cardenabled_" + name, newValue ? "1" : "0")
             SettingsHelper.notifyModuleSettingsChanged()
         }
     }
@@ -74,11 +71,7 @@ class AppModule : Hashable {
             return cache != "0"
         } set {
             // flag为true则设置为选中，否则设置为不选中
-            if (newValue) {
-                SettingsHelper.set("herald_settings_module_shortcutenabled_" + name, "1")
-            } else {
-                SettingsHelper.set("herald_settings_module_shortcutenabled_" + name, "0")
-            }
+            SettingsHelper.set("herald_settings_module_shortcutenabled_" + name, newValue ? "1" : "0")
             SettingsHelper.notifyModuleSettingsChanged()
         }
     }

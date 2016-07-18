@@ -5,15 +5,7 @@ import DHCShakeNotifier
  * MainViewController | 应用程序主界面
  * 负责处理全局UI初始化等处理
  *
- * 注意：此 ViewController 并不是最顶层的根布局。实际的布局树是如下这样的：
- * 
- * - Spilt View Controller (UISplitViewController)
- * |
- * | - Left View Controller (UINavigationController)
- * | |
- * | | - Main View Controller (UITabBarController)
- * |
- * | - Right View Controller (UINavigationController)
+ * 注意：此 ViewController 并不是最顶层的根布局。实际的布局树可参考 Main.storyboard 中各个 scene 的标题。
  */
 class MainTabBarController: UITabBarController {
     

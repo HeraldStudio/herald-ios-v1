@@ -11,8 +11,8 @@ import SwiftyJSON
 
 class JwcCard {
     
-    static func getRefresher () -> [ApiRequest] {
-        return [ApiRequest().api("jwc").uuid().toCache("herald_jwc")]
+    static func getRefresher () -> ApiRequest {
+        return ApiSimpleRequest(checkJson200: true).api("jwc").uuid().toCache("herald_jwc")
     }
     
     static func getCard () -> CardsModel {

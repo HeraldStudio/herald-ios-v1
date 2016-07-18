@@ -224,7 +224,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="km5-qj-1vs" firstAttribute="top" secondItem="bUN-OU-9mI" secondAttribute="bottom" id="7og-G8-LWU"/>
                             <constraint firstItem="bUN-OU-9mI" firstAttribute="centerY" secondItem="F9m-37-lYx" secondAttribute="centerY" constant="-48" id="DZN-mg-KH5"/>
@@ -291,7 +291,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wbc-KG-obJ" customClass="ShortcutBoxView" customModule="小猴偷米" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="400" height="65.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="400" height="66"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                     </subviews>
@@ -788,13 +788,13 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_herald" translatesAutoresizingMaskIntoConstraints="NO" id="1HG-QB-YSZ">
-                                            <rect key="frame" x="7" y="72" width="306" height="122.5"/>
+                                            <rect key="frame" x="7" y="72" width="306" height="123"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="1HG-QB-YSZ" secondAttribute="height" multiplier="5:2" id="Te8-7v-9mF"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="活动介绍" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zjs-4t-aGr">
-                                            <rect key="frame" x="26" y="206.5" width="268" height="27.5"/>
+                                            <rect key="frame" x="26" y="207" width="268" height="27"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -1503,7 +1503,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="对于您的问题，工作人员会主动联系您，而对于可行性建议，我们会考虑直接投入开发喔~" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jMp-wh-wdP">
-                                <rect key="frame" x="15" y="220" width="290" height="31.5"/>
+                                <rect key="frame" x="15" y="220" width="290" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="0.75209541130000002" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -1889,7 +1889,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="空空如也，是不是该庆祝一下…" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5u1-lF-nhI">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="56" id="Rrm-se-wT6"/>
                                             </constraints>
@@ -2510,7 +2510,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="还没有选择要发的牌" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aRH-RO-KTQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55.5" id="gsX-AC-05k"/>
                                             </constraints>
@@ -2615,7 +2615,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="还没有抽到卡牌，下拉试试？" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="deX-k3-3ZG">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="56" id="c6Y-mm-XLP"/>
                                             </constraints>
@@ -3874,7 +3874,7 @@
                         <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title="返回" id="94M-Ih-W2k"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="hzx-A2-07O">
-                            <rect key="frame" x="99.5" y="7" width="121" height="30"/>
+                            <rect key="frame" x="100" y="7" width="121" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="工作日"/>
@@ -4269,7 +4269,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="书名" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8z-tY-O72">
-                                                    <rect key="frame" x="16" y="7" width="212" height="20.5"/>
+                                                    <rect key="frame" x="16" y="7" width="212" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.8980392157" green="0.22352941179999999" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>

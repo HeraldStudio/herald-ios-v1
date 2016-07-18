@@ -31,7 +31,8 @@ class WifiLoginHelper {
     }
     
     private func beginCheck () {
-        ApiRequest().url("https://selfservice.seu.edu.cn/selfservice/index.php").noCheck200().onFinish { success, code, response in
+        ApiSimpleRequest(checkJson200: false).url("https://selfservice.seu.edu.cn/selfservice/index.php")
+            .onResponse { success, code, response in
             if !response.containsString("403 Forbidden") {
                 self.checkOnlineStatus()
             } else {
@@ -43,7 +44,8 @@ class WifiLoginHelper {
     }
     
     private func checkOnlineStatus () {
-        ApiRequest().get().url("http://w.seu.edu.cn/portal/init.php").noCheck200().onFinish { success, _, response in
+        ApiSimpleRequest(checkJson200: false).get().url("http://w.seu.edu.cn/portal/init.php")
+            .onResponse { success, _, response in
             if success {
                 if response.containsString("notlogin") {
                     // 未登录状态，直接登录
@@ -67,7 +69,8 @@ class WifiLoginHelper {
     }
     
     private func logoutThenLogin () {
-        ApiRequest().url("http://w.seu.edu.cn/portal/logout.php").noCheck200().onFinish { success, _, response in
+        ApiSimpleRequest(checkJson200: false).url("http://w.seu.edu.cn/portal/logout.php")
+            .onResponse { success, _, response in
             if success {
                 self.loginToService()
             } else {
@@ -86,9 +89,9 @@ class WifiLoginHelper {
         // w.seu.edu.cn 的服务器在登录的时候是按参数顺序取参数的，第一个参数作为用户名，
         // 第二个参数作为密码，而 Alamofire 传参数时会将 Key 按字母顺序排序，因此若用户名 Key
         // 为 username ，密码 Key 为 password，会导致参数倒置，登录失败！
-        ApiRequest().url("http://w.seu.edu.cn/portal/login.php").noCheck200()
+        ApiSimpleRequest(checkJson200: false).url("http://w.seu.edu.cn/portal/login.php")
             .post("p1", username, "p2", password)
-            .onFinish { success, _, response in
+            .onResponse { success, _, response in
                 if success {
                     let info = JSON.parse(response)
                     if info["login_username"].string != nil

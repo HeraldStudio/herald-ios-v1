@@ -14,15 +14,14 @@ import SwiftyJSON
  **/
 class CurriculumCard {
     
-    static func getRefresher () -> [ApiRequest] {
-        return [
-            ApiRequest().api("sidebar").uuid().toCache("herald_sidebar") {
-                json in json["content"]
-            },
-            ApiRequest().api("curriculum").uuid().toCache("herald_curriculum") {
+    static func getRefresher () -> ApiRequest {
+        return
+            ApiSimpleRequest(checkJson200: true).api("sidebar").uuid().toCache("herald_sidebar") {
                 json in json["content"]
             }
-        ]
+            + ApiSimpleRequest(checkJson200: true).api("curriculum").uuid().toCache("herald_curriculum") {
+                json in json["content"]
+            }
     }
     
     static func getCard() -> CardsModel {
