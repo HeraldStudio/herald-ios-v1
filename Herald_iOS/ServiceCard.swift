@@ -3,7 +3,7 @@ import SwiftyJSON
 class ServiceCard {
     
     static func getRefresher () -> ApiRequest {
-        return ApiSimpleRequest(checkJson200: true).url("http://android.heraldstudio.com/checkversion").uuid()
+        return ApiSimpleRequest(.Post, checkJson200: true).url("http://android.heraldstudio.com/checkversion").uuid()
             .post("schoolnum", ApiHelper.getSchoolnum())
             .post("versioncode", "\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion")!)")
             .post("versionname", "V\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")!)")
@@ -33,7 +33,7 @@ class ServiceCard {
                     let tip = "小猴偷米 iOS " + newestVersionName + " 更新啦，点击升级\n" +
                         newestVersionDesc
                     
-                    let card = CardsModel(cellId: "", icon : "ic_update", title : "版本升级", desc : tip, dest : R.string.update_url, message: "", priority : .CONTENT_NOTIFY)
+                    let card = CardsModel(cellId: "", icon : "ic_update", title : "版本升级", desc : tip, dest : StringUpdateUrl, message: "", priority : .CONTENT_NOTIFY)
                     return card
                 }
             }

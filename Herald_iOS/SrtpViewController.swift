@@ -90,8 +90,8 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiSimpleRequest(checkJson200: true).api("srtp").uuid().post("schoolnum", ApiHelper.getSchoolnum())
-            .toCache("herald_srtp", notifyModuleIfChanged: R.module.srtp)
+        ApiSimpleRequest(.Post, checkJson200: true).api("srtp").uuid().post("schoolnum", ApiHelper.getSchoolnum())
+            .toCache("herald_srtp", notifyModuleIfChanged: ModuleSrtp)
             .onResponse { success, _, _ in
                 self.hideProgressDialog()
                 if success {
@@ -104,8 +104,8 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     static func remoteRefreshNotifyDotState() -> ApiRequest {
         return
-            ApiSimpleRequest(checkJson200: true).api("srtp").uuid().post("schoolnum", ApiHelper.getSchoolnum())
-                .toCache("herald_srtp", notifyModuleIfChanged: R.module.srtp)
+            ApiSimpleRequest(.Post, checkJson200: true).api("srtp").uuid().post("schoolnum", ApiHelper.getSchoolnum())
+                .toCache("herald_srtp", notifyModuleIfChanged: ModuleSrtp)
     }
     
     func showError () {

@@ -8,11 +8,20 @@ import SwiftyJSON
  *  以 SimpleApiRequest(简单请求) 为单元，通过 chain(顺次执行) 和 parallel(同时执行) 两种
  *  运算，可以得到满足不同需求的复合请求，而复合请求又可以作为新的单元，形成更大的复合请求。
  **/
-    
+
+/// 闭包类型，表示当前请求中各个简单请求结束的事件。
+/// 若当前请求就是简单请求，则只触发一次，相当于请求结束的事件；
+/// 若当前请求是复合请求，其中包含的每个简单请求结束时都会触发一次
 typealias OnResponseListener = (Bool, Int, String) -> Void
-    
+
+/// 闭包类型，表示整个请求结束的事件。
+/// 由于请求结束的事件可能是简单请求结束，也可能是复合请求结束，
+/// 而复合请求作为一个整体，本身没有 code 和 response 值，
+/// 所以这个 listener 只有一个参数。
+/// 如要监听简单请求结束的事件，可使用OnResponseListener
 typealias OnFinishListener = (Bool) -> Void
 
+/// 协议，空请求、简单请求、顺次复合请求、同时复合请求都要遵守该协议，以保证这种递归式的多态性
 protocol ApiRequest {
     
     func onResponse(listener : OnResponseListener) -> ApiRequest
@@ -26,23 +35,30 @@ protocol ApiRequest {
     func run()
 }
 
-func * (left: ApiRequest, right: ApiRequest) -> ApiRequest {
+/// 用乘号表示顺次复合运算
+func - (left: ApiRequest, right: ApiRequest) -> ApiRequest {
     return left.chain(right)
 }
 
-func + (left: ApiRequest, right: ApiRequest) -> ApiRequest {
-    return left.parallel(right)
-}
-
-func *= (inout left: ApiRequest, right: ApiRequest) {
+func -= (inout left: ApiRequest, right: ApiRequest) {
     left = left.chain(right)
 }
 
-func += (inout left: ApiRequest, right: ApiRequest) {
+/// 用加号表示同时复合运算
+func | (left: ApiRequest, right: ApiRequest) -> ApiRequest {
+    return left.parallel(right)
+}
+
+func |= (inout left: ApiRequest, right: ApiRequest) {
     left = left.parallel(right)
 }
 
+/**
+ * ApiEmptyRequest | 空请求
+ * 请求运算中的单位元，任何请求与空请求做运算都得到其本身。
+ **/
 class ApiEmptyRequest : ApiRequest {
+    
     func onResponse(listener: OnResponseListener) -> ApiRequest {
         return self
     }
@@ -60,7 +76,7 @@ class ApiEmptyRequest : ApiRequest {
     }
     
     func run() {
-        return
+        // do nothing
     }
 }
 
@@ -70,10 +86,20 @@ class ApiEmptyRequest : ApiRequest {
  **/
 class ApiSimpleRequest : ApiRequest {
     
+    enum Method {
+        case Post
+        case Get
+    }
+    
+    var method : Method
+    
+    var checkJson200 : Bool
+    
     /**
      * 构造部分
      **/
-    init(checkJson200: Bool){
+    init(_ method: Method, checkJson200: Bool){
+        self.method = method
         self.checkJson200 = checkJson200
     }
     
@@ -88,19 +114,10 @@ class ApiSimpleRequest : ApiRequest {
         return url(ApiHelper.getApiUrl(api))
     }
     
-    var checkJson200 : Bool
-    
     var isDebug = false
     
     func debug () -> ApiSimpleRequest {
         isDebug = true
-        return self
-    }
-    
-    var isGet = false
-    
-    func get () -> ApiSimpleRequest {
-        isGet = true
         return self
     }
     
@@ -266,7 +283,8 @@ class ApiSimpleRequest : ApiRequest {
      * 执行部分
      **/
     func run () {
-        let request = Alamofire.request(isGet ? .GET : .POST, url!, parameters: map, encoding: .URL)
+        let request = Alamofire.request([Method.Get: .GET, Method.Post: .POST][method]!,
+            url!, parameters: map, encoding: .URL)
         
         request.responseString { response in
             if self.isDebug {

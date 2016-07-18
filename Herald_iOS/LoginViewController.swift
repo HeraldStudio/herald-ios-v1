@@ -38,7 +38,7 @@ class LoginViewController: UIViewController {
     func doLogin () {
         let appid = ApiHelper.appid
         showProgressDialog()
-        ApiSimpleRequest(checkJson200: false).url(ApiHelper.auth_url)
+        ApiSimpleRequest(.Post, checkJson200: false).url(ApiHelper.auth_url)
             .post("user", username!.text!, "password", password!.text!, "appid", appid)
             .onResponse { success, _, response in
                 if response.containsString("Unauthorized") {
@@ -56,7 +56,7 @@ class LoginViewController: UIViewController {
     }
     
     func checkUUID () {
-        ApiSimpleRequest(checkJson200: true).api("user").uuid()
+        ApiSimpleRequest(.Post, checkJson200: true).api("user").uuid()
             .toAuthCache("schoolnum") { json in json["content"]["schoolnum"] }
             .onResponse { (success, code, response) in
                 

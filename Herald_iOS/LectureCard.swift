@@ -15,13 +15,13 @@ import SwiftyJSON
 class LectureCard {
     
     static func getRefresher () -> ApiRequest {
-        return ApiSimpleRequest(checkJson200: true).url(ApiHelper.wechat_lecture_notice_url).uuid().toCache("herald_lecture_notices")
+        return ApiSimpleRequest(.Post, checkJson200: true).url(ApiHelper.wechat_lecture_notice_url).uuid().toCache("herald_lecture_notices")
     }
     
     static func getCard() -> CardsModel {
         let cache = CacheHelper.get("herald_lecture_notices")
         if cache == "" {
-            return CardsModel(cellId: "CardsCellLecture", module: R.module.lecture, desc: "人文讲座数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
+            return CardsModel(cellId: "CardsCellLecture", module: ModuleLecture, desc: "人文讲座数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
         }
         
         let jsonArray = JSON.parse(cache)["content"]
@@ -45,12 +45,12 @@ class LectureCard {
         
         // 今天有人文讲座
         if lectures.count > 0 {
-            let model = CardsModel(cellId: "CardsCellLecture", module: R.module.lecture, desc: "今天有新的人文讲座，有兴趣的同学欢迎参加", priority: .CONTENT_NOTIFY)
+            let model = CardsModel(cellId: "CardsCellLecture", module: ModuleLecture, desc: "今天有新的人文讲座，有兴趣的同学欢迎参加", priority: .CONTENT_NOTIFY)
             model.rows.appendContentsOf(lectures)
             return model;
         }
         
         // 今天无人文讲座
-        return CardsModel(cellId: "CardsCellLecture", module: R.module.lecture, desc: jsonArray.count == 0 ? "暂无人文讲座预告信息" : "暂无新的人文讲座，点我查看以后的预告", priority: .NO_CONTENT)
+        return CardsModel(cellId: "CardsCellLecture", module: ModuleLecture, desc: jsonArray.count == 0 ? "暂无人文讲座预告信息" : "暂无新的人文讲座，点我查看以后的预告", priority: .NO_CONTENT)
     }
 }

@@ -21,9 +21,9 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate {
     }
     
     let webModuleColors = [
-        R.module.schedule : 0xe54f40,
-        R.module.emptyroom : 0x3188cb,
-        R.module.quanyi : 0xed7f0e
+        ModuleSchedule : 0xe54f40,
+        ModuleEmptyRoom : 0x3188cb,
+        ModuleQuanYi : 0xed7f0e
     ]
     
     @IBOutlet var webView : UIWebView!
@@ -33,7 +33,7 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate {
     override func viewDidLoad () {
         if let _url = NSURL(string: url) {
             // 若是检查更新的链接，直接用 App Store 打开并关闭 Webview
-            if url == R.string.update_url {
+            if url == StringUpdateUrl {
                 UIApplication.sharedApplication().openURL(_url)
                 dismiss()
             } else {

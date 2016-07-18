@@ -112,9 +112,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 获取目标界面
         switch shortcutItem.type {
         case "exam":
-            R.module.exam.open()
+            ModuleExam.open()
         case "curriculum":
-            R.module.curriculum.open()
+            ModuleCurriculum.open()
         case "card":
             AppModule(title: "一卡通充值", url: "http://58.192.115.47:8088/wechat-web/login/initlogin.html").open()
         default:

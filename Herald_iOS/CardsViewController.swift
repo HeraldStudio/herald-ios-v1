@@ -249,17 +249,17 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
         // 判断各模块是否开启并加载对应数据，暂时只有一个示例，为了给首页卡片的实现提供参考
-        if R.module.curriculum.cardEnabled {
+        if ModuleCurriculum.cardEnabled {
             // 加载并解析课表缓存
             cardList.append(CurriculumCard.getCard())
         }
         
-        if R.module.experiment.cardEnabled {
+        if ModuleExperiment.cardEnabled {
             // 加载并解析实验缓存
             cardList.append(ExperimentCard.getCard())
         }
         
-        if R.module.exam.cardEnabled {
+        if ModuleExam.cardEnabled {
             // 加载并解析考试缓存
             cardList.append(ExamCard.getCard())
         }
@@ -267,22 +267,22 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         // 加载校园活动缓存
         cardList.append(ActivityCard.getCard())
         
-        if R.module.lecture.cardEnabled {
+        if ModuleLecture.cardEnabled {
             // 加载并解析人文讲座预告缓存
             cardList.append(LectureCard.getCard())
         }
         
-        if R.module.pedetail.cardEnabled {
+        if ModulePedetail.cardEnabled {
             // 加载并解析跑操预报缓存
             cardList.append(PedetailCard.getCard())
         }
         
-        if R.module.card.cardEnabled {
+        if ModuleCard.cardEnabled {
             // 加载并解析一卡通缓存
             cardList.append(CardCard.getCard())
         }
         
-        if R.module.jwc.cardEnabled {
+        if ModuleJwc.cardEnabled {
             // 加载并解析一卡通缓存
             cardList.append(JwcCard.getCard())
         }
@@ -314,57 +314,58 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         var parallelRequest : ApiRequest = ApiEmptyRequest()
         
         // 刷新版本信息和推送消息
-        parallelRequest += ServiceCard.getRefresher()
+        parallelRequest |= ServiceCard.getRefresher()
         
-        if R.module.curriculum.cardEnabled {
+        if ModuleCurriculum.cardEnabled {
             // 仅当课表数据不存在时刷新课表
             if CacheHelper.get("herald_curriculum") == "" || CacheHelper.get("herald_sidebar") == "" {
-                parallelRequest += CurriculumCard.getRefresher()
+                parallelRequest |= CurriculumCard.getRefresher()
             }
         }
         
-        if R.module.experiment.cardEnabled {
+        if ModuleExperiment.cardEnabled {
             // 仅当实验数据不存在时刷新实验
             if CacheHelper.get("herald_experiment") == "" {
-                parallelRequest += ExperimentCard.getRefresher()
+                parallelRequest |= ExperimentCard.getRefresher()
             }
         }
         
-        if R.module.exam.cardEnabled {
+        if ModuleExam.cardEnabled {
             // 仅当考试数据不存在时刷新考试
             if CacheHelper.get("herald_exam") == "" {
-                parallelRequest += ExamCard.getRefresher()
+                parallelRequest |= ExamCard.getRefresher()
             }
         }
         
         // 直接刷新校园活动
-        parallelRequest += ActivityCard.getRefresher()
+        parallelRequest |= ActivityCard.getRefresher()
         
-        if R.module.lecture.cardEnabled {
+        if ModuleLecture.cardEnabled {
             // 直接刷新人文讲座预告
-            parallelRequest += LectureCard.getRefresher()
+            parallelRequest |= LectureCard.getRefresher()
         }
         
-        if R.module.pedetail.cardEnabled {
+        if ModulePedetail.cardEnabled {
             // 直接刷新跑操数据
-            parallelRequest += PedetailCard.getRefresher()
+            parallelRequest |= PedetailCard.getRefresher()
         }
         
-        if R.module.card.cardEnabled {
+        if ModuleCard.cardEnabled {
             // 直接刷新一卡通数据
-            parallelRequest += CardCard.getRefresher()
+            parallelRequest |= CardCard.getRefresher()
         }
         
-        if R.module.jwc.cardEnabled{
+        if ModuleJwc.cardEnabled{
             // 直接刷新教务处数据
-            parallelRequest += JwcCard.getRefresher()
+            parallelRequest |= JwcCard.getRefresher()
         }
         
-        parallelRequest +=
-                GymReserveViewController.remoteRefreshNotifyDotState() +
-                SrtpViewController.remoteRefreshNotifyDotState() +
-                GradeViewController.remoteRefreshNotifyDotState() +
-                LibraryViewController.remoteRefreshNotifyDotState()
+        parallelRequest |=
+                ( GymReserveViewController.remoteRefreshNotifyDotState()
+                | SrtpViewController.remoteRefreshNotifyDotState()
+                | GradeViewController.remoteRefreshNotifyDotState()
+                | LibraryViewController.remoteRefreshNotifyDotState()
+                )
 
         /**
          * 结束刷新部分
@@ -392,7 +393,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     /// 是否要显示快捷栏
     var hasShortcutBox : Bool {
-        return R.module.array.filter{$0.shortcutEnabled}.count != 0
+        return Modules.filter{$0.shortcutEnabled}.count != 0
     }
     
     /// 快捷栏个数，即上面那个布尔函数的Int形式，方便使用

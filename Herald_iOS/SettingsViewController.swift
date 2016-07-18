@@ -19,7 +19,7 @@ class SettingsViewController: UITableViewController {
     
     /// 跳转到 App Store 发布页面，用于检查更新或发布评论
     func checkVersion () {
-        UIApplication.sharedApplication().openURL(NSURL(string: R.string.update_url)!)
+        UIApplication.sharedApplication().openURL(NSURL(string: StringUpdateUrl)!)
     }
     
     /// 界面实例化时的初始化
