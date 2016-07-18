@@ -21,8 +21,6 @@ class ApiHelper : NSObject {
         return API_ROOT + api
     }
     
-    // TODO dealApiException
-    
     static func doLogout (message: String?) {
         
         //清除授权信息
@@ -41,9 +39,9 @@ class ApiHelper : NSObject {
         // 注意此处的clearAllmoduleCache里的authUser和authPwd与上面清除的是不同的
         CacheHelper.clearAllModuleCache()
         
-        let vc = ((UIApplication.sharedApplication().delegate) as! AppDelegate).showLogin()
-        if message != nil {
-            vc.showMessage(message!)
+        let vc = AppDelegate.instance.showLogin()
+        if let message = message {
+            vc.showMessage(message)
         }
     }
     
@@ -89,7 +87,6 @@ class ApiHelper : NSObject {
     }
     
     static func clearWifiAuth () {
-        // TODO 若实现了加密，这里也应该对应修改
         setWifiAuth(user: "", pwd: "")
     }
     

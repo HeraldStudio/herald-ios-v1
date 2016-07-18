@@ -10,6 +10,17 @@ import Foundation
 import UIKit
 
 class SettingsHelper {
+
+    
+    static let settingsCache = NSUserDefaults.withPrefix("settings_")
+    
+    static func get (key : String) -> String {
+        return settingsCache.get(key)
+    }
+    
+    static func set (key : String, _ value: String) {
+        settingsCache.set(key, value)
+    }
     
     /**
      * 应用启动次数
@@ -26,16 +37,6 @@ class SettingsHelper {
         } set {
             set("herald_settings_launch_time", String(newValue))
         }
-    }
-    
-    static let settingsCache = NSUserDefaults.withPrefix("settings_")
-    
-    static func get (key : String) -> String {
-        return settingsCache.get(key)
-    }
-    
-    static func set (key : String, _ value: String) {
-        settingsCache.set(key, value)
     }
     
     // 摇一摇默认关闭

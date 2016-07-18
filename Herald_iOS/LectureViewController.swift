@@ -80,10 +80,12 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
     @IBAction func refreshCache () {
         showProgressDialog()
         
-        ApiThreadManager().addAll([
-            ApiRequest().api("lecture").uuid().toCache("herald_lecture_records"),
-            ApiRequest().url(ApiHelper.wechat_lecture_notice_url).uuid().toCache("herald_lecture_notices")
-        ]).onFinish { success in
+        (
+            ApiSimpleRequest(checkJson200: true).api("lecture")
+                .uuid().toCache("herald_lecture_records")
+            + ApiSimpleRequest(checkJson200: true).url(ApiHelper.wechat_lecture_notice_url)
+                .uuid().toCache("herald_lecture_notices")
+        ).onFinish { success in
             self.hideProgressDialog()
             if success {
                 self.loadCache()

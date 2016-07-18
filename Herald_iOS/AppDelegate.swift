@@ -133,7 +133,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = nil
         
         // 实例化新的界面
-        let lvc = AppDelegate.instantiateLoginGodController()
+        let lvc = AppDelegate.instantiateLoginViewController()
         
         // 打开新的界面
         self.window?.rootViewController = lvc
@@ -152,7 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = nil
         
         // 实例化新的界面
-        let mvc = AppDelegate.instantiateMainGodController()
+        let mvc = AppDelegate.instantiateMainViewController()
         
         // 打开新的界面
         self.window?.rootViewController = mvc
@@ -160,16 +160,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return mvc
     }
     
+    /// 检测当前环境是否iPad
     static var isPad : Bool {
         return UI_USER_INTERFACE_IDIOM() == .Pad
     }
     
-    static func instantiateLoginGodController() -> UIViewController {
+    /// 切换到登录页
+    static func instantiateLoginViewController() -> UIViewController {
         let id = "LoginViewController"
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(id)
     }
     
-    static func instantiateMainGodController() -> UIViewController {
+    /// 切换到主页
+    static func instantiateMainViewController() -> UIViewController {
         let id = isPad ? "MainSplitController" : "MainNavigationController"
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(id)
     }

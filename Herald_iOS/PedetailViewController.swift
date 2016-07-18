@@ -70,35 +70,14 @@ class PedetailViewController : UIViewController, FSCalendarDelegate {
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiThreadManager().addAll([
-            ApiRequest().api("pc").uuid().noCheck200().toCache("herald_pc_forecast") {
-                    json in json["content"]
+        PedetailCard.getRefresher().onFinish { success in
+                self.hideProgressDialog()
+                if success {
+                    self.loadCache()
+                } else {
+                    self.showMessage("刷新失败，请重试")
                 }
-                .onFinish { success, code, _ in
-                    let todayComp = GCalendar(.Day)
-                    let today = String(format: "%4d-%02d-%02d", todayComp.year, todayComp.month, todayComp.day)
-                    if success {
-                        CacheHelper.set("herald_pc_date", today)
-                    } else if code == 201 {
-                        CacheHelper.set("herald_pc_date", today)
-                        CacheHelper.set("herald_pc_forecast", "refreshing")
-                    }
-                },
-            ApiRequest().api("pe").uuid()
-                .toCache("herald_pe_count") { json in json["content"] }
-                .toCache("herald_pe_remain") { json in json["remain"] },
-            ApiRequest().api("pedetail").uuid().toCache("herald_pedetail") {
-                json in if !json.rawStringValue.containsString("[") { throw E }
-                return json
-            }
-        ]).onFinish { success in
-            self.hideProgressDialog()
-            if success {
-                self.loadCache()
-            } else {
-                self.showMessage("刷新失败，请重试")
-            }
-        }.run()
+            }.run()
     }
     
     func showError () {

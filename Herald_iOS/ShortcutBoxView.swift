@@ -1,11 +1,18 @@
 import UIKit
 
+/**
+ * ShortcutBoxView | 快捷栏视图
+ * 仅用于在 CardsTableView 中显示快捷栏。如要用作他用，请做修改
+ */
 class ShortcutBoxView : UIView {
     
+    /// 最小列宽
     static let minCellWidth : CGFloat = 64
     
+    /// 行高
     static let cellHeight : CGFloat = 86
     
+    /// 数据源，包括表示模块管理按钮的伪模块
     var dataSource : [AppModule] = []
     
     /// 初始化完成后，载入数据
@@ -16,8 +23,11 @@ class ShortcutBoxView : UIView {
         }
     }
     
+    /// 预计算高度，因为 TableView 是先取得 cell 高度再布局各个 cell 的
+    /// 所以需要在 tableView(_:heightForRowAtIndexPath:) 中提前调用此方法得知快捷栏高度
     static func precalculateHeight() -> CGFloat {
         
+        // 此处假定在 iPad 端快捷栏始终显示在左侧栏
         let width = AppDelegate.instance.leftController.view.frame.width
         
         // 获取已启用快捷方式的模块列表

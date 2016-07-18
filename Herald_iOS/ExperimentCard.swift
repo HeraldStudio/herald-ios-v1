@@ -14,8 +14,9 @@ import SwiftyJSON
  **/
 class ExperimentCard {
     
-    static func getRefresher () -> [ApiRequest] {
-        return [ApiRequest().api("phylab").uuid().toCache("herald_experiment")]
+    static func getRefresher () -> ApiRequest {
+        return ApiSimpleRequest(checkJson200: true).api("phylab")
+            .uuid().toCache("herald_experiment")
     }
     
     static func getCard () -> CardsModel {

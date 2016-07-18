@@ -14,8 +14,8 @@ import SwiftyJSON
  **/
 class ExamCard {
     
-    static func getRefresher () -> [ApiRequest] {
-        return [ApiRequest().api("exam").uuid().toCache("herald_exam")]
+    static func getRefresher () -> ApiRequest {
+        return ApiSimpleRequest(checkJson200: true).api("exam").uuid().toCache("herald_exam")
     }
 
     static func getCard() -> CardsModel {

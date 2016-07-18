@@ -14,8 +14,8 @@ import SwiftyJSON
  **/
 class LectureCard {
     
-    static func getRefresher () -> [ApiRequest] {
-        return [ApiRequest().url(ApiHelper.wechat_lecture_notice_url).uuid().toCache("herald_lecture_notices")]
+    static func getRefresher () -> ApiRequest {
+        return ApiSimpleRequest(checkJson200: true).url(ApiHelper.wechat_lecture_notice_url).uuid().toCache("herald_lecture_notices")
     }
     
     static func getCard() -> CardsModel {

@@ -30,10 +30,10 @@ class FeedbackViewController : UIViewController {
         
         showProgressDialog()
         
-        ApiRequest().url(ApiHelper.feedback_url)
+        ApiSimpleRequest(checkJson200: true).url(ApiHelper.feedback_url)
             .post("cardnum", ApiHelper.getUserName())
             .post("content", "[来自iOS版] \(content) [联系方式：\(contact)]")
-            .onFinish { success, _, _ in
+            .onResponse { success, _, _ in
                 self.hideProgressDialog()
                 if success {
                     self.showMessage("您的反馈已发送，感谢支持！")
