@@ -35,20 +35,15 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        (
-            ApiSimpleRequest(checkJson200: true).api("sidebar").uuid().toCache("herald_sidebar") {
-                    json in json["content"]
-                }
-            + ApiSimpleRequest(checkJson200: true).api("curriculum").uuid().toCache("herald_curriculum") {
-                    json in json["content"]
-                }
-            ).onFinish { success in
-                self.hideProgressDialog()
-                if success {
-                    self.readLocal()
-                } else {
-                    self.showMessage("刷新失败")
-                }
+        ( ApiSimpleRequest(.Post, checkJson200: true).api("sidebar").uuid().toCache("herald_sidebar") {json in json["content"]}
+        | ApiSimpleRequest(.Post, checkJson200: true).api("curriculum").uuid().toCache("herald_curriculum") {json in json["content"]}
+        ).onFinish { success in
+            self.hideProgressDialog()
+            if success {
+                self.readLocal()
+            } else {
+                self.showMessage("刷新失败")
+            }
         }.run()
     }
     

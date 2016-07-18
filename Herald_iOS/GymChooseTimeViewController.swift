@@ -59,7 +59,7 @@ class GymChooseTimeViewController : UIViewController, UITableViewDataSource, UIT
         let index = picker.selectedSegmentIndex
         
         showProgressDialog()
-        ApiSimpleRequest(checkJson200: true)
+        ApiSimpleRequest(.Post, checkJson200: true)
             .api("yuyue").uuid().post("method", "getOrder", "itemId", "\(sport.id)", "dayInfo", dateList[picker.selectedSegmentIndex])
             .onResponse { success, _, response in
                 self.hideProgressDialog()
@@ -120,7 +120,7 @@ class GymChooseTimeViewController : UIViewController, UITableViewDataSource, UIT
         let time = timeList[indexPath.row].availableTime
         
         showProgressDialog()
-        ApiSimpleRequest(checkJson200: true).api("yuyue").uuid().post("method", "judgeOrder", "itemId", String(sport.id), "dayInfo", date, "time", time)
+        ApiSimpleRequest(.Post, checkJson200: true).api("yuyue").uuid().post("method", "judgeOrder", "itemId", String(sport.id), "dayInfo", date, "time", time)
             .onResponse { _, _, response in
                 self.hideProgressDialog()
                 let success = JSON.parse(response)["content"]["code"].stringValue == "0"

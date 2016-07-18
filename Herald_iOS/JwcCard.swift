@@ -12,13 +12,13 @@ import SwiftyJSON
 class JwcCard {
     
     static func getRefresher () -> ApiRequest {
-        return ApiSimpleRequest(checkJson200: true).api("jwc").uuid().toCache("herald_jwc")
+        return ApiSimpleRequest(.Post, checkJson200: true).api("jwc").uuid().toCache("herald_jwc")
     }
     
     static func getCard () -> CardsModel {
         let cache = CacheHelper.get("herald_jwc")
         if cache == "" {
-            return CardsModel(cellId: "CardsCellJwc", module: R.module.jwc, desc: "教务通知数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
+            return CardsModel(cellId: "CardsCellJwc", module: ModuleJwc, desc: "教务通知数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
         }
         
         let content = JSON.parse(cache)["content"]["教务信息"]
@@ -36,9 +36,9 @@ class JwcCard {
         
         if allNotices.count == 0 {
             // 无教务信息
-            return CardsModel(cellId: "CardsCellJwc", module: R.module.jwc, desc: "最近没有新的核心教务通知", priority: .NO_CONTENT)
+            return CardsModel(cellId: "CardsCellJwc", module: ModuleJwc, desc: "最近没有新的核心教务通知", priority: .NO_CONTENT)
         } else {
-            let model = CardsModel(cellId: "CardsCellJwc", module: R.module.jwc, desc: "最近有新的核心教务通知，有关同学请关注", priority: .CONTENT_NOTIFY)
+            let model = CardsModel(cellId: "CardsCellJwc", module: ModuleJwc, desc: "最近有新的核心教务通知，有关同学请关注", priority: .CONTENT_NOTIFY)
             model.rows.appendContentsOf(allNotices)
             return model
         }

@@ -15,7 +15,7 @@ class GymAddFriendViewController : UIViewController, UISearchBarDelegate, UITabl
         let keyword = searchBar.text == nil ? "" : searchBar.text!
         searchBar.resignFirstResponder()
         showProgressDialog()
-        ApiSimpleRequest(checkJson200: true).api("yuyue")
+        ApiSimpleRequest(.Post, checkJson200: true).api("yuyue")
             .uuid().post("method", "getFriendList", "cardNo", keyword).onResponse { success, _, response in
             self.hideProgressDialog()
             if success {

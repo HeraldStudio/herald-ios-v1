@@ -20,7 +20,7 @@
 		D306E02A1CCA68A700FA3812 /* GradeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E0291CCA68A700FA3812 /* GradeModel.swift */; };
 		D306E02C1CCA68EB00FA3812 /* GradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E02B1CCA68EB00FA3812 /* GradeTableViewCell.swift */; };
 		D306E02E1CCA691F00FA3812 /* GradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E02D1CCA691F00FA3812 /* GradeViewController.swift */; };
-		D30AB93A1D3C365600DFBFDD /* RefreshableCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30AB9391D3C365600DFBFDD /* RefreshableCache.swift */; };
+		D308693C1D3CB1F70088D9EA /* Modules.swift in Sources */ = {isa = PBXBuildFile; fileRef = D308693B1D3CB1F70088D9EA /* Modules.swift */; };
 		D3150F0F1CE8C3DA00E95EB6 /* CustomExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3150F0E1CE8C3DA00E95EB6 /* CustomExamViewController.swift */; };
 		D31821B21CC3B07800992355 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D31821B11CC3B07800992355 /* LaunchScreen.storyboard */; };
 		D31821B61CC48D5400992355 /* ServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821B51CC48D5400992355 /* ServiceHelper.swift */; };
@@ -90,7 +90,7 @@
 		D3D5D44D1CE99EDC000E406A /* GymFriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D44C1CE99EDC000E406A /* GymFriendModel.swift */; };
 		D3D5D44F1CE9AFF1000E406A /* GymAddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D5D44E1CE9AFF1000E406A /* GymAddFriendViewController.swift */; };
 		D3D849FC1CFBD88200F083DF /* ExtJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D849FB1CFBD88200F083DF /* ExtJSON.swift */; };
-		D3D849FF1CFBE75000F083DF /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D849FE1CFBE75000F083DF /* R.swift */; };
+		D3D849FF1CFBE75000F083DF /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D849FE1CFBE75000F083DF /* Strings.swift */; };
 		D3E079231D2E7A0D00D5FBB3 /* ShortcutBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E079221D2E7A0D00D5FBB3 /* ShortcutBoxView.swift */; };
 		D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */; };
 		D3E6BD7F1CC8C07F0074FF6D /* ModuleManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */; };
@@ -165,7 +165,7 @@
 		D306E0291CCA68A700FA3812 /* GradeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeModel.swift; sourceTree = "<group>"; };
 		D306E02B1CCA68EB00FA3812 /* GradeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeTableViewCell.swift; sourceTree = "<group>"; };
 		D306E02D1CCA691F00FA3812 /* GradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeViewController.swift; sourceTree = "<group>"; };
-		D30AB9391D3C365600DFBFDD /* RefreshableCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshableCache.swift; sourceTree = "<group>"; };
+		D308693B1D3CB1F70088D9EA /* Modules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modules.swift; sourceTree = "<group>"; };
 		D3150F0E1CE8C3DA00E95EB6 /* CustomExamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomExamViewController.swift; sourceTree = "<group>"; };
 		D31821B11CC3B07800992355 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D31821B51CC48D5400992355 /* ServiceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceHelper.swift; sourceTree = "<group>"; };
@@ -244,7 +244,7 @@
 		D3D5D44C1CE99EDC000E406A /* GymFriendModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymFriendModel.swift; sourceTree = "<group>"; };
 		D3D5D44E1CE9AFF1000E406A /* GymAddFriendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GymAddFriendViewController.swift; sourceTree = "<group>"; };
 		D3D849FB1CFBD88200F083DF /* ExtJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtJSON.swift; sourceTree = "<group>"; };
-		D3D849FE1CFBE75000F083DF /* R.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.swift; sourceTree = "<group>"; };
+		D3D849FE1CFBE75000F083DF /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		D3E079221D2E7A0D00D5FBB3 /* ShortcutBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutBoxView.swift; sourceTree = "<group>"; };
 		D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleManageTableViewCell.swift; sourceTree = "<group>"; };
 		D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleManagerViewController.swift; sourceTree = "<group>"; };
@@ -308,6 +308,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D308693D1D3CB8870088D9EA /* app_const */ = {
+			isa = PBXGroup;
+			children = (
+				D308693B1D3CB1F70088D9EA /* Modules.swift */,
+				D3D849FE1CFBE75000F083DF /* Strings.swift */,
+			);
+			name = app_const;
+			sourceTree = "<group>";
+		};
 		D31DE50C1CC334D800E4891D /* custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -350,14 +359,13 @@
 		D348580A1CBB48EF00B55E76 /* helper */ = {
 			isa = PBXGroup;
 			children = (
-				D306E0211CCA3DFD00FA3812 /* AppModule.swift */,
 				D348580B1CBB48FD00B55E76 /* ApiHelper.swift */,
-				D348580D1CBB4FF900B55E76 /* CacheHelper.swift */,
 				D34858121CBB60A600B55E76 /* ApiRequest.swift */,
+				D306E0211CCA3DFD00FA3812 /* AppModule.swift */,
+				D348580D1CBB4FF900B55E76 /* CacheHelper.swift */,
 				D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */,
 				D31821B51CC48D5400992355 /* ServiceHelper.swift */,
 				D3F375C61CDB3957004DDEA5 /* WifiLoginHelper.swift */,
-				D30AB9391D3C365600DFBFDD /* RefreshableCache.swift */,
 			);
 			name = helper;
 			sourceTree = "<group>";
@@ -577,8 +585,8 @@
 				D31821C81CC7BC0400992355 /* Main.storyboard */,
 				D31821B11CC3B07800992355 /* LaunchScreen.storyboard */,
 				D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */,
-				D3D849FE1CFBE75000F083DF /* R.swift */,
 				D3D35DE31CBA2E8200B18092 /* Assets.xcassets */,
+				D308693D1D3CB8870088D9EA /* app_const */,
 				D34858091CBB46AF00B55E76 /* app_main */,
 				D31DE50C1CC334D800E4891D /* custom */,
 				D348580A1CBB48EF00B55E76 /* helper */,
@@ -860,6 +868,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3D5D43F1CE97149000E406A /* GymChooseTimeViewController.swift in Sources */,
+				D308693C1D3CB1F70088D9EA /* Modules.swift in Sources */,
 				D39B87971CCCCA0200EC5280 /* CardsRowModel.swift in Sources */,
 				D33438501D1A185300CD49D6 /* LibrarySearchTableViewCell.swift in Sources */,
 				D306E0281CCA403D00FA3812 /* ExamModel.swift in Sources */,
@@ -931,7 +940,6 @@
 				D3F4734B1CCA146800750FFB /* LectureTableViewCell.swift in Sources */,
 				D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */,
 				D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */,
-				D30AB93A1D3C365600DFBFDD /* RefreshableCache.swift in Sources */,
 				D3D5D44F1CE9AFF1000E406A /* GymAddFriendViewController.swift in Sources */,
 				D30661CA1CF2C50E006583C2 /* GameCreateViewController.swift in Sources */,
 				D3D5D44B1CE99D63000E406A /* NoSelectionTableViewCell.swift in Sources */,
@@ -951,7 +959,7 @@
 				D31821BF1CC522D900992355 /* CardViewController.swift in Sources */,
 				D38D2F401CFDC49400E0E5BE /* CardRecordModel.swift in Sources */,
 				D39B879A1CCCEC2E00EC5280 /* CardCard.swift in Sources */,
-				D3D849FF1CFBE75000F083DF /* R.swift in Sources */,
+				D3D849FF1CFBE75000F083DF /* Strings.swift in Sources */,
 				D3D35DDD1CBA2E8200B18092 /* AppDelegate.swift in Sources */,
 				D3A0C1701CBB7A3A00744640 /* MainTabBarController.swift in Sources */,
 				D3A0C1741CBB7AF500744640 /* ModulesViewController.swift in Sources */,

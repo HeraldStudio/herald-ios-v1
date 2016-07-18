@@ -144,7 +144,7 @@ class GymNewViewController : UIViewController, UITableViewDataSource, UITableVie
             showProgressDialog()
             working = true
             
-            ApiSimpleRequest(checkJson200: true).api("yuyue").uuid()
+            ApiSimpleRequest(.Post, checkJson200: true).api("yuyue").uuid()
                 .post("method", "new")
                 .post("orderVO.itemId", "\(self.sport.id)")
                 .post("orderVO.useTime", self.useTime)

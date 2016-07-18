@@ -31,7 +31,7 @@ class WifiLoginHelper {
     }
     
     private func beginCheck () {
-        ApiSimpleRequest(checkJson200: false).url("https://selfservice.seu.edu.cn/selfservice/index.php")
+        ApiSimpleRequest(.Post, checkJson200: false).url("https://selfservice.seu.edu.cn/selfservice/index.php")
             .onResponse { success, code, response in
             if !response.containsString("403 Forbidden") {
                 self.checkOnlineStatus()
@@ -44,7 +44,7 @@ class WifiLoginHelper {
     }
     
     private func checkOnlineStatus () {
-        ApiSimpleRequest(checkJson200: false).get().url("http://w.seu.edu.cn/portal/init.php")
+        ApiSimpleRequest(.Get, checkJson200: false).url("http://w.seu.edu.cn/portal/init.php")
             .onResponse { success, _, response in
             if success {
                 if response.containsString("notlogin") {
@@ -69,7 +69,7 @@ class WifiLoginHelper {
     }
     
     private func logoutThenLogin () {
-        ApiSimpleRequest(checkJson200: false).url("http://w.seu.edu.cn/portal/logout.php")
+        ApiSimpleRequest(.Post, checkJson200: false).url("http://w.seu.edu.cn/portal/logout.php")
             .onResponse { success, _, response in
             if success {
                 self.loginToService()
@@ -89,7 +89,7 @@ class WifiLoginHelper {
         // w.seu.edu.cn 的服务器在登录的时候是按参数顺序取参数的，第一个参数作为用户名，
         // 第二个参数作为密码，而 Alamofire 传参数时会将 Key 按字母顺序排序，因此若用户名 Key
         // 为 username ，密码 Key 为 password，会导致参数倒置，登录失败！
-        ApiSimpleRequest(checkJson200: false).url("http://w.seu.edu.cn/portal/login.php")
+        ApiSimpleRequest(.Post, checkJson200: false).url("http://w.seu.edu.cn/portal/login.php")
             .post("p1", username, "p2", password)
             .onResponse { success, _, response in
                 if success {

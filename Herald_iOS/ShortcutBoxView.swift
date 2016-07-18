@@ -31,7 +31,7 @@ class ShortcutBoxView : UIView {
         let width = AppDelegate.instance.leftController.view.frame.width
         
         // 获取已启用快捷方式的模块列表
-        let dataSource = R.module.array.filter { $0.shortcutEnabled } + [R.module.moduleManager]
+        let dataSource = Modules.filter { $0.shortcutEnabled } + [ModuleManager]
         
         // 根据尺寸计算列数
         let columnCount = Int(width / minCellWidth)
@@ -53,7 +53,7 @@ class ShortcutBoxView : UIView {
         
         /// 初始化、调整布局属性
         // 获取已启用快捷方式的模块列表
-        dataSource = R.module.array.filter { $0.shortcutEnabled } + [R.module.moduleManager]
+        dataSource = Modules.filter { $0.shortcutEnabled } + [ModuleManager]
         
         let width = AppDelegate.instance.leftController.view.frame.width
         
@@ -200,7 +200,7 @@ class ShortcutBoxCell : UIView {
         addGestureRecognizer(tapGesture)
         
         /// 设置长按事件（模块管理按钮不设置）
-        if module == R.module.moduleManager {
+        if module == ModuleManager {
             return
         }
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.askToDelete))

@@ -64,10 +64,10 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
         var enabledModules : [AppModule] = []
         
         // 将模块管理伪装成一个模块加入到第一个分区中，并将这个分区加入到列表中
-        sections.append([R.module.moduleManager])
+        sections.append([ModuleManager])
         
         // 将各个模块加入到第二个分区中
-        for k in R.module.array {
+        for k in Modules {
             if k.shortcutEnabled || k.cardEnabled {
                 enabledModules.append(k)
             }
