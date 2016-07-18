@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CacheHelper : NSObject {
+class CacheHelper {
     
     // 缓存名称列表，注销时将取消这些缓存
     static let cacheNames = [
