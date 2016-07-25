@@ -21,13 +21,22 @@ class WifiLoginHelper {
     }
     
     func checkAndLogin () {
-        if WifiLoginHelper.working { return }
-        WifiLoginHelper.working = true
         
-        //vc.showTipDialogIfUnknown("注意：请先进入 [设置]-[Wi-Fi]-\"seu-wlan\" 右侧的 [i] 按钮，关闭 [自动连接]，才能正常使用~", cachePostfix: "wifi") {
+        /// 此段代码需要使用用户名和密码，先判断是否处于试用状态
+        if !ApiHelper.isLogin() || ApiHelper.isTrial() {
+            vc.showQuestionDialog("您处于试用状态，需要登录或设置校园网自定义账号，才能使用校园网快捷登录功能，是否立即登录？"){
+                ApiHelper.doLogout(nil)
+            }
+        } else {// 若非试用状态，进入下面的流程
+            
+            if WifiLoginHelper.working { return }
+            WifiLoginHelper.working = true
+            
+            //vc.showTipDialogIfUnknown("注意：请先进入 [设置]-[Wi-Fi]-\"seu-wlan\" 右侧的 [i] 按钮，关闭 [自动连接]，才能正常使用~", cachePostfix: "wifi") {
             self.vc.showProgressDialog()
             self.beginCheck()
-        //}
+            //}
+        }
     }
     
     private func beginCheck () {
@@ -51,7 +60,9 @@ class WifiLoginHelper {
                     // 未登录状态，直接登录
                     //self.vc.showMessage("摇一摇：未登录状态，正在尝试登录~")
                     self.loginToService()
-                } else if !response.containsString(ApiHelper.getWifiUserName()) {
+                    
+                    /// 此处由于已经判断用户已登录，故断言 ApiHelper.getWifiUserName() 非空
+                } else if !response.containsString(ApiHelper.getWifiUserName()!) {
                     // 已登录，但账号与当前设置的账号不同
                     //self.vc.showMessage("摇一摇：已登录其它账号，正在尝试退出~")
                     self.logoutThenLogin()
@@ -82,8 +93,9 @@ class WifiLoginHelper {
     }
     
     private func loginToService () {
-        let username = ApiHelper.getWifiUserName()
-        let password = ApiHelper.getWifiPassword()
+        /// 此处由于已经判断用户已登录，故断言 ApiHelper.getWifiUserName()/getWifiPassword() 非空
+        let username = ApiHelper.getWifiUserName()!
+        let password = ApiHelper.getWifiPassword()!
         
         /// 前方大坑！前方大坑！
         // w.seu.edu.cn 的服务器在登录的时候是按参数顺序取参数的，第一个参数作为用户名，

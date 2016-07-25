@@ -40,31 +40,40 @@ class GymReserveViewController : UIViewController, UITableViewDataSource, UITabl
     }
     
     @IBAction func refreshCache() {
-        showProgressDialog()
-        ( ApiSimpleRequest(.Post, checkJson200: true)
-            .api("yuyue").uuid().post("method", "getDate")
-            .toCache("herald_gymreserve_timelist_and_itemlist")
-        | ApiSimpleRequest(.Post, checkJson200: true)
-            .api("yuyue").uuid().post("method", "myOrder")
-            .toCache("herald_gymreserve_myorder", notifyModuleIfChanged: ModuleGymReserve)
-        // 预获取用户手机号
-        | ApiSimpleRequest(.Post, checkJson200: true)
-            .api("yuyue").uuid().post("method", "getPhone")
-            .toCache("herald_gymreserve_phone") { json in json["content"]["phone"] }
-        ).onFinish { success in
-            self.hideProgressDialog()
-            if success {
-                self.loadCache()
-            } else {
-                self.showMessage("获取失败，请重试")
+        /// 此段代码需要使用用户名和密码，先判断是否处于试用状态
+        if !ApiHelper.isLogin() || ApiHelper.isTrial() {
+            showQuestionDialog("您处于试用状态，需要登录才能继续，是否登录？"){
+                ApiHelper.doLogout(nil)
             }
-        }.run()
-        
-        // 如果缓存的用户ID为空，预查询用户ID
-        if CacheHelper.get("herald_gymreserve_userid") == "" {
-            ApiSimpleRequest(.Post, checkJson200: true).api("yuyue").uuid().post("method", "getFriendList")
-                .post("cardNo", ApiHelper.getUserName())
-                .toCache("herald_gymreserve_userid") { json in json["content"][0]["userId"] }.run()
+        } else {// 若非试用状态，对用户名和密码存在性进行断言
+            let userName = ApiHelper.getUserName()!
+            
+            showProgressDialog()
+            ( ApiSimpleRequest(.Post, checkJson200: true)
+                .api("yuyue").uuid().post("method", "getDate")
+                .toCache("herald_gymreserve_timelist_and_itemlist")
+                | ApiSimpleRequest(.Post, checkJson200: true)
+                    .api("yuyue").uuid().post("method", "myOrder")
+                    .toCache("herald_gymreserve_myorder", notifyModuleIfChanged: ModuleGymReserve)
+                // 预获取用户手机号
+                | ApiSimpleRequest(.Post, checkJson200: true)
+                    .api("yuyue").uuid().post("method", "getPhone")
+                    .toCache("herald_gymreserve_phone") { json in json["content"]["phone"] }
+                ).onFinish { success in
+                    self.hideProgressDialog()
+                    if success {
+                        self.loadCache()
+                    } else {
+                        self.showMessage("获取失败，请重试")
+                    }
+                }.run()
+            
+            // 如果缓存的用户ID为空，预查询用户ID
+            if CacheHelper.get("herald_gymreserve_userid") == "" {
+                ApiSimpleRequest(.Post, checkJson200: true).api("yuyue").uuid().post("method", "getFriendList")
+                    .post("cardNo", userName)
+                    .toCache("herald_gymreserve_userid") { json in json["content"][0]["userId"] }.run()
+            }
         }
     }
     

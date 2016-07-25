@@ -1,6 +1,6 @@
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var username : UITextField!
     
@@ -28,11 +28,18 @@ class LoginViewController: UIViewController {
     
     @IBAction func buttonClicked() {
         endEdit()
-        if username?.text! != "" && password?.text! != "" {
+        if username.text! != "" && password.text! != "" {
             doLogin()
         } else {
             showMessage("输入不完整，请重试")
         }
+    }
+    
+    @IBAction func trialButtonClicked() {
+        endEdit()
+        ApiHelper.setAuthCache("uuid", ApiHelper.trialUuid)
+        ApiHelper.setAuthCache("schoolnum", ApiHelper.trialSchoolnum)
+        AppDelegate.instance.showMain()
     }
     
     func doLogin () {
@@ -75,7 +82,7 @@ class LoginViewController: UIViewController {
                  * 5) 使用 postman, 调用 srtp 接口, 不带 schoolnum 参数, 应当返回自己的 srtp 信息;
                  **/
                 if success && ApiHelper.authCache.get("schoolnum").characters.count == 8 {
-                ((UIApplication.sharedApplication().delegate) as! AppDelegate).showMain()
+                    AppDelegate.instance.showMain()
             } else {
                 self.hideProgressDialog()
                 ApiHelper.doLogout("用户不存在或网络异常，请重试")
@@ -86,6 +93,15 @@ class LoginViewController: UIViewController {
     @IBAction func endEdit () {
         username.resignFirstResponder()
         password.resignFirstResponder()
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == username {
+            password.becomeFirstResponder()
+        } else if textField == password {
+            buttonClicked()
+        }
+        return true
     }
 }
 

@@ -154,36 +154,46 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     func displayLibraryAuthDialog () {
-        let dialog = UIAlertController(title: "绑定图书馆账号", message: "你还没有绑定图书馆账号或账号不正确，请重新绑定：", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        dialog.addTextFieldWithConfigurationHandler { field in
-            field.placeholder = "图书馆密码（默认为一卡通号）"
-            field.secureTextEntry = true
-        }
-        
-        dialog.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: {
-            _ in
-        }))
-        
-        dialog.addAction(UIAlertAction(title: "绑定", style: UIAlertActionStyle.Default, handler: { _ in
-            if let password = dialog.textFields![0].text {
-                self.showProgressDialog()
-                ApiSimpleRequest(.Post, checkJson200: false).url(ApiHelper.auth_update_url)
-                    .post("cardnum", ApiHelper.getUserName())
-                    .post("password", ApiHelper.getPassword())
-                    .post("lib_username", ApiHelper.getUserName())
-                    .post("lib_password", password)
-                    .onResponse { _, _, response in
-                        if response == "OK" {
-                            //返回OK说明认证成功
-                            self.refreshCache()
-                        } else {
-                            self.showMessage("绑定失败，请重试")
-                        }
-                    }.run()
+        /// 此段代码需要使用用户名和密码，先判断是否处于试用状态
+        if !ApiHelper.isLogin() || ApiHelper.isTrial() {
+            showQuestionDialog("您处于试用状态，需要登录才能继续，是否登录？"){
+                ApiHelper.doLogout(nil)
             }
-        }))
-
-        presentViewController(dialog, animated: true, completion: nil)
+        } else {// 若非试用状态，对用户名和密码存在性进行断言
+            let userName = ApiHelper.getUserName()!
+            let password = ApiHelper.getPassword()!
+            
+            let dialog = UIAlertController(title: "绑定图书馆账号", message: "你还没有绑定图书馆账号或账号不正确，请重新绑定：", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            dialog.addTextFieldWithConfigurationHandler { field in
+                field.placeholder = "图书馆密码（默认为一卡通号）"
+                field.secureTextEntry = true
+            }
+            
+            dialog.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: {
+                _ in
+            }))
+            
+            dialog.addAction(UIAlertAction(title: "绑定", style: UIAlertActionStyle.Default, handler: { _ in
+                if let libPassword = dialog.textFields![0].text {
+                    self.showProgressDialog()
+                    ApiSimpleRequest(.Post, checkJson200: false).url(ApiHelper.auth_update_url)
+                        .post("cardnum", userName)
+                        .post("password", password)
+                        .post("lib_username", userName)
+                        .post("lib_password", libPassword)
+                        .onResponse { _, _, response in
+                            if response == "OK" {
+                                //返回OK说明认证成功
+                                self.refreshCache()
+                            } else {
+                                self.showMessage("绑定失败，请重试")
+                            }
+                        }.run()
+                }
+            }))
+            
+            presentViewController(dialog, animated: true, completion: nil)
+        }
     }
 }

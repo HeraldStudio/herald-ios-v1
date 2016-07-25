@@ -15,6 +15,11 @@ class ApiHelper {
     
     static let appid = "9f9ce5c3605178daadc2d85ce9f8e064"
     
+    /// 试用登陆时的uuid、学号和一卡通号
+    static let trialUuid = "00000000000000000000000000000000"
+    static let trialUserName = "000000000"
+    static let trialSchoolnum = "00000000"
+    
     static let authCache = NSUserDefaults.withPrefix("auth_")
     
     static func getApiUrl (api : String) -> String {
@@ -46,25 +51,34 @@ class ApiHelper {
     }
     
     static func isLogin () -> Bool {
-        let uuid = authCache.get("uuid")
-        return uuid != ""
+        return getUUID() != ""
+    }
+    
+    static func isTrial () -> Bool {
+        return getUUID() == ApiHelper.trialUuid
     }
     
     static func getUUID () -> String {
         return authCache.get("uuid")
     }
     
+    /// 试用登陆时，此函数不需要调用，即不需要关心用户名和密码缓存的值，
+    /// 因为试用登陆时取得的用户名和密码已被下面两个函数直接短路为nil
     static func setAuth (user user : String, pwd : String) {
         // TODO 加密
         CacheHelper.set("authUser", user)
         CacheHelper.set("authPwd", pwd)
     }
     
-    static func getUserName () -> String {
+    /// 试用登陆时，取用户名和密码均为空
+    static func getUserName () -> String? {
+        if !isLogin() || isTrial() { return nil }
         return CacheHelper.get("authUser")
     }
     
-    static func getPassword () -> String {
+    /// 试用登陆时，取用户名和密码均为空
+    static func getPassword () -> String? {
+        if !isLogin() || isTrial() { return nil }
         return CacheHelper.get("authPwd")
     }
     
@@ -74,13 +88,15 @@ class ApiHelper {
         CacheHelper.set("wifiAuthPwd", pwd)
     }
     
-    static func getWifiUserName () -> String {
+    /// 试用登陆且没设置自定义账号时，取 Wifi 用户名和密码均为空
+    static func getWifiUserName () -> String? {
         // 若无校园网独立用户缓存，则使用登陆应用的账户
         let cacheUser = CacheHelper.get("wifiAuthUser")
         return cacheUser == "" ? getUserName() : cacheUser
     }
     
-    static func getWifiPassword () -> String {
+    /// 试用登陆且没设置自定义账号时，取 Wifi 用户名和密码均为空
+    static func getWifiPassword () -> String? {
         // 若无校园网独立用户缓存，则使用登陆应用的账户
         let cachePwd = CacheHelper.get("wifiAuthPwd")
         return cachePwd == "" ? getPassword() : cachePwd
