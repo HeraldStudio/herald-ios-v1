@@ -3,7 +3,7 @@ import SwiftyJSON
 class ServiceCard {
     
     static func getRefresher () -> ApiRequest {
-        return ApiSimpleRequest(.Post, checkJson200: true).url("http://android.heraldstudio.com/checkversion").uuid()
+        return ApiSimpleRequest(.Post).url("http://android.heraldstudio.com/checkversion").uuid()
             .post("schoolnum", ApiHelper.getSchoolnum())
             .post("versioncode", "\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion")!)")
             .post("versionname", "V\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")!)")

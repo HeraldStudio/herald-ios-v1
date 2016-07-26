@@ -1,4 +1,4 @@
-import Foundation
+import SwiftyJSON
 
 /**
  * PrefixUserDefaults | 前缀用户偏好
@@ -28,6 +28,22 @@ class PrefixUserDefaults {
     
     /// 获取对应键值的用户偏好
     func get (key : String) -> String {
+        
+        // 试用环境下的缓存覆盖
+        if ApiHelper.isTrial() {
+            if TrialCache.keys.contains(key) {
+                do {
+                    let data = try NSJSONSerialization.dataWithJSONObject(TrialCache[key]!, options: NSJSONWritingOptions.PrettyPrinted)
+                    let strJson = NSString(data: data, encoding: NSUTF8StringEncoding)
+                    print(strJson)
+                    return "\(strJson!)"
+                } catch {
+                    // 解析出错，按照正常方式返回，不再覆盖缓存
+                    // 也是一万年不会出现一次的意外
+                }
+            }
+        }
+        
         if let k = defaults.stringForKey(prefix + key) {
             return k
         }

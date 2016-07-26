@@ -9,17 +9,65 @@ import SwiftyJSON
  *  运算，可以得到满足不同需求的复合请求，而复合请求又可以作为新的单元，形成更大的复合请求。
  **/
 
+/// 获取指定 Status Code 对应的错误级别，返回值越大，错误越严重
+func getErrorLevelForStatusCode (code : Int) -> Int {
+    let SUCCESS = 0, WARNING = 1, ERROR = 2, FATAL_ERROR = 3
+    
+    if code <= 200 { // HTTP 正常通信代码
+        return SUCCESS
+    } else if code < 300 { // 稍有异常但无关痛痒的代码
+        return WARNING
+    } else if code < 400 || code >= 500 { // HTTP 出错的代码
+        return ERROR
+    } else { // 400 ~ 499 表示认证失败，必须注销的代码
+        return FATAL_ERROR
+    }
+}
+
+/// 合并两个错误码，即去掉其中错误轻的，保留错误严重的代码
+func mergeStatusCodes (leftCode : Int, _ rightCode : Int) -> Int {
+    let leftSlighter = getErrorLevelForStatusCode(leftCode) < getErrorLevelForStatusCode(rightCode)
+    return leftSlighter ? rightCode : leftCode
+}
+
 /// 闭包类型，表示当前请求中各个简单请求结束的事件。
 /// 若当前请求就是简单请求，则只触发一次，相当于请求结束的事件；
 /// 若当前请求是复合请求，其中包含的每个简单请求结束时都会触发一次
+/// 返回值 true 表示截断，不再向其余监听器传递此事件；false 表示继续传递给其它监听器。
 typealias OnResponseListener = (Bool, Int, String) -> Void
 
 /// 闭包类型，表示整个请求结束的事件。
 /// 由于请求结束的事件可能是简单请求结束，也可能是复合请求结束，
 /// 而复合请求作为一个整体，本身没有 code 和 response 值，
-/// 所以这个 listener 只有一个参数。
+/// 这里定义：** 一个复合请求中所有简单请求返回的 code 的最大值，作为这个复合请求的 code。**
+/// 所以这个 listener 有两个参数。
 /// 如要监听简单请求结束的事件，可使用OnResponseListener
-typealias OnFinishListener = (Bool) -> Void
+/// 返回值 true 表示截断，不再向其余监听器传递此事件；false 表示继续传递给其它监听器。
+typealias OnFinishListener = (Bool, Int) -> Void
+
+/// 用来在将要运行的请求中优先加入 4xx 致命错误（400 ~ 499）的监听器
+/// 所有复合请求的 run() 函数必须首先调用本函数
+/// 当请求出现致命错误时，提示身份过期并退出登录
+func addFatalErrorListenerInOnFinishList(inout list: [OnFinishListener]) {
+    let listener : OnFinishListener = { _, code in
+        if 400 <= code && code < 500 {
+            ApiHelper.notifyUserIdentityExpired()
+        }
+    }
+    list = [listener] + list
+}
+
+/// 用来在将要运行的请求中优先加入 4xx 致命错误（400 ~ 499）的监听器
+/// 所有简单请求的 run() 函数必须首先调用本函数
+/// 当请求出现致命错误时，提示身份过期并退出登录
+func addFatalErrorListenerInOnResponseList(inout list: [OnResponseListener]) {
+    let listener : OnResponseListener = { _, code, _ in
+        if 400 <= code && code < 500 {
+            ApiHelper.notifyUserIdentityExpired()
+        }
+    }
+    list = [listener] + list
+}
 
 /// 协议，空请求、简单请求、顺次复合请求、同时复合请求都要遵守该协议，以保证这种递归式的多态性
 protocol ApiRequest {
@@ -32,6 +80,12 @@ protocol ApiRequest {
     
     func parallel(anotherRequest : ApiRequest) -> ApiRequest
     
+    /// 不添加 4xx 错误监听器，直接运行。
+    /// 该函数用于外层复合请求调用内层请求时使用，防止 4xx 错误监听器重复添加。
+    /// 在需要忽略 4xx 错误的情况下，此函数也可以从外部调用。
+    func runWithoutFatalListener()
+    
+    /// 添加 4xx 错误监听器并运行。
     func run()
 }
 
@@ -75,6 +129,10 @@ class ApiEmptyRequest : ApiRequest {
         return anotherRequest
     }
     
+    func runWithoutFatalListener() {
+        // do nothing
+    }
+    
     func run() {
         // do nothing
     }
@@ -93,14 +151,11 @@ class ApiSimpleRequest : ApiRequest {
     
     var method : Method
     
-    var checkJson200 : Bool
-    
     /**
      * 构造部分
      **/
-    init(_ method: Method, checkJson200: Bool){
+    init(_ method: Method){
         self.method = method
-        self.checkJson200 = checkJson200
     }
     
     var url : String?
@@ -149,42 +204,25 @@ class ApiSimpleRequest : ApiRequest {
      *
      * callback     默认的Callback（自动调用二级回调，若出错还会执行错误处理）
      **/
-    
     func callback (response : Response <String, NSError>) -> Void {
         
-        var code = 0
-        let resp = response.result.value == nil ? "" : response.result.value!
+        /// 解析错误码（这里指的是 HTTP Response Status Code，不考虑 JSON 中返回的 code）
+        let code = response.response?.statusCode
         
-        switch response.result {
-        case .Success:
-            let responseJson = JSON.parse(resp)
-            code = responseJson["code"].intValue
-            if !checkJson200 {
-                for onResponseListener in onResponseListeners {
-                    onResponseListener(true, code, resp)
-                }
-            } else {
-                guard let jsonStr = responseJson.rawString() else { fallthrough }
-                guard code == 200 else {
-                    if code == 400 {
-                        ApiHelper.doLogout("用户身份已过期，请重新登录")
-                        break
-                    } else {
-                        fallthrough
-                    }
-                }
-                
-                for onResponseListener in onResponseListeners {
-                    onResponseListener(true, code, jsonStr)
-                }
-            }
-        case .Failure:
-            for onResponseListener in onResponseListeners {
-                onResponseListener(false, code, resp)
-            }
+        /// 按照错误码判断是否成功
+        let success = code < 300
+        
+        /// 取返回的字符串值
+        var responseString = ""
+        if let stringResponse = response.result.value {
+            responseString = stringResponse
+        }
+        
+        /// 触发回调
+        for listener in onResponseListeners {
+            listener(success, code, responseString)
         }
     }
-    
     
     /**
      * 二级回调设置部分
@@ -202,7 +240,7 @@ class ApiSimpleRequest : ApiRequest {
     }
     
     func onFinish(listener: OnFinishListener) -> ApiRequest {
-        return onResponse { success, code, response in listener(success) }
+        return onResponse { success, code, response in listener(success, code) }
     }
     
     /**
@@ -282,7 +320,7 @@ class ApiSimpleRequest : ApiRequest {
     /**
      * 执行部分
      **/
-    func run () {
+    func runWithoutFatalListener() {
         let request = Alamofire.request([Method.Get: .GET, Method.Post: .POST][method]!,
             url!, parameters: map, encoding: .URL)
         
@@ -294,39 +332,57 @@ class ApiSimpleRequest : ApiRequest {
             self.callback(response)
         }
     }
+    
+    func run () {
+        addFatalErrorListenerInOnResponseList(&onResponseListeners)
+        runWithoutFatalListener()
+    }
 }
 
 /**
- * ApiChainRequest | 顺次请求
+ * ApiChainRequest | 短路顺次请求
  *
- * 利用 request1.chain(request2) 或 request1 * request2 运算可得到一个 ApiChainRequest
+ * 利用 request1.chain(request2) 或 request1 - request2 运算可得到一个 ApiChainRequest
  * 当前一个子请求执行完毕后，判断其是否执行成功，若执行成功则启动后一个子请求，直到所有子请求结束。
  * 仅当所有子请求都执行成功，才视为 ApiChainRequest 执行成功。
- * 遵循短路原则，即若前面的请求执行失败，后面的请求将不会被执行。
+ * 此请求是短路的，即左边的请求如果失败，将不会继续向右执行。
  */
 class ApiChainRequest : ApiRequest {
-
+    
     var leftRequest : ApiRequest
     
     var rightRequest : ApiRequest
+    
+    var code = 0
     
     init(_ left: ApiRequest, _ right: ApiRequest) {
         leftRequest = left
         rightRequest = right
         
-        leftRequest.onFinish { success in
+        leftRequest.onFinish { success, code in
+            
+            // 首先更新复合请求的 code
+            self.code = mergeStatusCodes(self.code, code)
+            
+            // 若前一个请求成功，运行下一个请求
             if success {
-                self.rightRequest.run()
+                self.rightRequest.runWithoutFatalListener()
             } else {
+                // 否则直接报告请求结束
                 for listener in self.onFinishListeners {
-                    listener(false)
+                    listener(self.code < 300, self.code)
                 }
             }
         }
         
-        rightRequest.onFinish { success in
+        rightRequest.onFinish { _, code in
+            
+            // 首先更新复合请求的 code
+            self.code = mergeStatusCodes(self.code, code)
+            
+            // 报告请求结束
             for listener in self.onFinishListeners {
-                listener(success)
+                listener(self.code < 300, self.code)
             }
         }
     }
@@ -352,14 +408,20 @@ class ApiChainRequest : ApiRequest {
         return ApiParallelRequest(self, anotherRequest)
     }
     
+    func runWithoutFatalListener() {
+        leftRequest.runWithoutFatalListener()
+    }
+    
     func run() {
-        leftRequest.run()
+        addFatalErrorListenerInOnFinishList(&onFinishListeners)
+        runWithoutFatalListener()
     }
 }
+
 /**
  * ApiParallelRequest | 同时请求
  * 
- * 利用 request1.parallel(request2) 或 request1 + request2 运算可得到一个 ApiParallelRequest
+ * 利用 request1.parallel(request2) 或 request1 | request2 运算可得到一个 ApiParallelRequest
  * 所有子请求同时开始执行，直到最后结束的请求结束。
  * 仅当所有子请求都执行成功，才视为 ApiParallelRequest 执行成功。
  **/
@@ -372,32 +434,34 @@ class ApiParallelRequest : ApiRequest {
     
     var rightFinished = false
     
-    var success = true
+    var code = 0
     
     init(_ left: ApiRequest, _ right: ApiRequest) {
         leftRequest = left
         rightRequest = right
         
-        leftRequest.onFinish { success in
+        leftRequest.onFinish { _, code in
             self.leftFinished = true
-            if !success {
-                self.success = false
-            }
+            
+            // 首先更新复合请求的 code
+            self.code = mergeStatusCodes(self.code, code)
+            
             if self.rightFinished {
                 for listener in self.onFinishListeners {
-                    listener(self.success)
+                    listener(self.code < 300, self.code)
                 }
             }
         }
         
-        rightRequest.onFinish { success in
+        rightRequest.onFinish { _, code in
             self.rightFinished = true
-            if !success {
-                self.success = false
-            }
+            
+            // 首先更新复合请求的 code
+            self.code = mergeStatusCodes(self.code, code)
+            
             if self.leftFinished {
                 for listener in self.onFinishListeners {
-                    listener(self.success)
+                    listener(self.code < 300, self.code)
                 }
             }
         }
@@ -424,8 +488,13 @@ class ApiParallelRequest : ApiRequest {
         return ApiParallelRequest(self, anotherRequest)
     }
     
+    func runWithoutFatalListener() {
+        leftRequest.runWithoutFatalListener()
+        rightRequest.runWithoutFatalListener()
+    }
+    
     func run() {
-        leftRequest.run()
-        rightRequest.run()
+        addFatalErrorListenerInOnFinishList(&onFinishListeners)
+        runWithoutFatalListener()
     }
 }

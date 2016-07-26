@@ -98,7 +98,7 @@ class MainTabBarController: UITabBarController {
     /// 弹出菜单操作：模块管理
     func moduleManage () {
         if let vc = storyboard?.instantiateViewControllerWithIdentifier("MODULE_MANAGER") {
-            AppDelegate.instance.rightController.pushViewController(vc, animated: true)
+            AppDelegate.instance.rightController!.pushViewController(vc, animated: true)
         }
     }
 }

@@ -107,7 +107,7 @@ class SeuNetViewController : UIViewController {
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiSimpleRequest(.Post, checkJson200: true).api("nic").uuid().toCache("herald_nic")
+        ApiSimpleRequest(.Post).api("nic").uuid().toCache("herald_nic")
             .onResponse { success, _, _ in
                 self.hideProgressDialog()
                 if success {

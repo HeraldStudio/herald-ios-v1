@@ -11,16 +11,24 @@ import Toast_Swift
 extension UIViewController {
     
     /// 显示加载框（全局单例）
-    func showProgressDialog() {
+    static func showProgressDialog() {
         SVProgressHUD.setDefaultStyle(.Custom)
         SVProgressHUD.setBackgroundColor(UIColor(red: 0, green: 0, blue: 0, alpha: 0.8))
         SVProgressHUD.setForegroundColor(UIColor.whiteColor())
         SVProgressHUD.show()
     }
     
+    func showProgressDialog() {
+        UIViewController.showProgressDialog()
+    }
+    
     /// 隐藏加载框（全局单例）
-    func hideProgressDialog() {
+    static func hideProgressDialog() {
         SVProgressHUD.dismiss()
+    }
+    
+    func hideProgressDialog() {
+        UIViewController.hideProgressDialog()
     }
     
     /// 显示提示消息

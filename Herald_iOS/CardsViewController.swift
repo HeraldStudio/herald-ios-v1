@@ -99,8 +99,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // 轮播图宽高比 5:2
         slider.view.frame = CGRect(x: 0, y: 0,
-                                   width: AppDelegate.instance.leftController.view.frame.width,
-                                   height: AppDelegate.instance.leftController.view.frame.width * CGFloat(0.4))
+                                   width: AppDelegate.instance.leftController!.view.frame.width,
+                                   height: AppDelegate.instance.leftController!.view.frame.width * CGFloat(0.4))
         
         // 轮播图自动切换间隔 5秒
         slider.interval = 5
@@ -373,7 +373,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
          **/
         parallelRequest.onResponse { _, _, _ in
             self.loadContent(false)
-        }.onFinish { success in
+        }.onFinish { success, _ in
             self.hideProgressDialog()
             
             // 暂时关闭列表的下拉刷新

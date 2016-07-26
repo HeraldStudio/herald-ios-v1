@@ -70,14 +70,14 @@ class PedetailViewController : UIViewController, FSCalendarDelegate {
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        PedetailCard.getRefresher().onFinish { success in
-                self.hideProgressDialog()
-                if success {
-                    self.loadCache()
-                } else {
-                    self.showMessage("刷新失败，请重试")
-                }
-            }.run()
+        PedetailCard.getRefresher().onFinish { success, _ in
+            self.hideProgressDialog()
+            if success {
+                self.loadCache()
+            } else {
+                self.showMessage("刷新失败，请重试")
+            }
+        }.run()
     }
     
     func showError () {

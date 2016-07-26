@@ -12,7 +12,7 @@ import SwiftyJSON
 class CardCard {
     
     static func getRefresher () -> ApiRequest {
-        return ApiSimpleRequest(.Post, checkJson200: true).api("card").uuid().post("timedelta", "1").toCache("herald_card_today")
+        return ApiSimpleRequest(.Post).api("card").uuid().post("timedelta", "1").toCache("herald_card_today")
     }
     
     static func getCard() -> CardsModel {

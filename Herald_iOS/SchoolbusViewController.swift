@@ -102,7 +102,7 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiSimpleRequest(.Post, checkJson200: true).api("schoolbus").uuid().toCache("herald_schoolbus")
+        ApiSimpleRequest(.Post).api("schoolbus").uuid().toCache("herald_schoolbus")
             .onResponse { success, _, _ in
                 self.hideProgressDialog()
                 if success {

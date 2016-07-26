@@ -73,7 +73,7 @@ class JwcViewController : UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiSimpleRequest(.Post, checkJson200: true).api("jwc").uuid().toCache("herald_jwc")
+        ApiSimpleRequest(.Post).api("jwc").uuid().toCache("herald_jwc")
             .onResponse { success, _, _ in
                 self.hideProgressDialog()
                 if success {

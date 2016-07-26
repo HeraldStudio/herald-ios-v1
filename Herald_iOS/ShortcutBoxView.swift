@@ -28,7 +28,7 @@ class ShortcutBoxView : UIView {
     static func precalculateHeight() -> CGFloat {
         
         // 此处假定在 iPad 端快捷栏始终显示在左侧栏
-        let width = AppDelegate.instance.leftController.view.frame.width
+        let width = AppDelegate.instance.leftController!.view.frame.width
         
         // 获取已启用快捷方式的模块列表
         let dataSource = Modules.filter { $0.shortcutEnabled } + [ModuleManager]
@@ -55,7 +55,7 @@ class ShortcutBoxView : UIView {
         // 获取已启用快捷方式的模块列表
         dataSource = Modules.filter { $0.shortcutEnabled } + [ModuleManager]
         
-        let width = AppDelegate.instance.leftController.view.frame.width
+        let width = AppDelegate.instance.leftController!.view.frame.width
         
         // 根据尺寸计算列数
         let columnCount = Int(width / ShortcutBoxView.minCellWidth)
@@ -217,7 +217,7 @@ class ShortcutBoxCell : UIView {
     
     /// 询问删除快捷方式
     func askToDelete() {
-        AppDelegate.instance.leftController.showQuestionDialog("确定移除此模块的快捷方式吗？") {
+        AppDelegate.instance.leftController!.showQuestionDialog("确定移除此模块的快捷方式吗？") {
             self.module.shortcutEnabled = false
         }
     }
