@@ -96,7 +96,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
     /// 联网刷新并存入缓存，若成功，载入缓存内容；否则显示错误提示
     @IBAction func refreshCache() {
         showProgressDialog()
-        ApiSimpleRequest(.Get, checkJson200: true).url("http://115.28.27.150/herald/api/v1/huodong/get").toCache("herald_activity")
+        ApiSimpleRequest(.Get).url("http://115.28.27.150/herald/api/v1/huodong/get").toCache("herald_activity")
             .onResponse { success, _, _ in
                 self.hideProgressDialog()
                 self.loadCache()
@@ -132,7 +132,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
     /// 联网加载下一页内容，若成功，加入列表并自增一页；否则显示错误信息
     func loadNextPage() {
         showProgressDialog()
-        ApiSimpleRequest(.Get, checkJson200: true).url("http://115.28.27.150/herald/api/v1/huodong/get?page=\(page + 1)")
+        ApiSimpleRequest(.Get).url("http://115.28.27.150/herald/api/v1/huodong/get?page=\(page + 1)")
             .onResponse { success, _, response in
                 self.hideProgressDialog()
                 if success {

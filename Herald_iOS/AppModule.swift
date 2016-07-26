@@ -97,12 +97,14 @@ class AppModule : Hashable {
             vc.title = nameTip
             vc.url = controller
             
-            AppDelegate.instance.rightController.pushViewController(vc, animated: true)
+            if let rightController = AppDelegate.instance.rightController {
+                rightController.pushViewController(vc, animated: true)
+            }
             
             // 切换到指定的 Tab，只适用于首页的 Tab
         } else if controller.hasPrefix("TAB") {
             if let tab = Int(controller.replaceAll("TAB", "")) {
-                if let tabVC = AppDelegate.instance.leftController.childViewControllers[0] as? UITabBarController {
+                if let tabVC = AppDelegate.instance.leftController?.childViewControllers[0] as? UITabBarController {
                     tabVC.selectedIndex = tab
                 }
             }
@@ -110,7 +112,9 @@ class AppModule : Hashable {
             // 切换到指定的VC
         } else {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(controller)
-            AppDelegate.instance.rightController.pushViewController(vc, animated: true)
+            if let rightController = AppDelegate.instance.rightController {
+                rightController.pushViewController(vc, animated: true)
+            }
         }
     }
 }

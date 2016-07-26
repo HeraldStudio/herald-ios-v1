@@ -13,7 +13,7 @@ class PedetailCard {
     
     static func getRefresher () -> ApiRequest {
         return
-            ( ApiSimpleRequest(.Post, checkJson200: false).api("pc")
+            ( ApiSimpleRequest(.Post).api("pc")
                 .uuid().toCache("herald_pc_forecast") { json in json["content"] }
                 .onResponse { success, code, _ in
                     let todayComp = GCalendar(.Day)
@@ -25,10 +25,10 @@ class PedetailCard {
                         CacheHelper.set("herald_pc_forecast", "refreshing")
                     }
                 }
-            | ApiSimpleRequest(.Post, checkJson200: true).api("pe").uuid()
+            | ApiSimpleRequest(.Post).api("pe").uuid()
                 .toCache("herald_pe_count") { json in json["content"] }
                 .toCache("herald_pe_remain") { json in json["remain"] }
-            | ApiSimpleRequest(.Post, checkJson200: true).api("pedetail")
+            | ApiSimpleRequest(.Post).api("pedetail")
                 .uuid().toCache("herald_pedetail") {
                     json in if !json.rawStringValue.containsString("[") { throw E }
                     return json

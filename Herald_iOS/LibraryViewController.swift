@@ -71,7 +71,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
     @IBAction func refreshCache () {
         showProgressDialog()
         
-        ( ApiSimpleRequest(.Post, checkJson200: true).api("library")
+        ( ApiSimpleRequest(.Post).api("library")
             .uuid().toCache("herald_library_borrowbook", notifyModuleIfChanged: ModuleLibrary)
             .onResponse {
                 _, code, _ in
@@ -79,8 +79,8 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
                     self.displayLibraryAuthDialog()
                 }
             }
-        | ApiSimpleRequest(.Post, checkJson200: true).api("library_hot").uuid().toCache("herald_library_hotbook")
-        ).onFinish { success in
+        | ApiSimpleRequest(.Post).api("library_hot").uuid().toCache("herald_library_hotbook")
+        ).onFinish { success, _ in
             self.hideProgressDialog()
             if success {
                 self.loadCache()
@@ -92,7 +92,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
     
     static func remoteRefreshNotifyDotState() -> ApiRequest {
         return
-            ApiSimpleRequest(.Post, checkJson200: true).api("library").uuid().toCache("herald_library_borrowbook", notifyModuleIfChanged: ModuleLibrary)
+            ApiSimpleRequest(.Post).api("library").uuid().toCache("herald_library_borrowbook", notifyModuleIfChanged: ModuleLibrary)
     }
     
     func showError () {
@@ -144,7 +144,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
         let barcode = list[indexPath.section][indexPath.row].barcode
         if barcode != "" {
             showProgressDialog()
-            ApiSimpleRequest(.Post, checkJson200: true).api("renew").uuid().post("barcode", barcode).onResponse { _, _, response in
+            ApiSimpleRequest(.Post).api("renew").uuid().post("barcode", barcode).onResponse { _, _, response in
                 self.hideProgressDialog()
                 var response = JSON.parse(response)["content"].stringValue
                 response = response == "success" ? "续借成功" : response
@@ -156,9 +156,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
     func displayLibraryAuthDialog () {
         /// 此段代码需要使用用户名和密码，先判断是否处于试用状态
         if !ApiHelper.isLogin() || ApiHelper.isTrial() {
-            showQuestionDialog("您处于试用状态，需要登录才能继续，是否登录？"){
-                ApiHelper.doLogout(nil)
-            }
+            ApiHelper.showTrialFunctionLimitDialog()
         } else {// 若非试用状态，对用户名和密码存在性进行断言
             let userName = ApiHelper.getUserName()!
             let password = ApiHelper.getPassword()!
@@ -177,7 +175,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
             dialog.addAction(UIAlertAction(title: "绑定", style: UIAlertActionStyle.Default, handler: { _ in
                 if let libPassword = dialog.textFields![0].text {
                     self.showProgressDialog()
-                    ApiSimpleRequest(.Post, checkJson200: false).url(ApiHelper.auth_update_url)
+                    ApiSimpleRequest(.Post).url(ApiHelper.auth_update_url)
                         .post("cardnum", userName)
                         .post("password", password)
                         .post("lib_username", userName)

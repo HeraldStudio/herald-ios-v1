@@ -24,9 +24,7 @@ class WifiLoginHelper {
         
         /// 此段代码需要使用用户名和密码，先判断是否处于试用状态
         if !ApiHelper.isLogin() || ApiHelper.isTrial() {
-            vc.showQuestionDialog("您处于试用状态，需要登录或设置校园网自定义账号，才能使用校园网快捷登录功能，是否立即登录？"){
-                ApiHelper.doLogout(nil)
-            }
+            ApiHelper.showTrialFunctionLimitDialog("校园网快捷登录")
         } else {// 若非试用状态，进入下面的流程
             
             if WifiLoginHelper.working { return }
@@ -40,7 +38,7 @@ class WifiLoginHelper {
     }
     
     private func beginCheck () {
-        ApiSimpleRequest(.Post, checkJson200: false).url("https://selfservice.seu.edu.cn/selfservice/index.php")
+        ApiSimpleRequest(.Post).url("https://selfservice.seu.edu.cn/selfservice/index.php")
             .onResponse { success, code, response in
             if !response.containsString("403 Forbidden") {
                 self.checkOnlineStatus()
@@ -53,7 +51,7 @@ class WifiLoginHelper {
     }
     
     private func checkOnlineStatus () {
-        ApiSimpleRequest(.Get, checkJson200: false).url("http://w.seu.edu.cn/portal/init.php")
+        ApiSimpleRequest(.Get).url("http://w.seu.edu.cn/portal/init.php")
             .onResponse { success, _, response in
             if success {
                 if response.containsString("notlogin") {
@@ -80,7 +78,7 @@ class WifiLoginHelper {
     }
     
     private func logoutThenLogin () {
-        ApiSimpleRequest(.Post, checkJson200: false).url("http://w.seu.edu.cn/portal/logout.php")
+        ApiSimpleRequest(.Post).url("http://w.seu.edu.cn/portal/logout.php")
             .onResponse { success, _, response in
             if success {
                 self.loginToService()
@@ -101,7 +99,7 @@ class WifiLoginHelper {
         // w.seu.edu.cn 的服务器在登录的时候是按参数顺序取参数的，第一个参数作为用户名，
         // 第二个参数作为密码，而 Alamofire 传参数时会将 Key 按字母顺序排序，因此若用户名 Key
         // 为 username ，密码 Key 为 password，会导致参数倒置，登录失败！
-        ApiSimpleRequest(.Post, checkJson200: false).url("http://w.seu.edu.cn/portal/login.php")
+        ApiSimpleRequest(.Post).url("http://w.seu.edu.cn/portal/login.php")
             .post("p1", username, "p2", password)
             .onResponse { success, _, response in
                 if success {

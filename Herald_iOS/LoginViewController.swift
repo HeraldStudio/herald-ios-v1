@@ -12,7 +12,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        AppDelegate.instance.leftController = nil
+        AppDelegate.instance.rightController = nil
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -45,7 +46,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     func doLogin () {
         let appid = ApiHelper.appid
         showProgressDialog()
-        ApiSimpleRequest(.Post, checkJson200: false).url(ApiHelper.auth_url)
+        ApiSimpleRequest(.Post).url(ApiHelper.auth_url)
             .post("user", username!.text!, "password", password!.text!, "appid", appid)
             .onResponse { success, _, response in
                 if response.containsString("Unauthorized") {
@@ -63,7 +64,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func checkUUID () {
-        ApiSimpleRequest(.Post, checkJson200: true).api("user").uuid()
+        ApiSimpleRequest(.Post).api("user").uuid()
             .toAuthCache("schoolnum") { json in json["content"]["schoolnum"] }
             .onResponse { (success, code, response) in
                 

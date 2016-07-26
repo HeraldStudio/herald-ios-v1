@@ -46,6 +46,7 @@
 		D34858111CBB57F600B55E76 /* ExtNSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858101CBB57F600B55E76 /* ExtNSUserDefaults.swift */; };
 		D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858121CBB60A600B55E76 /* ApiRequest.swift */; };
 		D34BCC731CE5D379005F4164 /* ExamNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BCC721CE5D379005F4164 /* ExamNotifier.swift */; };
+		D34D72D71D46EADE0078DC02 /* TrialCaches.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34D72D61D46EADE0078DC02 /* TrialCaches.swift */; };
 		D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34E95851CCDCCE700AD1119 /* JwcCard.swift */; };
 		D354905C1CDC519100E59615 /* GCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354905B1CDC519100E59615 /* GCalendar.swift */; };
 		D35FC6221CE2FEF400BE844C /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6211CE2FEF400BE844C /* ActivityViewController.swift */; };
@@ -193,6 +194,7 @@
 		D34858101CBB57F600B55E76 /* ExtNSUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtNSUserDefaults.swift; sourceTree = "<group>"; };
 		D34858121CBB60A600B55E76 /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
 		D34BCC721CE5D379005F4164 /* ExamNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamNotifier.swift; sourceTree = "<group>"; };
+		D34D72D61D46EADE0078DC02 /* TrialCaches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrialCaches.swift; sourceTree = "<group>"; };
 		D34E95851CCDCCE700AD1119 /* JwcCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcCard.swift; sourceTree = "<group>"; };
 		D354905B1CDC519100E59615 /* GCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCalendar.swift; sourceTree = "<group>"; };
 		D3578AAE1CDBABE300B291D0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -311,6 +313,7 @@
 		D308693D1D3CB8870088D9EA /* app_const */ = {
 			isa = PBXGroup;
 			children = (
+				D34D72D61D46EADE0078DC02 /* TrialCaches.swift */,
 				D308693B1D3CB1F70088D9EA /* Modules.swift */,
 				D3D849FE1CFBE75000F083DF /* Strings.swift */,
 			);
@@ -938,6 +941,7 @@
 				D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */,
 				D3EFC1D71CCC81A800BC37A5 /* CurriculumCard.swift in Sources */,
 				D3F4734B1CCA146800750FFB /* LectureTableViewCell.swift in Sources */,
+				D34D72D71D46EADE0078DC02 /* TrialCaches.swift in Sources */,
 				D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */,
 				D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */,
 				D3D5D44F1CE9AFF1000E406A /* GymAddFriendViewController.swift in Sources */,
@@ -1118,7 +1122,7 @@
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test2";
 				PRODUCT_NAME = "小猴偷米";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Herald_iOS/Herald_iOS-Bridging-Header.h";
@@ -1140,7 +1144,7 @@
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test2";
 				PRODUCT_NAME = "小猴偷米";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Herald_iOS/Herald_iOS-Bridging-Header.h";

@@ -15,7 +15,7 @@ class GymAddFriendViewController : UIViewController, UISearchBarDelegate, UITabl
         let keyword = searchBar.text == nil ? "" : searchBar.text!
         searchBar.resignFirstResponder()
         showProgressDialog()
-        ApiSimpleRequest(.Post, checkJson200: true).api("yuyue")
+        ApiSimpleRequest(.Post).api("yuyue")
             .uuid().post("method", "getFriendList", "cardNo", keyword).onResponse { success, _, response in
             self.hideProgressDialog()
             if success {
@@ -23,7 +23,7 @@ class GymAddFriendViewController : UIViewController, UISearchBarDelegate, UITabl
             } else {
                 self.searchBar.resignFirstResponder()
                 self.showMessage("加载失败，请重试")
-            }
+                }
         }.run()
     }
     

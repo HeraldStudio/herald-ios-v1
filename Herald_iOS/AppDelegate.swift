@@ -11,10 +11,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     /// 用来显示主界面的导航控制器，在平板模式下是左侧视图
-    var leftController: UINavigationController!
+    var leftController: UINavigationController?
     
     /// 用来显示模块界面的导航控制器，在平板模式下是右侧视图
-    var rightController: UINavigationController!
+    var rightController: UINavigationController?
     
     /// 对获取AppDelegate单例的语句进行简化
     static var instance : AppDelegate {

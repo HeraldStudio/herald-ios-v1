@@ -33,7 +33,7 @@ class FeedbackViewController : UIViewController {
         
         showProgressDialog()
         
-        ApiSimpleRequest(.Post, checkJson200: true).url(ApiHelper.feedback_url)
+        ApiSimpleRequest(.Post).url(ApiHelper.feedback_url)
             .post("cardnum", userName)
             .post("content", "[来自iOS版] \(content) [联系方式：\(contact)]")
             .onResponse { success, _, _ in

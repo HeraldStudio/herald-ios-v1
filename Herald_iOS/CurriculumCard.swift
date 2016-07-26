@@ -16,9 +16,9 @@ class CurriculumCard {
     
     static func getRefresher () -> ApiRequest {
         return
-            ( ApiSimpleRequest(.Post, checkJson200: true).api("sidebar")
+            ( ApiSimpleRequest(.Post).api("sidebar")
                 .uuid().toCache("herald_sidebar") { json in json["content"] }
-            | ApiSimpleRequest(.Post, checkJson200: true).api("curriculum")
+            | ApiSimpleRequest(.Post).api("curriculum")
                 .uuid().toCache("herald_curriculum") { json in json["content"] }
             )
     }
