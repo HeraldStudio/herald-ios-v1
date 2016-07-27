@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class WebModuleViewController : UIViewController, UIWebViewDelegate {
+class WebModuleViewController : UIViewController, UIWebViewDelegate, ForceTouchPreviewable {
     
     func webViewDidStartLoad(webView: UIWebView) {
         showProgressDialog()
@@ -44,7 +44,7 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
         for (key, value) in webModuleColors {
-            if url == key.controller {
+            if url == key.destination {
                 setNavigationColor(nil, value)
             }
         }

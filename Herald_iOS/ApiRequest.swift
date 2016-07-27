@@ -33,7 +33,6 @@ func mergeStatusCodes (leftCode : Int, _ rightCode : Int) -> Int {
 /// 闭包类型，表示当前请求中各个简单请求结束的事件。
 /// 若当前请求就是简单请求，则只触发一次，相当于请求结束的事件；
 /// 若当前请求是复合请求，其中包含的每个简单请求结束时都会触发一次
-/// 返回值 true 表示截断，不再向其余监听器传递此事件；false 表示继续传递给其它监听器。
 typealias OnResponseListener = (Bool, Int, String) -> Void
 
 /// 闭包类型，表示整个请求结束的事件。
@@ -42,7 +41,6 @@ typealias OnResponseListener = (Bool, Int, String) -> Void
 /// 这里定义：** 一个复合请求中所有简单请求返回的 code 的最大值，作为这个复合请求的 code。**
 /// 所以这个 listener 有两个参数。
 /// 如要监听简单请求结束的事件，可使用OnResponseListener
-/// 返回值 true 表示截断，不再向其余监听器传递此事件；false 表示继续传递给其它监听器。
 typealias OnFinishListener = (Bool, Int) -> Void
 
 /// 用来在将要运行的请求中优先加入 4xx 致命错误（400 ~ 499）的监听器
@@ -89,7 +87,7 @@ protocol ApiRequest {
     func run()
 }
 
-/// 用乘号表示顺次复合运算
+/// 用-号表示顺次复合运算
 func - (left: ApiRequest, right: ApiRequest) -> ApiRequest {
     return left.chain(right)
 }
@@ -98,7 +96,7 @@ func -= (inout left: ApiRequest, right: ApiRequest) {
     left = left.chain(right)
 }
 
-/// 用加号表示同时复合运算
+/// 用|号表示同时复合运算
 func | (left: ApiRequest, right: ApiRequest) -> ApiRequest {
     return left.parallel(right)
 }
@@ -113,12 +111,15 @@ func |= (inout left: ApiRequest, right: ApiRequest) {
  **/
 class ApiEmptyRequest : ApiRequest {
     
-    func onResponse(listener: OnResponseListener) -> ApiRequest {
+    var onResponseListeners : [OnResponseListener] = []
+    
+    func onResponse (listener : OnResponseListener) -> ApiRequest {
+        onResponseListeners.append(listener)
         return self
     }
     
     func onFinish(listener: OnFinishListener) -> ApiRequest {
-        return self
+        return onResponse { success, code, response in listener(success, code) }
     }
     
     func chain(nextRequest: ApiRequest) -> ApiRequest {
@@ -130,11 +131,13 @@ class ApiEmptyRequest : ApiRequest {
     }
     
     func runWithoutFatalListener() {
-        // do nothing
+        for listener in onResponseListeners {
+            listener(true, 200, "Warning: This is an empty request.")
+        }
     }
     
     func run() {
-        // do nothing
+        runWithoutFatalListener()
     }
 }
 
@@ -183,7 +186,7 @@ class ApiSimpleRequest : ApiRequest {
     var map : [String : AnyObject] = [:]
     
     func uuid () -> ApiSimpleRequest {
-        map.updateValue(ApiHelper.getUUID(), forKey: "uuid")
+        map.updateValue(ApiHelper.currentUser.uuid, forKey: "uuid")
         return self
     }
     
@@ -207,7 +210,7 @@ class ApiSimpleRequest : ApiRequest {
     func callback (response : Response <String, NSError>) -> Void {
         
         /// 解析错误码（这里指的是 HTTP Response Status Code，不考虑 JSON 中返回的 code）
-        let code = response.response?.statusCode
+        let code = (response.response?.statusCode)!
         
         /// 按照错误码判断是否成功
         let success = code < 300
@@ -298,7 +301,7 @@ class ApiSimpleRequest : ApiRequest {
             if(success) {
                 do {
                     let cache = try parser(JSON.parse(response)).rawStringValue
-                    ApiHelper.setAuthCache(key, cache)
+                    ApiHelper.set(key, cache)
                 } catch {
                     for onResponseListener in self.onResponseListeners {
                         onResponseListener(false, 0, "")

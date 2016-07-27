@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BCAFB77BE851C62062F8A047 /* Pods_Herald_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41885719C03915D508964A23 /* Pods_Herald_iOS.framework */; };
+		D302B2BF1D482E1E00760BE9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D302B2BE1D482E1E00760BE9 /* User.swift */; };
+		D302B2C41D486F2200760BE9 /* ForceTouchPreviewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D302B2C31D486F2200760BE9 /* ForceTouchPreviewable.swift */; };
 		D30661C81CF2C38D006583C2 /* GameCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661C71CF2C38D006583C2 /* GameCardModel.swift */; };
 		D30661CA1CF2C50E006583C2 /* GameCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661C91CF2C50E006583C2 /* GameCreateViewController.swift */; };
 		D30661CC1CF30016006583C2 /* GameCreateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661CB1CF30016006583C2 /* GameCreateTableViewCell.swift */; };
@@ -46,7 +48,6 @@
 		D34858111CBB57F600B55E76 /* ExtNSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858101CBB57F600B55E76 /* ExtNSUserDefaults.swift */; };
 		D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858121CBB60A600B55E76 /* ApiRequest.swift */; };
 		D34BCC731CE5D379005F4164 /* ExamNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BCC721CE5D379005F4164 /* ExamNotifier.swift */; };
-		D34D72D71D46EADE0078DC02 /* TrialCaches.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34D72D61D46EADE0078DC02 /* TrialCaches.swift */; };
 		D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34E95851CCDCCE700AD1119 /* JwcCard.swift */; };
 		D354905C1CDC519100E59615 /* GCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354905B1CDC519100E59615 /* GCalendar.swift */; };
 		D35FC6221CE2FEF400BE844C /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6211CE2FEF400BE844C /* ActivityViewController.swift */; };
@@ -154,6 +155,8 @@
 		283283296736ED980EE6E1A6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41885719C03915D508964A23 /* Pods_Herald_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Herald_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C275CEB73A1293164D3C08CA /* Pods-Herald_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Herald_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Herald_iOS/Pods-Herald_iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		D302B2BE1D482E1E00760BE9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D302B2C31D486F2200760BE9 /* ForceTouchPreviewable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForceTouchPreviewable.swift; sourceTree = "<group>"; };
 		D30661C71CF2C38D006583C2 /* GameCardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCardModel.swift; sourceTree = "<group>"; };
 		D30661C91CF2C50E006583C2 /* GameCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCreateViewController.swift; sourceTree = "<group>"; };
 		D30661CB1CF30016006583C2 /* GameCreateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCreateTableViewCell.swift; sourceTree = "<group>"; };
@@ -194,7 +197,6 @@
 		D34858101CBB57F600B55E76 /* ExtNSUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtNSUserDefaults.swift; sourceTree = "<group>"; };
 		D34858121CBB60A600B55E76 /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
 		D34BCC721CE5D379005F4164 /* ExamNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamNotifier.swift; sourceTree = "<group>"; };
-		D34D72D61D46EADE0078DC02 /* TrialCaches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrialCaches.swift; sourceTree = "<group>"; };
 		D34E95851CCDCCE700AD1119 /* JwcCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcCard.swift; sourceTree = "<group>"; };
 		D354905B1CDC519100E59615 /* GCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCalendar.swift; sourceTree = "<group>"; };
 		D3578AAE1CDBABE300B291D0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -310,12 +312,30 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D302B2BD1D482DF700760BE9 /* app_framework */ = {
+			isa = PBXGroup;
+			children = (
+				D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */,
+				D302B2BE1D482E1E00760BE9 /* User.swift */,
+				D302B2C31D486F2200760BE9 /* ForceTouchPreviewable.swift */,
+			);
+			name = app_framework;
+			sourceTree = "<group>";
+		};
 		D308693D1D3CB8870088D9EA /* app_const */ = {
 			isa = PBXGroup;
 			children = (
-				D34D72D61D46EADE0078DC02 /* TrialCaches.swift */,
 				D308693B1D3CB1F70088D9EA /* Modules.swift */,
 				D3D849FE1CFBE75000F083DF /* Strings.swift */,
+				D3EFC1D61CCC81A800BC37A5 /* CurriculumCard.swift */,
+				D39B87991CCCEC2E00EC5280 /* CardCard.swift */,
+				D39B879B1CCCF02600EC5280 /* ExperimentCard.swift */,
+				D39B879D1CCD0C0B00EC5280 /* ExamCard.swift */,
+				D39B87A11CCD120F00EC5280 /* LectureCard.swift */,
+				D39B87A51CCD194E00EC5280 /* PedetailCard.swift */,
+				D34E95851CCDCCE700AD1119 /* JwcCard.swift */,
+				D35FC6291CE33A1E00BE844C /* ActivityCard.swift */,
+				D3CA10D01D1F7BD9000E1F88 /* ServiceCard.swift */,
 			);
 			name = app_const;
 			sourceTree = "<group>";
@@ -384,22 +404,6 @@
 				D3AC6FC11CF4135800000BF6 /* GameShowCardTableViewCell.swift */,
 			);
 			name = deskgame;
-			sourceTree = "<group>";
-		};
-		D39B87981CCCEC0C00EC5280 /* mod_cards */ = {
-			isa = PBXGroup;
-			children = (
-				D3EFC1D61CCC81A800BC37A5 /* CurriculumCard.swift */,
-				D39B87991CCCEC2E00EC5280 /* CardCard.swift */,
-				D39B879B1CCCF02600EC5280 /* ExperimentCard.swift */,
-				D39B879D1CCD0C0B00EC5280 /* ExamCard.swift */,
-				D39B87A11CCD120F00EC5280 /* LectureCard.swift */,
-				D39B87A51CCD194E00EC5280 /* PedetailCard.swift */,
-				D34E95851CCDCCE700AD1119 /* JwcCard.swift */,
-				D35FC6291CE33A1E00BE844C /* ActivityCard.swift */,
-				D3CA10D01D1F7BD9000E1F88 /* ServiceCard.swift */,
-			);
-			name = mod_cards;
 			sourceTree = "<group>";
 		};
 		D3A0C1791CBB7C0000744640 /* mod_modulemanage */ = {
@@ -587,14 +591,13 @@
 			children = (
 				D31821C81CC7BC0400992355 /* Main.storyboard */,
 				D31821B11CC3B07800992355 /* LaunchScreen.storyboard */,
-				D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */,
 				D3D35DE31CBA2E8200B18092 /* Assets.xcassets */,
 				D308693D1D3CB8870088D9EA /* app_const */,
+				D302B2BD1D482DF700760BE9 /* app_framework */,
 				D34858091CBB46AF00B55E76 /* app_main */,
 				D31DE50C1CC334D800E4891D /* custom */,
 				D348580A1CBB48EF00B55E76 /* helper */,
 				D3D35E0B1CBA2FFC00B18092 /* mod_auth */,
-				D39B87981CCCEC0C00EC5280 /* mod_cards */,
 				D3D35E0A1CBA2FEE00B18092 /* mod_communicate */,
 				D3A0C1791CBB7C0000744640 /* mod_modulemanage */,
 				D3DE9A951CE581A30090EF0D /* mod_notifiers */,
@@ -889,6 +892,7 @@
 				D30661C81CF2C38D006583C2 /* GameCardModel.swift in Sources */,
 				D3ED99E41CCB64BE00001E2B /* LibraryTableViewCell.swift in Sources */,
 				D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */,
+				D302B2C41D486F2200760BE9 /* ForceTouchPreviewable.swift in Sources */,
 				D3D5D4411CE9737B000E406A /* GymTimeModel.swift in Sources */,
 				D31DE5141CC3597800E4891D /* CurriculumBlock.swift in Sources */,
 				D306E0221CCA3DFD00FA3812 /* AppModule.swift in Sources */,
@@ -941,7 +945,6 @@
 				D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */,
 				D3EFC1D71CCC81A800BC37A5 /* CurriculumCard.swift in Sources */,
 				D3F4734B1CCA146800750FFB /* LectureTableViewCell.swift in Sources */,
-				D34D72D71D46EADE0078DC02 /* TrialCaches.swift in Sources */,
 				D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */,
 				D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */,
 				D3D5D44F1CE9AFF1000E406A /* GymAddFriendViewController.swift in Sources */,
@@ -953,6 +956,7 @@
 				D306E02A1CCA68A700FA3812 /* GradeModel.swift in Sources */,
 				D306E0241CCA3F7700FA3812 /* ExamViewController.swift in Sources */,
 				D3D35DDF1CBA2E8200B18092 /* LoginViewController.swift in Sources */,
+				D302B2BF1D482E1E00760BE9 /* User.swift in Sources */,
 				D38A7E5E1CE5ABFF0033926E /* ExperimentNotifier.swift in Sources */,
 				D31821C11CC5256F00992355 /* CardTableViewCell.swift in Sources */,
 				D306E0261CCA3F8400FA3812 /* ExamTableViewCell.swift in Sources */,
@@ -1122,7 +1126,7 @@
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test2";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Herald_iOS/Herald_iOS-Bridging-Header.h";
@@ -1144,7 +1148,7 @@
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test2";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Herald_iOS/Herald_iOS-Bridging-Header.h";

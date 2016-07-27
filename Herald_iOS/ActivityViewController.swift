@@ -62,6 +62,13 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         
         /// 联网刷新列表内容
         refreshCache()
+        
+        // 注册 3D Touch Peak 事件代理
+        if #available(iOS 9.0, *) {
+            if traitCollection.forceTouchCapability == .Available {
+                self.registerForPreviewingWithDelegate(self, sourceView: tableView)
+            }
+        }
     }
     
     /// 当视图准备显示前，显式调用列表重绘，以便切换 Tab 时产生动画效果
@@ -243,5 +250,29 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         cell.alpha = 1
         cell.layer.shadowOffset = CGSizeMake(0, 0)
         UIView.commitAnimations()
+    }
+}
+
+//3d touch遵守协议
+extension ActivityViewController:UIViewControllerPreviewingDelegate {
+    
+    //peek
+    @available(iOS 9.0, *)
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard let indexPath = tableView.indexPathForRowAtPoint(location) else {
+            return nil
+        }
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ActivityTableViewCell
+        previewingContext.sourceRect = cell.frame
+        
+        let destination = data[indexPath.row].detailUrl
+        return AppModule(title: "", url: destination).getPreviewViewController()
+    }
+    
+    //pop
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        AppDelegate.instance.rightController.pushViewController(viewControllerToCommit, animated: true)
     }
 }

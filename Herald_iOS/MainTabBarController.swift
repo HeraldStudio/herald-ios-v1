@@ -26,10 +26,26 @@ class MainTabBarController: UITabBarController {
         // 修改 TabBar 高亮图标的颜色
         tabBar.tintColor = UIColor(red: 0, green: 180/255, blue: 255/255, alpha: 1)
         
-        if ApiHelper.isLogin() {
-            // 注册摇一摇事件
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
+        // 注册摇一摇事件
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
+        
+        loadLoginButton()
+        
+        ApiHelper.addUserChangedListener { 
+            self.loadLoginButton()
         }
+    }
+    
+    func loadLoginButton() {
+        if ApiHelper.isLogin() {
+            navigationItem.leftBarButtonItem = nil
+        } else {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: " 登录 ", style: .Plain, target: self, action: #selector(self.showLogin))
+        }
+    }
+    
+    func showLogin() {
+        AppDelegate.showLogin()
     }
     
     /// 响应摇一摇事件

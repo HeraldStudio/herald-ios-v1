@@ -51,6 +51,11 @@ class LectureCard {
         }
         
         // 今天无人文讲座
-        return CardsModel(cellId: "CardsCellLecture", module: ModuleLecture, desc: jsonArray.count == 0 ? "暂无人文讲座预告信息" : "暂无新的人文讲座，点我查看以后的预告", priority: .NO_CONTENT)
+        var desc = jsonArray.count == 0 ? "暂无人文讲座预告信息" : "暂无新的人文讲座，点我查看以后的预告"
+        if !ApiHelper.isLogin() {
+            desc = "暂无最近讲座预告，登录可查询讲座记录"
+        }
+        
+        return CardsModel(cellId: "CardsCellLecture", module: ModuleLecture, desc: desc, priority: .NO_CONTENT)
     }
 }

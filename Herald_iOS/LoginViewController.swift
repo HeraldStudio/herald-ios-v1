@@ -1,4 +1,5 @@
 import UIKit
+import SwiftyJSON
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
@@ -10,11 +11,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var background : UIImageView!
     
+    var user = User("", "", "", "")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        AppDelegate.instance.leftController = nil
-        AppDelegate.instance.rightController = nil
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // 将超出部分截掉，防止滑动返回时看到超出部分的图片
+        background.layer.masksToBounds = true
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        setNavigationColor(nil, 0x000000)
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,11 +43,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func trialButtonClicked() {
-        endEdit()
-        ApiHelper.setAuthCache("uuid", ApiHelper.trialUuid)
-        ApiHelper.setAuthCache("schoolnum", ApiHelper.trialSchoolnum)
-        AppDelegate.instance.showMain()
+    @IBAction func dismiss() {
+        AppDelegate.instance.rightController.popViewControllerAnimated(true)
     }
     
     func doLogin () {
@@ -56,16 +60,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     self.hideProgressDialog()
                     self.showMessage("网络异常，请重试")
                 } else {
-                    ApiHelper.setAuthCache("uuid", response)
-                    ApiHelper.setAuth(user: self.username!.text!, pwd: self.password!.text!)
+                    self.user.uuid = response
+                    self.user.userName = self.username!.text!
+                    self.user.password = self.password!.text!
                     self.checkUUID()
                 }
             }.run()
     }
     
     func checkUUID () {
-        ApiSimpleRequest(.Post).api("user").uuid()
-            .toAuthCache("schoolnum") { json in json["content"]["schoolnum"] }
+        ApiSimpleRequest(.Post).api("user").post("uuid", self.user.uuid)
             .onResponse { (success, code, response) in
                 
                 /**
@@ -82,12 +86,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                  * 4) 使用客户端刷新 srtp 模块, 应当返回正确的 srtp 信息;
                  * 5) 使用 postman, 调用 srtp 接口, 不带 schoolnum 参数, 应当返回自己的 srtp 信息;
                  **/
-                if success && ApiHelper.authCache.get("schoolnum").characters.count == 8 {
-                    AppDelegate.instance.showMain()
-            } else {
-                self.hideProgressDialog()
-                ApiHelper.doLogout("用户不存在或网络异常，请重试")
-            }
+                self.user.schoolNum = JSON.parse(response)["content"]["schoolnum"].stringValue
+                if success && self.user.schoolNum.characters.count == 8 {
+                    ApiHelper.currentUser = self.user
+                    self.dismiss()
+                    AppModule(title: "跳转到首页", url: "TAB0").open()
+                } else {
+                    self.hideProgressDialog()
+                    self.showMessage("用户不存在或网络异常，请重试")
+                }
         }.run()
     }
     

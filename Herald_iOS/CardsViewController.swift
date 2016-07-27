@@ -29,11 +29,6 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 若未登录，不作操作
-        if !ApiHelper.isLogin() {
-            return
-        }
-        
         // 为列表视图添加底部 padding，防止滚动到底部时部分内容被 TabBar 覆盖
         let tw = (tabBarController?.tabBar.frame.width)!
         let th = (tabBarController?.tabBar.frame.height)!
@@ -64,15 +59,14 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
         
-        // 当模块设置改变时刷新
-        SettingsHelper.addModuleSettingsChangeListener { 
-            
-            // 若未登录，不作操作
-            if !ApiHelper.isLogin() {
-                return
-            }
-            
+        // 当模块设置改变时重载数据
+        SettingsHelper.addModuleSettingsChangeListener {
             self.loadContent(false)
+        }
+        
+        // 当用户改变时联网刷新
+        ApiHelper.addUserChangedListener { 
+            self.loadContent(true)
         }
     }
     
@@ -264,6 +258,16 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             cardList.append(ExamCard.getCard())
         }
         
+        if ModuleCard.cardEnabled {
+            // 加载并解析一卡通缓存
+            cardList.append(CardCard.getCard())
+        }
+        
+        if ModulePedetail.cardEnabled {
+            // 加载并解析跑操预报缓存
+            cardList.append(PedetailCard.getCard())
+        }
+        
         // 加载校园活动缓存
         cardList.append(ActivityCard.getCard())
         
@@ -272,18 +276,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             cardList.append(LectureCard.getCard())
         }
         
-        if ModulePedetail.cardEnabled {
-            // 加载并解析跑操预报缓存
-            cardList.append(PedetailCard.getCard())
-        }
-        
-        if ModuleCard.cardEnabled {
-            // 加载并解析一卡通缓存
-            cardList.append(CardCard.getCard())
-        }
-        
         if ModuleJwc.cardEnabled {
-            // 加载并解析一卡通缓存
+            // 加载并解析教务通知缓存
             cardList.append(JwcCard.getCard())
         }
         
@@ -316,21 +310,21 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         // 刷新版本信息和推送消息
         parallelRequest |= ServiceCard.getRefresher()
         
-        if ModuleCurriculum.cardEnabled {
+        if ModuleCurriculum.cardEnabled && ApiHelper.isLogin() {
             // 仅当课表数据不存在时刷新课表
             if CacheHelper.get("herald_curriculum") == "" || CacheHelper.get("herald_sidebar") == "" {
                 parallelRequest |= CurriculumCard.getRefresher()
             }
         }
         
-        if ModuleExperiment.cardEnabled {
+        if ModuleExperiment.cardEnabled && ApiHelper.isLogin() {
             // 仅当实验数据不存在时刷新实验
             if CacheHelper.get("herald_experiment") == "" {
                 parallelRequest |= ExperimentCard.getRefresher()
             }
         }
         
-        if ModuleExam.cardEnabled {
+        if ModuleExam.cardEnabled && ApiHelper.isLogin() {
             // 仅当考试数据不存在时刷新考试
             if CacheHelper.get("herald_exam") == "" {
                 parallelRequest |= ExamCard.getRefresher()
@@ -345,27 +339,29 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             parallelRequest |= LectureCard.getRefresher()
         }
         
-        if ModulePedetail.cardEnabled {
+        if ModulePedetail.cardEnabled && ApiHelper.isLogin() {
             // 直接刷新跑操数据
             parallelRequest |= PedetailCard.getRefresher()
         }
         
-        if ModuleCard.cardEnabled {
+        if ModuleCard.cardEnabled && ApiHelper.isLogin() {
             // 直接刷新一卡通数据
             parallelRequest |= CardCard.getRefresher()
         }
         
-        if ModuleJwc.cardEnabled{
+        if ModuleJwc.cardEnabled {
             // 直接刷新教务处数据
             parallelRequest |= JwcCard.getRefresher()
         }
         
-        parallelRequest |=
+        if ApiHelper.isLogin() {
+            parallelRequest |=
                 ( GymReserveViewController.remoteRefreshNotifyDotState()
                 | SrtpViewController.remoteRefreshNotifyDotState()
                 | GradeViewController.remoteRefreshNotifyDotState()
                 | LibraryViewController.remoteRefreshNotifyDotState()
                 )
+        }
 
         /**
          * 结束刷新部分
@@ -514,7 +510,9 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // 若有目标界面，打开目标界面；否则若有消息，显示消息；否则显示卡片无详情
         if destination != "" {
-            AppModule(title: model.rows[0].title!, url: destination).open()
+            let module = AppModule(title: model.rows[0].title!, url: destination)
+            module.needLogin = model.rows[0].needLogin
+            module.open()
         } else if message != "" {
             showMessage(message)
         } else {
@@ -552,39 +550,15 @@ extension CardsViewController:UIViewControllerPreviewingDelegate {
             }
         }
         
-        let cardTitle = cardList[cardIndex].rows[0].title!
-        
         let cell = cardsTableView.cellForRowAtIndexPath(indexPath) as! CardsTableViewCell
         previewingContext.sourceRect = cell.frame
         
-        // 白名单机制，只有部分模块可以预览
-        if !["实验助手", "考试助手", "一卡通", "教务通知", "人文讲座", "校园活动", "小猴提示"].contains(cardTitle) {
-            return nil
-        }
-        
-        // 校园活动的标题是切换tab，不能预览
-        if cardTitle == "校园活动" && indexPath.row == 0 {
-            return nil
-        }
-        
         let destination = cardList[cardIndex].rows[indexPath.row].destination
-        if destination.hasPrefix("http") {
-            //存在spinner卡顿情况，仅针对教务通知子cell
-            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE") as! WebModuleViewController
-            detailVC.url = cardList[cardIndex].rows[indexPath.row].destination
-            detailVC.title = cardList[cardIndex].rows[0].title!
-            return detailVC
-        } else if !destination.isEmpty && !destination.hasPrefix("TAB") {
-            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(cardList[cardIndex].rows[indexPath.row].destination)
-            detailVC.preferredContentSize = CGSizeMake(SCREEN_WIDTH, 600)
-            return detailVC
-        } else {
-            return nil
-        }
+        return AppModule(title: "", url: destination).getPreviewViewController()
     }
     
     //pop
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        showViewController(viewControllerToCommit, sender: self)
+        AppDelegate.instance.rightController.pushViewController(viewControllerToCommit, animated: true)
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class ExperimentViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ExperimentViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable {
     
     @IBOutlet var tableView : UITableView!
     

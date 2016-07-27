@@ -45,7 +45,8 @@ class CardsModel {
         header.icon = appModule.icon
         header.title = appModule.nameTip
         header.desc = desc
-        header.destination = appModule.controller
+        header.destination = appModule.destination
+        header.needLogin = appModule.needLogin
         rows.append(header)
         self.contentPriority = priority
     }

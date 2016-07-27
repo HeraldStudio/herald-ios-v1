@@ -11,7 +11,7 @@ import UIKit
 import SwiftyJSON
 import MagicPie
 
-class SeuNetViewController : UIViewController {
+class SeuNetViewController : UIViewController, ForceTouchPreviewable {
     
     @IBOutlet var usage : UILabel!
     

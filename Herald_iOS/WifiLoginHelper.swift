@@ -22,10 +22,14 @@ class WifiLoginHelper {
     
     func checkAndLogin () {
         
-        /// 此段代码需要使用用户名和密码，先判断是否处于试用状态
-        if !ApiHelper.isLogin() || ApiHelper.isTrial() {
-            ApiHelper.showTrialFunctionLimitDialog("校园网快捷登录")
-        } else {// 若非试用状态，进入下面的流程
+        /// 此段代码需要使用用户名和密码，先判断是否处于未登录状态
+        if !ApiHelper.isLogin() {
+            if let leftController = AppDelegate.instance.leftController {
+                leftController.showQuestionDialog("您处于未登录状态，校园网快捷登录功能需要登录或自定义账号才能使用，是否立即登录？"){
+                    AppDelegate.showLogin()
+                }
+            }
+        } else {// 若非未登录状态，进入下面的流程
             
             if WifiLoginHelper.working { return }
             WifiLoginHelper.working = true
@@ -47,7 +51,7 @@ class WifiLoginHelper {
                 WifiLoginHelper.working = false
                 self.vc.showMessage("校园网状态异常，请先手动连接到 seu-wlan，并等待网络图标变成 Wi-Fi 图标之后再试~\n\n如果系统弹出登录页面，请到 Wi-Fi 设置中关闭 seu-wlan 的 [自动登录] 功能再试~")
             }
-        }.run()
+        }.runWithoutFatalListener()
     }
     
     private func checkOnlineStatus () {
@@ -60,7 +64,7 @@ class WifiLoginHelper {
                     self.loginToService()
                     
                     /// 此处由于已经判断用户已登录，故断言 ApiHelper.getWifiUserName() 非空
-                } else if !response.containsString(ApiHelper.getWifiUserName()!) {
+                } else if !response.containsString(ApiHelper.getWifiUserName()) {
                     // 已登录，但账号与当前设置的账号不同
                     //self.vc.showMessage("摇一摇：已登录其它账号，正在尝试退出~")
                     self.logoutThenLogin()
@@ -92,8 +96,8 @@ class WifiLoginHelper {
     
     private func loginToService () {
         /// 此处由于已经判断用户已登录，故断言 ApiHelper.getWifiUserName()/getWifiPassword() 非空
-        let username = ApiHelper.getWifiUserName()!
-        let password = ApiHelper.getWifiPassword()!
+        let username = ApiHelper.getWifiUserName()
+        let password = ApiHelper.getWifiPassword()
         
         /// 前方大坑！前方大坑！
         // w.seu.edu.cn 的服务器在登录的时候是按参数顺序取参数的，第一个参数作为用户名，
