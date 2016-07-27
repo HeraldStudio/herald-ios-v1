@@ -26,6 +26,7 @@ class WifiLoginHelper {
         if !ApiHelper.isLogin() {
             if let wholeController = AppDelegate.instance.wholeController {
                 wholeController.showQuestionDialog("您处于未登录状态，校园网快捷登录功能需要登录或自定义账号才能使用，是否立即登录？"){
+                    
                     AppDelegate.showLogin()
                 }
             }

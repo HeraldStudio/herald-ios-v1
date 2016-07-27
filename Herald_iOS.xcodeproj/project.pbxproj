@@ -312,50 +312,72 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		D302B2BD1D482DF700760BE9 /* app_framework */ = {
+		D302B2C51D48B30300760BE9 /* factory */ = {
 			isa = PBXGroup;
 			children = (
-				D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */,
-				D302B2BE1D482E1E00760BE9 /* User.swift */,
-				D302B2C31D486F2200760BE9 /* ForceTouchPreviewable.swift */,
-			);
-			name = app_framework;
-			sourceTree = "<group>";
-		};
-		D308693D1D3CB8870088D9EA /* app_const */ = {
-			isa = PBXGroup;
-			children = (
-				D308693B1D3CB1F70088D9EA /* Modules.swift */,
-				D3D849FE1CFBE75000F083DF /* Strings.swift */,
 				D3EFC1D61CCC81A800BC37A5 /* CurriculumCard.swift */,
+				D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */,
 				D39B87991CCCEC2E00EC5280 /* CardCard.swift */,
 				D39B879B1CCCF02600EC5280 /* ExperimentCard.swift */,
+				D38A7E5D1CE5ABFF0033926E /* ExperimentNotifier.swift */,
 				D39B879D1CCD0C0B00EC5280 /* ExamCard.swift */,
+				D34BCC721CE5D379005F4164 /* ExamNotifier.swift */,
 				D39B87A11CCD120F00EC5280 /* LectureCard.swift */,
 				D39B87A51CCD194E00EC5280 /* PedetailCard.swift */,
 				D34E95851CCDCCE700AD1119 /* JwcCard.swift */,
 				D35FC6291CE33A1E00BE844C /* ActivityCard.swift */,
 				D3CA10D01D1F7BD9000E1F88 /* ServiceCard.swift */,
 			);
-			name = app_const;
+			name = factory;
+			sourceTree = "<group>";
+		};
+		D302B2C71D48B4B000760BE9 /* app_secondary */ = {
+			isa = PBXGroup;
+			children = (
+				D3D35DDE1CBA2E8200B18092 /* LoginViewController.swift */,
+				D3ED99E71CCB870200001E2B /* AboutUsViewController.swift */,
+				D37708611CCC5D37006ED853 /* FeedbackViewController.swift */,
+				D37A1DAC1D0269880040A7D1 /* AboutUsContentTableViewCell.swift */,
+				D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */,
+				D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */,
+				D306E01F1CCA3ADF00FA3812 /* WebModuleViewController.swift */,
+			);
+			name = app_secondary;
+			sourceTree = "<group>";
+		};
+		D302B2C81D48B56000760BE9 /* framework */ = {
+			isa = PBXGroup;
+			children = (
+				D34858101CBB57F600B55E76 /* ExtNSUserDefaults.swift */,
+				D3FBC2F11CCC51F900305428 /* ExtUIViewController.swift */,
+				D39B87A31CCD12EC00EC5280 /* ExtString.swift */,
+				D3D849FB1CFBD88200F083DF /* ExtJSON.swift */,
+				D39B879F1CCD0F0E00EC5280 /* Error.swift */,
+				D354905B1CDC519100E59615 /* GCalendar.swift */,
+				D302B2BE1D482E1E00760BE9 /* User.swift */,
+			);
+			name = framework;
+			sourceTree = "<group>";
+		};
+		D308693D1D3CB8870088D9EA /* const */ = {
+			isa = PBXGroup;
+			children = (
+				D308693B1D3CB1F70088D9EA /* Modules.swift */,
+				D3D849FE1CFBE75000F083DF /* Strings.swift */,
+			);
+			name = const;
 			sourceTree = "<group>";
 		};
 		D31DE50C1CC334D800E4891D /* custom */ = {
 			isa = PBXGroup;
 			children = (
+				D302B2C31D486F2200760BE9 /* ForceTouchPreviewable.swift */,
 				D33438571D1A2DE900CD49D6 /* NirKxMenu.h */,
 				D33438581D1A2DE900CD49D6 /* NirKxMenu.m */,
-				D34858101CBB57F600B55E76 /* ExtNSUserDefaults.swift */,
-				D3FBC2F11CCC51F900305428 /* ExtUIViewController.swift */,
-				D39B87A31CCD12EC00EC5280 /* ExtString.swift */,
-				D3D849FB1CFBD88200F083DF /* ExtJSON.swift */,
-				D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */,
-				D35FC6271CE3236300BE844C /* PullLoadFooter.swift */,
-				D39B879F1CCD0F0E00EC5280 /* Error.swift */,
-				D354905B1CDC519100E59615 /* GCalendar.swift */,
 				D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */,
-				D33438551D1A2DE900CD49D6 /* Herald_iOS-Bridging-Header.h */,
+				D35FC6271CE3236300BE844C /* PullLoadFooter.swift */,
 				D3E079221D2E7A0D00D5FBB3 /* ShortcutBoxView.swift */,
+				D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */,
 			);
 			name = custom;
 			sourceTree = "<group>";
@@ -406,15 +428,6 @@
 			name = deskgame;
 			sourceTree = "<group>";
 		};
-		D3A0C1791CBB7C0000744640 /* mod_modulemanage */ = {
-			isa = PBXGroup;
-			children = (
-				D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */,
-				D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */,
-			);
-			name = mod_modulemanage;
-			sourceTree = "<group>";
-		};
 		D3A0C17A1CBB7C1200744640 /* mod_query */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,14 +447,6 @@
 				D3A0C18B1CBB7D1D00744640 /* srtp */,
 			);
 			name = mod_query;
-			sourceTree = "<group>";
-		};
-		D3A0C17C1CBB7C4B00744640 /* mod_webmodule */ = {
-			isa = PBXGroup;
-			children = (
-				D306E01F1CCA3ADF00FA3812 /* WebModuleViewController.swift */,
-			);
-			name = mod_webmodule;
 			sourceTree = "<group>";
 		};
 		D3A0C17D1CBB7C5800744640 /* cardextra */ = {
@@ -591,18 +596,17 @@
 			children = (
 				D31821C81CC7BC0400992355 /* Main.storyboard */,
 				D31821B11CC3B07800992355 /* LaunchScreen.storyboard */,
+				D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */,
+				D33438551D1A2DE900CD49D6 /* Herald_iOS-Bridging-Header.h */,
 				D3D35DE31CBA2E8200B18092 /* Assets.xcassets */,
-				D308693D1D3CB8870088D9EA /* app_const */,
-				D302B2BD1D482DF700760BE9 /* app_framework */,
 				D34858091CBB46AF00B55E76 /* app_main */,
+				D302B2C71D48B4B000760BE9 /* app_secondary */,
+				D308693D1D3CB8870088D9EA /* const */,
 				D31DE50C1CC334D800E4891D /* custom */,
+				D302B2C81D48B56000760BE9 /* framework */,
 				D348580A1CBB48EF00B55E76 /* helper */,
-				D3D35E0B1CBA2FFC00B18092 /* mod_auth */,
-				D3D35E0A1CBA2FEE00B18092 /* mod_communicate */,
-				D3A0C1791CBB7C0000744640 /* mod_modulemanage */,
-				D3DE9A951CE581A30090EF0D /* mod_notifiers */,
+				D302B2C51D48B30300760BE9 /* factory */,
 				D3A0C17A1CBB7C1200744640 /* mod_query */,
-				D3A0C17C1CBB7C4B00744640 /* mod_webmodule */,
 				D3D35DE81CBA2E8200B18092 /* Info.plist */,
 			);
 			path = Herald_iOS;
@@ -626,24 +630,6 @@
 			path = Herald_iOSUITests;
 			sourceTree = "<group>";
 		};
-		D3D35E0A1CBA2FEE00B18092 /* mod_communicate */ = {
-			isa = PBXGroup;
-			children = (
-				D3ED99E71CCB870200001E2B /* AboutUsViewController.swift */,
-				D37708611CCC5D37006ED853 /* FeedbackViewController.swift */,
-				D37A1DAC1D0269880040A7D1 /* AboutUsContentTableViewCell.swift */,
-			);
-			name = mod_communicate;
-			sourceTree = "<group>";
-		};
-		D3D35E0B1CBA2FFC00B18092 /* mod_auth */ = {
-			isa = PBXGroup;
-			children = (
-				D3D35DDE1CBA2E8200B18092 /* LoginViewController.swift */,
-			);
-			name = mod_auth;
-			sourceTree = "<group>";
-		};
 		D3D5D4351CE950E6000E406A /* gymreserve */ = {
 			isa = PBXGroup;
 			children = (
@@ -658,16 +644,6 @@
 				D3D5D44E1CE9AFF1000E406A /* GymAddFriendViewController.swift */,
 			);
 			name = gymreserve;
-			sourceTree = "<group>";
-		};
-		D3DE9A951CE581A30090EF0D /* mod_notifiers */ = {
-			isa = PBXGroup;
-			children = (
-				D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */,
-				D38A7E5D1CE5ABFF0033926E /* ExperimentNotifier.swift */,
-				D34BCC721CE5D379005F4164 /* ExamNotifier.swift */,
-			);
-			name = mod_notifiers;
 			sourceTree = "<group>";
 		};
 		F527AB77D4F37A7ED7959F74 /* Frameworks */ = {
@@ -753,7 +729,7 @@
 				TargetAttributes = {
 					D3D35DD81CBA2E8200B18092 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = MW9PK9KE48;
+						DevelopmentTeam = JFQBLHLDR7;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -1120,15 +1096,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
+				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
 				SWIFT_OBJC_BRIDGING_HEADER = "Herald_iOS/Herald_iOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1142,15 +1118,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
+				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
 				SWIFT_OBJC_BRIDGING_HEADER = "Herald_iOS/Herald_iOS-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
