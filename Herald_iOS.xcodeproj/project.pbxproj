@@ -348,6 +348,8 @@
 		D302B2C81D48B56000760BE9 /* framework */ = {
 			isa = PBXGroup;
 			children = (
+				D34858121CBB60A600B55E76 /* ApiRequest.swift */,
+				D306E0211CCA3DFD00FA3812 /* AppModule.swift */,
 				D34858101CBB57F600B55E76 /* ExtNSUserDefaults.swift */,
 				D3FBC2F11CCC51F900305428 /* ExtUIViewController.swift */,
 				D39B87A31CCD12EC00EC5280 /* ExtString.swift */,
@@ -405,8 +407,6 @@
 			isa = PBXGroup;
 			children = (
 				D348580B1CBB48FD00B55E76 /* ApiHelper.swift */,
-				D34858121CBB60A600B55E76 /* ApiRequest.swift */,
-				D306E0211CCA3DFD00FA3812 /* AppModule.swift */,
 				D348580D1CBB4FF900B55E76 /* CacheHelper.swift */,
 				D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */,
 				D31821B51CC48D5400992355 /* ServiceHelper.swift */,
@@ -428,7 +428,7 @@
 			name = deskgame;
 			sourceTree = "<group>";
 		};
-		D3A0C17A1CBB7C1200744640 /* mod_query */ = {
+		D3A0C17A1CBB7C1200744640 /* app_module */ = {
 			isa = PBXGroup;
 			children = (
 				D34859591CF2C31D00EFCDB2 /* deskgame */,
@@ -446,7 +446,7 @@
 				D3A0C18A1CBB7D1600744640 /* seunet */,
 				D3A0C18B1CBB7D1D00744640 /* srtp */,
 			);
-			name = mod_query;
+			name = app_module;
 			sourceTree = "<group>";
 		};
 		D3A0C17D1CBB7C5800744640 /* cardextra */ = {
@@ -594,6 +594,7 @@
 		D3D35DDB1CBA2E8200B18092 /* Herald_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				D3D35DE81CBA2E8200B18092 /* Info.plist */,
 				D31821C81CC7BC0400992355 /* Main.storyboard */,
 				D31821B11CC3B07800992355 /* LaunchScreen.storyboard */,
 				D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */,
@@ -601,13 +602,12 @@
 				D3D35DE31CBA2E8200B18092 /* Assets.xcassets */,
 				D34858091CBB46AF00B55E76 /* app_main */,
 				D302B2C71D48B4B000760BE9 /* app_secondary */,
+				D3A0C17A1CBB7C1200744640 /* app_module */,
 				D308693D1D3CB8870088D9EA /* const */,
 				D31DE50C1CC334D800E4891D /* custom */,
 				D302B2C81D48B56000760BE9 /* framework */,
 				D348580A1CBB48EF00B55E76 /* helper */,
 				D302B2C51D48B30300760BE9 /* factory */,
-				D3A0C17A1CBB7C1200744640 /* mod_query */,
-				D3D35DE81CBA2E8200B18092 /* Info.plist */,
 			);
 			path = Herald_iOS;
 			sourceTree = "<group>";
