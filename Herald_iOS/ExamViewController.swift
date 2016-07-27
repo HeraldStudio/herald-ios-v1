@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable {
+class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable, LoginUserNeeded {
     
     @IBOutlet var tableView : UITableView!
     

@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class CurriculumViewController : UIViewController, UIScrollViewDelegate {
+class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUserNeeded {
     
     var thisWeek = 0
     

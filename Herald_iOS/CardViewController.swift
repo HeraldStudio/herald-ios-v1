@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class CardViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable {
+class CardViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable, LoginUserNeeded {
     
     @IBOutlet var tableView : UITableView!
     

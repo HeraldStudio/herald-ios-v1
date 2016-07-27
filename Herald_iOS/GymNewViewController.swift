@@ -1,7 +1,7 @@
 import UIKit
 import SwiftyJSON
 
-class GymNewViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
+class GymNewViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, LoginUserNeeded {
     
     var useTime : String!
     

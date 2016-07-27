@@ -11,7 +11,7 @@ import UIKit
 import SwiftyJSON
 import FSCalendar
 
-class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchPreviewable {
+class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchPreviewable, LoginUserNeeded {
     
     @IBOutlet weak var calendar : FSCalendar!
     
