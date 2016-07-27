@@ -28,8 +28,8 @@ class FeedbackViewController : UIViewController {
             return
         }
         
-        // 若用户未登录，处于试用状态，直接以匿名（000000000）身份提交反馈
-        let userName = ApiHelper.getUserName() == nil ? ApiHelper.trialUserName : ApiHelper.getUserName()!
+        // 若用户未登录，处于未登录状态，直接以匿名（000000000）身份提交反馈
+        let userName = ApiHelper.currentUser.userName
         
         showProgressDialog()
         

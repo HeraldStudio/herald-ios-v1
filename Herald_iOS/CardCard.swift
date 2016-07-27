@@ -16,6 +16,10 @@ class CardCard {
     }
     
     static func getCard() -> CardsModel {
+        if !ApiHelper.isLogin() {
+            return CardsModel(cellId: "CardsCellCard", module: ModuleCard, desc: "登录可使用消费查询、充值、余额提醒功能", priority: .NO_CONTENT)
+        }
+        
         let cache = CacheHelper.get("herald_card_today")
         let content = JSON.parse(cache)["content"]
         // 获取余额并且设置

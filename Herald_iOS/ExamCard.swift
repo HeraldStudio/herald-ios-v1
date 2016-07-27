@@ -19,12 +19,16 @@ class ExamCard {
     }
 
     static func getCard() -> CardsModel {
+        if !ApiHelper.isLogin() {
+            return CardsModel(cellId: "CardsCellExam", module: ModuleExam, desc: "登录即可使用考试查询、智能提醒功能", priority: .NO_CONTENT)
+        }
+        
         let cache = CacheHelper.get("herald_exam")
         if cache == "" {
             return CardsModel(cellId: "CardsCellExam", module: ModuleExam, desc: "考试数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
         }
         
-        let customCache = CacheHelper.get("herald_exam_custom_\(ApiHelper.getUserName())")
+        let customCache = CacheHelper.get("herald_exam_custom_\(ApiHelper.currentUser.userName)")
         let json = JSON.parse(cache)["content"]
         let jsonCustom = JSON.parse(customCache)
         

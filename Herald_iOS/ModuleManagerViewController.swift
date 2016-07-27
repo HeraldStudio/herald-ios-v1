@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class ModuleManagerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ModuleManagerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable {
     
     @IBOutlet weak var moduleTableView: UITableView!
     

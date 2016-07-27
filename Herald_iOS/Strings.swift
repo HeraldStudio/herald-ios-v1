@@ -4,6 +4,6 @@ let StringAboutUs = "东南大学小猴偷米工作室，成立于2016年3月，
 
 let StringContactUs = "招新/赞助/合作/活动宣传热线：\n祁同学   151-5187-8798\n\n客户端报障/建议信箱：\n于同学   vhyme@live.cn\n\n简历投递邮箱：\nheraldseu@outlook.com"
 
-let StringTerms = "本软件在许可范围内使用了如下设计作品：\n[CC-BY] monkey by Zille Sophie Bostinius from the Noun Project\n小猴偷米工作室对其作者致以诚挚的感谢。\n\n本软件所有数据来自学校网站或其他第三方，受学校网站或其他第三方数据的不确定性影响，本软件显示的数据可能会出现某些不正常情况，包含但不限于无法连接、信息错误、显示延迟或自相矛盾等。小猴偷米工作室不对以上问题导致的任何后果负责。"
+let StringTerms = "本软件在许可范围内使用了如下设计作品：\n\n图标素材：\nmonkey by Zille Sophie Bostinius from the Noun Project\n\n登录页背景：\n作者：东南大学艺术学院 杨令杰\n\n小猴偷米工作室对上述作者致以诚挚的感谢。\n\n本软件所有数据来自学校网站或其他第三方，受学校网站或其他第三方数据的不确定性影响，本软件显示的数据可能会出现某些不正常情况，包含但不限于无法连接、信息错误、显示延迟或自相矛盾等。小猴偷米工作室不对以上问题导致的任何后果负责。"
 
 let StringUpdateUrl = "https://itunes.apple.com/us/app/xiao-hou-tou-mi/id1107998946"

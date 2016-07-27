@@ -20,6 +20,10 @@ class ExperimentCard {
     }
     
     static func getCard () -> CardsModel {
+        if !ApiHelper.isLogin() {
+            return CardsModel(cellId: "CardsCellExperiment", module: ModuleExperiment, desc: "登录即可使用实验查询、智能提醒功能", priority: .NO_CONTENT)
+        }
+        
         let cache = CacheHelper.get("herald_experiment")
         if cache == "" {
             return CardsModel(cellId: "CardsCellExperiment", module: ModuleExperiment, desc: "实验数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)

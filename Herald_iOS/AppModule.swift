@@ -21,32 +21,46 @@ class AppModule : Hashable {
     var desc : String
     
     /// 模块VC名称（Identifier），也可以是网址或TABn（n表示要跳转到的Tab index）
-    var controller : String
+    var mDestination : String
+    
+    var destination : String {
+        get {
+            return mDestination.replaceAll("[uuid]", ApiHelper.currentUser.uuid)
+        } set {
+            mDestination = newValue
+        }
+    }
     
     /// 在 Assets 中的图标名称
     var icon : String
+    
+    /// 是否有卡片
     var hasCard : Bool
+    
+    /// 是否需要登录
+    var needLogin : Bool
     
     /// 构造函数
     init (_ id : Int, _ name : String, _ nameTip : String, _ desc : String,
-          _ controller : String, _ icon : String, _ hasCard : Bool) {
+            _ controller : String, _ icon : String, _ hasCard : Bool, _ needLogin: Bool) {
         self.id = id
         self.name = name
         self.nameTip = nameTip
         self.desc = desc
-        self.controller = controller
+        self.mDestination = controller
         self.icon = icon
         self.hasCard = hasCard
+        self.needLogin = needLogin
     }
     
-    /// 创建一个基于webview的页面，注意这里url中必须含有http
+    /// 创建一个基于webview的页面，注意这里url中必须以http开头
     convenience init (title: String, url : String) {
-        self.init (-1, "", title, "", url, "", false)
+        self.init (-1, "", title, "", url, "", false, false)
     }
     
     /// 用于比较两个模块是否相等
     var hashValue : Int {
-        return controller.hashValue
+        return destination.hashValue
     }
     
     /// 卡片是否开启
@@ -79,7 +93,7 @@ class AppModule : Hashable {
     /// 用来标识一个不带卡片的模块数据是否有更新
     var hasUpdates : Bool {
         get {
-            return !hasCard && SettingsHelper.get("herald_settings_module_hasupdates_" + name) == "1"
+            return !hasCard && SettingsHelper.get("herald_settings_module_hasupdates_" + name) == "1" && !needLogin
         } set {
             SettingsHelper.set("herald_settings_module_hasupdates_" + name, newValue ? "1" : "0")
             SettingsHelper.notifyModuleSettingsChanged()
@@ -88,22 +102,29 @@ class AppModule : Hashable {
     
     /// 打开模块
     func open (){
+        
+        // 需要登录的模块没有登录
+        if needLogin && !ApiHelper.isLogin() {
+            ApiHelper.showTrialFunctionLimitDialog(nameTip)
+            return
+        }
+        
         // 空模块不做任何事
-        if controller == "" { return }
+        if destination == "" { return }
         
         // Web 页面，交给 WebModule 打开
-        if controller.hasPrefix("http") {
+        if destination.hasPrefix("http") {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE") as! WebModuleViewController
             vc.title = nameTip
-            vc.url = controller
+            vc.url = destination
             
             if let rightController = AppDelegate.instance.rightController {
                 rightController.pushViewController(vc, animated: true)
             }
             
             // 切换到指定的 Tab，只适用于首页的 Tab
-        } else if controller.hasPrefix("TAB") {
-            if let tab = Int(controller.replaceAll("TAB", "")) {
+        } else if destination.hasPrefix("TAB") {
+            if let tab = Int(destination.replaceAll("TAB", "")) {
                 if let tabVC = AppDelegate.instance.leftController?.childViewControllers[0] as? UITabBarController {
                     tabVC.selectedIndex = tab
                 }
@@ -111,10 +132,33 @@ class AppModule : Hashable {
             
             // 切换到指定的VC
         } else {
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(controller)
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(destination)
             if let rightController = AppDelegate.instance.rightController {
                 rightController.pushViewController(vc, animated: true)
             }
+        }
+    }
+    
+    /// 获取 3D Touch 预览的vc
+    func getPreviewViewController () -> UIViewController? {
+        
+        if needLogin && !ApiHelper.isLogin() || destination == "" { return nil }
+        
+        if destination.hasPrefix("http") {
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE") as! WebModuleViewController
+            vc.title = nameTip
+            vc.url = destination
+            vc.preferredContentSize = CGSizeMake(SCREEN_WIDTH, 600)
+            return vc
+        } else if destination.hasPrefix("TAB") {
+            return nil
+        } else {
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(destination)
+            if vc is ForceTouchPreviewable {
+                vc.preferredContentSize = CGSizeMake(SCREEN_WIDTH, 600)
+                return vc
+            }
+            return nil
         }
     }
 }

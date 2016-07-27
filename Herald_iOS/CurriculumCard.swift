@@ -24,6 +24,10 @@ class CurriculumCard {
     }
     
     static func getCard() -> CardsModel {
+        if !ApiHelper.isLogin() {
+            return CardsModel(cellId: "CardsCellCurriculum", module: ModuleCurriculum, desc: "登录即可使用课表查询、智能提醒功能", priority: .NO_CONTENT)
+        }
+        
         let cache = CacheHelper.get("herald_curriculum")
         let now = GCalendar()
         if cache == "" {

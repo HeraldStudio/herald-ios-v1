@@ -10,11 +10,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// 应用程序的主显示窗口
     var window: UIWindow?
     
-    /// 用来显示主界面的导航控制器，在平板模式下是左侧视图
-    var leftController: UINavigationController?
+    /// 一个 NavigationController 的引用，
+    /// 手机模式下是指 MainNavigationController，平板模式下是指 LeftNavigationController
+    /// 当需要推入一个适合放在平板左侧的界面时，使用此引用
+    var leftController: UINavigationController!
     
-    /// 用来显示模块界面的导航控制器，在平板模式下是右侧视图
-    var rightController: UINavigationController?
+    /// 一个 NavigationController 的引用，
+    /// 手机模式下是 MainNavigationController，平板模式下是 RightNavigationController
+    /// 当需要推入一个适合放在平板右侧的界面时，使用此引用
+    var rightController: UINavigationController!
+    
+    /// 一个 ViewController 的引用，
+    /// 手机模式下是 MainNavigationController，平板模式下是 MainSplitController
+    /// 当需要在整个窗口的根视图上展示物件时，使用此引用
+    var wholeController: UIViewController!
     
     /// 对获取AppDelegate单例的语句进行简化
     static var instance : AppDelegate {
@@ -26,9 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// 带参数的启动结束事件
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
-        // 启动次数递增
-        SettingsHelper.launchTimes += 1
         
         /// 设置主屏幕图标 3D Touch 菜单
         /// TODO 考虑去掉考试助手和课表助手入口，换成其它的
@@ -49,13 +55,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let settings = UIUserNotificationSettings(forTypes: [.Badge, .Sound, .Alert], categories: nil)
         application.registerUserNotificationSettings(settings)
         
-        /// 若没有登录，立即销毁主界面并切换到登录界面，并结束初始化
-        if !ApiHelper.isLogin() {
-            showLogin()
-            return true
-        }
+        /// 初始化并显示主界面
+        let id = AppDelegate.isPad ? "MainSplitController" : "MainNavigationController"
+        self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(id)
         
-        showMain()
         return true
     }
     
@@ -74,23 +77,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 先清除旧的通知
         UIApplication.sharedApplication().cancelAllLocalNotifications()
         
-        // 若已登录，注册新的通知
-        if ApiHelper.isLogin() {
-            
-            // 加载课表通知
-            if SettingsHelper.curriculumNotificationEnabled {
-                CurriculumNotifier.scheduleNotifications()
-            }
-            
-            // 加载实验通知
-            if SettingsHelper.experimentNotificationEnabled {
-                ExperimentNotifier.scheduleNotifications()
-            }
-            
-            // 加载考试通知
-            if SettingsHelper.examNotificationEnabled {
-                ExamNotifier.scheduleNotifications()
-            }
+        // 加载课表通知
+        if SettingsHelper.curriculumNotificationEnabled {
+            CurriculumNotifier.scheduleNotifications()
+        }
+        
+        // 加载实验通知
+        if SettingsHelper.experimentNotificationEnabled {
+            ExperimentNotifier.scheduleNotifications()
+        }
+        
+        // 加载考试通知
+        if SettingsHelper.examNotificationEnabled {
+            ExamNotifier.scheduleNotifications()
         }
     }
     
@@ -102,12 +101,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// 处理主屏幕图标 3D Touch 菜单点击事件
     @available(iOS 9.0, *)
     func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
-        
-        // 若没有登录，直接切换到登录界面
-        if !ApiHelper.isLogin() {
-            showLogin()
-            return
-        }
         
         // 获取目标界面
         switch shortcutItem.type {
@@ -122,59 +115,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    /// 使主窗口立即跳转到登录界面
-    func showLogin () -> UIViewController {
+    /// 显示登录界面
+    static func showLogin () {
+        // 首先关闭所有上层界面，回到主界面
+        instance.leftController.popToRootViewControllerAnimated(true)
+        instance.rightController.popToRootViewControllerAnimated(true)
         
-        // 关闭当前界面
-        self.window?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
-        
-        // 销毁当前界面
-        /// TODO 貌似Swift不需要这句？
-        self.window?.rootViewController = nil
-        
-        // 实例化新的界面
-        let lvc = AppDelegate.instantiateLoginViewController()
-        
-        // 打开新的界面
-        self.window?.rootViewController = lvc
-        
-        return lvc
-    }
-    
-    /// 使主窗口立即跳转到主界面
-    func showMain () -> UIViewController {
-        
-        // 关闭当前界面
-        self.window?.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
-        
-        // 销毁当前界面
-        /// TODO 貌似Swift不需要这句？
-        self.window?.rootViewController = nil
-        
-        // 实例化新的界面
-        let mvc = AppDelegate.instantiateMainViewController()
-        
-        // 打开新的界面
-        self.window?.rootViewController = mvc
-        
-        return mvc
+        // 打开登录页，如果是平板，优先在右侧打开
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("LoginViewController")
+        AppDelegate.instance.rightController.pushViewController(vc, animated: true)
     }
     
     /// 检测当前环境是否iPad
     static var isPad : Bool {
         return UI_USER_INTERFACE_IDIOM() == .Pad
-    }
-    
-    /// 切换到登录页
-    static func instantiateLoginViewController() -> UIViewController {
-        let id = "LoginViewController"
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(id)
-    }
-    
-    /// 切换到主页
-    static func instantiateMainViewController() -> UIViewController {
-        let id = isPad ? "MainSplitController" : "MainNavigationController"
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(id)
     }
 }
 

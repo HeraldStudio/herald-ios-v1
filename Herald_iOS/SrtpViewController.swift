@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable {
     
     @IBOutlet var tableView : UITableView!
     
@@ -90,7 +90,7 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiSimpleRequest(.Post).api("srtp").uuid().post("schoolnum", ApiHelper.getSchoolnum())
+        ApiSimpleRequest(.Post).api("srtp").uuid().post("schoolnum", ApiHelper.currentUser.schoolNum)
             .toCache("herald_srtp", notifyModuleIfChanged: ModuleSrtp)
             .onResponse { success, _, _ in
                 self.hideProgressDialog()
@@ -104,7 +104,7 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     static func remoteRefreshNotifyDotState() -> ApiRequest {
         return
-            ApiSimpleRequest(.Post).api("srtp").uuid().post("schoolnum", ApiHelper.getSchoolnum())
+            ApiSimpleRequest(.Post).api("srtp").uuid().post("schoolnum", ApiHelper.currentUser.schoolNum)
                 .toCache("herald_srtp", notifyModuleIfChanged: ModuleSrtp)
     }
     

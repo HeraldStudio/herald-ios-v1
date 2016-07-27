@@ -21,6 +21,9 @@ class ShortcutBoxView : UIView {
         SettingsHelper.addModuleSettingsChangeListener {
             self.loadData()
         }
+        ApiHelper.addUserChangedListener { 
+            self.loadData()
+        }
     }
     
     /// 预计算高度，因为 TableView 是先取得 cell 高度再布局各个 cell 的

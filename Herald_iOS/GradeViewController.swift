@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable {
     
     @IBOutlet var tableView : UITableView!
     

@@ -37,6 +37,10 @@ class PedetailCard {
     }
     
     static func getCard() -> CardsModel {
+        if !ApiHelper.isLogin() {
+            return CardsModel(cellId: "CardsCellPedetail", module: ModulePedetail, desc: "登录即可使用跑操查询、跑操预告功能", priority: .NO_CONTENT)
+        }
+        
         let date = CacheHelper.get("herald_pc_date")
         let forecast = CacheHelper.get("herald_pc_forecast")
         let record = CacheHelper.get("herald_pedetail")

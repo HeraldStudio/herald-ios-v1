@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable {
     
     @IBOutlet var tableView : UITableView!
     
@@ -60,7 +60,7 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         // 自定义考试
-        var customCache = CacheHelper.get("herald_exam_custom_\(ApiHelper.getUserName())")
+        var customCache = CacheHelper.get("herald_exam_custom_\(ApiHelper.currentUser.userName)")
         if customCache == "" {
             customCache = "[]"
         }

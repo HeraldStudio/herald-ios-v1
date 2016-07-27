@@ -7,6 +7,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
     </dependencies>
     <scenes>
         <!--一级根布局：登录页-->
@@ -29,13 +30,13 @@
                                 </connections>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_slogan" translatesAutoresizingMaskIntoConstraints="NO" id="D8Z-uv-OPO">
-                                <rect key="frame" x="40" y="187.5" width="240" height="36"/>
+                                <rect key="frame" x="40" y="177.5" width="240" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="YPq-qc-PzE"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="一卡通号" textAlignment="center" minimumFontSize="17" background="login_textfield_bg_username" translatesAutoresizingMaskIntoConstraints="NO" id="f46-9i-i0D">
-                                <rect key="frame" x="40" y="238.5" width="240" height="45"/>
+                                <rect key="frame" x="40" y="228.5" width="240" height="45"/>
                                 <color key="tintColor" red="0.0" green="0.82352941176470584" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="rgY-B3-41F"/>
@@ -49,7 +50,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="统一身份认证密码" textAlignment="center" minimumFontSize="17" background="login_textfield_bg_password" translatesAutoresizingMaskIntoConstraints="NO" id="GJE-ea-QTI">
-                                <rect key="frame" x="40" y="283.5" width="240" height="45"/>
+                                <rect key="frame" x="40" y="273.5" width="240" height="45"/>
                                 <color key="tintColor" red="0.0" green="0.82352941180000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="gHc-Pz-uaD"/>
@@ -63,7 +64,7 @@
                                 </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DkG-ah-FGW">
-                                <rect key="frame" x="159" y="356" width="1" height="20"/>
+                                <rect key="frame" x="159" y="346" width="1" height="20"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="c0C-AB-KKf"/>
@@ -71,7 +72,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18c-cF-BFh">
-                                <rect key="frame" x="40" y="343.5" width="120" height="45.5"/>
+                                <rect key="frame" x="40" y="333.5" width="120" height="45.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="FgA-Zu-vjB"/>
                                     <constraint firstAttribute="width" constant="120" id="Yf7-My-cta"/>
@@ -83,15 +84,15 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S3T-2f-Gmv">
-                                <rect key="frame" x="160" y="343.5" width="120" height="45"/>
+                                <rect key="frame" x="160" y="333.5" width="120" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="Lxd-U1-jXd"/>
                                     <constraint firstAttribute="width" constant="120" id="fL8-xo-SGJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="新生试用" backgroundImage="button_bg_right"/>
+                                <state key="normal" title="暂不登录" backgroundImage="button_bg_right"/>
                                 <connections>
-                                    <action selector="trialButtonClicked" destination="BYZ-38-t0r" eventType="touchUpInside" id="tNF-TH-Ftq"/>
+                                    <action selector="dismiss" destination="BYZ-38-t0r" eventType="touchUpInside" id="3x9-ur-YpH"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 东南大学小猴偷米工作室" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZx-dy-LQx">
@@ -101,7 +102,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nvp-Dc-4gU">
-                                <rect key="frame" x="50" y="283.5" width="220" height="1"/>
+                                <rect key="frame" x="50" y="273.5" width="220" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="0.10369073275862069" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="220" id="Mgj-oM-YE0"/>
@@ -109,7 +110,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiaohui" translatesAutoresizingMaskIntoConstraints="NO" id="IHC-22-mFg">
-                                <rect key="frame" x="100" y="52.5" width="120" height="120"/>
+                                <rect key="frame" x="100" y="42.5" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="aCN-g0-WI8"/>
                                     <constraint firstAttribute="width" constant="120" id="hdT-G6-Fnc"/>
@@ -138,13 +139,14 @@
                             <constraint firstItem="0IA-CG-sat" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hCr-N1-aXo"/>
                             <constraint firstItem="18c-cF-BFh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-60" id="iff-aj-ici"/>
                             <constraint firstItem="S3T-2f-Gmv" firstAttribute="centerY" secondItem="18c-cF-BFh" secondAttribute="centerY" id="l1e-Gz-lkc"/>
-                            <constraint firstItem="nvp-Dc-4gU" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="qfI-px-o8q"/>
+                            <constraint firstItem="nvp-Dc-4gU" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-10" id="qfI-px-o8q"/>
                             <constraint firstItem="D8Z-uv-OPO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yBE-44-KDF"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="UZx-dy-LQx" secondAttribute="bottom" constant="15" id="yUO-KA-5nx"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="登录" id="lxJ-Qg-SqP"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <nil key="simulatedTopBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
                         <outlet property="background" destination="0IA-CG-sat" id="Lf2-Xd-cRD"/>
                         <outlet property="button" destination="18c-cF-BFh" id="Lmt-lF-TWa"/>
@@ -159,7 +161,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-880" y="-4061"/>
+            <point key="canvasLocation" x="-28" y="-3316"/>
         </scene>
         <!--一级根布局：手机导航框架-->
         <scene sceneID="dAH-Rc-Ndv">
@@ -178,7 +180,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D6N-Ah-OLK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-469" y="-4056"/>
+            <point key="canvasLocation" x="-28" y="-4056"/>
         </scene>
         <!--一级根布局：平板分栏框架-->
         <scene sceneID="1hb-WI-vgM">
@@ -191,7 +193,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zce-wS-yxP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-469" y="-3324"/>
+            <point key="canvasLocation" x="-865" y="-3316"/>
         </scene>
         <!--1.5级根布局：平板左侧导航框架-->
         <scene sceneID="2NK-bh-dcx">
@@ -210,7 +212,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tmL-4l-k5r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-28" y="-4056"/>
+            <point key="canvasLocation" x="-440" y="-4040"/>
         </scene>
         <!--1.5级根布局：平板右侧导航框架-->
         <scene sceneID="LU3-wx-gjT">
@@ -240,11 +242,12 @@
                         <segue destination="GHm-8e-AOt" kind="push" identifier="_" id="P9u-ON-LdO"/>
                         <segue destination="zij-8c-yi0" kind="push" identifier="_" id="T7w-RP-HlR"/>
                         <segue destination="F7L-QK-QVY" kind="relationship" relationship="rootViewController" id="oic-HC-mlL"/>
+                        <segue destination="BYZ-38-t0r" kind="push" identifier="_" id="bCp-eu-daL"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zeB-bL-lG8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-35" y="-3324"/>
+            <point key="canvasLocation" x="-440" y="-3316"/>
         </scene>
         <!--二级根布局：平板右侧首页-->
         <scene sceneID="thI-qz-Vkm">
@@ -1224,7 +1227,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="3Ab-CW-E5g" kind="push" identifier="_" id="Xsf-y4-cMU"/>
+                                            <segue destination="3Ab-CW-E5g" kind="push" identifier="_" id="Xsf-y4-cMU">
+                                                <segue key="commit" inheritsFrom="parent" id="2XW-vY-D7T"/>
+                                                <segue key="preview" inheritsFrom="commit" id="pII-Hv-Ug8"/>
+                                            </segue>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="G5U-4v-cyc">
@@ -1249,14 +1255,14 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="tXs-nW-gLH">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="tXs-nW-gLH">
                                         <rect key="frame" x="0.0" y="572.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tXs-nW-gLH" id="PVg-nY-qTM">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="反馈与建议" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnm-QD-tOJ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="反馈与建议" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnm-QD-tOJ">
                                                     <rect key="frame" x="16" y="0.0" width="288" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1271,7 +1277,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="DGi-cR-3Ff" kind="push" identifier="_" id="duf-ru-8hi"/>
+                                            <segue destination="DGi-cR-3Ff" kind="push" identifier="_" id="duf-ru-8hi">
+                                                <segue key="commit" inheritsFrom="parent" id="IsD-2U-Bgy"/>
+                                                <segue key="preview" inheritsFrom="commit" id="P0J-ee-NbT"/>
+                                            </segue>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -1290,6 +1299,7 @@
                         <outlet property="curriculumSwitch" destination="zYf-DV-Hct" id="UJh-9e-ZI4"/>
                         <outlet property="examSwitch" destination="Y6L-KU-Ftq" id="3Jo-pe-9Rh"/>
                         <outlet property="experimentSwitch" destination="bzm-Gt-LdB" id="bWQ-AY-9XT"/>
+                        <outlet property="loginOrLogoutText" destination="ZAI-B5-fUu" id="Ikv-Dt-Nl8"/>
                         <outlet property="version" destination="90x-XY-zXS" id="eQ5-ct-cZm"/>
                         <outlet property="wifiSwitch" destination="yRa-SK-ygp" id="bnR-6b-Nad"/>
                     </connections>
@@ -4430,6 +4440,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Fg4-9P-AL2"/>
+        <segue reference="duf-ru-8hi"/>
+        <segue reference="Xsf-y4-cMU"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

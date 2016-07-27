@@ -4,7 +4,7 @@ class ServiceCard {
     
     static func getRefresher () -> ApiRequest {
         return ApiSimpleRequest(.Post).url("http://android.heraldstudio.com/checkversion").uuid()
-            .post("schoolnum", ApiHelper.getSchoolnum())
+            .post("schoolnum", ApiHelper.currentUser.schoolNum)
             .post("versioncode", "\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion")!)")
             .post("versionname", "V\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")!)")
             .post("versiontype", "iOS")

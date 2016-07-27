@@ -34,7 +34,19 @@ class CardsRowModel {
     var sortOrder : Int = 0
     
     /// 头部或条目被点击时打开的目标，可以是url，也可以是controller id
-    var destination : String = ""
+    var mDestination : String = ""
+    
+    /// 取的时候对uuid做替换
+    var destination : String {
+        get {
+            return mDestination.replaceAll("[uuid]", ApiHelper.currentUser.uuid)
+        } set {
+            mDestination = newValue
+        }
+    }
+    
+    /// 是否需要登录
+    var needLogin : Bool = false
     
     /// 点击时显示的消息，若message和destination都为空，则不响应点击
     var message : String = ""
