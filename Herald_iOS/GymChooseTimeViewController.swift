@@ -1,7 +1,7 @@
 import UIKit
 import SwiftyJSON
 
-class GymChooseTimeViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
+class GymChooseTimeViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, LoginUserNeeded {
     
     @IBOutlet var tableView : UITableView!
     

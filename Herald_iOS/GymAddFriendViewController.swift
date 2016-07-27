@@ -1,7 +1,7 @@
 import UIKit
 import SwiftyJSON
 
-class GymAddFriendViewController : UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class GymAddFriendViewController : UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, LoginUserNeeded {
     
     @IBOutlet var tableView : UITableView!
     

@@ -1,7 +1,7 @@
 import UIKit
 import SwiftyJSON
 
-class GymReserveViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, ForceTouchPreviewable {
+class GymReserveViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, ForceTouchPreviewable, LoginUserNeeded {
     
     @IBOutlet var tableView : UITableView!
     

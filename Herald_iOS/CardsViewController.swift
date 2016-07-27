@@ -511,7 +511,6 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         // 若有目标界面，打开目标界面；否则若有消息，显示消息；否则显示卡片无详情
         if destination != "" {
             let module = AppModule(title: model.rows[0].title!, url: destination)
-            module.needLogin = model.rows[0].needLogin
             module.open()
         } else if message != "" {
             showMessage(message)

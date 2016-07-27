@@ -44,7 +44,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func dismiss() {
-        AppDelegate.instance.rightController.popViewControllerAnimated(true)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func doLogin () {

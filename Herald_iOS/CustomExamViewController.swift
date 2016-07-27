@@ -1,7 +1,7 @@
 import UIKit
 import SwiftyJSON
 
-class CustomExamViewController : UIViewController {
+class CustomExamViewController : UIViewController, LoginUserNeeded {
     
     @IBOutlet var examName : UITextField!
     

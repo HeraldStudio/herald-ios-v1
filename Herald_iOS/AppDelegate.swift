@@ -123,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // 打开登录页，如果是平板，优先在右侧打开
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("LoginViewController")
-        AppDelegate.instance.rightController.pushViewController(vc, animated: true)
+        AppDelegate.instance.wholeController.presentViewController(vc, animated: true, completion: nil)
     }
     
     /// 检测当前环境是否iPad

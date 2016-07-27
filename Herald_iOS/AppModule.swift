@@ -37,12 +37,9 @@ class AppModule : Hashable {
     /// 是否有卡片
     var hasCard : Bool
     
-    /// 是否需要登录
-    var needLogin : Bool
-    
     /// 构造函数
     init (_ id : Int, _ name : String, _ nameTip : String, _ desc : String,
-            _ controller : String, _ icon : String, _ hasCard : Bool, _ needLogin: Bool) {
+            _ controller : String, _ icon : String, _ hasCard : Bool) {
         self.id = id
         self.name = name
         self.nameTip = nameTip
@@ -50,12 +47,11 @@ class AppModule : Hashable {
         self.mDestination = controller
         self.icon = icon
         self.hasCard = hasCard
-        self.needLogin = needLogin
     }
     
     /// 创建一个基于webview的页面，注意这里url中必须以http开头
     convenience init (title: String, url : String) {
-        self.init (-1, "", title, "", url, "", false, false)
+        self.init (-1, "", title, "", url, "", false)
     }
     
     /// 用于比较两个模块是否相等
@@ -93,7 +89,7 @@ class AppModule : Hashable {
     /// 用来标识一个不带卡片的模块数据是否有更新
     var hasUpdates : Bool {
         get {
-            return !hasCard && SettingsHelper.get("herald_settings_module_hasupdates_" + name) == "1" && !needLogin
+            return !hasCard && SettingsHelper.get("herald_settings_module_hasupdates_" + name) == "1" && ApiHelper.isLogin()
         } set {
             SettingsHelper.set("herald_settings_module_hasupdates_" + name, newValue ? "1" : "0")
             SettingsHelper.notifyModuleSettingsChanged()
@@ -102,12 +98,6 @@ class AppModule : Hashable {
     
     /// 打开模块
     func open (){
-        
-        // 需要登录的模块没有登录
-        if needLogin && !ApiHelper.isLogin() {
-            ApiHelper.showTrialFunctionLimitDialog(nameTip)
-            return
-        }
         
         // 空模块不做任何事
         if destination == "" { return }
@@ -133,7 +123,9 @@ class AppModule : Hashable {
             // 切换到指定的VC
         } else {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(destination)
-            if let rightController = AppDelegate.instance.rightController {
+            if vc is LoginUserNeeded && !ApiHelper.isLogin() {
+                ApiHelper.showTrialFunctionLimitDialog(nameTip)
+            } else if let rightController = AppDelegate.instance.rightController {
                 rightController.pushViewController(vc, animated: true)
             }
         }
@@ -142,7 +134,7 @@ class AppModule : Hashable {
     /// 获取 3D Touch 预览的vc
     func getPreviewViewController () -> UIViewController? {
         
-        if needLogin && !ApiHelper.isLogin() || destination == "" { return nil }
+        if destination == "" { return nil }
         
         if destination.hasPrefix("http") {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE") as! WebModuleViewController
@@ -154,6 +146,9 @@ class AppModule : Hashable {
             return nil
         } else {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(destination)
+            if vc is LoginUserNeeded && !ApiHelper.isLogin() {
+                return nil
+            }
             if vc is ForceTouchPreviewable {
                 vc.preferredContentSize = CGSizeMake(SCREEN_WIDTH, 600)
                 return vc
