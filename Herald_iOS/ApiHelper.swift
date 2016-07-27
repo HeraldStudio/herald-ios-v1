@@ -64,8 +64,8 @@ class ApiHelper {
     
     /// 显示一个提示用户处于未登录模式，不能使用此功能的对话框
     static func showTrialFunctionLimitDialog (functionName : String = "部分") {
-        if let leftController = AppDelegate.instance.leftController {
-            leftController.showQuestionDialog("您处于未登录状态，\(functionName)功能需要登录才能使用，是否立即登录？"){
+        if let wholeController = AppDelegate.instance.wholeController {
+            wholeController.showQuestionDialog("您处于未登录状态，\(functionName)功能需要登录才能使用，是否立即登录？"){
                 AppDelegate.showLogin()
             }
         }
