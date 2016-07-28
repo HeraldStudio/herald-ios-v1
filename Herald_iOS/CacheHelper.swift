@@ -1,17 +1,11 @@
-//
-//  CacheHelper.swift
-//  Herald_iOS
-//
-//  Created by 于海通 on 16/4/11.
-//  Copyright © 2016年 于海通. All rights reserved.
-//
-
 import Foundation
 
 class CacheHelper {
     
     /// 本 Helper 的缓存已经改成随用户变化，退出登录时不再需要清空
-    static let cache = NSUserDefaults.withPrefix("cache_\(ApiHelper.currentUser.userName)_")
+    static var cache : PrefixUserDefaults {
+        return NSUserDefaults.withPrefix("cache_\(ApiHelper.currentUser.userName)_")
+    }
     
     static func get(cacheName : String) -> String {
         return cache.get(cacheName)

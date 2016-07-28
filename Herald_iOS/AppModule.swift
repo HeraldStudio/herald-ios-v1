@@ -8,9 +8,6 @@ import UIKit
  */
 class AppModule : Hashable {
     
-    /// 模块 ID，如果是真模块，注意要与 Module 枚举类中的顺序一致；伪模块用 -1 即可
-    var id : Int
-    
     /// 模块名称，这里用英文，以便作为存储数据等的键值
     var name : String
     
@@ -38,9 +35,8 @@ class AppModule : Hashable {
     var hasCard : Bool
     
     /// 构造函数
-    init (_ id : Int, _ name : String, _ nameTip : String, _ desc : String,
+    init (_ name : String, _ nameTip : String, _ desc : String,
             _ controller : String, _ icon : String, _ hasCard : Bool) {
-        self.id = id
         self.name = name
         self.nameTip = nameTip
         self.desc = desc
@@ -51,7 +47,7 @@ class AppModule : Hashable {
     
     /// 创建一个基于webview的页面，注意这里url中必须以http开头
     convenience init (title: String, url : String) {
-        self.init (-1, "", title, "", url, "", false)
+        self.init ("", title, "", url, "", false)
     }
     
     /// 用于比较两个模块是否相等
