@@ -51,10 +51,15 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
         }
         
         list.removeAll()
-        // 解析已借图书缓存
         var borrowList : [LibraryBookModel] = []
-        for k in JSON.parse(borrowCache)["content"].arrayValue {
-            borrowList.append(LibraryBookModel(borrowedBookJson: k))
+        
+        if JSON.parse(borrowCache)["code"].intValue == 401 {
+            displayLibraryAuthDialog()
+        } else {
+            // 解析已借图书缓存
+            for k in JSON.parse(borrowCache)["content"].arrayValue {
+                borrowList.append(LibraryBookModel(borrowedBookJson: k))
+            }
         }
         list.append(borrowList)
         
@@ -73,12 +78,6 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
         
         ( ApiSimpleRequest(.Post).api("library")
             .uuid().toCache("herald_library_borrowbook", notifyModuleIfChanged: ModuleLibrary)
-            .onResponse {
-                _, code, _ in
-                if code == 401 {
-                    self.displayLibraryAuthDialog()
-                }
-            }
         | ApiSimpleRequest(.Post).api("library_hot").uuid().toCache("herald_library_hotbook")
         ).onFinish { success, _ in
             self.hideProgressDialog()
