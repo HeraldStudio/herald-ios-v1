@@ -444,27 +444,31 @@ class ApiParallelRequest : ApiRequest {
         rightRequest = right
         
         leftRequest.onFinish { _, code in
-            self.leftFinished = true
-            
-            // 首先更新复合请求的 code
-            self.code = mergeStatusCodes(self.code, code)
-            
-            if self.rightFinished {
-                for listener in self.onFinishListeners {
-                    listener(self.code < 300, self.code)
+            synchronized(self) {
+                self.leftFinished = true
+                
+                // 首先更新复合请求的 code
+                self.code = mergeStatusCodes(self.code, code)
+                
+                if self.rightFinished {
+                    for listener in self.onFinishListeners {
+                        listener(self.code < 300, self.code)
+                    }
                 }
             }
         }
         
         rightRequest.onFinish { _, code in
-            self.rightFinished = true
-            
-            // 首先更新复合请求的 code
-            self.code = mergeStatusCodes(self.code, code)
-            
-            if self.leftFinished {
-                for listener in self.onFinishListeners {
-                    listener(self.code < 300, self.code)
+            synchronized(self) {
+                self.rightFinished = true
+                
+                // 首先更新复合请求的 code
+                self.code = mergeStatusCodes(self.code, code)
+                
+                if self.leftFinished {
+                    for listener in self.onFinishListeners {
+                        listener(self.code < 300, self.code)
+                    }
                 }
             }
         }
