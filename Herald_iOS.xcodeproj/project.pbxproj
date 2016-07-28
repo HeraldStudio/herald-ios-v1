@@ -611,9 +611,9 @@
 				D3A0C17A1CBB7C1200744640 /* app_module */,
 				D308693D1D3CB8870088D9EA /* const */,
 				D31DE50C1CC334D800E4891D /* custom */,
+				D302B2C51D48B30300760BE9 /* factory */,
 				D302B2C81D48B56000760BE9 /* framework */,
 				D348580A1CBB48EF00B55E76 /* helper */,
-				D302B2C51D48B30300760BE9 /* factory */,
 			);
 			path = Herald_iOS;
 			sourceTree = "<group>";

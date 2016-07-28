@@ -60,7 +60,7 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         // 自定义考试
-        var customCache = CacheHelper.get("herald_exam_custom_\(ApiHelper.currentUser.userName)")
+        var customCache = CacheHelper.get("herald_exam_custom")
         if customCache == "" {
             customCache = "[]"
         }

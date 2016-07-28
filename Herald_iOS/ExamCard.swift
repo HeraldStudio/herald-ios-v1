@@ -28,7 +28,7 @@ class ExamCard {
             return CardsModel(cellId: "CardsCellExam", module: ModuleExam, desc: "考试数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
         }
         
-        let customCache = CacheHelper.get("herald_exam_custom_\(ApiHelper.currentUser.userName)")
+        let customCache = CacheHelper.get("herald_exam_custom")
         let json = JSON.parse(cache)["content"]
         let jsonCustom = JSON.parse(customCache)
         

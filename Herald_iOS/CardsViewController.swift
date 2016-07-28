@@ -242,7 +242,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             cardList.append(item)
         }
         
-        // 判断各模块是否开启并加载对应数据，暂时只有一个示例，为了给首页卡片的实现提供参考
+        // 判断各模块是否开启并加载对应数据
         if ModuleCurriculum.cardEnabled {
             // 加载并解析课表缓存
             cardList.append(CurriculumCard.getCard())
@@ -290,11 +290,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         /**
          * 联网部分
          *
-         * 1、此处为懒惰刷新，即当某模块需要刷新时才刷新，不需要时不刷新，
+         * 此处为懒惰刷新，即当某模块需要刷新时才刷新，不需要时不刷新，
          * 各个模块是否刷新的判断条件可以按不同模块的需求来写。
-         *
-         * 2、此处改为用 {@link ApiThreadManager} 方式管理线程。
-         * 该管理器可以自定义在每个线程结束时、在所有线程结束时执行不同的操作。
          **/
         
         if !refresh { return }
