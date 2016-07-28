@@ -153,8 +153,6 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     func displayLibraryAuthDialog () {
-        /// 此段代码需要使用用户名和密码，先判断是否处于未登录状态
-        
         let dialog = UIAlertController(title: "绑定图书馆账号", message: "你还没有绑定图书馆账号或账号不正确，请重新绑定：", preferredStyle: UIAlertControllerStyle.Alert)
         
         dialog.addTextFieldWithConfigurationHandler { field in
