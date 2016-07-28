@@ -14,14 +14,14 @@ class GymFriendModel {
     
     static var friendCache : [JSON] {
         get {
-            var cache = CacheHelper.get("herald_gymreserve_friend_\(ApiHelper.currentUser.userName)")
+            var cache = CacheHelper.get("herald_gymreserve_friend")
             if cache == "" {
                 cache = "[]"
             }
             return JSON.parse(cache).arrayValue
         } set (value) {
             let str = JSON(value).rawString()
-            CacheHelper.set("herald_gymreserve_friend_\(ApiHelper.currentUser.userName)", str == nil ? "" : str!)
+            CacheHelper.set("herald_gymreserve_friend", str == nil ? "" : str!)
         }
     }
     
