@@ -75,6 +75,7 @@
 		D3A0C1721CBB7A9800744640 /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1711CBB7A9800744640 /* CardsViewController.swift */; };
 		D3A0C1741CBB7AF500744640 /* ModulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */; };
 		D3A0C1771CBB7B2300744640 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1761CBB7B2300744640 /* SettingsViewController.swift */; };
+		D3A9D7221D49B5ED00D350AE /* Synchronized.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A9D7211D49B5ED00D350AE /* Synchronized.swift */; };
 		D3AC6FC01CF410B000000BF6 /* GameShowCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AC6FBF1CF410B000000BF6 /* GameShowCardViewController.swift */; };
 		D3AC6FC21CF4135800000BF6 /* GameShowCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AC6FC11CF4135800000BF6 /* GameShowCardTableViewCell.swift */; };
 		D3CA10D11D1F7BD9000E1F88 /* ServiceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA10D01D1F7BD9000E1F88 /* ServiceCard.swift */; };
@@ -226,6 +227,7 @@
 		D3A0C1711CBB7A9800744640 /* CardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
 		D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModulesViewController.swift; sourceTree = "<group>"; };
 		D3A0C1761CBB7B2300744640 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D3A9D7211D49B5ED00D350AE /* Synchronized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Synchronized.swift; sourceTree = "<group>"; };
 		D3AC6FBF1CF410B000000BF6 /* GameShowCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameShowCardViewController.swift; sourceTree = "<group>"; };
 		D3AC6FC11CF4135800000BF6 /* GameShowCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameShowCardTableViewCell.swift; sourceTree = "<group>"; };
 		D3CA10D01D1F7BD9000E1F88 /* ServiceCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCard.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 				D3D849FB1CFBD88200F083DF /* ExtJSON.swift */,
 				D39B879F1CCD0F0E00EC5280 /* Error.swift */,
 				D354905B1CDC519100E59615 /* GCalendar.swift */,
+				D3A9D7211D49B5ED00D350AE /* Synchronized.swift */,
 				D302B2BE1D482E1E00760BE9 /* User.swift */,
 			);
 			name = framework;
@@ -948,6 +951,7 @@
 				D38D2F401CFDC49400E0E5BE /* CardRecordModel.swift in Sources */,
 				D39B879A1CCCEC2E00EC5280 /* CardCard.swift in Sources */,
 				D3D849FF1CFBE75000F083DF /* Strings.swift in Sources */,
+				D3A9D7221D49B5ED00D350AE /* Synchronized.swift in Sources */,
 				D3D35DDD1CBA2E8200B18092 /* AppDelegate.swift in Sources */,
 				D3A0C1701CBB7A3A00744640 /* MainTabBarController.swift in Sources */,
 				D3A0C1741CBB7AF500744640 /* ModulesViewController.swift in Sources */,
