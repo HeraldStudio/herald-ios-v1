@@ -122,6 +122,9 @@ extension UIViewController {
             if windowOnMainScreen && windowIsVisible && windowLevelNormal {
                 if let vc = window.rootViewController {
                     if vc.isViewLoaded() {
+                        if let child = vc.presentedViewController {
+                            return child
+                        }
                         return vc
                     }
                 }
