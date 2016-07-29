@@ -23,6 +23,14 @@ class MainTabBarController: UITabBarController {
         // 去除 TabBar 上的横线
         tabBar.clipsToBounds = true
         
+        // 隐藏 TabBar 文字，图标居中
+        if let items = tabBar.items {
+            for item in items {
+                item.title = nil
+                item.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+            }
+        }
+        
         // 修改 TabBar 高亮图标的颜色
         tabBar.tintColor = UIColor(red: 0, green: 180/255, blue: 255/255, alpha: 1)
         
