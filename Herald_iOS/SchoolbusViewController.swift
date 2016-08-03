@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable {
     
     @IBOutlet var tableView : UITableView!
     
@@ -102,8 +102,8 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("schoolbus").uuid().toCache("herald_schoolbus")
-            .onFinish { success, _, _ in
+        ApiSimpleRequest(.Post).api("schoolbus").uuid().toCache("herald_schoolbus")
+            .onResponse { success, _, _ in
                 self.hideProgressDialog()
                 if success {
                     self.loadCache(self.nowWeekend())

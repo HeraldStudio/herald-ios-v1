@@ -27,7 +27,7 @@ class AboutUsViewController : UITableViewController {
         default:
             let cell = tableView.dequeueReusableCellWithIdentifier("AboutUsContentTableViewCell") as! AboutUsContentTableViewCell
             cell.title.text = ["关于我们", "联系我们", "法律声明"][indexPath.row - 1]
-            cell.content.text = [R.string.aboutUsText, R.string.contactUsText, R.string.termsText][indexPath.row - 1]
+            cell.content.text = [StringAboutUs, StringContactUs, StringTerms][indexPath.row - 1]
             return cell
         }
     }

@@ -6,6 +6,8 @@ import UIKit
  */
 class SettingsViewController: UITableViewController {
     
+    @IBOutlet var loginOrLogoutText : UILabel!
+    
     /// 摇一摇登录校园网的开关
     @IBOutlet var wifiSwitch : UISwitch!
     
@@ -19,12 +21,23 @@ class SettingsViewController: UITableViewController {
     
     /// 跳转到 App Store 发布页面，用于检查更新或发布评论
     func checkVersion () {
-        UIApplication.sharedApplication().openURL(NSURL(string: R.string.update_url)!)
+        UIApplication.sharedApplication().openURL(NSURL(string: StringUpdateUrl)!)
     }
     
     /// 界面实例化时的初始化
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
+        
+        /// 当用户改变时重新加载
+        ApiHelper.addUserChangedListener { 
+            self.loadData()
+        }
+    }
+    
+    func loadData() {
+        /// 初始化登录按钮文字
+        loginOrLogoutText.text = ApiHelper.isLogin() ? "退出登录" : "登录"
         
         /// 初始化开关状态
         wifiSwitch.setOn(SettingsHelper.wifiAutoLogin, animated: false)
@@ -47,8 +60,13 @@ class SettingsViewController: UITableViewController {
         
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
-            /// 退出登录
-            showQuestionDialog("确定要退出登录吗？") { ApiHelper.doLogout(nil) }
+            if ApiHelper.isLogin(){
+                /// 退出登录
+                showQuestionDialog("确定要退出登录吗？") { ApiHelper.doLogout(nil) }
+            } else {
+                /// 登录
+                AppDelegate.showLogin()
+            }
         case (0, 1):
             /// 自定义校园网登录账号
             displayWifiSetDialog()
@@ -96,7 +114,7 @@ class SettingsViewController: UITableViewController {
             
             if username != nil && password != nil && username! != "" && password! != "" {
                 ApiHelper.setWifiAuth(user: username!, pwd: password!)
-                self.showMessage("已保存为校园网独立账号，建议手动摇一摇测试账号是否有效~")
+                self.showMessage("已保存为校园网独立账号，请手动测试账号是否有效~")
             } else {
                 self.showMessage("你没有更改设置")
             }

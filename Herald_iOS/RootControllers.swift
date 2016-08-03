@@ -7,6 +7,7 @@ class MainNavigationController : UINavigationController {
     override func viewDidLoad() {
         AppDelegate.instance.leftController = self
         AppDelegate.instance.rightController = self
+        AppDelegate.instance.wholeController = self
     }
     
     /// 覆盖默认设置，只支持竖屏
@@ -20,6 +21,7 @@ class MainSplitController : UISplitViewController, UISplitViewControllerDelegate
     
     override func viewDidLoad() {
         delegate = self
+        AppDelegate.instance.wholeController = self
         
         // 微调中间分割线颜色
         view.backgroundColor = UIColor(white: 192/255, alpha: 1)

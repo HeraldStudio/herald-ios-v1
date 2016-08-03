@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class LectureViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class LectureViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable, LoginUserNeeded {
     
     @IBOutlet var tableView : UITableView!
     
@@ -80,10 +80,11 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
     @IBAction func refreshCache () {
         showProgressDialog()
         
-        ApiThreadManager().addAll([
-            ApiRequest().api("lecture").uuid().toCache("herald_lecture_records"),
-            ApiRequest().url(ApiHelper.wechat_lecture_notice_url).uuid().toCache("herald_lecture_notices")
-        ]).onFinish { success in
+        ( ApiSimpleRequest(.Post).api("lecture")
+            .uuid().toCache("herald_lecture_records")
+        | ApiSimpleRequest(.Post).url(ApiHelper.wechat_lecture_notice_url)
+            .uuid().toCache("herald_lecture_notices")
+        ).onFinish { success, _ in
             self.hideProgressDialog()
             if success {
                 self.loadCache()

@@ -1,9 +1,10 @@
 import UIKit
+import SwiftyJSON
 
 /**
  * ApiHelper | API相关、登录相关
  */
-class ApiHelper : NSObject {
+class ApiHelper {
     // heraldstudio.com 主站API
     static let WWW_ROOT = "http://www.heraldstudio.com/"
     static let API_ROOT = WWW_ROOT + "api/"
@@ -21,89 +22,86 @@ class ApiHelper : NSObject {
         return API_ROOT + api
     }
     
-    // TODO dealApiException
+    /// 用户变化的监听器
+    typealias UserChangedListener = () -> Void
+    
+    static var userChangedListeners : [UserChangedListener] = []
+    
+    static func addUserChangedListener (listener : UserChangedListener) {
+        userChangedListeners.append(listener)
+    }
+    
+    static func notifyUserChanged () {
+        for function in userChangedListeners {
+            function()
+        }
+    }
+    
+    static var currentUser : User {
+        get {
+            return User(JSON.parse(get("currentUser")))
+        } set {
+            ApiHelper.set("currentUser", newValue.toJson().rawStringValue)
+            notifyUserChanged()
+        }
+    }
     
     static func doLogout (message: String?) {
-        
-        //清除授权信息
-        authCache.set("authUser", "")
-        authCache.set("authPwd", "")
-        authCache.set("uuid", "")
-        authCache.set("cardnum", "")
-        authCache.set("schoolnum", "")
-        authCache.set("name", "")
-        authCache.set("sex", "")
-        
-        // 清除通知
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
-        
-        // 清除模块缓存
-        // 注意此处的clearAllmoduleCache里的authUser和authPwd与上面清除的是不同的
-        CacheHelper.clearAllModuleCache()
-        
-        let vc = ((UIApplication.sharedApplication().delegate) as! AppDelegate).showLogin()
-        if message != nil {
-            vc.showMessage(message!)
+        if currentUser != trialUser {
+            currentUser = trialUser
+            
+            AppDelegate.showLogin()
+            if let message = message {
+                AppDelegate.instance.rightController?.showMessage(message)
+            }
+        }
+    }
+    
+    /// 当 ApiRequest 检测到用户身份过期时，将调用此函数
+    static func notifyUserIdentityExpired () {
+        doLogout("用户身份已过期，请重新登录")
+    }
+    
+    /// 显示一个提示用户处于未登录模式，不能使用此功能的对话框
+    static func showTrialFunctionLimitDialog (functionName : String = "部分") {
+        if let wholeController = AppDelegate.instance.wholeController {
+            wholeController.showQuestionDialog("您处于未登录状态，\(functionName)功能需要登录才能使用，是否立即登录？"){
+                AppDelegate.showLogin()
+            }
         }
     }
     
     static func isLogin () -> Bool {
-        let uuid = authCache.get("uuid")
-        return uuid != ""
-    }
-    
-    static func getUUID () -> String {
-        return authCache.get("uuid")
-    }
-    
-    static func setAuth (user user : String, pwd : String) {
-        // TODO 加密
-        CacheHelper.set("authUser", user)
-        CacheHelper.set("authPwd", pwd)
-    }
-    
-    static func getUserName () -> String {
-        return CacheHelper.get("authUser")
-    }
-    
-    static func getPassword () -> String {
-        return CacheHelper.get("authPwd")
+        return currentUser != trialUser
     }
     
     static func setWifiAuth (user user : String, pwd : String) {
         // TODO 加密
-        CacheHelper.set("wifiAuthUser", user)
-        CacheHelper.set("wifiAuthPwd", pwd)
+        set("wifiAuthUser", user)
+        set("wifiAuthPwd", pwd)
     }
     
     static func getWifiUserName () -> String {
         // 若无校园网独立用户缓存，则使用登陆应用的账户
-        let cacheUser = CacheHelper.get("wifiAuthUser")
-        return cacheUser == "" ? getUserName() : cacheUser
+        let cacheUser = get("wifiAuthUser")
+        return cacheUser == "" ? currentUser.userName : cacheUser
     }
     
     static func getWifiPassword () -> String {
         // 若无校园网独立用户缓存，则使用登陆应用的账户
-        let cachePwd = CacheHelper.get("wifiAuthPwd")
-        return cachePwd == "" ? getPassword() : cachePwd
+        let cachePwd = get("wifiAuthPwd")
+        return cachePwd == "" ? currentUser.password : cachePwd
     }
     
     static func clearWifiAuth () {
-        // TODO 若实现了加密，这里也应该对应修改
         setWifiAuth(user: "", pwd: "")
     }
     
-    let authCache = NSUserDefaults.withPrefix("auth_")
-    
-    static func getAuthCache (key : String) -> String {
+    static func get (key : String) -> String {
         return authCache.get(key)
     }
     
-    static func setAuthCache (key : String, _ value : String) {
+    static func set (key : String, _ value : String) {
         authCache.set(key, value)
-    }
-
-    static func getSchoolnum () -> String {
-        return authCache.get("schoolnum")
     }
 }

@@ -1,7 +1,7 @@
 import UIKit
 import SwiftyJSON
 
-class GymNewViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
+class GymNewViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, LoginUserNeeded {
     
     var useTime : String!
     
@@ -144,7 +144,7 @@ class GymNewViewController : UIViewController, UITableViewDataSource, UITableVie
             showProgressDialog()
             working = true
             
-            ApiRequest().api("yuyue").uuid()
+            ApiSimpleRequest(.Post).api("yuyue").uuid()
                 .post("method", "new")
                 .post("orderVO.itemId", "\(self.sport.id)")
                 .post("orderVO.useTime", self.useTime)
@@ -152,7 +152,7 @@ class GymNewViewController : UIViewController, UITableViewDataSource, UITableVie
                 .post("orderVO.phone", self.phoneCell.phone.text!)
                 .post("useUserIds", "[" + self.invitedFriends.map { s in "\"\(s.userId)\"" }.joinWithSeparator(",") + "]" )
                 .post("orderVO.remark", self.useTime)
-                .onFinish { success, _, response in
+                .onResponse { success, _, response in
                     self.hideProgressDialog()
                     self.working = false
                     let code = JSON.parse(response)["content"]["code"].intValue

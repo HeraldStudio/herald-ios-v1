@@ -14,17 +14,21 @@ import SwiftyJSON
  **/
 class ExamCard {
     
-    static func getRefresher () -> [ApiRequest] {
-        return [ApiRequest().api("exam").uuid().toCache("herald_exam")]
+    static func getRefresher () -> ApiRequest {
+        return ApiSimpleRequest(.Post).api("exam").uuid().toCache("herald_exam")
     }
 
     static func getCard() -> CardsModel {
-        let cache = CacheHelper.get("herald_exam")
-        if cache == "" {
-            return CardsModel(cellId: "CardsCellExam", module: R.module.exam, desc: "考试数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
+        if !ApiHelper.isLogin() {
+            return CardsModel(cellId: "CardsCellExam", module: ModuleExam, desc: "登录即可使用考试查询、智能提醒功能", priority: .NO_CONTENT)
         }
         
-        let customCache = CacheHelper.get("herald_exam_custom_\(ApiHelper.getUserName())")
+        let cache = CacheHelper.get("herald_exam")
+        if cache == "" {
+            return CardsModel(cellId: "CardsCellExam", module: ModuleExam, desc: "考试数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
+        }
+        
+        let customCache = CacheHelper.get("herald_exam_custom")
         let json = JSON.parse(cache)["content"]
         let jsonCustom = JSON.parse(customCache)
         
@@ -51,9 +55,9 @@ class ExamCard {
         examList = examList.sort({$0.sortOrder < $1.sortOrder})
         
         if (examList.count == 0) {
-            return CardsModel(cellId: "CardsCellExam", module: R.module.exam, desc: "最近没有新的考试安排", priority: .NO_CONTENT)
+            return CardsModel(cellId: "CardsCellExam", module: ModuleExam, desc: "最近没有新的考试安排", priority: .NO_CONTENT)
         } else {
-            let model = CardsModel(cellId: "CardsCellExam", module: R.module.exam, desc: "你最近有\(examList.count)场考试，抓紧时间复习吧", priority: .CONTENT_NO_NOTIFY)
+            let model = CardsModel(cellId: "CardsCellExam", module: ModuleExam, desc: "你最近有\(examList.count)场考试，抓紧时间复习吧", priority: .CONTENT_NO_NOTIFY)
             model.rows.appendContentsOf(examList)
             return model;
         }

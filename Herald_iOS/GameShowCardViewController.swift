@@ -88,10 +88,10 @@ class GameShowCardViewController : UIViewController, UITableViewDataSource, UITa
         // 前置条件：token 非空
         if token != "" {
             showProgressDialog()
-            ApiRequest().noCheck200()
+            ApiSimpleRequest(.Post)
                 .url("http://app.heraldstudio.com/api/deskgame/draw_card")
                 .post("token", token)
-                .onFinish { success, _, response in
+                .onResponse { success, _, response in
                     self.hideProgressDialog()
                     if success {
                         

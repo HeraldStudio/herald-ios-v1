@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class ExperimentViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ExperimentViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable, LoginUserNeeded {
     
     @IBOutlet var tableView : UITableView!
     
@@ -72,8 +72,8 @@ class ExperimentViewController : UIViewController, UITableViewDelegate, UITableV
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("phylab").uuid().toCache("herald_experiment")
-            .onFinish { success, _, _ in
+        ApiSimpleRequest(.Post).api("phylab").uuid().toCache("herald_experiment")
+            .onResponse { success, _, _ in
                 self.hideProgressDialog()
                 if success {
                     self.loadCache()

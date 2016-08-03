@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class CurriculumViewController : UIViewController, UIScrollViewDelegate {
+class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUserNeeded {
     
     var thisWeek = 0
     
@@ -20,7 +20,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
         let top = (navigationController?.navigationBar.bounds.height)! + UIApplication.sharedApplication().statusBarFrame.height
-        scrollView?.frame = CGRect(x: 0, y: top, width: AppDelegate.instance.rightController.view.bounds.width, height: view.bounds.height - top)
+        scrollView?.frame = CGRect(x: 0, y: top, width: AppDelegate.instance.rightController!.view.bounds.width, height: view.bounds.height - top)
         readLocal()
     }
     
@@ -35,20 +35,15 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate {
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiThreadManager().addAll([
-            ApiRequest().api("sidebar").uuid().toCache("herald_sidebar") {
-                    json in json["content"]
-                },
-                ApiRequest().api("curriculum").uuid().toCache("herald_curriculum") {
-                    json in json["content"]
-                }
-            ]).onFinish { success in
-                self.hideProgressDialog()
-                if success {
-                    self.readLocal()
-                } else {
-                    self.showMessage("刷新失败")
-                }
+        ( ApiSimpleRequest(.Post).api("sidebar").uuid().toCache("herald_sidebar") {json in json["content"]}
+        | ApiSimpleRequest(.Post).api("curriculum").uuid().toCache("herald_curriculum") {json in json["content"]}
+        ).onFinish { success, _ in
+            self.hideProgressDialog()
+            if success {
+                self.readLocal()
+            } else {
+                self.showMessage("刷新失败")
+            }
         }.run()
     }
     

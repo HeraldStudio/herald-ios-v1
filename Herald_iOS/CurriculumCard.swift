@@ -14,22 +14,24 @@ import SwiftyJSON
  **/
 class CurriculumCard {
     
-    static func getRefresher () -> [ApiRequest] {
-        return [
-            ApiRequest().api("sidebar").uuid().toCache("herald_sidebar") {
-                json in json["content"]
-            },
-            ApiRequest().api("curriculum").uuid().toCache("herald_curriculum") {
-                json in json["content"]
-            }
-        ]
+    static func getRefresher () -> ApiRequest {
+        return
+            ( ApiSimpleRequest(.Post).api("sidebar")
+                .uuid().toCache("herald_sidebar") { json in json["content"] }
+            | ApiSimpleRequest(.Post).api("curriculum")
+                .uuid().toCache("herald_curriculum") { json in json["content"] }
+            )
     }
     
     static func getCard() -> CardsModel {
+        if !ApiHelper.isLogin() {
+            return CardsModel(cellId: "CardsCellCurriculum", module: ModuleCurriculum, desc: "登录即可使用课表查询、智能提醒功能", priority: .NO_CONTENT)
+        }
+        
         let cache = CacheHelper.get("herald_curriculum")
         let now = GCalendar()
         if cache == "" {
-            return CardsModel(cellId: "CardsCellCurriculum", module: R.module.curriculum, desc: "课表数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
+            return CardsModel(cellId: "CardsCellCurriculum", module: ModuleCurriculum, desc: "课表数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
         }
         
         let content = JSON.parse(cache)
@@ -106,12 +108,12 @@ class CurriculumCard {
                     
                     // 快要上课的紧急提醒
                     if now >= startTime - 15 * 60 && now < startTime {
-                        let model = CardsModel(cellId: "CardsCellCurriculum", module: R.module.curriculum, desc: "即将开始上课，请注意时间，准时上课", priority: .CONTENT_NOTIFY)
+                        let model = CardsModel(cellId: "CardsCellCurriculum", module: ModuleCurriculum, desc: "即将开始上课，请注意时间，准时上课", priority: .CONTENT_NOTIFY)
                         model.rows.append(row)
                         return model
                     } else if now >= startTime && now < almostEndTime {
                         // 正在上课的提醒
-                        let model = CardsModel(cellId: "CardsCellCurriculum", module: R.module.curriculum, desc: "正在上课中", priority: .CONTENT_NOTIFY)
+                        let model = CardsModel(cellId: "CardsCellCurriculum", module: ModuleCurriculum, desc: "正在上课中", priority: .CONTENT_NOTIFY)
                         model.rows.append(row)
                         return model
                     }
@@ -125,7 +127,7 @@ class CurriculumCard {
         // 如果不是课上完了的状态
         if remainingClasses.count > 0 {
             let firstClass = remainingClasses.count == classCount
-            let model = CardsModel(cellId: "CardsCellCurriculum", module: R.module.curriculum, desc: (classAlmostEnd ? "快要下课了，" : "") +
+            let model = CardsModel(cellId: "CardsCellCurriculum", module: ModuleCurriculum, desc: (classAlmostEnd ? "快要下课了，" : "") +
                 (firstClass ? "你今天有" : "你今天还有") + String(remainingClasses.count) + "节课，点我查看详情", priority: .CONTENT_NO_NOTIFY)
             model.rows.appendContentsOf(remainingClasses)
             return model
@@ -158,7 +160,7 @@ class CurriculumCard {
             } catch {}
         }
         let model = CardsModel(cellId: "CardsCellCurriculum",
-                               module: R.module.curriculum,
+                               module: ModuleCurriculum,
                                desc:
             // 如果明天没课
             classCount == 0 ? (todayHasClasses ? "明天" : "今明两天都") + "没有课程，娱乐之余请注意作息安排哦"

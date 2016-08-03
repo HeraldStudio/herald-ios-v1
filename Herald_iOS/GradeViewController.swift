@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable, LoginUserNeeded {
     
     @IBOutlet var tableView : UITableView!
     
@@ -82,9 +82,9 @@ class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("gpa").uuid()
-            .toCache("herald_grade_gpa", notifyModuleIfChanged: R.module.grade)
-            .onFinish { success, _, _ in
+        ApiSimpleRequest(.Post).api("gpa").uuid()
+            .toCache("herald_grade_gpa", notifyModuleIfChanged: ModuleGrade)
+            .onResponse { success, _, _ in
                 self.hideProgressDialog()
                 if success {
                     self.loadCache()
@@ -96,8 +96,8 @@ class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDa
     
     static func remoteRefreshNotifyDotState() -> ApiRequest {
         return
-            ApiRequest().api("gpa").uuid()
-                .toCache("herald_grade_gpa", notifyModuleIfChanged: R.module.grade)
+            ApiSimpleRequest(.Post).api("gpa").uuid()
+                .toCache("herald_grade_gpa", notifyModuleIfChanged: ModuleGrade)
     }
     
     func showError () {

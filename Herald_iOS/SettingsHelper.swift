@@ -1,34 +1,12 @@
-//
-//  SettingsHelper.swift/Users/Vhyme/Documents/iOS/Herald_iOS/Herald_iOS
-//  Herald_iOS
-//
-//  Created by 于海通 on 16/4/11.
-//  Copyright © 2016年 于海通. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
 class SettingsHelper {
-    
-    /**
-     * 应用启动次数
-     */
-    static var launchTimes : Int {
-        get {
-            let times = get("herald_settings_launch_time")
-            if times == "" {
-                set("herald_settings_launch_time", "0")
-                return 0
-            } else {
-                return Int(times)!
-            }
-        } set {
-            set("herald_settings_launch_time", String(newValue))
-        }
+
+    /// 本 Helper 的缓存已经改成随用户变化，退出登录时不再需要清空
+    static var settingsCache : PrefixUserDefaults {
+        return NSUserDefaults.withPrefix("settings_\(ApiHelper.currentUser.userName)_")
     }
-    
-    static let settingsCache = NSUserDefaults.withPrefix("settings_")
     
     static func get (key : String) -> String {
         return settingsCache.get(key)

@@ -5,15 +5,7 @@ import DHCShakeNotifier
  * MainViewController | 应用程序主界面
  * 负责处理全局UI初始化等处理
  *
- * 注意：此 ViewController 并不是最顶层的根布局。实际的布局树是如下这样的：
- * 
- * - Spilt View Controller (UISplitViewController)
- * |
- * | - Left View Controller (UINavigationController)
- * | |
- * | | - Main View Controller (UITabBarController)
- * |
- * | - Right View Controller (UINavigationController)
+ * 注意：此 ViewController 并不是最顶层的根布局。实际的布局树可参考 Main.storyboard 中各个 scene 的标题。
  */
 class MainTabBarController: UITabBarController {
     
@@ -31,13 +23,37 @@ class MainTabBarController: UITabBarController {
         // 去除 TabBar 上的横线
         tabBar.clipsToBounds = true
         
+        // 隐藏 TabBar 文字，图标居中
+        if let items = tabBar.items {
+            for item in items {
+                item.title = nil
+                item.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+            }
+        }
+        
         // 修改 TabBar 高亮图标的颜色
         tabBar.tintColor = UIColor(red: 0, green: 180/255, blue: 255/255, alpha: 1)
         
-        if ApiHelper.isLogin() {
-            // 注册摇一摇事件
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
+        // 注册摇一摇事件
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
+        
+        loadLoginButton()
+        
+        ApiHelper.addUserChangedListener { 
+            self.loadLoginButton()
         }
+    }
+    
+    func loadLoginButton() {
+        if ApiHelper.isLogin() {
+            navigationItem.leftBarButtonItem = nil
+        } else {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: " 登录 ", style: .Plain, target: self, action: #selector(self.showLogin))
+        }
+    }
+    
+    func showLogin() {
+        AppDelegate.showLogin()
     }
     
     /// 响应摇一摇事件
@@ -106,7 +122,7 @@ class MainTabBarController: UITabBarController {
     /// 弹出菜单操作：模块管理
     func moduleManage () {
         if let vc = storyboard?.instantiateViewControllerWithIdentifier("MODULE_MANAGER") {
-            AppDelegate.instance.rightController.pushViewController(vc, animated: true)
+            AppDelegate.instance.rightController!.pushViewController(vc, animated: true)
         }
     }
 }
