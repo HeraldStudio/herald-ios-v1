@@ -225,11 +225,12 @@ class ApiSimpleRequest : ApiRequest {
             for listener in onResponseListeners {
                 listener(success, code, responseString)
             }
-        }
-        
-        /// 连接失败，触发回调
-        for listener in onResponseListeners {
-            listener(false, 500, "Connection Error")
+        } else {
+            
+            /// 连接失败，触发回调
+            for listener in onResponseListeners {
+                listener(false, 500, "Connection Error")
+            }
         }
     }
     
