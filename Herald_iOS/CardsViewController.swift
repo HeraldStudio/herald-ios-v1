@@ -29,11 +29,6 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 若未登录，不作操作
-        if !ApiHelper.isLogin() {
-            return
-        }
-        
         // 为列表视图添加底部 padding，防止滚动到底部时部分内容被 TabBar 覆盖
         let tw = (tabBarController?.tabBar.frame.width)!
         let th = (tabBarController?.tabBar.frame.height)!
@@ -64,15 +59,14 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
         
-        // 当模块设置改变时刷新
-        SettingsHelper.addModuleSettingsChangeListener { 
-            
-            // 若未登录，不作操作
-            if !ApiHelper.isLogin() {
-                return
-            }
-            
+        // 当模块设置改变时重载数据
+        SettingsHelper.addModuleSettingsChangeListener {
             self.loadContent(false)
+        }
+        
+        // 当用户改变时联网刷新
+        ApiHelper.addUserChangedListener { 
+            self.loadContent(true)
         }
     }
     
@@ -99,8 +93,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // 轮播图宽高比 5:2
         slider.view.frame = CGRect(x: 0, y: 0,
-                                   width: AppDelegate.instance.leftController.view.frame.width,
-                                   height: AppDelegate.instance.leftController.view.frame.width * CGFloat(0.4))
+                                   width: AppDelegate.instance.leftController!.view.frame.width,
+                                   height: AppDelegate.instance.leftController!.view.frame.width * CGFloat(0.4))
         
         // 轮播图自动切换间隔 5秒
         slider.interval = 5
@@ -248,42 +242,42 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             cardList.append(item)
         }
         
-        // 判断各模块是否开启并加载对应数据，暂时只有一个示例，为了给首页卡片的实现提供参考
-        if R.module.curriculum.cardEnabled {
+        // 判断各模块是否开启并加载对应数据
+        if ModuleCurriculum.cardEnabled {
             // 加载并解析课表缓存
             cardList.append(CurriculumCard.getCard())
         }
         
-        if R.module.experiment.cardEnabled {
+        if ModuleExperiment.cardEnabled {
             // 加载并解析实验缓存
             cardList.append(ExperimentCard.getCard())
         }
         
-        if R.module.exam.cardEnabled {
+        if ModuleExam.cardEnabled {
             // 加载并解析考试缓存
             cardList.append(ExamCard.getCard())
+        }
+        
+        if ModuleCard.cardEnabled {
+            // 加载并解析一卡通缓存
+            cardList.append(CardCard.getCard())
+        }
+        
+        if ModulePedetail.cardEnabled {
+            // 加载并解析跑操预报缓存
+            cardList.append(PedetailCard.getCard())
         }
         
         // 加载校园活动缓存
         cardList.append(ActivityCard.getCard())
         
-        if R.module.lecture.cardEnabled {
+        if ModuleLecture.cardEnabled {
             // 加载并解析人文讲座预告缓存
             cardList.append(LectureCard.getCard())
         }
         
-        if R.module.pedetail.cardEnabled {
-            // 加载并解析跑操预报缓存
-            cardList.append(PedetailCard.getCard())
-        }
-        
-        if R.module.card.cardEnabled {
-            // 加载并解析一卡通缓存
-            cardList.append(CardCard.getCard())
-        }
-        
-        if R.module.jwc.cardEnabled {
-            // 加载并解析一卡通缓存
+        if ModuleJwc.cardEnabled {
+            // 加载并解析教务通知缓存
             cardList.append(JwcCard.getCard())
         }
         
@@ -296,11 +290,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         /**
          * 联网部分
          *
-         * 1、此处为懒惰刷新，即当某模块需要刷新时才刷新，不需要时不刷新，
+         * 此处为懒惰刷新，即当某模块需要刷新时才刷新，不需要时不刷新，
          * 各个模块是否刷新的判断条件可以按不同模块的需求来写。
-         *
-         * 2、此处改为用 {@link ApiThreadManager} 方式管理线程。
-         * 该管理器可以自定义在每个线程结束时、在所有线程结束时执行不同的操作。
          **/
         
         if !refresh { return }
@@ -311,69 +302,71 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         cardsTableView.bounces = false
         
         // 线程管理器
-        let manager = ApiThreadManager()/*.debug()*/.onResponse { success, _, _ in
-            if success { self.loadContent(false) }
-        }
+        var parallelRequest : ApiRequest = ApiEmptyRequest()
         
         // 刷新版本信息和推送消息
-        manager.addAll(ServiceCard.getRefresher())
+        parallelRequest |= ServiceCard.getRefresher()
         
-        if R.module.curriculum.cardEnabled {
+        if ModuleCurriculum.cardEnabled && ApiHelper.isLogin() {
             // 仅当课表数据不存在时刷新课表
             if CacheHelper.get("herald_curriculum") == "" || CacheHelper.get("herald_sidebar") == "" {
-                manager.addAll(CurriculumCard.getRefresher())
+                parallelRequest |= CurriculumCard.getRefresher()
             }
         }
         
-        if R.module.experiment.cardEnabled {
+        if ModuleExperiment.cardEnabled && ApiHelper.isLogin() {
             // 仅当实验数据不存在时刷新实验
             if CacheHelper.get("herald_experiment") == "" {
-                manager.addAll(ExperimentCard.getRefresher())
+                parallelRequest |= ExperimentCard.getRefresher()
             }
         }
         
-        if R.module.exam.cardEnabled {
+        if ModuleExam.cardEnabled && ApiHelper.isLogin() {
             // 仅当考试数据不存在时刷新考试
             if CacheHelper.get("herald_exam") == "" {
-                manager.addAll(ExamCard.getRefresher())
+                parallelRequest |= ExamCard.getRefresher()
             }
         }
         
         // 直接刷新校园活动
-        manager.addAll(ActivityCard.getRefresher())
+        parallelRequest |= ActivityCard.getRefresher()
         
-        if R.module.lecture.cardEnabled {
+        if ModuleLecture.cardEnabled {
             // 直接刷新人文讲座预告
-            manager.addAll(LectureCard.getRefresher())
+            parallelRequest |= LectureCard.getRefresher()
         }
         
-        if R.module.pedetail.cardEnabled {
+        if ModulePedetail.cardEnabled && ApiHelper.isLogin() {
             // 直接刷新跑操数据
-            manager.addAll(PedetailCard.getRefresher())
+            parallelRequest |= PedetailCard.getRefresher()
         }
         
-        if R.module.card.cardEnabled {
+        if ModuleCard.cardEnabled && ApiHelper.isLogin() {
             // 直接刷新一卡通数据
-            manager.addAll(CardCard.getRefresher())
+            parallelRequest |= CardCard.getRefresher()
         }
         
-        if R.module.jwc.cardEnabled{
+        if ModuleJwc.cardEnabled {
             // 直接刷新教务处数据
-            manager.addAll(JwcCard.getRefresher())
+            parallelRequest |= JwcCard.getRefresher()
         }
         
-        manager.addAll([
-                GymReserveViewController.remoteRefreshNotifyDotState(),
-                SrtpViewController.remoteRefreshNotifyDotState(),
-                GradeViewController.remoteRefreshNotifyDotState(),
-                LibraryViewController.remoteRefreshNotifyDotState()
-            ])
+        if ApiHelper.isLogin() {
+            parallelRequest |=
+                ( GymReserveViewController.remoteRefreshNotifyDotState()
+                | SrtpViewController.remoteRefreshNotifyDotState()
+                | GradeViewController.remoteRefreshNotifyDotState()
+                | LibraryViewController.remoteRefreshNotifyDotState()
+                )
+        }
 
         /**
          * 结束刷新部分
          * 当最后一个线程结束时调用这一部分，刷新结束
          **/
-        manager.onFinish { success in
+        parallelRequest.onResponse { _, _, _ in
+            self.loadContent(false)
+        }.onFinish { success, _ in
             self.hideProgressDialog()
             
             // 暂时关闭列表的下拉刷新
@@ -393,7 +386,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     /// 是否要显示快捷栏
     var hasShortcutBox : Bool {
-        return R.module.array.filter{$0.shortcutEnabled}.count != 0
+        return Modules.filter{$0.shortcutEnabled}.count != 0
     }
     
     /// 快捷栏个数，即上面那个布尔函数的Int形式，方便使用
@@ -514,7 +507,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // 若有目标界面，打开目标界面；否则若有消息，显示消息；否则显示卡片无详情
         if destination != "" {
-            AppModule(title: model.rows[0].title!, url: destination).open()
+            let module = AppModule(title: model.rows[0].title!, url: destination)
+            module.open()
         } else if message != "" {
             showMessage(message)
         } else {
@@ -552,39 +546,15 @@ extension CardsViewController:UIViewControllerPreviewingDelegate {
             }
         }
         
-        let cardTitle = cardList[cardIndex].rows[0].title!
-        
         let cell = cardsTableView.cellForRowAtIndexPath(indexPath) as! CardsTableViewCell
         previewingContext.sourceRect = cell.frame
         
-        // 白名单机制，只有部分模块可以预览
-        if !["实验助手", "考试助手", "一卡通", "教务通知", "人文讲座", "校园活动", "小猴提示"].contains(cardTitle) {
-            return nil
-        }
-        
-        // 校园活动的标题是切换tab，不能预览
-        if cardTitle == "校园活动" && indexPath.row == 0 {
-            return nil
-        }
-        
         let destination = cardList[cardIndex].rows[indexPath.row].destination
-        if destination.hasPrefix("http") {
-            //存在spinner卡顿情况，仅针对教务通知子cell
-            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE") as! WebModuleViewController
-            detailVC.url = cardList[cardIndex].rows[indexPath.row].destination
-            detailVC.title = cardList[cardIndex].rows[0].title!
-            return detailVC
-        } else if !destination.isEmpty && !destination.hasPrefix("TAB") {
-            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(cardList[cardIndex].rows[indexPath.row].destination)
-            detailVC.preferredContentSize = CGSizeMake(SCREEN_WIDTH, 600)
-            return detailVC
-        } else {
-            return nil
-        }
+        return AppModule(title: "", url: destination).getPreviewViewController()
     }
     
     //pop
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        showViewController(viewControllerToCommit, sender: self)
+        AppDelegate.instance.rightController.pushViewController(viewControllerToCommit, animated: true)
     }
 }

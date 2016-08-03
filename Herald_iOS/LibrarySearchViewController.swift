@@ -20,14 +20,15 @@ class LibrarySearchViewController : UIViewController, UISearchBarDelegate, UITab
         let keyword = searchBar.text == nil ? "" : searchBar.text!
         searchBar.resignFirstResponder()
         showProgressDialog()
-        ApiRequest().api("search").uuid().post("book", keyword).onFinish { success, _, response in
+        ApiSimpleRequest(.Post).api("search").uuid().post("book", keyword)
+            .onResponse { success, _, response in
             self.hideProgressDialog()
             if success {
                 self.loadData(response)
             } else {
                 self.searchBar.resignFirstResponder()
                 self.showMessage("加载失败，请重试")
-            }
+                }
         }.run()
     }
     

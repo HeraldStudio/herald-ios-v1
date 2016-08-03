@@ -1,4 +1,4 @@
-import Foundation
+import SwiftyJSON
 
 /**
  * PrefixUserDefaults | 前缀用户偏好
@@ -8,7 +8,8 @@ extension NSUserDefaults {
     
     /// 从 NSUserDefaults 初始化一个 PrefixUserDefaults
     static func withPrefix (prefix : String) -> PrefixUserDefaults {
-        return PrefixUserDefaults(defaults: standardUserDefaults(), prefix: prefix)
+        let defaults = NSUserDefaults(suiteName: "group.herald-ext")!
+        return PrefixUserDefaults(defaults: defaults, prefix: prefix)
     }
 }
 

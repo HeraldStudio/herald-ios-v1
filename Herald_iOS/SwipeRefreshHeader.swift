@@ -61,9 +61,9 @@ class SwipeRefreshHeader : UIView {
         
         switch displayPlace {
         case .Left:
-            rootController = AppDelegate.instance.leftController
+            rootController = AppDelegate.instance.leftController!
         default:
-            rootController = AppDelegate.instance.rightController
+            rootController = AppDelegate.instance.rightController!
         }
         
         // 先移除所有子视图，以防万一

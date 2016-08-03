@@ -28,12 +28,15 @@ class FeedbackViewController : UIViewController {
             return
         }
         
+        // 若用户未登录，处于未登录状态，直接以匿名（000000000）身份提交反馈
+        let userName = ApiHelper.currentUser.userName
+        
         showProgressDialog()
         
-        ApiRequest().url(ApiHelper.feedback_url)
-            .post("cardnum", ApiHelper.getUserName())
+        ApiSimpleRequest(.Post).url(ApiHelper.feedback_url)
+            .post("cardnum", userName)
             .post("content", "[来自iOS版] \(content) [联系方式：\(contact)]")
-            .onFinish { success, _, _ in
+            .onResponse { success, _, _ in
                 self.hideProgressDialog()
                 if success {
                     self.showMessage("您的反馈已发送，感谢支持！")

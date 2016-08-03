@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class JwcViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class JwcViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable {
     
     @IBOutlet var tableView : UITableView!
     
@@ -73,8 +73,8 @@ class JwcViewController : UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("jwc").uuid().toCache("herald_jwc")
-            .onFinish { success, _, _ in
+        ApiSimpleRequest(.Post).api("jwc").uuid().toCache("herald_jwc")
+            .onResponse { success, _, _ in
                 self.hideProgressDialog()
                 if success {
                     self.loadCache()

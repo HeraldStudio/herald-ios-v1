@@ -1,24 +1,24 @@
 import UIKit
 
-/// 表示卡片消息是否重要，不重要的消息总在后面
-enum Priority : Int {
-    
-    /// 具有时效性的内容
-    case CONTENT_NOTIFY
-    
-    /// 有内容，但不具有时效性
-    case CONTENT_NO_NOTIFY
-    
-    /// 没有内容
-    case NO_CONTENT
-}
-
 /**
  * CardsModel | 首页卡片模型
  * 首页卡片列表每一个分区（代表一个卡片）的模型，这里只需要用来存储每一行的数据、
  * 用来排序、以及用来存储点击卡片时打开的页面
  */
 class CardsModel {
+    
+    /// 表示卡片消息是否重要，不重要的消息总在后面
+    enum Priority : Int {
+        
+        /// 具有时效性的内容
+        case CONTENT_NOTIFY
+        
+        /// 有内容，但不具有时效性
+        case CONTENT_NO_NOTIFY
+        
+        /// 没有内容
+        case NO_CONTENT
+    }
     
     /// 除卡片头部外，其他行所用的资源复用id
     var cellId : String
@@ -45,7 +45,7 @@ class CardsModel {
         header.icon = appModule.icon
         header.title = appModule.nameTip
         header.desc = desc
-        header.destination = appModule.controller
+        header.destination = appModule.destination
         rows.append(header)
         self.contentPriority = priority
     }

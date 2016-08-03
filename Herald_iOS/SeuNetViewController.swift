@@ -11,7 +11,7 @@ import UIKit
 import SwiftyJSON
 import MagicPie
 
-class SeuNetViewController : UIViewController {
+class SeuNetViewController : UIViewController, ForceTouchPreviewable, LoginUserNeeded {
     
     @IBOutlet var usage : UILabel!
     
@@ -107,8 +107,8 @@ class SeuNetViewController : UIViewController {
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("nic").uuid().toCache("herald_nic")
-            .onFinish { success, _, _ in
+        ApiSimpleRequest(.Post).api("nic").uuid().toCache("herald_nic")
+            .onResponse { success, _, _ in
                 self.hideProgressDialog()
                 if success {
                     self.loadCache(true)

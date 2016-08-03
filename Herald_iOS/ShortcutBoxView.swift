@@ -1,11 +1,18 @@
 import UIKit
 
+/**
+ * ShortcutBoxView | 快捷栏视图
+ * 仅用于在 CardsTableView 中显示快捷栏。如要用作他用，请做修改
+ */
 class ShortcutBoxView : UIView {
     
+    /// 最小列宽
     static let minCellWidth : CGFloat = 64
     
+    /// 行高
     static let cellHeight : CGFloat = 86
     
+    /// 数据源，包括表示模块管理按钮的伪模块
     var dataSource : [AppModule] = []
     
     /// 初始化完成后，载入数据
@@ -14,14 +21,20 @@ class ShortcutBoxView : UIView {
         SettingsHelper.addModuleSettingsChangeListener {
             self.loadData()
         }
+        ApiHelper.addUserChangedListener { 
+            self.loadData()
+        }
     }
     
+    /// 预计算高度，因为 TableView 是先取得 cell 高度再布局各个 cell 的
+    /// 所以需要在 tableView(_:heightForRowAtIndexPath:) 中提前调用此方法得知快捷栏高度
     static func precalculateHeight() -> CGFloat {
         
-        let width = AppDelegate.instance.leftController.view.frame.width
+        // 此处假定在 iPad 端快捷栏始终显示在左侧栏
+        let width = AppDelegate.instance.leftController!.view.frame.width
         
         // 获取已启用快捷方式的模块列表
-        let dataSource = R.module.array.filter { $0.shortcutEnabled } + [R.module.moduleManager]
+        let dataSource = Modules.filter { $0.shortcutEnabled } + [ModuleManager]
         
         // 根据尺寸计算列数
         let columnCount = Int(width / minCellWidth)
@@ -43,9 +56,9 @@ class ShortcutBoxView : UIView {
         
         /// 初始化、调整布局属性
         // 获取已启用快捷方式的模块列表
-        dataSource = R.module.array.filter { $0.shortcutEnabled } + [R.module.moduleManager]
+        dataSource = Modules.filter { $0.shortcutEnabled } + [ModuleManager]
         
-        let width = AppDelegate.instance.leftController.view.frame.width
+        let width = AppDelegate.instance.leftController!.view.frame.width
         
         // 根据尺寸计算列数
         let columnCount = Int(width / ShortcutBoxView.minCellWidth)
@@ -190,7 +203,7 @@ class ShortcutBoxCell : UIView {
         addGestureRecognizer(tapGesture)
         
         /// 设置长按事件（模块管理按钮不设置）
-        if module == R.module.moduleManager {
+        if module == ModuleManager {
             return
         }
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.askToDelete))
@@ -207,7 +220,7 @@ class ShortcutBoxCell : UIView {
     
     /// 询问删除快捷方式
     func askToDelete() {
-        AppDelegate.instance.leftController.showQuestionDialog("确定移除此模块的快捷方式吗？") {
+        AppDelegate.instance.leftController!.showQuestionDialog("确定移除此模块的快捷方式吗？") {
             self.module.shortcutEnabled = false
         }
     }

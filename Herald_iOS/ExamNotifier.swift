@@ -20,7 +20,7 @@ class ExamNotifier {
             } catch { continue }
         }
         
-        let customCache = CacheHelper.get("herald_exam_custom_\(ApiHelper.getUserName())")
+        let customCache = CacheHelper.get("herald_exam_custom")
         let jsonCustom = JSON.parse(customCache)
         
         for exam in jsonCustom.arrayValue {

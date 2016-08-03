@@ -1,7 +1,7 @@
 import UIKit
 import SwiftyJSON
 
-class GymAddFriendViewController : UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class GymAddFriendViewController : UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, LoginUserNeeded {
     
     @IBOutlet var tableView : UITableView!
     
@@ -15,14 +15,15 @@ class GymAddFriendViewController : UIViewController, UISearchBarDelegate, UITabl
         let keyword = searchBar.text == nil ? "" : searchBar.text!
         searchBar.resignFirstResponder()
         showProgressDialog()
-        ApiRequest().api("yuyue").uuid().post("method", "getFriendList", "cardNo", keyword).onFinish { success, _, response in
+        ApiSimpleRequest(.Post).api("yuyue")
+            .uuid().post("method", "getFriendList", "cardNo", keyword).onResponse { success, _, response in
             self.hideProgressDialog()
             if success {
                 self.loadData(response)
             } else {
                 self.searchBar.resignFirstResponder()
                 self.showMessage("加载失败，请重试")
-            }
+                }
         }.run()
     }
     

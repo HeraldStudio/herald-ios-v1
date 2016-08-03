@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class LibraryViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class LibraryViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable, LoginUserNeeded {
     
     @IBOutlet var tableView : UITableView!
     
@@ -51,10 +51,15 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
         }
         
         list.removeAll()
-        // 解析已借图书缓存
         var borrowList : [LibraryBookModel] = []
-        for k in JSON.parse(borrowCache)["content"].arrayValue {
-            borrowList.append(LibraryBookModel(borrowedBookJson: k))
+        
+        if JSON.parse(borrowCache)["code"].intValue == 401 {
+            displayLibraryAuthDialog()
+        } else {
+            // 解析已借图书缓存
+            for k in JSON.parse(borrowCache)["content"].arrayValue {
+                borrowList.append(LibraryBookModel(borrowedBookJson: k))
+            }
         }
         list.append(borrowList)
         
@@ -71,29 +76,22 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
     @IBAction func refreshCache () {
         showProgressDialog()
         
-        ApiThreadManager().addAll([
-            ApiRequest().api("library").uuid().toCache("herald_library_borrowbook", notifyModuleIfChanged: R.module.library)
-                .onFinish {
-                    _, code, _ in
-                    if code == 401 {
-                        self.displayLibraryAuthDialog()
-                    }
-                }
-            ,
-            ApiRequest().api("library_hot").uuid().toCache("herald_library_hotbook")
-            ]).onFinish { success in
-                self.hideProgressDialog()
-                if success {
-                    self.loadCache()
-                } else {
-                    self.showMessage("刷新失败，请重试")
-                }
-            }.run()
+        ( ApiSimpleRequest(.Post).api("library")
+            .uuid().toCache("herald_library_borrowbook", notifyModuleIfChanged: ModuleLibrary)
+        | ApiSimpleRequest(.Post).api("library_hot").uuid().toCache("herald_library_hotbook")
+        ).onFinish { success, _ in
+            self.hideProgressDialog()
+            if success {
+                self.loadCache()
+            } else {
+                self.showMessage("刷新失败，请重试")
+            }
+        }.run()
     }
     
     static func remoteRefreshNotifyDotState() -> ApiRequest {
         return
-            ApiRequest().api("library").uuid().toCache("herald_library_borrowbook", notifyModuleIfChanged: R.module.library)
+            ApiSimpleRequest(.Post).api("library").uuid().toCache("herald_library_borrowbook", notifyModuleIfChanged: ModuleLibrary)
     }
     
     func showError () {
@@ -145,12 +143,12 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
         let barcode = list[indexPath.section][indexPath.row].barcode
         if barcode != "" {
             showProgressDialog()
-            ApiRequest().api("renew").uuid().post("barcode", barcode).onFinish({ _, _, response in
+            ApiSimpleRequest(.Post).api("renew").uuid().post("barcode", barcode).onResponse { _, _, response in
                 self.hideProgressDialog()
                 var response = JSON.parse(response)["content"].stringValue
                 response = response == "success" ? "续借成功" : response
                 self.showMessage(response)
-            }).run()
+            } .run()
         }
     }
     
@@ -167,14 +165,14 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
         }))
         
         dialog.addAction(UIAlertAction(title: "绑定", style: UIAlertActionStyle.Default, handler: { _ in
-            if let password = dialog.textFields![0].text {
+            if let libPassword = dialog.textFields![0].text {
                 self.showProgressDialog()
-                ApiRequest().url(ApiHelper.auth_update_url).noCheck200()
-                    .post("cardnum", ApiHelper.getUserName())
-                    .post("password", ApiHelper.getPassword())
-                    .post("lib_username", ApiHelper.getUserName())
-                    .post("lib_password", password)
-                    .onFinish { _, _, response in
+                ApiSimpleRequest(.Post).url(ApiHelper.auth_update_url)
+                    .post("cardnum", ApiHelper.currentUser.userName)
+                    .post("password", ApiHelper.currentUser.password)
+                    .post("lib_username", ApiHelper.currentUser.userName)
+                    .post("lib_password", libPassword)
+                    .onResponse { _, _, response in
                         if response == "OK" {
                             //返回OK说明认证成功
                             self.refreshCache()
@@ -184,7 +182,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
                     }.run()
             }
         }))
-
+        
         presentViewController(dialog, animated: true, completion: nil)
     }
 }

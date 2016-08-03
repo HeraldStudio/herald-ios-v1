@@ -52,10 +52,10 @@ class GameCreateViewController : UIViewController, UITableViewDataSource, UITabl
     /// 异步刷新缓存
     func refreshCache() {
         showProgressDialog()
-        ApiRequest().noCheck200()
+        ApiSimpleRequest(.Post)
             .url("http://app.heraldstudio.com/api/deskgame/card_list")
             .toCache("herald_deskgame_cards")
-            .onFinish { success, _, _ in
+            .onResponse { success, _, _ in
                 self.hideProgressDialog()
                 if success {
                     self.loadCache()
@@ -129,9 +129,9 @@ class GameCreateViewController : UIViewController, UITableViewDataSource, UITabl
         
         // 请求发牌
         showProgressDialog()
-        ApiRequest().url("http://app.heraldstudio.com/api/deskgame/create_room")
+        ApiSimpleRequest(.Post).url("http://app.heraldstudio.com/api/deskgame/create_room")
             .post("json", request)
-            .onFinish { success, _, response in
+            .onResponse { success, _, response in
                 self.hideProgressDialog()
                 if success {
                     let token = JSON.parse(response)["content"].stringValue

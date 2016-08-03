@@ -39,12 +39,10 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         // 当模块设置改变时刷新
         SettingsHelper.addModuleSettingsChangeListener {
-            
-            // 若未登录，不作操作
-            if !ApiHelper.isLogin() {
-                return
-            }
-            
+            self.setupModuleList()
+        }
+        
+        ApiHelper.addUserChangedListener { 
             self.setupModuleList()
         }
     }
@@ -64,10 +62,10 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
         var enabledModules : [AppModule] = []
         
         // 将模块管理伪装成一个模块加入到第一个分区中，并将这个分区加入到列表中
-        sections.append([R.module.moduleManager])
+        sections.append([ModuleManager])
         
         // 将各个模块加入到第二个分区中
-        for k in R.module.array {
+        for k in Modules {
             if k.shortcutEnabled || k.cardEnabled {
                 enabledModules.append(k)
             }
@@ -148,22 +146,7 @@ extension ModulesViewController:UIViewControllerPreviewingDelegate {
         
         previewingContext.sourceRect = cell.frame
         
-        if cell.label!.text == "课表助手" || cell.label!.text == "模块管理" {
-            return nil
-        }
-        
-        if sections[indexPath.section][indexPath.row].controller.hasPrefix("http") {
-            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE") as! WebModuleViewController
-            
-            detailVC.title = sections[indexPath.section][indexPath.row].nameTip
-            detailVC.url = sections[indexPath.section][indexPath.row].controller
-            return detailVC
-            //return nil
-        }else {
-            let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(sections[indexPath.section][indexPath.row].controller)
-            detailVC.preferredContentSize = CGSizeMake(SCREEN_WIDTH, 600)
-            return detailVC
-        }
+        return sections[indexPath.section][indexPath.row].getPreviewViewController()
     }
     
     //pop

@@ -1,7 +1,7 @@
 import UIKit
 import SwiftyJSON
 
-class GymReserveViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
+class GymReserveViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, ForceTouchPreviewable, LoginUserNeeded {
     
     @IBOutlet var tableView : UITableView!
     
@@ -40,39 +40,40 @@ class GymReserveViewController : UIViewController, UITableViewDataSource, UITabl
     }
     
     @IBAction func refreshCache() {
+        let userName = ApiHelper.currentUser.userName
+        
         showProgressDialog()
-        ApiThreadManager().addAll([
-            ApiRequest()
-                .api("yuyue").uuid().post("method", "getDate")
-                .toCache("herald_gymreserve_timelist_and_itemlist"),
-            ApiRequest()
+        ( ApiSimpleRequest(.Post)
+            .api("yuyue").uuid().post("method", "getDate")
+            .toCache("herald_gymreserve_timelist_and_itemlist")
+            | ApiSimpleRequest(.Post)
                 .api("yuyue").uuid().post("method", "myOrder")
-                .toCache("herald_gymreserve_myorder", notifyModuleIfChanged: R.module.gymreserve),
+                .toCache("herald_gymreserve_myorder", notifyModuleIfChanged: ModuleGymReserve)
             // 预获取用户手机号
-            ApiRequest()
+            | ApiSimpleRequest(.Post)
                 .api("yuyue").uuid().post("method", "getPhone")
                 .toCache("herald_gymreserve_phone") { json in json["content"]["phone"] }
-        ]).onFinish { success in
-            self.hideProgressDialog()
-            if success {
-                self.loadCache()
-            } else {
-                self.showMessage("获取失败，请重试")
-            }
-        }.run()
+            ).onFinish { success, _ in
+                self.hideProgressDialog()
+                if success {
+                    self.loadCache()
+                } else {
+                    self.showMessage("获取失败，请重试")
+                }
+            }.run()
         
         // 如果缓存的用户ID为空，预查询用户ID
         if CacheHelper.get("herald_gymreserve_userid") == "" {
-            ApiRequest().api("yuyue").uuid().post("method", "getFriendList")
-                .post("cardNo", ApiHelper.getUserName())
+            ApiSimpleRequest(.Post).api("yuyue").uuid().post("method", "getFriendList")
+                .post("cardNo", userName)
                 .toCache("herald_gymreserve_userid") { json in json["content"][0]["userId"] }.run()
         }
     }
     
     static func remoteRefreshNotifyDotState() -> ApiRequest {
-        return ApiRequest()
+        return ApiSimpleRequest(.Post)
             .api("yuyue").uuid().post("method", "myOrder")
-            .toCache("herald_gymreserve_myorder", notifyModuleIfChanged: R.module.gymreserve)
+            .toCache("herald_gymreserve_myorder", notifyModuleIfChanged: ModuleGymReserve)
     }
     
     func loadCache() {
@@ -162,7 +163,7 @@ class GymReserveViewController : UIViewController, UITableViewDataSource, UITabl
             if model.canCancel {
                 showQuestionDialog("确定要取消该预约吗？", runAfter: {
                     self.showProgressDialog()
-                    ApiRequest().api("yuyue").uuid().post("method", "cancelUrl", "id", String(model.id)).onFinish { _, _, response in
+                    ApiSimpleRequest(.Post).api("yuyue").uuid().post("method", "cancelUrl", "id", String(model.id)).onResponse { _, _, response in
                         self.hideProgressDialog()
                         let success = JSON.parse(response)["content"]["msg"].stringValue == "success"
                         if success {

@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable, LoginUserNeeded {
     
     @IBOutlet var tableView : UITableView!
     
@@ -60,7 +60,7 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         // 自定义考试
-        var customCache = CacheHelper.get("herald_exam_custom_\(ApiHelper.getUserName())")
+        var customCache = CacheHelper.get("herald_exam_custom")
         if customCache == "" {
             customCache = "[]"
         }
@@ -115,9 +115,9 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiRequest().api("exam").uuid()
+        ApiSimpleRequest(.Post).api("exam").uuid()
             .toCache("herald_exam")
-            .onFinish { success, _, _ in
+            .onResponse { success, _, _ in
                 self.hideProgressDialog()
                 if success {
                     self.loadCache()

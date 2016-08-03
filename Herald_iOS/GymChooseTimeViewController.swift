@@ -1,7 +1,7 @@
 import UIKit
 import SwiftyJSON
 
-class GymChooseTimeViewController : UIViewController, UITableViewDataSource, UITableViewDelegate {
+class GymChooseTimeViewController : UIViewController, UITableViewDataSource, UITableViewDelegate, LoginUserNeeded {
     
     @IBOutlet var tableView : UITableView!
     
@@ -59,9 +59,9 @@ class GymChooseTimeViewController : UIViewController, UITableViewDataSource, UIT
         let index = picker.selectedSegmentIndex
         
         showProgressDialog()
-        ApiRequest()
+        ApiSimpleRequest(.Post)
             .api("yuyue").uuid().post("method", "getOrder", "itemId", "\(sport.id)", "dayInfo", dateList[picker.selectedSegmentIndex])
-            .onFinish { success, _, response in
+            .onResponse { success, _, response in
                 self.hideProgressDialog()
                 if self.picker.selectedSegmentIndex == index {
                     if success {
@@ -120,8 +120,8 @@ class GymChooseTimeViewController : UIViewController, UITableViewDataSource, UIT
         let time = timeList[indexPath.row].availableTime
         
         showProgressDialog()
-        ApiRequest().api("yuyue").uuid().post("method", "judgeOrder", "itemId", String(sport.id), "dayInfo", date, "time", time)
-            .onFinish { _, _, response in
+        ApiSimpleRequest(.Post).api("yuyue").uuid().post("method", "judgeOrder", "itemId", String(sport.id), "dayInfo", date, "time", time)
+            .onResponse { _, _, response in
                 self.hideProgressDialog()
                 let success = JSON.parse(response)["content"]["code"].stringValue == "0"
                 let code = JSON.parse(response)["content"]["code"].stringValue

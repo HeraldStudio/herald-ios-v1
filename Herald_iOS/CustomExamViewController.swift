@@ -1,7 +1,7 @@
 import UIKit
 import SwiftyJSON
 
-class CustomExamViewController : UIViewController {
+class CustomExamViewController : UIViewController, LoginUserNeeded {
     
     @IBOutlet var examName : UITextField!
     
@@ -14,7 +14,7 @@ class CustomExamViewController : UIViewController {
     var index = -1
     
     override func viewDidLoad() {
-        var cache = CacheHelper.get("herald_exam_custom_\(ApiHelper.getUserName())")
+        var cache = CacheHelper.get("herald_exam_custom")
         if cache == "" {cache = "[]"}
         
         var array = JSON.parse(cache).arrayValue
@@ -63,7 +63,7 @@ class CustomExamViewController : UIViewController {
             "hour":minutes
         ])
         
-        var cache = CacheHelper.get("herald_exam_custom_\(ApiHelper.getUserName())")
+        var cache = CacheHelper.get("herald_exam_custom")
         if cache == "" {cache = "[]"}
         
         var array = JSON.parse(cache).arrayValue
@@ -77,7 +77,7 @@ class CustomExamViewController : UIViewController {
             showMessage("数据保存失败，请重试")
             return
         }
-        CacheHelper.set("herald_exam_custom_\(ApiHelper.getUserName())", newJson)
+        CacheHelper.set("herald_exam_custom", newJson)
         
         navigationController?.popViewControllerAnimated(true)
     }
@@ -87,7 +87,7 @@ class CustomExamViewController : UIViewController {
             navigationController?.popViewControllerAnimated(true)
         } else {
             showQuestionDialog("确认删除该考试吗？", runAfter: {
-                var cache = CacheHelper.get("herald_exam_custom_\(ApiHelper.getUserName())")
+                var cache = CacheHelper.get("herald_exam_custom")
                 if cache == "" {cache = "[]"}
                 
                 var array = JSON.parse(cache).arrayValue
@@ -99,7 +99,7 @@ class CustomExamViewController : UIViewController {
                     self.showMessage("删除失败，请重试")
                     return
                 }
-                CacheHelper.set("herald_exam_custom_\(ApiHelper.getUserName())", newJson)
+                CacheHelper.set("herald_exam_custom", newJson)
                 
                 self.navigationController?.popViewControllerAnimated(true)
             })

@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 
-class CardViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CardViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, ForceTouchPreviewable, LoginUserNeeded {
     
     @IBOutlet var tableView : UITableView!
     
@@ -104,9 +104,7 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         showProgressDialog()
         
         // 先加入刷新余额的请求
-        let manager = ApiThreadManager().add(
-            ApiRequest().api("card").uuid().post("timedelta", "1").toCache("herald_card_today")
-        )
+        var request : ApiRequest = ApiSimpleRequest(.Post).api("card").uuid().post("timedelta", "1").toCache("herald_card_today")
         
         // 取上次刷新日期，与当前日期比较
         let lastRefresh = CacheHelper.get("herald_card_date")
@@ -115,11 +113,11 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         
         // 若与当前日期不同，刷新完整流水记录
         if lastRefresh != stamp {
-            manager.add(ApiRequest().api("card").uuid().post("timedelta", "31").toCache("herald_card"))
+            request |= ApiSimpleRequest(.Post).api("card").uuid().post("timedelta", "31").toCache("herald_card")
         }
         
         // 若刷新成功，保存当前日期
-        manager.onFinish { success in
+        request.onFinish { success, _ in
                     self.hideProgressDialog()
                     if success {
                         CacheHelper.set("herald_card_date", stamp)
@@ -128,8 +126,8 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
                         self.loadCache()
                     } else {
                         self.showMessage("刷新失败，请重试或到充值页面查询")
-                    }
-                }.run()
+            }
+        }.run()
     }
     
     func showError () {
