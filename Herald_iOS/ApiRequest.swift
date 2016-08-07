@@ -48,7 +48,7 @@ typealias OnFinishListener = (Bool, Int) -> Void
 /// 当请求出现致命错误时，提示身份过期并退出登录
 func addFatalErrorListenerInOnFinishList(inout list: [OnFinishListener]) {
     let listener : OnFinishListener = { _, code in
-        if 400 <= code && code < 500 {
+        if code == 401 {
             ApiHelper.notifyUserIdentityExpired()
         }
     }
@@ -60,7 +60,7 @@ func addFatalErrorListenerInOnFinishList(inout list: [OnFinishListener]) {
 /// 当请求出现致命错误时，提示身份过期并退出登录
 func addFatalErrorListenerInOnResponseList(inout list: [OnResponseListener]) {
     let listener : OnResponseListener = { _, code, _ in
-        if 400 <= code && code < 500 {
+        if code == 401 {
             ApiHelper.notifyUserIdentityExpired()
         }
     }
