@@ -9,25 +9,13 @@ import SwiftyJSON
  *  运算，可以得到满足不同需求的复合请求，而复合请求又可以作为新的单元，形成更大的复合请求。
  **/
 
-/// 获取指定 Status Code 对应的错误级别，返回值越大，错误越严重
-func getErrorLevelForStatusCode (code : Int) -> Int {
-    let SUCCESS = 0, WARNING = 1, ERROR = 2, FATAL_ERROR = 3
-    
-    if code <= 200 { // HTTP 正常通信代码
-        return SUCCESS
-    } else if code < 300 { // 稍有异常但无关痛痒的代码
-        return WARNING
-    } else if code < 400 || code >= 500 { // HTTP 出错的代码
-        return ERROR
-    } else { // 400 ~ 499 表示认证失败，必须注销的代码
-        return FATAL_ERROR
-    }
-}
-
 /// 合并两个错误码，即去掉其中错误轻的，保留错误严重的代码
+/// 具体逻辑是以401为最严重，其它错误数字越大越严重
 func mergeStatusCodes (leftCode : Int, _ rightCode : Int) -> Int {
-    let leftSlighter = getErrorLevelForStatusCode(leftCode) < getErrorLevelForStatusCode(rightCode)
-    return leftSlighter ? rightCode : leftCode
+    if leftCode == 401 || rightCode == 401 {
+        return 401
+    }
+    return max(leftCode, rightCode)
 }
 
 /// 闭包类型，表示当前请求中各个简单请求结束的事件。
@@ -43,7 +31,7 @@ typealias OnResponseListener = (Bool, Int, String) -> Void
 /// 如要监听简单请求结束的事件，可使用OnResponseListener
 typealias OnFinishListener = (Bool, Int) -> Void
 
-/// 用来在将要运行的请求中优先加入 4xx 致命错误（400 ~ 499）的监听器
+/// 用来在将要运行的请求中优先加入 401 错误的监听器
 /// 所有复合请求的 run() 函数必须首先调用本函数
 /// 当请求出现致命错误时，提示身份过期并退出登录
 func addFatalErrorListenerInOnFinishList(inout list: [OnFinishListener]) {
@@ -55,7 +43,7 @@ func addFatalErrorListenerInOnFinishList(inout list: [OnFinishListener]) {
     list = [listener] + list
 }
 
-/// 用来在将要运行的请求中优先加入 4xx 致命错误（400 ~ 499）的监听器
+/// 用来在将要运行的请求中优先加入 401 错误的监听器
 /// 所有简单请求的 run() 函数必须首先调用本函数
 /// 当请求出现致命错误时，提示身份过期并退出登录
 func addFatalErrorListenerInOnResponseList(inout list: [OnResponseListener]) {
