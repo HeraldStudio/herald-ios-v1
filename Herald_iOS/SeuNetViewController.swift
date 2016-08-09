@@ -43,12 +43,12 @@ class SeuNetViewController : UIViewController, ForceTouchPreviewable, LoginUserN
     }
     
     func loadCache (showPie : Bool) {
-        let cache = CacheHelper.get("herald_nic")
-        if cache == "" {
+        if Cache.seunet.isEmpty {
             refreshCache()
             return
         }
         
+        let cache = Cache.seunet.value
         var usageStr = JSON.parse(cache)["content"]["web"]["used"].stringValue
         var stateStr = JSON.parse(cache)["content"]["web"]["state"].stringValue
         var leftStr = JSON.parse(cache)["content"]["left"].stringValue
@@ -107,15 +107,14 @@ class SeuNetViewController : UIViewController, ForceTouchPreviewable, LoginUserN
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiSimpleRequest(.Post).api("nic").uuid().toCache("herald_nic")
-            .onResponse { success, _, _ in
-                self.hideProgressDialog()
-                if success {
-                    self.loadCache(true)
-                } else {
-                    self.showMessage("刷新失败，请重试")
-                }
-            }.run()
+        Cache.seunet.refresh { success, _ in
+            self.hideProgressDialog()
+            if success {
+                self.loadCache(true)
+            } else {
+                self.showMessage("刷新失败，请重试")
+            }
+        }
     }
     
     func showError() {

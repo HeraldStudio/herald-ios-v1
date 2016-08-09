@@ -40,46 +40,31 @@ class GymReserveViewController : UIViewController, UITableViewDataSource, UITabl
     }
     
     @IBAction func refreshCache() {
-        let userName = ApiHelper.currentUser.userName
-        
         showProgressDialog()
-        ( ApiSimpleRequest(.Post)
-            .api("yuyue").uuid().post("method", "getDate")
-            .toCache("herald_gymreserve_timelist_and_itemlist")
-            | ApiSimpleRequest(.Post)
-                .api("yuyue").uuid().post("method", "myOrder")
-                .toCache("herald_gymreserve_myorder", notifyModuleIfChanged: ModuleGymReserve)
-            // 预获取用户手机号
-            | ApiSimpleRequest(.Post)
-                .api("yuyue").uuid().post("method", "getPhone")
-                .toCache("herald_gymreserve_phone") { json in json["content"]["phone"] }
-            ).onFinish { success, _ in
-                self.hideProgressDialog()
-                if success {
-                    self.loadCache()
-                } else {
-                    self.showMessage("获取失败，请重试")
-                }
-            }.run()
+        
+        // 获取可预约项目列表
+        ( Cache.gymReserveGetDate.refresher
+        // 获取我的预约列表
+        | Cache.gymReserveMyOrder.refresher
+        // 预获取用户手机号
+        | Cache.gymReserveGetPhone.refresher
+        ).onFinish { success, _ in
+            self.hideProgressDialog()
+            if success {
+                self.loadCache()
+            } else {
+                self.showMessage("获取失败，请重试")
+            }
+        }.run()
         
         // 如果缓存的用户ID为空，预查询用户ID
-        if CacheHelper.get("herald_gymreserve_userid") == "" {
-            ApiSimpleRequest(.Post).api("yuyue").uuid().post("method", "getFriendList")
-                .post("cardNo", userName)
-                .toCache("herald_gymreserve_userid") { json in json["content"][0]["userId"] }.run()
-        }
-    }
-    
-    static func remoteRefreshNotifyDotState() -> ApiRequest {
-        return ApiSimpleRequest(.Post)
-            .api("yuyue").uuid().post("method", "myOrder")
-            .toCache("herald_gymreserve_myorder", notifyModuleIfChanged: ModuleGymReserve)
+        Cache.gymReserveUserId.refreshIfEmpty()
     }
     
     func loadCache() {
-        let timeAndItemListCache = CacheHelper.get("herald_gymreserve_timelist_and_itemlist")
-        let userIdCache = CacheHelper.get("herald_gymreserve_userid")
-        let myOrderCache = CacheHelper.get("herald_gymreserve_myorder")
+        let timeAndItemListCache = Cache.gymReserveGetDate.value
+        let userIdCache = Cache.gymReserveUserId.value
+        let myOrderCache = Cache.gymReserveMyOrder.value
         
         if timeAndItemListCache == "" || userIdCache == "" {
             refreshCache()

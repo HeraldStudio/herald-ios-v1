@@ -76,7 +76,7 @@ class CurriculumView : UIViewController {
         let dayOfWeek = GCalendar(.Day).dayOfWeekFromMonday.rawValue
         
         // 双重列表，用每个子列表表示一天的课程
-        var listOfList : [[ClassInfo]] = []
+        var listOfList : [[ClassModel]] = []
         
         // 放两个循环是为了先把列数确定下来
         for i in 0 ..< 7 {
@@ -84,10 +84,10 @@ class CurriculumView : UIViewController {
             var array = obj[CurriculumView.WEEK_NUMS[i]]
             
             // 剔除不属于本周的课程，并将对应的课程添加到对应星期的列表中
-            var list : [ClassInfo] = []
+            var list : [ClassModel] = []
             for j in 0 ..< array.count {
                 do {
-                    let info = try ClassInfo(json: array[j])
+                    let info = try ClassModel(json: array[j])
                     info.weekNum = CurriculumView.WEEK_NUMS_CN[i]
                     let startWeek = info.startWeek
                     let endWeek = info.endWeek
@@ -171,7 +171,7 @@ class CurriculumView : UIViewController {
         
         // 绘制每节课的方块
         for i in 0 ..< N {
-            let info = list[i] as! ClassInfo
+            let info = list[i] as! ClassModel
             let block = CurriculumBlock(frame: CGRect(
                 x: x,
                 y: topPadding + CGFloat(info.startTime) * height / CGFloat(CurriculumView.PERIOD_COUNT + 1) + 0.5,

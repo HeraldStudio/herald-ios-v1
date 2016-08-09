@@ -39,7 +39,7 @@ class GymChooseTimeViewController : UIViewController, UITableViewDataSource, UIT
         
         dateList.removeAll()
         picker.removeAllSegments()
-        let cache = CacheHelper.get("herald_gymreserve_timelist_and_itemlist")
+        let cache = Cache.gymReserveGetDate.value
         for time in JSON.parse(cache)["content"]["timeList"].arrayValue {
             let title = time["dayInfo"].stringValue
             dateList.append(title)

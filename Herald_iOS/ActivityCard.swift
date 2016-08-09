@@ -12,14 +12,14 @@ import SwiftyJSON
 class ActivityCard {
     
     static func getRefresher () -> ApiRequest {
-        return ApiSimpleRequest(.Get).url("http://115.28.27.150/herald/api/v1/huodong/get?type=hot").toCache("herald_activity_hot")
+        return Cache.activityHot.refresher
     }
     
     static func getCard () -> CardsModel {
-        let cache = CacheHelper.get("herald_activity_hot")
-        if cache == "" {
+        if Cache.activityHot.isEmpty {
             return CardsModel(cellId: "CardsCellActivity", icon : "ic_activity-1", title : "校园活动", desc: "热门活动数据为空，请尝试刷新", dest : "TAB1", message: "", priority: .CONTENT_NOTIFY)
         }
+        let cache = Cache.activityHot.value
         
         let content = JSON.parse(cache)["content"]
         

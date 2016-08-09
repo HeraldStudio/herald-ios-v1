@@ -51,7 +51,7 @@ class GymAddFriendViewController : UIViewController, UISearchBarDelegate, UITabl
         cell.button.setTitle(title, forState: .Highlighted)
         cell.button.setTitle(title, forState: .Selected)
         cell.toggleAction = { () in
-            let isMyself = String(model.userId) == CacheHelper.get("herald_gymreserve_userid")
+            let isMyself = String(model.userId) == Cache.gymReserveUserId.value
             if isMyself {
                 self.searchBar.resignFirstResponder()
                 self.showMessage("不允许添加自己为好友喔~")

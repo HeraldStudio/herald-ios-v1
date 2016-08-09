@@ -48,11 +48,11 @@ class CardsRowModel {
     init () {}
     
     /// 从课表模块的原始数据构造一行卡片详情
-    init (classInfo : ClassInfo, teacher: String) {
-        self.title = classInfo.className
+    init (classModel : ClassModel, teacher: String) {
+        self.title = classModel.className
         self.subtitle = teacher
-        let time = classInfo.getTimePeriod()
-        let place = classInfo.place
+        let time = classModel.getTimePeriod()
+        let place = classModel.place
             .replaceAll("(单)", "")
             .replaceAll("(双)", "")
         self.desc = time + " @ " + place

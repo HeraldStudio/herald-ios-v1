@@ -15,7 +15,7 @@ import SwiftyJSON
 class ExamCard {
     
     static func getRefresher () -> ApiRequest {
-        return ApiSimpleRequest(.Post).api("exam").uuid().toCache("herald_exam")
+        return Cache.exam.refresher
     }
 
     static func getCard() -> CardsModel {
@@ -23,12 +23,13 @@ class ExamCard {
             return CardsModel(cellId: "CardsCellExam", module: ModuleExam, desc: "登录即可使用考试查询、智能提醒功能", priority: .NO_CONTENT)
         }
         
-        let cache = CacheHelper.get("herald_exam")
-        if cache == "" {
+        if Cache.exam.isEmpty {
             return CardsModel(cellId: "CardsCellExam", module: ModuleExam, desc: "考试数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
         }
         
-        let customCache = CacheHelper.get("herald_exam_custom")
+        let cache = Cache.exam.value
+        
+        let customCache = Cache.examCustom.value
         let json = JSON.parse(cache)["content"]
         let jsonCustom = JSON.parse(customCache)
         

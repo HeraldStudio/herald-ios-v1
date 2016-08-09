@@ -15,15 +15,15 @@ import SwiftyJSON
 class LectureCard {
     
     static func getRefresher () -> ApiRequest {
-        return ApiSimpleRequest(.Post).url(ApiHelper.wechat_lecture_notice_url).uuid().toCache("herald_lecture_notices")
+        return Cache.lectureNotices.refresher
     }
     
     static func getCard() -> CardsModel {
-        let cache = CacheHelper.get("herald_lecture_notices")
-        if cache == "" {
+        if Cache.lectureNotices.isEmpty {
             return CardsModel(cellId: "CardsCellLecture", module: ModuleLecture, desc: "人文讲座数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
         }
         
+        let cache = Cache.lectureNotices.value
         let jsonArray = JSON.parse(cache)["content"]
         var lectures : [CardsRowModel] = []
         
