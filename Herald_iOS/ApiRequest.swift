@@ -96,6 +96,8 @@ func |= (inout left: ApiRequest, right: ApiRequest) {
 /**
  * ApiEmptyRequest | 空请求
  * 请求运算中的单位元，任何请求与空请求做运算都得到其本身。
+ * 
+ * 慎用！此类仅作为多个请求叠加时的初始化工具，只作为左操作数，不用于其它用途，也不要用作右操作数，否则可能会出现各种问题
  **/
 class ApiEmptyRequest : ApiRequest {
     

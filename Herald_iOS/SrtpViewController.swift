@@ -44,12 +44,12 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     func loadCache() {
         
-        let cache = CacheHelper.get("herald_srtp")
-        if cache == "" {
+        if Cache.srtp.isEmpty {
             refreshCache()
             return
         }
         
+        let cache = Cache.srtp.value
         let jsonCache = JSON.parse(cache)["content"]
         
         items.removeAll()
@@ -90,22 +90,18 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiSimpleRequest(.Post).api("srtp").uuid().post("schoolnum", ApiHelper.currentUser.schoolNum)
-            .toCache("herald_srtp", notifyModuleIfChanged: ModuleSrtp)
-            .onResponse { success, _, _ in
-                self.hideProgressDialog()
-                if success {
-                    self.loadCache()
-                } else {
-                    self.showMessage("刷新失败，请重试")
-                }
-            }.run()
+        Cache.srtp.refresh { success, _ in
+            self.hideProgressDialog()
+            if success {
+                self.loadCache()
+            } else {
+                self.showMessage("刷新失败，请重试")
+            }
+        }
     }
     
     static func remoteRefreshNotifyDotState() -> ApiRequest {
-        return
-            ApiSimpleRequest(.Post).api("srtp").uuid().post("schoolnum", ApiHelper.currentUser.schoolNum)
-                .toCache("herald_srtp", notifyModuleIfChanged: ModuleSrtp)
+        return Cache.srtp.refresher
     }
     
     func showError () {

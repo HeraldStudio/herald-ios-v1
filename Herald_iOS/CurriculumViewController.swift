@@ -35,9 +35,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ( ApiSimpleRequest(.Post).api("sidebar").uuid().toCache("herald_sidebar") {json in json["content"]}
-        | ApiSimpleRequest(.Post).api("curriculum").uuid().toCache("herald_curriculum") {json in json["content"]}
-        ).onFinish { success, _ in
+        (Cache.curriculumSidebar.refresher | Cache.curriculum.refresher).onFinish { success, _ in
             self.hideProgressDialog()
             if success {
                 self.readLocal()
@@ -48,8 +46,8 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
     }
     
     func readLocal () {
-        let data = CacheHelper.get("herald_curriculum")
-        let sidebar = CacheHelper.get("herald_sidebar")
+        let data = Cache.curriculum.value
+        let sidebar = Cache.curriculumSidebar.value
         if data == "" {
             refreshCache()
             return
@@ -67,7 +65,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
             let arr = content[weekNum]
             for i in 0 ..< arr.count {
                 do {
-                    let info = try ClassInfo(json: arr[i])
+                    let info = try ClassModel(json: arr[i])
                     if info.endWeek > maxWeek {
                         maxWeek = info.endWeek
                     }

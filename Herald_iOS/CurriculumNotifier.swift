@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class CurriculumNotifier {
     
-    static func scheduleNotificationsForClassInfo (info : ClassInfo, startDate : GCalendar) {
+    static func scheduleNotificationsForClassModel (info : ClassModel, startDate : GCalendar) {
         for week in info.startWeek ..< info.endWeek + 1 {
             if info.isFitEvenOrOdd(week) {
                 let cal = GCalendar(startDate)
@@ -39,8 +39,9 @@ class CurriculumNotifier {
     }
 
     static func scheduleNotifications () {
-        let cache = CacheHelper.get("herald_curriculum")
-        if cache == "" { return }
+        if Cache.curriculum.isEmpty { return }
+        
+        let cache = Cache.curriculum.value
         let content = JSON.parse(cache)
         
         // 读取开学日期
@@ -63,9 +64,9 @@ class CurriculumNotifier {
         for i in 0 ..< 7 {
             for k in content[CurriculumView.WEEK_NUMS[i]].arrayValue {
                 do {
-                    let classInfo = try ClassInfo(json: k)
-                    classInfo.weekDay = i
-                    scheduleNotificationsForClassInfo(classInfo, startDate: cal)
+                    let classModel = try ClassModel(json: k)
+                    classModel.weekDay = i
+                    scheduleNotificationsForClassModel(classModel, startDate: cal)
                 } catch {}
             }
         }

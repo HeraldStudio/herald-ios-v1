@@ -103,15 +103,14 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
     /// 联网刷新并存入缓存，若成功，载入缓存内容；否则显示错误提示
     @IBAction func refreshCache() {
         showProgressDialog()
-        ApiSimpleRequest(.Get).url("http://115.28.27.150/herald/api/v1/huodong/get").toCache("herald_activity")
-            .onResponse { success, _, _ in
-                self.hideProgressDialog()
-                self.loadCache()
+        Cache.activity.refresh { success, _ in
+            self.hideProgressDialog()
+            self.loadCache()
                 
-                if !success {
-                    self.showMessage("刷新失败，请重试")
-                }
-        }.run()
+            if !success {
+                self.showMessage("刷新失败，请重试")
+            }
+        }
     }
     
     /// 载入缓存内容
@@ -124,7 +123,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         page = 0
         
         // 如果有数据，逐条添加数据，并设置当前页数为1
-        for k in JSON.parse(CacheHelper.get("herald_activity"))["content"].arrayValue {
+        for k in JSON.parse(Cache.activity.value)["content"].arrayValue {
             self.data.append(ActivityModel(k))
             self.page = 1
         }

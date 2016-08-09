@@ -309,21 +309,21 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         if ModuleCurriculum.cardEnabled && ApiHelper.isLogin() {
             // 仅当课表数据不存在时刷新课表
-            if CacheHelper.get("herald_curriculum") == "" || CacheHelper.get("herald_sidebar") == "" {
+            if Cache.curriculum.isEmpty || Cache.curriculumSidebar.isEmpty {
                 parallelRequest |= CurriculumCard.getRefresher()
             }
         }
         
         if ModuleExperiment.cardEnabled && ApiHelper.isLogin() {
             // 仅当实验数据不存在时刷新实验
-            if CacheHelper.get("herald_experiment") == "" {
+            if Cache.experiment.isEmpty {
                 parallelRequest |= ExperimentCard.getRefresher()
             }
         }
         
         if ModuleExam.cardEnabled && ApiHelper.isLogin() {
             // 仅当考试数据不存在时刷新考试
-            if CacheHelper.get("herald_exam") == "" {
+            if Cache.exam.isEmpty {
                 parallelRequest |= ExamCard.getRefresher()
             }
         }
@@ -353,10 +353,10 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         if ApiHelper.isLogin() {
             parallelRequest |=
-                ( GymReserveViewController.remoteRefreshNotifyDotState()
-                | SrtpViewController.remoteRefreshNotifyDotState()
-                | GradeViewController.remoteRefreshNotifyDotState()
-                | LibraryViewController.remoteRefreshNotifyDotState()
+                ( Cache.gymReserveMyOrder.refresher
+                | Cache.srtp.refresher
+                | Cache.grade.refresher
+                | Cache.libraryBorrowBook.refresher
                 )
         }
 

@@ -1,11 +1,3 @@
-//
-//  WifiLoginHelper.swift
-//  Herald_iOS
-//
-//  Created by 于海通 on 16/5/5.
-//  Copyright © 2016年 HeraldStudio. All rights reserved.
-//
-
 import Foundation
 import UIKit
 import SwiftyJSON
@@ -22,8 +14,8 @@ class WifiLoginHelper {
     
     func checkAndLogin () {
         
-        /// 此段代码需要使用用户名和密码，先判断是否处于未登录状态
-        if !ApiHelper.isLogin() {
+        /// 此段代码需要使用 Wifi 用户名和密码，先判断是否已登录或已自定义Wifi账号
+        if !ApiHelper.isWifiLoginAvailable() {
             if let wholeController = AppDelegate.instance.wholeController {
                 wholeController.showQuestionDialog("您处于未登录状态，校园网快捷登录功能需要登录或自定义账号才能使用，是否立即登录？"){
                     
@@ -64,7 +56,6 @@ class WifiLoginHelper {
                     //self.vc.showMessage("摇一摇：未登录状态，正在尝试登录~")
                     self.loginToService()
                     
-                    /// 此处由于已经判断用户已登录，故断言 ApiHelper.getWifiUserName() 非空
                 } else if !response.containsString(ApiHelper.getWifiUserName()) {
                     // 已登录，但账号与当前设置的账号不同
                     //self.vc.showMessage("摇一摇：已登录其它账号，正在尝试退出~")
@@ -96,7 +87,6 @@ class WifiLoginHelper {
     }
     
     private func loginToService () {
-        /// 此处由于已经判断用户已登录，故断言 ApiHelper.getWifiUserName()/getWifiPassword() 非空
         let username = ApiHelper.getWifiUserName()
         let password = ApiHelper.getWifiPassword()
         

@@ -65,12 +65,13 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
     var displayDays = 7
     
     func loadCache() {
-        // 仅有余额的缓存，这个缓存刷新永远比完整的缓存快
-        let todayCache = CacheHelper.get("herald_card_today")
-        let cache = CacheHelper.get("herald_card")
-        if cache == "" || todayCache == "" {
+        if Cache.cardToday.isEmpty || Cache.card.isEmpty {
             return
         }
+        
+        // 当天的缓存，这个缓存刷新永远比完整的缓存快
+        let todayCache = Cache.cardToday.value
+        let cache = Cache.card.value
         
         let extra = JSON.parse(todayCache)["content"]["left"].stringValue.replaceAll(",", "")
         title = "余额：" + extra
@@ -104,23 +105,23 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         showProgressDialog()
         
         // 先加入刷新余额的请求
-        var request : ApiRequest = ApiSimpleRequest(.Post).api("card").uuid().post("timedelta", "1").toCache("herald_card_today")
+        var request : ApiRequest = Cache.cardToday.refresher
         
         // 取上次刷新日期，与当前日期比较
-        let lastRefresh = CacheHelper.get("herald_card_date")
+        let lastRefresh = Cache.cardDate.value
         let date = GCalendar(.Day)
         let stamp = "\(date.year)/\(date.month)/\(date.day)"
         
         // 若与当前日期不同，刷新完整流水记录
         if lastRefresh != stamp {
-            request |= ApiSimpleRequest(.Post).api("card").uuid().post("timedelta", "31").toCache("herald_card")
+            request |= Cache.card.refresher
         }
         
         // 若刷新成功，保存当前日期
         request.onFinish { success, _ in
                     self.hideProgressDialog()
                     if success {
-                        CacheHelper.set("herald_card_date", stamp)
+                        Cache.cardDate.value = stamp
                         self.displayDays = 7
                         self.puller.enable()
                         self.loadCache()
