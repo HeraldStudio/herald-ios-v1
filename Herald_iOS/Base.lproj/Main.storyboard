@@ -1769,18 +1769,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="课表助手" id="itE-9d-fi4">
                         <barButtonItem key="backBarButtonItem" title="返回" id="uQW-kB-2Cb"/>
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="eEJ-wO-A2N">
-                                <connections>
-                                    <action selector="refreshCache" destination="d6o-yY-zYP" id="H69-ji-Ox0"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="add" id="JXu-SH-KtD">
-                                <connections>
-                                    <segue destination="KAI-Rb-FUa" kind="push" id="Ojq-yg-ypY"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="浮动课程" id="JXu-SH-KtD">
+                            <connections>
+                                <segue destination="KAI-Rb-FUa" kind="push" id="Ojq-yg-ypY"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -1792,10 +1785,10 @@
             </objects>
             <point key="canvasLocation" x="1291" y="-3330"/>
         </scene>
-        <!--添加课程-->
+        <!--浮动课程-->
         <scene sceneID="f2k-au-JUK">
             <objects>
-                <tableViewController id="KAI-Rb-FUa" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MODULE_QUERY_CURRICULUM_ADD_SELECT" id="KAI-Rb-FUa" customClass="CurriculumFloatClassViewController" customModule="小猴偷米" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="56" sectionHeaderHeight="18" sectionFooterHeight="18" id="cUl-rc-ivv">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1803,35 +1796,15 @@
                         <color key="separatorColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CurriculumAddClassTableViewCell" rowHeight="43" id="cHY-if-RTo">
-                                <rect key="frame" x="0.0" y="49.5" width="320" height="43"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cHY-if-RTo" id="sxZ-FO-I9s">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="42.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="添加自定义课程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rr8-Ww-UPD">
-                                            <rect key="frame" x="16" y="11" width="119" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="Rr8-Ww-UPD" firstAttribute="leading" secondItem="sxZ-FO-I9s" secondAttribute="leadingMargin" constant="8" id="Ew1-ps-tet"/>
-                                        <constraint firstItem="Rr8-Ww-UPD" firstAttribute="centerY" secondItem="sxZ-FO-I9s" secondAttribute="centerY" id="Wr6-FX-ihh"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CurriculumPresetClassTableViewCell" rowHeight="56" id="eHf-h3-tzu">
-                                <rect key="frame" x="0.0" y="92.5" width="320" height="56"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CurriculumFloatClassTableViewCell" rowHeight="56" id="eHf-h3-tzu" customClass="CurriculumFloatClassTableViewCell" customModule="小猴偷米" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="49.5" width="320" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eHf-h3-tzu" id="ihB-bg-3t4">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="课程名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hd4-Ig-yE7">
-                                            <rect key="frame" x="16" y="8" width="229" height="21"/>
+                                            <rect key="frame" x="16" y="8" width="68" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="QgU-z1-Yv9"/>
                                             </constraints>
@@ -1848,33 +1821,29 @@
                                             <color key="textColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="未添加" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Dc-Cy-8SI">
-                                            <rect key="frame" x="253" y="8" width="51" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.6705882352941176" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="hZb-S9-Q95" secondAttribute="trailing" constant="8" id="1iu-QS-aF0"/>
-                                        <constraint firstItem="5Dc-Cy-8SI" firstAttribute="leading" secondItem="hd4-Ig-yE7" secondAttribute="trailing" constant="8" id="2gy-9k-3US"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="hZb-S9-Q95" secondAttribute="bottom" id="6cY-Jb-l9c"/>
                                         <constraint firstItem="hd4-Ig-yE7" firstAttribute="top" secondItem="ihB-bg-3t4" secondAttribute="top" constant="8" id="FGI-ts-wN9"/>
                                         <constraint firstItem="hZb-S9-Q95" firstAttribute="leading" secondItem="ihB-bg-3t4" secondAttribute="leadingMargin" constant="8" id="IHm-LO-BMt"/>
                                         <constraint firstItem="hZb-S9-Q95" firstAttribute="top" secondItem="ihB-bg-3t4" secondAttribute="top" constant="27" id="V7B-iY-ssr"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="5Dc-Cy-8SI" secondAttribute="trailing" constant="8" id="XbK-mD-pat"/>
-                                        <constraint firstItem="5Dc-Cy-8SI" firstAttribute="top" secondItem="ihB-bg-3t4" secondAttribute="top" constant="8" id="a2G-6z-xae"/>
                                         <constraint firstItem="hd4-Ig-yE7" firstAttribute="leading" secondItem="ihB-bg-3t4" secondAttribute="leadingMargin" constant="8" id="dew-ks-rJT"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="className" destination="hd4-Ig-yE7" id="iab-5f-U0r"/>
+                                    <outlet property="info" destination="hZb-S9-Q95" id="qiE-IR-NDb"/>
+                                </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CurriculumEmptyTableViewCell" rowHeight="56" id="GNb-sH-dVa" customClass="ExamTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="148.5" width="320" height="56"/>
+                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CurriculumEmptyTableViewCell" rowHeight="56" id="GNb-sH-dVa" customClass="NoSelectionTableViewCell" customModule="小猴偷米" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="105.5" width="320" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" tableViewCell="GNb-sH-dVa" id="tLI-rC-qza">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前学期暂无课程" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbe-zB-Kz6">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无浮动课程" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbe-zB-Kz6">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="56" id="6eH-9K-ITj"/>
@@ -1898,8 +1867,13 @@
                             <outlet property="delegate" destination="KAI-Rb-FUa" id="slS-rd-f6s"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="添加课程" id="6B1-HV-rFR">
+                    <navigationItem key="navigationItem" title="浮动课程" id="6B1-HV-rFR">
                         <barButtonItem key="backBarButtonItem" title="返回" id="23k-Ll-BHe"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="j6R-oH-HdM">
+                            <connections>
+                                <action selector="refreshCache" destination="KAI-Rb-FUa" id="vHR-ZX-5Pw"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mae-wr-5hQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1985,7 +1959,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iwj-iZ-vxz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3170" y="-3330"/>
+            <point key="canvasLocation" x="2687" y="-3324"/>
         </scene>
         <!--考试助手-->
         <scene sceneID="dUf-8u-3CB">
@@ -2113,7 +2087,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ua4-g5-Rfa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2710" y="-3330"/>
+            <point key="canvasLocation" x="2227" y="-3324"/>
         </scene>
         <!--实验助手-->
         <scene sceneID="92k-UL-WYT">
@@ -2235,7 +2209,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pO0-t9-6oU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3641" y="-3330"/>
+            <point key="canvasLocation" x="3158" y="-3324"/>
         </scene>
         <!--成绩查询-->
         <scene sceneID="kEf-OS-xML">
@@ -2446,7 +2420,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sE0-8f-MHS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4099" y="-3330"/>
+            <point key="canvasLocation" x="3616" y="-3324"/>
         </scene>
         <!--教务通知-->
         <scene sceneID="REC-VP-v7p">
@@ -2520,7 +2494,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dng-Gf-G2B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4566" y="-3330"/>
+            <point key="canvasLocation" x="4083" y="-3324"/>
         </scene>
         <!--选择时间段-->
         <scene sceneID="AXV-0f-oi4">

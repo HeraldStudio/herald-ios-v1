@@ -48,9 +48,15 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
     func readLocal () {
         let data = Cache.curriculum.value
         let sidebar = Cache.curriculumSidebar.value
+        let floatCount = CurriculumFloatClassViewController.getFloatClassCount()
+        
         if data == "" {
             refreshCache()
             return
+        }
+        
+        if let floatClassButton = navigationItem.rightBarButtonItem {
+            floatClassButton.title = "浮动课程(\(floatCount))"
         }
         
         var maxWeek = 0
@@ -59,8 +65,6 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
         let content = JSON.parse(data)
         
         // 计算总周数
-        var hasInvalid = false
-        
         for weekNum in CurriculumView.WEEK_NUMS {
             let arr = content[weekNum]
             for i in 0 ..< arr.count {
@@ -69,18 +73,13 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
                     if info.endWeek > maxWeek {
                         maxWeek = info.endWeek
                     }
-                } catch {
-                    hasInvalid = true
-                }
+                } catch {}
             }
-        }
-        if hasInvalid {
-            showInvalidClassError()
         }
         
         // 如果没课，什么也不做
         if maxWeek < 1 {
-            showMessage("暂无课程")
+            showMessage("暂无固定课程")
             return
         }
         
@@ -146,10 +145,6 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
     func showError () {
         title = "课表助手"
         showMessage("解析失败，请刷新")
-    }
-    
-    func showInvalidClassError() {
-        showTipDialogIfUnknown("部分课程导入失败，请刷新重试。\n\n注意：暂不支持导入辅修课，敬请期待后续版本。", cachePostfix: "curriculum_invalid_class") {}
     }
     
     func removeAllPages () {

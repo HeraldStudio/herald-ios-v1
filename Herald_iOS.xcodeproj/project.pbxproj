@@ -39,8 +39,8 @@
 		D33438521D1A18B400CD49D6 /* LibrarySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33438511D1A18B400CD49D6 /* LibrarySearchViewController.swift */; };
 		D33438591D1A2DE900CD49D6 /* NirKxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D33438581D1A2DE900CD49D6 /* NirKxMenu.m */; };
 		D33678F81CE5971C001E7C25 /* CurriculumNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */; };
-		D33B2DF41D598D1A00E7FBF1 /* SidebarClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF31D598D1A00E7FBF1 /* SidebarClassCell.swift */; };
-		D33B2DF61D59939500E7FBF1 /* CurriculumSelectAddClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF51D59939500E7FBF1 /* CurriculumSelectAddClassViewController.swift */; };
+		D33B2DF41D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF31D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift */; };
+		D33B2DF61D59939500E7FBF1 /* CurriculumFloatClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF51D59939500E7FBF1 /* CurriculumFloatClassViewController.swift */; };
 		D33B2DF81D59CD0600E7FBF1 /* SidebarClassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF71D59CD0600E7FBF1 /* SidebarClassModel.swift */; };
 		D33B2DFA1D59D68E00E7FBF1 /* Caches.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF91D59D68E00E7FBF1 /* Caches.swift */; };
 		D33B2DFC1D59D6AE00E7FBF1 /* AppCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DFB1D59D6AE00E7FBF1 /* AppCache.swift */; };
@@ -189,8 +189,8 @@
 		D33438571D1A2DE900CD49D6 /* NirKxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NirKxMenu.h; sourceTree = "<group>"; };
 		D33438581D1A2DE900CD49D6 /* NirKxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NirKxMenu.m; sourceTree = "<group>"; };
 		D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumNotifier.swift; sourceTree = "<group>"; };
-		D33B2DF31D598D1A00E7FBF1 /* SidebarClassCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarClassCell.swift; sourceTree = "<group>"; };
-		D33B2DF51D59939500E7FBF1 /* CurriculumSelectAddClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumSelectAddClassViewController.swift; sourceTree = "<group>"; };
+		D33B2DF31D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumFloatClassTableViewCell.swift; sourceTree = "<group>"; };
+		D33B2DF51D59939500E7FBF1 /* CurriculumFloatClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumFloatClassViewController.swift; sourceTree = "<group>"; };
 		D33B2DF71D59CD0600E7FBF1 /* SidebarClassModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarClassModel.swift; sourceTree = "<group>"; };
 		D33B2DF91D59D68E00E7FBF1 /* Caches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caches.swift; sourceTree = "<group>"; };
 		D33B2DFB1D59D6AE00E7FBF1 /* AppCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCache.swift; sourceTree = "<group>"; };
@@ -458,8 +458,8 @@
 				D31DE5191CC35A3100E4891D /* CurriculumView.swift */,
 				D31DE5131CC3597800E4891D /* CurriculumBlock.swift */,
 				D31DE5111CC3592F00E4891D /* ClassModel.swift */,
-				D33B2DF51D59939500E7FBF1 /* CurriculumSelectAddClassViewController.swift */,
-				D33B2DF31D598D1A00E7FBF1 /* SidebarClassCell.swift */,
+				D33B2DF51D59939500E7FBF1 /* CurriculumFloatClassViewController.swift */,
+				D33B2DF31D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift */,
 				D33B2DF71D59CD0600E7FBF1 /* SidebarClassModel.swift */,
 			);
 			name = curriculum;
@@ -871,7 +871,7 @@
 				D3A0C1721CBB7A9800744640 /* CardsViewController.swift in Sources */,
 				D33438591D1A2DE900CD49D6 /* NirKxMenu.m in Sources */,
 				D3E6BD7F1CC8C07F0074FF6D /* ModuleManagerViewController.swift in Sources */,
-				D33B2DF61D59939500E7FBF1 /* CurriculumSelectAddClassViewController.swift in Sources */,
+				D33B2DF61D59939500E7FBF1 /* CurriculumFloatClassViewController.swift in Sources */,
 				D3F473471CCA05CD00750FFB /* JwcViewController.swift in Sources */,
 				D34858111CBB57F600B55E76 /* ExtNSUserDefaults.swift in Sources */,
 				D3ED99E01CCB3DFD00001E2B /* SrtpViewController.swift in Sources */,
@@ -900,7 +900,7 @@
 				D3ED99E21CCB5BCB00001E2B /* LibraryBookModel.swift in Sources */,
 				D38E6F351D2F231B001E6172 /* RootControllers.swift in Sources */,
 				D3D849FC1CFBD88200F083DF /* ExtJSON.swift in Sources */,
-				D33B2DF41D598D1A00E7FBF1 /* SidebarClassCell.swift in Sources */,
+				D33B2DF41D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift in Sources */,
 				D3D5D44D1CE99EDC000E406A /* GymFriendModel.swift in Sources */,
 				D31DE5121CC3592F00E4891D /* ClassModel.swift in Sources */,
 				D3F4734D1CCA153A00750FFB /* LectureModel.swift in Sources */,
