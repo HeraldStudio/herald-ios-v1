@@ -7,8 +7,8 @@ import UIKit
 //- 3、本控件要放在最顶部，例如可以作为 UITableView 的 tableHeaderView 使用
 //- 4、初始 contentOffset.y 必须为零，因此不能放在开启 translucent 属性的 UINavigationBar 下
 /// 5、将本控件添加到父控件前，要先设置 themeColor、refresher
-/// 6、在父控件 scrollViewDidScroll 代理方法中要调用 syncApperance(_:)，参数是父控件的 contentOffset
-/// 7、在父控件 scrollViewDidBeginDragging 代理方法中要调用 beginDrag()
+/// 6、在父控件 scrollViewDidScroll 代理方法中要调用 syncApperance()
+/// 7、在父控件 scrollViewWillBeginDragging 代理方法中要调用 beginDrag()
 /// 8、在父控件 scrollViewDidEndDragging 代理方法中要调用 endDrag()
 
 class SwipeRefreshHeader : UIView {
@@ -44,6 +44,9 @@ class SwipeRefreshHeader : UIView {
     
     /// 下拉刷新中的文字，默认为REFRESH
     var tipText = "REFRESH"
+    
+    /// 下拉刷新是否启用，若没有启用，将不会显示
+    var enabled = true
     
     init(_ place : SwipeRefreshHeaderDisplayPlace) {
         self.displayPlace = place
@@ -96,6 +99,9 @@ class SwipeRefreshHeader : UIView {
         }
         let x = (superview! as! UIScrollView).contentOffset.x
         let y = (superview! as! UIScrollView).contentOffset.y
+        
+        // 若已禁用下拉刷新，则当 y <= 0 时关闭列表弹性，这样就可以只关闭顶部弹性，不影响底部弹性
+        (superview! as! UIScrollView).bounces = enabled || y > 0
         
         // 设置背景色
         if themeColor != nil {

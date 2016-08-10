@@ -299,7 +299,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         showProgressDialog()
         
         // 暂时关闭列表的下拉刷新
-        cardsTableView.bounces = false
+        swiper.enabled = false
         
         // 线程管理器
         var parallelRequest : ApiRequest = ApiEmptyRequest()
@@ -369,8 +369,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         }.onFinish { success, _ in
             self.hideProgressDialog()
             
-            // 暂时关闭列表的下拉刷新
-            self.cardsTableView.bounces = true
+            // 恢复列表的下拉刷新功能
+            self.swiper.enabled = true
             
             if !success {
                 self.showMessage("部分数据刷新失败")

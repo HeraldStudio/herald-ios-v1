@@ -62,10 +62,6 @@ protocol ApiRequest {
     
     func onFinish(listener : OnFinishListener) -> ApiRequest
     
-    func chain(nextRequest : ApiRequest) -> ApiRequest
-    
-    func parallel(anotherRequest : ApiRequest) -> ApiRequest
-    
     /// 不添加 4xx 错误监听器，直接运行。
     /// 该函数用于外层复合请求调用内层请求时使用，防止 4xx 错误监听器重复添加。
     /// 在需要忽略 4xx 错误的情况下，此函数也可以从外部调用。
@@ -77,27 +73,25 @@ protocol ApiRequest {
 
 /// 用-号表示顺次复合运算
 func - (left: ApiRequest, right: ApiRequest) -> ApiRequest {
-    return left.chain(right)
+    return ApiChainRequest(left, right)
 }
 
 func -= (inout left: ApiRequest, right: ApiRequest) {
-    left = left.chain(right)
+    left = left - right
 }
 
 /// 用|号表示同时复合运算
 func | (left: ApiRequest, right: ApiRequest) -> ApiRequest {
-    return left.parallel(right)
+    return ApiParallelRequest(left, right)
 }
 
 func |= (inout left: ApiRequest, right: ApiRequest) {
-    left = left.parallel(right)
+    left = left | right
 }
 
 /**
  * ApiEmptyRequest | 空请求
  * 请求运算中的单位元，任何请求与空请求做运算都得到其本身。
- * 
- * 慎用！此类仅作为多个请求叠加时的初始化工具，只作为左操作数，不用于其它用途，也不要用作右操作数，否则可能会出现各种问题
  **/
 class ApiEmptyRequest : ApiRequest {
     
@@ -110,14 +104,6 @@ class ApiEmptyRequest : ApiRequest {
     
     func onFinish(listener: OnFinishListener) -> ApiRequest {
         return onResponse { success, code, response in listener(success, code) }
-    }
-    
-    func chain(nextRequest: ApiRequest) -> ApiRequest {
-        return nextRequest
-    }
-    
-    func parallel(anotherRequest: ApiRequest) -> ApiRequest {
-        return anotherRequest
     }
     
     func runWithoutFatalListener() {
@@ -309,14 +295,6 @@ class ApiSimpleRequest : ApiRequest {
         return self
     }
     
-    func chain(nextRequest: ApiRequest) -> ApiRequest {
-        return ApiChainRequest(self, nextRequest)
-    }
-    
-    func parallel(anotherRequest: ApiRequest) -> ApiRequest {
-        return ApiParallelRequest(self, anotherRequest)
-    }
-    
     /**
      * 执行部分
      **/
@@ -342,7 +320,7 @@ class ApiSimpleRequest : ApiRequest {
 /**
  * ApiChainRequest | 短路顺次请求
  *
- * 利用 request1.chain(request2) 或 request1 - request2 运算可得到一个 ApiChainRequest
+ * 利用 request1 - request2 运算可得到一个 ApiChainRequest
  * 当前一个子请求执行完毕后，判断其是否执行成功，若执行成功则启动后一个子请求，直到所有子请求结束。
  * 仅当所有子请求都执行成功，才视为 ApiChainRequest 执行成功。
  * 此请求是短路的，即左边的请求如果失败，将不会继续向右执行。
@@ -400,14 +378,6 @@ class ApiChainRequest : ApiRequest {
         return self
     }
     
-    func chain(nextRequest: ApiRequest) -> ApiRequest {
-        return ApiChainRequest(self, nextRequest)
-    }
-    
-    func parallel(anotherRequest: ApiRequest) -> ApiRequest {
-        return ApiParallelRequest(self, anotherRequest)
-    }
-    
     func runWithoutFatalListener() {
         leftRequest.runWithoutFatalListener()
     }
@@ -421,7 +391,7 @@ class ApiChainRequest : ApiRequest {
 /**
  * ApiParallelRequest | 同时请求
  * 
- * 利用 request1.parallel(request2) 或 request1 | request2 运算可得到一个 ApiParallelRequest
+ * 利用 request1 | request2 运算可得到一个 ApiParallelRequest
  * 所有子请求同时开始执行，直到最后结束的请求结束。
  * 仅当所有子请求都执行成功，才视为 ApiParallelRequest 执行成功。
  **/
@@ -441,31 +411,24 @@ class ApiParallelRequest : ApiRequest {
         rightRequest = right
         
         leftRequest.onFinish { _, code in
-            synchronized(self) {
-                self.leftFinished = true
-                
-                // 首先更新复合请求的 code
-                self.code = mergeStatusCodes(self.code, code)
-                
-                if self.rightFinished {
-                    for listener in self.onFinishListeners {
-                        listener(self.code < 300, self.code)
-                    }
-                }
-            }
+            self.invokeCallback(code, &self.leftFinished, &self.rightFinished)
         }
         
         rightRequest.onFinish { _, code in
-            synchronized(self) {
-                self.rightFinished = true
-                
-                // 首先更新复合请求的 code
-                self.code = mergeStatusCodes(self.code, code)
-                
-                if self.leftFinished {
-                    for listener in self.onFinishListeners {
-                        listener(self.code < 300, self.code)
-                    }
+            self.invokeCallback(code, &self.rightFinished, &self.leftFinished)
+        }
+    }
+    
+    func invokeCallback(code : Int, inout _ thisFinished : Bool, inout _ anotherFinished : Bool) {
+        synchronized(self) {
+            thisFinished = true
+            
+            // 首先更新复合请求的 code
+            self.code = mergeStatusCodes(self.code, code)
+            
+            if anotherFinished {
+                for listener in self.onFinishListeners {
+                    listener(self.code < 300, self.code)
                 }
             }
         }
@@ -482,14 +445,6 @@ class ApiParallelRequest : ApiRequest {
     func onFinish(listener: OnFinishListener) -> ApiRequest {
         onFinishListeners.append(listener)
         return self
-    }
-    
-    func chain(nextRequest: ApiRequest) -> ApiRequest {
-        return ApiChainRequest(self, nextRequest)
-    }
-    
-    func parallel(anotherRequest: ApiRequest) -> ApiRequest {
-        return ApiParallelRequest(self, anotherRequest)
     }
     
     func runWithoutFatalListener() {
