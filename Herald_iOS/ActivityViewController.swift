@@ -138,7 +138,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
     /// 联网加载下一页内容，若成功，加入列表并自增一页；否则显示错误信息
     func loadNextPage() {
         showProgressDialog()
-        ApiSimpleRequest(.Get).url("http://115.28.27.150/herald/api/v1/huodong/get?page=\(page + 1)")
+        ApiSimpleRequest(.Get).url("http://www.heraldstudio.com/herald/api/v1/huodong/get?page=\(page + 1)")
             .onResponse { success, _, response in
                 self.hideProgressDialog()
                 if success {
