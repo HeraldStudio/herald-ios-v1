@@ -35,13 +35,12 @@ class CurriculumFloatClassViewController : UITableViewController, LoginUserNeede
     }
     
     func loadCache() {
-        dataSource.removeAll()
         let jsonArray = JSON.parse(Cache.curriculumSidebar.value)
-        for json in jsonArray.arrayValue {
-            let model = SidebarClassModel(sidebarJson: json)
-            if !model.isAdded {
-                dataSource.append(model)
-            }
+        dataSource = jsonArray.arrayValue.map {
+            json -> SidebarClassModel in
+            SidebarClassModel(sidebarJson: json)
+        }.filter {
+            !$0.isAdded
         }
         tableView.reloadData()
     }
