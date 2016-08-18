@@ -1015,7 +1015,7 @@
                         <color key="separatorColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                         <sections>
-                            <tableViewSection headerTitle="我的账户" footerTitle="可在此设置用别人的账号登录seu-wlan。" id="LbE-qM-CAu">
+                            <tableViewSection headerTitle="我的账户" id="LbE-qM-CAu">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="aXV-Lm-VrR">
                                         <rect key="frame" x="0.0" y="49.5" width="320" height="44"/>
@@ -1039,68 +1039,12 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="g8w-kh-UWA">
-                                        <rect key="frame" x="0.0" y="93.5" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g8w-kh-UWA" id="jji-DP-yUn">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自定义校园网登录账号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PlI-Xw-AZF">
-                                                    <rect key="frame" x="16" y="0.0" width="288" height="44"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="PlI-Xw-AZF" firstAttribute="top" secondItem="jji-DP-yUn" secondAttribute="top" id="C1l-2f-GOo"/>
-                                                <constraint firstItem="PlI-Xw-AZF" firstAttribute="leading" secondItem="jji-DP-yUn" secondAttribute="leadingMargin" constant="8" id="PSu-8U-nBh"/>
-                                                <constraint firstAttribute="bottom" secondItem="PlI-Xw-AZF" secondAttribute="bottom" id="oJ0-sH-u70"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="PlI-Xw-AZF" secondAttribute="trailing" constant="8" id="r9j-qK-tfF"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection footerTitle="也可以从加号菜单登录；支持全校所有旧版认证的Wi-Fi。" id="h74-E7-DdY">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="KRT-Nl-i9r" customClass="NoSelectionTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="182.5" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KRT-Nl-i9r" id="HfP-c3-WmX">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="摇一摇登录校园网" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTm-Bj-kmy">
-                                                    <rect key="frame" x="16" y="0.0" width="288" height="44"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yRa-SK-ygp">
-                                                    <rect key="frame" x="255" y="6" width="51" height="31"/>
-                                                    <connections>
-                                                        <action selector="wifiStateChanged" destination="nTs-TN-vbP" eventType="touchUpInside" id="hSC-Yl-KIh"/>
-                                                    </connections>
-                                                </switch>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="yRa-SK-ygp" secondAttribute="trailing" constant="8" id="1dg-Zd-Jf6"/>
-                                                <constraint firstAttribute="bottom" secondItem="RTm-Bj-kmy" secondAttribute="bottom" id="JM3-ld-S3a"/>
-                                                <constraint firstItem="RTm-Bj-kmy" firstAttribute="top" secondItem="HfP-c3-WmX" secondAttribute="top" id="P2M-oc-p6G"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="RTm-Bj-kmy" secondAttribute="trailing" constant="8" id="SSV-OD-Ptu"/>
-                                                <constraint firstItem="RTm-Bj-kmy" firstAttribute="leading" secondItem="HfP-c3-WmX" secondAttribute="leadingMargin" constant="8" id="WhV-Ip-IZA"/>
-                                                <constraint firstItem="yRa-SK-ygp" firstAttribute="centerY" secondItem="HfP-c3-WmX" secondAttribute="centerY" id="pyF-YN-efg"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection footerTitle="考试提醒为提前30分钟，其余为提前15分钟。" id="yCY-gM-TKp">
+                            <tableViewSection headerTitle="通知提醒" footerTitle="考试提醒为提前30分钟，其余为提前15分钟。" id="yCY-gM-TKp">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="iZj-79-x4K" customClass="NoSelectionTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="287.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="143.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iZj-79-x4K" id="Xnc-a6-yA0">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -1130,7 +1074,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="vBm-wc-3HZ" customClass="NoSelectionTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="331.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="187.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vBm-wc-3HZ" id="KGg-8y-9Ca">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -1160,7 +1104,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="rDk-6M-fzJ" customClass="NoSelectionTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="375.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="231.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rDk-6M-fzJ" id="cHF-zb-LAx">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -1194,7 +1138,7 @@
                             <tableViewSection footerTitle="如果某些模块无法连接或无数据，属学校网络设施故障，小猴也无能为力，等一等就好啦~" id="sji-X1-u2g">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="64" id="VFE-Gd-vac">
-                                        <rect key="frame" x="0.0" y="464.5" width="320" height="64"/>
+                                        <rect key="frame" x="0.0" y="320.5" width="320" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VFE-Gd-vac" id="OsB-Wa-s98">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="63.5"/>
@@ -1233,13 +1177,13 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="G5U-4v-cyc">
-                                        <rect key="frame" x="0.0" y="528.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="384.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G5U-4v-cyc" id="vAB-8l-PC3">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="给我们评分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4th-e8-A53">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分享给朋友" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4th-e8-A53">
                                                     <rect key="frame" x="16" y="0.0" width="288" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1254,14 +1198,36 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="czx-s9-id3">
+                                        <rect key="frame" x="0.0" y="428.5" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="czx-s9-id3" id="W6o-PG-BWg">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="给我们评分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJB-8F-Pty">
+                                                    <rect key="frame" x="16" y="0.0" width="288" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="HJB-8F-Pty" secondAttribute="bottom" id="4LO-Su-jOQ"/>
+                                                <constraint firstItem="HJB-8F-Pty" firstAttribute="leading" secondItem="W6o-PG-BWg" secondAttribute="leadingMargin" constant="8" id="C6R-O4-qzk"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="HJB-8F-Pty" secondAttribute="trailing" constant="8" id="Ct2-d0-KUD"/>
+                                                <constraint firstItem="HJB-8F-Pty" firstAttribute="top" secondItem="W6o-PG-BWg" secondAttribute="top" id="Iav-jK-ANF"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="tXs-nW-gLH">
-                                        <rect key="frame" x="0.0" y="572.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="472.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tXs-nW-gLH" id="PVg-nY-qTM">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="反馈与建议" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnm-QD-tOJ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="反馈建议" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnm-QD-tOJ">
                                                     <rect key="frame" x="16" y="0.0" width="255" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1300,7 +1266,6 @@
                         <outlet property="experimentSwitch" destination="bzm-Gt-LdB" id="bWQ-AY-9XT"/>
                         <outlet property="loginOrLogoutText" destination="ZAI-B5-fUu" id="Ikv-Dt-Nl8"/>
                         <outlet property="version" destination="90x-XY-zXS" id="eQ5-ct-cZm"/>
-                        <outlet property="wifiSwitch" destination="yRa-SK-ygp" id="bnR-6b-Nad"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UTp-9a-jaX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1792,7 +1757,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="56" sectionHeaderHeight="18" sectionFooterHeight="18" id="cUl-rc-ivv">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                         <prototypes>
