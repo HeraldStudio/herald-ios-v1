@@ -7,6 +7,12 @@ import SwiftyJSON
  * 设计要求：
  *  以 SimpleApiRequest(简单请求) 为单元，通过 chain(顺次执行) 和 parallel(同时执行) 两种
  *  运算，可以得到满足不同需求的复合请求，而复合请求又可以作为新的单元，形成更大的复合请求。
+ *
+ * 大坑提醒：
+ *  请务必注意 ** 类都是引用类型 **，因此请不要在多处使用同一个已经定义的 ApiRequest。
+ *  如果在多处使用同一个 ApiRequest 的引用，其中任意一处执行的 onResponse()，onFinish()，
+ *  toCache() 等将会影响到其它位置持有的 ApiRequest 引用的运行结果。
+ *  如果要定义一个需要在多处使用的 ApiRequest，请用一个返回 ApiRequest 的闭包代替。
  **/
 
 /// 合并两个错误码，即去掉其中错误轻的，保留错误严重的代码
@@ -57,16 +63,16 @@ func addFatalErrorListenerInOnResponseList(inout list: [OnResponseListener]) {
 
 /// 协议，空请求、简单请求、顺次复合请求、同时复合请求都要遵守该协议，以保证这种递归式的多态性
 protocol ApiRequest {
-    
+
     func onResponse(listener : OnResponseListener) -> ApiRequest
-    
+
     func onFinish(listener : OnFinishListener) -> ApiRequest
-    
+
     /// 不添加 4xx 错误监听器，直接运行。
     /// 该函数用于外层复合请求调用内层请求时使用，防止 4xx 错误监听器重复添加。
     /// 在需要忽略 4xx 错误的情况下，此函数也可以从外部调用。
     func runWithoutFatalListener()
-    
+
     /// 添加 4xx 错误监听器并运行。
     func run()
 }
@@ -94,24 +100,24 @@ func |= (inout left: ApiRequest, right: ApiRequest) {
  * 请求运算中的单位元，任何请求与空请求做运算都得到其本身。
  **/
 class ApiEmptyRequest : ApiRequest {
-    
+
     var onResponseListeners : [OnResponseListener] = []
-    
+
     func onResponse (listener : OnResponseListener) -> ApiRequest {
         onResponseListeners.append(listener)
         return self
     }
-    
+
     func onFinish(listener: OnFinishListener) -> ApiRequest {
         return onResponse { success, code, response in listener(success, code) }
     }
-    
+
     func runWithoutFatalListener() {
         for listener in onResponseListeners {
             listener(true, 200, "Warning: This is an empty request.")
         }
     }
-    
+
     func run() {
         runWithoutFatalListener()
     }
@@ -122,60 +128,60 @@ class ApiEmptyRequest : ApiRequest {
  * 网络请求的一个基本单元，包含一次请求和一次回调。
  **/
 class ApiSimpleRequest : ApiRequest {
-    
+
     enum Method {
         case Post
         case Get
     }
-    
+
     var method : Method
-    
+
     /**
      * 构造部分
      **/
     init(_ method: Method){
         self.method = method
     }
-    
+
     var url : String?
-    
+
     func url (url : String) -> ApiSimpleRequest {
         self.url = url
         return self
     }
-    
+
     func api (api : String) -> ApiSimpleRequest {
         return url(ApiHelper.getApiUrl(api))
     }
-    
+
     var isDebug = false
-    
+
     func debug () -> ApiSimpleRequest {
         isDebug = true
         return self
     }
-    
+
     /**
      * 联网设置部分
      * builder  参数表
      **/
     var map : [String : AnyObject] = [:]
-    
+
     func uuid () -> ApiSimpleRequest {
         map.updateValue(ApiHelper.currentUser.uuid, forKey: "uuid")
         return self
     }
-    
+
     func post (map : String...) -> ApiSimpleRequest {
         for i in 0 ..< (map.count / 2) {
             let key = map[2 * i]
             let value = map[2 * i + 1]
             self.map.updateValue(value, forKey: key)
         }
-        
+
         return self
     }
-    
+
     /**
      * 一级回调设置部分
      * 一级回调只是跟Alamofire框架之间的交互，并在此交互过程中为二级回调提供接口
@@ -184,32 +190,32 @@ class ApiSimpleRequest : ApiRequest {
      * callback     默认的Callback（自动调用二级回调，若出错还会执行错误处理）
      **/
     func callback (response : Response <String, NSError>) -> Void {
-        
+
         /// 解析错误码（这里指的是 HTTP Response Status Code，不考虑 JSON 中返回的 code）
         if let code = response.response?.statusCode {
-            
+
             /// 按照错误码判断是否成功
             let success = code < 300
-            
+
             /// 取返回的字符串值
             var responseString = ""
             if let stringResponse = response.result.value {
                 responseString = stringResponse
             }
-            
+
             /// 触发回调
             for listener in onResponseListeners {
                 listener(success, code, responseString)
             }
         } else {
-            
+
             /// 连接失败，触发回调
             for listener in onResponseListeners {
                 listener(false, 500, "Connection Error")
             }
         }
     }
-    
+
     /**
      * 二级回调设置部分
      * 二级回调是对返回状态和返回数据处理方式的定义，相当于重写Callback，
@@ -217,18 +223,18 @@ class ApiSimpleRequest : ApiRequest {
      *
      * onFinishListeners    二级回调接口，内含一个默认的回调操作，该操作仅在设置了三级回调策略时有效
      **/
-    
+
     var onResponseListeners : [OnResponseListener] = []
-    
+
     func onResponse (listener : OnResponseListener) -> ApiRequest {
         onResponseListeners.append(listener)
         return self
     }
-    
+
     func onFinish(listener: OnFinishListener) -> ApiRequest {
         return onResponse { success, code, response in listener(success, code) }
     }
-    
+
     /**
      * 三级回调设置部分
      * 三级回调是对一些比较典型的回调策略的包装，此处暂时只实现了将数据存入缓存这一种三级回调策略
@@ -238,7 +244,7 @@ class ApiSimpleRequest : ApiRequest {
      * toCache()    用于设置三级回调策略的函数
      **/
     typealias JSONParser = JSON throws -> JSON
-    
+
     // 目前暂时只有CacheHelper有更新检测机制，如果另外两个也需要该机制，请修改对应的Helper的set函数
     func toCache (key : String, notifyModuleIfChanged module : AppModule? = nil, withParser parser : JSONParser = {json in json}) -> ApiSimpleRequest {
         onResponse {
@@ -260,7 +266,7 @@ class ApiSimpleRequest : ApiRequest {
         }
         return self
     }
-    
+
     func toServiceCache (key : String, withParser parser : JSONParser = {json in json}) -> ApiSimpleRequest {
         onResponse {
             success, _, response in
@@ -277,7 +283,7 @@ class ApiSimpleRequest : ApiRequest {
         }
         return self
     }
-    
+
     func toAuthCache (key : String, withParser parser : JSONParser = {json in json}) -> ApiSimpleRequest {
         onResponse {
             success, _, response in
@@ -294,14 +300,14 @@ class ApiSimpleRequest : ApiRequest {
         }
         return self
     }
-    
+
     /**
      * 执行部分
      **/
     func runWithoutFatalListener() {
         let request = Alamofire.request([Method.Get: .GET, Method.Post: .POST][method]!,
             url!, parameters: map, encoding: .URL)
-        
+
         request.responseString { response in
             if self.isDebug {
                 debugPrint(request)
@@ -310,7 +316,7 @@ class ApiSimpleRequest : ApiRequest {
             self.callback(response)
         }
     }
-    
+
     func run () {
         addFatalErrorListenerInOnResponseList(&onResponseListeners)
         runWithoutFatalListener()
@@ -326,22 +332,22 @@ class ApiSimpleRequest : ApiRequest {
  * 此请求是短路的，即左边的请求如果失败，将不会继续向右执行。
  */
 class ApiChainRequest : ApiRequest {
-    
+
     var leftRequest : ApiRequest
-    
+
     var rightRequest : ApiRequest
-    
+
     var code = 0
-    
+
     init(_ left: ApiRequest, _ right: ApiRequest) {
         leftRequest = left
         rightRequest = right
-        
+
         leftRequest.onFinish { success, code in
-            
+
             // 首先更新复合请求的 code
             self.code = mergeStatusCodes(self.code, code)
-            
+
             // 若前一个请求成功，运行下一个请求
             if success {
                 self.rightRequest.runWithoutFatalListener()
@@ -352,36 +358,36 @@ class ApiChainRequest : ApiRequest {
                 }
             }
         }
-        
+
         rightRequest.onFinish { _, code in
-            
+
             // 首先更新复合请求的 code
             self.code = mergeStatusCodes(self.code, code)
-            
+
             // 报告请求结束
             for listener in self.onFinishListeners {
                 listener(self.code < 300, self.code)
             }
         }
     }
-    
+
     func onResponse(listener: OnResponseListener) -> ApiRequest {
         leftRequest.onResponse(listener)
         rightRequest.onResponse(listener)
         return self
     }
-    
+
     var onFinishListeners : [OnFinishListener] = []
-    
+
     func onFinish(listener: OnFinishListener) -> ApiRequest {
         onFinishListeners.append(listener)
         return self
     }
-    
+
     func runWithoutFatalListener() {
         leftRequest.runWithoutFatalListener()
     }
-    
+
     func run() {
         addFatalErrorListenerInOnFinishList(&onFinishListeners)
         runWithoutFatalListener()
@@ -390,42 +396,42 @@ class ApiChainRequest : ApiRequest {
 
 /**
  * ApiParallelRequest | 同时请求
- * 
+ *
  * 利用 request1 | request2 运算可得到一个 ApiParallelRequest
  * 所有子请求同时开始执行，直到最后结束的请求结束。
  * 仅当所有子请求都执行成功，才视为 ApiParallelRequest 执行成功。
  **/
 class ApiParallelRequest : ApiRequest {
     var leftRequest : ApiRequest
-    
+
     var leftFinished = false
-    
+
     var rightRequest : ApiRequest
-    
+
     var rightFinished = false
-    
+
     var code = 0
-    
+
     init(_ left: ApiRequest, _ right: ApiRequest) {
         leftRequest = left
         rightRequest = right
-        
+
         leftRequest.onFinish { _, code in
             self.invokeCallback(code, &self.leftFinished, &self.rightFinished)
         }
-        
+
         rightRequest.onFinish { _, code in
             self.invokeCallback(code, &self.rightFinished, &self.leftFinished)
         }
     }
-    
+
     func invokeCallback(code : Int, inout _ thisFinished : Bool, inout _ anotherFinished : Bool) {
         synchronized(self) {
             thisFinished = true
-            
+
             // 首先更新复合请求的 code
             self.code = mergeStatusCodes(self.code, code)
-            
+
             if anotherFinished {
                 for listener in self.onFinishListeners {
                     listener(self.code < 300, self.code)
@@ -433,25 +439,25 @@ class ApiParallelRequest : ApiRequest {
             }
         }
     }
-    
+
     func onResponse(listener: OnResponseListener) -> ApiRequest {
         leftRequest.onResponse(listener)
         rightRequest.onResponse(listener)
         return self
     }
-    
+
     var onFinishListeners : [OnFinishListener] = []
-    
+
     func onFinish(listener: OnFinishListener) -> ApiRequest {
         onFinishListeners.append(listener)
         return self
     }
-    
+
     func runWithoutFatalListener() {
         leftRequest.runWithoutFatalListener()
         rightRequest.runWithoutFatalListener()
     }
-    
+
     func run() {
         addFatalErrorListenerInOnFinishList(&onFinishListeners)
         runWithoutFatalListener()

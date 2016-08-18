@@ -83,6 +83,7 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate, ForceTouchP
     }
     
     @IBAction func share () {
+        
         let _shareUrl = webView.stringByEvaluatingJavaScriptFromString("window.location.href")
         let shareUrl = _shareUrl == nil ? "" : _shareUrl!
         
@@ -91,13 +92,6 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate, ForceTouchP
         let _title = __title == nil ? "" : __title!
         let shareText = prefix + _title + " " + shareUrl
         
-        let items : [AnyObject] = [shareText]
-        let vc = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        vc.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll]
-        
-        /// 各类分享对话框、ActionSheet等，展示前必须设置sourceView，否则在iPad上会导致崩溃
-        vc.popoverPresentationController?.sourceView = self.view
-        
-        presentViewController(vc, animated: true, completion: nil)
+        ShareHelper.share(shareText)
     }
 }

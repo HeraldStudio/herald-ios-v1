@@ -60,11 +60,7 @@ class MainTabBarController: UITabBarController {
     
     /// 响应摇一摇事件
     func onShake () {
-        
-        // 若设置了摇一摇登录校园网，则进入登录校园网流程
-        if SettingsHelper.wifiAutoLogin {
-            WifiLoginHelper(self).checkAndLogin()
-        }
+        // TODO
     }
     
     /// UITabBarController 析构函数，反注册摇一摇事件
@@ -80,7 +76,6 @@ class MainTabBarController: UITabBarController {
         
         // 要添加菜单项，直接在此列表添加元素，并指向所需的函数即可
         let menuArray = [
-            KxMenuItem("登录校园网", image: UIImage(named: "action_wifi"), target: self, action: #selector(self.loginToWifi)),
             KxMenuItem("一卡通充值", image: UIImage(named: "action_charge"), target: self, action: #selector(self.cardCharge)),
             KxMenuItem("模块管理", image: UIImage(named: "action_module_manage"), target: self, action: #selector(self.moduleManage))
         ]
@@ -105,11 +100,6 @@ class MainTabBarController: UITabBarController {
             textColor: Color(R: 0.2, G: 0.2, B: 0.2),
             menuBackgroundColor: Color(R: 1, G: 1, B: 1)
             ))
-    }
-    
-    /// 弹出菜单操作：登录校园网
-    func loginToWifi () {
-        WifiLoginHelper(self).checkAndLogin()
     }
     
     /// 弹出菜单操作：一卡通充值
