@@ -51,6 +51,7 @@
 		D34BCC731CE5D379005F4164 /* ExamNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BCC721CE5D379005F4164 /* ExamNotifier.swift */; };
 		D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34E95851CCDCCE700AD1119 /* JwcCard.swift */; };
 		D354905C1CDC519100E59615 /* GCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354905B1CDC519100E59615 /* GCalendar.swift */; };
+		D356C6291D692FA00028E1D9 /* ShareHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D356C6281D692FA00028E1D9 /* ShareHelper.swift */; };
 		D35FC6221CE2FEF400BE844C /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6211CE2FEF400BE844C /* ActivityViewController.swift */; };
 		D35FC6241CE301F700BE844C /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6231CE301F700BE844C /* ActivityModel.swift */; };
 		D35FC6261CE31A3500BE844C /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6251CE31A3500BE844C /* ActivityTableViewCell.swift */; };
@@ -77,7 +78,6 @@
 		D3A0C1741CBB7AF500744640 /* ModulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */; };
 		D3A0C1771CBB7B2300744640 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1761CBB7B2300744640 /* SettingsViewController.swift */; };
 		D3A9D7221D49B5ED00D350AE /* Synchronized.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A9D7211D49B5ED00D350AE /* Synchronized.swift */; };
-		D3B3D7E51D65AA2900882A03 /* ShareHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B3D7E41D65AA2900882A03 /* ShareHelper.swift */; };
 		D3CA10D11D1F7BD9000E1F88 /* ServiceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA10D01D1F7BD9000E1F88 /* ServiceCard.swift */; };
 		D3D35DDD1CBA2E8200B18092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */; };
 		D3D35DDF1CBA2E8200B18092 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D35DDE1CBA2E8200B18092 /* LoginViewController.swift */; };
@@ -111,6 +111,7 @@
 		D3ED99E61CCB651300001E2B /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99E51CCB651300001E2B /* LibraryViewController.swift */; };
 		D3ED99E81CCB870200001E2B /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99E71CCB870200001E2B /* AboutUsViewController.swift */; };
 		D3EFC1D71CCC81A800BC37A5 /* CurriculumCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EFC1D61CCC81A800BC37A5 /* CurriculumCard.swift */; };
+		D3F375C71CDB3957004DDEA5 /* WifiLoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F375C61CDB3957004DDEA5 /* WifiLoginHelper.swift */; };
 		D3F3DCFB1CBB7792006887F5 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */; };
 		D3F473451CCA04C100750FFB /* JwcTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F473441CCA04C100750FFB /* JwcTableViewCell.swift */; };
 		D3F473471CCA05CD00750FFB /* JwcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F473461CCA05CD00750FFB /* JwcViewController.swift */; };
@@ -201,6 +202,7 @@
 		D34BCC721CE5D379005F4164 /* ExamNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamNotifier.swift; sourceTree = "<group>"; };
 		D34E95851CCDCCE700AD1119 /* JwcCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcCard.swift; sourceTree = "<group>"; };
 		D354905B1CDC519100E59615 /* GCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCalendar.swift; sourceTree = "<group>"; };
+		D356C6281D692FA00028E1D9 /* ShareHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareHelper.swift; sourceTree = "<group>"; };
 		D3578AAE1CDBABE300B291D0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		D35FC6211CE2FEF400BE844C /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		D35FC6231CE301F700BE844C /* ActivityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
@@ -228,7 +230,6 @@
 		D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModulesViewController.swift; sourceTree = "<group>"; };
 		D3A0C1761CBB7B2300744640 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D3A9D7211D49B5ED00D350AE /* Synchronized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Synchronized.swift; sourceTree = "<group>"; };
-		D3B3D7E41D65AA2900882A03 /* ShareHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareHelper.swift; sourceTree = "<group>"; };
 		D3CA10D01D1F7BD9000E1F88 /* ServiceCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCard.swift; sourceTree = "<group>"; };
 		D3D35DD91CBA2E8200B18092 /* 小猴偷米.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "小猴偷米.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -268,6 +269,7 @@
 		D3ED99E51CCB651300001E2B /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		D3ED99E71CCB870200001E2B /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		D3EFC1D61CCC81A800BC37A5 /* CurriculumCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumCard.swift; sourceTree = "<group>"; };
+		D3F375C61CDB3957004DDEA5 /* WifiLoginHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiLoginHelper.swift; sourceTree = "<group>"; };
 		D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
 		D3F473441CCA04C100750FFB /* JwcTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcTableViewCell.swift; sourceTree = "<group>"; };
 		D3F473461CCA05CD00750FFB /* JwcViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcViewController.swift; sourceTree = "<group>"; };
@@ -412,11 +414,12 @@
 		D348580A1CBB48EF00B55E76 /* helper */ = {
 			isa = PBXGroup;
 			children = (
+				D356C6281D692FA00028E1D9 /* ShareHelper.swift */,
 				D348580B1CBB48FD00B55E76 /* ApiHelper.swift */,
 				D348580D1CBB4FF900B55E76 /* CacheHelper.swift */,
 				D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */,
 				D31821B51CC48D5400992355 /* ServiceHelper.swift */,
-				D3B3D7E41D65AA2900882A03 /* ShareHelper.swift */,
+				D3F375C61CDB3957004DDEA5 /* WifiLoginHelper.swift */,
 			);
 			name = helper;
 			sourceTree = "<group>";
@@ -724,7 +727,7 @@
 				TargetAttributes = {
 					D3D35DD81CBA2E8200B18092 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = JFQBLHLDR7;
+						DevelopmentTeam = MW9PK9KE48;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -875,6 +878,7 @@
 				D3F473471CCA05CD00750FFB /* JwcViewController.swift in Sources */,
 				D34858111CBB57F600B55E76 /* ExtNSUserDefaults.swift in Sources */,
 				D3ED99E01CCB3DFD00001E2B /* SrtpViewController.swift in Sources */,
+				D356C6291D692FA00028E1D9 /* ShareHelper.swift in Sources */,
 				D31DE51A1CC35A3100E4891D /* CurriculumView.swift in Sources */,
 				D3CA10D11D1F7BD9000E1F88 /* ServiceCard.swift in Sources */,
 				D3D5D43D1CE95603000E406A /* GymSportModel.swift in Sources */,
@@ -927,7 +931,6 @@
 				D306E02A1CCA68A700FA3812 /* GradeModel.swift in Sources */,
 				D306E0241CCA3F7700FA3812 /* ExamViewController.swift in Sources */,
 				D3D35DDF1CBA2E8200B18092 /* LoginViewController.swift in Sources */,
-				D3B3D7E51D65AA2900882A03 /* ShareHelper.swift in Sources */,
 				D302B2BF1D482E1E00760BE9 /* User.swift in Sources */,
 				D38A7E5E1CE5ABFF0033926E /* ExperimentNotifier.swift in Sources */,
 				D31821C11CC5256F00992355 /* CardTableViewCell.swift in Sources */,
@@ -947,6 +950,7 @@
 				D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */,
 				D3E6BD831CC8D4B20074FF6D /* PedetailViewController.swift in Sources */,
 				D34BCC731CE5D379005F4164 /* ExamNotifier.swift in Sources */,
+				D3F375C71CDB3957004DDEA5 /* WifiLoginHelper.swift in Sources */,
 				D3150F0F1CE8C3DA00E95EB6 /* CustomExamViewController.swift in Sources */,
 				D33678F81CE5971C001E7C25 /* CurriculumNotifier.swift in Sources */,
 				D33B2DF81D59CD0600E7FBF1 /* SidebarClassModel.swift in Sources */,
@@ -1092,15 +1096,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Herald_iOS/Herald_iOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1114,15 +1118,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Herald_iOS/Herald_iOS-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

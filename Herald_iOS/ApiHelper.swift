@@ -75,6 +75,32 @@ class ApiHelper {
         return currentUser != trialUser
     }
     
+    static func setWifiAuth (user user : String, pwd : String) {
+        // TODO 加密
+        set("wifiAuthUser", user)
+        set("wifiAuthPwd", pwd)
+    }
+    
+    static func getWifiUserName () -> String {
+        // 若无校园网独立用户缓存，则使用登陆应用的账户
+        let cacheUser = get("wifiAuthUser")
+        return cacheUser == "" ? currentUser.userName : cacheUser
+    }
+    
+    static func getWifiPassword () -> String {
+        // 若无校园网独立用户缓存，则使用登陆应用的账户
+        let cachePwd = get("wifiAuthPwd")
+        return cachePwd == "" ? currentUser.password : cachePwd
+    }
+    
+    static func isWifiLoginAvailable () -> Bool {
+        return isLogin() || getWifiUserName() != trialUser.userName
+    }
+    
+    static func clearWifiAuth () {
+        setWifiAuth(user: "", pwd: "")
+    }
+    
     static func get (key : String) -> String {
         return authCache.get(key)
     }
