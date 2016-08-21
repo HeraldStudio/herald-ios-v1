@@ -242,6 +242,16 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             cardList.append(item)
         }
         
+        if ModuleCard.cardEnabled {
+            // 加载并解析一卡通缓存
+            cardList.append(CardCard.getCard())
+        }
+        
+        if ModulePedetail.cardEnabled {
+            // 加载并解析跑操预报缓存
+            cardList.append(PedetailCard.getCard())
+        }
+        
         // 判断各模块是否开启并加载对应数据
         if ModuleCurriculum.cardEnabled {
             // 加载并解析课表缓存
@@ -256,16 +266,6 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         if ModuleExam.cardEnabled {
             // 加载并解析考试缓存
             cardList.append(ExamCard.getCard())
-        }
-        
-        if ModuleCard.cardEnabled {
-            // 加载并解析一卡通缓存
-            cardList.append(CardCard.getCard())
-        }
-        
-        if ModulePedetail.cardEnabled {
-            // 加载并解析跑操预报缓存
-            cardList.append(PedetailCard.getCard())
         }
         
         // 加载校园活动缓存
