@@ -50,11 +50,12 @@ class CurriculumNotifier {
         
         // 服务器端返回的startMonth是Java/JavaScript型的月份表示，变成实际月份要加1
         let cal = GCalendar(.Day)
+        let nowDate = GCalendar(.Day)
         cal.month = startMonth + 1
         cal.day = startDate
         
-        // 如果开学日期比今天还晚，则是去年开学的。这里用while保证了thisWeek永远大于零
-        while (cal > GCalendar()) {
+        // 如果开学日期比今天晚了超过两个月，则认为是去年开学的。这里用while保证了thisWeek永远大于零
+        while (cal - nowDate > 60 * 86400) {
             cal.year -= 1
         }
         
