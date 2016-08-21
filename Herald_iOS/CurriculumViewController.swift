@@ -105,8 +105,8 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
         beginOfTerm.month = startMonth + 1
         beginOfTerm.day = startDate
         
-        // 如果开学日期比今天还晚，则是去年开学的。这里用while保证了thisWeek永远大于零
-        while (today < beginOfTerm) {
+        // 如果开学日期比今天晚了超过两个月，则认为是去年开学的。这里用while保证了thisWeek永远大于零
+        while (beginOfTerm - today > 60 * 86400) {
             beginOfTerm.year -= 1
         }
         

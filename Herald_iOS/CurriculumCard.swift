@@ -49,8 +49,8 @@ class CurriculumCard {
         beginOfTerm.month = startMonth + 1
         beginOfTerm.day = startDate
         
-        // 如果开学日期比今天还晚，则是去年开学的。这里用while保证了thisWeek永远大于零
-        if nowDate < beginOfTerm {
+        // 如果开学日期比今天晚了超过两个月，则认为是去年开学的。这里用while保证了thisWeek永远大于零
+        while (beginOfTerm - nowDate > 60 * 86400) {
             beginOfTerm.year -= 1
         }
         
@@ -61,7 +61,14 @@ class CurriculumCard {
         beginOfTerm -= k * 86400
         
         // 计算当前周
-        var thisWeek = (nowDate - beginOfTerm) / 86400 / 7 + 1
+        let dayDelta = (nowDate - beginOfTerm) / 86400
+        if dayDelta < -1 {
+            return CardsModel(cellId: "CardsCellCurriculum", module: ModuleCurriculum, desc: "还没有开学，点击预览新学期课表~", priority: .CONTENT_NO_NOTIFY)
+        } else if dayDelta == -1 {
+            return CardsModel(cellId: "CardsCellCurriculum", module: ModuleCurriculum, desc: "明天就要开学了，点击预览新学期课表~", priority: .CONTENT_NOTIFY)
+        }
+        
+        var thisWeek = dayDelta / 7 + 1
         
         var dayOfWeek = nowDate.dayOfWeekFromMonday.rawValue
         
