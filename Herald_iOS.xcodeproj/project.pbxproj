@@ -10,10 +10,6 @@
 		BCAFB77BE851C62062F8A047 /* Pods_Herald_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41885719C03915D508964A23 /* Pods_Herald_iOS.framework */; };
 		D302B2BF1D482E1E00760BE9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D302B2BE1D482E1E00760BE9 /* User.swift */; };
 		D302B2C41D486F2200760BE9 /* ForceTouchPreviewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D302B2C31D486F2200760BE9 /* ForceTouchPreviewable.swift */; };
-		D30661C81CF2C38D006583C2 /* GameCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661C71CF2C38D006583C2 /* GameCardModel.swift */; };
-		D30661CA1CF2C50E006583C2 /* GameCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661C91CF2C50E006583C2 /* GameCreateViewController.swift */; };
-		D30661CC1CF30016006583C2 /* GameCreateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661CB1CF30016006583C2 /* GameCreateTableViewCell.swift */; };
-		D30661CE1CF3011B006583C2 /* GameAvailableCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30661CD1CF3011B006583C2 /* GameAvailableCardTableViewCell.swift */; };
 		D306E0201CCA3ADF00FA3812 /* WebModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E01F1CCA3ADF00FA3812 /* WebModuleViewController.swift */; };
 		D306E0221CCA3DFD00FA3812 /* AppModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E0211CCA3DFD00FA3812 /* AppModule.swift */; };
 		D306E0241CCA3F7700FA3812 /* ExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D306E0231CCA3F7700FA3812 /* ExamViewController.swift */; };
@@ -34,7 +30,7 @@
 		D31821CE1CC856FF00992355 /* ExperimentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821CD1CC856FF00992355 /* ExperimentViewController.swift */; };
 		D31821D01CC8573200992355 /* ExperimentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31821CF1CC8573200992355 /* ExperimentModel.swift */; };
 		D31DE50E1CC334EC00E4891D /* ModuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE50D1CC334EC00E4891D /* ModuleTableViewCell.swift */; };
-		D31DE5121CC3592F00E4891D /* ClassInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5111CC3592F00E4891D /* ClassInfo.swift */; };
+		D31DE5121CC3592F00E4891D /* ClassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5111CC3592F00E4891D /* ClassModel.swift */; };
 		D31DE5141CC3597800E4891D /* CurriculumBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5131CC3597800E4891D /* CurriculumBlock.swift */; };
 		D31DE5181CC359D300E4891D /* CurriculumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5171CC359D300E4891D /* CurriculumViewController.swift */; };
 		D31DE51A1CC35A3100E4891D /* CurriculumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5191CC35A3100E4891D /* CurriculumView.swift */; };
@@ -43,6 +39,11 @@
 		D33438521D1A18B400CD49D6 /* LibrarySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33438511D1A18B400CD49D6 /* LibrarySearchViewController.swift */; };
 		D33438591D1A2DE900CD49D6 /* NirKxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D33438581D1A2DE900CD49D6 /* NirKxMenu.m */; };
 		D33678F81CE5971C001E7C25 /* CurriculumNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */; };
+		D33B2DF41D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF31D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift */; };
+		D33B2DF61D59939500E7FBF1 /* CurriculumFloatClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF51D59939500E7FBF1 /* CurriculumFloatClassViewController.swift */; };
+		D33B2DF81D59CD0600E7FBF1 /* SidebarClassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF71D59CD0600E7FBF1 /* SidebarClassModel.swift */; };
+		D33B2DFA1D59D68E00E7FBF1 /* Caches.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF91D59D68E00E7FBF1 /* Caches.swift */; };
+		D33B2DFC1D59D6AE00E7FBF1 /* AppCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DFB1D59D6AE00E7FBF1 /* AppCache.swift */; };
 		D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348580B1CBB48FD00B55E76 /* ApiHelper.swift */; };
 		D348580E1CBB4FF900B55E76 /* CacheHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D348580D1CBB4FF900B55E76 /* CacheHelper.swift */; };
 		D34858111CBB57F600B55E76 /* ExtNSUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34858101CBB57F600B55E76 /* ExtNSUserDefaults.swift */; };
@@ -50,6 +51,7 @@
 		D34BCC731CE5D379005F4164 /* ExamNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34BCC721CE5D379005F4164 /* ExamNotifier.swift */; };
 		D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34E95851CCDCCE700AD1119 /* JwcCard.swift */; };
 		D354905C1CDC519100E59615 /* GCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354905B1CDC519100E59615 /* GCalendar.swift */; };
+		D356C6291D692FA00028E1D9 /* ShareHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D356C6281D692FA00028E1D9 /* ShareHelper.swift */; };
 		D35FC6221CE2FEF400BE844C /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6211CE2FEF400BE844C /* ActivityViewController.swift */; };
 		D35FC6241CE301F700BE844C /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6231CE301F700BE844C /* ActivityModel.swift */; };
 		D35FC6261CE31A3500BE844C /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6251CE31A3500BE844C /* ActivityTableViewCell.swift */; };
@@ -76,8 +78,6 @@
 		D3A0C1741CBB7AF500744640 /* ModulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */; };
 		D3A0C1771CBB7B2300744640 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1761CBB7B2300744640 /* SettingsViewController.swift */; };
 		D3A9D7221D49B5ED00D350AE /* Synchronized.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A9D7211D49B5ED00D350AE /* Synchronized.swift */; };
-		D3AC6FC01CF410B000000BF6 /* GameShowCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AC6FBF1CF410B000000BF6 /* GameShowCardViewController.swift */; };
-		D3AC6FC21CF4135800000BF6 /* GameShowCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AC6FC11CF4135800000BF6 /* GameShowCardTableViewCell.swift */; };
 		D3CA10D11D1F7BD9000E1F88 /* ServiceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA10D01D1F7BD9000E1F88 /* ServiceCard.swift */; };
 		D3D35DDD1CBA2E8200B18092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */; };
 		D3D35DDF1CBA2E8200B18092 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D35DDE1CBA2E8200B18092 /* LoginViewController.swift */; };
@@ -159,10 +159,6 @@
 		C275CEB73A1293164D3C08CA /* Pods-Herald_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Herald_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Herald_iOS/Pods-Herald_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D302B2BE1D482E1E00760BE9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D302B2C31D486F2200760BE9 /* ForceTouchPreviewable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForceTouchPreviewable.swift; sourceTree = "<group>"; };
-		D30661C71CF2C38D006583C2 /* GameCardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCardModel.swift; sourceTree = "<group>"; };
-		D30661C91CF2C50E006583C2 /* GameCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCreateViewController.swift; sourceTree = "<group>"; };
-		D30661CB1CF30016006583C2 /* GameCreateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCreateTableViewCell.swift; sourceTree = "<group>"; };
-		D30661CD1CF3011B006583C2 /* GameAvailableCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameAvailableCardTableViewCell.swift; sourceTree = "<group>"; };
 		D306E01F1CCA3ADF00FA3812 /* WebModuleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebModuleViewController.swift; sourceTree = "<group>"; };
 		D306E0211CCA3DFD00FA3812 /* AppModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModule.swift; sourceTree = "<group>"; };
 		D306E0231CCA3F7700FA3812 /* ExamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamViewController.swift; sourceTree = "<group>"; };
@@ -183,7 +179,7 @@
 		D31821CD1CC856FF00992355 /* ExperimentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentViewController.swift; sourceTree = "<group>"; };
 		D31821CF1CC8573200992355 /* ExperimentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperimentModel.swift; sourceTree = "<group>"; };
 		D31DE50D1CC334EC00E4891D /* ModuleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleTableViewCell.swift; sourceTree = "<group>"; };
-		D31DE5111CC3592F00E4891D /* ClassInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassInfo.swift; sourceTree = "<group>"; };
+		D31DE5111CC3592F00E4891D /* ClassModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassModel.swift; sourceTree = "<group>"; };
 		D31DE5131CC3597800E4891D /* CurriculumBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumBlock.swift; sourceTree = "<group>"; };
 		D31DE5171CC359D300E4891D /* CurriculumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumViewController.swift; sourceTree = "<group>"; };
 		D31DE5191CC35A3100E4891D /* CurriculumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumView.swift; sourceTree = "<group>"; };
@@ -194,6 +190,11 @@
 		D33438571D1A2DE900CD49D6 /* NirKxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NirKxMenu.h; sourceTree = "<group>"; };
 		D33438581D1A2DE900CD49D6 /* NirKxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NirKxMenu.m; sourceTree = "<group>"; };
 		D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumNotifier.swift; sourceTree = "<group>"; };
+		D33B2DF31D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumFloatClassTableViewCell.swift; sourceTree = "<group>"; };
+		D33B2DF51D59939500E7FBF1 /* CurriculumFloatClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumFloatClassViewController.swift; sourceTree = "<group>"; };
+		D33B2DF71D59CD0600E7FBF1 /* SidebarClassModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarClassModel.swift; sourceTree = "<group>"; };
+		D33B2DF91D59D68E00E7FBF1 /* Caches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caches.swift; sourceTree = "<group>"; };
+		D33B2DFB1D59D6AE00E7FBF1 /* AppCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCache.swift; sourceTree = "<group>"; };
 		D348580B1CBB48FD00B55E76 /* ApiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHelper.swift; sourceTree = "<group>"; };
 		D348580D1CBB4FF900B55E76 /* CacheHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheHelper.swift; sourceTree = "<group>"; };
 		D34858101CBB57F600B55E76 /* ExtNSUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtNSUserDefaults.swift; sourceTree = "<group>"; };
@@ -201,6 +202,7 @@
 		D34BCC721CE5D379005F4164 /* ExamNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamNotifier.swift; sourceTree = "<group>"; };
 		D34E95851CCDCCE700AD1119 /* JwcCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JwcCard.swift; sourceTree = "<group>"; };
 		D354905B1CDC519100E59615 /* GCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCalendar.swift; sourceTree = "<group>"; };
+		D356C6281D692FA00028E1D9 /* ShareHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareHelper.swift; sourceTree = "<group>"; };
 		D3578AAE1CDBABE300B291D0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		D35FC6211CE2FEF400BE844C /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		D35FC6231CE301F700BE844C /* ActivityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
@@ -228,8 +230,6 @@
 		D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModulesViewController.swift; sourceTree = "<group>"; };
 		D3A0C1761CBB7B2300744640 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D3A9D7211D49B5ED00D350AE /* Synchronized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Synchronized.swift; sourceTree = "<group>"; };
-		D3AC6FBF1CF410B000000BF6 /* GameShowCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameShowCardViewController.swift; sourceTree = "<group>"; };
-		D3AC6FC11CF4135800000BF6 /* GameShowCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameShowCardTableViewCell.swift; sourceTree = "<group>"; };
 		D3CA10D01D1F7BD9000E1F88 /* ServiceCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCard.swift; sourceTree = "<group>"; };
 		D3D35DD91CBA2E8200B18092 /* 小猴偷米.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "小猴偷米.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -353,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				D34858121CBB60A600B55E76 /* ApiRequest.swift */,
+				D33B2DFB1D59D6AE00E7FBF1 /* AppCache.swift */,
 				D306E0211CCA3DFD00FA3812 /* AppModule.swift */,
 				D34858101CBB57F600B55E76 /* ExtNSUserDefaults.swift */,
 				D3FBC2F11CCC51F900305428 /* ExtUIViewController.swift */,
@@ -369,6 +370,7 @@
 		D308693D1D3CB8870088D9EA /* const */ = {
 			isa = PBXGroup;
 			children = (
+				D33B2DF91D59D68E00E7FBF1 /* Caches.swift */,
 				D308693B1D3CB1F70088D9EA /* Modules.swift */,
 				D3D849FE1CFBE75000F083DF /* Strings.swift */,
 			);
@@ -412,6 +414,7 @@
 		D348580A1CBB48EF00B55E76 /* helper */ = {
 			isa = PBXGroup;
 			children = (
+				D356C6281D692FA00028E1D9 /* ShareHelper.swift */,
 				D348580B1CBB48FD00B55E76 /* ApiHelper.swift */,
 				D348580D1CBB4FF900B55E76 /* CacheHelper.swift */,
 				D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */,
@@ -421,23 +424,9 @@
 			name = helper;
 			sourceTree = "<group>";
 		};
-		D34859591CF2C31D00EFCDB2 /* deskgame */ = {
-			isa = PBXGroup;
-			children = (
-				D30661C71CF2C38D006583C2 /* GameCardModel.swift */,
-				D30661C91CF2C50E006583C2 /* GameCreateViewController.swift */,
-				D30661CB1CF30016006583C2 /* GameCreateTableViewCell.swift */,
-				D30661CD1CF3011B006583C2 /* GameAvailableCardTableViewCell.swift */,
-				D3AC6FBF1CF410B000000BF6 /* GameShowCardViewController.swift */,
-				D3AC6FC11CF4135800000BF6 /* GameShowCardTableViewCell.swift */,
-			);
-			name = deskgame;
-			sourceTree = "<group>";
-		};
 		D3A0C17A1CBB7C1200744640 /* app_module */ = {
 			isa = PBXGroup;
 			children = (
-				D34859591CF2C31D00EFCDB2 /* deskgame */,
 				D3A0C17D1CBB7C5800744640 /* cardextra */,
 				D3A0C17E1CBB7C6100744640 /* curriculum */,
 				D3A0C1801CBB7C7700744640 /* exam */,
@@ -471,7 +460,10 @@
 				D31DE5171CC359D300E4891D /* CurriculumViewController.swift */,
 				D31DE5191CC35A3100E4891D /* CurriculumView.swift */,
 				D31DE5131CC3597800E4891D /* CurriculumBlock.swift */,
-				D31DE5111CC3592F00E4891D /* ClassInfo.swift */,
+				D31DE5111CC3592F00E4891D /* ClassModel.swift */,
+				D33B2DF51D59939500E7FBF1 /* CurriculumFloatClassViewController.swift */,
+				D33B2DF31D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift */,
+				D33B2DF71D59CD0600E7FBF1 /* SidebarClassModel.swift */,
 			);
 			name = curriculum;
 			sourceTree = "<group>";
@@ -871,7 +863,6 @@
 				D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */,
 				D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */,
 				D31821CE1CC856FF00992355 /* ExperimentViewController.swift in Sources */,
-				D30661C81CF2C38D006583C2 /* GameCardModel.swift in Sources */,
 				D3ED99E41CCB64BE00001E2B /* LibraryTableViewCell.swift in Sources */,
 				D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */,
 				D302B2C41D486F2200760BE9 /* ForceTouchPreviewable.swift in Sources */,
@@ -879,12 +870,15 @@
 				D31DE5141CC3597800E4891D /* CurriculumBlock.swift in Sources */,
 				D306E0221CCA3DFD00FA3812 /* AppModule.swift in Sources */,
 				D39B87A41CCD12EC00EC5280 /* ExtString.swift in Sources */,
+				D33B2DFA1D59D68E00E7FBF1 /* Caches.swift in Sources */,
 				D3A0C1721CBB7A9800744640 /* CardsViewController.swift in Sources */,
 				D33438591D1A2DE900CD49D6 /* NirKxMenu.m in Sources */,
 				D3E6BD7F1CC8C07F0074FF6D /* ModuleManagerViewController.swift in Sources */,
+				D33B2DF61D59939500E7FBF1 /* CurriculumFloatClassViewController.swift in Sources */,
 				D3F473471CCA05CD00750FFB /* JwcViewController.swift in Sources */,
 				D34858111CBB57F600B55E76 /* ExtNSUserDefaults.swift in Sources */,
 				D3ED99E01CCB3DFD00001E2B /* SrtpViewController.swift in Sources */,
+				D356C6291D692FA00028E1D9 /* ShareHelper.swift in Sources */,
 				D31DE51A1CC35A3100E4891D /* CurriculumView.swift in Sources */,
 				D3CA10D11D1F7BD9000E1F88 /* ServiceCard.swift in Sources */,
 				D3D5D43D1CE95603000E406A /* GymSportModel.swift in Sources */,
@@ -910,19 +904,18 @@
 				D3ED99E21CCB5BCB00001E2B /* LibraryBookModel.swift in Sources */,
 				D38E6F351D2F231B001E6172 /* RootControllers.swift in Sources */,
 				D3D849FC1CFBD88200F083DF /* ExtJSON.swift in Sources */,
+				D33B2DF41D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift in Sources */,
 				D3D5D44D1CE99EDC000E406A /* GymFriendModel.swift in Sources */,
-				D30661CE1CF3011B006583C2 /* GameAvailableCardTableViewCell.swift in Sources */,
-				D31DE5121CC3592F00E4891D /* ClassInfo.swift in Sources */,
+				D31DE5121CC3592F00E4891D /* ClassModel.swift in Sources */,
 				D3F4734D1CCA153A00750FFB /* LectureModel.swift in Sources */,
+				D33B2DFC1D59D6AE00E7FBF1 /* AppCache.swift in Sources */,
 				D37708621CCC5D37006ED853 /* FeedbackViewController.swift in Sources */,
 				D3ED99E81CCB870200001E2B /* AboutUsViewController.swift in Sources */,
 				D348580E1CBB4FF900B55E76 /* CacheHelper.swift in Sources */,
 				D3D5D4371CE95101000E406A /* GymReserveViewController.swift in Sources */,
 				D3ED99D41CCAF9FC00001E2B /* SeuNetViewController.swift in Sources */,
 				D3ED99DE1CCB3DB600001E2B /* SrtpTableViewCell.swift in Sources */,
-				D3AC6FC21CF4135800000BF6 /* GameShowCardTableViewCell.swift in Sources */,
 				D3ED99D81CCB08B300001E2B /* SchoolbusTableViewCell.swift in Sources */,
-				D30661CC1CF30016006583C2 /* GameCreateTableViewCell.swift in Sources */,
 				D35FC6281CE3236300BE844C /* PullLoadFooter.swift in Sources */,
 				D3F3DCFB1CBB7792006887F5 /* SettingsHelper.swift in Sources */,
 				D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */,
@@ -931,7 +924,6 @@
 				D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */,
 				D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */,
 				D3D5D44F1CE9AFF1000E406A /* GymAddFriendViewController.swift in Sources */,
-				D30661CA1CF2C50E006583C2 /* GameCreateViewController.swift in Sources */,
 				D3D5D44B1CE99D63000E406A /* NoSelectionTableViewCell.swift in Sources */,
 				D3D5D4431CE99426000E406A /* GymNewViewController.swift in Sources */,
 				D33438521D1A18B400CD49D6 /* LibrarySearchViewController.swift in Sources */,
@@ -955,13 +947,13 @@
 				D3D35DDD1CBA2E8200B18092 /* AppDelegate.swift in Sources */,
 				D3A0C1701CBB7A3A00744640 /* MainTabBarController.swift in Sources */,
 				D3A0C1741CBB7AF500744640 /* ModulesViewController.swift in Sources */,
-				D3AC6FC01CF410B000000BF6 /* GameShowCardViewController.swift in Sources */,
 				D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */,
 				D3E6BD831CC8D4B20074FF6D /* PedetailViewController.swift in Sources */,
 				D34BCC731CE5D379005F4164 /* ExamNotifier.swift in Sources */,
 				D3F375C71CDB3957004DDEA5 /* WifiLoginHelper.swift in Sources */,
 				D3150F0F1CE8C3DA00E95EB6 /* CustomExamViewController.swift in Sources */,
 				D33678F81CE5971C001E7C25 /* CurriculumNotifier.swift in Sources */,
+				D33B2DF81D59CD0600E7FBF1 /* SidebarClassModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

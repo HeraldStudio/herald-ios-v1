@@ -30,15 +30,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return UIApplication.sharedApplication().delegate as! AppDelegate
     }
     
-    /// 无参数的启动结束事件，似乎不会触发
+    /// UIApplicationDelegate 无参数的启动结束事件，似乎不会触发
     func applicationDidFinishLaunching(application: UIApplication) {}
     
-    /// 带参数的启动结束事件
+    /// UIApplicationDelegate 带参数的启动结束事件
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        /// 设置主屏幕图标 3D Touch 菜单
-        /// TODO 考虑去掉考试助手和课表助手入口，换成其它的
+        // 设置主屏幕图标 3D Touch 菜单
         if #available(iOS 9.0, *) {
+            
             // 考试助手菜单
             let test1 = UIApplicationShortcutItem.init(type: "exam", localizedTitle: "考试助手", localizedSubtitle: "", icon: UIApplicationShortcutIcon.init(templateImageName: "pre_exam"), userInfo: nil)
             
@@ -51,22 +51,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.shortcutItems = [test1,test2,test3]
         }
         
-        /// 设置应用通知选项
+        // 设置应用通知选项
         let settings = UIUserNotificationSettings(forTypes: [.Badge, .Sound, .Alert], categories: nil)
         application.registerUserNotificationSettings(settings)
         
-        /// 初始化并显示主界面
+        // 初始化并显示主界面
         let id = AppDelegate.isPad ? "MainSplitController" : "MainNavigationController"
         self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(id)
         
         return true
     }
     
-    /// 在应用结束或转到后台时安排通知
+    /// UIApplicationDelegate 在应用结束时安排通知
     func applicationWillTerminate(application: UIApplication) {
         reloadNotifications()
     }
     
+    /// UIApplicationDelegate 在转到后台时安排通知
     func applicationDidEnterBackground(application: UIApplication) {
         reloadNotifications()
     }
@@ -93,12 +94,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    /// 清空图标徽标数字
+    /// UIApplicationDelegate 清空图标徽标数字
     func applicationDidBecomeActive(application: UIApplication) {
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
     }
     
-    /// 处理主屏幕图标 3D Touch 菜单点击事件
+    /// UIApplicationDelegate 处理主屏幕图标 3D Touch 菜单点击事件
     @available(iOS 9.0, *)
     func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
         

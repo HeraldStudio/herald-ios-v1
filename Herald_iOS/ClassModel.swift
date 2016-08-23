@@ -5,7 +5,7 @@
 import Foundation;
 import SwiftyJSON;
 
-class ClassInfo {
+class ClassModel {
     var className, place : String
     var weekNum : String = ""
     var weekDay : Int = 0

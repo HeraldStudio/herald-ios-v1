@@ -32,12 +32,12 @@ class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDa
     var titles : [String] = []
     
     func loadCache() {
-        let cache = CacheHelper.get("herald_grade_gpa")
-        if cache == "" {
+        if Cache.grade.isEmpty {
             refreshCache()
             return
         }
         
+        let cache = Cache.grade.value
         let jsonCache = JSON.parse(cache)["content"]
         
         sections.removeAll()
@@ -82,22 +82,14 @@ class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiSimpleRequest(.Post).api("gpa").uuid()
-            .toCache("herald_grade_gpa", notifyModuleIfChanged: ModuleGrade)
-            .onResponse { success, _, _ in
-                self.hideProgressDialog()
-                if success {
-                    self.loadCache()
-                } else {
-                    self.showMessage("刷新失败，请重试")
-                }
-            }.run()
-    }
-    
-    static func remoteRefreshNotifyDotState() -> ApiRequest {
-        return
-            ApiSimpleRequest(.Post).api("gpa").uuid()
-                .toCache("herald_grade_gpa", notifyModuleIfChanged: ModuleGrade)
+        Cache.grade.refresh { success, _ in
+            self.hideProgressDialog()
+            if success {
+                self.loadCache()
+            } else {
+                self.showMessage("刷新失败，请重试")
+            }
+        }
     }
     
     func showError () {

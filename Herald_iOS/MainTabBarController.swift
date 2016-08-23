@@ -9,7 +9,7 @@ import DHCShakeNotifier
  */
 class MainTabBarController: UITabBarController {
     
-    /// 界面实例化时的初始化
+    /// UITabBarController 生命周期
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +44,7 @@ class MainTabBarController: UITabBarController {
         }
     }
     
+    /// 刷新登录按钮，若未登录则显示，已登录则隐藏
     func loadLoginButton() {
         if ApiHelper.isLogin() {
             navigationItem.leftBarButtonItem = nil
@@ -52,18 +53,21 @@ class MainTabBarController: UITabBarController {
         }
     }
     
+    /// 登录按钮的点击事件
     func showLogin() {
         AppDelegate.showLogin()
     }
     
     /// 响应摇一摇事件
     func onShake () {
+        
+        // 若设置了摇一摇登录校园网，则进入登录校园网流程
         if SettingsHelper.wifiAutoLogin {
             WifiLoginHelper(self).checkAndLogin()
         }
     }
     
-    /// 反注册摇一摇事件
+    /// UITabBarController 析构函数，反注册摇一摇事件
     override func finalize() {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: DHCSHakeNotificationName, object: nil)
     }

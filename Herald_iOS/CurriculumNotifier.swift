@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class CurriculumNotifier {
     
-    static func scheduleNotificationsForClassInfo (info : ClassInfo, startDate : GCalendar) {
+    static func scheduleNotificationsForClassModel (info : ClassModel, startDate : GCalendar) {
         for week in info.startWeek ..< info.endWeek + 1 {
             if info.isFitEvenOrOdd(week) {
                 let cal = GCalendar(startDate)
@@ -39,8 +39,9 @@ class CurriculumNotifier {
     }
 
     static func scheduleNotifications () {
-        let cache = CacheHelper.get("herald_curriculum")
-        if cache == "" { return }
+        if Cache.curriculum.isEmpty { return }
+        
+        let cache = Cache.curriculum.value
         let content = JSON.parse(cache)
         
         // 读取开学日期
@@ -49,11 +50,12 @@ class CurriculumNotifier {
         
         // 服务器端返回的startMonth是Java/JavaScript型的月份表示，变成实际月份要加1
         let cal = GCalendar(.Day)
+        let nowDate = GCalendar(.Day)
         cal.month = startMonth + 1
         cal.day = startDate
         
-        // 如果开学日期比今天还晚，则是去年开学的。这里用while保证了thisWeek永远大于零
-        while (cal > GCalendar()) {
+        // 如果开学日期比今天晚了超过两个月，则认为是去年开学的。这里用while保证了thisWeek永远大于零
+        while (cal - nowDate > 60 * 86400) {
             cal.year -= 1
         }
         
@@ -63,9 +65,9 @@ class CurriculumNotifier {
         for i in 0 ..< 7 {
             for k in content[CurriculumView.WEEK_NUMS[i]].arrayValue {
                 do {
-                    let classInfo = try ClassInfo(json: k)
-                    classInfo.weekDay = i
-                    scheduleNotificationsForClassInfo(classInfo, startDate: cal)
+                    let classModel = try ClassModel(json: k)
+                    classModel.weekDay = i
+                    scheduleNotificationsForClassModel(classModel, startDate: cal)
                 } catch {}
             }
         }

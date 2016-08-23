@@ -52,15 +52,15 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
     func loadCache() {
         
         // 学校考试
-        let cache = CacheHelper.get("herald_exam")
-        
-        if cache == "" {
+        if Cache.exam.isEmpty {
             refreshCache()
             return
         }
         
+        let cache = Cache.exam.value
+        
         // 自定义考试
-        var customCache = CacheHelper.get("herald_exam_custom")
+        var customCache = Cache.examCustom.value
         if customCache == "" {
             customCache = "[]"
         }
@@ -115,16 +115,14 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiSimpleRequest(.Post).api("exam").uuid()
-            .toCache("herald_exam")
-            .onResponse { success, _, _ in
-                self.hideProgressDialog()
-                if success {
-                    self.loadCache()
-                } else {
-                    self.showMessage("刷新失败，请重试")
-                }
-            }.run()
+        Cache.exam.refresh { success, _ in
+            self.hideProgressDialog()
+            if success {
+                self.loadCache()
+            } else {
+                self.showMessage("刷新失败，请重试")
+            }
+        }
     }
     
     func showError () {

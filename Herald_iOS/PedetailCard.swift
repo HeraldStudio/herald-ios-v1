@@ -12,28 +12,7 @@ import SwiftyJSON
 class PedetailCard {
     
     static func getRefresher () -> ApiRequest {
-        return
-            ( ApiSimpleRequest(.Post).api("pc")
-                .uuid().toCache("herald_pc_forecast") { json in json["content"] }
-                .onResponse { success, code, _ in
-                    let todayComp = GCalendar(.Day)
-                    let today = String(format: "%4d-%02d-%02d", todayComp.year, todayComp.month, todayComp.day)
-                    if success {
-                        CacheHelper.set("herald_pc_date", today)
-                    } else if code == 201 {
-                        CacheHelper.set("herald_pc_date", today)
-                        CacheHelper.set("herald_pc_forecast", "refreshing")
-                    }
-                }
-            | ApiSimpleRequest(.Post).api("pe").uuid()
-                .toCache("herald_pe_count") { json in json["content"] }
-                .toCache("herald_pe_remain") { json in json["remain"] }
-            | ApiSimpleRequest(.Post).api("pedetail")
-                .uuid().toCache("herald_pedetail") {
-                    json in if !json.rawStringValue.containsString("[") { throw E }
-                    return json
-                }
-            )
+        return Cache.pcForecast.refresher | Cache.peCount.refresher | Cache.peDetail.refresher
     }
     
     static func getCard() -> CardsModel {
@@ -41,13 +20,11 @@ class PedetailCard {
             return CardsModel(cellId: "CardsCellPedetail", module: ModulePedetail, desc: "登录即可使用跑操查询、跑操预告功能", priority: .NO_CONTENT)
         }
         
-        let date = CacheHelper.get("herald_pc_date")
-        let forecast = CacheHelper.get("herald_pc_forecast")
-        let record = CacheHelper.get("herald_pedetail")
-        let _count = Int(CacheHelper.get("herald_pe_count"))
-        let count = _count != nil ? _count! : 0
-        let _remain = Int(CacheHelper.get("herald_pe_remain"))
-        let remain = _remain != nil ? _remain! : 0
+        let date = Cache.pcDate.value
+        let forecast = Cache.pcForecast.value
+        let record = Cache.peDetail.value
+        let count = Int(Cache.peCount.value) ?? 0
+        let remain = Int(Cache.peRemain.value) ?? 0
         
         if record == "" {
             return CardsModel(cellId: "CardsCellPedetail", module: ModulePedetail, desc: "跑操数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)

@@ -43,12 +43,12 @@ class ExperimentViewController : UIViewController, UITableViewDelegate, UITableV
     var sectionList : [String] = []
     
     func loadCache() {
-        let cache = CacheHelper.get("herald_experiment")
-        if cache == "" {
+        if Cache.experiment.isEmpty {
             refreshCache()
             return
         }
         
+        let cache = Cache.experiment.value
         let jsonCache = JSON.parse(cache)["content"]
         
         experimentList.removeAll()
@@ -72,15 +72,14 @@ class ExperimentViewController : UIViewController, UITableViewDelegate, UITableV
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiSimpleRequest(.Post).api("phylab").uuid().toCache("herald_experiment")
-            .onResponse { success, _, _ in
-                self.hideProgressDialog()
-                if success {
-                    self.loadCache()
-                } else {
-                    self.showMessage("刷新失败，请重试")
-                }
-            }.run()
+        Cache.experiment.refresh { success, _ in
+            self.hideProgressDialog()
+            if success {
+                self.loadCache()
+            } else {
+                self.showMessage("刷新失败，请重试")
+            }
+        }
     }
     
     func showError () {

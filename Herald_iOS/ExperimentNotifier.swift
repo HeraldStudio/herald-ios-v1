@@ -33,7 +33,7 @@ class ExperimentNotifier {
     }
     
     static func scheduleNotifications () {
-        let cache = CacheHelper.get("herald_experiment")
+        let cache = Cache.experiment.value
         let content = JSON.parse(cache)["content"]
         
         for section in content {

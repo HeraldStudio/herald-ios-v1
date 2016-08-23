@@ -12,15 +12,15 @@ import SwiftyJSON
 class JwcCard {
     
     static func getRefresher () -> ApiRequest {
-        return ApiSimpleRequest(.Post).api("jwc").uuid().toCache("herald_jwc")
+        return Cache.jwc.refresher
     }
     
     static func getCard () -> CardsModel {
-        let cache = CacheHelper.get("herald_jwc")
-        if cache == "" {
+        if Cache.jwc.isEmpty {
             return CardsModel(cellId: "CardsCellJwc", module: ModuleJwc, desc: "教务通知数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
         }
         
+        let cache = Cache.jwc.value
         let content = JSON.parse(cache)["content"]["教务信息"]
         
         var allNotices : [CardsRowModel] = []
