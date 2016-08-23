@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class ExamNotifier {
     static func scheduleNotifications() {
-        let cache = CacheHelper.get("herald_exam")
+        let cache = Cache.exam.value
         let json = JSON.parse(cache)["content"]
         
         for exam in json.arrayValue {
@@ -20,7 +20,7 @@ class ExamNotifier {
             } catch { continue }
         }
         
-        let customCache = CacheHelper.get("herald_exam_custom")
+        let customCache = Cache.examCustom.value
         let jsonCustom = JSON.parse(customCache)
         
         for exam in jsonCustom.arrayValue {

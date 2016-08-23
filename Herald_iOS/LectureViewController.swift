@@ -44,8 +44,8 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
     var list : [[LectureModel]] = []
     
     func loadCache() {
-        let noticeCache = CacheHelper.get("herald_lecture_notices")
-        let recordCache = CacheHelper.get("herald_lecture_records")
+        let noticeCache = Cache.lectureNotices.value
+        let recordCache = Cache.lectureRecords.value
         if noticeCache == "" || recordCache == "" {
             return
         }
@@ -80,11 +80,7 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
     @IBAction func refreshCache () {
         showProgressDialog()
         
-        ( ApiSimpleRequest(.Post).api("lecture")
-            .uuid().toCache("herald_lecture_records")
-        | ApiSimpleRequest(.Post).url(ApiHelper.wechat_lecture_notice_url)
-            .uuid().toCache("herald_lecture_notices")
-        ).onFinish { success, _ in
+        (Cache.lectureRecords.refresher | Cache.lectureNotices.refresher).onFinish { success, _ in
             self.hideProgressDialog()
             if success {
                 self.loadCache()

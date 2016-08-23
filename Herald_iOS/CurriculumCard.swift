@@ -15,28 +15,23 @@ import SwiftyJSON
 class CurriculumCard {
     
     static func getRefresher () -> ApiRequest {
-        return
-            ( ApiSimpleRequest(.Post).api("sidebar")
-                .uuid().toCache("herald_sidebar") { json in json["content"] }
-            | ApiSimpleRequest(.Post).api("curriculum")
-                .uuid().toCache("herald_curriculum") { json in json["content"] }
-            )
+        return Cache.curriculum.refresher | Cache.curriculumSidebar.refresher
     }
     
     static func getCard() -> CardsModel {
         if !ApiHelper.isLogin() {
             return CardsModel(cellId: "CardsCellCurriculum", module: ModuleCurriculum, desc: "登录即可使用课表查询、智能提醒功能", priority: .NO_CONTENT)
         }
-        
-        let cache = CacheHelper.get("herald_curriculum")
-        let now = GCalendar()
-        if cache == "" {
+        if Cache.curriculum.isEmpty {
             return CardsModel(cellId: "CardsCellCurriculum", module: ModuleCurriculum, desc: "课表数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
         }
         
+        let now = GCalendar()
+        let cache = Cache.curriculum.value
+        
         let content = JSON.parse(cache)
         // 读取侧栏信息
-        let sidebar = CacheHelper.get("herald_sidebar")
+        let sidebar = Cache.curriculumSidebar.value
         var sidebarInfo : [String : String] = [:]
         
         // 将课程的授课教师放入键值对
@@ -54,8 +49,8 @@ class CurriculumCard {
         beginOfTerm.month = startMonth + 1
         beginOfTerm.day = startDate
         
-        // 如果开学日期比今天还晚，则是去年开学的。这里用while保证了thisWeek永远大于零
-        if nowDate < beginOfTerm {
+        // 如果开学日期比今天晚了超过两个月，则认为是去年开学的。这里用while保证了thisWeek永远大于零
+        while (beginOfTerm - nowDate > 60 * 86400) {
             beginOfTerm.year -= 1
         }
         
@@ -66,7 +61,14 @@ class CurriculumCard {
         beginOfTerm -= k * 86400
         
         // 计算当前周
-        var thisWeek = (nowDate - beginOfTerm) / 86400 / 7 + 1
+        let dayDelta = (nowDate - beginOfTerm) / 86400
+        if dayDelta < -1 {
+            return CardsModel(cellId: "CardsCellCurriculum", module: ModuleCurriculum, desc: "还没有开学，点击预览新学期课表~", priority: .CONTENT_NO_NOTIFY)
+        } else if dayDelta == -1 {
+            return CardsModel(cellId: "CardsCellCurriculum", module: ModuleCurriculum, desc: "明天就要开学了，点击预览新学期课表~", priority: .CONTENT_NOTIFY)
+        }
+        
+        var thisWeek = dayDelta / 7 + 1
         
         var dayOfWeek = nowDate.dayOfWeekFromMonday.rawValue
         
@@ -79,11 +81,11 @@ class CurriculumCard {
         
         for j in 0 ..< array.count {
             do {
-                let info = try ClassInfo(json: array[j])
+                let info = try ClassModel(json: array[j])
                 info.weekNum = CurriculumView.WEEK_NUMS_CN[dayOfWeek]
                 let _teacher = sidebarInfo[info.className]
                 let teacher = _teacher != nil ? _teacher! : ""
-                let row = CardsRowModel(classInfo: info, teacher: teacher)
+                let row = CardsRowModel(classModel: info, teacher: teacher)
                 
                 // 如果该课程本周上课
                 if info.startWeek <= thisWeek && info.endWeek >= thisWeek && info.isFitEvenOrOdd(thisWeek) {
@@ -147,11 +149,11 @@ class CurriculumCard {
         var rowList : [CardsRowModel] = []
         for j in 0 ..< array.count {
             do {
-                let info = try ClassInfo(json: array[j])
+                let info = try ClassModel(json: array[j])
                 info.weekNum = CurriculumView.WEEK_NUMS_CN[dayOfWeek]
                 let _teacher = sidebarInfo[info.className]
                 let teacher = _teacher != nil ? _teacher! : ""
-                let row = CardsRowModel(classInfo: info, teacher: teacher)
+                let row = CardsRowModel(classModel: info, teacher: teacher)
                 // 如果该课程本周上课
                 if info.startWeek <= thisWeek && info.endWeek >= thisWeek && info.isFitEvenOrOdd(thisWeek) {
                     classCount += 1

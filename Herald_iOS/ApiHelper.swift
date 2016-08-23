@@ -93,6 +93,10 @@ class ApiHelper {
         return cachePwd == "" ? currentUser.password : cachePwd
     }
     
+    static func isWifiLoginAvailable () -> Bool {
+        return isLogin() || getWifiUserName() != trialUser.userName
+    }
+    
     static func clearWifiAuth () {
         setWifiAuth(user: "", pwd: "")
     }

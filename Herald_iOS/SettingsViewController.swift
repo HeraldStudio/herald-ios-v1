@@ -71,6 +71,9 @@ class SettingsViewController: UITableViewController {
             /// 自定义校园网登录账号
             displayWifiSetDialog()
         case (3, 1):
+            /// 分享小猴
+            ShareHelper.share("我在使用小猴偷米App，它是东南大学本科生必备的校园生活助手，你也来试试吧：http://app.heraldstudio.com/")
+        case (3, 2):
             /// 给我们评分（App Store不允许有版本更新按钮，因此更名）
             checkVersion()
         default:

@@ -26,7 +26,7 @@ class GymNewViewController : UIViewController, UITableViewDataSource, UITableVie
         timeCell.time.text = useTime
         halfCell.half.enabled = sport.allowHalf
         halfCell.switchAction = { () in self.tableView.reloadData() }
-        phoneCell.phone.text = CacheHelper.get("herald_gymreserve_phone")
+        phoneCell.phone.text = Cache.gymReserveGetPhone.value
     }
     
     override func viewWillAppear(animated: Bool) {

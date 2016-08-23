@@ -47,12 +47,12 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
     func loadCache(weekend : Bool) {
         control.selectedSegmentIndex = weekend ? 1 : 0
         
-        let cache = CacheHelper.get("herald_schoolbus")
-        if cache == "" {
+        if Cache.schoolbus.isEmpty {
             refreshCache()
             return
         }
         
+        let cache = Cache.schoolbus.value
         let day = weekend ? "weekend" : "weekday"
         let jsonCache = JSON.parse(cache)["content"][day]
         
@@ -102,15 +102,14 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiSimpleRequest(.Post).api("schoolbus").uuid().toCache("herald_schoolbus")
-            .onResponse { success, _, _ in
-                self.hideProgressDialog()
-                if success {
-                    self.loadCache(self.nowWeekend())
-                } else {
-                    self.showMessage("刷新失败，请重试")
-                }
-            }.run()
+        Cache.schoolbus.refresh { success, _ in
+            self.hideProgressDialog()
+            if success {
+                self.loadCache(self.nowWeekend())
+            } else {
+                self.showMessage("刷新失败，请重试")
+            }
+        }
     }
     
     func showError () {

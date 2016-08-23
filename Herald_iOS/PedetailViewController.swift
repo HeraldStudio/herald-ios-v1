@@ -21,7 +21,7 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
     
     override func viewDidLoad() {
         calendar.delegate = self
-        let cache = CacheHelper.get("herald_pedetail")
+        let cache = Cache.peDetail.value
         if cache != "" {
             loadCache()
         } else {
@@ -36,9 +36,9 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
     var history : [NSDate] = []
     
     func loadCache() {
-        let cache = CacheHelper.get("herald_pedetail")
-        let count = CacheHelper.get("herald_pe_count")
-        let remain = CacheHelper.get("herald_pe_remain")
+        let cache = Cache.peDetail.value
+        let count = Cache.peCount.value
+        let remain = Cache.peRemain.value
         countLabel.text = count
         remainLabel.text = remain
         calendar?.reloadData()

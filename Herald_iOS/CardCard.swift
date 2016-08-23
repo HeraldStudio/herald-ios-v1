@@ -12,7 +12,7 @@ import SwiftyJSON
 class CardCard {
     
     static func getRefresher () -> ApiRequest {
-        return ApiSimpleRequest(.Post).api("card").uuid().post("timedelta", "1").toCache("herald_card_today")
+        return Cache.cardToday.refresher
     }
     
     static func getCard() -> CardsModel {
@@ -20,7 +20,7 @@ class CardCard {
             return CardsModel(cellId: "CardsCellCard", module: ModuleCard, desc: "登录可使用消费查询、充值、余额提醒功能", priority: .NO_CONTENT)
         }
         
-        let cache = CacheHelper.get("herald_card_today")
+        let cache = Cache.cardToday.value
         let content = JSON.parse(cache)["content"]
         // 获取余额并且设置
         if let extra = Float(content["left"].stringValue.replaceAll(",", "")) {

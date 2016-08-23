@@ -45,12 +45,12 @@ class JwcViewController : UIViewController, UITableViewDelegate, UITableViewData
     var sectionList : [String] = []
     
     func loadCache() {
-        let cache = CacheHelper.get("herald_jwc")
-        if cache == "" {
+        if Cache.jwc.isEmpty {
             refreshCache()
             return
         }
         
+        let cache = Cache.jwc.value
         let jsonCache = JSON.parse(cache)["content"]
         
         noticeList.removeAll()
@@ -73,15 +73,14 @@ class JwcViewController : UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func refreshCache () {
         showProgressDialog()
-        ApiSimpleRequest(.Post).api("jwc").uuid().toCache("herald_jwc")
-            .onResponse { success, _, _ in
-                self.hideProgressDialog()
-                if success {
-                    self.loadCache()
-                } else {
-                    self.showMessage("刷新失败，请重试")
-                }
-            }.run()
+        Cache.jwc.refresh { success, _ in
+            self.hideProgressDialog()
+            if success {
+                self.loadCache()
+            } else {
+                self.showMessage("刷新失败，请重试")
+            }
+        }
     }
     
     func showError () {

@@ -242,6 +242,16 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             cardList.append(item)
         }
         
+        if ModuleCard.cardEnabled {
+            // 加载并解析一卡通缓存
+            cardList.append(CardCard.getCard())
+        }
+        
+        if ModulePedetail.cardEnabled {
+            // 加载并解析跑操预报缓存
+            cardList.append(PedetailCard.getCard())
+        }
+        
         // 判断各模块是否开启并加载对应数据
         if ModuleCurriculum.cardEnabled {
             // 加载并解析课表缓存
@@ -256,16 +266,6 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         if ModuleExam.cardEnabled {
             // 加载并解析考试缓存
             cardList.append(ExamCard.getCard())
-        }
-        
-        if ModuleCard.cardEnabled {
-            // 加载并解析一卡通缓存
-            cardList.append(CardCard.getCard())
-        }
-        
-        if ModulePedetail.cardEnabled {
-            // 加载并解析跑操预报缓存
-            cardList.append(PedetailCard.getCard())
         }
         
         // 加载校园活动缓存
@@ -299,7 +299,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         showProgressDialog()
         
         // 暂时关闭列表的下拉刷新
-        cardsTableView.bounces = false
+        swiper.enabled = false
         
         // 线程管理器
         var parallelRequest : ApiRequest = ApiEmptyRequest()
@@ -309,21 +309,21 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         if ModuleCurriculum.cardEnabled && ApiHelper.isLogin() {
             // 仅当课表数据不存在时刷新课表
-            if CacheHelper.get("herald_curriculum") == "" || CacheHelper.get("herald_sidebar") == "" {
+            if Cache.curriculum.isEmpty || Cache.curriculumSidebar.isEmpty {
                 parallelRequest |= CurriculumCard.getRefresher()
             }
         }
         
         if ModuleExperiment.cardEnabled && ApiHelper.isLogin() {
             // 仅当实验数据不存在时刷新实验
-            if CacheHelper.get("herald_experiment") == "" {
+            if Cache.experiment.isEmpty {
                 parallelRequest |= ExperimentCard.getRefresher()
             }
         }
         
         if ModuleExam.cardEnabled && ApiHelper.isLogin() {
             // 仅当考试数据不存在时刷新考试
-            if CacheHelper.get("herald_exam") == "" {
+            if Cache.exam.isEmpty {
                 parallelRequest |= ExamCard.getRefresher()
             }
         }
@@ -353,10 +353,10 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         if ApiHelper.isLogin() {
             parallelRequest |=
-                ( GymReserveViewController.remoteRefreshNotifyDotState()
-                | SrtpViewController.remoteRefreshNotifyDotState()
-                | GradeViewController.remoteRefreshNotifyDotState()
-                | LibraryViewController.remoteRefreshNotifyDotState()
+                ( Cache.gymReserveMyOrder.refresher
+                | Cache.srtp.refresher
+                | Cache.grade.refresher
+                | Cache.libraryBorrowBook.refresher
                 )
         }
 
@@ -369,8 +369,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         }.onFinish { success, _ in
             self.hideProgressDialog()
             
-            // 暂时关闭列表的下拉刷新
-            self.cardsTableView.bounces = true
+            // 恢复列表的下拉刷新功能
+            self.swiper.enabled = true
             
             if !success {
                 self.showMessage("部分数据刷新失败")

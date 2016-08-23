@@ -43,12 +43,13 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
     var list : [[LibraryBookModel]] = []
     
     func loadCache() {
-        let borrowCache = CacheHelper.get("herald_library_borrowbook")
-        let hotCache = CacheHelper.get("herald_library_hotbook")
-        if borrowCache == "" || hotCache == "" {
+        if Cache.libraryBorrowBook.isEmpty || Cache.libraryHotBook.isEmpty {
             refreshCache()
             return
         }
+        
+        let borrowCache = Cache.libraryBorrowBook.value
+        let hotCache = Cache.libraryHotBook.value
         
         list.removeAll()
         var borrowList : [LibraryBookModel] = []
@@ -76,10 +77,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
     @IBAction func refreshCache () {
         showProgressDialog()
         
-        ( ApiSimpleRequest(.Post).api("library")
-            .uuid().toCache("herald_library_borrowbook", notifyModuleIfChanged: ModuleLibrary)
-        | ApiSimpleRequest(.Post).api("library_hot").uuid().toCache("herald_library_hotbook")
-        ).onFinish { success, _ in
+        (Cache.libraryBorrowBook.refresher | Cache.libraryHotBook.refresher).onFinish { success, _ in
             self.hideProgressDialog()
             if success {
                 self.loadCache()
@@ -87,11 +85,6 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
                 self.showMessage("刷新失败，请重试")
             }
         }.run()
-    }
-    
-    static func remoteRefreshNotifyDotState() -> ApiRequest {
-        return
-            ApiSimpleRequest(.Post).api("library").uuid().toCache("herald_library_borrowbook", notifyModuleIfChanged: ModuleLibrary)
     }
     
     func showError () {
