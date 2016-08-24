@@ -133,7 +133,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
         
         // 防止当前学期结束导致下标越界
         // 不过前面已经保证过这里 scrollView.subviews.count > 0，不需要再做此判断
-        let curPage = min(thisWeek - 1, scrollView.subviews.count - 1)
+        let curPage = max(0, min(thisWeek - 1, scrollView.subviews.count - 1))
         scrollView?.scrollRectToVisible((scrollView?.subviews[curPage].frame)!, animated: true)
         
         let page = abs(Int(scrollView!.contentOffset.x / scrollView!.frame.width))
