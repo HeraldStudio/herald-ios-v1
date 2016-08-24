@@ -75,6 +75,11 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         setNavigationColor(swiper, 0x00b4ff)
     }
     
+    /// 当从其他界面返回时，重载数据
+    override func viewDidAppear(animated: Bool) {
+        loadContent(false)
+    }
+    
     /// 定时刷新，即每当时间改变时重新解析本地缓存，并加载卡片内容
     func timeChanged() {
         
