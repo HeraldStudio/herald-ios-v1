@@ -141,4 +141,8 @@ class Cache {
     static let schoolbus = AppCache("herald_schoolbus") {
         ApiSimpleRequest(.Post).api("schoolbus").uuid().toCache("herald_schoolbus")
     }
+    
+    static let expressUserName = AppCache("herald_express_user_name")
+    
+    static let expressUserPhone = AppCache("herald_express_user_phone")
 }

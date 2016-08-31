@@ -79,6 +79,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
         
         // 如果没课，什么也不做
         if maxWeek < 1 {
+            removeAllPages()
             showMessage("暂无固定课程")
             return
         }
