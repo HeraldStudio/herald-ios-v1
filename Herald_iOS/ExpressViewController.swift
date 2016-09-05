@@ -2,6 +2,8 @@ import UIKit
 
 class ExpressViewController : UITableViewController {
     
+    var cell : ExpressMainTableViewCell?
+    
     override func viewDidLoad() {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 500
@@ -16,6 +18,11 @@ class ExpressViewController : UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier("ExpressMainTableViewCell")!
+        cell = (tableView.dequeueReusableCellWithIdentifier("ExpressMainTableViewCell") as! ExpressMainTableViewCell)
+        return cell!
+    }
+    
+    @IBAction func refreshTimeList() {
+        cell?.refreshTimeList()
     }
 }
