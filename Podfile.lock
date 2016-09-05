@@ -2,6 +2,7 @@ PODS:
   - Alamofire (3.3.1)
   - DHCShakeNotifier (0.2.0)
   - FSCalendar (2.1.0)
+  - IQDropDownTextField (1.1.0)
   - Kingfisher (2.2.2)
   - MagicPie (1.1.1)
   - Reindeer (0.1.1)
@@ -13,6 +14,7 @@ DEPENDENCIES:
   - Alamofire (~> 3.3)
   - DHCShakeNotifier
   - FSCalendar
+  - IQDropDownTextField
   - Kingfisher (~> 2.2)
   - MagicPie
   - Reindeer
@@ -33,6 +35,7 @@ SPEC CHECKSUMS:
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   DHCShakeNotifier: 64048427ecaa763f2472d0032f58bf7a10074eee
   FSCalendar: d8b9dddaf96fff7621a33b110763d981bb01bc04
+  IQDropDownTextField: 614f79ca905529c992045eaa112d0fc9ebb875d1
   Kingfisher: 7e8de5b0cf7b5dc8ec559d193029a0859df93ef1
   MagicPie: 0cfe79ae6e312d64f6799e3c2ba146b26ba5c79c
   Reindeer: 732796cb76bef40c1ec726017533ec31c2b414a5
@@ -40,6 +43,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   Toast-Swift: 25c3d98db42dc70d9a77b5006ee000e0becb458e
 
-PODFILE CHECKSUM: 4543d32e200f007e93694c03d469aed0a108e307
+PODFILE CHECKSUM: 153c2c17fdd0a9a445d4c3bc719a2d7b14a7001c
 
 COCOAPODS: 1.0.1

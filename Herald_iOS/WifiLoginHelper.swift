@@ -96,7 +96,7 @@ class WifiLoginHelper {
         let passwordEncoded = passwordData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0)) ?? ""
         
         ApiSimpleRequest(.Post).url("http://w.seu.edu.cn/index.php/index/login")
-            .post("username", username, "password", passwordEncoded, "domain", "teacher")
+            .post("username", username, "password", passwordEncoded, "enablemacauth", "1")
             .onResponse { success, _, response in
                 if success {
                     let info = JSON.parse(response)
