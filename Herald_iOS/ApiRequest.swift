@@ -305,6 +305,7 @@ class ApiSimpleRequest : ApiRequest {
      * 执行部分
      **/
     func runWithoutFatalListener() {
+        
         let request = Alamofire.request([Method.Get: .GET, Method.Post: .POST][method]!,
             url!, parameters: map, encoding: .URL)
 
@@ -315,6 +316,7 @@ class ApiSimpleRequest : ApiRequest {
             }
             self.callback(response)
         }
+        
     }
 
     func run () {

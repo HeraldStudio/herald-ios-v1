@@ -7,10 +7,10 @@ import UIKit
 class ShortcutBoxView : UIView {
     
     /// 最小列宽
-    static let minCellWidth : CGFloat = 64
+    static let minCellWidth : CGFloat = 60
     
     /// 行高
-    static let cellHeight : CGFloat = 86
+    static let cellHeight : CGFloat = 82
     
     /// 数据源，包括表示模块管理按钮的伪模块
     var dataSource : [AppModule] = []

@@ -45,7 +45,7 @@ extension UIViewController {
         }
     }
     
-    /// 显示确认对话框
+    /// 显示有确认和取消按钮的对话框
     func showQuestionDialog (message: String, runAfter: () -> Void) {
         
         // 若已有窗口，不作处理
@@ -57,6 +57,18 @@ extension UIViewController {
             (action: UIAlertAction) -> Void in runAfter()})
         dialog.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel){
             (action: UIAlertAction) -> Void in })
+        getTopViewController()?.presentViewController(dialog, animated: true, completion: nil)
+    }
+    
+    /// 显示只有确认按钮的对话框
+    func showSimpleDialog (message: String) {
+        
+        // 若已有窗口，不作处理
+        if getTopViewController()?.presentedViewController != nil {
+            return
+        }
+        let dialog = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        dialog.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.Default){ action in })
         getTopViewController()?.presentViewController(dialog, animated: true, completion: nil)
     }
     
