@@ -19,7 +19,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     let slider = BannerPageViewController()
     
     /// 下拉刷新视图
-    let swiper = SwipeRefreshHeader(.Left)
+    let swiper = SwipeRefreshHeader()
     
     /// 轮播图的数据，用于比较当前数据与新数据是否一致，不一致则重载轮播图
     /// 避免轮播图在刷新过程中出现不必要的闪烁，起到缓冲的作用

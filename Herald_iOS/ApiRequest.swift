@@ -191,25 +191,29 @@ class ApiSimpleRequest : ApiRequest {
      **/
     func callback (response : Response <String, NSError>) -> Void {
 
-        /// 解析错误码（这里指的是 HTTP Response Status Code，不考虑 JSON 中返回的 code）
-        if let code = response.response?.statusCode {
+        // 解析错误码（这里指的是 HTTP Response Status Code，不考虑 JSON 中返回的 code）
+        if let httpCode = response.response?.statusCode {
 
-            /// 按照错误码判断是否成功
-            let success = code < 300
-
-            /// 取返回的字符串值
+            // 取返回的字符串值
             var responseString = ""
             if let stringResponse = response.result.value {
                 responseString = stringResponse
             }
+            
+            // 将 HTTP Response Status Code 与 JSON code 合并, 取其中较严重的一个。
+            // 若返回字符串无法解析成 JSON, 按照我们的 JSON 解析库的实现, 后一个参数将为0, 仍取前一个参数作为 code
+            let code = mergeStatusCodes(httpCode, JSON.parse(responseString)["code"].intValue)
 
-            /// 触发回调
+            // 按照错误码判断是否成功
+            let success = code < 300
+
+            // 触发回调
             for listener in onResponseListeners {
                 listener(success, code, responseString)
             }
         } else {
 
-            /// 连接失败，触发回调
+            // 连接失败，触发回调
             for listener in onResponseListeners {
                 listener(false, 500, "Connection Error")
             }
