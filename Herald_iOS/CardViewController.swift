@@ -8,7 +8,7 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     static let url = "http://58.192.115.47:8088/wechat-web/login/initlogin.html"
     
-    let swiper = SwipeRefreshHeader(.Right)
+    let swiper = SwipeRefreshHeader()
     let puller = PullLoadFooter()
     
     override func viewDidLoad() {

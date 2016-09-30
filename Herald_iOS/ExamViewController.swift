@@ -15,7 +15,7 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet var tableView : UITableView!
     
-    let swiper = SwipeRefreshHeader(.Right)
+    let swiper = SwipeRefreshHeader()
     
     override func viewDidLoad() {
         tableView.estimatedRowHeight = 45

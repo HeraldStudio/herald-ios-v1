@@ -3,7 +3,7 @@ import SwiftyJSON
 
 class CurriculumFloatClassViewController : UITableViewController, LoginUserNeeded {
     
-    let swiper = SwipeRefreshHeader(.Right)
+    let swiper = SwipeRefreshHeader()
     
     override func viewDidLoad() {
         tableView.rowHeight = UITableViewAutomaticDimension

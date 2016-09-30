@@ -13,14 +13,6 @@ import UIKit
 
 class SwipeRefreshHeader : UIView {
     
-    /// 表示在平板视图时，该控件放在左侧还是右侧
-    enum SwipeRefreshHeaderDisplayPlace {
-        case Left
-        case Right
-    }
-    
-    var displayPlace : SwipeRefreshHeaderDisplayPlace = .Left
-    
     /// 背景不透明度从0淡入到1的距离。若 contentView 留空，则始终不透明，不会淡入淡出
     let fadeDistance : CGFloat = 150
     
@@ -46,10 +38,20 @@ class SwipeRefreshHeader : UIView {
     var tipText = "REFRESH"
     
     /// 下拉刷新是否启用，若没有启用，将不会显示
-    var enabled = true
+    var _enabled = true
     
-    init(_ place : SwipeRefreshHeaderDisplayPlace) {
-        self.displayPlace = place
+    /// 在 enabled 改变时要先做一次重绘，否则列表的弹性开关不会立即改变
+    var enabled : Bool {
+        get {
+            return _enabled
+        }
+        set {
+            _enabled = newValue
+            syncApperance()
+        }
+    }
+    
+    init() {
         super.init(frame: CGRect())
     }
     
@@ -60,13 +62,9 @@ class SwipeRefreshHeader : UIView {
     /// 视图被展示时的操作
     override func didMoveToSuperview() {
         
-        var rootController : UIViewController
-        
-        switch displayPlace {
-        case .Left:
-            rootController = AppDelegate.instance.leftController!
-        default:
-            rootController = AppDelegate.instance.rightController!
+        var superStaticView = superview!
+        if let v = superStaticView.superview where superStaticView is UIScrollView {
+            superStaticView = v
         }
         
         // 先移除所有子视图，以防万一
@@ -80,10 +78,10 @@ class SwipeRefreshHeader : UIView {
         }
         
         // 计算尺寸
-        self.frame = CGRect(x: 0, y: 0, width: rootController.view.frame.width, height: realHeight)
+        self.frame = CGRect(x: 0, y: 0, width: superStaticView.frame.width, height: realHeight)
         
         // 添加刷新提示文字
-        refresh.frame = CGRect(x: 0, y: 0, width: rootController.view.frame.width, height: 0)
+        refresh.frame = CGRect(x: 0, y: 0, width: superStaticView.frame.width, height: 0)
         refresh.textAlignment = .Center
         refresh.font = UIFont(name: "AppleSDGothicNeo-Thin", size: 54)
         addSubview(refresh)

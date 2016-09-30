@@ -14,7 +14,7 @@ class ExperimentViewController : UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet var tableView : UITableView!
     
-    let swiper = SwipeRefreshHeader(.Right)
+    let swiper = SwipeRefreshHeader()
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}

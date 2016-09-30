@@ -16,7 +16,7 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet var control : UISegmentedControl!
     
-    let swiper = SwipeRefreshHeader(.Right)
+    let swiper = SwipeRefreshHeader()
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}

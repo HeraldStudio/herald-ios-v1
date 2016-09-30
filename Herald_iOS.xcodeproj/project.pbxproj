@@ -34,11 +34,13 @@
 		D31DE5141CC3597800E4891D /* CurriculumBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5131CC3597800E4891D /* CurriculumBlock.swift */; };
 		D31DE5181CC359D300E4891D /* CurriculumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5171CC359D300E4891D /* CurriculumViewController.swift */; };
 		D31DE51A1CC35A3100E4891D /* CurriculumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31DE5191CC35A3100E4891D /* CurriculumView.swift */; };
+		D3277D711D92CE7000A3B5CB /* BeginOfTermProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3277D701D92CE7000A3B5CB /* BeginOfTermProvider.swift */; };
 		D3325D051CC89BA0002060A5 /* SwipeRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */; };
 		D33438501D1A185300CD49D6 /* LibrarySearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D334384F1D1A185300CD49D6 /* LibrarySearchTableViewCell.swift */; };
 		D33438521D1A18B400CD49D6 /* LibrarySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33438511D1A18B400CD49D6 /* LibrarySearchViewController.swift */; };
 		D33438591D1A2DE900CD49D6 /* NirKxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D33438581D1A2DE900CD49D6 /* NirKxMenu.m */; };
 		D33678F81CE5971C001E7C25 /* CurriculumNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */; };
+		D3378CF91D9AAFA000DCD186 /* ExerciseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3378CF81D9AAFA000DCD186 /* ExerciseUtil.swift */; };
 		D33B2DF41D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF31D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift */; };
 		D33B2DF61D59939500E7FBF1 /* CurriculumFloatClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF51D59939500E7FBF1 /* CurriculumFloatClassViewController.swift */; };
 		D33B2DF81D59CD0600E7FBF1 /* SidebarClassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF71D59CD0600E7FBF1 /* SidebarClassModel.swift */; };
@@ -184,6 +186,7 @@
 		D31DE5131CC3597800E4891D /* CurriculumBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumBlock.swift; sourceTree = "<group>"; };
 		D31DE5171CC359D300E4891D /* CurriculumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumViewController.swift; sourceTree = "<group>"; };
 		D31DE5191CC35A3100E4891D /* CurriculumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumView.swift; sourceTree = "<group>"; };
+		D3277D701D92CE7000A3B5CB /* BeginOfTermProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeginOfTermProvider.swift; sourceTree = "<group>"; };
 		D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeRefreshHeader.swift; sourceTree = "<group>"; };
 		D334384F1D1A185300CD49D6 /* LibrarySearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibrarySearchTableViewCell.swift; sourceTree = "<group>"; };
 		D33438511D1A18B400CD49D6 /* LibrarySearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibrarySearchViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +194,7 @@
 		D33438571D1A2DE900CD49D6 /* NirKxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NirKxMenu.h; sourceTree = "<group>"; };
 		D33438581D1A2DE900CD49D6 /* NirKxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NirKxMenu.m; sourceTree = "<group>"; };
 		D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumNotifier.swift; sourceTree = "<group>"; };
+		D3378CF81D9AAFA000DCD186 /* ExerciseUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseUtil.swift; sourceTree = "<group>"; };
 		D33B2DF31D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumFloatClassTableViewCell.swift; sourceTree = "<group>"; };
 		D33B2DF51D59939500E7FBF1 /* CurriculumFloatClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumFloatClassViewController.swift; sourceTree = "<group>"; };
 		D33B2DF71D59CD0600E7FBF1 /* SidebarClassModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarClassModel.swift; sourceTree = "<group>"; };
@@ -468,6 +472,7 @@
 		D3A0C17E1CBB7C6100744640 /* curriculum */ = {
 			isa = PBXGroup;
 			children = (
+				D3277D701D92CE7000A3B5CB /* BeginOfTermProvider.swift */,
 				D31DE5171CC359D300E4891D /* CurriculumViewController.swift */,
 				D31DE5191CC35A3100E4891D /* CurriculumView.swift */,
 				D31DE5131CC3597800E4891D /* CurriculumBlock.swift */,
@@ -546,6 +551,7 @@
 			isa = PBXGroup;
 			children = (
 				D3E6BD811CC8D4B20074FF6D /* PedetailViewController.swift */,
+				D3378CF81D9AAFA000DCD186 /* ExerciseUtil.swift */,
 			);
 			name = pedetail;
 			sourceTree = "<group>";
@@ -738,7 +744,7 @@
 				TargetAttributes = {
 					D3D35DD81CBA2E8200B18092 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = MW9PK9KE48;
+						DevelopmentTeam = JFQBLHLDR7;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -871,6 +877,7 @@
 				D37A1DAD1D0269880040A7D1 /* AboutUsContentTableViewCell.swift in Sources */,
 				D3D5D4491CE99D19000E406A /* GymReserveCells.swift in Sources */,
 				D354905C1CDC519100E59615 /* GCalendar.swift in Sources */,
+				D3378CF91D9AAFA000DCD186 /* ExerciseUtil.swift in Sources */,
 				D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */,
 				D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */,
 				D31821CE1CC856FF00992355 /* ExperimentViewController.swift in Sources */,
@@ -933,6 +940,7 @@
 				D3EFC1D71CCC81A800BC37A5 /* CurriculumCard.swift in Sources */,
 				D3F4734B1CCA146800750FFB /* LectureTableViewCell.swift in Sources */,
 				D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */,
+				D3277D711D92CE7000A3B5CB /* BeginOfTermProvider.swift in Sources */,
 				D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */,
 				D3D5D44F1CE9AFF1000E406A /* GymAddFriendViewController.swift in Sources */,
 				D3D5D44B1CE99D63000E406A /* NoSelectionTableViewCell.swift in Sources */,
@@ -1108,15 +1116,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
+				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
 				SWIFT_OBJC_BRIDGING_HEADER = "Herald_iOS/Herald_iOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1130,15 +1138,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
+				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
 				SWIFT_OBJC_BRIDGING_HEADER = "Herald_iOS/Herald_iOS-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

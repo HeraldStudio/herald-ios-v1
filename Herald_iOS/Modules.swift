@@ -19,7 +19,7 @@ let ModuleSchoolBus = AppModule("schoolbus", "校车助手", "提供可实时更
 //let ModuleExpress = AppModule("express", "快递代取", "提供线上预订、线下交付的快递便捷代取服务", "MODULE_EXPRESS", "ic_express", false)
 let ModuleSchedule = AppModule("schedule", "校历查询 Web", "显示当前年度各学期的学校校历安排", "http://heraldstudio.com/static/images/xiaoli.jpg", "ic_schedule", false)
 let ModuleQuanYi = AppModule("quanyi", "权益服务 Web", "向东大校会权益部反馈投诉信息", "https://jinshuju.net/f/By3aTK", "ic_quanyi", false)
-let ModuleEmptyRoom = AppModule("emptyroom", "空教室 Web", "提供指定时间内的空教室信息查询服务", "http://www.heraldstudio.com/herald/api/v1/huodong/get/queryEmptyClassrooms/m", "ic_emptyroom", false)
+let ModuleEmptyRoom = AppModule("emptyroom", "空教室 Web", "提供指定时间内的空教室信息查询服务", "http://www.heraldstudio.com/queryEmptyClassrooms/m", "ic_emptyroom", false)
 
 // 特殊的模块，模块管理
 let ModuleManager = AppModule("", "模块管理", "管理各模块的显示/隐藏状态", "MODULE_MANAGER", "ic_add", true)
