@@ -331,7 +331,7 @@
                         <color key="sectionIndexTrackingBackgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CardsCellShortcutBox" rowHeight="66" id="9jc-13-M7S" customClass="CardsCellShortcutBox" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="49.5" width="400" height="66"/>
+                                <rect key="frame" x="0.0" y="50" width="400" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9jc-13-M7S" id="MJV-iU-Ygi">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="66"/>
@@ -352,7 +352,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableViewCell>
                             <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CardsCellHeader" rowHeight="66" id="3fs-qi-Llj" customClass="CardsTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="115.5" width="400" height="66"/>
+                                <rect key="frame" x="0.0" y="116" width="400" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3fs-qi-Llj" id="Xc1-nU-fik">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="66"/>
@@ -422,7 +422,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CardsCellCurriculum" rowHeight="55" id="lep-BL-7fQ" customClass="CardsTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="181.5" width="400" height="55"/>
+                                <rect key="frame" x="0.0" y="182" width="400" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lep-BL-7fQ" id="ljf-bm-mzU">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="55"/>
@@ -467,7 +467,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CardsCellExperiment" rowHeight="55" id="5AH-Qj-VBn" customClass="CardsTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="236.5" width="400" height="55"/>
+                                <rect key="frame" x="0.0" y="237" width="400" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5AH-Qj-VBn" id="eNr-IL-QVU">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="55"/>
@@ -512,7 +512,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CardsCellExam" rowHeight="55" id="0fa-ZO-sot" customClass="CardsTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="291.5" width="400" height="55"/>
+                                <rect key="frame" x="0.0" y="292" width="400" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0fa-ZO-sot" id="hAN-hd-wdI">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="55"/>
@@ -567,7 +567,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CardsCellActivity" rowHeight="55" id="2Yy-Me-db4" customClass="CardsTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="346.5" width="400" height="55"/>
+                                <rect key="frame" x="0.0" y="347" width="400" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Yy-Me-db4" id="0Nq-gc-uTM">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="55"/>
@@ -603,7 +603,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CardsCellLecture" rowHeight="55" id="L0J-fm-2LG" customClass="CardsTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="401.5" width="400" height="55"/>
+                                <rect key="frame" x="0.0" y="402" width="400" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L0J-fm-2LG" id="WbM-jb-i5X">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="55"/>
@@ -648,7 +648,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CardsCellJwc" rowHeight="55" id="ycr-xu-TgC" customClass="CardsTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="456.5" width="400" height="55"/>
+                                <rect key="frame" x="0.0" y="457" width="400" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ycr-xu-TgC" id="uzu-d9-Spk">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="55"/>
@@ -684,7 +684,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="CardsCellPedetail" id="3Jo-uc-mUD" customClass="CardsTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="511.5" width="400" height="55"/>
+                                <rect key="frame" x="0.0" y="512" width="400" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Jo-uc-mUD" id="awz-HJ-dZD">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="55"/>
@@ -939,7 +939,7 @@
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ModuleTableViewCell" id="HCN-VQ-FWU" customClass="ModuleTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="49.5" width="400" height="80"/>
+                                <rect key="frame" x="0.0" y="50" width="400" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HCN-VQ-FWU" id="Uqo-bk-XM4">
                                     <rect key="frame" x="0.0" y="0.0" width="400" height="80"/>
@@ -1015,7 +1015,7 @@
                             <tableViewSection headerTitle="我的账户" footerTitle="可在此设置用别人的账号登录seu-wlan。" id="LbE-qM-CAu">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="aXV-Lm-VrR">
-                                        <rect key="frame" x="0.0" y="49.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="50" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aXV-Lm-VrR" id="WhE-mR-qjz">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1037,7 +1037,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="g8w-kh-UWA">
-                                        <rect key="frame" x="0.0" y="93.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="94" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g8w-kh-UWA" id="jji-DP-yUn">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1063,7 +1063,7 @@
                             <tableViewSection footerTitle="也可以从加号菜单登录；支持全校所有新版认证的Wi-Fi。" id="h74-E7-DdY">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="KRT-Nl-i9r" customClass="NoSelectionTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="182.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="183" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KRT-Nl-i9r" id="HfP-c3-WmX">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1097,7 +1097,7 @@
                             <tableViewSection footerTitle="考试提醒为提前30分钟，其余为提前15分钟。" id="yCY-gM-TKp">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="iZj-79-x4K" customClass="NoSelectionTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="287.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="288" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iZj-79-x4K" id="Xnc-a6-yA0">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1127,7 +1127,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="vBm-wc-3HZ" customClass="NoSelectionTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="331.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="332" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vBm-wc-3HZ" id="KGg-8y-9Ca">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1157,7 +1157,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="rDk-6M-fzJ" customClass="NoSelectionTableViewCell" customModule="小猴偷米" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="375.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="376" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rDk-6M-fzJ" id="cHF-zb-LAx">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1191,7 +1191,7 @@
                             <tableViewSection footerTitle="如果某些模块无法连接或无数据，属学校网络设施故障，小猴也无能为力，等一等就好啦~" id="sji-X1-u2g">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="64" id="VFE-Gd-vac">
-                                        <rect key="frame" x="0.0" y="464.5" width="320" height="64"/>
+                                        <rect key="frame" x="0.0" y="465" width="320" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VFE-Gd-vac" id="OsB-Wa-s98">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="64"/>
@@ -1224,7 +1224,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="G5U-4v-cyc">
-                                        <rect key="frame" x="0.0" y="528.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="529" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G5U-4v-cyc" id="vAB-8l-PC3">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1246,7 +1246,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="LYI-KF-cJe">
-                                        <rect key="frame" x="0.0" y="572.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="573" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LYI-KF-cJe" id="dmQ-0I-F5E">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1268,7 +1268,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="tXs-nW-gLH">
-                                        <rect key="frame" x="0.0" y="616.5" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="617" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tXs-nW-gLH" id="PVg-nY-qTM">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="44"/>
@@ -1339,7 +1339,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="快捷栏" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ts-48-eIo">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="常用模块" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ts-48-eIo">
                                             <rect key="frame" x="253" y="38" width="56" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="56" id="Xvg-aZ-LGT"/>
