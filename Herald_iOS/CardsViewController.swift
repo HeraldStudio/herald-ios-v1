@@ -458,14 +458,12 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         let destination = model.rows[indexPath.row].destination
         let message = model.rows[indexPath.row].message
         
-        // 若有目标界面，打开目标界面；否则若有消息，显示消息；否则显示卡片无详情
+        // 若有目标界面，打开目标界面；否则若有消息，显示消息
         if destination != "" {
             let module = AppModule(title: model.rows[0].title!, url: destination)
             module.open()
         } else if message != "" {
             showMessage(message)
-        } else {
-            showMessage("卡片无详情")
         }
         
         // 标记为已读
