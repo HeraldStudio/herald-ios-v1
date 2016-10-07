@@ -250,17 +250,13 @@ class ApiSimpleRequest : ApiRequest {
     typealias JSONParser = JSON throws -> JSON
 
     // 目前暂时只有CacheHelper有更新检测机制，如果另外两个也需要该机制，请修改对应的Helper的set函数
-    func toCache (key : String, notifyModuleIfChanged module : AppModule? = nil, withParser parser : JSONParser = {json in json}) -> ApiSimpleRequest {
+    func toCache (key : String, withParser parser : JSONParser = {json in json}) -> ApiSimpleRequest {
         onResponse {
             success, _, response in
             if(success) {
                 do {
                     let cache = try parser(JSON.parse(response)).rawStringValue
-                    if CacheHelper.set(key, cache) {
-                        if let module = module {
-                            module.hasUpdates = true
-                        }
-                    }
+                    CacheHelper.set(key, cache)
                 } catch {
                     for onResponseListener in self.onResponseListeners {
                         onResponseListener(false, 0, "")

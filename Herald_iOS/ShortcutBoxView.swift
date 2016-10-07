@@ -7,13 +7,26 @@ import UIKit
 class ShortcutBoxView : UIView {
     
     /// 最小列宽
-    static let minCellWidth : CGFloat = 60
+    static let minCellWidth : CGFloat = 80
+    
+    /// 左右边距
+    static let paddings : CGFloat = 15
     
     /// 行高
-    static let cellHeight : CGFloat = 82
+    static let cellHeight : CGFloat = 42
     
     /// 数据源，包括表示模块管理按钮的伪模块
     var dataSource : [AppModule] = []
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.userInteractionEnabled = true
+        loadData()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     /// 初始化完成后，载入数据
     override func didMoveToSuperview() {
@@ -26,26 +39,6 @@ class ShortcutBoxView : UIView {
         }
     }
     
-    /// 预计算高度，因为 TableView 是先取得 cell 高度再布局各个 cell 的
-    /// 所以需要在 tableView(_:heightForRowAtIndexPath:) 中提前调用此方法得知快捷栏高度
-    static func precalculateHeight() -> CGFloat {
-        
-        // 此处假定在 iPad 端快捷栏始终显示在左侧栏
-        let width = AppDelegate.instance.leftController!.view.frame.width
-        
-        // 获取已启用快捷方式的模块列表
-        let dataSource = Modules.filter { $0.shortcutEnabled } + [ModuleManager]
-        
-        // 根据尺寸计算列数
-        let columnCount = Int(width / minCellWidth)
-        
-        // 根据总数和列数计算行数
-        let rowCount = Int(ceil(Float(dataSource.count) / Float(columnCount)))
-        
-        // 根据行数计算高度
-        return cellHeight * CGFloat(rowCount)
-    }
-    
     /// 重新载入数据
     func loadData() {
         
@@ -56,12 +49,12 @@ class ShortcutBoxView : UIView {
         
         /// 初始化、调整布局属性
         // 获取已启用快捷方式的模块列表
-        dataSource = Modules.filter { $0.shortcutEnabled } + [ModuleManager]
+        dataSource = Modules.filter { $0.shortcutEnabled }
         
-        let width = AppDelegate.instance.leftController!.view.frame.width
+        let width = AppDelegate.instance.leftController!.view.frame.width - ShortcutBoxView.paddings * 2
         
-        // 根据尺寸计算列数
-        let columnCount = Int(width / ShortcutBoxView.minCellWidth)
+        // 根据尺寸计算列数；为了防止列宽大于屏幕造成除以零错误，限制最小列数为1
+        let columnCount = max(1, Int(width / ShortcutBoxView.minCellWidth))
         
         // 根据总数和列数计算行数
         let rowCount = Int(ceil(Float(dataSource.count) / Float(columnCount)))
@@ -84,144 +77,60 @@ class ShortcutBoxView : UIView {
             // 计算图标位置
             let xPos = index % columnCount
             let yPos = index / columnCount
-            let x = CGFloat(xPos) * cellWidth
+            let x = CGFloat(xPos) * cellWidth + ShortcutBoxView.paddings
             let y = CGFloat(yPos) * ShortcutBoxView.cellHeight
             
             // 得到图标区域
             let rect = CGRect(x: x, y: y, width: cellWidth, height: ShortcutBoxView.cellHeight)
             
-            let cell = layoutCellAt(index, inRect: rect)
-            
-            cell.backgroundColor = ((xPos + yPos) % 2 == 0) ? UIColor(white: 248/255, alpha: 1) : UIColor.whiteColor()
+            layoutCellAt(index, inRect: rect)
         }
+        
+        self.removeConstraints(constraints)
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 0, constant: height))
+        self.updateConstraintsIfNeeded()
     }
     
     /// 布局单个图标
-    func layoutCellAt(index : Int, inRect rect : CGRect) -> ShortcutBoxCell {
+    func layoutCellAt(index : Int, inRect rect : CGRect) {
         let module = dataSource[index]
         
-        let cell = ShortcutBoxCell(frame: rect, module: module)
+        let cell = UIViewController(nibName: "ShortcutBoxCell", bundle: nil)
+        cell.view.frame = rect
+        (cell.view as! ShortcutBoxCell).module = module
         
-        addSubview(cell)
+        addSubview(cell.view)
         
-        return cell
+        let divider = UIView(frame: CGRect(x: rect.minX, y: rect.minY - 0.5, width: rect.width, height: 0.5))
+        divider.backgroundColor = UIColor(white: 229/255, alpha: 1)
+        addSubview(divider)
     }
 }
 
 /// 快捷栏图标
 class ShortcutBoxCell : UIView {
     
-    /// 图标尺寸
-    let iconSize : CGFloat = 42
+    @IBOutlet var icon : UIImageView!
     
-    /// 字体大小
-    let fontSize : CGFloat = 12
-    
-    /// 小红点大小
-    let notifyDotSize : CGFloat = 12
+    @IBOutlet var title : UILabel!
     
     /// 当前图标代表的模块
-    var module : AppModule
+    var _module : AppModule?
     
-    /// 拒绝遵守反序列化协议
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    var module : AppModule? {
+        get {
+            return _module
+        }
+        set {
+            _module = newValue
+            if let _module = _module {
+                icon.image = UIImage(named: _module.invertIcon)
+                title.text = _module.nameTip.split(" ")[0]
+            }
+        }
     }
     
-    /// 使用显示区域和模块对象构造一个图标
-    init(frame : CGRect, module : AppModule) {
-        self.module = module
-        super.init(frame: frame)
-    }
-    
-    /// 初始化完成后，显示该图标
-    override func didMoveToSuperview() {
-        
-        /// 首先进行必要的前置计算
-        // 去除图标和文字以外的剩余空间总高度
-        let totalSpace = frame.height - iconSize - fontSize
-        
-        // 图标和文字之间的距离
-        let middlePadding = totalSpace * 1 / 4
-        
-        // 图标上方、文字下方到边缘的距离
-        let outerPadding = (totalSpace - middlePadding) / 2
-        
-        // 图标左右两边到边缘的距离
-        let iconSidePadding = (frame.width - iconSize) / 2
-        
-        /// 初始化并放置图片视图
-        // 图标视图
-        let icon = UIImageView(image: UIImage(named: module.icon))
-        
-        // 设置图标显示区域
-        icon.frame = CGRect(x: iconSidePadding, y: outerPadding, width: iconSize, height: iconSize)
-        
-        // 放置图标
-        addSubview(icon)
-        
-        /// 初始化并放置文字标签
-        let label = UILabel()
-        
-        // 设置文字内容
-        label.text = module.nameTip.split(" ")[0]
-        
-        // 设置文字字体
-        label.font = UIFont.systemFontOfSize(fontSize)
-        
-        // 设置文字颜色
-        label.textColor = UIColor(white: 0.4, alpha: 1)
-        
-        // 设置文字对齐
-        label.textAlignment = .Center
-        
-        // 设置文字显示区域
-        label.frame = CGRect(x: 0, y: outerPadding + iconSize + middlePadding, width: frame.width, height: fontSize)
-        
-        // 放置文字
-        addSubview(label)
-        
-        /// 初始化并放置小红点
-        if module.hasUpdates {
-            
-            // 计算位置
-            let notifyDotX = iconSidePadding + iconSize - notifyDotSize
-            let notifyDotY = outerPadding
-            
-            // 初始化小红点控件
-            let notifyDot = UIImageView(image: UIImage(named: "notify_dot"))
-            
-            // 设置小红点显示区域
-            notifyDot.frame = CGRect(x: notifyDotX, y: notifyDotY, width: notifyDotSize, height: notifyDotSize)
-            
-            // 放置小红点
-            addSubview(notifyDot)
-        }
-        
-        /// 设置点击事件
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.launch))
-        addGestureRecognizer(tapGesture)
-        
-        /// 设置长按事件（模块管理按钮不设置）
-        if module == ModuleManager {
-            return
-        }
-        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.askToDelete))
-        addGestureRecognizer(longGesture)
-    }
-    
-    /// 打开该模块
-    func launch() {
-        if module.hasUpdates {
-            module.hasUpdates = false
-        }
-        module.open()
-    }
-    
-    /// 询问删除快捷方式
-    func askToDelete() {
-        AppDelegate.instance.leftController!.showQuestionDialog("确定移除此模块的快捷方式吗？") {
-            self.module.shortcutEnabled = false
-        }
+    @IBAction func open() {
+        _module?.open()
     }
 }

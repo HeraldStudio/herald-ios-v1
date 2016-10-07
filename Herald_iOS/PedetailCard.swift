@@ -12,12 +12,13 @@ import SwiftyJSON
 class PedetailCard {
     
     static func getRefresher () -> ApiRequest {
-        var refreshers = Cache.pcForecast.refresher | Cache.peCount.refresher
-            
+        var request = Cache.pcForecast.refresher | Cache.peCount.refresher
+        
+        // 为了减轻服务器压力, 只在跑操时间已过后刷新跑操详情
         if ExerciseUtil.getCurrentExerciseStatus() == .AfterExercise {
-            refreshers |= Cache.peDetail.refresher
+            request |= Cache.peDetail.refresher
         }
-        return refreshers
+        return request
     }
     
     static func getCard() -> CardsModel {
