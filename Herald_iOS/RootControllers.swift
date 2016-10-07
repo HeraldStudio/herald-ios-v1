@@ -90,6 +90,6 @@ class RightMainController : UIViewController {
     override func viewWillAppear(animated: Bool) {
         
         // 设置导航栏颜色
-        setNavigationColor(nil, 0x00b4ff)
+        setNavigationColor(nil, 0x12b0ec)
     }
 }
