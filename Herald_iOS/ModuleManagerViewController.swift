@@ -10,7 +10,7 @@ class ModuleManagerViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(nil, 0x00b4ff)
+        setNavigationColor(nil, 0x12b0ec)
     }
     
     override func didReceiveMemoryWarning() {

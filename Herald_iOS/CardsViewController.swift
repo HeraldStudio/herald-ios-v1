@@ -72,7 +72,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     /// 当准备从其它界面返回时，设置导航栏颜色
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(swiper, 0x00b4ff)
+        setNavigationColor(swiper, 0x12b0ec)
     }
     
     /// 当从其他界面返回时，重载数据
