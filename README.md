@@ -28,6 +28,7 @@ Project Development Manual for Herald_iOS
 - 系统要求macOS Yosemite或更高，需要安装Xcode 7.3版本。
 - 需要掌握Swift 2和iOS开发的知识，有一定的项目开发经验；
 - 需要熟悉git的基本操作。
+
 ### 环境配置
 - 在 https://cocoapods.org/app 下载cocoapods图形化工具；
 - 打开Xcode，选择Checkout an existing project，输入项目的git仓库地址，选择dev-main分支进行拉取。
