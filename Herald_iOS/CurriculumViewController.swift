@@ -25,7 +25,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(swiper, 0x00abd4)
+        setNavigationColor(0x00abd4)
     }
     
     /// 当屏幕旋转时重新布局

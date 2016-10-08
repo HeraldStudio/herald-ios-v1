@@ -392,10 +392,10 @@
 				D33438581D1A2DE900CD49D6 /* NirKxMenu.m */,
 				D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */,
 				D35FC6271CE3236300BE844C /* PullLoadFooter.swift */,
-				D3E079221D2E7A0D00D5FBB3 /* ShortcutBoxView.swift */,
-				D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */,
 				D3C1A1071D9F67CE00B55B3E /* CardsCellShortcutBox.swift */,
+				D3E079221D2E7A0D00D5FBB3 /* ShortcutBoxView.swift */,
 				D3B4BA711DA79E0800E8DBB1 /* ShortcutBoxCell.xib */,
+				D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */,
 			);
 			name = custom;
 			sourceTree = "<group>";

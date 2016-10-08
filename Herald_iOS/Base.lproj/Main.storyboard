@@ -4161,7 +4161,7 @@
         <image name="login_textfield_bg_password" width="13" height="13"/>
         <image name="login_textfield_bg_username" width="13" height="13"/>
         <image name="notify_dot" width="40" height="40"/>
-        <image name="right_home" width="512" height="512"/>
+        <image name="right_home" width="341" height="341"/>
         <image name="xiaohui" width="1024" height="1026"/>
     </resources>
     <inferredMetricsTieBreakers>

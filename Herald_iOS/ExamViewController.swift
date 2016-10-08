@@ -28,7 +28,7 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(swiper, 0xf5176c)
+        setNavigationColor(0xf5176c)
         loadCache()
     }
     

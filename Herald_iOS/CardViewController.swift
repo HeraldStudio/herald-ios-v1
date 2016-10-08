@@ -34,7 +34,7 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(swiper, 0x03a9f4)
+        setNavigationColor(0x03a9f4)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -145,7 +145,7 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         // 若为空，加一个条目提示用户这里是空的
         if history.count == 0 {
-            return nil
+            return "消费记录"
         }
         var consume : Float = 0.0
         var charge : Float = 0.0

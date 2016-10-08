@@ -25,7 +25,7 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(swiper, 0x009688)
+        setNavigationColor(0x009688)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

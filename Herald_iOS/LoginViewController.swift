@@ -21,7 +21,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(nil, 0x000000)
+        setNavigationColor(0x000000)
     }
 
     override func didReceiveMemoryWarning() {

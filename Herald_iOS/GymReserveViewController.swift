@@ -20,7 +20,7 @@ class GymReserveViewController : UIViewController, UITableViewDataSource, UITabl
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(swiper, 0x0075ef)
+        setNavigationColor(0x0075ef)
     }
     
     override func viewDidAppear(animated: Bool) {

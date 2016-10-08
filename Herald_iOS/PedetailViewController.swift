@@ -30,7 +30,7 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(nil, 0x26a69a)
+        setNavigationColor(0x26a69a)
     }
     
     var history : [NSDate] = []

@@ -26,7 +26,7 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(swiper, 0xf44336)
+        setNavigationColor(0xf44336)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

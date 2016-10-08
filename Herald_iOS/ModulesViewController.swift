@@ -49,7 +49,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     /// 当准备从其它界面返回时，设置导航栏颜色
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(nil, 0x12b0ec)
+        setNavigationColor(0x12b0ec)
     }
     
     /// 加载模块列表
