@@ -25,7 +25,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(swiper, 0xe53935)
+        setNavigationColor(0xe53935)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

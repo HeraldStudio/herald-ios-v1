@@ -25,7 +25,7 @@ class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(nil, 0x4caf50)
+        setNavigationColor(0x4caf50)
     }
     
     var sections : [[GradeModel]] = []

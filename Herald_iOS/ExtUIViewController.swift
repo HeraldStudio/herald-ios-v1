@@ -72,6 +72,33 @@ extension UIViewController {
         getTopViewController()?.presentViewController(dialog, animated: true, completion: nil)
     }
     
+    /// 开启小猴对话彩蛋
+    func showSimsimiDialog(message: String = "跟小猴对话吧~") {
+        
+        // 若已有窗口，不作处理
+        if getTopViewController()?.presentedViewController != nil {
+            return
+        }
+        let dialog = UIAlertController(title: "小猴消息", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        dialog.addTextFieldWithConfigurationHandler { _ in }
+        dialog.addAction(UIAlertAction(title: "发送", style: UIAlertActionStyle.Default){
+            (action: UIAlertAction) -> Void in
+            guard let msg = dialog.textFields![0].text else {
+                return
+            }
+            ApiSimpleRequest(.Post).api("simsimi").uuid().post("msg", msg).onResponse { _, _, response in
+                if response == "error" {
+                    self.showSimsimiDialog("你在说什么，小猴好像听不懂的样子~")
+                } else {
+                    self.showSimsimiDialog(response)
+                }
+            }.run()
+        })
+        dialog.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel){
+            (action: UIAlertAction) -> Void in })
+        getTopViewController()?.presentViewController(dialog, animated: true, completion: nil)
+    }
+    
     /// 显示带有“不再提示”按钮的对话框
     func showTipDialogIfUnknown (message: String, cachePostfix: String, runAfter: () -> Void) {
         
@@ -96,7 +123,7 @@ extension UIViewController {
     }
     
     /// 设置导航栏颜色，参数是 Java 风格的不透明颜色值，例如 0x2bbfff
-    func setNavigationColor (swiper: SwipeRefreshHeader?, _ color: Int) {
+    func setNavigationColor (color: Int) {
         var color = color
         let blue = CGFloat(color % 0x100) / 0xFF
         color /= 0x100
@@ -105,11 +132,11 @@ extension UIViewController {
         let red = CGFloat(color % 0x100) / 0xFF
         let _color = UIColor(red: red, green: green, blue: blue, alpha: 1)
         
-        setNavigationColor(swiper, uiColor: _color)
+        setNavigationColor(uiColor: _color)
     }
     
     /// 设置导航栏颜色
-    func setNavigationColor (swiper: SwipeRefreshHeader?, uiColor color: UIColor) {
+    func setNavigationColor (uiColor color: UIColor) {
         if let bar = self.navigationController?.navigationBar {
             UIView.beginAnimations(nil, context: nil)
             UIView.setAnimationCurve(.Linear)
@@ -118,8 +145,6 @@ extension UIViewController {
             bar.barTintColor = color
             UIView.commitAnimations()
         }
-        
-        swiper?.themeColor = color
     }
     
     /// 获取当前最顶层的VC，以防止提示消息显示不出来

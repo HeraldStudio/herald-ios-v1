@@ -16,7 +16,7 @@ class GymChooseTimeViewController : UIViewController, UITableViewDataSource, UIT
     let swiper = SwipeRefreshHeader()
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(swiper, 0x0075ef)
+        setNavigationColor(0x0075ef)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

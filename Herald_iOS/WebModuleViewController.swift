@@ -45,7 +45,7 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate, ForceTouchP
     override func viewWillAppear(animated: Bool) {
         for (key, value) in webModuleColors {
             if url == key.destination {
-                setNavigationColor(nil, value)
+                setNavigationColor(value)
             }
         }
     }

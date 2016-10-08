@@ -25,7 +25,7 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(swiper, 0xef5350)
+        setNavigationColor(0xef5350)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
