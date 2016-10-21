@@ -25,9 +25,7 @@ class CardCard {
         // 获取余额并且设置
         if let extra = Float(content["left"].stringValue.replaceAll(",", "")) {
             if extra < 20 {
-                let model = CardsModel(cellId: "CardsCellCard", module: ModuleCard, desc: "一卡通余额还有\(String(format: "%.2f", extra))元，快点我充值~\n如果已经充值过了，需要在食堂刷卡一次才会更新哦~", priority: .CONTENT_NOTIFY)
-                model.rows[0].destination = CardViewController.url
-                return model
+                return CardsModel(cellId: "CardsCellCard", module: ModuleCard, desc: "一卡通余额还有\(String(format: "%.2f", extra))元，快去充值~\n如果已经充值过了，需要在食堂刷卡一次才会更新哦~", priority: .CONTENT_NOTIFY)
             } else {
                 return CardsModel(cellId: "CardsCellCard", module: ModuleCard, desc: "你的一卡通余额还有\(String(format: "%.2f", extra))元", priority: .CONTENT_NO_NOTIFY)
             }
