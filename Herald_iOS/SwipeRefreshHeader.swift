@@ -60,7 +60,6 @@ class SwipeRefreshHeader : UIView {
     
     init() {
         super.init(frame: CGRect())
-        backgroundColor = UIColor.whiteColor()
     }
     
     required init?(coder aDecoder: NSCoder) {
