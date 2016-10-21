@@ -11,14 +11,14 @@ import UIKit
 /// 7、在父控件 scrollViewWillBeginDragging 代理方法中要调用 beginDrag()
 /// 8、在父控件 scrollViewDidEndDragging 代理方法中要调用 endDrag()
 
-let eggs = [
+/*let eggs = [
     "诶嘿？",
     "喂喂~",
     "主人你在发呆吗？",
     "妖妖灵吗？这里有人虐待小猴纸！",
     "场面已经控制不住了！",
     "要不，小猴陪你说说话吧。"
-]
+]*/
 
 class SwipeRefreshHeader : UIView {
     
@@ -41,8 +41,8 @@ class SwipeRefreshHeader : UIView {
     var realHeight = CGFloat(0)
     
     /// 下拉刷新中的文字
-    let tipTextOff = "·  ω  ·"
-    let tipTextOn = "> ω <"
+    let tipTextOff = "·  ω  · 下拉刷新"
+    let tipTextOn = "·  ω  · 松手刷新"
     
     /// 下拉刷新是否启用，若没有启用，将不会显示
     var _enabled = true
@@ -131,13 +131,13 @@ class SwipeRefreshHeader : UIView {
     // 不拖动时即使距离超过了触发距离也只显示REFRESH。
     var dragging = false
     
-    var changeTime = 0
-    var _isHighlight = false
+/*    var changeTime = 0
+    var _isHighlight = false*/
     var isHighlight : Bool {
         let y = (superview! as! UIScrollView).contentOffset.y
         let val = -y >= refreshDistance && dragging
         
-        if _isHighlight != val {
+/*        if _isHighlight != val {
             changeTime += 1
             if changeTime % 10 == 0 {
                 let eggIndex = changeTime / 10 - 1
@@ -147,9 +147,9 @@ class SwipeRefreshHeader : UIView {
                     AppDelegate.instance.wholeController.showSimsimiDialog()
                 }
             }
-        }
+        }*/
         
-        _isHighlight = val
+        //_isHighlight = val
         return val
     }
     
@@ -161,7 +161,7 @@ class SwipeRefreshHeader : UIView {
     /// 记录拖动结束，需要在父视图代理中调用
     func endDrag () {
         dragging = false
-        changeTime = 0
+        //changeTime = 0
         guard let text = refresh.text else { return }
         if text == tipTextOn {
             refresher?()
