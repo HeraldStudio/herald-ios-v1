@@ -6,26 +6,27 @@ import UIKit
 //- 2、父控件是 UIScrollView 或其子类，如 UITableView
 //- 3、本控件要放在最顶部，例如可以作为 UITableView 的 tableHeaderView 使用
 //- 4、初始 contentOffset.y 必须为零，因此不能放在开启 translucent 属性的 UINavigationBar 下
-/// 5、将本控件添加到父控件前，要先设置 themeColor、refresher
+/// 5、将本控件添加到父控件前，要先设置 refresher
 /// 6、在父控件 scrollViewDidScroll 代理方法中要调用 syncApperance()
 /// 7、在父控件 scrollViewWillBeginDragging 代理方法中要调用 beginDrag()
 /// 8、在父控件 scrollViewDidEndDragging 代理方法中要调用 endDrag()
 
+/*let eggs = [
+    "诶嘿？",
+    "喂喂~",
+    "主人你在发呆吗？",
+    "妖妖灵吗？这里有人虐待小猴纸！",
+    "场面已经控制不住了！",
+    "要不，小猴陪你说说话吧。"
+]*/
+
 class SwipeRefreshHeader : UIView {
     
-    /// 表示在平板视图时，该控件放在左侧还是右侧
-    enum SwipeRefreshHeaderDisplayPlace {
-        case Left
-        case Right
-    }
-    
-    var displayPlace : SwipeRefreshHeaderDisplayPlace = .Left
-    
-    /// 背景不透明度从0淡入到1的距离。若 contentView 留空，则始终不透明，不会淡入淡出
+    /// 文字不透明度从0淡入到1的距离
     let fadeDistance : CGFloat = 150
     
     /// 触发刷新的最小滑动距离
-    let refreshDistance : CGFloat = 80
+    let refreshDistance : CGFloat = 60
     
     /// 嵌入的子视图，若非空，则以它的高度作为下拉刷新控件的初始高度
     var contentView : UIView?
@@ -36,20 +37,28 @@ class SwipeRefreshHeader : UIView {
     /// 刷新触发的事件
     var refresher : (() -> Void)?
     
-    /// 下拉刷新时淡入淡出的背景色
-    var themeColor : UIColor?
-    
     /// 下拉刷新控件没有拉伸时的原始高度
     var realHeight = CGFloat(0)
     
-    /// 下拉刷新中的文字，默认为REFRESH
-    var tipText = "REFRESH"
+    /// 下拉刷新中的文字
+    let tipTextOff = "·  ω  · 下拉刷新"
+    let tipTextOn = "·  ω  · 松手刷新"
     
     /// 下拉刷新是否启用，若没有启用，将不会显示
-    var enabled = true
+    var _enabled = true
     
-    init(_ place : SwipeRefreshHeaderDisplayPlace) {
-        self.displayPlace = place
+    /// 在 enabled 改变时要先做一次重绘，否则列表的弹性开关不会立即改变
+    var enabled : Bool {
+        get {
+            return _enabled
+        }
+        set {
+            _enabled = newValue
+            syncApperance()
+        }
+    }
+    
+    init() {
         super.init(frame: CGRect())
     }
     
@@ -60,13 +69,9 @@ class SwipeRefreshHeader : UIView {
     /// 视图被展示时的操作
     override func didMoveToSuperview() {
         
-        var rootController : UIViewController
-        
-        switch displayPlace {
-        case .Left:
-            rootController = AppDelegate.instance.leftController!
-        default:
-            rootController = AppDelegate.instance.rightController!
+        var superStaticView = superview!
+        if let v = superStaticView.superview where superStaticView is UIScrollView {
+            superStaticView = v
         }
         
         // 先移除所有子视图，以防万一
@@ -80,12 +85,13 @@ class SwipeRefreshHeader : UIView {
         }
         
         // 计算尺寸
-        self.frame = CGRect(x: 0, y: 0, width: rootController.view.frame.width, height: realHeight)
+        self.frame = CGRect(x: 0, y: 0, width: superStaticView.frame.width, height: realHeight)
         
         // 添加刷新提示文字
-        refresh.frame = CGRect(x: 0, y: 0, width: rootController.view.frame.width, height: 0)
+        refresh.frame = CGRect(x: 0, y: 0, width: superStaticView.frame.width, height: 0)
         refresh.textAlignment = .Center
-        refresh.font = UIFont(name: "AppleSDGothicNeo-Thin", size: 54)
+        refresh.font = UIFont.systemFontOfSize(16)
+        refresh.textColor = UIColor.darkGrayColor()
         addSubview(refresh)
         
         // 首次重绘
@@ -103,25 +109,19 @@ class SwipeRefreshHeader : UIView {
         // 若已禁用下拉刷新，则当 y <= 0 时关闭列表弹性，这样就可以只关闭顶部弹性，不影响底部弹性
         (superview! as! UIScrollView).bounces = enabled || y > 0
         
-        // 设置背景色
-        if themeColor != nil {
-            refresh.backgroundColor = themeColor!
-        }
-        
         // 文字的透明度因子
         let textAlpha : CGFloat = -y < fadeDistance ? (-y) / fadeDistance : 1;
         
         // 更新刷新提示文字内容
-        refresh.text = isHighlight ? "[\(tipText)]" : tipText
+        refresh.text = isHighlight ? tipTextOn : tipTextOff
         
         // 设置对应的颜色和透明度
-        refresh.alpha = 1
-        refresh.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: min(1, textAlpha * 3))
+        refresh.alpha = textAlpha
         
         // 弹性放大动效
-        let transitionPercent = max(0, min(1, (-y - refreshDistance + 20) / 40))
-        refresh.frame = CGRect(x: x, y: min(y, 0) - 1, width: frame.width, height: frame.maxY * transitionPercent - min(y, 0) + 1)
-        contentView?.frame = CGRect(x: x, y: 0, width: frame.width, height: frame.maxY)
+        //let transitionPercent = max(0, min(1, (-y - refreshDistance + 20) / 40))
+        refresh.frame = CGRect(x: x, y: frame.maxY + min(y, 0), width: frame.width, height: -min(y, 0))
+        contentView?.frame = CGRect(x: x, y: min(y, 0), width: frame.width, height: frame.maxY)
     }
     
     /// 记录是否正在拖动
@@ -131,9 +131,25 @@ class SwipeRefreshHeader : UIView {
     // 不拖动时即使距离超过了触发距离也只显示REFRESH。
     var dragging = false
     
+/*    var changeTime = 0
+    var _isHighlight = false*/
     var isHighlight : Bool {
         let y = (superview! as! UIScrollView).contentOffset.y
         let val = -y >= refreshDistance && dragging
+        
+/*        if _isHighlight != val {
+            changeTime += 1
+            if changeTime % 10 == 0 {
+                let eggIndex = changeTime / 10 - 1
+                if eggIndex < eggs.count {
+                    AppDelegate.instance.wholeController.showMessage(eggs[eggIndex])
+                } else {
+                    AppDelegate.instance.wholeController.showSimsimiDialog()
+                }
+            }
+        }*/
+        
+        //_isHighlight = val
         return val
     }
     
@@ -145,8 +161,9 @@ class SwipeRefreshHeader : UIView {
     /// 记录拖动结束，需要在父视图代理中调用
     func endDrag () {
         dragging = false
+        //changeTime = 0
         guard let text = refresh.text else { return }
-        if text == "[\(tipText)]" {
+        if text == tipTextOn {
             refresher?()
         }
     }

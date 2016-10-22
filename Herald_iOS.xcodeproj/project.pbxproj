@@ -39,6 +39,7 @@
 		D33438521D1A18B400CD49D6 /* LibrarySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33438511D1A18B400CD49D6 /* LibrarySearchViewController.swift */; };
 		D33438591D1A2DE900CD49D6 /* NirKxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D33438581D1A2DE900CD49D6 /* NirKxMenu.m */; };
 		D33678F81CE5971C001E7C25 /* CurriculumNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */; };
+		D3378CF91D9AAFA000DCD186 /* ExerciseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3378CF81D9AAFA000DCD186 /* ExerciseUtil.swift */; };
 		D33B2DF41D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF31D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift */; };
 		D33B2DF61D59939500E7FBF1 /* CurriculumFloatClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF51D59939500E7FBF1 /* CurriculumFloatClassViewController.swift */; };
 		D33B2DF81D59CD0600E7FBF1 /* SidebarClassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF71D59CD0600E7FBF1 /* SidebarClassModel.swift */; };
@@ -78,6 +79,9 @@
 		D3A0C1741CBB7AF500744640 /* ModulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */; };
 		D3A0C1771CBB7B2300744640 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A0C1761CBB7B2300744640 /* SettingsViewController.swift */; };
 		D3A9D7221D49B5ED00D350AE /* Synchronized.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A9D7211D49B5ED00D350AE /* Synchronized.swift */; };
+		D3B4BA721DA79E0800E8DBB1 /* ShortcutBoxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3B4BA711DA79E0800E8DBB1 /* ShortcutBoxCell.xib */; };
+		D3C1A1061D9F52B900B55B3E /* ShortcutCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C1A1051D9F52B900B55B3E /* ShortcutCard.swift */; };
+		D3C1A1081D9F67CE00B55B3E /* CardsCellShortcutBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C1A1071D9F67CE00B55B3E /* CardsCellShortcutBox.swift */; };
 		D3CA10D11D1F7BD9000E1F88 /* ServiceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CA10D01D1F7BD9000E1F88 /* ServiceCard.swift */; };
 		D3D35DDD1CBA2E8200B18092 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */; };
 		D3D35DDF1CBA2E8200B18092 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D35DDE1CBA2E8200B18092 /* LoginViewController.swift */; };
@@ -109,7 +113,6 @@
 		D3ED99E21CCB5BCB00001E2B /* LibraryBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99E11CCB5BCB00001E2B /* LibraryBookModel.swift */; };
 		D3ED99E41CCB64BE00001E2B /* LibraryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99E31CCB64BE00001E2B /* LibraryTableViewCell.swift */; };
 		D3ED99E61CCB651300001E2B /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99E51CCB651300001E2B /* LibraryViewController.swift */; };
-		D3ED99E81CCB870200001E2B /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3ED99E71CCB870200001E2B /* AboutUsViewController.swift */; };
 		D3EFC1D71CCC81A800BC37A5 /* CurriculumCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EFC1D61CCC81A800BC37A5 /* CurriculumCard.swift */; };
 		D3F375C71CDB3957004DDEA5 /* WifiLoginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F375C61CDB3957004DDEA5 /* WifiLoginHelper.swift */; };
 		D3F3DCFB1CBB7792006887F5 /* SettingsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */; };
@@ -190,6 +193,7 @@
 		D33438571D1A2DE900CD49D6 /* NirKxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NirKxMenu.h; sourceTree = "<group>"; };
 		D33438581D1A2DE900CD49D6 /* NirKxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NirKxMenu.m; sourceTree = "<group>"; };
 		D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumNotifier.swift; sourceTree = "<group>"; };
+		D3378CF81D9AAFA000DCD186 /* ExerciseUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseUtil.swift; sourceTree = "<group>"; };
 		D33B2DF31D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumFloatClassTableViewCell.swift; sourceTree = "<group>"; };
 		D33B2DF51D59939500E7FBF1 /* CurriculumFloatClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumFloatClassViewController.swift; sourceTree = "<group>"; };
 		D33B2DF71D59CD0600E7FBF1 /* SidebarClassModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarClassModel.swift; sourceTree = "<group>"; };
@@ -230,6 +234,9 @@
 		D3A0C1731CBB7AF500744640 /* ModulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModulesViewController.swift; sourceTree = "<group>"; };
 		D3A0C1761CBB7B2300744640 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D3A9D7211D49B5ED00D350AE /* Synchronized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Synchronized.swift; sourceTree = "<group>"; };
+		D3B4BA711DA79E0800E8DBB1 /* ShortcutBoxCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShortcutBoxCell.xib; sourceTree = "<group>"; };
+		D3C1A1051D9F52B900B55B3E /* ShortcutCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutCard.swift; sourceTree = "<group>"; };
+		D3C1A1071D9F67CE00B55B3E /* CardsCellShortcutBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsCellShortcutBox.swift; sourceTree = "<group>"; };
 		D3CA10D01D1F7BD9000E1F88 /* ServiceCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCard.swift; sourceTree = "<group>"; };
 		D3D35DD91CBA2E8200B18092 /* 小猴偷米.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "小猴偷米.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3D35DDC1CBA2E8200B18092 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -267,7 +274,6 @@
 		D3ED99E11CCB5BCB00001E2B /* LibraryBookModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryBookModel.swift; sourceTree = "<group>"; };
 		D3ED99E31CCB64BE00001E2B /* LibraryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryTableViewCell.swift; sourceTree = "<group>"; };
 		D3ED99E51CCB651300001E2B /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
-		D3ED99E71CCB870200001E2B /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		D3EFC1D61CCC81A800BC37A5 /* CurriculumCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumCard.swift; sourceTree = "<group>"; };
 		D3F375C61CDB3957004DDEA5 /* WifiLoginHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiLoginHelper.swift; sourceTree = "<group>"; };
 		D3F3DCFA1CBB7792006887F5 /* SettingsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHelper.swift; sourceTree = "<group>"; };
@@ -331,6 +337,7 @@
 				D34E95851CCDCCE700AD1119 /* JwcCard.swift */,
 				D35FC6291CE33A1E00BE844C /* ActivityCard.swift */,
 				D3CA10D01D1F7BD9000E1F88 /* ServiceCard.swift */,
+				D3C1A1051D9F52B900B55B3E /* ShortcutCard.swift */,
 			);
 			name = factory;
 			sourceTree = "<group>";
@@ -339,7 +346,6 @@
 			isa = PBXGroup;
 			children = (
 				D3D35DDE1CBA2E8200B18092 /* LoginViewController.swift */,
-				D3ED99E71CCB870200001E2B /* AboutUsViewController.swift */,
 				D37708611CCC5D37006ED853 /* FeedbackViewController.swift */,
 				D37A1DAC1D0269880040A7D1 /* AboutUsContentTableViewCell.swift */,
 				D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */,
@@ -386,7 +392,9 @@
 				D33438581D1A2DE900CD49D6 /* NirKxMenu.m */,
 				D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */,
 				D35FC6271CE3236300BE844C /* PullLoadFooter.swift */,
+				D3C1A1071D9F67CE00B55B3E /* CardsCellShortcutBox.swift */,
 				D3E079221D2E7A0D00D5FBB3 /* ShortcutBoxView.swift */,
+				D3B4BA711DA79E0800E8DBB1 /* ShortcutBoxCell.xib */,
 				D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */,
 			);
 			name = custom;
@@ -535,6 +543,7 @@
 			isa = PBXGroup;
 			children = (
 				D3E6BD811CC8D4B20074FF6D /* PedetailViewController.swift */,
+				D3378CF81D9AAFA000DCD186 /* ExerciseUtil.swift */,
 			);
 			name = pedetail;
 			sourceTree = "<group>";
@@ -773,6 +782,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D31821CA1CC7BC0400992355 /* Main.storyboard in Resources */,
+				D3B4BA721DA79E0800E8DBB1 /* ShortcutBoxCell.xib in Resources */,
 				D3D35DE41CBA2E8200B18092 /* Assets.xcassets in Resources */,
 				D31821B21CC3B07800992355 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -860,6 +870,7 @@
 				D37A1DAD1D0269880040A7D1 /* AboutUsContentTableViewCell.swift in Sources */,
 				D3D5D4491CE99D19000E406A /* GymReserveCells.swift in Sources */,
 				D354905C1CDC519100E59615 /* GCalendar.swift in Sources */,
+				D3378CF91D9AAFA000DCD186 /* ExerciseUtil.swift in Sources */,
 				D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */,
 				D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */,
 				D31821CE1CC856FF00992355 /* ExperimentViewController.swift in Sources */,
@@ -910,17 +921,18 @@
 				D3F4734D1CCA153A00750FFB /* LectureModel.swift in Sources */,
 				D33B2DFC1D59D6AE00E7FBF1 /* AppCache.swift in Sources */,
 				D37708621CCC5D37006ED853 /* FeedbackViewController.swift in Sources */,
-				D3ED99E81CCB870200001E2B /* AboutUsViewController.swift in Sources */,
 				D348580E1CBB4FF900B55E76 /* CacheHelper.swift in Sources */,
 				D3D5D4371CE95101000E406A /* GymReserveViewController.swift in Sources */,
 				D3ED99D41CCAF9FC00001E2B /* SeuNetViewController.swift in Sources */,
 				D3ED99DE1CCB3DB600001E2B /* SrtpTableViewCell.swift in Sources */,
+				D3C1A1061D9F52B900B55B3E /* ShortcutCard.swift in Sources */,
 				D3ED99D81CCB08B300001E2B /* SchoolbusTableViewCell.swift in Sources */,
 				D35FC6281CE3236300BE844C /* PullLoadFooter.swift in Sources */,
 				D3F3DCFB1CBB7792006887F5 /* SettingsHelper.swift in Sources */,
 				D34858131CBB60A600B55E76 /* ApiRequest.swift in Sources */,
 				D3EFC1D71CCC81A800BC37A5 /* CurriculumCard.swift in Sources */,
 				D3F4734B1CCA146800750FFB /* LectureTableViewCell.swift in Sources */,
+				D3C1A1081D9F67CE00B55B3E /* CardsCellShortcutBox.swift in Sources */,
 				D348580C1CBB48FD00B55E76 /* ApiHelper.swift in Sources */,
 				D31821B91CC4D53300992355 /* CardsTableViewCell.swift in Sources */,
 				D3D5D44F1CE9AFF1000E406A /* GymAddFriendViewController.swift in Sources */,

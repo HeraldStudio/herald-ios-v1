@@ -103,7 +103,7 @@ class Cache {
     }
     
     static let gymReserveMyOrder = AppCache("herald_gymreserve_myorder") {
-        ApiSimpleRequest(.Post).api("yuyue").uuid().post("method", "myOrder").toCache("herald_gymreserve_myorder", notifyModuleIfChanged: ModuleGymReserve)
+        ApiSimpleRequest(.Post).api("yuyue").uuid().post("method", "myOrder").toCache("herald_gymreserve_myorder")
     }
     
     static let gymReserveGetPhone = AppCache("herald_gymreserve_phone") {
@@ -120,7 +120,7 @@ class Cache {
     
     // 图书馆模块缓存
     static let libraryBorrowBook = AppCache("herald_library_borrowbook") {
-        ApiSimpleRequest(.Post).api("library").uuid().toCache("herald_library_borrowbook", notifyModuleIfChanged: ModuleLibrary)
+        ApiSimpleRequest(.Post).api("library").uuid().toCache("herald_library_borrowbook")
     }
     
     static let libraryHotBook = AppCache("herald_library_hotbook") {
@@ -129,16 +129,20 @@ class Cache {
     
     // 成绩模块缓存
     static let grade = AppCache("herald_grade_gpa") {
-        ApiSimpleRequest(.Post).api("gpa").uuid().toCache("herald_grade_gpa", notifyModuleIfChanged: ModuleGrade)
+        ApiSimpleRequest(.Post).api("gpa").uuid().toCache("herald_grade_gpa")
     }
     
     // 课外研学模块缓存
     static let srtp = AppCache("herald_srtp") {
-        ApiSimpleRequest(.Post).api("srtp").uuid().post("schoolnum", ApiHelper.currentUser.schoolNum).toCache("herald_srtp", notifyModuleIfChanged: ModuleSrtp)
+        ApiSimpleRequest(.Post).api("srtp").uuid().post("schoolnum", ApiHelper.currentUser.schoolNum).toCache("herald_srtp")
     }
     
     // 校车助手缓存
     static let schoolbus = AppCache("herald_schoolbus") {
         ApiSimpleRequest(.Post).api("schoolbus").uuid().toCache("herald_schoolbus")
     }
+    
+    static let expressUserName = AppCache("herald_express_user_name")
+    
+    static let expressUserPhone = AppCache("herald_express_user_phone")
 }

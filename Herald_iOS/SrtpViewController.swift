@@ -14,7 +14,7 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet var tableView : UITableView!
     
-    let swiper = SwipeRefreshHeader(.Right)
+    let swiper = SwipeRefreshHeader()
 
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
@@ -25,7 +25,7 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(swiper, 0xef5350)
+        setNavigationColor(0xef5350)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

@@ -31,6 +31,10 @@ class AppModule : Hashable {
     /// 在 Assets 中的图标名称
     var icon : String
     
+    var invertIcon : String {
+        return icon + "_invert"
+    }
+    
     /// 是否有卡片
     var hasCard : Bool
     
@@ -78,16 +82,6 @@ class AppModule : Hashable {
         } set {
             // flag为true则设置为选中，否则设置为不选中
             SettingsHelper.set("herald_settings_module_shortcutenabled_" + name, newValue ? "1" : "0")
-            SettingsHelper.notifyModuleSettingsChanged()
-        }
-    }
-    
-    /// 用来标识一个不带卡片的模块数据是否有更新
-    var hasUpdates : Bool {
-        get {
-            return !hasCard && SettingsHelper.get("herald_settings_module_hasupdates_" + name) == "1" && ApiHelper.isLogin()
-        } set {
-            SettingsHelper.set("herald_settings_module_hasupdates_" + name, newValue ? "1" : "0")
             SettingsHelper.notifyModuleSettingsChanged()
         }
     }
