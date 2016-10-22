@@ -41,6 +41,8 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
         let remain = Cache.peRemain.value
         countLabel.text = count
         remainLabel.text = remain
+        
+        // 清除所有日历事件
         calendar?.reloadData()
         
         let jsonArray = JSON.parse(cache)["content"]
