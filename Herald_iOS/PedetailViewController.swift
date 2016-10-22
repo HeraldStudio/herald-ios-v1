@@ -30,10 +30,10 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(nil, 0x26a69a)
+        setNavigationColor(0x26a69a)
     }
     
-    var history : [NSDate] = []
+    var history : [GCalendar] = []
     
     func loadCache() {
         let cache = Cache.peDetail.value
@@ -41,6 +41,8 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
         let remain = Cache.peRemain.value
         countLabel.text = count
         remainLabel.text = remain
+        
+        // 清除所有日历事件
         calendar?.reloadData()
         
         let jsonArray = JSON.parse(cache)["content"]
@@ -52,15 +54,29 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
             let date = k["sign_date"].stringValue
             
             let ymd = date.replaceAll("-", "/").split("/")
-            let comp = GCalendar(.Day)
+            let comp = GCalendar(.Minute)
             
-            guard let year = Int(ymd[0]) else { showError(); return }
-            guard let month = Int(ymd[1]) else { showError(); return }
-            guard let day = Int(ymd[2]) else { showError(); return }
+            if ymd.count < 3 { continue }
+            guard let year = Int(ymd[0]), month = Int(ymd[1]), day = Int(ymd[2]) else {
+                continue
+            }
             comp.year = year; comp.month = month; comp.day = day
             
+            var time = k["sign_time"].stringValue.replaceAll(".", ":").split(":")
+            
+            // 由于体育系程序员是体育老师教的，他们直接把小数点分隔的时分当作小数来储存，百分位上的0会被抹去
+            // 所以一位字符表示的分钟要在其后补0
+            if time.count < 2 { continue }
+            if time[1].characters.count < 2 {
+                time[1] += "0"
+            }
+            guard let hour = Int(time[0]), minute = Int(time[1]) else {
+                continue
+            }
+            comp.hour = hour; comp.minute = minute
+            
             calendar?.selectDate(comp.getDate())
-            history.append(comp.getDate())
+            history.append(comp)
         }
         
         if history.count == 0 {
@@ -87,16 +103,30 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
     
     func hasDate(date : NSDate) -> Bool {
         for k in history {
-            if k.timeIntervalSince1970 == date.timeIntervalSince1970 { return true }
+            if k.year == date.fs_year && k.month == date.fs_month && k.day == date.fs_day {
+                return true
+            }
         }
         return false
     }
     
     func calendar(calendar: FSCalendar, didSelectDate date: NSDate) {
-        if !hasDate(date) { calendar.deselectDate(date) }
+        if !hasDate(date) {
+            calendar.deselectDate(date)
+            showMessage("该日无跑操记录")
+        }
     }
     
     func calendar(calendar: FSCalendar, didDeselectDate date: NSDate) {
-        if hasDate(date) { calendar.selectDate(date) }
+        if hasDate(date) {
+            calendar.selectDate(date)
+            for index in 0 ..< history.count {
+                let k = history[index]
+                if k.year == date.fs_year && k.month == date.fs_month && k.day == date.fs_day {
+                    let timeStr = String(format: "%d/%d/%d %d:%02d", k.year, k.month, k.day, k.hour, k.minute)
+                    showMessage("(第 \(index + 1) 次跑操) 打卡时间：" + timeStr)
+                }
+            }
+        }
     }
 }

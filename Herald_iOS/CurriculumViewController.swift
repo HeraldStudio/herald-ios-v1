@@ -15,7 +15,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
     
     @IBOutlet var scrollView : UIScrollView!
     
-    let swiper = SwipeRefreshHeader(.Right)
+    let swiper = SwipeRefreshHeader()
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
@@ -25,7 +25,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(swiper, 0x00abd4)
+        setNavigationColor(0x00abd4)
     }
     
     /// 当屏幕旋转时重新布局
@@ -79,6 +79,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
         
         // 如果没课，什么也不做
         if maxWeek < 1 {
+            removeAllPages()
             showMessage("暂无固定课程")
             return
         }
@@ -133,7 +134,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
         
         // 防止当前学期结束导致下标越界
         // 不过前面已经保证过这里 scrollView.subviews.count > 0，不需要再做此判断
-        let curPage = min(thisWeek - 1, scrollView.subviews.count - 1)
+        let curPage = max(0, min(thisWeek - 1, scrollView.subviews.count - 1))
         scrollView?.scrollRectToVisible((scrollView?.subviews[curPage].frame)!, animated: true)
         
         let page = abs(Int(scrollView!.contentOffset.x / scrollView!.frame.width))

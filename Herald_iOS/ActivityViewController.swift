@@ -17,7 +17,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
     var page = 0
     
     /// 下拉刷新和上拉加载方面的处理
-    let swiper = SwipeRefreshHeader(.Left)
+    let swiper = SwipeRefreshHeader()
     
     let puller = PullLoadFooter()
     
@@ -46,9 +46,6 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         
         /// 初始化下拉刷新控件
         
-        // 下拉刷新控件蒙版颜色
-        swiper.themeColor = navigationController?.navigationBar.barTintColor
-        
         // 设置下拉刷新控件刷新事件
         swiper.refresher = {() in
             
@@ -75,7 +72,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
     /// 当准备从其它界面返回时，设置导航栏颜色
     override func viewWillAppear(animated: Bool) {
         tableView.reloadData()
-        setNavigationColor(swiper, 0x176ccc)
+        setNavigationColor(0x176ccc)
     }
     
     /// 下拉刷新和上拉加载控件用到的三个 hook

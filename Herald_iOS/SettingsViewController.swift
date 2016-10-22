@@ -51,7 +51,7 @@ class SettingsViewController: UITableViewController {
     
     /// 当准备从其它界面返回时，设置导航栏颜色
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(nil, 0x00b4ff)
+        setNavigationColor(0x12b0ec)
     }
     
     /// 一些自定义的点击事件
@@ -70,6 +70,9 @@ class SettingsViewController: UITableViewController {
         case (0, 1):
             /// 自定义校园网登录账号
             displayWifiSetDialog()
+        case (3, 0):
+            /// 关于我们
+            AppModule(title: "关于小猴", url: "http://app.heraldstudio.com/about.htm?type=ios").open()
         case (3, 1):
             /// 分享小猴
             ShareHelper.share("我在使用小猴偷米App，它是东南大学本科生必备的校园生活助手，你也来试试吧：http://app.heraldstudio.com/")

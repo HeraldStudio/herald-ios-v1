@@ -4,36 +4,36 @@ import SwiftyJSON
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var username : UITextField!
-    
+
     @IBOutlet var password : UITextField!
-    
+
     @IBOutlet var button : UIButton!
-    
+
     @IBOutlet var background : UIImageView!
-    
+
     var user = User("", "", "", "")
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // 将超出部分截掉，防止滑动返回时看到超出部分的图片
         background.layer.masksToBounds = true
     }
-    
+
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(nil, 0x000000)
+        setNavigationColor(0x000000)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     /// 手机只支持竖屏，平板支持横屏和竖屏
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return AppDelegate.isPad ? .AllButUpsideDown : .Portrait
     }
-    
+
     @IBAction func buttonClicked() {
         endEdit()
         if username.text! != "" && password.text! != "" {
@@ -42,11 +42,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             showMessage("输入不完整，请重试")
         }
     }
-    
+
     @IBAction func dismiss() {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
+
     func doLogin () {
         let appid = ApiHelper.appid
         showProgressDialog()
@@ -56,6 +56,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 if response.containsString("Unauthorized") {
                     self.hideProgressDialog()
                     self.showMessage("密码错误，请重试")
+                } else if response.containsString("Bad Request") {
+                    self.hideProgressDialog()
+                    self.showMessage("当前客户端版本已过期，请下载最新版本")
+                    UIApplication.sharedApplication().openURL(NSURL(string: StringUpdateUrl)!)
                 } else if !success {
                     self.hideProgressDialog()
                     self.showMessage("网络异常，请重试")
@@ -67,11 +71,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
             }.run()
     }
-    
+
     func checkUUID () {
         ApiSimpleRequest(.Post).api("user").post("uuid", self.user.uuid)
             .onResponse { (success, code, response) in
-                
+
                 /**
                  * 注意: 学号的获取关系到统计功能和 srtp api 的正常调用, 千万要保证学号正确!
                  *
@@ -97,12 +101,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
         }.run()
     }
-    
+
     @IBAction func endEdit () {
         username.resignFirstResponder()
         password.resignFirstResponder()
     }
-    
+
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField == username {
             password.becomeFirstResponder()
@@ -112,4 +116,3 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         return true
     }
 }
-

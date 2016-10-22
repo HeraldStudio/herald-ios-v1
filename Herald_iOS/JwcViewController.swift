@@ -14,7 +14,7 @@ class JwcViewController : UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet var tableView : UITableView!
     
-    let swiper = SwipeRefreshHeader(.Right)
+    let swiper = SwipeRefreshHeader()
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
@@ -25,7 +25,7 @@ class JwcViewController : UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(swiper, 0x1976d2)
+        setNavigationColor(0x1976d2)
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

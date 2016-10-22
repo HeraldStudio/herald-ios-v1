@@ -30,7 +30,7 @@ class CustomExamViewController : UIViewController, LoginUserNeeded {
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(nil, 0xf5176c)
+        setNavigationColor(0xf5176c)
     }
     
     @IBAction func save () {

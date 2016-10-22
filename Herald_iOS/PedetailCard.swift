@@ -12,7 +12,13 @@ import SwiftyJSON
 class PedetailCard {
     
     static func getRefresher () -> ApiRequest {
-        return Cache.pcForecast.refresher | Cache.peCount.refresher | Cache.peDetail.refresher
+        var request = Cache.pcForecast.refresher | Cache.peCount.refresher
+        
+        // 为了减轻服务器压力, 只在跑操时间已过后刷新跑操详情
+        if ExerciseUtil.getCurrentExerciseStatus() == .AfterExercise {
+            request |= Cache.peDetail.refresher
+        }
+        return request
     }
     
     static func getCard() -> CardsModel {
@@ -30,12 +36,8 @@ class PedetailCard {
             return CardsModel(cellId: "CardsCellPedetail", module: ModulePedetail, desc: "跑操数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
         }
         
-        let _now = GCalendar()
-        let now = _now.hour * 60 + _now.minute
-        let startTime = 6 * 60 + 20
-        let endTime = 7 * 60 + 20
-        
-        let todayStamp = String(format: "%4d-%02d-%02d", _now.year, _now.month, _now.day)
+        let today = GCalendar(.Day)
+        let todayStamp = String(format: "%4d-%02d-%02d", today.year, today.month, today.day)
         let row = CardsRowModel(pedetailCount: count, remain: remain)
         
         if record.containsString(todayStamp) {
@@ -44,16 +46,18 @@ class PedetailCard {
             return model
         }
         
-        if now >= startTime && date != todayStamp {
+        let exerciseStatus = ExerciseUtil.getCurrentExerciseStatus()
+        
+        if exerciseStatus != .BeforeExercise && date != todayStamp {
             return CardsModel(cellId: "CardsCellPedetail", module: ModulePedetail, desc: "跑操预告数据为空，请尝试刷新", priority: .CONTENT_NOTIFY)
         }
         
-        if now < startTime {
+        if exerciseStatus == .BeforeExercise {
             // 跑操时间没到
             let model = CardsModel(cellId: "CardsCellPedetail", module: ModulePedetail, desc: "小猴会在早上跑操时间实时显示跑操预告\n" + getRemainNotice(count, remain, false), priority: .CONTENT_NO_NOTIFY)
             model.rows.append(row)
             return model
-        } else if now >= endTime {
+        } else if exerciseStatus == .AfterExercise {
             // 跑操时间已过
             if !forecast.containsString("跑操") {
                 // 没有跑操预告信息

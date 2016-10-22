@@ -34,7 +34,7 @@ class SeuNetViewController : UIViewController, ForceTouchPreviewable, LoginUserN
     }
     
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(nil, 0x7cb342)
+        setNavigationColor(0x7cb342)
     }
     
     // 把这个操作延迟到视图加载完成后，否则饼图会错位

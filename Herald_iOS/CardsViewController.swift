@@ -19,7 +19,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     let slider = BannerPageViewController()
     
     /// 下拉刷新视图
-    let swiper = SwipeRefreshHeader(.Left)
+    let swiper = SwipeRefreshHeader()
     
     /// 轮播图的数据，用于比较当前数据与新数据是否一致，不一致则重载轮播图
     /// 避免轮播图在刷新过程中出现不必要的闪烁，起到缓冲的作用
@@ -72,7 +72,12 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     /// 当准备从其它界面返回时，设置导航栏颜色
     override func viewWillAppear(animated: Bool) {
-        setNavigationColor(swiper, 0x00b4ff)
+        setNavigationColor(0x12b0ec)
+    }
+    
+    /// 当从其他界面返回时，重载数据
+    override func viewDidAppear(animated: Bool) {
+        loadContent(false)
     }
     
     /// 定时刷新，即每当时间改变时重新解析本地缓存，并加载卡片内容
@@ -117,9 +122,6 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
         /// 初始化下拉刷新控件
-        
-        // 下拉刷新控件蒙版颜色
-        swiper.themeColor = navigationController?.navigationBar.backgroundColor
         
         // 设置轮播图为下拉刷新控件内嵌视图
         swiper.contentView = slider.view
@@ -231,6 +233,9 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         // 清空卡片列表，等待载入
         cardList.removeAll()
+        
+        // 添加快捷栏
+        cardList.append(ShortcutCard.getCard())
         
         // 加载版本更新缓存
         if let item = ServiceCard.getCheckVersionCard() {
@@ -350,15 +355,6 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             // 直接刷新教务处数据
             parallelRequest |= JwcCard.getRefresher()
         }
-        
-        if ApiHelper.isLogin() {
-            parallelRequest |=
-                ( Cache.gymReserveMyOrder.refresher
-                | Cache.srtp.refresher
-                | Cache.grade.refresher
-                | Cache.libraryBorrowBook.refresher
-                )
-        }
 
         /**
          * 结束刷新部分
@@ -384,51 +380,24 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     /// 卡片列表
     var cardList : [CardsModel] = []
     
-    /// 是否要显示快捷栏
-    var hasShortcutBox : Bool {
-        return Modules.filter{$0.shortcutEnabled}.count != 0
-    }
-    
-    /// 快捷栏个数，即上面那个布尔函数的Int形式，方便使用
-    var shortcutBoxCount : Int {
-        return hasShortcutBox ? 1 : 0
-    }
     
     /// 列表分区数目
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return shortcutBoxCount + cardList.count
+        return cardList.count
     }
     
     /// 列表某分区中条目数目
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if hasShortcutBox {
-            if section == 0 {
-                return 1
-            } else {
-                return cardList[section - 1].rows.count
-            }
-        } else {
-            return cardList[section].rows.count
-        }
+        return cardList[section].rows.count
     }
     
     /// 实例化列表条目
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cardIndex = indexPath.section
-        
-        if hasShortcutBox {
-            if indexPath.section == 0 {
-                return tableView.dequeueReusableCellWithIdentifier("CardsCellShortcutBox")!
-            } else {
-                cardIndex -= 1
-            }
-        }
-        
         /// 实例化
         
         // 该卡片的卡片模型对象
-        let model = cardList[cardIndex]
+        let model = cardList[indexPath.section]
         
         // 该卡片的卡片模型对象中对应的行模型对象
         let row = model.rows[indexPath.row]
@@ -465,7 +434,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.notifyDot?.alpha = indexPath.row == 0 && model.displayPriority == .CONTENT_NOTIFY ? 1 : 0
         
         // 若该行不是卡片头，且既没有目标界面，也没有消息，则关闭其点击效果
-        cell.userInteractionEnabled = row.destination != "" || row.message != "" || indexPath.row == 0
+        cell.userInteractionEnabled = cell is CardsCellShortcutBox || row.destination != "" || row.message != "" || indexPath.row == 0
         
         // 若该行是卡片头，且没有目标界面，则隐藏其箭头
         if indexPath.row == 0 {
@@ -475,15 +444,6 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         return cell
     }
     
-    /// 为了兼容动态改变高度的快捷栏，需要复写此方法
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if hasShortcutBox && indexPath.section == 0 {
-            return ShortcutBoxView.precalculateHeight()
-        }
-        
-        return UITableViewAutomaticDimension
-    }
-    
     /// 卡片列表部分：卡片列表代理
     /////////////////////////////////////////////////////////////////////////////////////
     
@@ -491,28 +451,16 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        var cardIndex = indexPath.section
-        
-        if hasShortcutBox {
-            if indexPath.section == 0 {
-                return
-            } else {
-                cardIndex -= 1
-            }
-        }
-        
-        let model = cardList[cardIndex]
+        let model = cardList[indexPath.section]
         let destination = model.rows[indexPath.row].destination
         let message = model.rows[indexPath.row].message
         
-        // 若有目标界面，打开目标界面；否则若有消息，显示消息；否则显示卡片无详情
+        // 若有目标界面，打开目标界面；否则若有消息，显示消息
         if destination != "" {
             let module = AppModule(title: model.rows[0].title!, url: destination)
             module.open()
         } else if message != "" {
             showMessage(message)
-        } else {
-            showMessage("卡片无详情")
         }
         
         // 标记为已读
@@ -536,20 +484,10 @@ extension CardsViewController:UIViewControllerPreviewingDelegate {
             return nil
         }
         
-        var cardIndex = indexPath.section
-        
-        if hasShortcutBox {
-            if indexPath.section == 0 {
-                return nil
-            } else {
-                cardIndex -= 1
-            }
-        }
-        
         let cell = cardsTableView.cellForRowAtIndexPath(indexPath) as! CardsTableViewCell
         previewingContext.sourceRect = cell.frame
         
-        let destination = cardList[cardIndex].rows[indexPath.row].destination
+        let destination = cardList[indexPath.section].rows[indexPath.row].destination
         return AppModule(title: "", url: destination).getPreviewViewController()
     }
     
