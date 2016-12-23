@@ -1,6 +1,5 @@
 import UIKit
-import Reindeer
-import Kingfisher
+import SDWebImage
 import SwiftyJSON
 
 /**

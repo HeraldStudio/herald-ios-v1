@@ -48,7 +48,7 @@ extern NSString * const pieElementAnimateChangesNotificationIdentifier;
 static NSString * const _animationValuesKey = @"animationValues";
 
 #pragma mark - PieLayer
-@interface PieLayer ()
+@interface PieLayer () <CAAnimationDelegate>
 {
     BOOL _isNotCopyForAnimation;
 }
@@ -147,7 +147,7 @@ static NSString * const _animationValuesKey = @"animationValues";
         [animationEndState insertObject:elem atIndex:delIdx];
     }
     
-    [self performSelector:@selector(delayedAnimateChanges) withObject:nil afterDelay:0.0];
+    [self performSelector:@selector(delayedAnimateChanges) withObject:nil afterDelay:0.0 inModes:@[[[NSRunLoop currentRunLoop] currentMode], NSDefaultRunLoopMode]];
     return YES;
 }
 
@@ -243,7 +243,7 @@ static NSString * const _animationValuesKey = @"animationValues";
     animationEndState = nil;
     animationDeletingIndexes = nil;
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(setPresentValues:) object:nil];
-    [self performSelector:@selector(setPresentValues:) withObject:nil afterDelay:0];
+    [self performSelector:@selector(setPresentValues:) withObject:nil afterDelay:0 inModes:@[[[NSRunLoop currentRunLoop] currentMode], NSDefaultRunLoopMode]];
 }
 
 #pragma mark - Animate setters
