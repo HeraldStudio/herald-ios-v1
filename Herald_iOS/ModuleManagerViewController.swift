@@ -9,7 +9,7 @@ class ModuleManagerViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0x12b0ec)
     }
     
@@ -19,22 +19,22 @@ class ModuleManagerViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     //指定UITableView中有多少个section的，section分区，一个section里会包含多个Cell
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     //每一个section里面有多少个Cell
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Modules.count + 1
     }
     
     //初始化每一个Cell
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-            return moduleTableView.dequeueReusableCellWithIdentifier("ModuleManageTableHeaderCell", forIndexPath: indexPath)
+            return moduleTableView.dequeueReusableCell(withIdentifier: "ModuleManageTableHeaderCell", for: indexPath)
         } else {
-            let moduleCell = moduleTableView.dequeueReusableCellWithIdentifier("ModuleManageTableViewCell", forIndexPath: indexPath) as! ModuleManageTableViewCell
+            let moduleCell = moduleTableView.dequeueReusableCell(withIdentifier: "ModuleManageTableViewCell", for: indexPath) as! ModuleManageTableViewCell
         
             let module = Modules[indexPath.row - 1]
         
@@ -43,7 +43,7 @@ class ModuleManagerViewController: UIViewController, UITableViewDelegate, UITabl
             moduleCell.label.text = module.nameTip
             moduleCell.shortcutSwitch.setOn(module.shortcutEnabled, animated: false)
             moduleCell.cardSwitch.setOn(module.cardEnabled, animated: false)
-            moduleCell.cardSwitch.enabled = module.hasCard
+            moduleCell.cardSwitch.isEnabled = module.hasCard
             moduleCell.cardSwitch.alpha = module.hasCard ? 1 : 0
         
             return moduleCell
@@ -51,7 +51,7 @@ class ModuleManagerViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     //选中一个Cell后执行的方法
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

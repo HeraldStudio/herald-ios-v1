@@ -11,13 +11,13 @@ import SwiftyJSON
 
 class ServiceHelper {
     
-    static let serviceCache = NSUserDefaults.withPrefix("service_")
+    static let serviceCache = UserDefaults.withPrefix("service_")
     
-    static func get(key : String) -> String {
+    static func get(_ key : String) -> String {
         return serviceCache.get(key)
     }
     
-    static func set(key : String, _ value : String) {
+    static func set(_ key : String, _ value : String) {
         serviceCache.set(key, value)
     }
 }

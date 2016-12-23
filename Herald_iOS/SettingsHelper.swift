@@ -5,14 +5,14 @@ class SettingsHelper {
 
     /// 本 Helper 的缓存已经改成随用户变化，退出登录时不再需要清空
     static var settingsCache : PrefixUserDefaults {
-        return NSUserDefaults.withPrefix("settings_\(ApiHelper.currentUser.userName)_")
+        return UserDefaults.withPrefix("settings_\(ApiHelper.currentUser.userName)_")
     }
     
-    static func get (key : String) -> String {
+    static func get (_ key : String) -> String {
         return settingsCache.get(key)
     }
     
-    static func set (key : String, _ value: String) {
+    static func set (_ key : String, _ value: String) {
         settingsCache.set(key, value)
     }
     
@@ -54,7 +54,7 @@ class SettingsHelper {
     
     static var moduleSettingsChangeListeners : [ModuleSettingsChangeListener] = []
     
-    static func addModuleSettingsChangeListener (listener : ModuleSettingsChangeListener) {
+    static func addModuleSettingsChangeListener (_ listener : @escaping ModuleSettingsChangeListener) {
         moduleSettingsChangeListeners.append(listener)
     }
     

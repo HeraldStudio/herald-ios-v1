@@ -18,19 +18,19 @@ class CurriculumFloatClassViewController : UITableViewController, LoginUserNeede
         showTipDialogIfUnknown("浮动课程：是指上课时间存在不确定因素，无法在课表上显示的课程，例如新生军训、短学期实训、辅修课等。\n\n遇到此类课程，请以授课教师指定的时间安排为准。", cachePostfix: "float_class") {}
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0x00abd4)
     }
     
-    override func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         swiper.beginDrag()
     }
     
-    override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         swiper.endDrag()
     }
     
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         swiper.syncApperance()
     }
     
@@ -69,34 +69,34 @@ class CurriculumFloatClassViewController : UITableViewController, LoginUserNeede
     
     var dataSource : [SidebarClassModel] = []
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     /// 此处必须有header，否则当列表为空时下拉刷新控件会错位
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "浮动课程列表"
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return max(dataSource.count, 1)
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
         
         // 如果数据源没有内容，放没有内容的提示
         if dataSource.count == 0 {
-            return tableView.dequeueReusableCellWithIdentifier("CurriculumEmptyTableViewCell")!
+            return tableView.dequeueReusableCell(withIdentifier: "CurriculumEmptyTableViewCell")!
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("CurriculumFloatClassTableViewCell") as! CurriculumFloatClassTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CurriculumFloatClassTableViewCell") as! CurriculumFloatClassTableViewCell
         
         cell.setData(sidebarModel: dataSource[indexPath.row])
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

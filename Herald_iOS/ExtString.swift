@@ -9,19 +9,19 @@ import Foundation
 extension String {
     
     /// 分割字符串
-    func split (separator : String) -> [String] {
-        return componentsSeparatedByString(separator)
+    func split (_ separator : String) -> [String] {
+        return components(separatedBy: separator)
     }
     
     /// 全部替换
-    func replaceAll (src : String, _ dst : String) -> String {
-        return stringByReplacingOccurrencesOfString(src, withString: dst)
+    func replaceAll (_ src : String, _ dst : String) -> String {
+        return replacingOccurrences(of: src, with: dst)
     }
     
     /// 重复替换直到不存在
-    func recursiveReplaceAll (src : String, _ dst : String) -> String {
+    func recursiveReplaceAll (_ src : String, _ dst : String) -> String {
         var a = self
-        while a.containsString(src) {
+        while a.contains(src) {
             a = a.replaceAll(src, dst)
         }
         return a

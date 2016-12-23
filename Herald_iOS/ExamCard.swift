@@ -53,13 +53,13 @@ class ExamCard {
             } catch { continue }
         }
         
-        examList = examList.sort({$0.sortOrder < $1.sortOrder})
+        examList = examList.sorted(by: {$0.sortOrder < $1.sortOrder})
         
         if (examList.count == 0) {
             return CardsModel(cellId: "CardsCellExam", module: ModuleExam, desc: "最近没有新的考试安排", priority: .NO_CONTENT)
         } else {
             let model = CardsModel(cellId: "CardsCellExam", module: ModuleExam, desc: "你最近有\(examList.count)场考试，抓紧时间复习吧", priority: .CONTENT_NO_NOTIFY)
-            model.rows.appendContentsOf(examList)
+            model.rows.append(contentsOf: examList)
             return model;
         }
     }

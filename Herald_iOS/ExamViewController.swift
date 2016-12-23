@@ -27,20 +27,20 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
         showTipDialogIfUnknown("考试模块支持添加考试咯~\n\n点击右上角加号即可添加考试，添加好的考试与其它考试一样可以显示倒计时和通知提醒；\n\n点击添加好的考试也可以编辑或删除~", cachePostfix: "custom_exam") {}
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0xf5176c)
         loadCache()
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         swiper.syncApperance()
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         swiper.beginDrag()
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         swiper.endDrag()
     }
     
@@ -102,8 +102,8 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
             }
         }
         
-        comingExams = comingExams.sort({$0.days < $1.days})
-        endedExams = endedExams.sort({$0.days > $1.days})
+        comingExams = comingExams.sorted(by: {$0.days < $1.days})
+        endedExams = endedExams.sorted(by: {$0.days > $1.days})
         
         titles.append("考试倒计时")
         sections.append(comingExams)
@@ -129,7 +129,7 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
         showMessage("解析失败，请刷新")
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 考试倒计时页面如果为空，加一个提示；已结束的考试为空则不加提示
         if section == 0 && sections[section].count == 0 {
             return 1
@@ -137,18 +137,18 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
         return sections[section].count
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         // 考试倒计时页面如果为空，加一个提示；已结束的考试为空则不加提示
         if section == 1 && sections[section].count == 0 { return nil }
         return titles[section]
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
         if sections[indexPath.section].count == 0 {
-            return tableView.dequeueReusableCellWithIdentifier("ExamEmptyTableViewCell", forIndexPath: indexPath)
+            return tableView.dequeueReusableCell(withIdentifier: "ExamEmptyTableViewCell", for: indexPath)
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("ExamTableViewCell", forIndexPath: indexPath) as! ExamTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExamTableViewCell", for: indexPath) as! ExamTableViewCell
         
         let model = sections[indexPath.section][indexPath.row]
         cell.course?.text = model.course
@@ -159,18 +159,18 @@ class ExamViewController : UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let item = sections[indexPath.section][indexPath.row]
         if item.customIndex == -1 {
             showMessage("固定的考试不允许编辑~")
         } else {
-            let vc = storyboard?.instantiateViewControllerWithIdentifier("MODULE_CUSTOM_EXAM") as! CustomExamViewController
+            let vc = storyboard?.instantiateViewController(withIdentifier: "MODULE_CUSTOM_EXAM") as! CustomExamViewController
             vc.index = item.customIndex
             navigationController?.pushViewController(vc, animated: true)
         }

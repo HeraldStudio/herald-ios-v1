@@ -94,7 +94,7 @@ class AppModule : Hashable {
         
         // Web 页面，交给 WebModule 打开
         if destination.hasPrefix("http") {
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE") as! WebModuleViewController
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WEBMODULE") as! WebModuleViewController
             vc.title = nameTip
             vc.url = destination
             
@@ -112,7 +112,7 @@ class AppModule : Hashable {
             
             // 切换到指定的VC
         } else {
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(destination)
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: destination)
             if vc is LoginUserNeeded && !ApiHelper.isLogin() {
                 ApiHelper.showTrialFunctionLimitDialog(nameTip)
             } else if let rightController = AppDelegate.instance.rightController {
@@ -127,20 +127,20 @@ class AppModule : Hashable {
         if destination == "" { return nil }
         
         if destination.hasPrefix("http") {
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("WEBMODULE") as! WebModuleViewController
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WEBMODULE") as! WebModuleViewController
             vc.title = nameTip
             vc.url = destination
-            vc.preferredContentSize = CGSizeMake(SCREEN_WIDTH, 600)
+            vc.preferredContentSize = CGSize(width: SCREEN_WIDTH, height: 600)
             return vc
         } else if destination.hasPrefix("TAB") {
             return nil
         } else {
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(destination)
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: destination)
             if vc is LoginUserNeeded && !ApiHelper.isLogin() {
                 return nil
             }
             if vc is ForceTouchPreviewable {
-                vc.preferredContentSize = CGSizeMake(SCREEN_WIDTH, 600)
+                vc.preferredContentSize = CGSize(width: SCREEN_WIDTH, height: 600)
                 return vc
             }
             return nil

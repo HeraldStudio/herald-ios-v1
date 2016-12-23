@@ -16,13 +16,12 @@ class CurriculumBlock : UILabel {
     @IBAction func showInfo(){
         // 初始化对话框
         var dialog :UIAlertController
-        dialog = UIAlertController(title: "课程信息", message: info,
-                                   preferredStyle: UIAlertControllerStyle.Alert)
-        dialog.addAction(UIAlertAction(title: "确定", style: .Default, handler: {
+        dialog = UIAlertController(title: "课程信息", message: info, preferredStyle: .alert)
+        dialog.addAction(UIAlertAction(title: "确定", style: .default, handler: {
             (action : UIAlertAction) -> Void in
         }))
         if(root != nil){
-            root!.presentViewController(dialog, animated: true, completion: nil)
+            root!.present(dialog, animated: true, completion: nil)
         }
     }
 }

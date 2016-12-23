@@ -30,18 +30,18 @@ class ExamNotifier {
         }
     }
     
-    static func scheduleNotificationsForExam(model : ExamModel){
+    static func scheduleNotificationsForExam(_ model : ExamModel){
         let cal = GCalendar(model.time)
         cal -= 30 * 60
         if cal < GCalendar() { return }
         
         let not = UILocalNotification()
         not.fireDate = cal.getDate()
-        not.timeZone = NSTimeZone.defaultTimeZone()
+        not.timeZone = TimeZone.current
         not.soundName = UILocalNotificationDefaultSoundName
         not.applicationIconBadgeNumber = 1
         not.alertBody = (model.location == "" ? "" : "[\(model.location)] ") + model.course + " 将在半小时后开始考试，请注意时间，准时参加"
         
-        UIApplication.sharedApplication().scheduleLocalNotification(not)
+        UIApplication.shared.scheduleLocalNotification(not)
     }
 }

@@ -33,16 +33,16 @@ class SeuNetViewController : UIViewController, ForceTouchPreviewable, LoginUserN
         loadCache(false)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0x7cb342)
     }
     
     // 把这个操作延迟到视图加载完成后，否则饼图会错位
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         loadPie()
     }
     
-    func loadCache (showPie : Bool) {
+    func loadCache (_ showPie : Bool) {
         if Cache.seunet.isEmpty {
             refreshCache()
             return
@@ -83,7 +83,7 @@ class SeuNetViewController : UIViewController, ForceTouchPreviewable, LoginUserN
         }
     }
     
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         loadPie()
     }
     
@@ -97,8 +97,8 @@ class SeuNetViewController : UIViewController, ForceTouchPreviewable, LoginUserN
         pie.frame = CGRect(x: 0, y: 0, width: container.frame.width, height: container.frame.height)
         container.layer.addSublayer(pie)
         
-        let usedElem = PieElement(value: used, color: usedColor)
-        let remainElem = PieElement(value: remain, color: leftColor)
+        let usedElem = PieElement(value: used, color: usedColor)!
+        let remainElem = PieElement(value: remain, color: leftColor)!
         usedElem.showTitle = true
         remainElem.showTitle = true
         

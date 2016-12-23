@@ -19,17 +19,17 @@ class GymNewViewController : UIViewController, UITableViewDataSource, UITableVie
         tableView.estimatedRowHeight = 48
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        timeCell = tableView.dequeueReusableCellWithIdentifier("GymNewStaticCellTime") as! GymNewStaticCellTime
-        halfCell = tableView.dequeueReusableCellWithIdentifier("GymNewStaticCellHalf") as! GymNewStaticCellHalf
-        phoneCell = tableView.dequeueReusableCellWithIdentifier("GymNewStaticCellPhone") as! GymNewStaticCellPhone
+        timeCell = tableView.dequeueReusableCell(withIdentifier: "GymNewStaticCellTime") as! GymNewStaticCellTime
+        halfCell = tableView.dequeueReusableCell(withIdentifier: "GymNewStaticCellHalf") as! GymNewStaticCellHalf
+        phoneCell = tableView.dequeueReusableCell(withIdentifier: "GymNewStaticCellPhone") as! GymNewStaticCellPhone
         
         timeCell.time.text = useTime
-        halfCell.half.enabled = sport.allowHalf
+        halfCell.half.isEnabled = sport.allowHalf
         halfCell.switchAction = { () in self.tableView.reloadData() }
         phoneCell.phone.text = Cache.gymReserveGetPhone.value
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         allFriends.removeAll()
         for friend in GymFriendModel.friendCache {
             let model = GymFriendModel(json: friend)
@@ -52,16 +52,16 @@ class GymNewViewController : UIViewController, UITableViewDataSource, UITableVie
     
     var allFriends : [GymFriendModel] = []
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return ["预约基本信息", "共同参加的好友（\(minUsers - 1)~\(maxUsers - 1)个，已添加\(invitedFriends.count)个）", "我的好友"][section]
     }
     
     var halfEnabled : Bool {
-        return sport.allowHalf && halfCell.half.on
+        return sport.allowHalf && halfCell.half.isOn
     }
     
     var minUsers : Int {
@@ -72,41 +72,41 @@ class GymNewViewController : UIViewController, UITableViewDataSource, UITableVie
         return halfEnabled ? sport.halfMaxUsers : sport.fullMaxUsers
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return [3, max(1, invitedFriends.count), allFriends.count + 1][section]
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             return [timeCell, halfCell, phoneCell][indexPath.row]
         } else if indexPath.section == 1 {
             if invitedFriends.count == 0 {
-                return tableView.dequeueReusableCellWithIdentifier("GymReserveEmptyTableViewCell")!
+                return tableView.dequeueReusableCell(withIdentifier: "GymReserveEmptyTableViewCell")!
             } else {
-                let cell = tableView.dequeueReusableCellWithIdentifier("GymNewInvitedFriendCell")! as! GymNewInvitedFriendCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "GymNewInvitedFriendCell")! as! GymNewInvitedFriendCell
                 cell.name.text = invitedFriends[indexPath.row].name
                 cell.removeAction = {() in
-                    self.allFriends.append(self.invitedFriends.removeAtIndex(indexPath.row))
+                    self.allFriends.append(self.invitedFriends.remove(at: indexPath.row))
                     self.tableView.reloadData()
                 }
                 return cell
             }
         } else {
             if indexPath.row == allFriends.count {
-                return tableView.dequeueReusableCellWithIdentifier("GymNewAddFriendCell")!
+                return tableView.dequeueReusableCell(withIdentifier: "GymNewAddFriendCell")!
             } else {
-                let cell = tableView.dequeueReusableCellWithIdentifier("GymNewFriendCell")! as! GymNewFriendCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "GymNewFriendCell")! as! GymNewFriendCell
                 cell.name.text = allFriends[indexPath.row].name
                 cell.department.text = allFriends[indexPath.row].department
                 cell.deleteAction = {() in
                     self.showQuestionDialog("确定要删除该好友吗？", runAfter: {
                         self.allFriends[indexPath.row].removeFriend()
-                        self.allFriends.removeAtIndex(indexPath.row)
+                        self.allFriends.remove(at: indexPath.row)
                         self.tableView.reloadData()
                     })
                 }
                 cell.addAction = {() in
-                    self.invitedFriends.append(self.allFriends.removeAtIndex(indexPath.row))
+                    self.invitedFriends.append(self.allFriends.remove(at: indexPath.row))
                     self.tableView.reloadData()
                 }
                 return cell
@@ -114,8 +114,8 @@ class GymNewViewController : UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     var working = false
@@ -144,13 +144,13 @@ class GymNewViewController : UIViewController, UITableViewDataSource, UITableVie
             showProgressDialog()
             working = true
             
-            ApiSimpleRequest(.Post).api("yuyue").uuid()
+            ApiSimpleRequest(.post).api("yuyue").uuid()
                 .post("method", "new")
                 .post("orderVO.itemId", "\(self.sport.id)")
                 .post("orderVO.useTime", self.useTime)
                 .post("orderVO.useMode", self.halfEnabled ? "2" : "1")
                 .post("orderVO.phone", self.phoneCell.phone.text!)
-                .post("useUserIds", "[" + self.invitedFriends.map { s in "\"\(s.userId)\"" }.joinWithSeparator(",") + "]" )
+                .post("useUserIds", "[" + self.invitedFriends.map { s in "\"\(s.userId)\"" }.joined(separator: ",") + "]" )
                 .post("orderVO.remark", self.useTime)
                 .onResponse { success, _, response in
                     self.hideProgressDialog()
@@ -167,6 +167,6 @@ class GymNewViewController : UIViewController, UITableViewDataSource, UITableVie
     }
     
     func dismiss () {
-        navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewController(animated: true)
     }
 }

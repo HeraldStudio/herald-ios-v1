@@ -16,10 +16,10 @@ class GymReserveTableViewCell : UITableViewCell {
     
     @IBOutlet var action : UILabel!
     
-    func setEnabled (enabled : Bool) {
+    func setEnabled (_ enabled : Bool) {
         name.alpha = enabled ? 1 : 0.3
-        action.hidden = !enabled
-        userInteractionEnabled = enabled
+        action.isHidden = !enabled
+        isUserInteractionEnabled = enabled
     }
 }
 

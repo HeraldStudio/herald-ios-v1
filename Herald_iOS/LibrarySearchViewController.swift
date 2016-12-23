@@ -12,15 +12,15 @@ class LibrarySearchViewController : UIViewController, UISearchBarDelegate, UITab
         tableView.estimatedRowHeight = 56
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         searchBar.becomeFirstResponder()
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let keyword = searchBar.text == nil ? "" : searchBar.text!
         searchBar.resignFirstResponder()
         showProgressDialog()
-        ApiSimpleRequest(.Post).api("search").uuid().post("book", keyword)
+        ApiSimpleRequest(.post).api("search").uuid().post("book", keyword)
             .onResponse { success, _, response in
             self.hideProgressDialog()
             if success {
@@ -32,7 +32,7 @@ class LibrarySearchViewController : UIViewController, UISearchBarDelegate, UITab
         }.run()
     }
     
-    func loadData (response : String) {
+    func loadData (_ response : String) {
         resultList.removeAll()
         for book in JSON.parse(response)["content"].arrayValue {
             resultList.append(LibraryBookModel(searchResultJson: book))
@@ -42,16 +42,16 @@ class LibrarySearchViewController : UIViewController, UISearchBarDelegate, UITab
     
     var resultList : [LibraryBookModel] = []
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return max(1, resultList.count)
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
         if resultList.count == 0 {
-            return tableView.dequeueReusableCellWithIdentifier("LibrarySearchEmptyTableViewCell")!
+            return tableView.dequeueReusableCell(withIdentifier: "LibrarySearchEmptyTableViewCell")!
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("LibrarySearchTableViewCell") as! LibrarySearchTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LibrarySearchTableViewCell") as! LibrarySearchTableViewCell
         let model = resultList[indexPath.row]
         cell.title.text = model.title
         cell.line1.text = model.line1

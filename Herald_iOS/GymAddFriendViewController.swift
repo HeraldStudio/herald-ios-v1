@@ -7,15 +7,15 @@ class GymAddFriendViewController : UIViewController, UISearchBarDelegate, UITabl
     
     @IBOutlet var searchBar : UISearchBar!
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         searchBar.becomeFirstResponder()
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let keyword = searchBar.text == nil ? "" : searchBar.text!
         searchBar.resignFirstResponder()
         showProgressDialog()
-        ApiSimpleRequest(.Post).api("yuyue")
+        ApiSimpleRequest(.post).api("yuyue")
             .uuid().post("method", "getFriendList", "cardNo", keyword).onResponse { success, _, response in
             self.hideProgressDialog()
             if success {
@@ -27,7 +27,7 @@ class GymAddFriendViewController : UIViewController, UISearchBarDelegate, UITabl
         }.run()
     }
     
-    func loadData (response : String) {
+    func loadData (_ response : String) {
         resultList.removeAll()
         for person in JSON.parse(response)["content"].arrayValue {
             resultList.append(GymFriendModel(json: person))
@@ -37,19 +37,19 @@ class GymAddFriendViewController : UIViewController, UISearchBarDelegate, UITabl
     
     var resultList : [GymFriendModel] = []
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return resultList.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("GymFriendResultCell") as! GymFriendResultCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GymFriendResultCell") as! GymFriendResultCell
         let model = resultList[indexPath.row]
         cell.name.text = model.name
         cell.department.text = model.department
         let title = model.isMyFriend ? "已添加" : "添加"
-        cell.button.setTitle(title, forState: .Normal)
-        cell.button.setTitle(title, forState: .Highlighted)
-        cell.button.setTitle(title, forState: .Selected)
+        cell.button.setTitle(title, for: .normal)
+        cell.button.setTitle(title, for: .highlighted)
+        cell.button.setTitle(title, for: .selected)
         cell.toggleAction = { () in
             let isMyself = String(model.userId) == Cache.gymReserveUserId.value
             if isMyself {

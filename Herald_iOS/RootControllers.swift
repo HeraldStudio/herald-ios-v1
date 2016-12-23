@@ -21,8 +21,8 @@ class MainNavigationController : UINavigationController {
     }
     
     /// UINavigationController 覆盖默认设置，只支持竖屏
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .Portrait
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
     }
 }
 
@@ -47,12 +47,12 @@ class MainSplitController : UISplitViewController, UISplitViewControllerDelegate
     }
     
     /// UISplitViewController 覆盖默认设置，支持横屏和竖屏
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .AllButUpsideDown
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return .allButUpsideDown
     }
     
     /// UISplitViewControllerDelegate 永不隐藏左栏
-    func splitViewController(svc: UISplitViewController, shouldHideViewController vc: UIViewController, inOrientation orientation: UIInterfaceOrientation) -> Bool {
+    func splitViewController(_ svc: UISplitViewController, shouldHide vc: UIViewController, in orientation: UIInterfaceOrientation) -> Bool {
         return false
     }
 }
@@ -78,7 +78,7 @@ class RightNavigationController : UINavigationController {
         AppDelegate.instance.rightController = self
         
         // 去除导航栏下的横线
-        navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationBar.shadowImage = UIImage()
     }
 }
@@ -87,7 +87,7 @@ class RightNavigationController : UINavigationController {
 class RightMainController : UIViewController {
     
     /// UIViewController 生命周期
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         // 设置导航栏颜色
         setNavigationColor(0x12b0ec)

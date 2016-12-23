@@ -127,15 +127,15 @@ class ExperimentCard {
         if N == 0 {
             let model = CardsModel(cellId: "CardsCellExperiment", module: ModuleExperiment, desc: (M == 0 ? "你没有未完成的实验，" : ("本学期你还有\(M)个实验，"))
                 + "实验助手可以智能提醒你参加即将开始的实验", priority: M == 0 ? .NO_CONTENT : .CONTENT_NO_NOTIFY)
-            allExperiments = allExperiments.sort {$0.sortOrder < $1.sortOrder}
-            model.rows.appendContentsOf(allExperiments)
+            allExperiments = allExperiments.sorted {$0.sortOrder < $1.sortOrder}
+            model.rows.append(contentsOf: allExperiments)
             return model
         }
         
         // 今天或本周有实验
         let model = CardsModel(cellId: "CardsCellExperiment", module: ModuleExperiment, desc: (todayHasExperiments ? "今天有" : "本周有") + "\(N)个实验，请注意准时参加", priority: .CONTENT_NO_NOTIFY)
-        currExperiments = currExperiments.sort {$0.sortOrder < $1.sortOrder}
-        model.rows.appendContentsOf(currExperiments)
+        currExperiments = currExperiments.sorted {$0.sortOrder < $1.sortOrder}
+        model.rows.append(contentsOf: currExperiments)
         return model
     }
 }

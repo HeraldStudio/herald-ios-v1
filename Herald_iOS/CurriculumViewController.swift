@@ -19,17 +19,17 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
-        let top = (navigationController?.navigationBar.bounds.height)! + UIApplication.sharedApplication().statusBarFrame.height
+        let top = (navigationController?.navigationBar.bounds.height)! + UIApplication.shared.statusBarFrame.height
         scrollView?.frame = CGRect(x: 0, y: top, width: AppDelegate.instance.rightController!.view.bounds.width, height: view.bounds.height - top)
         readLocal()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0x00abd4)
     }
     
     /// 当屏幕旋转时重新布局
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         readLocal()
     }
     
@@ -126,7 +126,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
         
         for i in 1 ... maxWeek {
             let page = CurriculumView()
-            page.data(content, sidebar: sidebarList, week: i, curWeek: i == thisWeek, beginOfTerm : beginOfTerm)
+            page.data(obj: content, sidebar: sidebarList, week: i, curWeek: i == thisWeek, beginOfTerm : beginOfTerm)
             page.view.frame = CGRect(x: CGFloat(i - 1) * (scrollView?.frame.width)!, y: 0, width: (scrollView?.frame.width)!, height: (scrollView?.frame.height)!)
             scrollView?.addSubview(page.view)
             page.loadData()
@@ -154,11 +154,11 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
         }
     }
     
-    func updateContentSize (pages : Int) {
+    func updateContentSize (_ pages : Int) {
         scrollView?.contentSize = CGSize(width: CGFloat(pages) * (scrollView?.frame.width)!, height: (scrollView?.frame.height)!)
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // 如果没课，什么也不做
         if scrollView.contentSize.width == 0 { return }
         let page = abs(Int(scrollView.contentOffset.x / scrollView.frame.width + 0.5))
@@ -166,11 +166,11 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
         swiper.syncApperance()
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         swiper.beginDrag()
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         swiper.endDrag()
     }
 }

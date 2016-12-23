@@ -22,7 +22,7 @@ class ActivityTableViewCell : NoSelectionTableViewCell {
     
     // 修正iPad端背景白色不透明的问题
     override func didMoveToSuperview() {
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         self.selectedBackgroundView = UIImageView(image: UIImage())
     }
 }

@@ -29,11 +29,11 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0x26a69a)
     }
     
-    var history : [GCalendar] = []
+    var history : [Date] = []
     
     func loadCache() {
         let cache = Cache.peDetail.value
@@ -57,7 +57,7 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
             let comp = GCalendar(.Minute)
             
             if ymd.count < 3 { continue }
-            guard let year = Int(ymd[0]), month = Int(ymd[1]), day = Int(ymd[2]) else {
+            guard let year = Int(ymd[0]), let month = Int(ymd[1]), let day = Int(ymd[2]) else {
                 continue
             }
             comp.year = year; comp.month = month; comp.day = day
@@ -70,13 +70,13 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
             if time[1].characters.count < 2 {
                 time[1] += "0"
             }
-            guard let hour = Int(time[0]), minute = Int(time[1]) else {
+            guard let hour = Int(time[0]), let minute = Int(time[1]) else {
                 continue
             }
             comp.hour = hour; comp.minute = minute
             
-            calendar?.selectDate(comp.getDate())
-            history.append(comp)
+            calendar?.select(comp.getDate())
+            history.append(comp.getDate())
         }
         
         if history.count == 0 {
@@ -101,28 +101,20 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
         showMessage("解析失败，请刷新")
     }
     
-    func hasDate(date : NSDate) -> Bool {
-        for k in history {
-            if k.year == date.fs_year && k.month == date.fs_month && k.day == date.fs_day {
-                return true
-            }
-        }
-        return false
-    }
-    
-    func calendar(calendar: FSCalendar, didSelectDate date: NSDate) {
-        if !hasDate(date) {
-            calendar.deselectDate(date)
+    func calendar(_ calendar: FSCalendar, didSelect date: Date) {
+        if !history.contains(date) {
+            calendar.deselect(date)
             showMessage("该日无跑操记录")
         }
     }
     
-    func calendar(calendar: FSCalendar, didDeselectDate date: NSDate) {
-        if hasDate(date) {
-            calendar.selectDate(date)
+    func calendar(_ calendar: FSCalendar, didDeselect date: Date) {
+        if history.contains(date) {
+            calendar.select(date)
             for index in 0 ..< history.count {
                 let k = history[index]
-                if k.year == date.fs_year && k.month == date.fs_month && k.day == date.fs_day {
+                if k == date {
+                    let k = GCalendar(date)
                     let timeStr = String(format: "%d/%d/%d %d:%02d", k.year, k.month, k.day, k.hour, k.minute)
                     showMessage("(第 \(index + 1) 次跑操) 打卡时间：" + timeStr)
                 }

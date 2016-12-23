@@ -24,7 +24,7 @@ class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDa
         loadCache()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0x4caf50)
     }
     
@@ -96,24 +96,24 @@ class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDa
         showMessage("解析失败，请刷新")
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 若为空，加一个条目提示用户这里是空的
         if sections.count == 0 { return 1 }
         return sections[section].count
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         // 若为空，加一个条目提示用户这里是空的
         if sections.count == 0 { return nil }
         return titles[section]
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
         // 若为空，加一个条目提示用户这里是空的
         if sections.count == 0 {
-            return tableView.dequeueReusableCellWithIdentifier("GradeEmptyTableViewCell", forIndexPath: indexPath)
+            return tableView.dequeueReusableCell(withIdentifier: "GradeEmptyTableViewCell", for: indexPath)
         }
-        let cell = tableView.dequeueReusableCellWithIdentifier("GradeTableViewCell", forIndexPath: indexPath) as! GradeTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GradeTableViewCell", for: indexPath) as! GradeTableViewCell
         
         let model = sections[indexPath.section][indexPath.row]
         cell.course?.text = model.course
@@ -123,12 +123,12 @@ class GradeViewController : UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // 若为空，加一个条目提示用户这里是空的
         return sections.count > 0 ? sections.count : 1
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

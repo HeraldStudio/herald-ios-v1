@@ -56,15 +56,15 @@ class ClassModel {
         return endTime - startTime + 1
     }
     
-    func isFitEvenOrOdd(weekNum: Int) -> Bool{
+    func isFitEvenOrOdd(_ weekNum: Int) -> Bool{
         if(weekNum % 2 == 0){
-            return !place.containsString("(单)")
+            return !place.contains("(单)")
         } else {
-            return !place.containsString("(双)")
+            return !place.contains("(双)")
         }
     }
     
-    func time60ToHourMinute(time: Int) -> String{
+    func time60ToHourMinute(_ time: Int) -> String{
         return String(format: "%d:%02d", time / 60, time % 60)
     }
 }

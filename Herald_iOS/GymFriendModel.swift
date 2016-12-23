@@ -55,7 +55,7 @@ class GymFriendModel {
                 }
             }
             
-            oldCache.removeAtIndex(index)
+            oldCache.remove(at: index)
             GymFriendModel.friendCache = oldCache
         }
     }
