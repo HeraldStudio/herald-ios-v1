@@ -58,6 +58,7 @@
 		D35FC6261CE31A3500BE844C /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6251CE31A3500BE844C /* ActivityTableViewCell.swift */; };
 		D35FC6281CE3236300BE844C /* PullLoadFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6271CE3236300BE844C /* PullLoadFooter.swift */; };
 		D35FC62A1CE33A1E00BE844C /* ActivityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6291CE33A1E00BE844C /* ActivityCard.swift */; };
+		D36AE8F91DE1D5010087B9F0 /* KWBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36AE8F81DE1D5010087B9F0 /* KWBannerView.swift */; };
 		D37708621CCC5D37006ED853 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708611CCC5D37006ED853 /* FeedbackViewController.swift */; };
 		D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708641CCC67DC006ED853 /* CardsModel.swift */; };
 		D37A1DAD1D0269880040A7D1 /* AboutUsContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A1DAC1D0269880040A7D1 /* AboutUsContentTableViewCell.swift */; };
@@ -213,6 +214,7 @@
 		D35FC6251CE31A3500BE844C /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		D35FC6271CE3236300BE844C /* PullLoadFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullLoadFooter.swift; sourceTree = "<group>"; };
 		D35FC6291CE33A1E00BE844C /* ActivityCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCard.swift; sourceTree = "<group>"; };
+		D36AE8F81DE1D5010087B9F0 /* KWBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KWBannerView.swift; sourceTree = "<group>"; };
 		D37708611CCC5D37006ED853 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		D37708641CCC67DC006ED853 /* CardsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsModel.swift; sourceTree = "<group>"; };
 		D37A1DAC1D0269880040A7D1 /* AboutUsContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsContentTableViewCell.swift; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				D3E079221D2E7A0D00D5FBB3 /* ShortcutBoxView.swift */,
 				D3B4BA711DA79E0800E8DBB1 /* ShortcutBoxCell.xib */,
 				D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */,
+				D36AE8F81DE1D5010087B9F0 /* KWBannerView.swift */,
 			);
 			name = custom;
 			sourceTree = "<group>";
@@ -731,12 +734,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = HeraldStudio;
 				TargetAttributes = {
 					D3D35DD81CBA2E8200B18092 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = JFQBLHLDR7;
+						DevelopmentTeam = MW9PK9KE48;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -832,7 +835,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		CA5DA88F3068205510FA6E72 /* [CP] Embed Pods Frameworks */ = {
@@ -914,6 +917,7 @@
 				D37D77741D490C7400531575 /* LoginUserNeeded.swift in Sources */,
 				D3ED99E21CCB5BCB00001E2B /* LibraryBookModel.swift in Sources */,
 				D38E6F351D2F231B001E6172 /* RootControllers.swift in Sources */,
+				D36AE8F91DE1D5010087B9F0 /* KWBannerView.swift in Sources */,
 				D3D849FC1CFBD88200F083DF /* ExtJSON.swift in Sources */,
 				D33B2DF41D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift in Sources */,
 				D3D5D44D1CE99EDC000E406A /* GymFriendModel.swift in Sources */,
@@ -1026,8 +1030,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
@@ -1056,6 +1062,7 @@
 				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1074,8 +1081,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
@@ -1096,6 +1105,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1105,20 +1116,22 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C275CEB73A1293164D3C08CA /* Pods-Herald_iOS.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Herald_iOS/Herald_iOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1127,19 +1140,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 17613A96BDD193BC61871BC6 /* Pods-Herald_iOS.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gengrui Guo (JFQBLHLDR7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Herald_iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.heraldstudio.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.heraldstudio.ios-test";
 				PRODUCT_NAME = "小猴偷米";
-				PROVISIONING_PROFILE = "5c79a644-1d95-4f4b-af8d-1485a19d1fac";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Herald_iOS/Herald_iOS-Bridging-Header.h";
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
