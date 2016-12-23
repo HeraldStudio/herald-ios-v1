@@ -32,8 +32,8 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
         //cell注册3D touch代理
         //因为cell的管理使用不是很完善，暂时删除内部cell按压预览
         if #available(iOS 9.0, *) {
-            if traitCollection.forceTouchCapability == .Available {
-                self.registerForPreviewingWithDelegate(self, sourceView: moduleTableView)
+            if traitCollection.forceTouchCapability == .available {
+                self.registerForPreviewing(with: self, sourceView: moduleTableView)
             }
         }
         
@@ -48,7 +48,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     /// 当准备从其它界面返回时，设置导航栏颜色
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0x12b0ec)
     }
     
@@ -87,20 +87,20 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
     var sections : [[AppModule]] = []
     
     /// 列表分区数目
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
     /// 列表某分区中条目数目
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].count
     }
     
     /// 实例化列表条目
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
         
         // 实例化
-        let moduleCell = moduleTableView.dequeueReusableCellWithIdentifier("ModuleTableViewCell", forIndexPath: indexPath) as! ModuleTableViewCell
+        let moduleCell = moduleTableView.dequeueReusableCell(withIdentifier: "ModuleTableViewCell", for: indexPath) as! ModuleTableViewCell
         
         let module = sections[indexPath.section][indexPath.row]
         
@@ -113,7 +113,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     /// 列表分区标题
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return section == 0 ? nil : "已启用的模块"
     }
     
@@ -121,8 +121,8 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
     /////////////////////////////////////////////////////////////////////////////////////
     
     /// 自定义列表条目点击事件
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         // 打开对应的模块
         sections[indexPath.section][indexPath.row].open()
@@ -135,14 +135,14 @@ extension ModulesViewController:UIViewControllerPreviewingDelegate {
     
     //peek
     @available(iOS 9.0, *)
-    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
         //通过触摸点的位置获取的是相对于moduleTableView的indexPath
-        guard let indexPath = moduleTableView.indexPathForRowAtPoint(location) else {
+        guard let indexPath = moduleTableView.indexPathForRow(at: location) else {
                 return nil
         }
 
-        let cell = moduleTableView.cellForRowAtIndexPath(indexPath) as! ModuleTableViewCell
+        let cell = moduleTableView.cellForRow(at: indexPath) as! ModuleTableViewCell
         
         previewingContext.sourceRect = cell.frame
         
@@ -150,10 +150,10 @@ extension ModulesViewController:UIViewControllerPreviewingDelegate {
     }
     
     //pop
-    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        showViewController(viewControllerToCommit, sender: self)
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
     }
 }
 
 //屏幕宽度
-let SCREEN_WIDTH = UIScreen.mainScreen().bounds.size.width
+let SCREEN_WIDTH = UIScreen.main.bounds.size.width

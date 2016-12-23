@@ -3,10 +3,10 @@ import SwiftyJSON
 class ServiceCard {
     
     static func getRefresher () -> ApiRequest {
-        return ApiSimpleRequest(.Post).url("http://app.heraldstudio.com/checkversion").uuid()
+        return ApiSimpleRequest(.post).url("http://app.heraldstudio.com/checkversion").uuid()
             .post("schoolnum", ApiHelper.currentUser.schoolNum)
-            .post("versioncode", "\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion")!)")
-            .post("versionname", "V\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")!)")
+            .post("versioncode", "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")!)")
+            .post("versionname", "V\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")!)")
             .post("versiontype", "iOS")
             .toServiceCache("versioncheck_cache")
     }
@@ -25,7 +25,7 @@ class ServiceCard {
     static func getCheckVersionCard() -> CardsModel? {
         let cache = JSON.parse(ServiceHelper.get("versioncheck_cache"))
         let newestVersionCode = cache["content"]["version"]["code"].intValue
-        if let curVersionCode = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleVersion") as? String {
+        if let curVersionCode = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String {
             if let curVersionCode = Int(curVersionCode) {
                 if curVersionCode < newestVersionCode {
                     let newestVersionName = cache["content"]["version"]["name"].stringValue

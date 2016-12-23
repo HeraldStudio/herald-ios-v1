@@ -28,13 +28,13 @@ class AppCache {
     }
 
     /// 构造函数
-    init (_ key : String, refresher : () -> ApiRequest = { () in ApiEmptyRequest() }) {
+    init (_ key : String, refresher : @escaping () -> ApiRequest = { () in ApiEmptyRequest() }) {
         self.key = key
         self.refresherCreator = refresher
     }
 
     /// 刷新函数，可以直接无参数调用或者拖一个 OnFinishListener，即 { success, code in ... }
-    func refresh(onFinishListener : OnFinishListener? = nil) {
+    func refresh(_ onFinishListener : OnFinishListener? = nil) {
         if let onFinishListener = onFinishListener {
             refresher.onFinish(onFinishListener).run()
         } else {
@@ -43,7 +43,7 @@ class AppCache {
     }
 
     /// 刷新函数，当缓存为空时刷新
-    func refreshIfEmpty(onFinishListener : OnFinishListener? = nil) {
+    func refreshIfEmpty(_ onFinishListener : OnFinishListener? = nil) {
         if isEmpty {
             refresh(onFinishListener)
         }

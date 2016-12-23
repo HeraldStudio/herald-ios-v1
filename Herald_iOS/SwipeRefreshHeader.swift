@@ -70,7 +70,7 @@ class SwipeRefreshHeader : UIView {
     override func didMoveToSuperview() {
         
         var superStaticView = superview!
-        if let v = superStaticView.superview where superStaticView is UIScrollView {
+        if let v = superStaticView.superview, superStaticView is UIScrollView {
             superStaticView = v
         }
         
@@ -89,9 +89,9 @@ class SwipeRefreshHeader : UIView {
         
         // 添加刷新提示文字
         refresh.frame = CGRect(x: 0, y: 0, width: superStaticView.frame.width, height: 0)
-        refresh.textAlignment = .Center
-        refresh.font = UIFont.systemFontOfSize(16)
-        refresh.textColor = UIColor.darkGrayColor()
+        refresh.textAlignment = .center
+        refresh.font = UIFont.systemFont(ofSize: 16)
+        refresh.textColor = UIColor.darkGray
         addSubview(refresh)
         
         // 首次重绘

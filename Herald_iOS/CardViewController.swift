@@ -33,29 +33,29 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         refreshCache() // 自动判断是否需要刷新流水，不需要的话只刷新余额
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0x03a9f4)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         loadCache()
     }
     
     /// 下拉刷新和上拉加载控件用到的三个 hook
     // 滚动时刷新显示
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         swiper.syncApperance()
         puller.syncApperance()
     }
     
     // 开始拖动，以下两个函数用于让下拉刷新控件判断是否已经松手，保证不会在松手后出现“[REFRESH]”
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         swiper.beginDrag()
         puller.beginDrag()
     }
     
     // 结束拖动
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         swiper.endDrag()
         puller.endDrag()
     }
@@ -136,13 +136,13 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         showMessage("解析失败，请刷新")
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 若为空，加一个条目提示用户这里是空的
         if history.count == 0 { return 1 }
         return history[section].count
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         // 若为空，加一个条目提示用户这里是空的
         if history.count == 0 {
             return "消费记录"
@@ -163,12 +163,12 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         return history[section][0].displayDate + consumeTip + chargeTip
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
         // 若为空，加一个条目提示用户这里是空的
         if history.count == 0 {
-            return tableView.dequeueReusableCellWithIdentifier("CardEmptyTableViewCell", forIndexPath: indexPath)
+            return tableView.dequeueReusableCell(withIdentifier: "CardEmptyTableViewCell", for: indexPath)
         }
-        let cell = tableView.dequeueReusableCellWithIdentifier("CardTableViewCell", forIndexPath: indexPath) as! CardTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CardTableViewCell", for: indexPath) as! CardTableViewCell
         
         let model = history[indexPath.section][indexPath.row]
         cell.time?.text = model.time
@@ -179,7 +179,7 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // 若为空，加一个条目提示用户这里是空的
         return history.count > 0 ? history.count : 1
     }
@@ -192,7 +192,7 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

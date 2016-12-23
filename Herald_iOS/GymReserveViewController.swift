@@ -19,23 +19,23 @@ class GymReserveViewController : UIViewController, UITableViewDataSource, UITabl
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0x0075ef)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         refreshCache()
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         swiper.syncApperance()
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         swiper.beginDrag()
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         swiper.endDrag()
     }
     
@@ -98,48 +98,48 @@ class GymReserveViewController : UIViewController, UITableViewDataSource, UITabl
     
     var myOrder : [GymRecordModel] = []
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return ["新增预约", "最近预约记录"][section]
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return [max(1, sports.count), max(1, myOrder.count)][section]
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             if sports.count == 0 {
-                return tableView.dequeueReusableCellWithIdentifier("GymReserveEmptyTableViewCell")!
+                return tableView.dequeueReusableCell(withIdentifier: "GymReserveEmptyTableViewCell")!
             }
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("GymReserveTableViewCell") as! GymReserveTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "GymReserveTableViewCell") as! GymReserveTableViewCell
             cell.name.text = sports[indexPath.row].name
             return cell
         } else {
             if myOrder.count == 0 {
-                return tableView.dequeueReusableCellWithIdentifier("GymReserveRecordEmptyTableViewCell")!
+                return tableView.dequeueReusableCell(withIdentifier: "GymReserveRecordEmptyTableViewCell")!
             }
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("GymReserveRecordTableViewCell") as! GymReserveRecordTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "GymReserveRecordTableViewCell") as! GymReserveRecordTableViewCell
             let model = myOrder[indexPath.row]
             cell.title.text = model.title
             cell.state.text = model.stateTip
             cell.desc.text = model.desc
-            cell.userInteractionEnabled = model.canCancel
+            cell.isUserInteractionEnabled = model.canCancel
             
             return cell
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.section == 0 {
-            let vc = storyboard?.instantiateViewControllerWithIdentifier("MODULE_GYMRESERVE_CHOOSETIME") as! GymChooseTimeViewController
+            let vc = storyboard?.instantiateViewController(withIdentifier: "MODULE_GYMRESERVE_CHOOSETIME") as! GymChooseTimeViewController
             vc.title = sports[indexPath.row].name
             vc.sport = sports[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
@@ -148,7 +148,7 @@ class GymReserveViewController : UIViewController, UITableViewDataSource, UITabl
             if model.canCancel {
                 showQuestionDialog("确定要取消该预约吗？", runAfter: {
                     self.showProgressDialog()
-                    ApiSimpleRequest(.Post).api("yuyue").uuid().post("method", "cancelUrl", "id", String(model.id)).onResponse { _, _, response in
+                    ApiSimpleRequest(.post).api("yuyue").uuid().post("method", "cancelUrl", "id", String(model.id)).onResponse { _, _, response in
                         self.hideProgressDialog()
                         let success = JSON.parse(response)["content"]["msg"].stringValue == "success"
                         if success {

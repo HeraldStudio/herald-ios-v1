@@ -17,7 +17,7 @@ import SwiftyJSON
 
 /// 合并两个错误码，即去掉其中错误轻的，保留错误严重的代码
 /// 具体逻辑是以401为最严重，其它错误数字越大越严重
-func mergeStatusCodes (leftCode : Int, _ rightCode : Int) -> Int {
+func mergeStatusCodes (_ leftCode : Int, _ rightCode : Int) -> Int {
     if leftCode == 401 || rightCode == 401 {
         return 401
     }
@@ -40,7 +40,7 @@ typealias OnFinishListener = (Bool, Int) -> Void
 /// 用来在将要运行的请求中优先加入 401 错误的监听器
 /// 所有复合请求的 run() 函数必须首先调用本函数
 /// 当请求出现致命错误时，提示身份过期并退出登录
-func addFatalErrorListenerInOnFinishList(inout list: [OnFinishListener]) {
+func addFatalErrorListenerInOnFinishList(_ list: inout [OnFinishListener]) {
     let listener : OnFinishListener = { _, code in
         if code == 401 {
             ApiHelper.notifyUserIdentityExpired()
@@ -52,7 +52,7 @@ func addFatalErrorListenerInOnFinishList(inout list: [OnFinishListener]) {
 /// 用来在将要运行的请求中优先加入 401 错误的监听器
 /// 所有简单请求的 run() 函数必须首先调用本函数
 /// 当请求出现致命错误时，提示身份过期并退出登录
-func addFatalErrorListenerInOnResponseList(inout list: [OnResponseListener]) {
+func addFatalErrorListenerInOnResponseList(_ list: inout [OnResponseListener]) {
     let listener : OnResponseListener = { _, code, _ in
         if code == 401 {
             ApiHelper.notifyUserIdentityExpired()
@@ -64,9 +64,9 @@ func addFatalErrorListenerInOnResponseList(inout list: [OnResponseListener]) {
 /// 协议，空请求、简单请求、顺次复合请求、同时复合请求都要遵守该协议，以保证这种递归式的多态性
 protocol ApiRequest {
 
-    func onResponse(listener : OnResponseListener) -> ApiRequest
+    func onResponse(_ listener : @escaping OnResponseListener) -> ApiRequest
 
-    func onFinish(listener : OnFinishListener) -> ApiRequest
+    func onFinish(_ listener : @escaping OnFinishListener) -> ApiRequest
 
     /// 不添加 4xx 错误监听器，直接运行。
     /// 该函数用于外层复合请求调用内层请求时使用，防止 4xx 错误监听器重复添加。
@@ -82,7 +82,7 @@ func - (left: ApiRequest, right: ApiRequest) -> ApiRequest {
     return ApiChainRequest(left, right)
 }
 
-func -= (inout left: ApiRequest, right: ApiRequest) {
+func -= (left: inout ApiRequest, right: ApiRequest) {
     left = left - right
 }
 
@@ -91,7 +91,7 @@ func | (left: ApiRequest, right: ApiRequest) -> ApiRequest {
     return ApiParallelRequest(left, right)
 }
 
-func |= (inout left: ApiRequest, right: ApiRequest) {
+func |= (left: inout ApiRequest, right: ApiRequest) {
     left = left | right
 }
 
@@ -103,12 +103,12 @@ class ApiEmptyRequest : ApiRequest {
 
     var onResponseListeners : [OnResponseListener] = []
 
-    func onResponse (listener : OnResponseListener) -> ApiRequest {
+    func onResponse (_ listener : @escaping OnResponseListener) -> ApiRequest {
         onResponseListeners.append(listener)
         return self
     }
 
-    func onFinish(listener: OnFinishListener) -> ApiRequest {
+    func onFinish (_ listener: @escaping OnFinishListener) -> ApiRequest {
         return onResponse { success, code, response in listener(success, code) }
     }
 
@@ -129,28 +129,23 @@ class ApiEmptyRequest : ApiRequest {
  **/
 class ApiSimpleRequest : ApiRequest {
 
-    enum Method {
-        case Post
-        case Get
-    }
-
-    var method : Method
+    var method : HTTPMethod
 
     /**
      * 构造部分
      **/
-    init(_ method: Method){
+    init(_ method: HTTPMethod){
         self.method = method
     }
 
-    var url : String?
+    var _url = ""
 
-    func url (url : String) -> ApiSimpleRequest {
-        self.url = url
+    func url (_ url : String) -> ApiSimpleRequest {
+        self._url = url
         return self
     }
 
-    func api (api : String) -> ApiSimpleRequest {
+    func api (_ api : String) -> ApiSimpleRequest {
         return url(ApiHelper.getApiUrl(api))
     }
 
@@ -165,14 +160,14 @@ class ApiSimpleRequest : ApiRequest {
      * 联网设置部分
      * builder  参数表
      **/
-    var map : [String : AnyObject] = [:]
+    var map : [String : Any] = [:]
 
     func uuid () -> ApiSimpleRequest {
         map.updateValue(ApiHelper.currentUser.uuid, forKey: "uuid")
         return self
     }
 
-    func post (map : String...) -> ApiSimpleRequest {
+    func post (_ map : String...) -> ApiSimpleRequest {
         for i in 0 ..< (map.count / 2) {
             let key = map[2 * i]
             let value = map[2 * i + 1]
@@ -189,7 +184,7 @@ class ApiSimpleRequest : ApiRequest {
      *
      * callback     默认的Callback（自动调用二级回调，若出错还会执行错误处理）
      **/
-    func callback (response : Response <String, NSError>) -> Void {
+    func callback (_ response : DataResponse <String>) -> Void {
 
         // 解析错误码（这里指的是 HTTP Response Status Code，不考虑 JSON 中返回的 code）
         if let httpCode = response.response?.statusCode {
@@ -230,12 +225,12 @@ class ApiSimpleRequest : ApiRequest {
 
     var onResponseListeners : [OnResponseListener] = []
 
-    func onResponse (listener : OnResponseListener) -> ApiRequest {
+    func onResponse (_ listener : @escaping OnResponseListener) -> ApiRequest {
         onResponseListeners.append(listener)
         return self
     }
 
-    func onFinish(listener: OnFinishListener) -> ApiRequest {
+    func onFinish(_ listener: @escaping OnFinishListener) -> ApiRequest {
         return onResponse { success, code, response in listener(success, code) }
     }
 
@@ -247,10 +242,10 @@ class ApiSimpleRequest : ApiRequest {
      * toCache      将目标数据存入缓存的回调策略
      * toCache()    用于设置三级回调策略的函数
      **/
-    typealias JSONParser = JSON throws -> JSON
+    typealias JSONParser = (JSON) throws -> JSON
 
     // 目前暂时只有CacheHelper有更新检测机制，如果另外两个也需要该机制，请修改对应的Helper的set函数
-    func toCache (key : String, withParser parser : JSONParser = {json in json}) -> ApiSimpleRequest {
+    func toCache (_ key : String, withParser parser : @escaping JSONParser = {json in json}) -> ApiSimpleRequest {
         onResponse {
             success, _, response in
             if(success) {
@@ -267,7 +262,7 @@ class ApiSimpleRequest : ApiRequest {
         return self
     }
 
-    func toServiceCache (key : String, withParser parser : JSONParser = {json in json}) -> ApiSimpleRequest {
+    func toServiceCache (_ key : String, withParser parser : @escaping JSONParser = {json in json}) -> ApiSimpleRequest {
         onResponse {
             success, _, response in
             if(success) {
@@ -284,7 +279,7 @@ class ApiSimpleRequest : ApiRequest {
         return self
     }
 
-    func toAuthCache (key : String, withParser parser : JSONParser = {json in json}) -> ApiSimpleRequest {
+    func toAuthCache (_ key : String, withParser parser : @escaping JSONParser = {json in json}) -> ApiSimpleRequest {
         onResponse {
             success, _, response in
             if(success) {
@@ -306,8 +301,10 @@ class ApiSimpleRequest : ApiRequest {
      **/
     func runWithoutFatalListener() {
         
-        let request = Alamofire.request([Method.Get: .GET, Method.Post: .POST][method]!,
-            url!, parameters: map, encoding: .URL)
+        let request = Alamofire.request(
+            _url,
+            method: method,
+            parameters: map)
 
         request.responseString { response in
             if self.isDebug {
@@ -373,7 +370,7 @@ class ApiChainRequest : ApiRequest {
         }
     }
 
-    func onResponse(listener: OnResponseListener) -> ApiRequest {
+    func onResponse(_ listener: @escaping OnResponseListener) -> ApiRequest {
         leftRequest.onResponse(listener)
         rightRequest.onResponse(listener)
         return self
@@ -381,7 +378,7 @@ class ApiChainRequest : ApiRequest {
 
     var onFinishListeners : [OnFinishListener] = []
 
-    func onFinish(listener: OnFinishListener) -> ApiRequest {
+    func onFinish(_ listener: @escaping OnFinishListener) -> ApiRequest {
         onFinishListeners.append(listener)
         return self
     }
@@ -419,7 +416,7 @@ class ApiParallelRequest : ApiRequest {
         rightRequest = right
 
         leftRequest.onFinish { _, code in
-            self.invokeCallback(code, &self.leftFinished, &self.rightFinished)
+            self.invokeCallback(code, &self.rightFinished, &self.leftFinished)
         }
 
         rightRequest.onFinish { _, code in
@@ -427,7 +424,7 @@ class ApiParallelRequest : ApiRequest {
         }
     }
 
-    func invokeCallback(code : Int, inout _ thisFinished : Bool, inout _ anotherFinished : Bool) {
+    func invokeCallback(_ code : Int, _ thisFinished : inout Bool, _ anotherFinished : inout Bool) {
         synchronized(self) {
             thisFinished = true
 
@@ -442,7 +439,7 @@ class ApiParallelRequest : ApiRequest {
         }
     }
 
-    func onResponse(listener: OnResponseListener) -> ApiRequest {
+    func onResponse(_ listener: @escaping OnResponseListener) -> ApiRequest {
         leftRequest.onResponse(listener)
         rightRequest.onResponse(listener)
         return self
@@ -450,7 +447,7 @@ class ApiParallelRequest : ApiRequest {
 
     var onFinishListeners : [OnFinishListener] = []
 
-    func onFinish(listener: OnFinishListener) -> ApiRequest {
+    func onFinish(_ listener: @escaping OnFinishListener) -> ApiRequest {
         onFinishListeners.append(listener)
         return self
     }

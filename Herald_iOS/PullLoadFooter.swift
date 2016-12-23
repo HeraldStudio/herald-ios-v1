@@ -35,13 +35,13 @@ class PullLoadFooter : UIView {
         realHeight = self.frame.height
         
         // 计算尺寸
-        self.frame = CGRect(x: 0, y: 0, width: (UIApplication.sharedApplication().keyWindow?.frame.width)!, height: realHeight)
+        self.frame = CGRect(x: 0, y: 0, width: (UIApplication.shared.keyWindow?.frame.width)!, height: realHeight)
         
         // 添加加载提示文字
         load.frame = self.frame
-        load.textColor = UIColor.lightGrayColor()
-        load.textAlignment = .Center
-        load.font = UIFont.systemFontOfSize(16)
+        load.textColor = UIColor.lightGray
+        load.textAlignment = .center
+        load.font = UIFont.systemFont(ofSize: 16)
         addSubview(load)
         
         // 首次重绘
@@ -92,7 +92,7 @@ class PullLoadFooter : UIView {
     }
     
     /// 立即禁用上拉加载，并显示一段提示文字
-    func disable(placeholder : String) {
+    func disable(_ placeholder : String) {
         enabled = false
         load.text = placeholder
     }

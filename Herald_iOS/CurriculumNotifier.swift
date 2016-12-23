@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class CurriculumNotifier {
     
-    static func scheduleNotificationsForClassModel (info : ClassModel, startDate : GCalendar) {
+    static func scheduleNotificationsForClassModel (_ info : ClassModel, startDate : GCalendar) {
         for week in info.startWeek ..< info.endWeek + 1 {
             if info.isFitEvenOrOdd(week) {
                 let cal = GCalendar(startDate)
@@ -27,13 +27,13 @@ class CurriculumNotifier {
                 
                 let not = UILocalNotification()
                 not.fireDate = date
-                not.timeZone = NSTimeZone.defaultTimeZone()
+                not.timeZone = TimeZone.current
                 not.soundName = UILocalNotificationDefaultSoundName
                 not.applicationIconBadgeNumber = 1
                 let place = info.place.replaceAll("(单)", "").replaceAll("(双)", "")
                 not.alertBody = "[\(place)] " + info.className + " 将在15分钟后开始上课，请注意时间，准时上课"
                 
-                UIApplication.sharedApplication().scheduleLocalNotification(not)
+                UIApplication.shared.scheduleLocalNotification(not)
             }
         }
     }

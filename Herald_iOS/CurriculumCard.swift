@@ -131,7 +131,7 @@ class CurriculumCard {
             let firstClass = remainingClasses.count == classCount
             let model = CardsModel(cellId: "CardsCellCurriculum", module: ModuleCurriculum, desc: (classAlmostEnd ? "快要下课了，" : "") +
                 (firstClass ? "你今天有" : "你今天还有") + String(remainingClasses.count) + "节课，点我查看详情", priority: .CONTENT_NO_NOTIFY)
-            model.rows.appendContentsOf(remainingClasses)
+            model.rows.append(contentsOf: remainingClasses)
             return model
         }
         
@@ -170,7 +170,7 @@ class CurriculumCard {
                 : (todayHasClasses ? "今天的课程已经结束，" : "今天没有课程，") + "明天有\(classCount)节课",
             // 若明天有课，则属于有内容不提醒状态；否则属于无内容状态
             priority: classCount == 0 ? .NO_CONTENT : .CONTENT_NO_NOTIFY)
-        model.rows.appendContentsOf(rowList)
+        model.rows.append(contentsOf: rowList)
         return model
     }
 }

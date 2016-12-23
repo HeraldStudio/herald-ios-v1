@@ -33,9 +33,9 @@ class WifiLoginHelper {
     }
     
     private func beginCheck () {
-        ApiSimpleRequest(.Post).url("https://selfservice.seu.edu.cn/selfservice/index.php")
+        ApiSimpleRequest(.post).url("https://selfservice.seu.edu.cn/selfservice/index.php")
             .onResponse { success, code, response in
-            if !response.containsString("403 Forbidden") {
+            if !response.contains("403 Forbidden") {
                 self.checkOnlineStatus()
             } else {
                 self.vc.hideProgressDialog()
@@ -46,7 +46,7 @@ class WifiLoginHelper {
     }
     
     private func checkOnlineStatus () {
-        ApiSimpleRequest(.Get).url("http://w.seu.edu.cn/index.php/index/init")
+        ApiSimpleRequest(.get).url("http://w.seu.edu.cn/index.php/index/init")
             .onResponse { success, _, response in
             if success {
                 let responseJSON = JSON.parse(response)
@@ -75,7 +75,7 @@ class WifiLoginHelper {
     }
     
     private func logoutThenLogin () {
-        ApiSimpleRequest(.Post).url("http://w.seu.edu.cn/index.php/index/logout")
+        ApiSimpleRequest(.post).url("http://w.seu.edu.cn/index.php/index/logout")
             .onResponse { success, _, response in
             if success {
                 self.loginToService()
@@ -91,11 +91,11 @@ class WifiLoginHelper {
         let username = ApiHelper.getWifiUserName()
         let password = ApiHelper.getWifiPassword()
             
-        let passwordData = password.dataUsingEncoding(NSUTF8StringEncoding)
+        let passwordData = password.data(using: String.Encoding.utf8)
             
-        let passwordEncoded = passwordData?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0)) ?? ""
+        let passwordEncoded = passwordData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)) ?? ""
         
-        ApiSimpleRequest(.Post).url("http://w.seu.edu.cn/index.php/index/login")
+        ApiSimpleRequest(.post).url("http://w.seu.edu.cn/index.php/index/login")
             .post("username", username, "password", passwordEncoded, "enablemacauth", "1")
             .onResponse { success, _, response in
                 if success {

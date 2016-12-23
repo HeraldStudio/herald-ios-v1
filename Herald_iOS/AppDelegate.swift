@@ -27,14 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// 对获取AppDelegate单例的语句进行简化
     static var instance : AppDelegate {
-        return UIApplication.sharedApplication().delegate as! AppDelegate
+        return UIApplication.shared.delegate as! AppDelegate
     }
     
     /// UIApplicationDelegate 无参数的启动结束事件，似乎不会触发
-    func applicationDidFinishLaunching(application: UIApplication) {}
+    func applicationDidFinishLaunching(_ application: UIApplication) {}
     
     /// UIApplicationDelegate 带参数的启动结束事件
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         
         // 设置主屏幕图标 3D Touch 菜单
         if #available(iOS 9.0, *) {
@@ -52,23 +52,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // 设置应用通知选项
-        let settings = UIUserNotificationSettings(forTypes: [.Badge, .Sound, .Alert], categories: nil)
+        let settings = UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil)
         application.registerUserNotificationSettings(settings)
         
         // 初始化并显示主界面
         let id = AppDelegate.isPad ? "MainSplitController" : "MainNavigationController"
-        self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(id)
+        self.window?.rootViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: id)
         
         return true
     }
     
     /// UIApplicationDelegate 在应用结束时安排通知
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         reloadNotifications()
     }
     
     /// UIApplicationDelegate 在转到后台时安排通知
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         reloadNotifications()
     }
     
@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func reloadNotifications() {
         
         // 先清除旧的通知
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        UIApplication.shared.cancelAllLocalNotifications()
         
         // 加载课表通知
         if SettingsHelper.curriculumNotificationEnabled {
@@ -95,13 +95,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     /// UIApplicationDelegate 清空图标徽标数字
-    func applicationDidBecomeActive(application: UIApplication) {
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
     /// UIApplicationDelegate 处理主屏幕图标 3D Touch 菜单点击事件
     @available(iOS 9.0, *)
-    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         
         // 获取目标界面
         switch shortcutItem.type {
@@ -119,17 +119,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// 显示登录界面
     static func showLogin () {
         // 首先关闭所有上层界面，回到主界面
-        instance.leftController.popToRootViewControllerAnimated(true)
-        instance.rightController.popToRootViewControllerAnimated(true)
+        instance.leftController.popToRootViewController(animated: true)
+        instance.rightController.popToRootViewController(animated: true)
         
         // 打开登录页，如果是平板，优先在右侧打开
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("LoginViewController")
-        AppDelegate.instance.wholeController.presentViewController(vc, animated: true, completion: nil)
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController")
+        AppDelegate.instance.wholeController.present(vc, animated: true, completion: nil)
     }
     
     /// 检测当前环境是否iPad
     static var isPad : Bool {
-        return UI_USER_INTERFACE_IDIOM() == .Pad
+        return UI_USER_INTERFACE_IDIOM() == .pad
     }
 }
 
