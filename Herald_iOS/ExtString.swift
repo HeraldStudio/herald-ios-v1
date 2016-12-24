@@ -26,4 +26,11 @@ extension String {
         }
         return a
     }
+    
+    /// 子串
+    func substring(_ range: Range<Int>) -> String {
+        let startIndex = index(self.startIndex, offsetBy: range.lowerBound)
+        let endIndex = index(self.startIndex, offsetBy: range.upperBound)
+        return self[startIndex..<endIndex]
+    }
 }

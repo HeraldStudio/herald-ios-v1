@@ -33,6 +33,26 @@ public class GCalendar : CustomDebugStringConvertible {
     /// 所需的时间单位集合，取值被限制在下面的PRECISION_UNITS数组中
     private var unit : Set<Calendar.Component>
     
+    /// 全部单位
+    private let allUnits : Set<Calendar.Component> = [
+        .calendar,
+        .day,
+        .era,
+        .hour,
+        .minute,
+        .month,
+        .nanosecond,
+        .quarter,
+        .second,
+        .timeZone,
+        .weekday,
+        .weekdayOrdinal,
+        .weekOfMonth,
+        .weekOfYear,
+        .year,
+        .yearForWeekOfYear
+    ]
+    
     /// 由使用者设置的时间精确度
     public enum GCalendarPrecision : Int {
         /// 精确到年
@@ -86,13 +106,13 @@ public class GCalendar : CustomDebugStringConvertible {
         // 精确到月
         [.year, .month],
         // 精确到天
-        [.year, .month, .day],
+        [.year, .month, .day, .weekOfYear, .weekOfMonth, .weekday],
         // 精确到小时
-        [.year, .month, .day, .hour],
+        [.year, .month, .day, .weekOfYear, .weekOfMonth, .weekday, .hour],
         // 精确到分钟
-        [.year, .month, .day, .hour, .minute],
+        [.year, .month, .day, .weekOfYear, .weekOfMonth, .weekday, .hour, .minute],
         // 精确到秒
-        [.year, .month, .day, .hour, .minute, .second]
+        [.year, .month, .day, .weekOfYear, .weekOfMonth, .weekday, .hour, .minute, .second]
     ]
     
     /// 用指定的精确度初始化时间对象
@@ -107,7 +127,7 @@ public class GCalendar : CustomDebugStringConvertible {
         // 将精确度范围内的时间值同步到 date
         date = calendar.date(from: srcComp)!
         // 将 date 的时间值同步到 dstComp
-        dstComp = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: date)
+        dstComp = calendar.dateComponents(allUnits, from: date)
     }
     
     /// 复制构造函数
@@ -171,13 +191,13 @@ public class GCalendar : CustomDebugStringConvertible {
     /// 立即同步 srcComp 中的更改到 date 和 dstComp
     private func sync() {
         date = calendar.date(from: srcComp)!
-        dstComp = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: date)
+        dstComp = calendar.dateComponents(allUnits, from: date)
     }
     
     /// 反向同步 date 到 srcComp 并更新 dstComp
     private func backSync() {
         srcComp = calendar.dateComponents(unit, from: date)
-        dstComp = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second, .nanosecond], from: date)
+        dstComp = calendar.dateComponents(allUnits, from: date)
     }
     
     /// 直接设置日期

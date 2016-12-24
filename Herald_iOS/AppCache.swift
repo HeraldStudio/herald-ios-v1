@@ -8,11 +8,17 @@ class AppCache {
     /// 取值或设值
     var value : String {
         get {
+            if let mask = mask {
+                return mask(CacheHelper.get(key))
+            }
             return CacheHelper.get(key)
         } set {
             CacheHelper.set(key, newValue)
         }
     }
+    
+    /// 取值时的可选变换
+    var mask : ((String) -> String)?
 
     /// 由于同一个 ApiRequest 实例不能多次使用，所以需要存储一个能动态创建新 ApiRequest 实例的闭包
     let refresherCreator : () -> ApiRequest
@@ -52,5 +58,11 @@ class AppCache {
     /// 设为空
     func setEmpty() {
         value = ""
+    }
+    
+    /// 设置取值变换
+    func masked(mask : ((String) -> String)?) -> AppCache {
+        self.mask = mask
+        return self
     }
 }

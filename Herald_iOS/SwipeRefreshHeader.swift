@@ -44,6 +44,14 @@ class SwipeRefreshHeader : UIView {
     let tipTextOff = "·  ω  · 下拉刷新"
     let tipTextOn = "·  ω  · 松手刷新"
     
+    /// 可以设置的背景色
+    var bgColor : UIColor? {
+        didSet {
+            refresh.textColor = bgColor == nil ? .lightGray : .white
+            refresh.backgroundColor = bgColor
+        }
+    }
+    
     /// 下拉刷新是否启用，若没有启用，将不会显示
     var _enabled = true
     
@@ -69,33 +77,35 @@ class SwipeRefreshHeader : UIView {
     /// 视图被展示时的操作
     override func didMoveToSuperview() {
         
-        var superStaticView = superview!
-        if let v = superStaticView.superview, superStaticView is UIScrollView {
-            superStaticView = v
+        if var superStaticView = superview {
+            if let v = superStaticView.superview, superStaticView is UIScrollView {
+                superStaticView = v
+            }
+            
+            // 先移除所有子视图，以防万一
+            for k in subviews { k.removeFromSuperview() }
+            
+            // 计算原始高度并添加子视图
+            realHeight = CGFloat(0)
+            if contentView != nil {
+                realHeight = contentView!.frame.height
+                addSubview(contentView!)
+            }
+            
+            // 计算尺寸
+            self.frame = CGRect(x: 0, y: 0, width: superStaticView.frame.width, height: realHeight)
+            
+            // 添加刷新提示文字
+            refresh.clipsToBounds = true
+            refresh.frame = CGRect(x: 0, y: 0, width: superStaticView.frame.width, height: 0)
+            refresh.textAlignment = .center
+            refresh.font = UIFont.systemFont(ofSize: 16)
+            refresh.textColor = bgColor == nil ? UIColor.lightGray : UIColor.white
+            addSubview(refresh)
+            
+            // 首次重绘
+            syncApperance()
         }
-        
-        // 先移除所有子视图，以防万一
-        for k in subviews { k.removeFromSuperview() }
-        
-        // 计算原始高度并添加子视图
-        realHeight = CGFloat(0)
-        if contentView != nil {
-            realHeight = contentView!.frame.height
-            addSubview(contentView!)
-        }
-        
-        // 计算尺寸
-        self.frame = CGRect(x: 0, y: 0, width: superStaticView.frame.width, height: realHeight)
-        
-        // 添加刷新提示文字
-        refresh.frame = CGRect(x: 0, y: 0, width: superStaticView.frame.width, height: 0)
-        refresh.textAlignment = .center
-        refresh.font = UIFont.systemFont(ofSize: 16)
-        refresh.textColor = UIColor.darkGray
-        addSubview(refresh)
-        
-        // 首次重绘
-        syncApperance()
     }
     
     /// 重绘
@@ -114,9 +124,6 @@ class SwipeRefreshHeader : UIView {
         
         // 更新刷新提示文字内容
         refresh.text = isHighlight ? tipTextOn : tipTextOff
-        
-        // 设置对应的颜色和透明度
-        refresh.alpha = textAlpha
         
         // 弹性放大动效
         //let transitionPercent = max(0, min(1, (-y - refreshDistance + 20) / 40))
