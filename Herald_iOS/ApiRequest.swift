@@ -416,7 +416,7 @@ class ApiParallelRequest : ApiRequest {
         rightRequest = right
 
         leftRequest.onFinish { _, code in
-            self.invokeCallback(code, &self.rightFinished, &self.leftFinished)
+            self.invokeCallback(code, &self.leftFinished, &self.rightFinished)
         }
 
         rightRequest.onFinish { _, code in

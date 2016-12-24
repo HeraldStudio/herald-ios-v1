@@ -40,8 +40,8 @@
 		D33438591D1A2DE900CD49D6 /* NirKxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D33438581D1A2DE900CD49D6 /* NirKxMenu.m */; };
 		D33678F81CE5971C001E7C25 /* CurriculumNotifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */; };
 		D3378CF91D9AAFA000DCD186 /* ExerciseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3378CF81D9AAFA000DCD186 /* ExerciseUtil.swift */; };
-		D33B2DF41D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF31D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift */; };
-		D33B2DF61D59939500E7FBF1 /* CurriculumFloatClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF51D59939500E7FBF1 /* CurriculumFloatClassViewController.swift */; };
+		D33B2DF41D598D1A00E7FBF1 /* CurriculumCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF31D598D1A00E7FBF1 /* CurriculumCells.swift */; };
+		D33B2DF61D59939500E7FBF1 /* CurriculumOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF51D59939500E7FBF1 /* CurriculumOptionsViewController.swift */; };
 		D33B2DF81D59CD0600E7FBF1 /* SidebarClassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF71D59CD0600E7FBF1 /* SidebarClassModel.swift */; };
 		D33B2DFA1D59D68E00E7FBF1 /* Caches.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DF91D59D68E00E7FBF1 /* Caches.swift */; };
 		D33B2DFC1D59D6AE00E7FBF1 /* AppCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33B2DFB1D59D6AE00E7FBF1 /* AppCache.swift */; };
@@ -53,6 +53,8 @@
 		D34E95861CCDCCE700AD1119 /* JwcCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34E95851CCDCCE700AD1119 /* JwcCard.swift */; };
 		D354905C1CDC519100E59615 /* GCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D354905B1CDC519100E59615 /* GCalendar.swift */; };
 		D356C6291D692FA00028E1D9 /* ShareHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D356C6281D692FA00028E1D9 /* ShareHelper.swift */; };
+		D3588F071E0E97630009D4A0 /* CurriculumOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3588F061E0E97630009D4A0 /* CurriculumOverviewView.swift */; };
+		D3588F091E0EAB830009D4A0 /* TermModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3588F081E0EAB830009D4A0 /* TermModel.swift */; };
 		D35FC6221CE2FEF400BE844C /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6211CE2FEF400BE844C /* ActivityViewController.swift */; };
 		D35FC6241CE301F700BE844C /* ActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6231CE301F700BE844C /* ActivityModel.swift */; };
 		D35FC6261CE31A3500BE844C /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6251CE31A3500BE844C /* ActivityTableViewCell.swift */; };
@@ -194,8 +196,8 @@
 		D33438581D1A2DE900CD49D6 /* NirKxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = NirKxMenu.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D33678F71CE5971C001E7C25 /* CurriculumNotifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumNotifier.swift; sourceTree = "<group>"; };
 		D3378CF81D9AAFA000DCD186 /* ExerciseUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExerciseUtil.swift; sourceTree = "<group>"; };
-		D33B2DF31D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumFloatClassTableViewCell.swift; sourceTree = "<group>"; };
-		D33B2DF51D59939500E7FBF1 /* CurriculumFloatClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CurriculumFloatClassViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		D33B2DF31D598D1A00E7FBF1 /* CurriculumCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumCells.swift; sourceTree = "<group>"; };
+		D33B2DF51D59939500E7FBF1 /* CurriculumOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CurriculumOptionsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D33B2DF71D59CD0600E7FBF1 /* SidebarClassModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarClassModel.swift; sourceTree = "<group>"; };
 		D33B2DF91D59D68E00E7FBF1 /* Caches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Caches.swift; sourceTree = "<group>"; };
 		D33B2DFB1D59D6AE00E7FBF1 /* AppCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCache.swift; sourceTree = "<group>"; };
@@ -208,6 +210,8 @@
 		D354905B1CDC519100E59615 /* GCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = GCalendar.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D356C6281D692FA00028E1D9 /* ShareHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareHelper.swift; sourceTree = "<group>"; };
 		D3578AAE1CDBABE300B291D0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		D3588F061E0E97630009D4A0 /* CurriculumOverviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurriculumOverviewView.swift; sourceTree = "<group>"; };
+		D3588F081E0EAB830009D4A0 /* TermModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermModel.swift; sourceTree = "<group>"; };
 		D35FC6211CE2FEF400BE844C /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ActivityViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D35FC6231CE301F700BE844C /* ActivityModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityModel.swift; sourceTree = "<group>"; };
 		D35FC6251CE31A3500BE844C /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
@@ -469,9 +473,11 @@
 				D31DE5191CC35A3100E4891D /* CurriculumView.swift */,
 				D31DE5131CC3597800E4891D /* CurriculumBlock.swift */,
 				D31DE5111CC3592F00E4891D /* ClassModel.swift */,
-				D33B2DF51D59939500E7FBF1 /* CurriculumFloatClassViewController.swift */,
-				D33B2DF31D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift */,
+				D33B2DF51D59939500E7FBF1 /* CurriculumOptionsViewController.swift */,
+				D33B2DF31D598D1A00E7FBF1 /* CurriculumCells.swift */,
 				D33B2DF71D59CD0600E7FBF1 /* SidebarClassModel.swift */,
+				D3588F061E0E97630009D4A0 /* CurriculumOverviewView.swift */,
+				D3588F081E0EAB830009D4A0 /* TermModel.swift */,
 			);
 			name = curriculum;
 			sourceTree = "<group>";
@@ -731,7 +737,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = HeraldStudio;
 				TargetAttributes = {
 					D3D35DD81CBA2E8200B18092 = {
@@ -860,6 +866,7 @@
 				D3D5D43F1CE97149000E406A /* GymChooseTimeViewController.swift in Sources */,
 				D308693C1D3CB1F70088D9EA /* Modules.swift in Sources */,
 				D39B87971CCCCA0200EC5280 /* CardsRowModel.swift in Sources */,
+				D3588F091E0EAB830009D4A0 /* TermModel.swift in Sources */,
 				D33438501D1A185300CD49D6 /* LibrarySearchTableViewCell.swift in Sources */,
 				D306E0281CCA403D00FA3812 /* ExamModel.swift in Sources */,
 				D39B879C1CCCF02600EC5280 /* ExperimentCard.swift in Sources */,
@@ -885,7 +892,7 @@
 				D3A0C1721CBB7A9800744640 /* CardsViewController.swift in Sources */,
 				D33438591D1A2DE900CD49D6 /* NirKxMenu.m in Sources */,
 				D3E6BD7F1CC8C07F0074FF6D /* ModuleManagerViewController.swift in Sources */,
-				D33B2DF61D59939500E7FBF1 /* CurriculumFloatClassViewController.swift in Sources */,
+				D33B2DF61D59939500E7FBF1 /* CurriculumOptionsViewController.swift in Sources */,
 				D3F473471CCA05CD00750FFB /* JwcViewController.swift in Sources */,
 				D34858111CBB57F600B55E76 /* ExtUserDefaults.swift in Sources */,
 				D3ED99E01CCB3DFD00001E2B /* SrtpViewController.swift in Sources */,
@@ -903,6 +910,7 @@
 				D31DE5181CC359D300E4891D /* CurriculumViewController.swift in Sources */,
 				D3A0C1771CBB7B2300744640 /* SettingsViewController.swift in Sources */,
 				D3FBC2F21CCC51F900305428 /* ExtUIViewController.swift in Sources */,
+				D3588F071E0E97630009D4A0 /* CurriculumOverviewView.swift in Sources */,
 				D3ED99DA1CCB091700001E2B /* SchoolbusViewController.swift in Sources */,
 				D306E02E1CCA691F00FA3812 /* GradeViewController.swift in Sources */,
 				D31821B61CC48D5400992355 /* ServiceHelper.swift in Sources */,
@@ -915,7 +923,7 @@
 				D3ED99E21CCB5BCB00001E2B /* LibraryBookModel.swift in Sources */,
 				D38E6F351D2F231B001E6172 /* RootControllers.swift in Sources */,
 				D3D849FC1CFBD88200F083DF /* ExtJSON.swift in Sources */,
-				D33B2DF41D598D1A00E7FBF1 /* CurriculumFloatClassTableViewCell.swift in Sources */,
+				D33B2DF41D598D1A00E7FBF1 /* CurriculumCells.swift in Sources */,
 				D3D5D44D1CE99EDC000E406A /* GymFriendModel.swift in Sources */,
 				D31DE5121CC3592F00E4891D /* ClassModel.swift in Sources */,
 				D3F4734D1CCA153A00750FFB /* LectureModel.swift in Sources */,

@@ -67,4 +67,15 @@ class ClassModel {
     func time60ToHourMinute(_ time: Int) -> String{
         return String(format: "%d:%02d", time / 60, time % 60)
     }
+    
+    var weekSummary : String {
+        var summary = "\(startWeek)~\(endWeek)周"
+        if place.contains("(单)") {
+            summary += "单周"
+        }
+        if place.contains("(双)") {
+            summary += "双周"
+        }
+        return summary
+    }
 }
