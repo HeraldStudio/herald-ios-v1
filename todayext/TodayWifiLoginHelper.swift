@@ -20,6 +20,8 @@ class WifiLoginHelper {
             if WifiLoginHelper.working { return }
             WifiLoginHelper.working = true
             self.beginCheck()
+        } else {
+            self.vc.showMessage("请登录")
         }
     }
     

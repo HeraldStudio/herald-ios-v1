@@ -19,6 +19,8 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataS
     
     @IBOutlet weak var curriculum : UITableView!
     
+    @IBOutlet weak var highlight_view : UIView!
+    
     var data = [(UIImage, String)]()
     
     var curriculumList = [ClassModel]()
@@ -88,11 +90,15 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataS
     }
     
     func updateSize() {
+        UIView.beginAnimations(nil, context: nil)
         if expanded {
             preferredContentSize = CGSize(width: view.frame.width, height: curriculum.frame.minY + curriculum.contentSize.height)
+            highlight_view.alpha = 1
         } else {
             preferredContentSize = CGSize(width: view.frame.width, height: 95)
+            highlight_view.alpha = 0
         }
+        UIView.commitAnimations()
     }
     
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
