@@ -13,5 +13,15 @@ target "Herald_iOS" do
 	pod 'FSCalendar'
 	pod 'MagicPie'
 	pod 'DHCShakeNotifier'
+	pod 'SnapKit'
+
+end
+
+target "todayext" do
+    
+    pod 'Alamofire'
+    pod 'SwiftyJSON'
+    pod 'Toast-Swift', '~> 2.0.0'
+    pod 'SnapKit'    
 
 end

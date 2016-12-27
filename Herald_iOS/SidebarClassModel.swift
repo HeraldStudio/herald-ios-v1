@@ -24,7 +24,7 @@ class SidebarClassModel {
         // 读取json内容
         let content = JSON.parse(data)
         
-        for weekNum in CurriculumView.WEEK_NUMS {
+        for weekNum in WEEK_NUMS {
             let arr = content[weekNum]
             for i in 0 ..< arr.count {
                 do {
