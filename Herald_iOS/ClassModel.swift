@@ -48,8 +48,8 @@ class ClassModel {
     }
     
     func getTimePeriod() -> String {
-        return time60ToHourMinute(CurriculumView.CLASS_BEGIN_TIME[startTime - 1]) + "~"
-            + time60ToHourMinute(CurriculumView.CLASS_BEGIN_TIME[endTime - 1] + 45)
+        return time60ToHourMinute(CLASS_BEGIN_TIME[startTime - 1]) + "~"
+            + time60ToHourMinute(CLASS_BEGIN_TIME[endTime - 1] + 45)
     }
     
     func getPeriodCount() -> Int {

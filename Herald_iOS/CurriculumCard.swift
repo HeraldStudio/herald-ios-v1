@@ -73,7 +73,7 @@ class CurriculumCard {
         var dayOfWeek = nowDate.dayOfWeekFromMonday.rawValue
         
         // 枚举今天的课程
-        var array = content[CurriculumView.WEEK_NUMS[dayOfWeek]].arrayValue
+        var array = content[WEEK_NUMS[dayOfWeek]].arrayValue
         var classCount = 0
         var classAlmostEnd = false
         
@@ -82,7 +82,7 @@ class CurriculumCard {
         for j in 0 ..< array.count {
             do {
                 let info = try ClassModel(json: array[j])
-                info.weekNum = CurriculumView.WEEK_NUMS_CN[dayOfWeek]
+                info.weekNum = WEEK_NUMS_CN[dayOfWeek]
                 let _teacher = sidebarInfo[info.className]
                 let teacher = _teacher != nil ? _teacher! : ""
                 let row = CardsRowModel(classModel: info, teacher: teacher)
@@ -91,10 +91,10 @@ class CurriculumCard {
                 if info.startWeek <= thisWeek && info.endWeek >= thisWeek && info.isFitEvenOrOdd(thisWeek) {
                     classCount += 1
                     // 上课时间
-                    let startTime = GCalendar(.Day) + CurriculumView.CLASS_BEGIN_TIME[info.startTime - 1] * 60
+                    let startTime = GCalendar(.Day) + CLASS_BEGIN_TIME[info.startTime - 1] * 60
                     
                     // 下课时间
-                    let endTime = GCalendar(.Day) + (CurriculumView.CLASS_BEGIN_TIME[info.endTime - 1] + 45) * 60
+                    let endTime = GCalendar(.Day) + (CLASS_BEGIN_TIME[info.endTime - 1] + 45) * 60
 
                     // 快要下课的时间
                     let almostEndTime = endTime - 10 * 60
@@ -142,7 +142,7 @@ class CurriculumCard {
         dayOfWeek += 1
         thisWeek += dayOfWeek / 7
         dayOfWeek %= 7
-        array = content[CurriculumView.WEEK_NUMS[dayOfWeek]].arrayValue
+        array = content[WEEK_NUMS[dayOfWeek]].arrayValue
         let todayHasClasses = classCount != 0
         
         classCount = 0
@@ -150,7 +150,7 @@ class CurriculumCard {
         for j in 0 ..< array.count {
             do {
                 let info = try ClassModel(json: array[j])
-                info.weekNum = CurriculumView.WEEK_NUMS_CN[dayOfWeek]
+                info.weekNum = WEEK_NUMS_CN[dayOfWeek]
                 let _teacher = sidebarInfo[info.className]
                 let teacher = _teacher != nil ? _teacher! : ""
                 let row = CardsRowModel(classModel: info, teacher: teacher)

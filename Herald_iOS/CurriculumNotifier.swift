@@ -18,7 +18,7 @@ class CurriculumNotifier {
                 let cal = GCalendar(startDate)
                 cal += (week - 1) * 7 * 24 * 60 * 60
                 cal += info.weekDay * 24 * 60 * 60
-                cal += CurriculumView.CLASS_BEGIN_TIME[info.startTime - 1] * 60
+                cal += CLASS_BEGIN_TIME[info.startTime - 1] * 60
                 cal -= 15 * 60
                 if cal < GCalendar() { continue }
                 
@@ -63,7 +63,7 @@ class CurriculumNotifier {
         cal -= cal.dayOfWeekFromMonday.rawValue * 24 * 60 * 60
         
         for i in 0 ..< 7 {
-            for k in content[CurriculumView.WEEK_NUMS[i]].arrayValue {
+            for k in content[WEEK_NUMS[i]].arrayValue {
                 do {
                     let classModel = try ClassModel(json: k)
                     classModel.weekDay = i

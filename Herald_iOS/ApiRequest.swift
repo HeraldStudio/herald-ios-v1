@@ -244,7 +244,6 @@ class ApiSimpleRequest : ApiRequest {
      **/
     typealias JSONParser = (JSON) throws -> JSON
 
-    // 目前暂时只有CacheHelper有更新检测机制，如果另外两个也需要该机制，请修改对应的Helper的set函数
     func toCache (_ key : String, withParser parser : @escaping JSONParser = {json in json}) -> ApiSimpleRequest {
         onResponse {
             success, _, response in

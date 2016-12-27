@@ -99,7 +99,7 @@ class CurriculumViewController : UIViewController, UIScrollViewDelegate, LoginUs
             var maxWeek = 0
             
             // 计算总周数
-            for weekNum in CurriculumView.WEEK_NUMS {
+            for weekNum in WEEK_NUMS {
                 let arr = content[weekNum]
                 for i in 0 ..< arr.count {
                     do {

@@ -17,20 +17,6 @@ class CurriculumView : UIViewController {
     // 常量，今天所在列与其他列的宽度比值
     static let TODAY_WEIGHT : CGFloat = 1.5
     
-    // 星期在JSON中的表示值
-    static let WEEK_NUMS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-    
-    // 星期在屏幕上的显示值
-    static let WEEK_NUMS_CN = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
-    
-    // 每节课开始的时间，以(Hour * 60 + Minute)形式表示
-    // 本程序假定每节课都是45分钟
-    static let CLASS_BEGIN_TIME = [
-        8 * 60, 8 * 60 + 50, 9 * 60 + 50, 10 * 60 + 40, 11 * 60 + 30,
-        14 * 60, 14 * 60 + 50, 15 * 60 + 50, 16 * 60 + 40, 17 * 60 + 30,
-        18 * 60 + 30, 19 * 60 + 20, 20 * 60 + 10
-    ]
-    
     static let BLOCK_COLORS = [
         [245,98,154],[254,141,63],[236,173,7],[161,210,19],
         [18,202,152],[0,171,212],[109,159,244],[159,115,255]
@@ -81,14 +67,14 @@ class CurriculumView : UIViewController {
         // 放两个循环是为了先把列数确定下来
         for i in 0 ..< 7 {
             // 用JSON中对应的String表示的该日星期
-            var array = obj[CurriculumView.WEEK_NUMS[i]]
+            var array = obj[WEEK_NUMS[i]]
             
             // 剔除不属于本周的课程，并将对应的课程添加到对应星期的列表中
             var list : [ClassModel] = []
             for j in 0 ..< array.count {
                 do {
                     let info = try ClassModel(json: array[j])
-                    info.weekNum = CurriculumView.WEEK_NUMS_CN[i]
+                    info.weekNum = WEEK_NUMS_CN[i]
                     let startWeek = info.startWeek
                     let endWeek = info.endWeek
                     if(endWeek >= week && startWeek <= week && info.isFitEvenOrOdd(week)){
@@ -150,7 +136,7 @@ class CurriculumView : UIViewController {
             width : w ,
             height : height / CGFloat(CurriculumView.PERIOD_COUNT + 1)
             ))
-        v.text = String(format: "%d月%d日\n\(CurriculumView.WEEK_NUMS_CN[dayIndex])", cal.month, cal.day)
+        v.text = String(format: "%d月%d日\n\(WEEK_NUMS_CN[dayIndex])", cal.month, cal.day)
         v.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
         v.textAlignment = .center
         v.numberOfLines = 0

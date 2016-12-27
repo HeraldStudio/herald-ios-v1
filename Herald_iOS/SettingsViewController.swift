@@ -72,10 +72,10 @@ class SettingsViewController: UITableViewController {
             displayWifiSetDialog()
         case (3, 0):
             /// 关于我们
-            AppModule(title: "关于小猴", url: "http://app.heraldstudio.com/about.htm?type=ios").open()
+            AppModule(title: "关于小猴", url: "https://app.heraldstudio.com/about.htm?type=ios").open()
         case (3, 1):
             /// 分享小猴
-            ShareHelper.share("我在使用小猴偷米App，它是东南大学本科生必备的校园生活助手，你也来试试吧：http://app.heraldstudio.com/")
+            ShareHelper.share("我在使用小猴偷米App，它是东南大学本科生必备的校园生活助手，你也来试试吧：https://app.heraldstudio.com/")
         case (3, 2):
             /// 给我们评分（App Store不允许有版本更新按钮，因此更名）
             checkVersion()

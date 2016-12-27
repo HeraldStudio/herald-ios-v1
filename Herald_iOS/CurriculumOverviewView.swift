@@ -51,14 +51,14 @@ class CurriculumOverviewView : UIViewController {
         // 放两个循环是为了先把列数确定下来
         for i in 0 ..< 7 {
             // 用JSON中对应的String表示的该日星期
-            var array = obj[CurriculumView.WEEK_NUMS[i]]
+            var array = obj[WEEK_NUMS[i]]
             
             // 将对应的课程添加到对应星期的列表中
             var list : [ClassModel] = []
             for j in 0 ..< array.count {
                 do {
                     let info = try ClassModel(json: array[j])
-                    info.weekNum = CurriculumView.WEEK_NUMS_CN[i]
+                    info.weekNum = WEEK_NUMS_CN[i]
                     list.append(info)
                 } catch {}
             }
@@ -105,7 +105,7 @@ class CurriculumOverviewView : UIViewController {
             width : w ,
             height : height / CGFloat(CurriculumView.PERIOD_COUNT + 1)
         ))
-        v.text = CurriculumView.WEEK_NUMS_CN[dayIndex]
+        v.text = WEEK_NUMS_CN[dayIndex]
         v.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
         v.textAlignment = .center
         v.numberOfLines = 0

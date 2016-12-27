@@ -40,13 +40,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 9.0, *) {
             
             // 考试助手菜单
-            let test1 = UIApplicationShortcutItem.init(type: "wifi", localizedTitle: "登录校园网", localizedSubtitle: "一键登录，快人一步！", icon: UIApplicationShortcutIcon.init(templateImageName: "ic_seunet_invert"), userInfo: nil)
+            let test1 = UIApplicationShortcutItem.init(type: "wifi", localizedTitle: "登录校园网", localizedSubtitle: nil, icon: UIApplicationShortcutIcon.init(templateImageName: "ic_seunet_invert"), userInfo: nil)
             
             // 课表助手菜单
-            let test2 = UIApplicationShortcutItem.init(type: "curriculum", localizedTitle: "课表助手", localizedSubtitle: "快速查看课程安排", icon: UIApplicationShortcutIcon.init(templateImageName: "ic_curriculum_invert"), userInfo: nil)
+            let test2 = UIApplicationShortcutItem.init(type: "curriculum", localizedTitle: "课表助手", localizedSubtitle: nil, icon: UIApplicationShortcutIcon.init(templateImageName: "ic_curriculum_invert"), userInfo: nil)
             
             // 一卡通充值菜单
-            let test3 = UIApplicationShortcutItem.init(type: "card", localizedTitle: "一卡通充值", localizedSubtitle: "一卡通没钱了？点我充值", icon: UIApplicationShortcutIcon.init(templateImageName: "ic_card_invert"), userInfo: nil)
+            let test3 = UIApplicationShortcutItem.init(type: "card", localizedTitle: "一卡通充值", localizedSubtitle: nil, icon: UIApplicationShortcutIcon.init(templateImageName: "ic_card_invert"), userInfo: nil)
             
             application.shortcutItems = [test1,test2,test3]
         }

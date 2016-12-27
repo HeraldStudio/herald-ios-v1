@@ -138,7 +138,7 @@ class CurriculumOptionsViewController : UITableViewController, LoginUserNeeded {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section > 0 {
-            let term = ([floatClasses, nextTerm, terms][indexPath.section] as! [TermModel])[indexPath.row]
+            let term = [[], [], nextTerm, terms][indexPath.section][indexPath.row]
             let termStr = term.rawString
             showProgressDialog()
             ApiSimpleRequest(.post).api("curriculum").uuid().post("term", termStr).onResponse { s, c, r in
