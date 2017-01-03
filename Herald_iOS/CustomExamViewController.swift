@@ -79,12 +79,12 @@ class CustomExamViewController : UIViewController, LoginUserNeeded {
         }
         Cache.examCustom.value = newJson
         
-        navigationController?.popViewController(animated: true)
+        let _ = navigationController?.popViewController(animated: true)
     }
     
     @IBAction func delete () {
         if index == -1 {
-            navigationController?.popViewController(animated: true)
+            let _ = navigationController?.popViewController(animated: true)
         } else {
             showQuestionDialog("确认删除该考试吗？", runAfter: {
                 var cache = Cache.examCustom.value
@@ -101,7 +101,7 @@ class CustomExamViewController : UIViewController, LoginUserNeeded {
                 }
                 Cache.examCustom.value = newJson
                 
-                self.navigationController?.popViewController(animated: true)
+                let _ = self.navigationController?.popViewController(animated: true)
             })
         }
     }
