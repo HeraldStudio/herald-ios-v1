@@ -55,7 +55,7 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate, ForceTouchP
     }
     
     func _dismiss () {
-        navigationController?.popViewController(animated: true)
+        let _ = navigationController?.popViewController(animated: true)
     }
     
     func refreshLeftBarItems () {

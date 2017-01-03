@@ -167,6 +167,6 @@ class GymNewViewController : UIViewController, UITableViewDataSource, UITableVie
     }
     
     func dismiss () {
-        navigationController?.popViewController(animated: true)
+        let _ = navigationController?.popViewController(animated: true)
     }
 }

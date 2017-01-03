@@ -245,7 +245,7 @@ class ApiSimpleRequest : ApiRequest {
     typealias JSONParser = (JSON) throws -> JSON
 
     func toCache (_ key : String, withParser parser : @escaping JSONParser = {json in json}) -> ApiSimpleRequest {
-        onResponse {
+        let _ = onResponse {
             success, _, response in
             if(success) {
                 do {
@@ -262,7 +262,7 @@ class ApiSimpleRequest : ApiRequest {
     }
 
     func toServiceCache (_ key : String, withParser parser : @escaping JSONParser = {json in json}) -> ApiSimpleRequest {
-        onResponse {
+        let _ = onResponse {
             success, _, response in
             if(success) {
                 do {
@@ -279,7 +279,7 @@ class ApiSimpleRequest : ApiRequest {
     }
 
     func toAuthCache (_ key : String, withParser parser : @escaping JSONParser = {json in json}) -> ApiSimpleRequest {
-        onResponse {
+        let _ = onResponse {
             success, _, response in
             if(success) {
                 do {
@@ -341,7 +341,7 @@ class ApiChainRequest : ApiRequest {
         leftRequest = left
         rightRequest = right
 
-        leftRequest.onFinish { success, code in
+        let _ = leftRequest.onFinish { success, code in
 
             // 首先更新复合请求的 code
             self.code = mergeStatusCodes(self.code, code)
@@ -357,7 +357,7 @@ class ApiChainRequest : ApiRequest {
             }
         }
 
-        rightRequest.onFinish { _, code in
+        let _ = rightRequest.onFinish { _, code in
 
             // 首先更新复合请求的 code
             self.code = mergeStatusCodes(self.code, code)
@@ -370,8 +370,8 @@ class ApiChainRequest : ApiRequest {
     }
 
     func onResponse(_ listener: @escaping OnResponseListener) -> ApiRequest {
-        leftRequest.onResponse(listener)
-        rightRequest.onResponse(listener)
+        let _ = leftRequest.onResponse(listener)
+        let _ = rightRequest.onResponse(listener)
         return self
     }
 
@@ -414,11 +414,11 @@ class ApiParallelRequest : ApiRequest {
         leftRequest = left
         rightRequest = right
 
-        leftRequest.onFinish { _, code in
+        let _ = leftRequest.onFinish { _, code in
             self.invokeCallback(code, &self.leftFinished, &self.rightFinished)
         }
 
-        rightRequest.onFinish { _, code in
+        let _ = rightRequest.onFinish { _, code in
             self.invokeCallback(code, &self.rightFinished, &self.leftFinished)
         }
     }
@@ -439,8 +439,8 @@ class ApiParallelRequest : ApiRequest {
     }
 
     func onResponse(_ listener: @escaping OnResponseListener) -> ApiRequest {
-        leftRequest.onResponse(listener)
-        rightRequest.onResponse(listener)
+        let _ = leftRequest.onResponse(listener)
+        let _ = rightRequest.onResponse(listener)
         return self
     }
 

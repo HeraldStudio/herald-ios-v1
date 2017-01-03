@@ -119,9 +119,6 @@ class SwipeRefreshHeader : UIView {
         // 若已禁用下拉刷新，则当 y <= 0 时关闭列表弹性，这样就可以只关闭顶部弹性，不影响底部弹性
         (superview! as! UIScrollView).bounces = enabled || y > 0
         
-        // 文字的透明度因子
-        let textAlpha : CGFloat = -y < fadeDistance ? (-y) / fadeDistance : 1;
-        
         // 更新刷新提示文字内容
         refresh.text = isHighlight ? tipTextOn : tipTextOff
         

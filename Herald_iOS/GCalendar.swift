@@ -326,27 +326,27 @@ func << (left: GCalendar, right: GCalendar) -> GCalendar {
 }
 
 // 自加一段时间
-func += (left: GCalendar, right: Int) -> GCalendar {
+func += (left: GCalendar, right: Int) {
     left.rawTime = left.rawTime + right
-    return left
 }
 
 // 加上一段时间
 func + (left: GCalendar, right: Int) -> GCalendar {
     let ret = GCalendar(left)
-    return ret += right
+    ret.rawTime = ret.rawTime + right
+    return ret
 }
 
 // 自减一段时间
-func -= (left: GCalendar, right: Int) -> GCalendar {
+func -= (left: GCalendar, right: Int) {
     left.rawTime = left.rawTime - right
-    return left
 }
 
 // 减去一段时间
 func - (left: GCalendar, right: Int) -> GCalendar {
     let ret = GCalendar(left)
-    return ret -= right
+    ret.rawTime = ret.rawTime - right
+    return ret
 }
 
 // 求时间差
