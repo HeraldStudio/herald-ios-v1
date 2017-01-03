@@ -24,6 +24,11 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataS
     var data = [(UIImage, String)]()
     
     var curriculumList = [ClassModel]()
+    
+    // iOS9以下适用，调整左边距和下边距
+    func widgetMarginInsets(forProposedMarginInsets defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(0, 16, 0, 0)
+    }
         
     override func viewDidLoad() {
         super.viewDidLoad()
