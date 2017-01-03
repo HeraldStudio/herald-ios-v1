@@ -17,12 +17,20 @@ class AppModule : Hashable {
     /// 模块描述
     var desc : String
     
+    /// url需要登录
+    var needLogin : Bool {
+        return mDestination != destination
+    }
+    
     /// 模块VC名称（Identifier），也可以是网址或TABn（n表示要跳转到的Tab index）
     var mDestination : String
     
     var destination : String {
         get {
-            return mDestination.replaceAll("[uuid]", ApiHelper.currentUser.uuid)
+            return mDestination
+                .replaceAll("[uuid]", ApiHelper.currentUser.uuid)
+                .replaceAll("[schoolnum]", ApiHelper.currentUser.schoolNum)
+                .replaceAll("[cardnum]", ApiHelper.currentUser.userName)
         } set {
             mDestination = newValue
         }
@@ -91,6 +99,11 @@ class AppModule : Hashable {
         
         // 空模块不做任何事
         if destination == "" { return }
+        
+        if needLogin && !ApiHelper.isLogin() {
+            ApiHelper.showTrialFunctionLimitDialog()
+            return
+        }
         
         // Web 页面，交给 WebModule 打开
         if destination.hasPrefix("http") {

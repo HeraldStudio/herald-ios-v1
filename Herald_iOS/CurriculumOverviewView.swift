@@ -97,7 +97,7 @@ class CurriculumOverviewView : UIViewController {
         x *= width / CGFloat(columnsCount)
         x += 0.5
         
-        var w : CGFloat = width / CGFloat(columnsCount)
+        let w : CGFloat = width / CGFloat(columnsCount)
         
         let v = UILabel(frame: CGRect(
             x : x ,

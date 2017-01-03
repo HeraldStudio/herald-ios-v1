@@ -15,7 +15,7 @@ import SwiftyJSON
 class CurriculumCard {
     
     static func getRefresher () -> ApiRequest {
-        return Cache.curriculum.refresher | Cache.curriculumSidebar.refresher
+        return Cache.curriculum.refresher
     }
     
     static func getCard() -> CardsModel {
@@ -29,13 +29,14 @@ class CurriculumCard {
         let now = GCalendar()
         let cache = Cache.curriculum.value
         
-        let content = JSON.parse(cache)
+        let json = JSON.parse(cache)
+        let content = json["content"]
+        let sidebarArray = json["sidebar"].arrayValue
+        
         // 读取侧栏信息
-        let sidebar = Cache.curriculumSidebar.value
         var sidebarInfo : [String : String] = [:]
         
         // 将课程的授课教师放入键值对
-        let sidebarArray = JSON.parse(sidebar).arrayValue
         for k in sidebarArray {
             sidebarInfo.updateValue(k["lecturer"].stringValue, forKey: k["course"].stringValue)
         }

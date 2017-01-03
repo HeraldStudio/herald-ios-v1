@@ -41,7 +41,6 @@ public class GCalendar : CustomDebugStringConvertible {
         .hour,
         .minute,
         .month,
-        .nanosecond,
         .quarter,
         .second,
         .timeZone,

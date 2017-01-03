@@ -60,43 +60,40 @@ class Cache {
     
     // 课表模块缓存
     static let curriculum = AppCache("herald_curriculum") {
-        ApiSimpleRequest(.post).api("curriculum").uuid().toCache("herald_curriculum") { json in json["content"] }
+        ApiSimpleRequest(.post).api("curriculum").uuid().toCache("herald_curriculum")
     }.masked { oldValue in
-        if curriculumWeekOffset.value == "-4" {
-            var content = JSON.parse(oldValue)
-            
-            // 读取开学日期
-            let startMonth = content["startdate"]["month"].intValue
-            let startDate = content["startdate"]["day"].intValue
-            
-            // 服务器端返回的startMonth是Java/JavaScript型的月份表示，变成实际月份要加1
-            let cal = GCalendar(.Day)
-            let nowDate = GCalendar(.Day)
-            cal.month = startMonth + 1
-            cal.day = startDate
-            
-            // 如果开学日期比今天晚了超过两个月，则认为是去年开学的。这里用while保证了thisWeek永远大于零
-            while (cal - nowDate > 60 * 86400) {
-                cal.year -= 1
+        if curriculumAdvance.value == "1" {
+            var json = JSON.parse(oldValue)
+            if json["term"].stringValue.hasSuffix("-2"){ // 仅秋季学期有效
+                // 读取开学日期
+                let startMonth = json["content"]["startdate"]["month"].intValue
+                let startDate = json["content"]["startdate"]["day"].intValue
+                
+                // 服务器端返回的startMonth是Java/JavaScript型的月份表示，变成实际月份要加1
+                let cal = GCalendar(.Day)
+                let nowDate = GCalendar(.Day)
+                cal.month = startMonth + 1
+                cal.day = startDate
+                
+                // 如果开学日期比今天晚了超过两个月，则认为是去年开学的。这里用while保证了thisWeek永远大于零
+                while (cal - nowDate > 60 * 86400) {
+                    cal.year -= 1
+                }
+                
+                cal -= 28 * 24 * 60 * 60
+                json["content"]["startdate"]["month"] = JSON(cal.month - 1)
+                json["content"]["startdate"]["day"] = JSON(cal.day)
+                return json.rawStringValue
             }
-            
-            cal -= 28 * 24 * 60 * 60
-            content["startdate"]["month"] = JSON(cal.month - 1)
-            content["startdate"]["day"] = JSON(cal.day)
-            return content.rawStringValue
         }
         return oldValue
     }
     
-    static let curriculumSidebar = AppCache("herald_sidebar") {
-        ApiSimpleRequest(.post).api("sidebar").uuid().toCache("herald_sidebar") { json in json["content"] }
-    }
+    static let curriculumAdvance = AppCache("herald_curriculum_advance")
     
     static let curriculumTerm = AppCache("herald_term") {
         ApiSimpleRequest(.post).api("term").uuid().toCache("herald_term") { json in json["content"] }
     }
-    
-    static let curriculumWeekOffset = AppCache("herald_curriculum_week_offset")
     
     // 实验模块缓存
     static let experiment = AppCache("herald_experiment") {
@@ -174,7 +171,5 @@ class Cache {
         ApiSimpleRequest(.post).api("schoolbus").uuid().toCache("herald_schoolbus")
     }
     
-    static let expressUserName = AppCache("herald_express_user_name")
-    
-    static let expressUserPhone = AppCache("herald_express_user_phone")
+    static let version = AppCache("herald_version")
 }

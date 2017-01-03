@@ -25,7 +25,7 @@ class TodayNotiCurriculum {
         let now = GCalendar()
         let cache = Cache.curriculum.value
         
-        let content = JSON.parse(cache)
+        let content = JSON.parse(cache)["content"]
         
         // 读取开学日期
         let startMonth = content["startdate"]["month"].intValue

@@ -34,6 +34,13 @@ class TodayViewController: UIViewController, NCWidgetProviding, UITableViewDataS
         curriculum.rowHeight = UITableViewAutomaticDimension
         curriculum.estimatedRowHeight = 48 // 这个一定要准，否则会导致展开状态刷新时高度不正确
         
+        // 9以下隐藏高光背景因为会丑
+        if #available(iOSApplicationExtension 10.0, *) {
+            highlight_view.isHidden = false
+        } else {
+            highlight_view.isHidden = true
+        }
+        
         updateSize()
         
         //如果需要折叠

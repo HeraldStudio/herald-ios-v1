@@ -42,7 +42,8 @@ class CurriculumNotifier {
         if Cache.curriculum.isEmpty { return }
         
         let cache = Cache.curriculum.value
-        let content = JSON.parse(cache)
+        let json = JSON.parse(cache)
+        let content = json["content"]
         
         // 读取开学日期
         let startMonth = content["startdate"]["month"].intValue
