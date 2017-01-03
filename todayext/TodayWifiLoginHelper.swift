@@ -119,7 +119,7 @@ class WifiLoginHelper {
                     if info["status"].intValue == 1 {
                         self.vc.showMessage("SEU已登录")
                     } else {
-                        if let error = info["info"].string {
+                        if info["info"].string != nil {
                             self.vc.showMessage("请开通或续费")
                         } else {
                             self.vc.showMessage("SEU信号差")

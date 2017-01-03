@@ -162,6 +162,7 @@
 		D3F4734D1CCA153A00750FFB /* LectureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4734C1CCA153A00750FFB /* LectureModel.swift */; };
 		D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4734E1CCA15C900750FFB /* LectureViewController.swift */; };
 		D3FBC2F21CCC51F900305428 /* ExtUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FBC2F11CCC51F900305428 /* ExtUIViewController.swift */; };
+		D3FC652D1E1B7DD60009414A /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FC652C1E1B7DD60009414A /* IntroViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -357,6 +358,7 @@
 		D3F4734C1CCA153A00750FFB /* LectureModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureModel.swift; sourceTree = "<group>"; };
 		D3F4734E1CCA15C900750FFB /* LectureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LectureViewController.swift; sourceTree = "<group>"; };
 		D3FBC2F11CCC51F900305428 /* ExtUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtUIViewController.swift; sourceTree = "<group>"; };
+		D3FC652C1E1B7DD60009414A /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		DA028C4F1CDF422F005343DE /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -435,6 +437,7 @@
 				D3E6BD7E1CC8C07F0074FF6D /* ModuleManagerViewController.swift */,
 				D3E6BD7B1CC8BF740074FF6D /* ModuleManageTableViewCell.swift */,
 				D306E01F1CCA3ADF00FA3812 /* WebModuleViewController.swift */,
+				D3FC652C1E1B7DD60009414A /* IntroViewController.swift */,
 			);
 			name = app_secondary;
 			sourceTree = "<group>";
@@ -1116,6 +1119,7 @@
 				D3ED99E01CCB3DFD00001E2B /* SrtpViewController.swift in Sources */,
 				D356C6291D692FA00028E1D9 /* ShareHelper.swift in Sources */,
 				D31DE51A1CC35A3100E4891D /* CurriculumView.swift in Sources */,
+				D3FC652D1E1B7DD60009414A /* IntroViewController.swift in Sources */,
 				D3CA10D11D1F7BD9000E1F88 /* ServiceCard.swift in Sources */,
 				D3D5D43D1CE95603000E406A /* GymSportModel.swift in Sources */,
 				D3ED99DC1CCB1DB400001E2B /* SrtpModel.swift in Sources */,

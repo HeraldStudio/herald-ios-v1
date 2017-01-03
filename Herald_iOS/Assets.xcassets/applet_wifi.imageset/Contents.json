@@ -10,12 +10,15 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "Image.png",
+      "filename" : "wifi (4).png",
       "scale" : "3x"
     }
   ],
   "info" : {
     "version" : 1,
     "author" : "xcode"
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
   }
 }

@@ -33,7 +33,30 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
         setNavigationColor(0x26a69a)
     }
     
-    var history : [Date] = []
+    struct PDate : Hashable, Equatable {
+        var year, month, day: Int
+        var hashValue: Int { return (((year << 9) + month) << 5) + day }
+        public static func == (left: PDate, right: PDate) -> Bool {
+            return left.hashValue == right.hashValue
+        }
+        init(_ y: Int, _ m: Int, _ d: Int) {
+            year = y; month = m; day = d
+        }
+        init(_ date: Date) {
+            let cal = GCalendar(date)
+            self.init(cal.year, cal.month, cal.day)
+        }
+    }
+    
+    struct PTime {
+        var hour, minute: Int
+        init(_ h: Int, _ m: Int) {
+            hour = h; minute = m
+        }
+    }
+    
+    // key为年月日，value为时分，这样方便判断是否有某个日期的记录
+    var history : [PDate : PTime] = [:]
     
     func loadCache() {
         let cache = Cache.peDetail.value
@@ -73,10 +96,9 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
             guard let hour = Int(time[0]), let minute = Int(time[1]) else {
                 continue
             }
-            comp.hour = hour; comp.minute = minute
             
             calendar?.select(comp.getDate())
-            history.append(comp.getDate())
+            history.updateValue(PTime(hour, minute), forKey: PDate(year, month, day))
         }
         
         if history.count == 0 {
@@ -102,23 +124,18 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date) {
-        if !history.contains(date) {
+        if !history.keys.contains(PDate(date)) {
             calendar.deselect(date)
             showMessage("该日无跑操记录")
         }
     }
     
     func calendar(_ calendar: FSCalendar, didDeselect date: Date) {
-        if history.contains(date) {
+        let pDate = PDate(date)
+        if let pTime = history[pDate] {
             calendar.select(date)
-            for index in 0 ..< history.count {
-                let k = history[index]
-                if k == date {
-                    let k = GCalendar(date)
-                    let timeStr = String(format: "%d/%d/%d %d:%02d", k.year, k.month, k.day, k.hour, k.minute)
-                    showMessage("(第 \(index + 1) 次跑操) 打卡时间：" + timeStr)
-                }
-            }
+            let timeStr = String(format: "%d/%d/%d %d:%02d", pDate.year, pDate.month, pDate.day, pTime.hour, pTime.minute)
+            showMessage("打卡时间：" + timeStr)
         }
     }
 }

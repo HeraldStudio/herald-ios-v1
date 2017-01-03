@@ -135,7 +135,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         if pics.count == 0 {
             return
         }
-        AppModule(title: self.titles[index],url: self.links[index]).open()
+        AppModule(title: self.titles[index], url: self.links[index]).open()
     }
     
     func banner(_ banner: ZYBannerView!, viewForItemAt index: Int) -> UIView! {
@@ -324,7 +324,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         if ModuleCurriculum.cardEnabled && ApiHelper.isLogin() {
             // 仅当课表数据不存在时刷新课表
-            if Cache.curriculum.isEmpty || Cache.curriculumSidebar.isEmpty {
+            if Cache.curriculum.isEmpty || !Cache.curriculum.value.contains("content") {
                 parallelRequest |= CurriculumCard.getRefresher()
             }
         }

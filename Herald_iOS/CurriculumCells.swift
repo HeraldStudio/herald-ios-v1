@@ -6,9 +6,11 @@ class CurriculumFloatClassTableViewCell : NoSelectionTableViewCell {
     
     @IBOutlet var info : UILabel!
     
-    func setData (sidebarModel model : SidebarClassModel) {
-        className.text = model.className
-        info.text = model.desc
+    static func instance (for tableView: UITableView, sidebarModel model : SidebarClassModel) -> CurriculumFloatClassTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CurriculumFloatClassTableViewCell") as! CurriculumFloatClassTableViewCell
+        cell.className.text = model.className
+        cell.info.text = model.desc
+        return cell
     }
 }
 
@@ -18,19 +20,27 @@ class CurriculumTermTableViewCell : UITableViewCell {
     
     @IBOutlet var termSummary : UILabel!
     
-    func setData (term : TermModel) {
-        termName.text = term.rawString
-        termSummary.text = term.desc
+    static func instance (for tableView: UITableView, termModel : TermModel) -> CurriculumTermTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CurriculumTermTableViewCell") as! CurriculumTermTableViewCell
+        cell.termName.text = termModel.rawString
+        cell.termSummary.text = termModel.desc
+        return cell
     }
 }
 
 class CurriculumOptionTableViewCell : NoSelectionTableViewCell {
     
     @IBOutlet var sw : UISwitch!
-    
     @IBAction func switched () {
         onSwitch?()
     }
     
     var onSwitch : (() -> Void)?
+    
+    static func instance (for tableView: UITableView, state: Bool, onSwitch : (() -> Void)?) -> CurriculumOptionTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CurriculumOptionTableViewCell") as! CurriculumOptionTableViewCell
+        cell.onSwitch = onSwitch
+        cell.sw.isOn = state
+        return cell
+    }
 }

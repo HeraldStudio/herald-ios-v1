@@ -39,7 +39,7 @@ class TodayCurriculumListTableViewCell : NoSelectionTableViewCell {
         
         cell.className.text = model.className
         cell.classTime.text = model.weekNum + model.getTimePeriod()
-        cell.classPlace.text = model.place
+        cell.classPlace.text = model.place.replaceAll("(单)", "").replaceAll("(双)", "")
         cell.classCountdown.text = model.weekSummary
         
         return cell
