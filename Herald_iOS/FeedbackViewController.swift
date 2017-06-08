@@ -15,7 +15,7 @@ class FeedbackViewController : UIViewController {
     
     @IBOutlet var contact : UITextField!
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         editor.becomeFirstResponder()
     }
     
@@ -33,7 +33,7 @@ class FeedbackViewController : UIViewController {
         
         showProgressDialog()
         
-        ApiSimpleRequest(.Post).url(ApiHelper.feedback_url)
+        ApiSimpleRequest(.post).url(ApiHelper.feedback_url)
             .post("cardnum", userName)
             .post("content", "[来自iOS版] \(content) [联系方式：\(contact)]")
             .onResponse { success, _, _ in

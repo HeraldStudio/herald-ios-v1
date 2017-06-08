@@ -17,20 +17,6 @@ class CurriculumView : UIViewController {
     // 常量，今天所在列与其他列的宽度比值
     static let TODAY_WEIGHT : CGFloat = 1.5
     
-    // 星期在JSON中的表示值
-    static let WEEK_NUMS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-    
-    // 星期在屏幕上的显示值
-    static let WEEK_NUMS_CN = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
-    
-    // 每节课开始的时间，以(Hour * 60 + Minute)形式表示
-    // 本程序假定每节课都是45分钟
-    static let CLASS_BEGIN_TIME = [
-        8 * 60, 8 * 60 + 50, 9 * 60 + 50, 10 * 60 + 40, 11 * 60 + 30,
-        14 * 60, 14 * 60 + 50, 15 * 60 + 50, 16 * 60 + 40, 17 * 60 + 30,
-        18 * 60 + 30, 19 * 60 + 20, 20 * 60 + 10
-    ]
-    
     static let BLOCK_COLORS = [
         [245,98,154],[254,141,63],[236,173,7],[161,210,19],
         [18,202,152],[0,171,212],[109,159,244],[159,115,255]
@@ -81,14 +67,14 @@ class CurriculumView : UIViewController {
         // 放两个循环是为了先把列数确定下来
         for i in 0 ..< 7 {
             // 用JSON中对应的String表示的该日星期
-            var array = obj[CurriculumView.WEEK_NUMS[i]]
+            var array = obj[WEEK_NUMS[i]]
             
             // 剔除不属于本周的课程，并将对应的课程添加到对应星期的列表中
             var list : [ClassModel] = []
             for j in 0 ..< array.count {
                 do {
                     let info = try ClassModel(json: array[j])
-                    info.weekNum = CurriculumView.WEEK_NUMS_CN[i]
+                    info.weekNum = WEEK_NUMS_CN[i]
                     let startWeek = info.startWeek
                     let endWeek = info.endWeek
                     if(endWeek >= week && startWeek <= week && info.isFitEvenOrOdd(week)){
@@ -111,7 +97,8 @@ class CurriculumView : UIViewController {
         for i in 0 ..< 7 {
             let list = listOfList[i]
             if (list.count != 0 || i < 5) {
-                setColumnData(list, // 这一列的数据
+                setColumnData(
+                    list: list, // 这一列的数据
                     sidebar : sidebar,
                     columnIndex : j, // 该列在所有实际要显示的列中的序号
                     dayIndex : i, // 该列在所有列中的序号
@@ -124,7 +111,7 @@ class CurriculumView : UIViewController {
     }
     
     // 绘制某一列的课表
-    func setColumnData(list : NSArray, sidebar : [String : String],
+    func setColumnData(list : [Any], sidebar : [String : String],
                        columnIndex : Int, dayIndex : Int, dayDelta : Int, widenToday : Bool) {
         let N = list.count
         var addition : CGFloat = 0
@@ -149,12 +136,12 @@ class CurriculumView : UIViewController {
             width : w ,
             height : height / CGFloat(CurriculumView.PERIOD_COUNT + 1)
             ))
-        v.text = String(format: "%d月%d日\n\(CurriculumView.WEEK_NUMS_CN[dayIndex])", cal.month, cal.day)
+        v.text = String(format: "%d月%d日\n\(WEEK_NUMS_CN[dayIndex])", cal.month, cal.day)
         v.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
-        v.textAlignment = .Center
+        v.textAlignment = .center
         v.numberOfLines = 0
         v.font = UIFont(name: "HelveticaNeue", size: fontSize)
-        v.backgroundColor = UIColor.whiteColor()
+        v.backgroundColor = UIColor.white
         self.view.addSubview(v)
         
         // 显示当天星期标题下面的高亮条
@@ -180,17 +167,17 @@ class CurriculumView : UIViewController {
                 ))
             
             block.text = info.className + "\n" + info.place
-            block.textColor = UIColor.whiteColor()
-            block.textAlignment = .Center
+            block.textColor = UIColor.white
+            block.textAlignment = .center
             block.font = UIFont(name: "HelveticaNeue", size: fontSize)
-            block.lineBreakMode = .ByWordWrapping
+            block.lineBreakMode = .byWordWrapping
             block.numberOfLines = 0
             var a = CurriculumView.BLOCK_COLORS[(info.className.utf16.count + info.className.utf8.count * 2) % CurriculumView.BLOCK_COLORS.count]
             block.layer.backgroundColor = UIColor(
                 red: CGFloat(a[0])/255.0,
                 green: CGFloat(a[1])/255.0,
                 blue: CGFloat(a[2])/255.0,
-                alpha: 1.0).CGColor
+                alpha: 1.0).cgColor
             block.layer.cornerRadius = 3
             
             block.root = self
@@ -198,8 +185,8 @@ class CurriculumView : UIViewController {
                 .replaceAll("(单)", "")
                 .replaceAll("(双)", "")
             block.info = "课程名称：\(info.className)\n上课地点：\(place)\n上课周次：\(info.startWeek)~\(info.endWeek)周"
-            if(info.place.containsString("(单)")){block.info += "单周"}
-            if(info.place.containsString("(双)")){block.info += "双周"}
+            if(info.place.contains("(单)")){block.info += "单周"}
+            if(info.place.contains("(双)")){block.info += "双周"}
             block.info += "\(info.weekNum)\n上课时间：\(info.startTime)~\(info.endTime)节 (\(info.getTimePeriod()))\n"
             if let additional = sidebar[info.className] {
                 block.info += additional
@@ -207,7 +194,7 @@ class CurriculumView : UIViewController {
                 block.info += "获取教师及学分信息失败，请刷新"
             }
             
-            block.userInteractionEnabled = true
+            block.isUserInteractionEnabled = true
             let tapStepGestureRecognizer = UITapGestureRecognizer(target: block, action: #selector(CurriculumBlock.showInfo))
             block.addGestureRecognizer(tapStepGestureRecognizer)
             self.view.addSubview(block)

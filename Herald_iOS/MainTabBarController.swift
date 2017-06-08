@@ -13,11 +13,18 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 按需打开新版本引导页
+        let version = "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")!)"
+        if Cache.version.value != version {
+            present((storyboard?.instantiateViewController(withIdentifier: "IntroViewController"))!, animated: true, completion: nil)
+            Cache.version.value = version
+        }
+        
         // 去除界面切换时导航栏的黑影
-        navigationController?.view.backgroundColor = UIColor.whiteColor()
+        navigationController?.view.backgroundColor = UIColor.white
         
         // 去除导航栏下的横线
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
         // 去除 TabBar 上的横线
@@ -35,7 +42,7 @@ class MainTabBarController: UITabBarController {
         tabBar.tintColor = UIColor(red: 0, green: 180/255, blue: 255/255, alpha: 1)
         
         // 注册摇一摇事件
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onShake), name: DHCSHakeNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onShake), name: NSNotification.Name(rawValue: DHCSHakeNotificationName), object: nil)
         
         loadLoginButton()
         
@@ -49,7 +56,7 @@ class MainTabBarController: UITabBarController {
         if ApiHelper.isLogin() {
             navigationItem.leftBarButtonItem = nil
         } else {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(title: " 登录 ", style: .Plain, target: self, action: #selector(self.showLogin))
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: " 登录 ", style: .plain, target: self, action: #selector(self.showLogin))
         }
     }
     
@@ -69,7 +76,7 @@ class MainTabBarController: UITabBarController {
     
     /// UITabBarController 析构函数，反注册摇一摇事件
     override func finalize() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: DHCSHakeNotificationName, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: DHCSHakeNotificationName), object: nil)
     }
     
     /// 显示右上角弹出菜单
@@ -92,7 +99,7 @@ class MainTabBarController: UITabBarController {
         KxMenu.setTitleFont(UIFont(name: "HelveticaNeue", size: 14))
         
         // 这里要选择 navigationController 父视图作为宿主，否则将无法覆盖标题栏，导致再次点击加号按钮无法收起菜单
-        KxMenu.showMenuInView(navigationController?.view, fromRect: rect, menuItems: menuArray, withOptions: OptionalConfiguration(
+        KxMenu.show(in: navigationController?.view, from: rect, menuItems: menuArray, withOptions: OptionalConfiguration(
             arrowSize: 9,
             marginXSpacing: 7,
             marginYSpacing: 8,
@@ -125,7 +132,7 @@ class MainTabBarController: UITabBarController {
     
     /// 弹出菜单操作：模块管理
     func moduleManage () {
-        if let vc = storyboard?.instantiateViewControllerWithIdentifier("MODULE_MANAGER") {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "MODULE_MANAGER") {
             AppDelegate.instance.rightController!.pushViewController(vc, animated: true)
         }
     }

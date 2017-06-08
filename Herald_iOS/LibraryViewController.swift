@@ -24,19 +24,19 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
         loadCache()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0xe53935)
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         swiper.syncApperance()
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         swiper.beginDrag()
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         swiper.endDrag()
     }
     
@@ -91,22 +91,22 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
         showMessage("解析失败，请刷新")
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 若无记录，添加一个条目显示没有记录
         return list[section].count == 0 ? 1 : list[section].count
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return section == 0 ? "我借阅的图书" : "热门图书"
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
         // 若无记录，添加一个条目显示没有记录
         if list[indexPath.section].count == 0 {
-            return tableView.dequeueReusableCellWithIdentifier("LibraryEmptyTableViewCell", forIndexPath: indexPath)
+            return tableView.dequeueReusableCell(withIdentifier: "LibraryEmptyTableViewCell", for: indexPath)
         } else {
             if indexPath.section == 0 { // 借阅书籍
-                let cell = tableView.dequeueReusableCellWithIdentifier("LibraryBorrowBookTableViewCell", forIndexPath: indexPath) as! LibraryTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "LibraryBorrowBookTableViewCell", for: indexPath) as! LibraryTableViewCell
             
                 let model = list[indexPath.section][indexPath.row]
                 cell.title.text = model.title
@@ -115,7 +115,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
                 cell.count.text = model.count
                 return cell
             } else { // 热门书籍
-                let cell = tableView.dequeueReusableCellWithIdentifier("LibraryHotBookTableViewCell", forIndexPath: indexPath) as! LibraryTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "LibraryHotBookTableViewCell", for: indexPath) as! LibraryTableViewCell
                 
                 let model = list[indexPath.section][indexPath.row]
                 cell.title.text = model.title
@@ -127,16 +127,16 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return list.count
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let barcode = list[indexPath.section][indexPath.row].barcode
         if barcode != "" {
             showProgressDialog()
-            ApiSimpleRequest(.Post).api("renew").uuid().post("barcode", barcode).onResponse { _, _, response in
+            ApiSimpleRequest(.post).api("renew").uuid().post("barcode", barcode).onResponse { _, _, response in
                 self.hideProgressDialog()
                 var response = JSON.parse(response)["content"].stringValue
                 response = response == "success" ? "续借成功" : response
@@ -146,21 +146,21 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
     }
     
     func displayLibraryAuthDialog () {
-        let dialog = UIAlertController(title: "绑定图书馆账号", message: "你还没有绑定图书馆账号或账号不正确，请重新绑定：", preferredStyle: UIAlertControllerStyle.Alert)
+        let dialog = UIAlertController(title: "绑定图书馆账号", message: "你还没有绑定图书馆账号或账号不正确，请重新绑定：", preferredStyle: .alert)
         
-        dialog.addTextFieldWithConfigurationHandler { field in
+        dialog.addTextField { field in
             field.placeholder = "图书馆密码（默认为一卡通号）"
-            field.secureTextEntry = true
+            field.isSecureTextEntry = true
         }
         
-        dialog.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: {
+        dialog.addAction(UIAlertAction(title: "取消", style: .cancel, handler: {
             _ in
         }))
         
-        dialog.addAction(UIAlertAction(title: "绑定", style: UIAlertActionStyle.Default, handler: { _ in
+        dialog.addAction(UIAlertAction(title: "绑定", style: .default, handler: { _ in
             if let libPassword = dialog.textFields![0].text {
                 self.showProgressDialog()
-                ApiSimpleRequest(.Post).url(ApiHelper.auth_update_url)
+                ApiSimpleRequest(.post).url(ApiHelper.auth_update_url)
                     .post("cardnum", ApiHelper.currentUser.userName)
                     .post("password", ApiHelper.currentUser.password)
                     .post("lib_username", ApiHelper.currentUser.userName)
@@ -176,6 +176,6 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
             }
         }))
         
-        presentViewController(dialog, animated: true, completion: nil)
+        present(dialog, animated: true, completion: nil)
     }
 }

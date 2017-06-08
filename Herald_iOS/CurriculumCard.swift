@@ -15,7 +15,7 @@ import SwiftyJSON
 class CurriculumCard {
     
     static func getRefresher () -> ApiRequest {
-        return Cache.curriculum.refresher | Cache.curriculumSidebar.refresher
+        return Cache.curriculum.refresher
     }
     
     static func getCard() -> CardsModel {
@@ -29,13 +29,14 @@ class CurriculumCard {
         let now = GCalendar()
         let cache = Cache.curriculum.value
         
-        let content = JSON.parse(cache)
+        let json = JSON.parse(cache)
+        let content = json["content"]
+        let sidebarArray = json["sidebar"].arrayValue
+        
         // 读取侧栏信息
-        let sidebar = Cache.curriculumSidebar.value
         var sidebarInfo : [String : String] = [:]
         
         // 将课程的授课教师放入键值对
-        let sidebarArray = JSON.parse(sidebar).arrayValue
         for k in sidebarArray {
             sidebarInfo.updateValue(k["lecturer"].stringValue, forKey: k["course"].stringValue)
         }
@@ -73,7 +74,7 @@ class CurriculumCard {
         var dayOfWeek = nowDate.dayOfWeekFromMonday.rawValue
         
         // 枚举今天的课程
-        var array = content[CurriculumView.WEEK_NUMS[dayOfWeek]].arrayValue
+        var array = content[WEEK_NUMS[dayOfWeek]].arrayValue
         var classCount = 0
         var classAlmostEnd = false
         
@@ -82,7 +83,7 @@ class CurriculumCard {
         for j in 0 ..< array.count {
             do {
                 let info = try ClassModel(json: array[j])
-                info.weekNum = CurriculumView.WEEK_NUMS_CN[dayOfWeek]
+                info.weekNum = WEEK_NUMS_CN[dayOfWeek]
                 let _teacher = sidebarInfo[info.className]
                 let teacher = _teacher != nil ? _teacher! : ""
                 let row = CardsRowModel(classModel: info, teacher: teacher)
@@ -91,10 +92,10 @@ class CurriculumCard {
                 if info.startWeek <= thisWeek && info.endWeek >= thisWeek && info.isFitEvenOrOdd(thisWeek) {
                     classCount += 1
                     // 上课时间
-                    let startTime = GCalendar(.Day) + CurriculumView.CLASS_BEGIN_TIME[info.startTime - 1] * 60
+                    let startTime = GCalendar(.Day) + CLASS_BEGIN_TIME[info.startTime - 1] * 60
                     
                     // 下课时间
-                    let endTime = GCalendar(.Day) + (CurriculumView.CLASS_BEGIN_TIME[info.endTime - 1] + 45) * 60
+                    let endTime = GCalendar(.Day) + (CLASS_BEGIN_TIME[info.endTime - 1] + 45) * 60
 
                     // 快要下课的时间
                     let almostEndTime = endTime - 10 * 60
@@ -131,7 +132,7 @@ class CurriculumCard {
             let firstClass = remainingClasses.count == classCount
             let model = CardsModel(cellId: "CardsCellCurriculum", module: ModuleCurriculum, desc: (classAlmostEnd ? "快要下课了，" : "") +
                 (firstClass ? "你今天有" : "你今天还有") + String(remainingClasses.count) + "节课，点我查看详情", priority: .CONTENT_NO_NOTIFY)
-            model.rows.appendContentsOf(remainingClasses)
+            model.rows.append(contentsOf: remainingClasses)
             return model
         }
         
@@ -142,7 +143,7 @@ class CurriculumCard {
         dayOfWeek += 1
         thisWeek += dayOfWeek / 7
         dayOfWeek %= 7
-        array = content[CurriculumView.WEEK_NUMS[dayOfWeek]].arrayValue
+        array = content[WEEK_NUMS[dayOfWeek]].arrayValue
         let todayHasClasses = classCount != 0
         
         classCount = 0
@@ -150,7 +151,7 @@ class CurriculumCard {
         for j in 0 ..< array.count {
             do {
                 let info = try ClassModel(json: array[j])
-                info.weekNum = CurriculumView.WEEK_NUMS_CN[dayOfWeek]
+                info.weekNum = WEEK_NUMS_CN[dayOfWeek]
                 let _teacher = sidebarInfo[info.className]
                 let teacher = _teacher != nil ? _teacher! : ""
                 let row = CardsRowModel(classModel: info, teacher: teacher)
@@ -170,7 +171,7 @@ class CurriculumCard {
                 : (todayHasClasses ? "今天的课程已经结束，" : "今天没有课程，") + "明天有\(classCount)节课",
             // 若明天有课，则属于有内容不提醒状态；否则属于无内容状态
             priority: classCount == 0 ? .NO_CONTENT : .CONTENT_NO_NOTIFY)
-        model.rows.appendContentsOf(rowList)
+        model.rows.append(contentsOf: rowList)
         return model
     }
 }

@@ -25,19 +25,19 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
         refreshCache()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0xf44336)
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         swiper.syncApperance()
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         swiper.beginDrag()
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         swiper.endDrag()
     }
     
@@ -95,21 +95,21 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
         showMessage("解析失败，请刷新")
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 若无记录，添加一个条目显示没有记录
         return list[section].count == 0 ? 1 : list[section].count
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return section == 0 ? "讲座预告" : "听讲记录"
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
         // 若无记录，添加一个条目显示没有记录
         if list[indexPath.section].count == 0 {
-            return tableView.dequeueReusableCellWithIdentifier("LectureEmptyTableViewCell", forIndexPath: indexPath)
+            return tableView.dequeueReusableCell(withIdentifier: "LectureEmptyTableViewCell", for: indexPath)
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("LectureTableViewCell", forIndexPath: indexPath) as! LectureTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LectureTableViewCell", for: indexPath) as! LectureTableViewCell
         
             let model = list[indexPath.section][indexPath.row]
             cell.topic?.text = model.topic
@@ -119,11 +119,11 @@ class LectureViewController : UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return list.count
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

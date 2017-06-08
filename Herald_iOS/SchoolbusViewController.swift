@@ -24,19 +24,19 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
         loadCache(nowWeekend())
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0x009688)
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         swiper.syncApperance()
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         swiper.beginDrag()
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         swiper.endDrag()
     }
     
@@ -44,7 +44,7 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
     
     var titles : [String] = []
     
-    func loadCache(weekend : Bool) {
+    func loadCache(_ weekend : Bool) {
         control.selectedSegmentIndex = weekend ? 1 : 0
         
         if Cache.schoolbus.isEmpty {
@@ -116,16 +116,16 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
         showMessage("解析失败，请刷新")
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].count
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return titles[section]
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SchoolbusTableViewCell", forIndexPath: indexPath) as! SchoolbusTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SchoolbusTableViewCell", for: indexPath) as! SchoolbusTableViewCell
         
         let model = sections[indexPath.section][indexPath.row]
         cell.time.text = model.time
@@ -134,12 +134,12 @@ class SchoolbusViewController : UIViewController, UITableViewDelegate, UITableVi
         return cell
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func nowWeekend () -> Bool {

@@ -21,7 +21,7 @@ class SettingsViewController: UITableViewController {
     
     /// 跳转到 App Store 发布页面，用于检查更新或发布评论
     func checkVersion () {
-        UIApplication.sharedApplication().openURL(NSURL(string: StringUpdateUrl)!)
+        UIApplication.shared.openURL(URL(string: StringUpdateUrl)!)
     }
     
     /// 界面实例化时的初始化
@@ -46,17 +46,17 @@ class SettingsViewController: UITableViewController {
         examSwitch.setOn(SettingsHelper.examNotificationEnabled, animated: false)
         
         /// 初始化版本信息的显示
-        version.text = "当前版本：v\(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")!)"
+        version.text = "当前版本：v\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")!)"
     }
     
     /// 当准备从其它界面返回时，设置导航栏颜色
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0x12b0ec)
     }
     
     /// 一些自定义的点击事件
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
@@ -72,10 +72,10 @@ class SettingsViewController: UITableViewController {
             displayWifiSetDialog()
         case (3, 0):
             /// 关于我们
-            AppModule(title: "关于小猴", url: "http://app.heraldstudio.com/about.htm?type=ios").open()
+            AppModule(title: "关于小猴", url: "https://app.heraldstudio.com/about.htm?type=ios").open()
         case (3, 1):
             /// 分享小猴
-            ShareHelper.share("我在使用小猴偷米App，它是东南大学本科生必备的校园生活助手，你也来试试吧：http://app.heraldstudio.com/")
+            ShareHelper.share("我在使用小猴偷米App，它是东南大学本科生必备的校园生活助手，你也来试试吧：https://app.heraldstudio.com/")
         case (3, 2):
             /// 给我们评分（App Store不允许有版本更新按钮，因此更名）
             checkVersion()
@@ -86,35 +86,35 @@ class SettingsViewController: UITableViewController {
     
     /// 同步开关状态到设置
     @IBAction func wifiStateChanged () {
-        SettingsHelper.wifiAutoLogin = wifiSwitch.on
+        SettingsHelper.wifiAutoLogin = wifiSwitch.isOn
     }
     
     @IBAction func curriculumStateChanged () {
-        SettingsHelper.curriculumNotificationEnabled = curriculumSwitch.on
+        SettingsHelper.curriculumNotificationEnabled = curriculumSwitch.isOn
     }
     
     @IBAction func experimentStateChanged () {
-        SettingsHelper.experimentNotificationEnabled = experimentSwitch.on
+        SettingsHelper.experimentNotificationEnabled = experimentSwitch.isOn
     }
     
     @IBAction func examStateChanged () {
-        SettingsHelper.examNotificationEnabled = examSwitch.on
+        SettingsHelper.examNotificationEnabled = examSwitch.isOn
     }
     
     /// 显示摇一摇账号设置对话框
     func displayWifiSetDialog () {
-        let dialog = UIAlertController(title: "自定义校园网登录账号", message: "你可以在这里设置用独立账号登陆校园网；校园网查询模块不受此设置影响", preferredStyle: UIAlertControllerStyle.Alert)
+        let dialog = UIAlertController(title: "自定义校园网登录账号", message: "你可以在这里设置用独立账号登陆校园网；校园网查询模块不受此设置影响", preferredStyle: .alert)
         
-        dialog.addTextFieldWithConfigurationHandler { field in
+        dialog.addTextField { field in
             field.placeholder = "一卡通号"
         }
         
-        dialog.addTextFieldWithConfigurationHandler { field in
+        dialog.addTextField { field in
             field.placeholder = "统一身份认证密码"
-            field.secureTextEntry = true
+            field.isSecureTextEntry = true
         }
         
-        dialog.addAction(UIAlertAction(title: "保存", style: UIAlertActionStyle.Default, handler: { _ in
+        dialog.addAction(UIAlertAction(title: "保存", style: UIAlertActionStyle.default, handler: { _ in
             let username = dialog.textFields![0].text
             let password = dialog.textFields![1].text
             
@@ -126,14 +126,14 @@ class SettingsViewController: UITableViewController {
             }
         }))
         
-        dialog.addAction(UIAlertAction(title: "恢复默认", style: UIAlertActionStyle.Default, handler: { _ in
+        dialog.addAction(UIAlertAction(title: "恢复默认", style: UIAlertActionStyle.default, handler: { _ in
             ApiHelper.clearWifiAuth()
         }))
         
-        dialog.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: {
+        dialog.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: {
             _ in
         }))
         
-        presentViewController(dialog, animated: true, completion: nil)
+        present(dialog, animated: true, completion: nil)
     }
 }

@@ -11,11 +11,11 @@ import UIKit
 
 class WebModuleViewController : UIViewController, UIWebViewDelegate, ForceTouchPreviewable {
     
-    func webViewDidStartLoad(webView: UIWebView) {
+    func webViewDidStartLoad(_ webView: UIWebView) {
         showProgressDialog()
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         hideProgressDialog()
         refreshLeftBarItems()
     }
@@ -31,18 +31,18 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate, ForceTouchP
     var url : String = ""
     
     override func viewDidLoad () {
-        if let _url = NSURL(string: url) {
+        if let _url = URL(string: url) {
             // 若是检查更新的链接，直接用 App Store 打开并关闭 Webview
             if url == StringUpdateUrl {
-                UIApplication.sharedApplication().openURL(_url)
-                dismiss()
+                UIApplication.shared.openURL(_url)
+                _dismiss()
             } else {
-                webView.loadRequest(NSURLRequest(URL: _url))
+                webView.loadRequest(URLRequest(url: _url))
             }
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         for (key, value) in webModuleColors {
             if url == key.destination {
                 setNavigationColor(value)
@@ -50,19 +50,19 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate, ForceTouchP
         }
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         hideProgressDialog()
     }
     
-    func dismiss () {
-        navigationController?.popViewControllerAnimated(true)
+    func _dismiss () {
+        let _ = navigationController?.popViewController(animated: true)
     }
     
     func refreshLeftBarItems () {
         if webView.canGoBack {
             navigationItem.leftBarButtonItems = [
-                UIBarButtonItem(barButtonSystemItem: .Stop, target: self, action: #selector(self.dismiss)),
-                UIBarButtonItem(title: "后退", style: .Plain, target: self, action: #selector(self.back))
+                UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(self._dismiss)),
+                UIBarButtonItem(title: "后退", style: .plain, target: self, action: #selector(self.back))
             ]
         } else {
             navigationItem.leftBarButtonItems = nil
@@ -84,11 +84,11 @@ class WebModuleViewController : UIViewController, UIWebViewDelegate, ForceTouchP
     
     @IBAction func share () {
         
-        let _shareUrl = webView.stringByEvaluatingJavaScriptFromString("window.location.href")
+        let _shareUrl = webView.stringByEvaluatingJavaScript(from: "window.location.href")
         let shareUrl = _shareUrl == nil ? "" : _shareUrl!
         
         let prefix = "[分享自小猴偷米App] "
-        let __title = webView.stringByEvaluatingJavaScriptFromString("document.title")
+        let __title = webView.stringByEvaluatingJavaScript(from: "document.title")
         let _title = __title == nil ? "" : __title!
         let shareText = prefix + _title + " " + shareUrl
         

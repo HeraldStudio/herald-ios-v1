@@ -22,19 +22,19 @@ class ExperimentViewController : UIViewController, UITableViewDelegate, UITableV
         loadCache()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0x673ab7)
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         swiper.syncApperance()
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         swiper.beginDrag()
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         swiper.endDrag()
     }
     
@@ -86,24 +86,24 @@ class ExperimentViewController : UIViewController, UITableViewDelegate, UITableV
         showMessage("解析失败，请刷新")
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // 若为空，加一个条目提示用户这里是空的
         if sectionList.count == 0 { return 1 }
         return experimentList[section].count
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         // 若为空，加一个条目提示用户这里是空的
         if sectionList.count == 0 { return nil }
         return sectionList[section]
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
         // 若为空，加一个条目提示用户这里是空的
         if sectionList.count == 0 {
-            return tableView.dequeueReusableCellWithIdentifier("ExperimentEmptyTableViewCell", forIndexPath: indexPath)
+            return tableView.dequeueReusableCell(withIdentifier: "ExperimentEmptyTableViewCell", for: indexPath)
         }
-        let cell = tableView.dequeueReusableCellWithIdentifier("ExperimentTableViewCell", forIndexPath: indexPath) as! ExperimentTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExperimentTableViewCell", for: indexPath) as! ExperimentTableViewCell
         
         let model = experimentList[indexPath.section][indexPath.row]
         cell.name?.text = model.name
@@ -113,12 +113,12 @@ class ExperimentViewController : UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // 若为空，加一个条目提示用户这里是空的
         return sectionList.count > 0 ? sectionList.count : 1
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

@@ -4,34 +4,53 @@ import Foundation
 // 该类实现了对如下流程的处理：
 // 1) 使用者初始化一个时间对象
 // 2) 使用者对该时间中不同单位的值进行设置
-// 3) 由一个 NSDateComponents 对象负责记录这些更改
-// 4) 由 NSCalendar 对象实时将上面记录下来的更改同步到一个 NSDate 对象中
-// 5) 再由这个 NSCalendar 对象实时将这个 NSDate 对象中的结果转换成另外一个 NSDateComponents 对象
-// 6) 当使用者再来查询不同单位的值时，由这个新生成的 NSDateComponents 对象负责返回结果
+// 3) 由一个 DateComponents 对象负责记录这些更改
+// 4) 由 Calendar 对象实时将上面记录下来的更改同步到一个 Date 对象中
+// 5) 再由这个 Calendar 对象实时将这个 Date 对象中的结果转换成另外一个 DateComponents 对象
+// 6) 当使用者再来查询不同单位的值时，由这个新生成的 DateComponents 对象负责返回结果
 
 // 通过上述流程，实现将使用者对时间字段的修改与最终的计算结果分离开来，保证计算结果始终按照正确的历法生成，而不会因为用户修改而导致自相矛盾
 public class GCalendar : CustomDebugStringConvertible {
     
     /// 从系统本身获取到的历法设置
-    private var calendar : NSCalendar
+    private var calendar : Calendar
     
     /// 只包含所需时间单位的时间字段表，用于记录使用者对时间字段的更改
     // 为防止日期与星期自相矛盾导致计算失败，该对象不允许存储星期值，相应地，也不允许用户直接更改星期值。
     // 它的单位始终是 unit 对象，该 unit 对象的所有可能的取值参见常数组 PRECISION_UNITS。
-    private var srcComp : NSDateComponents
+    private var srcComp : DateComponents
     
-    /// 该 NSDate 对象应当始终表示这个 GCalendar 对象所代表的时间
+    /// 该 Date 对象应当始终表示这个 GCalendar 对象所代表的时间
     // 当用户对上面的 components 做了修改后，应根据历法，实时将这些更改同步到这里
-    private var date : NSDate
+    private var date : Date
     
     /// 包含完整时间单位的时间字段集，用于将计算好的时间结果拆分成不同单位进行输出
     // date 和 dstComp 都是符合历法的计算结果，它们同时负责响应使用者的查询需求
     // 若使用者要查询年、月、日、星期等，从 dstComp 获取相应的字段并返回；
     // 若使用者要获得时间戳，从 date 获取时间戳并返回。
-    private var dstComp : NSDateComponents
+    private var dstComp : DateComponents
     
     /// 所需的时间单位集合，取值被限制在下面的PRECISION_UNITS数组中
-    private var unit : NSCalendarUnit
+    private var unit : Set<Calendar.Component>
+    
+    /// 全部单位
+    private let allUnits : Set<Calendar.Component> = [
+        .calendar,
+        .day,
+        .era,
+        .hour,
+        .minute,
+        .month,
+        .quarter,
+        .second,
+        .timeZone,
+        .weekday,
+        .weekdayOrdinal,
+        .weekOfMonth,
+        .weekOfYear,
+        .year,
+        .yearForWeekOfYear
+    ]
     
     /// 由使用者设置的时间精确度
     public enum GCalendarPrecision : Int {
@@ -80,19 +99,19 @@ public class GCalendar : CustomDebugStringConvertible {
     }
     
     /// 六种精确度对应的六种单位集合
-    public static let PRECISION_UNITS : [NSCalendarUnit] = [
+    public static let PRECISION_UNITS : [Set<Calendar.Component>] = [
         // 精确到年
-        [.Year],
+        [.year],
         // 精确到月
-        [.Year, .Month],
+        [.year, .month],
         // 精确到天
-        [.Year, .Month, .Day],
+        [.year, .month, .day, .weekOfYear, .weekOfMonth, .weekday],
         // 精确到小时
-        [.Year, .Month, .Day, .Hour],
+        [.year, .month, .day, .weekOfYear, .weekOfMonth, .weekday, .hour],
         // 精确到分钟
-        [.Year, .Month, .Day, .Hour, .Minute],
+        [.year, .month, .day, .weekOfYear, .weekOfMonth, .weekday, .hour, .minute],
         // 精确到秒
-        [.Year, .Month, .Day, .Hour, .Minute, .Second]
+        [.year, .month, .day, .weekOfYear, .weekOfMonth, .weekday, .hour, .minute, .second]
     ]
     
     /// 用指定的精确度初始化时间对象
@@ -100,14 +119,14 @@ public class GCalendar : CustomDebugStringConvertible {
         // 设置单位
         self.unit = GCalendar.PRECISION_UNITS[precision.rawValue]
         // 获取系统历法设置
-        calendar = NSCalendar.currentCalendar()
+        calendar = Calendar.current
         // 用系统时间初始化 srcComp，此时超过精确度范围的字段将被自动截断
-        srcComp = calendar.components(unit, fromDate: NSDate())
+        srcComp = calendar.dateComponents(unit, from: Date())
         
         // 将精确度范围内的时间值同步到 date
-        date = calendar.dateFromComponents(srcComp)!
+        date = calendar.date(from: srcComp)!
         // 将 date 的时间值同步到 dstComp
-        dstComp = calendar.components(NSCalendarUnit(rawValue: UInt.max), fromDate: date)
+        dstComp = calendar.dateComponents(allUnits, from: date)
     }
     
     /// 复制构造函数
@@ -137,8 +156,8 @@ public class GCalendar : CustomDebugStringConvertible {
         setTime(h, m, s)
     }
     
-    /// 构造函数，通过 NSDate 构造时间
-    public convenience init (_ date: NSDate) {
+    /// 构造函数，通过 Date 构造时间
+    public convenience init (_ date: Date) {
         self.init()
         rawTime = Int64(date.timeIntervalSince1970)
     }
@@ -147,15 +166,15 @@ public class GCalendar : CustomDebugStringConvertible {
     /// 根据分割出来的子串个数，依次填到年/月/日/时/分/秒中
     public convenience init (_ src : String) {
         let int = src
-            .replaceAll("/", "-")
-            .replaceAll(":", "-")
-            .replaceAll(".", "-")
-            .replaceAll(" ", "-")
-            .replaceAll("年", "-")
-            .replaceAll("月", "-")
-            .replaceAll("日", "-")
-            .recursiveReplaceAll("--", "-")
-            .split("-").map { s -> Int in
+            .replacingOccurrences(of: "/", with: "-")
+            .replacingOccurrences(of: ":", with: "-")
+            .replacingOccurrences(of: ".", with: "-")
+            .replacingOccurrences(of: " ", with: "-")
+            .replacingOccurrences(of: "年", with: "-")
+            .replacingOccurrences(of: "月", with: "-")
+            .replacingOccurrences(of: "日", with: "-")
+            .replacingOccurrences(of: "--", with: "-")
+            .components(separatedBy: "-").map { s -> Int in
                 Int(s) == nil ? 0 : Int(s)!
         }
         self.init(GCalendarPrecision(rawValue: min(5, max(0, int.count - 1)))!)
@@ -170,36 +189,34 @@ public class GCalendar : CustomDebugStringConvertible {
     
     /// 立即同步 srcComp 中的更改到 date 和 dstComp
     private func sync() {
-        date = calendar.dateFromComponents(srcComp)!
-        dstComp = calendar.components(NSCalendarUnit(rawValue: UInt.max), fromDate: date)
+        date = calendar.date(from: srcComp)!
+        dstComp = calendar.dateComponents(allUnits, from: date)
     }
     
     /// 反向同步 date 到 srcComp 并更新 dstComp
     private func backSync() {
-        srcComp = calendar.components(unit, fromDate: date)
-        dstComp = calendar.components(NSCalendarUnit(rawValue: UInt.max), fromDate: date)
+        srcComp = calendar.dateComponents(unit, from: date)
+        dstComp = calendar.dateComponents(allUnits, from: date)
     }
     
     /// 直接设置日期
-    public func setDate (year : Int, _ month : Int, _ day : Int) -> GCalendar {
+    public func setDate (_ year : Int, _ month : Int, _ day : Int) {
         self.year = year
         self.month = month
         self.day = day
-        return self
     }
     
     /// 直接设置时间
-    public func setTime (hour : Int, _ minute : Int, _ second : Int) -> GCalendar {
+    public func setTime (_ hour : Int, _ minute : Int, _ second : Int) {
         self.hour = hour
         self.minute = minute
         self.second = second
-        return self
     }
     
     /// 年份的设置和获取
     public var year : Int {
         get {
-            return dstComp.year
+            return dstComp.year ?? 1990
         } set (value) {
             srcComp.year = value
             sync()
@@ -209,7 +226,7 @@ public class GCalendar : CustomDebugStringConvertible {
     /// 月份的设置和获取
     public var month : Int {
         get {
-            return dstComp.month
+            return dstComp.month ?? 1
         } set (value) {
             srcComp.month = value
             sync()
@@ -219,7 +236,7 @@ public class GCalendar : CustomDebugStringConvertible {
     /// 日期的设置和获取
     public var day : Int {
         get {
-            return dstComp.day
+            return dstComp.day ?? 1
         } set (value) {
             srcComp.day = value
             sync()
@@ -229,7 +246,7 @@ public class GCalendar : CustomDebugStringConvertible {
     /// 周数的获取
     public var weekOfYear : Int {
         get {
-            return dstComp.weekOfYear
+            return dstComp.weekOfYear ?? 1
         }
     }
     
@@ -237,7 +254,7 @@ public class GCalendar : CustomDebugStringConvertible {
     public var dayOfWeekFromSunday : DayOfWeekFromSunday {
         get {
             // dstComp.weekday 是以1为周日，2为周一，以此类推，因此要减1
-            return DayOfWeekFromSunday(rawValue: (dstComp.weekday - 1) % 7)!
+            return DayOfWeekFromSunday(rawValue: ((dstComp.weekday ?? 1) - 1) % 7)!
         }
     }
     
@@ -245,14 +262,14 @@ public class GCalendar : CustomDebugStringConvertible {
     public var dayOfWeekFromMonday : DayOfWeekFromMonday {
         get {
             // dstComp.weekday 是以1为周日，2为周一，以此类推，因此要+5
-            return DayOfWeekFromMonday(rawValue: (dstComp.weekday + 5) % 7)!
+            return DayOfWeekFromMonday(rawValue: ((dstComp.weekday ?? 1) + 5) % 7)!
         }
     }
     
     /// 小时的设置和获取
     public var hour : Int {
         get {
-            return dstComp.hour
+            return dstComp.hour ?? 0
         } set (value) {
             srcComp.hour = value
             sync()
@@ -262,7 +279,7 @@ public class GCalendar : CustomDebugStringConvertible {
     /// 分钟的设置和获取
     public var minute : Int {
         get {
-            return dstComp.minute
+            return dstComp.minute ?? 0
         } set (value) {
             srcComp.minute = value
             sync()
@@ -272,7 +289,7 @@ public class GCalendar : CustomDebugStringConvertible {
     /// 秒钟的设置和获取
     public var second : Int {
         get {
-            return dstComp.second
+            return dstComp.second ?? 0
         } set (value) {
             srcComp.second = value
             sync()
@@ -291,12 +308,12 @@ public class GCalendar : CustomDebugStringConvertible {
         get {
             return Int64(date.timeIntervalSince1970)
         } set (value) {
-            date = NSDate(timeIntervalSince1970: Double(value))
+            date = Date(timeIntervalSince1970: Double(value))
             backSync()
         }
     }
     
-    public func getDate() -> NSDate {
+    public func getDate() -> Date {
         return date
     }
 }
@@ -309,27 +326,27 @@ func << (left: GCalendar, right: GCalendar) -> GCalendar {
 }
 
 // 自加一段时间
-func += (left: GCalendar, right: Int) -> GCalendar {
+func += (left: GCalendar, right: Int) {
     left.rawTime = left.rawTime + right
-    return left
 }
 
 // 加上一段时间
 func + (left: GCalendar, right: Int) -> GCalendar {
     let ret = GCalendar(left)
-    return ret += right
+    ret.rawTime = ret.rawTime + right
+    return ret
 }
 
 // 自减一段时间
-func -= (left: GCalendar, right: Int) -> GCalendar {
+func -= (left: GCalendar, right: Int) {
     left.rawTime = left.rawTime - right
-    return left
 }
 
 // 减去一段时间
 func - (left: GCalendar, right: Int) -> GCalendar {
     let ret = GCalendar(left)
-    return ret -= right
+    ret.rawTime = ret.rawTime - right
+    return ret
 }
 
 // 求时间差

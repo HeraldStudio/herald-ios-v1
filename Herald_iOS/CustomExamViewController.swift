@@ -29,7 +29,7 @@ class CustomExamViewController : UIViewController, LoginUserNeeded {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0xf5176c)
     }
     
@@ -79,12 +79,12 @@ class CustomExamViewController : UIViewController, LoginUserNeeded {
         }
         Cache.examCustom.value = newJson
         
-        navigationController?.popViewControllerAnimated(true)
+        let _ = navigationController?.popViewController(animated: true)
     }
     
     @IBAction func delete () {
         if index == -1 {
-            navigationController?.popViewControllerAnimated(true)
+            let _ = navigationController?.popViewController(animated: true)
         } else {
             showQuestionDialog("确认删除该考试吗？", runAfter: {
                 var cache = Cache.examCustom.value
@@ -92,7 +92,7 @@ class CustomExamViewController : UIViewController, LoginUserNeeded {
                 
                 var array = JSON.parse(cache).arrayValue
                 if self.index >= 0 && self.index < array.count {
-                    array.removeAtIndex(self.index)
+                    array.remove(at: self.index)
                 }
                 
                 guard let newJson = JSON(array).rawString() else {
@@ -101,7 +101,7 @@ class CustomExamViewController : UIViewController, LoginUserNeeded {
                 }
                 Cache.examCustom.value = newJson
                 
-                self.navigationController?.popViewControllerAnimated(true)
+                let _ = self.navigationController?.popViewController(animated: true)
             })
         }
     }

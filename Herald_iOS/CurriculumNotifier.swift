@@ -12,13 +12,13 @@ import SwiftyJSON
 
 class CurriculumNotifier {
     
-    static func scheduleNotificationsForClassModel (info : ClassModel, startDate : GCalendar) {
+    static func scheduleNotificationsForClassModel (_ info : ClassModel, startDate : GCalendar) {
         for week in info.startWeek ..< info.endWeek + 1 {
             if info.isFitEvenOrOdd(week) {
                 let cal = GCalendar(startDate)
                 cal += (week - 1) * 7 * 24 * 60 * 60
                 cal += info.weekDay * 24 * 60 * 60
-                cal += CurriculumView.CLASS_BEGIN_TIME[info.startTime - 1] * 60
+                cal += CLASS_BEGIN_TIME[info.startTime - 1] * 60
                 cal -= 15 * 60
                 if cal < GCalendar() { continue }
                 
@@ -27,13 +27,13 @@ class CurriculumNotifier {
                 
                 let not = UILocalNotification()
                 not.fireDate = date
-                not.timeZone = NSTimeZone.defaultTimeZone()
+                not.timeZone = TimeZone.current
                 not.soundName = UILocalNotificationDefaultSoundName
                 not.applicationIconBadgeNumber = 1
                 let place = info.place.replaceAll("(单)", "").replaceAll("(双)", "")
                 not.alertBody = "[\(place)] " + info.className + " 将在15分钟后开始上课，请注意时间，准时上课"
                 
-                UIApplication.sharedApplication().scheduleLocalNotification(not)
+                UIApplication.shared.scheduleLocalNotification(not)
             }
         }
     }
@@ -42,7 +42,8 @@ class CurriculumNotifier {
         if Cache.curriculum.isEmpty { return }
         
         let cache = Cache.curriculum.value
-        let content = JSON.parse(cache)
+        let json = JSON.parse(cache)
+        let content = json["content"]
         
         // 读取开学日期
         let startMonth = content["startdate"]["month"].intValue
@@ -63,7 +64,7 @@ class CurriculumNotifier {
         cal -= cal.dayOfWeekFromMonday.rawValue * 24 * 60 * 60
         
         for i in 0 ..< 7 {
-            for k in content[CurriculumView.WEEK_NUMS[i]].arrayValue {
+            for k in content[WEEK_NUMS[i]].arrayValue {
                 do {
                     let classModel = try ClassModel(json: k)
                     classModel.weekDay = i

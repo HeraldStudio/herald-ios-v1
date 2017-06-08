@@ -1,13 +1,13 @@
 import UIKit
-import Reindeer
-import Kingfisher
+import SDWebImage
 import SwiftyJSON
+import ZYBannerView
 
 /**
  * CardsViewController | 首页卡片界面，首页卡片列表视图代理和数据源
  * 负责首页卡片列表视图、轮播图、集成下拉刷新的处理
  */
-class CardsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CardsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ZYBannerViewDataSource, ZYBannerViewDelegate {
     
     /// 整体部分：初始化、轮播图、集成下拉刷新
     /////////////////////////////////////////////////////////////////////////////////////
@@ -16,7 +16,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet var cardsTableView: UITableView!
     
     /// 轮播图视图
-    let slider = BannerPageViewController()
+    let slider = ZYBannerView()
     
     /// 下拉刷新视图
     let swiper = SwipeRefreshHeader()
@@ -49,13 +49,13 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         loadContent(true)
         
         // 启动定时刷新，每当时间改变时触发本地重载
-        let seconds = 60 - NSDate().timeIntervalSince1970 % 60
-        performSelector(#selector(self.timeChanged), withObject: nil, afterDelay: seconds)
+        let seconds = 60 - Date().timeIntervalSince1970.truncatingRemainder(dividingBy: 60)
+        perform(#selector(self.timeChanged), with: nil, afterDelay: seconds)
         
         // 注册 3D Touch Peak 事件代理
         if #available(iOS 9.0, *) {
-            if traitCollection.forceTouchCapability == .Available {
-                self.registerForPreviewingWithDelegate(self, sourceView: cardsTableView)
+            if traitCollection.forceTouchCapability == .available {
+                self.registerForPreviewing(with: self, sourceView: cardsTableView)
             }
         }
         
@@ -71,12 +71,12 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     /// 当准备从其它界面返回时，设置导航栏颜色
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0x12b0ec)
     }
     
     /// 当从其他界面返回时，重载数据
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         loadContent(false)
     }
     
@@ -87,8 +87,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         loadContent(false)
         
         // 到下一分钟的剩余秒数，这里虽然接近 60，但是不写死，防止误差累积
-        let seconds = 60 - NSDate().timeIntervalSince1970 % 60
-        performSelector(#selector(self.timeChanged), withObject: nil, afterDelay: seconds)
+        let seconds = 60 - Date().timeIntervalSince1970.truncatingRemainder(dividingBy: 60)
+        perform(#selector(self.timeChanged), with: nil, afterDelay: seconds)
     }
     
     /// 初始化轮播图、下拉刷新控件和快捷栏
@@ -97,45 +97,56 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         /// 初始化轮播图
         
         // 轮播图宽高比 5:2
-        slider.view.frame = CGRect(x: 0, y: 0,
+        slider.frame = CGRect(x: 0, y: 0,
                                    width: AppDelegate.instance.leftController!.view.frame.width,
                                    height: AppDelegate.instance.leftController!.view.frame.width * CGFloat(0.4))
         
+        slider.dataSource = self
+        
+        slider.delegate = self
+        
+        slider.shouldLoop = true
+        
         // 轮播图自动切换间隔 5秒
-        slider.interval = 5
-        
-        // 轮播图无法加载时的默认图片
-        slider.placeholderImage = UIImage(named: "default_herald")
-        
-        // 定义 KingFisher 为轮播图在线图片加载器
-        slider.setRemoteImageFetche { (imageView, urlStr, placeHolderImage) in
-            if let url = NSURL(string: urlStr) {
-                imageView.kf_setImageWithURL(url, placeholderImage: UIImage(named: "default_herald"))
-            } else {
-                imageView.image = UIImage(named: "default_herald")
-            }
-        }
-        
-        // 轮播图点击时的事件
-        slider.setBannerTapHandler { (index) in
-            AppModule(title: self.titles[index],url: self.links[index]).open()
-        }
+        slider.scrollInterval = 5
         
         /// 初始化下拉刷新控件
         
         // 设置轮播图为下拉刷新控件内嵌视图
-        swiper.contentView = slider.view
+        swiper.contentView = slider
         
         // 设置下拉刷新控件刷新事件
         swiper.refresher = {() in
             
             // 此处为了防止列表立即刷新导致列表在下拉后突然弹回，延迟1秒刷新，加载框提前显示
             self.showProgressDialog()
-            self.performSelector(#selector(self.refresh), withObject: nil, afterDelay: 1)
+            self.perform(#selector(self.refresh), with: nil, afterDelay: 1)
         }
         
         // 设置下拉刷新控件为列表页头视图
         cardsTableView.tableHeaderView = swiper
+    }
+    
+    func numberOfItems(inBanner banner: ZYBannerView!) -> Int {
+        return max(1, pics.count)
+    }
+    
+    func banner(_ banner: ZYBannerView!, didSelectItemAt index: Int) {
+        if pics.count == 0 {
+            return
+        }
+        AppModule(title: self.titles[index], url: self.links[index]).open()
+    }
+    
+    func banner(_ banner: ZYBannerView!, viewForItemAt index: Int) -> UIView! {
+        if pics.count == 0 {
+            return UIImageView(image: UIImage(named: "default_herald"))
+        }
+        let view = UIImageView()
+        if let url = URL(string: pics[index]) {
+            view.sd_setImage(with: url, placeholderImage: UIImage(named: "default_herald"))
+        }
+        return view
     }
     
     /// 下拉刷新控件用到的刷新函数
@@ -145,17 +156,17 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     /// 下拉刷新控件用到的三个 hook
     // 滚动时刷新显示
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         swiper.syncApperance()
     }
     
     // 开始拖动，以下两个函数用于让下拉刷新控件判断是否已经松手，保证不会在松手后出现“[REFRESH]”
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         swiper.beginDrag()
     }
     
     // 结束拖动
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         swiper.endDrag()
     }
     
@@ -164,6 +175,9 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     /// 各个轮播图点击时打开的页面标题
     var titles : [String] = []
+    
+    /// 各个轮播图的图片地址
+    var pics : [String] = []
     
     /// 判断轮播图数据是否变化，若变化，重载轮播图
     func refreshSliderIfNeeded () {
@@ -189,7 +203,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         titles.removeAll()
         
         // 清空图片列表
-        var pics : [AnyObject?] = []
+        pics.removeAll()
         
         // 逐个添加图片和对应链接
         for i in 0 ..< array.count {
@@ -214,19 +228,15 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             titles.append("")
         }
         // 设置为轮播图的图片列表
-        slider.images = pics
+        slider.reloadData()
         // 若轮播图只有1张图，停止滚动
-        if slider.images.count > 1 {
-            slider.startRolling()
-        } else {
-            slider.stopRolling()
-        }
+        slider.autoScroll = pics.count > 1
     }
     
     /// 卡片列表部分：卡片刷新
     /////////////////////////////////////////////////////////////////////////////////////
     
-    func loadContent (refresh : Bool) {
+    func loadContent (_ refresh : Bool) {
         /// 本地重载
         // 若需要，重载轮播图
         refreshSliderIfNeeded()
@@ -287,7 +297,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
         // 有消息且未读的排在前面，没消息或已读的排在后面
-        cardList = cardList.sort {$0.displayPriority.rawValue < $1.displayPriority.rawValue}
+        cardList = cardList.sorted {$0.displayPriority.rawValue < $1.displayPriority.rawValue}
         
         // 更新数据源，结束刷新
         cardsTableView.reloadData()
@@ -314,7 +324,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         if ModuleCurriculum.cardEnabled && ApiHelper.isLogin() {
             // 仅当课表数据不存在时刷新课表
-            if Cache.curriculum.isEmpty || Cache.curriculumSidebar.isEmpty {
+            if Cache.curriculum.isEmpty || !Cache.curriculum.value.contains("content") {
                 parallelRequest |= CurriculumCard.getRefresher()
             }
         }
@@ -382,17 +392,17 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     
     /// 列表分区数目
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return cardList.count
     }
     
     /// 列表某分区中条目数目
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cardList[section].rows.count
     }
     
     /// 实例化列表条目
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
         
         /// 实例化
         
@@ -406,7 +416,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         let id = indexPath.row == 0 ? "CardsCellHeader" : model.cellId
         
         // 实例化或重用对应的布局
-        let cell = cardsTableView.dequeueReusableCellWithIdentifier(id) as! CardsTableViewCell
+        let cell = cardsTableView.dequeueReusableCell(withIdentifier: id) as! CardsTableViewCell
         
         /// 数据绑定
         
@@ -434,11 +444,11 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.notifyDot?.alpha = indexPath.row == 0 && model.displayPriority == .CONTENT_NOTIFY ? 1 : 0
         
         // 若该行不是卡片头，且既没有目标界面，也没有消息，则关闭其点击效果
-        cell.userInteractionEnabled = cell is CardsCellShortcutBox || row.destination != "" || row.message != "" || indexPath.row == 0
+        cell.isUserInteractionEnabled = cell is CardsCellShortcutBox || row.destination != "" || row.message != "" || indexPath.row == 0
         
         // 若该行是卡片头，且没有目标界面，则隐藏其箭头
         if indexPath.row == 0 {
-            cell.arrow?.hidden = row.destination == ""
+            cell.arrow?.isHidden = row.destination == ""
         }
 
         return cell
@@ -448,8 +458,8 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     /////////////////////////////////////////////////////////////////////////////////////
     
     /// 卡片列表项的点击事件
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let model = cardList[indexPath.section]
         let destination = model.rows[indexPath.row].destination
@@ -478,13 +488,13 @@ extension CardsViewController:UIViewControllerPreviewingDelegate {
     
     //peek
     @available(iOS 9.0, *)
-    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-        guard let indexPath = cardsTableView.indexPathForRowAtPoint(location) else {
+        guard let indexPath = cardsTableView.indexPathForRow(at: location) else {
             return nil
         }
         
-        let cell = cardsTableView.cellForRowAtIndexPath(indexPath) as! CardsTableViewCell
+        let cell = cardsTableView.cellForRow(at: indexPath) as! CardsTableViewCell
         previewingContext.sourceRect = cell.frame
         
         let destination = cardList[indexPath.section].rows[indexPath.row].destination
@@ -492,7 +502,7 @@ extension CardsViewController:UIViewControllerPreviewingDelegate {
     }
     
     //pop
-    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         AppDelegate.instance.rightController.pushViewController(viewControllerToCommit, animated: true)
     }
 }

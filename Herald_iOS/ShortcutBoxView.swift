@@ -20,7 +20,7 @@ class ShortcutBoxView : UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         loadData()
     }
     
@@ -66,7 +66,7 @@ class ShortcutBoxView : UIView {
         frame = CGRect(x: frame.minX, y: frame.minY, width: width, height: height)
         
         // 设置背景色
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
         
         /// 布局各个快捷图标
         // 根据尺寸计算实际列宽
@@ -87,12 +87,12 @@ class ShortcutBoxView : UIView {
         }
         
         self.removeConstraints(constraints)
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 0, constant: height))
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 0, constant: height))
         self.updateConstraintsIfNeeded()
     }
     
     /// 布局单个图标
-    func layoutCellAt(index : Int, inRect rect : CGRect) {
+    func layoutCellAt(_ index : Int, inRect rect : CGRect) {
         let module = dataSource[index]
         
         let cell = UIViewController(nibName: "ShortcutBoxCell", bundle: nil)

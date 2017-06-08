@@ -40,7 +40,7 @@ class PedetailCard {
         let todayStamp = String(format: "%4d-%02d-%02d", today.year, today.month, today.day)
         let row = CardsRowModel(pedetailCount: count, remain: remain)
         
-        if record.containsString(todayStamp) {
+        if record.contains(todayStamp) {
             let model = CardsModel(cellId: "CardsCellPedetail", module: ModulePedetail, desc: "你今天的跑操已经到账。" + getRemainNotice(count, remain, false), priority: .CONTENT_NOTIFY)
             model.rows.append(row)
             return model
@@ -59,7 +59,7 @@ class PedetailCard {
             return model
         } else if exerciseStatus == .AfterExercise {
             // 跑操时间已过
-            if !forecast.containsString("跑操") {
+            if !forecast.contains("跑操") {
                 // 没有跑操预告信息
                 let model = CardsModel(cellId: "CardsCellPedetail", module: ModulePedetail, desc: "今天没有跑操预告信息\n" + getRemainNotice(count, remain, false), priority: .CONTENT_NO_NOTIFY)
                 model.rows.append(row)
@@ -72,21 +72,21 @@ class PedetailCard {
             }
         } else {
             // 处于跑操时间
-            if !forecast.containsString("跑操") {
+            if !forecast.contains("跑操") {
                 // 还没有跑操预告信息
                 let model = CardsModel(cellId: "CardsCellPedetail", module: ModulePedetail, desc: "目前暂无跑操预报信息，过一会再来看吧~\n" + getRemainNotice(count, remain, false), priority: .CONTENT_NO_NOTIFY)
                 model.rows.append(row)
                 return model
             } else {
                 // 有跑操预告信息
-                let model = CardsModel(cellId: "CardsCellPedetail", module: ModulePedetail, desc: "小猴预测\(forecast)\n" + getRemainNotice(count, remain, forecast.containsString("今天正常跑操")), priority: .CONTENT_NOTIFY)
+                let model = CardsModel(cellId: "CardsCellPedetail", module: ModulePedetail, desc: "小猴预测\(forecast)\n" + getRemainNotice(count, remain, forecast.contains("今天正常跑操")), priority: .CONTENT_NOTIFY)
                 model.rows.append(row)
                 return model
             }
         }
     }
     
-    static func getRemainNotice (count : Int, _ remain : Int, _ todayAvailable : Bool) -> String {
+    static func getRemainNotice (_ count : Int, _ remain : Int, _ todayAvailable : Bool) -> String {
         
         if count == 0 {
             return "你这学期还没有跑操，如果是需要跑操的同学要加油咯~"

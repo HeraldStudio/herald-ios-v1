@@ -34,7 +34,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         // 设置上拉加载控件的加载事件
         puller.loader = {() in
             self.showProgressDialog()
-            self.performSelector(#selector(self.loadNextPage), withObject: nil, afterDelay: 1)
+            self.perform(#selector(self.loadNextPage), with: nil, afterDelay: 1)
         }
         
         // 设置上拉加载控件为列表页脚视图
@@ -51,7 +51,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
             
             // 此处为了防止列表立即刷新导致列表在下拉后突然弹回，延迟1秒刷新，加载框提前显示
             self.showProgressDialog()
-            self.performSelector(#selector(self.refreshCache), withObject: nil, afterDelay: 1)
+            self.perform(#selector(self.refreshCache), with: nil, afterDelay: 1)
         }
         
         // 设置下拉刷新控件为列表页头视图
@@ -62,34 +62,34 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         
         // 注册 3D Touch Peak 事件代理
         if #available(iOS 9.0, *) {
-            if traitCollection.forceTouchCapability == .Available {
-                self.registerForPreviewingWithDelegate(self, sourceView: tableView)
+            if traitCollection.forceTouchCapability == .available {
+                self.registerForPreviewing(with: self, sourceView: tableView)
             }
         }
     }
     
     /// 当视图准备显示前，显式调用列表重绘，以便切换 Tab 时产生动画效果
     /// 当准备从其它界面返回时，设置导航栏颜色
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
         setNavigationColor(0x176ccc)
     }
     
     /// 下拉刷新和上拉加载控件用到的三个 hook
     // 滚动时刷新显示
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         swiper.syncApperance()
         puller.syncApperance()
     }
     
     // 开始拖动，以下两个函数用于让下拉刷新控件判断是否已经松手，保证不会在松手后出现“[REFRESH]”
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         swiper.beginDrag()
         puller.beginDrag()
     }
     
     // 结束拖动
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         swiper.endDrag()
         puller.endDrag()
     }
@@ -135,7 +135,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
     /// 联网加载下一页内容，若成功，加入列表并自增一页；否则显示错误信息
     func loadNextPage() {
         showProgressDialog()
-        ApiSimpleRequest(.Get).url("http://www.heraldstudio.com/herald/api/v1/huodong/get?page=\(page + 1)")
+        ApiSimpleRequest(.get).url("http://www.heraldstudio.com/herald/api/v1/huodong/get?page=\(page + 1)")
             .onResponse { success, _, response in
                 self.hideProgressDialog()
                 if success {
@@ -148,7 +148,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
                         
                         // 注意 TableView 的动态修改需要在数据源和视图两边同时进行，若两边不一致则会报错
                         self.data.append(ActivityModel(k))
-                        self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: self.data.count - 1, inSection: 0)], withRowAnimation: .Bottom)
+                        self.tableView.insertRows(at: [IndexPath(row: self.data.count - 1, section: 0)], with: .bottom)
                     }
                     self.tableView.endUpdates()
                     
@@ -170,20 +170,20 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
     var data : [ActivityModel] = []
     
     /// 列表某分区中条目数目
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count > 0 ? data.count : 1
     }
     
     /// 实例化列表条目
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
         
         // 无数据时的处理
         if data.count == 0 {
-            return tableView.dequeueReusableCellWithIdentifier("ActivityEmptyTableViewCell", forIndexPath: indexPath)
+            return tableView.dequeueReusableCell(withIdentifier: "ActivityEmptyTableViewCell", for: indexPath)
         }
         
         // 实例化
-        let cell = tableView.dequeueReusableCellWithIdentifier("ActivityTableViewCell", forIndexPath: indexPath) as! ActivityTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityTableViewCell", for: indexPath) as! ActivityTableViewCell
         let model = data[indexPath.row]
         
         // 数据绑定
@@ -191,8 +191,8 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         cell.assoc.text = model.assoc
         cell.state.text = model.state.rawValue
         
-        if let url = NSURL(string: model.picUrl) {
-            cell.pic.kf_setImageWithURL(url, placeholderImage: UIImage(named: "default_herald"))
+        if let url = URL(string: model.picUrl) {
+            cell.pic.sd_setImage(with: url, placeholderImage: UIImage(named: "default_herald"))
         } else {
             cell.pic.image = UIImage(named: "default_herald")
         }
@@ -200,7 +200,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         cell.intro.text = "活动时间：\(model.activityTime)\n活动地点：\(model.location)\n\n\(model.intro)" + (model.detailUrl != "" ? "\n\n查看详情 >" : "")
         
         // 布局调整
-        cell.state.textColor = model.state == .Going ? navigationController?.navigationBar.barTintColor : UIColor.grayColor()
+        cell.state.textColor = model.state == .Going ? navigationController?.navigationBar.barTintColor : UIColor.gray
         
         return cell
     }
@@ -209,8 +209,8 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
     /////////////////////////////////////////////////////////////////////////////////////
     
     /// 自定义列表条目点击事件
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         // 无数据时的处理
         if data.count == 0 { return }
@@ -226,7 +226,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
     }
     
     /// 自定义列表条目显示动效
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         var rotation = CATransform3D()
         rotation = CATransform3DMakeTranslation(0, 50, 20)
@@ -234,8 +234,8 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         rotation = CATransform3DScale(rotation, 0.9, 0.9, 1)
         rotation.m34 = 1.0 / -600
         
-        cell.layer.shadowColor = UIColor.blackColor().CGColor
-        cell.layer.shadowOffset = CGSizeMake(10, 10)
+        cell.layer.shadowColor = UIColor.black.cgColor
+        cell.layer.shadowOffset = CGSize.init(width: 10, height: 10)
         cell.alpha = 0
         
         cell.layer.transform = rotation
@@ -244,7 +244,7 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         UIView.setAnimationDuration(0.6)
         cell.layer.transform = CATransform3DIdentity
         cell.alpha = 1
-        cell.layer.shadowOffset = CGSizeMake(0, 0)
+        cell.layer.shadowOffset = CGSize.zero
         UIView.commitAnimations()
     }
 }
@@ -254,13 +254,13 @@ extension ActivityViewController:UIViewControllerPreviewingDelegate {
     
     //peek
     @available(iOS 9.0, *)
-    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-        guard let indexPath = tableView.indexPathForRowAtPoint(location) else {
+        guard let indexPath = tableView.indexPathForRow(at: location) else {
             return nil
         }
         
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ActivityTableViewCell
+        let cell = tableView.cellForRow(at: indexPath) as! ActivityTableViewCell
         previewingContext.sourceRect = cell.frame
         
         let destination = data[indexPath.row].detailUrl
@@ -268,7 +268,7 @@ extension ActivityViewController:UIViewControllerPreviewingDelegate {
     }
     
     //pop
-    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         AppDelegate.instance.rightController.pushViewController(viewControllerToCommit, animated: true)
     }
 }

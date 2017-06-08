@@ -20,7 +20,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         background.layer.masksToBounds = true
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0x000000)
     }
 
@@ -30,8 +30,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     /// 手机只支持竖屏，平板支持横屏和竖屏
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return AppDelegate.isPad ? .AllButUpsideDown : .Portrait
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return AppDelegate.isPad ? .allButUpsideDown : .portrait
     }
 
     @IBAction func buttonClicked() {
@@ -44,22 +44,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func dismiss() {
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     func doLogin () {
         let appid = ApiHelper.appid
         showProgressDialog()
-        ApiSimpleRequest(.Post).url(ApiHelper.auth_url)
+        ApiSimpleRequest(.post).url(ApiHelper.auth_url)
             .post("user", username!.text!, "password", password!.text!, "appid", appid)
             .onResponse { success, _, response in
-                if response.containsString("Unauthorized") {
+                if response.contains("Unauthorized") {
                     self.hideProgressDialog()
                     self.showMessage("密码错误，请重试")
-                } else if response.containsString("Bad Request") {
+                } else if response.contains("Bad Request") {
                     self.hideProgressDialog()
                     self.showMessage("当前客户端版本已过期，请下载最新版本")
-                    UIApplication.sharedApplication().openURL(NSURL(string: StringUpdateUrl)!)
+                    UIApplication.shared.openURL(URL(string: StringUpdateUrl)!)
                 } else if !success {
                     self.hideProgressDialog()
                     self.showMessage("网络异常，请重试")
@@ -73,7 +73,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     func checkUUID () {
-        ApiSimpleRequest(.Post).api("user").post("uuid", self.user.uuid)
+        ApiSimpleRequest(.post).api("user").post("uuid", self.user.uuid)
             .onResponse { (success, code, response) in
 
                 /**
@@ -107,7 +107,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         password.resignFirstResponder()
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == username {
             password.becomeFirstResponder()
         } else if textField == password {

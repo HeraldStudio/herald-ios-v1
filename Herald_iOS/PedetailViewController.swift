@@ -29,11 +29,34 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0x26a69a)
     }
     
-    var history : [GCalendar] = []
+    struct PDate : Hashable, Equatable {
+        var year, month, day: Int
+        var hashValue: Int { return (((year << 9) + month) << 5) + day }
+        public static func == (left: PDate, right: PDate) -> Bool {
+            return left.hashValue == right.hashValue
+        }
+        init(_ y: Int, _ m: Int, _ d: Int) {
+            year = y; month = m; day = d
+        }
+        init(_ date: Date) {
+            let cal = GCalendar(date)
+            self.init(cal.year, cal.month, cal.day)
+        }
+    }
+    
+    struct PTime {
+        var hour, minute: Int
+        init(_ h: Int, _ m: Int) {
+            hour = h; minute = m
+        }
+    }
+    
+    // key为年月日，value为时分，这样方便判断是否有某个日期的记录
+    var history : [PDate : PTime] = [:]
     
     func loadCache() {
         let cache = Cache.peDetail.value
@@ -57,7 +80,7 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
             let comp = GCalendar(.Minute)
             
             if ymd.count < 3 { continue }
-            guard let year = Int(ymd[0]), month = Int(ymd[1]), day = Int(ymd[2]) else {
+            guard let year = Int(ymd[0]), let month = Int(ymd[1]), let day = Int(ymd[2]) else {
                 continue
             }
             comp.year = year; comp.month = month; comp.day = day
@@ -70,13 +93,12 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
             if time[1].characters.count < 2 {
                 time[1] += "0"
             }
-            guard let hour = Int(time[0]), minute = Int(time[1]) else {
+            guard let hour = Int(time[0]), let minute = Int(time[1]) else {
                 continue
             }
-            comp.hour = hour; comp.minute = minute
             
-            calendar?.selectDate(comp.getDate())
-            history.append(comp)
+            calendar?.select(comp.getDate())
+            history.updateValue(PTime(hour, minute), forKey: PDate(year, month, day))
         }
         
         if history.count == 0 {
@@ -101,32 +123,19 @@ class PedetailViewController : UIViewController, FSCalendarDelegate, ForceTouchP
         showMessage("解析失败，请刷新")
     }
     
-    func hasDate(date : NSDate) -> Bool {
-        for k in history {
-            if k.year == date.fs_year && k.month == date.fs_month && k.day == date.fs_day {
-                return true
-            }
-        }
-        return false
-    }
-    
-    func calendar(calendar: FSCalendar, didSelectDate date: NSDate) {
-        if !hasDate(date) {
-            calendar.deselectDate(date)
+    func calendar(_ calendar: FSCalendar, didSelect date: Date) {
+        if !history.keys.contains(PDate(date)) {
+            calendar.deselect(date)
             showMessage("该日无跑操记录")
         }
     }
     
-    func calendar(calendar: FSCalendar, didDeselectDate date: NSDate) {
-        if hasDate(date) {
-            calendar.selectDate(date)
-            for index in 0 ..< history.count {
-                let k = history[index]
-                if k.year == date.fs_year && k.month == date.fs_month && k.day == date.fs_day {
-                    let timeStr = String(format: "%d/%d/%d %d:%02d", k.year, k.month, k.day, k.hour, k.minute)
-                    showMessage("(第 \(index + 1) 次跑操) 打卡时间：" + timeStr)
-                }
-            }
+    func calendar(_ calendar: FSCalendar, didDeselect date: Date) {
+        let pDate = PDate(date)
+        if let pTime = history[pDate] {
+            calendar.select(date)
+            let timeStr = String(format: "%d/%d/%d %d:%02d", pDate.year, pDate.month, pDate.day, pTime.hour, pTime.minute)
+            showMessage("打卡时间：" + timeStr)
         }
     }
 }

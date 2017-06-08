@@ -24,19 +24,19 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
         tableView.rowHeight = UITableViewAutomaticDimension;
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         setNavigationColor(0xef5350)
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         swiper.syncApperance()
     }
     
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         swiper.beginDrag()
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         swiper.endDrag()
     }
     
@@ -109,13 +109,13 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
         showMessage("解析失败，请刷新")
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count > 0 ? items.count : 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
         if items.count > 0 {
-            let cell = tableView.dequeueReusableCellWithIdentifier("SrtpTableViewCell", forIndexPath: indexPath) as! SrtpTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SrtpTableViewCell", for: indexPath) as! SrtpTableViewCell
         
             let model = items[indexPath.row]
             cell.time.text = model.time
@@ -127,19 +127,19 @@ class SrtpViewController : UIViewController, UITableViewDelegate, UITableViewDat
         
             return cell
         } else {
-            return tableView.dequeueReusableCellWithIdentifier("SrtpEmptyTableViewCell", forIndexPath: indexPath)
+            return tableView.dequeueReusableCell(withIdentifier: "SrtpEmptyTableViewCell", for: indexPath)
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "我参加的项目"
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

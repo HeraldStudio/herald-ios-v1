@@ -48,23 +48,34 @@ class ClassModel {
     }
     
     func getTimePeriod() -> String {
-        return time60ToHourMinute(CurriculumView.CLASS_BEGIN_TIME[startTime - 1]) + "~"
-            + time60ToHourMinute(CurriculumView.CLASS_BEGIN_TIME[endTime - 1] + 45)
+        return time60ToHourMinute(CLASS_BEGIN_TIME[startTime - 1]) + "~"
+            + time60ToHourMinute(CLASS_BEGIN_TIME[endTime - 1] + 45)
     }
     
     func getPeriodCount() -> Int {
         return endTime - startTime + 1
     }
     
-    func isFitEvenOrOdd(weekNum: Int) -> Bool{
+    func isFitEvenOrOdd(_ weekNum: Int) -> Bool{
         if(weekNum % 2 == 0){
-            return !place.containsString("(单)")
+            return !place.contains("(单)")
         } else {
-            return !place.containsString("(双)")
+            return !place.contains("(双)")
         }
     }
     
-    func time60ToHourMinute(time: Int) -> String{
+    func time60ToHourMinute(_ time: Int) -> String{
         return String(format: "%d:%02d", time / 60, time % 60)
+    }
+    
+    var weekSummary : String {
+        var summary = "\(startWeek)~\(endWeek)周"
+        if place.contains("(单)") {
+            summary += "单周"
+        }
+        if place.contains("(双)") {
+            summary += "双周"
+        }
+        return summary
     }
 }
