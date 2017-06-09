@@ -48,7 +48,7 @@ class CardRecordModel {
     
     var type : String {
         if jsonSystem == "" && jsonType != "" {
-            return "无详情"
+            return ""
         }
         return jsonType
     }

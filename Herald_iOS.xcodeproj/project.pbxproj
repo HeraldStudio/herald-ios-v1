@@ -78,6 +78,8 @@
 		D35FC6261CE31A3500BE844C /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6251CE31A3500BE844C /* ActivityTableViewCell.swift */; };
 		D35FC6281CE3236300BE844C /* PullLoadFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6271CE3236300BE844C /* PullLoadFooter.swift */; };
 		D35FC62A1CE33A1E00BE844C /* ActivityCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35FC6291CE33A1E00BE844C /* ActivityCard.swift */; };
+		D36182961EEA89200033668D /* CardsCellVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36182951EEA89200033668D /* CardsCellVote.swift */; };
+		D36182981EEA8B350033668D /* ExtUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36182971EEA8B350033668D /* ExtUIView.swift */; };
 		D37708621CCC5D37006ED853 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708611CCC5D37006ED853 /* FeedbackViewController.swift */; };
 		D37708651CCC67DC006ED853 /* CardsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37708641CCC67DC006ED853 /* CardsModel.swift */; };
 		D37A1DAD1D0269880040A7D1 /* AboutUsContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37A1DAC1D0269880040A7D1 /* AboutUsContentTableViewCell.swift */; };
@@ -277,6 +279,8 @@
 		D35FC6251CE31A3500BE844C /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		D35FC6271CE3236300BE844C /* PullLoadFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullLoadFooter.swift; sourceTree = "<group>"; };
 		D35FC6291CE33A1E00BE844C /* ActivityCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCard.swift; sourceTree = "<group>"; };
+		D36182951EEA89200033668D /* CardsCellVote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsCellVote.swift; sourceTree = "<group>"; };
+		D36182971EEA8B350033668D /* ExtUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtUIView.swift; sourceTree = "<group>"; };
 		D37708611CCC5D37006ED853 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		D37708641CCC67DC006ED853 /* CardsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsModel.swift; sourceTree = "<group>"; };
 		D37A1DAC1D0269880040A7D1 /* AboutUsContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutUsContentTableViewCell.swift; sourceTree = "<group>"; };
@@ -456,6 +460,7 @@
 				D354905B1CDC519100E59615 /* GCalendar.swift */,
 				D3A9D7211D49B5ED00D350AE /* Synchronized.swift */,
 				D302B2BE1D482E1E00760BE9 /* User.swift */,
+				D36182971EEA8B350033668D /* ExtUIView.swift */,
 			);
 			name = framework;
 			sourceTree = "<group>";
@@ -480,6 +485,7 @@
 				D3D5D44A1CE99D63000E406A /* NoSelectionTableViewCell.swift */,
 				D35FC6271CE3236300BE844C /* PullLoadFooter.swift */,
 				D3C1A1071D9F67CE00B55B3E /* CardsCellShortcutBox.swift */,
+				D36182951EEA89200033668D /* CardsCellVote.swift */,
 				D3E079221D2E7A0D00D5FBB3 /* ShortcutBoxView.swift */,
 				D3B4BA711DA79E0800E8DBB1 /* ShortcutBoxCell.xib */,
 				D3325D041CC89BA0002060A5 /* SwipeRefreshHeader.swift */,
@@ -990,7 +996,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2C92DDECCE79BA01E1AF61C0 /* [CP] Check Pods Manifest.lock */ = {
@@ -1005,7 +1011,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		62088D9CF3EF5A7CBE7F851D /* [CP] Copy Pods Resources */ = {
@@ -1098,6 +1104,7 @@
 				D37A1DAD1D0269880040A7D1 /* AboutUsContentTableViewCell.swift in Sources */,
 				D3D5D4491CE99D19000E406A /* GymReserveCells.swift in Sources */,
 				D354905C1CDC519100E59615 /* GCalendar.swift in Sources */,
+				D36182981EEA8B350033668D /* ExtUIView.swift in Sources */,
 				D3378CF91D9AAFA000DCD186 /* ExerciseUtil.swift in Sources */,
 				D3F4734F1CCA15C900750FFB /* LectureViewController.swift in Sources */,
 				D3E6BD7C1CC8BF740074FF6D /* ModuleManageTableViewCell.swift in Sources */,
@@ -1145,6 +1152,7 @@
 				D3ED99E21CCB5BCB00001E2B /* LibraryBookModel.swift in Sources */,
 				D38E6F351D2F231B001E6172 /* RootControllers.swift in Sources */,
 				D3D849FC1CFBD88200F083DF /* ExtJSON.swift in Sources */,
+				D36182961EEA89200033668D /* CardsCellVote.swift in Sources */,
 				D33B2DF41D598D1A00E7FBF1 /* CurriculumCells.swift in Sources */,
 				D3D5D44D1CE99EDC000E406A /* GymFriendModel.swift in Sources */,
 				D31DE5121CC3592F00E4891D /* ClassModel.swift in Sources */,

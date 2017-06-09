@@ -51,9 +51,9 @@ class TodayNotiCurriculum {
         // 计算当前周
         let dayDelta = (nowDate - beginOfTerm) / 86400
         if dayDelta < -1 {
-            return nil
+            return "还未开学，尽情享受假期吧~"
         } else if dayDelta == -1 {
-            return nil
+            return "假期最后一天，准备好接受挑战了吗？"
         }
         
         let thisWeek = dayDelta / 7 + 1

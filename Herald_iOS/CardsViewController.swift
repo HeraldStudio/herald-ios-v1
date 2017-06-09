@@ -257,6 +257,11 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
             cardList.append(item)
         }
         
+        // 加载投票缓存
+        if let item = ServiceCard.getVoteCard() {
+            cardList.append(item)
+        }
+        
         if ModuleCard.cardEnabled {
             // 加载并解析一卡通缓存
             cardList.append(CardCard.getCard())
@@ -444,7 +449,7 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.notifyDot?.alpha = indexPath.row == 0 && model.displayPriority == .CONTENT_NOTIFY ? 1 : 0
         
         // 若该行不是卡片头，且既没有目标界面，也没有消息，则关闭其点击效果
-        cell.isUserInteractionEnabled = cell is CardsCellShortcutBox || row.destination != "" || row.message != "" || indexPath.row == 0
+        cell.isUserInteractionEnabled = cell is CardsCellShortcutBox || cell is CardsCellVote || row.destination != "" || row.message != "" || indexPath.row == 0
         
         // 若该行是卡片头，且没有目标界面，则隐藏其箭头
         if indexPath.row == 0 {

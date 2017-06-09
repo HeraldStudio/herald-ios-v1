@@ -14,11 +14,11 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         
         // 按需打开新版本引导页
-        let version = "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")!)"
-        if Cache.version.value != version {
-            present((storyboard?.instantiateViewController(withIdentifier: "IntroViewController"))!, animated: true, completion: nil)
-            Cache.version.value = version
-        }
+//        let version = "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")!)"
+//        if Cache.version.value != version {
+//            present((storyboard?.instantiateViewController(withIdentifier: "IntroViewController"))!, animated: true, completion: nil)
+//            Cache.version.value = version
+//        }
         
         // 去除界面切换时导航栏的黑影
         navigationController?.view.backgroundColor = UIColor.white
@@ -82,9 +82,6 @@ class MainTabBarController: UITabBarController {
     /// 显示右上角弹出菜单
     @IBAction func showPopupMenu () {
         
-        // 用户已打开了弹出菜单，不再提示弹出菜单更新
-        SettingsHelper.set("popmenu_intro", "0")
-        
         // 要添加菜单项，直接在此列表添加元素，并指向所需的函数即可
         let menuArray = [
             KxMenuItem("登录校园网", image: UIImage(named: "action_wifi"), target: self, action: #selector(self.loginToWifi)),
@@ -132,8 +129,6 @@ class MainTabBarController: UITabBarController {
     
     /// 弹出菜单操作：模块管理
     func moduleManage () {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "MODULE_MANAGER") {
-            AppDelegate.instance.rightController!.pushViewController(vc, animated: true)
-        }
+        ModuleManager.open()
     }
 }

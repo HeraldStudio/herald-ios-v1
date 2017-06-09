@@ -84,7 +84,7 @@ class LibraryViewController : UIViewController, UITableViewDelegate, UITableView
             } else {
                 self.showMessage("刷新失败，请重试")
             }
-        }.run()
+        }.runWithoutFatalListener() // 由于图书馆接口在图书馆认证失败时也返回401，用run会导致401误判断为app登录过期，因此使用runWithoutFatalListener
     }
     
     func showError () {

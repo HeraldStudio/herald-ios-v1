@@ -22,6 +22,19 @@ class ServiceCard {
         return nil
     }
     
+    
+    static func getVoteCard() -> CardsModel? {
+        let cache = ServiceHelper.get("versioncheck_cache")
+        let content = JSON.parse(cache)["content"]["vote"]["content"].stringValue
+        let url = JSON.parse(cache)["content"]["vote"]["url"].stringValue
+        if content != "" {
+            let card = CardsModel(cellId: "CardsCellVote", icon : "ic_vote", title : "投个票", desc : content, dest : url, message: "", priority : .CONTENT_NO_NOTIFY)
+            card.rows.append(CardsRowModel())
+            return card
+        }
+        return nil
+    }
+    
     static func getCheckVersionCard() -> CardsModel? {
         let cache = JSON.parse(ServiceHelper.get("versioncheck_cache"))
         let newestVersionCode = cache["content"]["version"]["code"].intValue

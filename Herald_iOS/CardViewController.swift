@@ -13,7 +13,9 @@ class CardViewController : UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         swiper.refresher = {() in self.refreshCache()}
-        tableView?.tableHeaderView = swiper
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 48
+        tableView.tableHeaderView = swiper
         
         // 设置上拉加载控件的加载事件
         puller.loader = {() in

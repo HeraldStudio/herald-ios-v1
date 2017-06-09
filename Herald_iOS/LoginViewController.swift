@@ -9,19 +9,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var button : UIButton!
 
-    @IBOutlet var background : UIImageView!
-
     var user = User("", "", "", "")
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // 将超出部分截掉，防止滑动返回时看到超出部分的图片
-        background.layer.masksToBounds = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        setNavigationColor(0x000000)
+        setNavigationColor(0x12b0ec)
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,32 +39,62 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func dismiss() {
-        dismiss(animated: true, completion: nil)
+        let _ = navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func showTos () {
+        AppModule(title: "服务协议及隐私政策", url: "https://myseu.cn/tos.htm").open()
     }
 
     func doLogin () {
-        let appid = ApiHelper.appid
-        showProgressDialog()
-        ApiSimpleRequest(.post).url(ApiHelper.auth_url)
-            .post("user", username!.text!, "password", password!.text!, "appid", appid)
-            .onResponse { success, _, response in
-                if response.contains("Unauthorized") {
-                    self.hideProgressDialog()
-                    self.showMessage("密码错误，请重试")
-                } else if response.contains("Bad Request") {
-                    self.hideProgressDialog()
-                    self.showMessage("当前客户端版本已过期，请下载最新版本")
-                    UIApplication.shared.openURL(URL(string: StringUpdateUrl)!)
-                } else if !success {
-                    self.hideProgressDialog()
-                    self.showMessage("网络异常，请重试")
-                } else {
-                    self.user.uuid = response
-                    self.user.userName = self.username!.text!
-                    self.user.password = self.password!.text!
-                    self.checkUUID()
-                }
-            }.run()
+        if password.text?.characters.count == 40 { // uuid强制登录模式
+            let dialog = UIAlertController(title: "管理员登录", message: "你可以使用此功能在用户允许的情况下模拟用户登录。此方式不需要通过验证，但登录后可使用的功能将取决于所提供的信息的准确性。\n\n提供下列附加信息有助于对该用户启用完整功能，例如校园网登录和srtp查询等", preferredStyle: .alert)
+            dialog.addTextField { field in
+                field.placeholder = "学号"
+            }
+            dialog.addTextField { field in
+                field.isSecureTextEntry = true
+                field.placeholder = "统一身份认证密码"
+            }
+            dialog.addAction(UIAlertAction(title: "登录", style: .default) { action in
+                self.user.userName = self.username.text ?? ""
+                self.user.password = dialog.textFields![1].text ?? ""
+                self.user.uuid = self.password.text ?? ""
+                self.user.schoolNum = dialog.textFields![0].text ?? ""
+                ApiHelper.currentUser = self.user
+                ApiHelper.notifyUserChanged()
+                self.showMessage("欢迎管理员登录")
+                self.dismiss()
+                AppModule(title: "跳转到首页", url: "TAB0").open()
+            })
+            dialog.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+            present(dialog, animated: true) {}
+
+        } else { // 正常登录
+            showProgressDialog()
+            let appid = ApiHelper.appid
+
+            ApiSimpleRequest(.post).url(ApiHelper.auth_url)
+                .post("user", username.text!, "password", password.text!, "appid", appid)
+                .onResponse { success, _, response in
+                    if response.contains("Unauthorized") {
+                        self.hideProgressDialog()
+                        self.showMessage("当前无法登录或密码错误，请重试")
+                    } else if response.contains("Bad Request") {
+                        self.hideProgressDialog()
+                        self.showMessage("当前客户端版本已过期，请下载最新版本")
+                        UIApplication.shared.openURL(URL(string: StringUpdateUrl)!)
+                    } else if !success {
+                        self.hideProgressDialog()
+                        self.showMessage("网络异常，请重试")
+                    } else {
+                        self.user.uuid = response
+                        self.user.userName = self.username!.text!
+                        self.user.password = self.password!.text!
+                        self.checkUUID()
+                    }
+                }.run()
+        }
     }
 
     func checkUUID () {

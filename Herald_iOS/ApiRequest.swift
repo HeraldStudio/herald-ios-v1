@@ -200,7 +200,7 @@ class ApiSimpleRequest : ApiRequest {
             let code = mergeStatusCodes(httpCode, JSON.parse(responseString)["code"].intValue)
 
             // 按照错误码判断是否成功
-            let success = code < 300
+            let success = code < 400
 
             // 触发回调
             for listener in onResponseListeners {
@@ -294,13 +294,26 @@ class ApiSimpleRequest : ApiRequest {
         }
         return self
     }
-
+    
+    // 设置网络请求超时时间
+    static var _alamofireManager : Alamofire.SessionManager?
+    
+    static var alamofireManager : Alamofire.SessionManager {
+        if _alamofireManager == nil {
+            let conf = URLSessionConfiguration.default
+            conf.timeoutIntervalForRequest = 10
+            conf.timeoutIntervalForResource = 5
+            _alamofireManager = Alamofire.SessionManager(configuration: conf)
+        }
+        return _alamofireManager!
+    }
+    
     /**
      * 执行部分
      **/
     func runWithoutFatalListener() {
         
-        let request = Alamofire.request(
+        let request = ApiSimpleRequest.alamofireManager.request(
             _url,
             method: method,
             parameters: map)

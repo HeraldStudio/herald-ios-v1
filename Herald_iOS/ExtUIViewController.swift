@@ -34,7 +34,7 @@ extension UIViewController {
     
     /// 显示提示消息
     func showMessage(_ message : String) {
-        if let vc = getTopViewController() {
+        if let vc = UIViewController.top {
             var style = ToastStyle()
             style.messageFont = UIFont.systemFont(ofSize: 14)
             style.horizontalPadding = 20
@@ -50,7 +50,7 @@ extension UIViewController {
     func showQuestionDialog (_ message: String, runAfter: @escaping () -> Void) {
         
         // 若已有窗口，不作处理
-        if getTopViewController()?.presentedViewController != nil {
+        if UIViewController.top?.presentedViewController != nil {
             return
         }
         let dialog = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.alert)
@@ -58,26 +58,26 @@ extension UIViewController {
             (action: UIAlertAction) -> Void in runAfter()})
         dialog.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel){
             (action: UIAlertAction) -> Void in })
-        getTopViewController()?.present(dialog, animated: true, completion: nil)
+        UIViewController.top?.present(dialog, animated: true, completion: nil)
     }
     
     /// 显示只有确认按钮的对话框
     func showSimpleDialog (_ message: String) {
         
         // 若已有窗口，不作处理
-        if getTopViewController()?.presentedViewController != nil {
+        if UIViewController.top?.presentedViewController != nil {
             return
         }
         let dialog = UIAlertController(title: "提示", message: message, preferredStyle: UIAlertControllerStyle.alert)
         dialog.addAction(UIAlertAction(title: "确定", style: UIAlertActionStyle.default){ action in })
-        getTopViewController()?.present(dialog, animated: true, completion: nil)
+        UIViewController.top?.present(dialog, animated: true, completion: nil)
     }
     
     /// 开启小猴对话彩蛋
     func showSimsimiDialog(_ message: String = "跟小猴对话吧~") {
         
         // 若已有窗口，不作处理
-        if getTopViewController()?.presentedViewController != nil {
+        if UIViewController.top?.presentedViewController != nil {
             return
         }
         let dialog = UIAlertController(title: "小猴消息", message: message, preferredStyle: UIAlertControllerStyle.alert)
@@ -97,14 +97,14 @@ extension UIViewController {
         })
         dialog.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel){
             (action: UIAlertAction) -> Void in })
-        getTopViewController()?.present(dialog, animated: true, completion: nil)
+        UIViewController.top?.present(dialog, animated: true, completion: nil)
     }
     
     /// 显示带有“不再提示”按钮的对话框
     func showTipDialogIfUnknown (_ message: String, cachePostfix: String, runAfter: @escaping () -> Void) {
         
         // 若已有窗口，不作处理
-        if getTopViewController()?.presentedViewController != nil {
+        if UIViewController.top?.presentedViewController != nil {
             return
         }
         let shown = CacheHelper.get("tip_ignored_" + cachePostfix) == "1"
@@ -117,7 +117,7 @@ extension UIViewController {
                 CacheHelper.set("tip_ignored_" + cachePostfix, "1")
                 runAfter()
                 })
-            getTopViewController()?.present(dialog, animated: true, completion: nil)
+            UIViewController.top?.present(dialog, animated: true, completion: nil)
         } else {
             runAfter()
         }
@@ -150,7 +150,7 @@ extension UIViewController {
     
     /// 获取当前最顶层的VC，以防止提示消息显示不出来
     // 参考了 SVProgressHUD 中获取最顶层窗口的实现
-    func getTopViewController() -> UIViewController? {
+    static var top : UIViewController? {
         let frontToBackWindows = UIApplication.shared.windows.reversed()
         for window in frontToBackWindows {
             let windowOnMainScreen = window.screen == UIScreen.main

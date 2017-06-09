@@ -6,7 +6,7 @@ import SwiftyJSON
  */
 class ApiHelper {
     // heraldstudio.com 主站API
-    static let WWW_ROOT = "http://www.heraldstudio.com/"
+    static let WWW_ROOT = "https://www.heraldstudio.com/"
     static let API_ROOT = WWW_ROOT + "api/"
     
     static let auth_url = WWW_ROOT + "uc/auth"

@@ -36,7 +36,7 @@ class CurriculumOptionsViewController : UITableViewController, LoginUserNeeded {
     func loadCache() {
         terms.removeAll()
         
-        let termStrs = JSON.parse(Cache.curriculumTerm.value).arrayValue.map {$0.stringValue}
+        let termStrs = JSON.parse(Cache.curriculumTerm.value).arrayValue.map {$0.stringValue}.sorted(by: >)
         let advance = Cache.curriculumAdvance.value == "1"
         
         for term in termStrs {

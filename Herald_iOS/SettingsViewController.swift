@@ -79,6 +79,9 @@ class SettingsViewController: UITableViewController {
         case (3, 2):
             /// 给我们评分（App Store不允许有版本更新按钮，因此更名）
             checkVersion()
+        case (3, 3):
+            /// 反馈建议
+            UIApplication.shared.openURL(URL(string: "mailto:vhyme@live.cn")!)
         default:
             break
         }
