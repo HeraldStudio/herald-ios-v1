@@ -51,7 +51,7 @@ class CardsCellVote : CardsTableViewCell {
         if json["voted"].boolValue {
             UIViewController.top?.showMessage("你已投票，不能重复投票")
         } else {
-            ApiSimpleRequest(.post).url("https://myseu.cn/vote").uuid()
+            ApiSimpleRequest(.post).url("http://myseu.cn/vote").uuid()
                 .post("vote_id", json["id"].stringValue)
                 .post("attitude", attitude).onResponse { success, code, response in
                     if success {

@@ -26,7 +26,7 @@ class WifiLoginHelper {
     }
     
     private func beginCheck () {
-        ApiSimpleRequest(.post).url("https://selfservice.seu.edu.cn/selfservice/index.php")
+        ApiSimpleRequest(.post).url("http://selfservice.seu.edu.cn/selfservice/index.php")
             .onResponse { success, code, response in
                 if !response.contains("403 Forbidden") {
                     self.checkOnlineStatus()
@@ -64,7 +64,7 @@ class WifiLoginHelper {
     }
     
     public func checkOnly() {
-        ApiSimpleRequest(.post).url("https://selfservice.seu.edu.cn/selfservice/index.php")
+        ApiSimpleRequest(.post).url("http://selfservice.seu.edu.cn/selfservice/index.php")
             .onResponse { success, code, response in
                 if !response.contains("403 Forbidden") {
                     ApiSimpleRequest(.get).url("http://w.seu.edu.cn/index.php/index/init")

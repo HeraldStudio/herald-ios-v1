@@ -16,13 +16,13 @@ let ModuleLibrary = AppModule("library", "图书馆", "查看图书馆实时借�
 let ModuleGrade = AppModule("grade", "成绩查询", "查询历史学期的科目成绩、学分以及绩点详情", "MODULE_QUERY_GRADE", "ic_grade", false)
 let ModuleSrtp = AppModule("srtp", "课外研学", "提供SRTP学分及得分详情查询服务", "MODULE_QUERY_SRTP", "ic_srtp", false)
 let ModuleSchoolBus = AppModule("schoolbus", "校车助手", "提供可实时更新的校车班车时间表", "MODULE_QUERY_SCHOOLBUS", "ic_bus", false)
-let ModuleSchedule = AppModule("schedule", "校历查询 Web", "显示当前年度各学期的学校校历安排", "https://heraldstudio.com/static/images/xiaoli.jpg", "ic_schedule", false)
-let ModuleQuanYi = AppModule("quanyi", "权益服务 Web", "向东大校会权益部反馈投诉信息", "https://jinshuju.net/f/By3aTK", "ic_quanyi", false)
-let ModuleEmptyRoom = AppModule("emptyroom", "空教室 Web", "提供指定时间内的空教室信息查询服务", "https://www.heraldstudio.com/queryEmptyClassrooms/m", "ic_emptyroom", false)
+let ModuleSchedule = AppModule("schedule", "校历查询 Web", "显示当前年度各学期的学校校历安排", "http://heraldstudio.com/static/images/xiaoli.jpg", "ic_schedule", false)
+let ModuleQuanYi = AppModule("quanyi", "权益服务 Web", "向东大校会权益部反馈投诉信息", "http://jinshuju.net/f/By3aTK", "ic_quanyi", false)
+let ModuleEmptyRoom = AppModule("emptyroom", "空教室 Web", "提供指定时间内的空教室信息查询服务", "http://www.heraldstudio.com/queryEmptyClassrooms/m", "ic_emptyroom", false)
 
 // 特殊的模块，模块管理
 let ModuleManager = AppModule("", "模块管理", "管理各模块的显示/隐藏状态", "MODULE_MANAGER", "ic_add", true)
-let ModuleFeedback = AppModule(title: "反馈建议", url: "https://www.heraldstudio.com/service/feedback?cardnum=[cardnum]")
+let ModuleFeedback = AppModule(title: "反馈建议", url: "http://www.heraldstudio.com/service/feedback?cardnum=[cardnum]")
 
 let Modules = [
     ModuleCard, ModulePedetail, ModuleCurriculum, ModuleExperiment, ModuleExam, ModuleLecture, ModuleJwc, /* ModuleSeuNet, */ModuleGymReserve, ModuleLibrary, ModuleGrade, ModuleSrtp, ModuleSchoolBus, ModuleSchedule, ModuleQuanYi, ModuleEmptyRoom

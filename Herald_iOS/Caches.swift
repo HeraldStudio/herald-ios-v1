@@ -6,11 +6,11 @@ class Cache {
     
     // 活动第一页缓存
     static let activity = AppCache("herald_activity") {
-        ApiSimpleRequest(.get).url("https://www.heraldstudio.com/herald/api/v1/huodong/get").toCache("herald_activity")
+        ApiSimpleRequest(.get).url("http://www.heraldstudio.com/herald/api/v1/huodong/get").toCache("herald_activity")
     }
     
     static let activityHot = AppCache("herald_activity_hot") {
-        ApiSimpleRequest(.get).url("https://www.heraldstudio.com/herald/api/v1/huodong/get?type=hot").toCache("herald_activity_hot")
+        ApiSimpleRequest(.get).url("http://www.heraldstudio.com/herald/api/v1/huodong/get?type=hot").toCache("herald_activity_hot")
     }
     
     // 一卡通模块缓存

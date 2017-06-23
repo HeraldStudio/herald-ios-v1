@@ -43,7 +43,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func showTos () {
-        AppModule(title: "服务协议及隐私政策", url: "https://myseu.cn/tos.htm").open()
+        AppModule(title: "服务协议及隐私政策", url: "http://myseu.cn/tos.htm").open()
     }
 
     func doLogin () {
