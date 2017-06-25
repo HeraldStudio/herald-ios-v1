@@ -8,9 +8,6 @@ class ActivityTableViewCell : NoSelectionTableViewCell {
     /// 活动标题
     @IBOutlet var title : UILabel!
     
-    /// 活动所属组织
-    @IBOutlet var assoc : UILabel!
-    
     /// 活动进行状态
     @IBOutlet var state : UILabel!
     

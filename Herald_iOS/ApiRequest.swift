@@ -149,13 +149,6 @@ class ApiSimpleRequest : ApiRequest {
         return url(ApiHelper.getApiUrl(api))
     }
 
-    var isDebug = false
-
-    func debug () -> ApiSimpleRequest {
-        isDebug = true
-        return self
-    }
-
     /**
      * 联网设置部分
      * builder  参数表
@@ -319,10 +312,11 @@ class ApiSimpleRequest : ApiRequest {
             parameters: map)
 
         request.responseString { response in
-            if self.isDebug {
-                debugPrint(request)
-                debugPrint(response)
-            }
+            print()
+            print("<-", self.method.rawValue, self._url, "{")
+            print("  " + request.debugDescription)
+            print("} ->", response.response?.statusCode ?? -1, response.result.value ?? "")
+            print()
             self.callback(response)
         }
         

@@ -188,7 +188,6 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         
         // 数据绑定
         cell.title.text = model.title
-        cell.assoc.text = model.assoc
         cell.state.text = model.state.rawValue
         
         if let url = URL(string: model.picUrl) {
