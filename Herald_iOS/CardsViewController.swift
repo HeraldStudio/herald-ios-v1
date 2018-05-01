@@ -140,11 +140,11 @@ class CardsViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func banner(_ banner: ZYBannerView!, viewForItemAt index: Int) -> UIView! {
         if pics.count == 0 {
-            return UIImageView(image: UIImage(named: "default_herald"))
+            return UIImageView(image: UIImage())
         }
         let view = UIImageView()
         if let url = URL(string: pics[index]) {
-            view.sd_setImage(with: url, placeholderImage: UIImage(named: "default_herald"))
+            view.sd_setImage(with: url)
         }
         return view
     }

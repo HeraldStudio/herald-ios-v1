@@ -192,12 +192,12 @@ class ActivityViewController : UIViewController, UITableViewDataSource, UITableV
         cell.state.text = model.state.rawValue
         
         if let url = URL(string: model.picUrl) {
-            cell.pic.sd_setImage(with: url, placeholderImage: UIImage(named: "default_herald"))
+            cell.pic.sd_setImage(with: url)
         } else {
-            cell.pic.image = UIImage(named: "default_herald")
+            cell.pic.image = UIImage()
         }
         
-        cell.intro.text = "活动时间：\(model.activityTime)\n活动地点：\(model.location)\n\n\(model.intro)" + (model.detailUrl != "" ? "\n\n查看详情 >" : "")
+        cell.intro.text = model.intro + (model.detailUrl != "" ? "\n\n查看详情 >" : "")
         
         // 布局调整
         cell.state.textColor = model.state == .Going ? navigationController?.navigationBar.barTintColor : UIColor.gray

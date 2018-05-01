@@ -14,11 +14,11 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         
         // 按需打开新版本引导页
-        let version = "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")!)"
-        if Cache.version.value != version {
-            present((storyboard?.instantiateViewController(withIdentifier: "IntroViewController"))!, animated: true, completion: nil)
-            Cache.version.value = version
-        }
+        // let version = "\(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")!)"
+        // if Cache.version.value != version {
+        //     present((storyboard?.instantiateViewController(withIdentifier: "IntroViewController"))!, animated: true, completion: nil)
+        //     Cache.version.value = version
+        // }
         
         // 去除界面切换时导航栏的黑影
         navigationController?.view.backgroundColor = UIColor.white
